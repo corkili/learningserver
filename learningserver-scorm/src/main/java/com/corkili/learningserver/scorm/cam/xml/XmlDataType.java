@@ -9,7 +9,8 @@ public enum XmlDataType {
     STRING("xs:String"),
     ANY_URI("xs:anyURI"),
     IDREF("xs:IDREF"),
-    BOOLEAN("xs:boolean");
+    BOOLEAN("xs:boolean"),
+    DECIMAL("xs:decimal");
 
     private String dataTypeName;
 
