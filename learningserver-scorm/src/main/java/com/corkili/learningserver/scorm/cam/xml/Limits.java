@@ -42,4 +42,10 @@ public class Limits {
     public static final DecimalRangeLimit DECIMAL_0_TO_1_WITH_SCALE_EQUAL_4_LIMIT =
             new DecimalRangeLimit(4, 0, 1);
 
+    public static final VocabularyLimit TYPE_IN_RESOURCE =
+            new VocabularyLimit("webcontent");
+
+    public static final VocabularyLimit SCORM_CONTENT_TYPE_LIMIT =
+            new VocabularyLimit("sco", "asset");
+
 }

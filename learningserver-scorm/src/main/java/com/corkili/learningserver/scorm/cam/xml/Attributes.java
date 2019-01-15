@@ -164,4 +164,54 @@ public class Attributes {
             Limits.BOOL_LIMIT,
             -1
     );
+
+    public static final Attribute TYPE__M__STRING__VOCABULARY_LIMIT__1000 = new Attribute(
+            "type",
+            true,
+            XmlDataType.STRING,
+            "",
+            true,
+            Limits.TYPE_IN_RESOURCE,
+            1000
+    );
+
+    public static final Attribute HREF__O__STRING__NO_LIMIT__2000 = new Attribute(
+            "href",
+            false,
+            XmlDataType.STRING,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            2000
+    );
+
+    public static final Attribute ADLCP_SCORM_TYPE__M__STRING__VOCABULARY_LIMIT__NO_SPM = new Attribute(
+            "adlcp:scormType",
+            true,
+            XmlDataType.STRING,
+            "",
+            true,
+            Limits.SCORM_CONTENT_TYPE_LIMIT,
+            -1
+    );
+
+    public static final Attribute HREF__M__STRING__NO_LIMIT__2000 = new Attribute(
+            "href",
+            true,
+            XmlDataType.STRING,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            2000
+    );
+
+    public static final Attribute IDENTIFIERREF__M__STRING__NO_LIMIT__2000 = new Attribute(
+            "identifierref",
+            true,
+            XmlDataType.STRING,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            2000
+    );
 }

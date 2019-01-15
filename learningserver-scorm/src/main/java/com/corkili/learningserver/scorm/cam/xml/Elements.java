@@ -1,9 +1,13 @@
 package com.corkili.learningserver.scorm.cam.xml;
 
+import static com.corkili.learningserver.scorm.cam.xml.Attributes.ADLCP_SCORM_TYPE__M__STRING__VOCABULARY_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.ADLCP_SHARED_DATA_GLOBAL_TO_SYSTEM__O__BOOLEAN__BOOL_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.ADLSEQ_OBJECTIVES_GLOBAL_TO_SYSTEM__O__BOOLEAN__BOOL_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.COMPLETED_BY_MEASURE__O__BOOLEAN__BOOL_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.DEFAULT__M__IDREF__NO_LIMIT__NO_SPM;
+import static com.corkili.learningserver.scorm.cam.xml.Attributes.HREF__M__STRING__NO_LIMIT__2000;
+import static com.corkili.learningserver.scorm.cam.xml.Attributes.HREF__O__STRING__NO_LIMIT__2000;
+import static com.corkili.learningserver.scorm.cam.xml.Attributes.IDENTIFIERREF__M__STRING__NO_LIMIT__2000;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.IDENTIFIERREF__O__STRING__NO_LIMIT__2000;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.IDENTIFIER__M__ID__NO_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.ISVISIBLE__O__BOOLEAN__BOOL_LIMIT__NO_SPM;
@@ -13,6 +17,7 @@ import static com.corkili.learningserver.scorm.cam.xml.Attributes.PROGRESS_WEIGH
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.READ_SHARED_DATA__O__BOOLEAN__BOOL_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.STRUCTURE__O__STRING__NO_LIMIT__200;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.TARGET_ID__M__ANY_URI__NO_LIMIT__NO_SPM;
+import static com.corkili.learningserver.scorm.cam.xml.Attributes.TYPE__M__STRING__VOCABULARY_LIMIT__1000;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.VERSION__O__STRING__NO_LIMIT__20;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.WRITE_SHARED_DATA__O__BOOLEAN__BOOL_LIMIT__NO_SPM;
 import static com.corkili.learningserver.scorm.cam.xml.Attributes.XML_BASE__O__ANY_URI__NO_LIMIT__2000;
@@ -21,7 +26,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * All Element.
+ * All Elements described in CAM.
  */
 public final class Elements {
 
@@ -30,6 +35,204 @@ public final class Elements {
 
     private static final String NAMESPACE_ADLCP = "http://www.adlnet.org/xsd/adlcp_v1p3";
     private static final String PREFIX_ADLCP = "adlcp";
+
+    private static final String NAMESPACE_ADLSEQ = "http://www.adlnet.org/xsd/adlseq_v1p3";
+    private static final String PREFIX_ADLSEQ = "adlseq";
+
+    private static final String NAMESPACE_ADLNAV = "http://www.adlnet.org/xsd/adlnav_v1p3";
+    private static final String PREFIX_ADLNAV = "adlnav";
+
+    public static final Element DEPENDENCY__IN_RESOURCE = new Element(
+            "dependency",
+            NAMESPACE_IMSCP,
+            PREFIX_IMSCP,
+            Multiplicity.ZERO_OR_MORE,
+            Multiplicity.ZERO_OR_MORE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.singletonList(
+                    /*
+                    The identifierref attribute references an identifier attribute of a <resource>
+                    (within the scope of the <manifest> element for which it is defined) and is used
+                    to resolve the ultimate location of the dependent resource. The identifierref is
+                    not permitted to reference a resource defined in a (sub)manifest.
+                     */
+                    IDENTIFIERREF__M__STRING__NO_LIMIT__2000),
+            Collections.emptyList()
+    );
+
+    /**
+     * The <metadata> element is metadata describing the file. It contains relevant information that
+     * describes the <file> element(i.e.,asset) as a whole. The <metadata> element is considered the
+     * root node for metadata describing the asset. This means that all metadata for the asset is
+     * defined as a child of the <metadata> element.
+     */
+    public static final Element METADATA__IN_FILE = new Element(
+            "metadata",
+            NAMESPACE_IMSCP,
+            PREFIX_IMSCP,
+            Multiplicity.ZERO_OR_ONE,
+            Multiplicity.ZERO_OR_ONE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.emptyList(),
+            Arrays.asList() // TODO: {Metadata}
+
+    );
+
+    /**
+     * The <file> element is a listing of files that a resource described by a <resource> element requires
+     * for delivery. This element is repeated as necessary for each file for a given resource. The element
+     * acts as an inventory system detailing the set of files used to build the resource. The <file>
+     * element represents files that are local to the content package. For all files that are required
+     * for delivery of the content package in a SCORM run-time environment and are local to the content
+     * package (physically located in the content package), a <file> element shall be used to represent
+     * the file relative to the resource in which it is used. If the resource identified by a <resource>
+     * element is local to the package, then the resource itself shall be identified as a <file> element.
+     * The launch location of the <resource> (<resource>’s href value) shall be used as the href of the
+     * file. The value of the <file> element’s href attribute should not contain any parameters that
+     * may have been defined on the <resource> element’s href attribute.
+     *
+     * All of the physical files that are included in the content package should be referenced by a file
+     * element. Leaving these references to the physical files out of the manifest may cause a wide range
+     * of problems.
+     */
+    public static final Element FILE__IN_RESOURCE = new Element(
+            "file",
+            NAMESPACE_IMSCP,
+            PREFIX_IMSCP,
+            Multiplicity.ZERO_OR_MORE,
+            Multiplicity.ZERO_OR_MORE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.singletonList(
+                    /*
+                    The href attribute identifies the location of the file. This value is affected
+                    by the use of xml:base values. Some systems may treat this value as case sensitive,
+                    developers should be aware of this and ensure that values used match the resources
+                    being referenced.
+                     */
+                    HREF__M__STRING__NO_LIMIT__2000),
+            Collections.singletonList(METADATA__IN_FILE)
+    );
+
+    /**
+     * The <metadata> element is metadata describing the resource [3]. It contains relevant information
+     * that describes the <resource> element as a whole. The<resource> element may represent a SCO or
+     * an asset. This depends on the value of the adlcp:scormType attribute. The <metadata> element
+     * is considered the root node for metadata describing the resource. This means that all metadata
+     * for the resource is defined as a child of the <metadata> element.
+     */
+    public static final Element METADATA__IN_RESOURCE = new Element(
+            "metadata",
+            NAMESPACE_IMSCP,
+            PREFIX_IMSCP,
+            Multiplicity.ZERO_OR_ONE,
+            Multiplicity.ZERO_OR_ONE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.emptyList(),
+            Arrays.asList() // TODO: {Metadata}
+    );
+
+    /**
+     * The <resource> element is a reference to a resource. There are two primary types of resources
+     * defined within SCORM: SCOs and assets.
+     *
+     * A leaf <item> element is required to reference a resource (SCO resource or asset resource).
+     * If an <item> references a resource, this resource is subject to being identified for delivery
+     * and launch to the learner. If an <item> references a <resource>, then the <resource> element
+     * shall meet the following requirements:
+     *  - The type attribute should be set to webcontent.
+     *  - The adlcp:scormType shall be set to sco or asset.
+     *  - The href attribute shall be required.
+     */
+    public static final Element RESOURCE__IN_RESOURCES = new Element(
+            "resource",
+            NAMESPACE_IMSCP,
+            PREFIX_IMSCP,
+            Multiplicity.ONE_OR_MORE,
+            Multiplicity.ONE_OR_MORE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Arrays.asList(
+                    /*
+                    The identifier attribute represents an identifier, of the resource, that is unique
+                    within the scope of its containing manifest file
+                     */
+                    IDENTIFIER__M__ID__NO_LIMIT__NO_SPM,
+                    /*
+                    The type attribute indicates the type of resource.
+                     */
+                    TYPE__M__STRING__VOCABULARY_LIMIT__1000,
+                    /*
+                    The href attribute is a reference a Uniform Resource Locator (URL). The href attribute
+                    represents the “entry point” or “launching point” of this resource. External fully
+                    qualified URLs are also permitted. The URL may also contain additional parameters.
+                    This value is affected by the use of xml:base values.
+                     */
+                    HREF__O__STRING__NO_LIMIT__2000,
+                    /*
+                    The xml:base attribute provides a relative path off set for the files contained in the manifest.
+                     */
+                    XML_BASE__O__ANY_URI__NO_LIMIT__2000,
+                    /*
+                    The adlcp:scormType attribute defines the type of SCORM resource. This is an ADL
+                    defined extension to the IMS Content Packaging Information Model. The character string
+                    is restricted and shall be one of the following characterstring tokens (sco or asset).
+                    Where sco indicates that the resource is a SCO resource and asset indicates that
+                    the resource is an asset resource.
+                     */
+                    ADLCP_SCORM_TYPE__M__STRING__VOCABULARY_LIMIT__NO_SPM),
+            Arrays.asList(
+                    METADATA__IN_RESOURCE,
+                    FILE__IN_RESOURCE,
+                    DEPENDENCY__IN_RESOURCE)
+    );
+
+    /**
+     * The <resources> element is a collection of references to resources. There is no assumption of
+     * order or hierarchy of the individual <resource> elements that the <resources> element contains.
+     */
+    public static final Element RESOURCES__IN_MANIFEST = new Element(
+            "resources",
+            NAMESPACE_IMSCP,
+            PREFIX_IMSCP,
+            Multiplicity.ONE_AND_ONLY_ONE,
+            Multiplicity.ONE_AND_ONLY_ONE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.singletonList(
+                    /*
+                    The xml:base attribute provides a relative path off set for the content file(s).
+                     */
+                    XML_BASE__O__ANY_URI__NO_LIMIT__2000),
+            Collections.singletonList(RESOURCE__IN_RESOURCES)
+    );
 
     /**
      * The <metadata> element is metadata describing the organization. It contains relevant information
@@ -291,7 +494,7 @@ public final class Elements {
                     TIME_LIMIT_ACTION__IN_ITEM,
                     DATA_FROM_LMS__IN_ITEM,
                     COMPLETION_THRESHOLD__IN_ITEM,
-                    DATA__IN_ITEM) // TODO: sequencing, presentation
+                    DATA__IN_ITEM) // TODO: imsss:sequencing, adlnav:presentation
     );
     static {
         ITEM__IN_ITEM.getElements().add(ITEM__IN_ITEM);
@@ -353,7 +556,7 @@ public final class Elements {
                     TIME_LIMIT_ACTION__IN_ITEM,
                     DATA_FROM_LMS__IN_ITEM,
                     COMPLETION_THRESHOLD__IN_ITEM,
-                    DATA__IN_ITEM) // TODO: sequencing, presentation
+                    DATA__IN_ITEM) // TODO: imsss:sequencing, adlnav:presentation
     );
 
     /**
@@ -549,8 +752,11 @@ public final class Elements {
                     XML_BASE__O__ANY_URI__NO_LIMIT__2000),
             Arrays.asList(
                     METADATA__IN_MANIFEST,
-                    ORGANIZATIONS__IN_MANIFEST) // manifest don't implementation. TODO: ress, imss:seqC
+                    ORGANIZATIONS__IN_MANIFEST,
+                    RESOURCES__IN_MANIFEST) // manifest don't implementation. TODO: imsss:sequencingCollection
     );
-
+    static {
+        MANIFEST.getElements().add(MANIFEST);
+    }
 
 }
