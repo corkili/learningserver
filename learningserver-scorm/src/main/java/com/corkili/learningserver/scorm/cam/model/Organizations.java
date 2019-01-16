@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import java.util.List;
+
+import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
+
 /**
  * Organizations: Contains the content structure or organization
  * of the learning resources making up a stand-alone unit or
@@ -7,5 +11,13 @@ package com.corkili.learningserver.scorm.cam.model;
  * be associated with the content structure.
  */
 public class Organizations {
+
+    // attributes
+    private IDRef defaultOrganizationID;
+
+    // elements
+    private List<Organization> organizationList;
+
+
 
 }

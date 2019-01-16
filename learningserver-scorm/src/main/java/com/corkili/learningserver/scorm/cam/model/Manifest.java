@@ -13,5 +13,6 @@ public class Manifest {
     private Organizations organizations;
     private Resources resources;
     private List<Manifest> subManifests; // don't implementation
+    // TODO sequencingCollection
 
 }
