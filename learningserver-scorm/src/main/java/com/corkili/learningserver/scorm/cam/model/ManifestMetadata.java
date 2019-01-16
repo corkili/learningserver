@@ -5,4 +5,8 @@ package com.corkili.learningserver.scorm.cam.model;
  */
 public class ManifestMetadata {
 
+    private String schema;
+    private String schemaVersion;
+    private Metadata metadata;
+    
 }
