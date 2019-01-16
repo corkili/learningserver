@@ -42,6 +42,138 @@ public final class Elements {
     private static final String NAMESPACE_ADLNAV = "http://www.adlnet.org/xsd/adlnav_v1p3";
     private static final String PREFIX_ADLNAV = "adlnav";
 
+    private static final String NAMESPACE_LOM = "http://ltsc.ieee.org/xsd/LOM";
+    private static final String PREFIX_LOM = "lom";
+
+    /**
+     * The <entry> element represents the value of the identifier within the identification or cataloging scheme
+     * (refer to the <catalog> element) that designates or identifies the learning object.
+     */
+    public static final Element ENTRY__IN_IDENTIFIER = new Element(
+            "entry",
+            NAMESPACE_LOM,
+            PREFIX_LOM,
+            Multiplicity.ZERO_OR_ONE,
+            Multiplicity.ZERO_OR_ONE,
+            false,
+            XmlDataType.STRING,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            1000,
+            Collections.emptyList(),
+            Collections.emptyList()
+    );
+
+    /**
+     * The <catalog> element represents the name or designator of the identification or cataloging scheme for the
+     * entry. There are a variety of cataloging systems available. SCORM does not require the use of any one
+     * particular cataloging system. Organizations are free to choose any cataloging scheme that meets their
+     * organizations practices or policies.
+     */
+    public static final Element CATALOG__IN_IDENTIFIER = new Element(
+            "catalog",
+            NAMESPACE_LOM,
+            PREFIX_LOM,
+            Multiplicity.ZERO_OR_ONE,
+            Multiplicity.ZERO_OR_ONE,
+            false,
+            XmlDataType.STRING,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            1000,
+            Collections.emptyList(),
+            Collections.emptyList()
+    );
+
+    /**
+     * The <identifier> element represents a mechanism for assigning a globally unique label that identifies the
+     * SCORM Content Model Component. The notion of assigning a globally unique identifier to a component is
+     * important when dealing with multiple facets of learning content development (e.g., versioning, maintenance, etc.).
+     */
+    public static final Element IDENTIFIER__IN_GENERAL = new Element(
+            "identifier",
+            NAMESPACE_LOM,
+            PREFIX_LOM,
+            Multiplicity.ZERO_OR_MORE,
+            Multiplicity.ZERO_OR_MORE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            10,
+            Collections.emptyList(),
+            Arrays.asList(
+                    CATALOG__IN_IDENTIFIER,
+                    ENTRY__IN_IDENTIFIER) // TODO: entry
+    );
+
+    /**
+     * The General category groups the general information that describes the resource as a whole. The resource
+     * in this case is the particular SCORM Content Model Component (asset, SCO, activity, content organization
+     * or content aggregation) being described. This general information is sometimes viewed as key information
+     * in that it is important for describing the particular component.
+     */
+    public static final Element GENERAL__IN_LOM = new Element(
+            "general",
+            NAMESPACE_LOM,
+            PREFIX_LOM,
+            Multiplicity.ZERO_OR_ONE,
+            Multiplicity.ZERO_OR_ONE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.emptyList(),
+            Arrays.asList(
+                    IDENTIFIER__IN_GENERAL) // TODO: title, language, description, keyword, coverage, structure, aggregationLevel
+    );
+
+    /**
+     * All metadata instances shall have <lom> as the root node. The root node begins to define the metadata
+     * used to describe the SCORM Content Model Component.
+     */
+    public static final Element LOM = new Element(
+            "lom",
+            NAMESPACE_LOM,
+            PREFIX_LOM,
+            Multiplicity.ONE_AND_ONLY_ONE,
+            Multiplicity.ONE_AND_ONLY_ONE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.emptyList(),
+            Arrays.asList(
+                    GENERAL__IN_LOM) // TODO: lifeCycle, metaMetadata, technical, educational, rights, relation, annotation, classification
+    );
+
+    /**
+     * All metadata instances shall have <lom> as the root node. The root node begins to define the metadata
+     * used to describe the SCORM Content Model Component.
+     */
+    public static final Element LOM__IN_METADATA = new Element(
+            "lom",
+            NAMESPACE_LOM,
+            PREFIX_LOM,
+            Multiplicity.ZERO_OR_MORE,
+            Multiplicity.ZERO_OR_MORE,
+            true,
+            XmlDataType.CONTAINER,
+            "",
+            false,
+            Limits.NONE_LIMIT,
+            -1,
+            Collections.emptyList(),
+            Arrays.asList() // TODO: general, lifeCycle, metaMetadata, technical, educational, rights, relation, annotation, classification
+    );
+
     public static final Element DEPENDENCY__IN_RESOURCE = new Element(
             "dependency",
             NAMESPACE_IMSCP,
