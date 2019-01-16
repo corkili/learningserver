@@ -13,11 +13,11 @@ public class Organization {
     private boolean sharedDataGlobalToSystem;
 
     // elements
-    // TODO sequencing
     private String title;
     private List<Item> itemList;
     private Metadata metadata;
     private CompletionThreshold completionThreshold;
+    private Sequencing sequencing;
 
 
 }

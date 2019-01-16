@@ -20,8 +20,6 @@ public class Item {
     private String dataFromLMS;
     private CompletionThreshold completionThreshold;
     private Data data;
-
-    // TODO sequencing, presentation
-
-
+    private Sequencing sequencing;
+    private Presentation presentation;
 }
