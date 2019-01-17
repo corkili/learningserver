@@ -4,13 +4,13 @@ import java.util.List;
 
 public class General {
 
-    private List<Identifier> identifier;
-    private LanguageString title;
-    private List<String> languageList;
-    private List<LanguageString> descriptionList;
-    private List<LanguageString> keywordList;
-    private List<LanguageString> coverageList;
-    private Vocabulary structure;
-    private Vocabulary aggregationLevel;
+    private List<Identifier> identifier; // 0...n
+    private LanguageString title; // 0...1
+    private List<String> languageList; //0...n
+    private List<LanguageString> descriptionList; // 0...n
+    private List<LanguageString> keywordList; // 0...n
+    private List<LanguageString> coverageList; // 0...n
+    private Vocabulary structure; // 0...1
+    private Vocabulary aggregationLevel; // 0...1
 
 }

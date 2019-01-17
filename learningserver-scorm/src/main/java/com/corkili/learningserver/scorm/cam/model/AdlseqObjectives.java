@@ -5,6 +5,6 @@ import java.util.List;
 public class AdlseqObjectives {
 
     // elements
-    private List<AdlseqObjective> objectiveList;
+    private List<AdlseqObjective> objectiveList; // 1...n
 
 }

@@ -7,19 +7,19 @@ import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 public class Item {
 
     // attributes
-    private ID identifier;
-    private String identifierref;
-    private boolean isvisible;
-    private String parameters;
+    private ID identifier; // M
+    private String identifierref; // O
+    private boolean isvisible; // O true
+    private String parameters; // O
 
     // elements
-    private String title;
-    private List<Item> itemList;
-    private Metadata metadata;
-    private String timeLimitAction;
-    private String dataFromLMS;
-    private CompletionThreshold completionThreshold;
-    private Data data;
-    private Sequencing sequencing;
-    private Presentation presentation;
+    private String title; // 1...1
+    private List<Item> itemList; // 0...n
+    private Metadata metadata; // 0...1
+    private String timeLimitAction; // 0...1
+    private String dataFromLMS; // 0...1
+    private CompletionThreshold completionThreshold; // 0...1
+    private Data data; // 0...1
+    private Sequencing sequencing; // 0...1
+    private Presentation presentation; // 0...1
 }

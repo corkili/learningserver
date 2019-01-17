@@ -6,9 +6,9 @@ import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 public class RuleCondition {
 
     // attributes
-    private String referencedObjective;
-    private Decimal measureThreshold;
-    private Token operator;
-    private Token condition;
+    private Token condition; // M
+    private String referencedObjective; // O
+    private Decimal measureThreshold; // O
+    private Token operator; // O noOp
 
 }

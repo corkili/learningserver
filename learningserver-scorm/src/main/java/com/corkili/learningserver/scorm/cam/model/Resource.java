@@ -9,15 +9,15 @@ import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 public class Resource {
 
     // attributes
-    private ID identifier;
-    private String type;
-    private String href;
-    private AnyURI xmlBase;
-    private String scormType;
+    private ID identifier; // M
+    private String type; // M
+    private String scormType; // M
+    private String href; // O
+    private AnyURI xmlBase; // O
 
     // elements
-    private Metadata metadata;
-    private List<File> fileList;
-    private List<Dependency> dependencyList;
+    private Metadata metadata; // 0...1
+    private List<File> fileList; // 0...1
+    private List<Dependency> dependencyList; // 0...n
 
 }

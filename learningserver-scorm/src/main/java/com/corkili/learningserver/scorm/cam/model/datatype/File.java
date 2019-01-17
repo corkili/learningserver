@@ -5,9 +5,9 @@ import com.corkili.learningserver.scorm.cam.model.Metadata;
 public class File {
 
     // attributes
-    private String href;
+    private String href; // M
 
     // elements
-    private Metadata metadata;
+    private Metadata metadata; // 0...1
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 public class Objectives {
 
     // elements
-    private Objective primaryObjective;
-    private List<Objective> ObjectiveList;
+    private Objective primaryObjective; // 1...1
+    private List<Objective> ObjectiveList; // 0...n
 
 }

@@ -3,11 +3,11 @@ package com.corkili.learningserver.scorm.cam.model;
 public class ControlMode {
 
     // attributes
-    private boolean choice;
-    private boolean choiceExit;
-    private boolean flow;
-    private boolean forwardOnly;
-    private boolean useCurrentAttemptObjectiveInfo;
-    private boolean useCurrentAttemptProgressInfo;
+    private boolean choice; // O true
+    private boolean choiceExit; // O true
+    private boolean flow; // O false
+    private boolean forwardOnly; // O false
+    private boolean useCurrentAttemptObjectiveInfo; // O true
+    private boolean useCurrentAttemptProgressInfo; // O true
 
 }

@@ -5,9 +5,9 @@ import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 public class RandomizationControls {
 
     // attributes
-    private Token randomizationTiming;
-    private int selectCount;
-    private boolean reorderChildren;
-    private Token selectionTiming;
+    private Token randomizationTiming; // O never
+    private int selectCount; // O
+    private boolean reorderChildren; // O false
+    private Token selectionTiming; // O never
 
 }

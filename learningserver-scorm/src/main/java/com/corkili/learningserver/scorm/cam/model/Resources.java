@@ -10,9 +10,9 @@ import com.corkili.learningserver.scorm.cam.model.datatype.AnyURI;
 public class Resources {
 
     // attributes
-    private AnyURI xmlBase;
+    private AnyURI xmlBase; // O
 
     // elements
-    private List<Resource> resourceList;
+    private List<Resource> resourceList; // 0...n
 
 }

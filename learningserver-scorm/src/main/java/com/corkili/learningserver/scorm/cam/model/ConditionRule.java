@@ -1,10 +1,8 @@
 package com.corkili.learningserver.scorm.cam.model;
 
-import com.corkili.learningserver.scorm.cam.model.datatype.Token;
-
 public class ConditionRule {
 
-    private RuleConditions ruleConditions;
-    private Token ruleAction;
+    private RuleConditions ruleConditions; // 1...1
+    private RuleAction ruleAction; // 1...1
 
 }

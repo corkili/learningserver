@@ -6,20 +6,20 @@ import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
 public class Sequencing {
 
     // attributes
-    private ID id;
-    private IDRef idRef;
+    private ID id; // O
+    private IDRef idRef; // O
 
     // elements
-    private ControlMode controlMode;
-    private SequencingRules sequencingRules;
-    private LimitConditions limitConditions;
-    private AuxiliaryResources auxiliaryResources;
-    private RollupRules rollupRules;
-    private Objectives objectives;
-    private RandomizationControls randomizationControls;
-    private DeliveryControls deliveryControls;
-    private ConstrainedChoiceConsiderations constrainedChoiceConsiderations;
-    private RollupConsiderations rollupConsiderations;
-    private AdlseqObjectives adlseqObjectives;
+    private ControlMode controlMode; // 0...1
+    private SequencingRules sequencingRules; // 0...1
+    private LimitConditions limitConditions; // 0...1
+    private RollupRules rollupRules; // 0...1
+    private Objectives objectives; // 0...1
+    private RandomizationControls randomizationControls; // 0...1
+    private DeliveryControls deliveryControls; // // 0...1
+    private ConstrainedChoiceConsiderations constrainedChoiceConsiderations; // 0...1
+    private RollupConsiderations rollupConsiderations; // 0...1
+    private AdlseqObjectives adlseqObjectives; // 0...1
+//  private AuxiliaryResources auxiliaryResources; // don't implementation
 
 }

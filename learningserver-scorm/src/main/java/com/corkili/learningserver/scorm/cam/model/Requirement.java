@@ -4,6 +4,6 @@ import java.util.List;
 
 public class Requirement {
 
-    private List<OrComposite> orCompositeList;
+    private List<OrComposite> orCompositeList; // 0...n
 
 }

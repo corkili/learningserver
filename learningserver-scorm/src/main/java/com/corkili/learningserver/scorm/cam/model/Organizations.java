@@ -13,10 +13,10 @@ import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
 public class Organizations {
 
     // attributes
-    private IDRef defaultOrganizationID;
+    private IDRef defaultOrganizationID; // M
 
     // elements
-    private List<Organization> organizationList;
+    private List<Organization> organizationList; // 0...n
 
 
 

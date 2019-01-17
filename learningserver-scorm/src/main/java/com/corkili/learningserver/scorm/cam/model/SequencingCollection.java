@@ -4,6 +4,6 @@ import java.util.List;
 
 public class SequencingCollection {
 
-    private List<Sequencing> sequencingList;
+    private List<Sequencing> sequencingList; // 1...n
 
 }

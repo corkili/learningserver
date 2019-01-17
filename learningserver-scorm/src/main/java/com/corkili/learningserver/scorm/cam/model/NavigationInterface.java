@@ -5,6 +5,6 @@ import java.util.List;
 public class NavigationInterface {
 
     // elements
-    private List<HideLMSUI> hideLMSUIList;
+    private List<HideLMSUI> hideLMSUIList; // 0...n
 
 }

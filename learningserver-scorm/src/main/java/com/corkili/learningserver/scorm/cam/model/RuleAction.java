@@ -2,10 +2,8 @@ package com.corkili.learningserver.scorm.cam.model;
 
 import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 
-public class RollupCondition {
+public class RuleAction {
 
-    // attributes
-    private Token condition; // M
-    private Token operator; // O noOp
+    private Token action; // M
 
 }

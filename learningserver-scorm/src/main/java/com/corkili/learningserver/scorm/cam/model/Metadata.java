@@ -4,9 +4,7 @@ import java.util.List;
 
 public class Metadata {
 
-    private List<LOM> lomList;
-    private List<String> locationList;
-    private boolean usedLOM;
-    private boolean usedLocation;
+    private List<LOM> lomList; // 0...n
+    private List<String> locationList; // 0...n
 
 }

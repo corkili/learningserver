@@ -1,18 +1,26 @@
 package com.corkili.learningserver.scorm.cam.model;
 
-import java.util.List;
+import com.corkili.learningserver.scorm.cam.model.datatype.AnyURI;
+import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 
 /**
  * A manifest is an XML document that contains a
  * structured inventory of the content of a package.
  * In this version, ADL recommends not to use (sub)manifests.
  */
+
 public class Manifest {
 
-    private ManifestMetadata metadata;
-    private Organizations organizations;
-    private Resources resources;
-    private List<Manifest> subManifests; // don't implementation
-    private SequencingCollection sequencingCollection;
+    // attributes
+    private ID identifier;  // M
+    private String version; // O
+    private AnyURI xmlBase; // O
+
+    // elements
+    private ManifestMetadata metadata; // 1...1
+    private Organizations organizations; // 1...1
+    private Resources resources; // 1...1
+    private SequencingCollection sequencingCollection; // 0...1
+//  private List<Manifest> subManifests; // don't implementation
 
 }

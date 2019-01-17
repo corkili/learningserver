@@ -4,8 +4,8 @@ import java.util.List;
 
 public class LifeCycle {
 
-    private LanguageString version;
-    private Vocabulary status;
-    private List<Contribute> contributeList;
+    private LanguageString version; // 0...1
+    private Vocabulary status; // 0...1
+    private List<Contribute> contributeList; // 0...n
 
 }
