@@ -9,4 +9,32 @@ public class Map {
     private boolean readSharedData; // O true
     private boolean writeSharedData; // O true
 
+    public Map() {
+        readSharedData = true;
+        writeSharedData = true;
+    }
+
+    public AnyURI getTargetID() {
+        return targetID;
+    }
+
+    public void setTargetID(AnyURI targetID) {
+        this.targetID = targetID;
+    }
+
+    public boolean isReadSharedData() {
+        return readSharedData;
+    }
+
+    public void setReadSharedData(boolean readSharedData) {
+        this.readSharedData = readSharedData;
+    }
+
+    public boolean isWriteSharedData() {
+        return writeSharedData;
+    }
+
+    public void setWriteSharedData(boolean writeSharedData) {
+        this.writeSharedData = writeSharedData;
+    }
 }

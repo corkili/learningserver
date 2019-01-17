@@ -1,5 +1,6 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LOM {
@@ -15,4 +16,82 @@ public class LOM {
     private List<Annotation> annotationList; // 0...n
     private List<Classification> classification; // 0...n
 
+    public LOM() {
+        educationalList = new ArrayList<>();
+        relationList = new ArrayList<>();
+        annotationList = new ArrayList<>();
+        classification = new ArrayList<>();
+    }
+
+    public General getGeneral() {
+        return general;
+    }
+
+    public void setGeneral(General general) {
+        this.general = general;
+    }
+
+    public LifeCycle getLifeCycle() {
+        return lifeCycle;
+    }
+
+    public void setLifeCycle(LifeCycle lifeCycle) {
+        this.lifeCycle = lifeCycle;
+    }
+
+    public MetaMetadata getMetaMetadata() {
+        return metaMetadata;
+    }
+
+    public void setMetaMetadata(MetaMetadata metaMetadata) {
+        this.metaMetadata = metaMetadata;
+    }
+
+    public Technical getTechnical() {
+        return technical;
+    }
+
+    public void setTechnical(Technical technical) {
+        this.technical = technical;
+    }
+
+    public List<Educational> getEducationalList() {
+        return educationalList;
+    }
+
+    public void setEducationalList(List<Educational> educationalList) {
+        this.educationalList = educationalList;
+    }
+
+    public Rights getRights() {
+        return rights;
+    }
+
+    public void setRights(Rights rights) {
+        this.rights = rights;
+    }
+
+    public List<Relation> getRelationList() {
+        return relationList;
+    }
+
+    public void setRelationList(List<Relation> relationList) {
+        this.relationList = relationList;
+    }
+
+    public List<Annotation> getAnnotationList() {
+        return annotationList;
+    }
+
+    public void setAnnotationList(List<Annotation> annotationList) {
+        this.annotationList = annotationList;
+    }
+
+    public List<Classification> getClassification() {
+        return classification;
+    }
+
+    public void setClassification(List<Classification> classification) {
+        this.classification = classification;
+    }
 }

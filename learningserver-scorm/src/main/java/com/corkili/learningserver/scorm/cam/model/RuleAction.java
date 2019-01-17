@@ -6,4 +6,14 @@ public class RuleAction {
 
     private Token action; // M
 
+    public RuleAction() {
+    }
+
+    public Token getAction() {
+        return action;
+    }
+
+    public void setAction(Token action) {
+        this.action = action;
+    }
 }

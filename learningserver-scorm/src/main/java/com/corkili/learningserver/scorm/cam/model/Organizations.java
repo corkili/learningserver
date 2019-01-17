@@ -1,5 +1,6 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
@@ -18,6 +19,23 @@ public class Organizations {
     // elements
     private List<Organization> organizationList; // 0...n
 
+    public Organizations() {
+        organizationList = new ArrayList<>();
+    }
 
+    public IDRef getDefaultOrganizationID() {
+        return defaultOrganizationID;
+    }
 
+    public void setDefaultOrganizationID(IDRef defaultOrganizationID) {
+        this.defaultOrganizationID = defaultOrganizationID;
+    }
+
+    public List<Organization> getOrganizationList() {
+        return organizationList;
+    }
+
+    public void setOrganizationList(List<Organization> organizationList) {
+        this.organizationList = organizationList;
+    }
 }

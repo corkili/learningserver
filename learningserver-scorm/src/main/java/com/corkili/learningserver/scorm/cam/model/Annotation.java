@@ -8,4 +8,30 @@ public class Annotation {
     private DateTime date; // 0...1
     private LanguageString description; // 0...1
 
+    public Annotation() {
+    }
+
+    public VCard getEntity() {
+        return entity;
+    }
+
+    public void setEntity(VCard entity) {
+        this.entity = entity;
+    }
+
+    public DateTime getDate() {
+        return date;
+    }
+
+    public void setDate(DateTime date) {
+        this.date = date;
+    }
+
+    public LanguageString getDescription() {
+        return description;
+    }
+
+    public void setDescription(LanguageString description) {
+        this.description = description;
+    }
 }

@@ -1,28 +1,22 @@
 package com.corkili.learningserver.scorm.cam;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.corkili.learningserver.scorm.cam.exception.EmptyValueOfAttributeException;
 import com.corkili.learningserver.scorm.cam.exception.RequiredAttributeNotExistException;
-import com.corkili.learningserver.scorm.common.NameAndValue;
+import com.corkili.learningserver.scorm.common.CommonUtils;
 
 public class AttributeAssertor {
 
-    public static void assertAttributeIsMandatory(String parentElementName, NameAndValue<String>... attributes) {
-        List<String> invalidAttributeNames = new ArrayList<>(attributes.length / 2);
-        for (NameAndValue<String> attribute : attributes) {
-            if (attribute.getValue() == null || attribute.getValue().trim().isEmpty()) {
-                invalidAttributeNames.add(attribute.getName());
-            }
+    public static void assertAttributeIsMandatory(String parentElementName, String attributeName, Object attribute) {
+        if (attribute == null || attribute.toString().trim().isEmpty()) {
+            throw new RequiredAttributeNotExistException(CommonUtils.format(
+                    "The attribute \"{}\" in the \"{}\" shall exist 1 or more time.", attributeName, parentElementName));
         }
-        if (!invalidAttributeNames.isEmpty()) {
-            StringBuilder msg = new StringBuilder();
-            msg.append("The following attribute(s) or element(s) within ");
-            msg.append(parentElementName);
-            msg.append(" must exist: [");
-            invalidAttributeNames.forEach(name -> msg.append(name).append(","));
-            msg.replace(msg.length() - 1, msg.length(), "].");
-            throw new RequiredAttributeNotExistException(msg.toString());
+    }
+
+    public static void assertAttributeNotEmpty(String parentElementName, String attributeName, Object attribute) {
+        if (attribute != null && attribute.toString().trim().isEmpty()) {
+            throw new EmptyValueOfAttributeException(CommonUtils.format(
+                    "The value of attribute \"{}\" in the \"{}\" cannot be empty.", attributeName, parentElementName));
         }
     }
 

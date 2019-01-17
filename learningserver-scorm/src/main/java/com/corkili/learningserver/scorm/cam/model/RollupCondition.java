@@ -8,4 +8,23 @@ public class RollupCondition {
     private Token condition; // M
     private Token operator; // O noOp
 
+    public RollupCondition() {
+        operator = new Token("noOp");
+    }
+
+    public Token getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Token condition) {
+        this.condition = condition;
+    }
+
+    public Token getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Token operator) {
+        this.operator = operator;
+    }
 }
