@@ -34,17 +34,9 @@ public class ContentPackage {
         return content;
     }
 
-    public void setContent(Content content) {
-        this.content = content;
-    }
-
     public ContentPackageType getContentPackageType() {
         updateContentPackageType();
         return contentPackageType;
-    }
-
-    public void setContentPackageType(ContentPackageType contentPackageType) {
-        this.contentPackageType = contentPackageType;
     }
 
     private void updateContent() {
@@ -68,6 +60,9 @@ public class ContentPackage {
     }
 
     private void updateContentPackageType() {
+        if (manifest == null) {
+            return;
+        }
         // 根据manifest.organizations是否为空，设置type
         if (manifest.getOrganizations().getOrganizationList().isEmpty()) {
             contentPackageType = ContentPackageType.RESOURCE_CONTENT_PACKAGE;
@@ -78,6 +73,8 @@ public class ContentPackage {
 
     @Override
     public String toString() {
+        updateContent();
+        updateContentPackageType();
         return new ToStringBuilder(this)
                 .append("manifest", manifest)
                 .append("content", content)
@@ -87,6 +84,8 @@ public class ContentPackage {
 
     @Override
     public boolean equals(Object o) {
+        updateContent();
+        updateContentPackageType();
         if (this == o) return true;
 
         if (o == null || getClass() != o.getClass()) return false;
@@ -102,6 +101,8 @@ public class ContentPackage {
 
     @Override
     public int hashCode() {
+        updateContent();
+        updateContentPackageType();
         return new HashCodeBuilder(17, 37)
                 .append(manifest)
                 .append(content)

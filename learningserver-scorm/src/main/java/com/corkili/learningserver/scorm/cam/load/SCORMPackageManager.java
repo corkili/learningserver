@@ -1,7 +1,10 @@
 package com.corkili.learningserver.scorm.cam.load;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 
+@Slf4j
 public class SCORMPackageManager {
 
     private static SCORMPackageManager instance;
@@ -26,7 +29,11 @@ public class SCORMPackageManager {
             return null;
         }
         String saveDir = zipFilePath.substring(0, zipFilePath.length() - 4);
-        System.out.println(ZipUtils.decompressZip(zipFilePath, saveDir));
+        if (ZipUtils.decompressZip(zipFilePath, saveDir)) {
+            log.error("compress error.");
+            return null;
+        }
+
         return null;
     }
 
