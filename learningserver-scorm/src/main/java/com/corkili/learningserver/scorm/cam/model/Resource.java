@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.corkili.learningserver.scorm.cam.model.datatype.AnyURI;
-import com.corkili.learningserver.scorm.cam.model.datatype.File;
 import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 
 /**
