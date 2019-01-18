@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.AnyURI;
 
 public class AdlseqMapInfo {
@@ -116,5 +120,62 @@ public class AdlseqMapInfo {
 
     public void setWriteProgressMeasure(boolean writeProgressMeasure) {
         this.writeProgressMeasure = writeProgressMeasure;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("targetObjectiveID", targetObjectiveID)
+                .append("readRawScore", readRawScore)
+                .append("readMinScore", readMinScore)
+                .append("readMaxScore", readMaxScore)
+                .append("readCompletionStatus", readCompletionStatus)
+                .append("readProgressMeasure", readProgressMeasure)
+                .append("writeRawScore", writeRawScore)
+                .append("writeMinScore", writeMinScore)
+                .append("writeMaxScore", writeMaxScore)
+                .append("writeCompletionStatus", writeCompletionStatus)
+                .append("writeProgressMeasure", writeProgressMeasure)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AdlseqMapInfo that = (AdlseqMapInfo) o;
+
+        return new EqualsBuilder()
+                .append(readRawScore, that.readRawScore)
+                .append(readMinScore, that.readMinScore)
+                .append(readMaxScore, that.readMaxScore)
+                .append(readCompletionStatus, that.readCompletionStatus)
+                .append(readProgressMeasure, that.readProgressMeasure)
+                .append(writeRawScore, that.writeRawScore)
+                .append(writeMinScore, that.writeMinScore)
+                .append(writeMaxScore, that.writeMaxScore)
+                .append(writeCompletionStatus, that.writeCompletionStatus)
+                .append(writeProgressMeasure, that.writeProgressMeasure)
+                .append(targetObjectiveID, that.targetObjectiveID)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(targetObjectiveID)
+                .append(readRawScore)
+                .append(readMinScore)
+                .append(readMaxScore)
+                .append(readCompletionStatus)
+                .append(readProgressMeasure)
+                .append(writeRawScore)
+                .append(writeMinScore)
+                .append(writeMaxScore)
+                .append(writeCompletionStatus)
+                .append(writeProgressMeasure)
+                .toHashCode();
     }
 }

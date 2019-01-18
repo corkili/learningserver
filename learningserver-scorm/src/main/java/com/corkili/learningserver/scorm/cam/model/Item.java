@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 
 public class Item {
@@ -131,5 +135,68 @@ public class Item {
 
     public void setPresentation(Presentation presentation) {
         this.presentation = presentation;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("identifier", identifier)
+                .append("identifierref", identifierref)
+                .append("isvisible", isvisible)
+                .append("parameters", parameters)
+                .append("title", title)
+                .append("itemList", itemList)
+                .append("metadata", metadata)
+                .append("timeLimitAction", timeLimitAction)
+                .append("dataFromLMS", dataFromLMS)
+                .append("completionThreshold", completionThreshold)
+                .append("data", data)
+                .append("sequencing", sequencing)
+                .append("presentation", presentation)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        return new EqualsBuilder()
+                .append(isvisible, item.isvisible)
+                .append(identifier, item.identifier)
+                .append(identifierref, item.identifierref)
+                .append(parameters, item.parameters)
+                .append(title, item.title)
+                .append(itemList, item.itemList)
+                .append(metadata, item.metadata)
+                .append(timeLimitAction, item.timeLimitAction)
+                .append(dataFromLMS, item.dataFromLMS)
+                .append(completionThreshold, item.completionThreshold)
+                .append(data, item.data)
+                .append(sequencing, item.sequencing)
+                .append(presentation, item.presentation)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(identifier)
+                .append(identifierref)
+                .append(isvisible)
+                .append(parameters)
+                .append(title)
+                .append(itemList)
+                .append(metadata)
+                .append(timeLimitAction)
+                .append(dataFromLMS)
+                .append(completionThreshold)
+                .append(data)
+                .append(sequencing)
+                .append(presentation)
+                .toHashCode();
     }
 }

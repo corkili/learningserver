@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class LOM {
 
     // elements
@@ -93,5 +97,56 @@ public class LOM {
 
     public void setClassification(List<Classification> classification) {
         this.classification = classification;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("general", general)
+                .append("lifeCycle", lifeCycle)
+                .append("metaMetadata", metaMetadata)
+                .append("technical", technical)
+                .append("educationalList", educationalList)
+                .append("rights", rights)
+                .append("relationList", relationList)
+                .append("annotationList", annotationList)
+                .append("classification", classification)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LOM lom = (LOM) o;
+
+        return new EqualsBuilder()
+                .append(general, lom.general)
+                .append(lifeCycle, lom.lifeCycle)
+                .append(metaMetadata, lom.metaMetadata)
+                .append(technical, lom.technical)
+                .append(educationalList, lom.educationalList)
+                .append(rights, lom.rights)
+                .append(relationList, lom.relationList)
+                .append(annotationList, lom.annotationList)
+                .append(classification, lom.classification)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(general)
+                .append(lifeCycle)
+                .append(metaMetadata)
+                .append(technical)
+                .append(educationalList)
+                .append(rights)
+                .append(relationList)
+                .append(annotationList)
+                .append(classification)
+                .toHashCode();
     }
 }

@@ -7,7 +7,6 @@ public class Decimal extends XMLDataType {
     private BigDecimal decimalValue;
     private int scale;
 
-
     public Decimal(String value, int scale) {
         super(value);
         this.scale = scale;

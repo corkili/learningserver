@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
 
@@ -119,5 +123,65 @@ public class Sequencing {
 
     public void setAdlseqObjectives(AdlseqObjectives adlseqObjectives) {
         this.adlseqObjectives = adlseqObjectives;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("idRef", idRef)
+                .append("controlMode", controlMode)
+                .append("sequencingRules", sequencingRules)
+                .append("limitConditions", limitConditions)
+                .append("rollupRules", rollupRules)
+                .append("objectives", objectives)
+                .append("randomizationControls", randomizationControls)
+                .append("deliveryControls", deliveryControls)
+                .append("constrainedChoiceConsiderations", constrainedChoiceConsiderations)
+                .append("rollupConsiderations", rollupConsiderations)
+                .append("adlseqObjectives", adlseqObjectives)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Sequencing that = (Sequencing) o;
+
+        return new EqualsBuilder()
+                .append(id, that.id)
+                .append(idRef, that.idRef)
+                .append(controlMode, that.controlMode)
+                .append(sequencingRules, that.sequencingRules)
+                .append(limitConditions, that.limitConditions)
+                .append(rollupRules, that.rollupRules)
+                .append(objectives, that.objectives)
+                .append(randomizationControls, that.randomizationControls)
+                .append(deliveryControls, that.deliveryControls)
+                .append(constrainedChoiceConsiderations, that.constrainedChoiceConsiderations)
+                .append(rollupConsiderations, that.rollupConsiderations)
+                .append(adlseqObjectives, that.adlseqObjectives)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(idRef)
+                .append(controlMode)
+                .append(sequencingRules)
+                .append(limitConditions)
+                .append(rollupRules)
+                .append(objectives)
+                .append(randomizationControls)
+                .append(deliveryControls)
+                .append(constrainedChoiceConsiderations)
+                .append(rollupConsiderations)
+                .append(adlseqObjectives)
+                .toHashCode();
     }
 }

@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
 
 /**
@@ -37,5 +41,35 @@ public class Organizations {
 
     public void setOrganizationList(List<Organization> organizationList) {
         this.organizationList = organizationList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("defaultOrganizationID", defaultOrganizationID)
+                .append("organizationList", organizationList)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Organizations that = (Organizations) o;
+
+        return new EqualsBuilder()
+                .append(defaultOrganizationID, that.defaultOrganizationID)
+                .append(organizationList, that.organizationList)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(defaultOrganizationID)
+                .append(organizationList)
+                .toHashCode();
     }
 }

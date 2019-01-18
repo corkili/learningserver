@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 
 public class Organization {
@@ -97,5 +101,56 @@ public class Organization {
 
     public void setSequencing(Sequencing sequencing) {
         this.sequencing = sequencing;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("identifier", identifier)
+                .append("structure", structure)
+                .append("objectivesGlobalToSystem", objectivesGlobalToSystem)
+                .append("sharedDataGlobalToSystem", sharedDataGlobalToSystem)
+                .append("title", title)
+                .append("itemList", itemList)
+                .append("metadata", metadata)
+                .append("completionThreshold", completionThreshold)
+                .append("sequencing", sequencing)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Organization that = (Organization) o;
+
+        return new EqualsBuilder()
+                .append(objectivesGlobalToSystem, that.objectivesGlobalToSystem)
+                .append(sharedDataGlobalToSystem, that.sharedDataGlobalToSystem)
+                .append(identifier, that.identifier)
+                .append(structure, that.structure)
+                .append(title, that.title)
+                .append(itemList, that.itemList)
+                .append(metadata, that.metadata)
+                .append(completionThreshold, that.completionThreshold)
+                .append(sequencing, that.sequencing)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(identifier)
+                .append(structure)
+                .append(objectivesGlobalToSystem)
+                .append(sharedDataGlobalToSystem)
+                .append(title)
+                .append(itemList)
+                .append(metadata)
+                .append(completionThreshold)
+                .append(sequencing)
+                .toHashCode();
     }
 }

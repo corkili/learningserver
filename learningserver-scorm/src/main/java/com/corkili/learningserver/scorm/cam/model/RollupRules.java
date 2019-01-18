@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.Decimal;
 
 public class RollupRules {
@@ -52,5 +56,41 @@ public class RollupRules {
 
     public void setRollupRuleList(List<RollupRule> rollupRuleList) {
         this.rollupRuleList = rollupRuleList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("rollupObjectiveSatisfied", rollupObjectiveSatisfied)
+                .append("rollupProgressCompletion", rollupProgressCompletion)
+                .append("objectiveMeasureWeight", objectiveMeasureWeight)
+                .append("rollupRuleList", rollupRuleList)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RollupRules that = (RollupRules) o;
+
+        return new EqualsBuilder()
+                .append(rollupObjectiveSatisfied, that.rollupObjectiveSatisfied)
+                .append(rollupProgressCompletion, that.rollupProgressCompletion)
+                .append(objectiveMeasureWeight, that.objectiveMeasureWeight)
+                .append(rollupRuleList, that.rollupRuleList)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(rollupObjectiveSatisfied)
+                .append(rollupProgressCompletion)
+                .append(objectiveMeasureWeight)
+                .append(rollupRuleList)
+                .toHashCode();
     }
 }

@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.AnyURI;
 import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 
@@ -80,5 +84,50 @@ public class Manifest {
 
     public void setSequencingCollection(SequencingCollection sequencingCollection) {
         this.sequencingCollection = sequencingCollection;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("identifier", identifier)
+                .append("version", version)
+                .append("xmlBase", xmlBase)
+                .append("metadata", metadata)
+                .append("organizations", organizations)
+                .append("resources", resources)
+                .append("sequencingCollection", sequencingCollection)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Manifest manifest = (Manifest) o;
+
+        return new EqualsBuilder()
+                .append(identifier, manifest.identifier)
+                .append(version, manifest.version)
+                .append(xmlBase, manifest.xmlBase)
+                .append(metadata, manifest.metadata)
+                .append(organizations, manifest.organizations)
+                .append(resources, manifest.resources)
+                .append(sequencingCollection, manifest.sequencingCollection)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(identifier)
+                .append(version)
+                .append(xmlBase)
+                .append(metadata)
+                .append(organizations)
+                .append(resources)
+                .append(sequencingCollection)
+                .toHashCode();
     }
 }

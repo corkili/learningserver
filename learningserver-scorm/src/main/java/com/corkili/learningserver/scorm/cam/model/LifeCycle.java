@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class LifeCycle {
 
     private LanguageString version; // 0...1
@@ -35,5 +39,38 @@ public class LifeCycle {
 
     public void setContributeList(List<Contribute> contributeList) {
         this.contributeList = contributeList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("version", version)
+                .append("status", status)
+                .append("contributeList", contributeList)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LifeCycle lifeCycle = (LifeCycle) o;
+
+        return new EqualsBuilder()
+                .append(version, lifeCycle.version)
+                .append(status, lifeCycle.status)
+                .append(contributeList, lifeCycle.contributeList)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(version)
+                .append(status)
+                .append(contributeList)
+                .toHashCode();
     }
 }

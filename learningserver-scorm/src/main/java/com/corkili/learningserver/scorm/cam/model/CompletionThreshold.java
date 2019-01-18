@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.Decimal;
 
 public class CompletionThreshold {
@@ -37,5 +41,38 @@ public class CompletionThreshold {
 
     public void setProgressWeight(Decimal progressWeight) {
         this.progressWeight = progressWeight;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("completedByMeasure", completedByMeasure)
+                .append("minProgressMeasure", minProgressMeasure)
+                .append("progressWeight", progressWeight)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CompletionThreshold that = (CompletionThreshold) o;
+
+        return new EqualsBuilder()
+                .append(completedByMeasure, that.completedByMeasure)
+                .append(minProgressMeasure, that.minProgressMeasure)
+                .append(progressWeight, that.progressWeight)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(completedByMeasure)
+                .append(minProgressMeasure)
+                .append(progressWeight)
+                .toHashCode();
     }
 }

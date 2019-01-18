@@ -3,6 +3,10 @@ package com.corkili.learningserver.scorm.cam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.corkili.learningserver.scorm.cam.model.datatype.AnyURI;
 import com.corkili.learningserver.scorm.cam.model.datatype.ID;
 
@@ -93,5 +97,53 @@ public class Resource {
 
     public void setDependencyList(List<Dependency> dependencyList) {
         this.dependencyList = dependencyList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("identifier", identifier)
+                .append("type", type)
+                .append("scormType", scormType)
+                .append("href", href)
+                .append("xmlBase", xmlBase)
+                .append("metadata", metadata)
+                .append("fileList", fileList)
+                .append("dependencyList", dependencyList)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Resource resource = (Resource) o;
+
+        return new EqualsBuilder()
+                .append(identifier, resource.identifier)
+                .append(type, resource.type)
+                .append(scormType, resource.scormType)
+                .append(href, resource.href)
+                .append(xmlBase, resource.xmlBase)
+                .append(metadata, resource.metadata)
+                .append(fileList, resource.fileList)
+                .append(dependencyList, resource.dependencyList)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(identifier)
+                .append(type)
+                .append(scormType)
+                .append(href)
+                .append(xmlBase)
+                .append(metadata)
+                .append(fileList)
+                .append(dependencyList)
+                .toHashCode();
     }
 }
