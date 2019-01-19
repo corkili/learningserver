@@ -8,9 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -27,7 +25,7 @@ public class ZipUtils {
             zipFilePath += ".zip";
         }
         File srcFile = new File(srcPath);
-        List<File> fileList = getAllFiles(srcFile);
+        List<File> fileList = FileUtils.getAllFiles(srcFile);
         byte[] buffer = new byte[BUFFER_SIZE];
         ZipEntry zipEntry;
         int readLen;
@@ -35,7 +33,7 @@ public class ZipUtils {
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFilePath))){
             for (File file : fileList) {
                 if (file.isFile()) {
-                    zipEntry = new ZipEntry(getRelativePath(srcPath, file));
+                    zipEntry = new ZipEntry(FileUtils.getRelativePath(srcPath, file));
                     zipEntry.setSize(file.length());
                     zipEntry.setTime(file.lastModified());
                     zipOutputStream.putNextEntry(zipEntry);
@@ -48,7 +46,7 @@ public class ZipUtils {
 
                     inputStream.close();
                 } else {
-                    zipEntry = new ZipEntry(getRelativePath(srcPath, file) + "/");
+                    zipEntry = new ZipEntry(FileUtils.getRelativePath(srcPath, file) + "/");
                     zipOutputStream.putNextEntry(zipEntry);
                 }
             }
@@ -82,7 +80,7 @@ public class ZipUtils {
                         dir.mkdirs();
                     }
                 } else {
-                    File file = createFile(saveFileDir, zipEntry.getName());
+                    File file = FileUtils.createFile(saveFileDir, zipEntry.getName());
                     OutputStream outputStream = new FileOutputStream(file);
 
                     while ((readLen = zipInputStream.read(buffer, 0, BUFFER_SIZE)) != -1) {
@@ -102,62 +100,6 @@ public class ZipUtils {
     public static boolean isEndWithZip(String zipFilePath) {
         return zipFilePath != null && !"".equals(zipFilePath.trim())
                 && (zipFilePath.endsWith(".ZIP") || zipFilePath.endsWith(".zip"));
-    }
-
-    private static List<File> getAllFiles(File srcFile) {
-        List<File> fileList = new ArrayList<>();
-        File[] files = srcFile.listFiles();
-        for (File f : Objects.requireNonNull(files)) {
-            if (f.isFile()) {
-                fileList.add(f);
-            }
-            if (f.isDirectory()) {
-                if (Objects.requireNonNull(f.listFiles()).length != 0) {
-                    fileList.addAll(getAllFiles(f));
-                } else {
-                    fileList.add(f);
-                }
-            }
-        }
-        return fileList;
-    }
-
-    private static String getRelativePath(String dirPath, File file) {
-        File dir = new File(dirPath);
-        String relativePath = file.getName();
-        while (true) {
-            file = file.getParentFile();
-            if (file == null) {
-                break;
-            }
-            if (file.equals(dir)) {
-                break;
-            } else {
-                relativePath = file.getName() + "/" + relativePath;
-            }
-        }
-        return relativePath;
-    }
-
-    private static File createFile(String dstPath, String fileName) throws IOException {
-        String[] dirs = fileName.split("/");
-        File file = new File(dstPath);
-
-        if (dirs.length > 1) {
-            for (int i = 0; i < dirs.length - 1; i++) {
-                file = new File(file, dirs[i]);
-            }
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            file = new File(file, dirs[dirs.length - 1]);
-        } else {
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            file = new File(file, dirs[0]);
-        }
-        return file;
     }
 
 }

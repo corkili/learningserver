@@ -28,9 +28,32 @@ public class SCORMPackageManager {
         if (!ZipUtils.isEndWithZip(zipFilePath)) {
             return null;
         }
-        String saveDir = zipFilePath.substring(0, zipFilePath.length() - 4);
+
+        // step 1: uncompress
+        String saveDir = zipFilePath.substring(0, zipFilePath.length() - 4) + "/";
         if (ZipUtils.decompressZip(zipFilePath, saveDir)) {
-            log.error("compress error.");
+            log.error("uncompress error.");
+            return null;
+        }
+
+        // step 2: validate all xml file in saveDir
+        //noinspection ResultOfMethodCallIgnored
+        if (!XmlSchemaValidator.validateAllXmlFileWithSchemaFileInPath(saveDir)) {
+            log.error("validate xml schema error.");
+            return null;
+        }
+
+        // step 3: 读取imsmanifest.xml，生成ContentPackage
+        ContentPackage contentPackage = ContentPackageGenerator.generateContentPackageFromFile(saveDir);
+        if (contentPackage == null) {
+            log.error("generate content package error.");
+            return null;
+        }
+
+        // step 4: 验证ContentPackage
+        String checkMsg = ContentPackageValidator.isCorrectContentPackage(contentPackage);
+        if (!"".equals(checkMsg)) {
+            log.error("validate content package error: " + checkMsg);
             return null;
         }
 
