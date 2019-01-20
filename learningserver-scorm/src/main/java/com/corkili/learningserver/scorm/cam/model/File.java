@@ -12,8 +12,7 @@ public class File {
     // elements
     private Metadata metadata; // 0...1
 
-    public File(String href) {
-        this.href = href;
+    public File() {
     }
 
     public String getHref() {

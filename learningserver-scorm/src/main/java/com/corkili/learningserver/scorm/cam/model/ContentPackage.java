@@ -41,15 +41,15 @@ public class ContentPackage {
 
     private void updateContent() {
         // 根据manifest自动解析
-        if (manifest == null) {
+        if (manifest == null || manifest.getResources() == null) {
             return;
         }
         final Content content = new Content();
-        final String manifestXmlBase = ModelUtils.isAnyUriEmpty(manifest.getXmlBase()) ? "" : manifest.getXmlBase().getValue();
+        final String manifestXmlBase = ModelUtils.isAnyUriEmpty(manifest.getXmlBase()) ? manifest.getXmlBase().getValue() : "";
         final String resourcesXmlBase = ModelUtils.isAnyUriEmpty(manifest.getResources().getXmlBase()) ?
-                "" : manifest.getResources().getXmlBase().getValue();
+                manifest.getResources().getXmlBase().getValue() : "";
         manifest.getResources().getResourceList().forEach(resource -> {
-            final String resourceXmlBase = ModelUtils.isAnyUriEmpty(resource.getXmlBase()) ? "" : resource.getXmlBase().getValue();
+            final String resourceXmlBase = ModelUtils.isAnyUriEmpty(resource.getXmlBase()) ? resource.getXmlBase().getValue() : "";
             resource.getFileList().forEach(file -> {
                 if (StringUtils.isNotBlank(file.getHref())) {
                     content.getPhysicalFilePathList().add(manifestXmlBase + resourcesXmlBase + resourceXmlBase + file.getHref());
@@ -60,7 +60,7 @@ public class ContentPackage {
     }
 
     private void updateContentPackageType() {
-        if (manifest == null) {
+        if (manifest == null || manifest.getOrganizations() == null) {
             return;
         }
         // 根据manifest.organizations是否为空，设置type

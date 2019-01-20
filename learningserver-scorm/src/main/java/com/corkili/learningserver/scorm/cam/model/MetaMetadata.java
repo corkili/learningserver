@@ -10,13 +10,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class MetaMetadata {
 
     private List<Identifier> identifierList; // 0...n
-    private List<Contribute> contribute; // 0...n
+    private List<Contribute> contributeList; // 0...n
     private List<String> metadataSchema; // 0...n
     private String language; // 0...1
 
     public MetaMetadata() {
         identifierList = new ArrayList<>();
-        contribute = new ArrayList<>();
+        contributeList = new ArrayList<>();
         metadataSchema = new ArrayList<>();
     }
 
@@ -28,12 +28,12 @@ public class MetaMetadata {
         this.identifierList = identifierList;
     }
 
-    public List<Contribute> getContribute() {
-        return contribute;
+    public List<Contribute> getContributeList() {
+        return contributeList;
     }
 
-    public void setContribute(List<Contribute> contribute) {
-        this.contribute = contribute;
+    public void setContributeList(List<Contribute> contributeList) {
+        this.contributeList = contributeList;
     }
 
     public List<String> getMetadataSchema() {
@@ -56,7 +56,7 @@ public class MetaMetadata {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("identifierList", identifierList)
-                .append("contribute", contribute)
+                .append("contributeList", contributeList)
                 .append("metadataSchema", metadataSchema)
                 .append("language", language)
                 .toString();
@@ -72,7 +72,7 @@ public class MetaMetadata {
 
         return new EqualsBuilder()
                 .append(identifierList, that.identifierList)
-                .append(contribute, that.contribute)
+                .append(contributeList, that.contributeList)
                 .append(metadataSchema, that.metadataSchema)
                 .append(language, that.language)
                 .isEquals();
@@ -82,7 +82,7 @@ public class MetaMetadata {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(identifierList)
-                .append(contribute)
+                .append(contributeList)
                 .append(metadataSchema)
                 .append(language)
                 .toHashCode();

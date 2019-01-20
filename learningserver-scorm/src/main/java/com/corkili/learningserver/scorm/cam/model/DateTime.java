@@ -7,12 +7,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class DateTime {
 
     private String dateTime; // 0...1
-    private LanguageString description; // 0...1
+    private LanguageStrings description; // 0...1
 
     public DateTime() {
     }
 
-    public DateTime(String dateTime, LanguageString description) {
+    public DateTime(String dateTime, LanguageStrings description) {
         this.dateTime = dateTime;
         this.description = description;
     }
@@ -21,7 +21,7 @@ public class DateTime {
         this.dateTime = dateTime;
     }
 
-    public DateTime(LanguageString description) {
+    public DateTime(LanguageStrings description) {
         this.description = description;
     }
 
@@ -33,11 +33,11 @@ public class DateTime {
         this.dateTime = dateTime;
     }
 
-    public LanguageString getDescription() {
+    public LanguageStrings getDescription() {
         return description;
     }
 
-    public void setDescription(LanguageString description) {
+    public void setDescription(LanguageStrings description) {
         this.description = description;
     }
 

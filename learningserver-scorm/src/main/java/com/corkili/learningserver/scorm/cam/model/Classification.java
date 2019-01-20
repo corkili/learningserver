@@ -11,8 +11,8 @@ public class Classification {
 
     private Vocabulary purpose; // 0...1
     private List<TaxonPath> taxonPathList; // 0...n
-    private LanguageString description; // 0...1
-    private List<LanguageString> keywordList; // 0...n
+    private LanguageStrings description; // 0...1
+    private List<LanguageStrings> keywordList; // 0...n
 
     public Classification() {
         taxonPathList = new ArrayList<>();
@@ -35,19 +35,19 @@ public class Classification {
         this.taxonPathList = taxonPathList;
     }
 
-    public LanguageString getDescription() {
+    public LanguageStrings getDescription() {
         return description;
     }
 
-    public void setDescription(LanguageString description) {
+    public void setDescription(LanguageStrings description) {
         this.description = description;
     }
 
-    public List<LanguageString> getKeywordList() {
+    public List<LanguageStrings> getKeywordList() {
         return keywordList;
     }
 
-    public void setKeywordList(List<LanguageString> keywordList) {
+    public void setKeywordList(List<LanguageStrings> keywordList) {
         this.keywordList = keywordList;
     }
 

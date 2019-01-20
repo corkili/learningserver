@@ -8,7 +8,7 @@ public class Rights {
 
     private Vocabulary cost; // 0...1
     private Vocabulary copyrightAndOtherRestrictions; // 0...1
-    private LanguageString description; // 0...1
+    private LanguageStrings description; // 0...1
 
     public Rights() {
     }
@@ -29,11 +29,11 @@ public class Rights {
         this.copyrightAndOtherRestrictions = copyrightAndOtherRestrictions;
     }
 
-    public LanguageString getDescription() {
+    public LanguageStrings getDescription() {
         return description;
     }
 
-    public void setDescription(LanguageString description) {
+    public void setDescription(LanguageStrings description) {
         this.description = description;
     }
 

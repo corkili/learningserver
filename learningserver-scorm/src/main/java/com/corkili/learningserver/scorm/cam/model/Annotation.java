@@ -10,7 +10,7 @@ public class Annotation {
 
     private VCard entity; // 0...1
     private DateTime date; // 0...1
-    private LanguageString description; // 0...1
+    private LanguageStrings description; // 0...1
 
     public Annotation() {
     }
@@ -31,11 +31,11 @@ public class Annotation {
         this.date = date;
     }
 
-    public LanguageString getDescription() {
+    public LanguageStrings getDescription() {
         return description;
     }
 
-    public void setDescription(LanguageString description) {
+    public void setDescription(LanguageStrings description) {
         this.description = description;
     }
 

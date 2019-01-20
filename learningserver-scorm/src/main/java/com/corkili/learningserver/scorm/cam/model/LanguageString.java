@@ -14,10 +14,6 @@ public class LanguageString {
         this.value = value;
     }
 
-    public LanguageString(String value) {
-        this.value = value;
-    }
-
     public String getLanguage() {
         return language;
     }

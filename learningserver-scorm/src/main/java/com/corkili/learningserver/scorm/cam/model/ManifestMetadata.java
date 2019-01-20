@@ -1,8 +1,5 @@
 package com.corkili.learningserver.scorm.cam.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,10 +11,9 @@ public class ManifestMetadata {
 
     private String schema; // 1...1 {ADL SCORM}
     private String schemaVersion; // 1...1 {2004 4th Edition}
-    private List<Metadata> metadataList; // 0...n
+    private Metadata metadata; // 0...n
 
     public ManifestMetadata() {
-        metadataList = new ArrayList<>();
     }
 
     public String getSchema() {
@@ -36,12 +32,12 @@ public class ManifestMetadata {
         this.schemaVersion = schemaVersion;
     }
 
-    public List<Metadata> getMetadataList() {
-        return metadataList;
+    public Metadata getMetadata() {
+        return metadata;
     }
 
-    public void setMetadataList(List<Metadata> metadataList) {
-        this.metadataList = metadataList;
+    public void setMetadata(Metadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override
@@ -49,7 +45,7 @@ public class ManifestMetadata {
         return new ToStringBuilder(this)
                 .append("schema", schema)
                 .append("schemaVersion", schemaVersion)
-                .append("metadataList", metadataList)
+                .append("metadata", metadata)
                 .toString();
     }
 
@@ -64,7 +60,7 @@ public class ManifestMetadata {
         return new EqualsBuilder()
                 .append(schema, that.schema)
                 .append(schemaVersion, that.schemaVersion)
-                .append(metadataList, that.metadataList)
+                .append(metadata, that.metadata)
                 .isEquals();
     }
 
@@ -73,7 +69,7 @@ public class ManifestMetadata {
         return new HashCodeBuilder(17, 37)
                 .append(schema)
                 .append(schemaVersion)
-                .append(metadataList)
+                .append(metadata)
                 .toHashCode();
     }
 }

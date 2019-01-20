@@ -14,10 +14,10 @@ public class Educational {
     private Vocabulary semanticDensity; // 0...1
     private List<Vocabulary> intendedEndUserRoleList; // 0...n
     private List<Vocabulary> contextList; // 0...n
-    private List<LanguageString> typicalAgeRangeList; // 0...n
+    private List<LanguageStrings> typicalAgeRangeList; // 0...n
     private Vocabulary difficulty; // 0...1
     private Duration typicalLearningTime; // 0...1
-    private List<LanguageString> descriptionList; // 0...n
+    private List<LanguageStrings> descriptionList; // 0...n
     private List<String> languageList; // 0...n
 
     public Educational() {
@@ -71,11 +71,11 @@ public class Educational {
         this.contextList = contextList;
     }
 
-    public List<LanguageString> getTypicalAgeRangeList() {
+    public List<LanguageStrings> getTypicalAgeRangeList() {
         return typicalAgeRangeList;
     }
 
-    public void setTypicalAgeRangeList(List<LanguageString> typicalAgeRangeList) {
+    public void setTypicalAgeRangeList(List<LanguageStrings> typicalAgeRangeList) {
         this.typicalAgeRangeList = typicalAgeRangeList;
     }
 
@@ -95,11 +95,11 @@ public class Educational {
         this.typicalLearningTime = typicalLearningTime;
     }
 
-    public List<LanguageString> getDescriptionList() {
+    public List<LanguageStrings> getDescriptionList() {
         return descriptionList;
     }
 
-    public void setDescriptionList(List<LanguageString> descriptionList) {
+    public void setDescriptionList(List<LanguageStrings> descriptionList) {
         this.descriptionList = descriptionList;
     }
 

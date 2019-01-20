@@ -1,38 +1,32 @@
 package com.corkili.learningserver.scorm.cam.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Taxon {
+public class LanguageStrings {
 
-    private String id; // 0...1
-    private LanguageStrings entry; // 0...1
+    List<LanguageString> languageStringList;
 
-    public Taxon() {
+    public LanguageStrings() {
+        this.languageStringList = new ArrayList<>();
     }
 
-    public String getId() {
-        return id;
+    public List<LanguageString> getLanguageStringList() {
+        return languageStringList;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public LanguageStrings getEntry() {
-        return entry;
-    }
-
-    public void setEntry(LanguageStrings entry) {
-        this.entry = entry;
+    public void setLanguageStringList(List<LanguageString> languageStringList) {
+        this.languageStringList = languageStringList;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
-                .append("entry", entry)
+                .append("languageStringList", languageStringList)
                 .toString();
     }
 
@@ -42,19 +36,17 @@ public class Taxon {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Taxon taxon = (Taxon) o;
+        LanguageStrings that = (LanguageStrings) o;
 
         return new EqualsBuilder()
-                .append(id, taxon.id)
-                .append(entry, taxon.entry)
+                .append(languageStringList, that.languageStringList)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(id)
-                .append(entry)
+                .append(languageStringList)
                 .toHashCode();
     }
 }

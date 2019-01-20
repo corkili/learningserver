@@ -31,7 +31,7 @@ public class SCORMPackageManager {
 
         // step 1: uncompress
         String saveDir = zipFilePath.substring(0, zipFilePath.length() - 4) + "/";
-        if (ZipUtils.decompressZip(zipFilePath, saveDir)) {
+        if (!ZipUtils.decompressZip(zipFilePath, saveDir)) {
             log.error("uncompress error.");
             return null;
         }
@@ -44,24 +44,25 @@ public class SCORMPackageManager {
         }
 
         // step 3: 读取imsmanifest.xml，生成ContentPackage
-        ContentPackage contentPackage = ContentPackageGenerator.generateContentPackageFromFile(saveDir);
+        ContentPackage contentPackage = new ContentPackageGenerator().generateContentPackageFromFile(saveDir);
         if (contentPackage == null) {
             log.error("generate content package error.");
             return null;
         }
+        System.out.println(contentPackage);
 
         // step 4: 验证ContentPackage
-        String checkMsg = ContentPackageValidator.isCorrectContentPackage(contentPackage);
-        if (!"".equals(checkMsg)) {
-            log.error("validate content package error: " + checkMsg);
+        ContentPackageValidator validator = new ContentPackageValidator();
+        boolean validateResult = validator.validate(contentPackage);
+        if (!validateResult) {
+            log.error("validate content package error: " + validator.getErrorList());
             return null;
         }
-
         return null;
     }
 
     public static void main(String[] args) {
-        SCORMPackageManager.getInstance().loadSCORMContentPackageFromZipFile("learningserver-scorm/scorm.zip");
+        SCORMPackageManager.getInstance().loadSCORMContentPackageFromZipFile("learningserver-scorm/scorm-test-pkg.zip");
     }
 
 }

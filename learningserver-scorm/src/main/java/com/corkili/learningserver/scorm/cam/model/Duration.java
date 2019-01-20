@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Duration {
 
     private String duration; // 0...1
-    private LanguageString description; // 0...1
+    private LanguageStrings description; // 0...1
 
     public Duration() {
     }
@@ -16,11 +16,11 @@ public class Duration {
         this.duration = duration;
     }
 
-    public Duration(LanguageString description) {
+    public Duration(LanguageStrings description) {
         this.description = description;
     }
 
-    public Duration(String duration, LanguageString description) {
+    public Duration(String duration, LanguageStrings description) {
         this.duration = duration;
         this.description = description;
     }
@@ -33,11 +33,11 @@ public class Duration {
         this.duration = duration;
     }
 
-    public LanguageString getDescription() {
+    public LanguageStrings getDescription() {
         return description;
     }
 
-    public void setDescription(LanguageString description) {
+    public void setDescription(LanguageStrings description) {
         this.description = description;
     }
 

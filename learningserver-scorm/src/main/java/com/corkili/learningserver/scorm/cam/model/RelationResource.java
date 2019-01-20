@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class RelationResource {
 
     private List<Identifier> identifierList; // 0...n
-    private List<LanguageString> descriptionList; // 0...n
+    private List<LanguageStrings> descriptionList; // 0...n
 
     public RelationResource() {
         identifierList = new ArrayList<>();
@@ -25,11 +25,11 @@ public class RelationResource {
         this.identifierList = identifierList;
     }
 
-    public List<LanguageString> getDescriptionList() {
+    public List<LanguageStrings> getDescriptionList() {
         return descriptionList;
     }
 
-    public void setDescriptionList(List<LanguageString> descriptionList) {
+    public void setDescriptionList(List<LanguageStrings> descriptionList) {
         this.descriptionList = descriptionList;
     }
 

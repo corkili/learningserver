@@ -9,18 +9,18 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class TaxonPath {
 
-    private LanguageString source; // 0...1
+    private LanguageStrings source; // 0...1
     private List<Taxon> taxonList; // 0...n
 
     public TaxonPath() {
         taxonList = new ArrayList<>();
     }
 
-    public LanguageString getSource() {
+    public LanguageStrings getSource() {
         return source;
     }
 
-    public void setSource(LanguageString source) {
+    public void setSource(LanguageStrings source) {
         this.source = source;
     }
 

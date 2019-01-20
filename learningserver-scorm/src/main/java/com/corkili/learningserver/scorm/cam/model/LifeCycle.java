@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class LifeCycle {
 
-    private LanguageString version; // 0...1
+    private LanguageStrings version; // 0...1
     private Vocabulary status; // 0...1
     private List<Contribute> contributeList; // 0...n
 
@@ -17,11 +17,11 @@ public class LifeCycle {
         contributeList = new ArrayList<>();
     }
 
-    public LanguageString getVersion() {
+    public LanguageStrings getVersion() {
         return version;
     }
 
-    public void setVersion(LanguageString version) {
+    public void setVersion(LanguageStrings version) {
         this.version = version;
     }
 

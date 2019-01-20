@@ -13,8 +13,8 @@ public class Technical {
     private String size; // 0...1
     private List<String> locationList; // 0...n
     private List<Requirement> requirementList; // 0...n
-    private LanguageString installationRemarks; // 0...1
-    private LanguageString otherPlatformRequirements; // 0...1
+    private LanguageStrings installationRemarks; // 0...1
+    private LanguageStrings otherPlatformRequirements; // 0...1
     private Duration duration; // 0...1
 
     public Technical() {
@@ -55,19 +55,19 @@ public class Technical {
         this.requirementList = requirementList;
     }
 
-    public LanguageString getInstallationRemarks() {
+    public LanguageStrings getInstallationRemarks() {
         return installationRemarks;
     }
 
-    public void setInstallationRemarks(LanguageString installationRemarks) {
+    public void setInstallationRemarks(LanguageStrings installationRemarks) {
         this.installationRemarks = installationRemarks;
     }
 
-    public LanguageString getOtherPlatformRequirements() {
+    public LanguageStrings getOtherPlatformRequirements() {
         return otherPlatformRequirements;
     }
 
-    public void setOtherPlatformRequirements(LanguageString otherPlatformRequirements) {
+    public void setOtherPlatformRequirements(LanguageStrings otherPlatformRequirements) {
         this.otherPlatformRequirements = otherPlatformRequirements;
     }
 

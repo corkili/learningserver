@@ -11,10 +11,12 @@ public class Metadata {
 
     private List<LOM> lomList; // 0...n
     private List<String> locationList; // 0...n
+    private List<LOM> lomFromLocationList; // 0...n
 
     public Metadata() {
         lomList = new ArrayList<>();
         locationList = new ArrayList<>();
+        lomFromLocationList = new ArrayList<>();
     }
 
     public List<LOM> getLomList() {
@@ -33,11 +35,20 @@ public class Metadata {
         this.locationList = locationList;
     }
 
+    public List<LOM> getLomFromLocationList() {
+        return lomFromLocationList;
+    }
+
+    public void setLomFromLocationList(List<LOM> lomFromLocationList) {
+        this.lomFromLocationList = lomFromLocationList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("lomList", lomList)
                 .append("locationList", locationList)
+                .append("lomFromLocationList", lomFromLocationList)
                 .toString();
     }
 
@@ -52,6 +63,7 @@ public class Metadata {
         return new EqualsBuilder()
                 .append(lomList, metadata.lomList)
                 .append(locationList, metadata.locationList)
+                .append(lomFromLocationList, metadata.lomFromLocationList)
                 .isEquals();
     }
 
@@ -60,6 +72,7 @@ public class Metadata {
         return new HashCodeBuilder(17, 37)
                 .append(lomList)
                 .append(locationList)
+                .append(lomFromLocationList)
                 .toHashCode();
     }
 }

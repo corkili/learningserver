@@ -9,36 +9,36 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class General {
 
-    private List<Identifier> identifier; // 0...n
-    private LanguageString title; // 0...1
+    private List<Identifier> identifierList; // 0...n
+    private LanguageStrings title; // 0...1
     private List<String> languageList; //0...n
-    private List<LanguageString> descriptionList; // 0...n
-    private List<LanguageString> keywordList; // 0...n
-    private List<LanguageString> coverageList; // 0...n
+    private List<LanguageStrings> descriptionList; // 0...n
+    private List<LanguageStrings> keywordList; // 0...n
+    private List<LanguageStrings> coverageList; // 0...n
     private Vocabulary structure; // 0...1
     private Vocabulary aggregationLevel; // 0...1
 
     public General() {
-        identifier = new ArrayList<>();
+        identifierList = new ArrayList<>();
         languageList = new ArrayList<>();
         descriptionList = new ArrayList<>();
         keywordList = new ArrayList<>();
         coverageList = new ArrayList<>();
     }
 
-    public List<Identifier> getIdentifier() {
-        return identifier;
+    public List<Identifier> getIdentifierList() {
+        return identifierList;
     }
 
-    public void setIdentifier(List<Identifier> identifier) {
-        this.identifier = identifier;
+    public void setIdentifierList(List<Identifier> identifierList) {
+        this.identifierList = identifierList;
     }
 
-    public LanguageString getTitle() {
+    public LanguageStrings getTitle() {
         return title;
     }
 
-    public void setTitle(LanguageString title) {
+    public void setTitle(LanguageStrings title) {
         this.title = title;
     }
 
@@ -50,27 +50,27 @@ public class General {
         this.languageList = languageList;
     }
 
-    public List<LanguageString> getDescriptionList() {
+    public List<LanguageStrings> getDescriptionList() {
         return descriptionList;
     }
 
-    public void setDescriptionList(List<LanguageString> descriptionList) {
+    public void setDescriptionList(List<LanguageStrings> descriptionList) {
         this.descriptionList = descriptionList;
     }
 
-    public List<LanguageString> getKeywordList() {
+    public List<LanguageStrings> getKeywordList() {
         return keywordList;
     }
 
-    public void setKeywordList(List<LanguageString> keywordList) {
+    public void setKeywordList(List<LanguageStrings> keywordList) {
         this.keywordList = keywordList;
     }
 
-    public List<LanguageString> getCoverageList() {
+    public List<LanguageStrings> getCoverageList() {
         return coverageList;
     }
 
-    public void setCoverageList(List<LanguageString> coverageList) {
+    public void setCoverageList(List<LanguageStrings> coverageList) {
         this.coverageList = coverageList;
     }
 
@@ -93,7 +93,7 @@ public class General {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("identifier", identifier)
+                .append("identifierList", identifierList)
                 .append("title", title)
                 .append("languageList", languageList)
                 .append("descriptionList", descriptionList)
@@ -113,7 +113,7 @@ public class General {
         General general = (General) o;
 
         return new EqualsBuilder()
-                .append(identifier, general.identifier)
+                .append(identifierList, general.identifierList)
                 .append(title, general.title)
                 .append(languageList, general.languageList)
                 .append(descriptionList, general.descriptionList)
@@ -127,7 +127,7 @@ public class General {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(identifier)
+                .append(identifierList)
                 .append(title)
                 .append(languageList)
                 .append(descriptionList)
