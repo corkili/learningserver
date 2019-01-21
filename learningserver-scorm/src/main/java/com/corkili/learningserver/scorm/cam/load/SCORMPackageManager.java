@@ -55,7 +55,7 @@ public class SCORMPackageManager {
         ContentPackageValidator validator = new ContentPackageValidator();
         boolean validateResult = validator.validate(contentPackage);
         if (!validateResult) {
-            log.error("validate content package error: " + validator.getErrorList());
+            log.error("validate content package error: " + validator.getErrors());
             return null;
         }
         return null;

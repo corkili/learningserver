@@ -495,7 +495,7 @@ public class ContentPackageGenerator {
             if ("".equals(location)) {
                 return;
             }
-            metadata.getLocationList().add(location);
+            metadata.getLocationLomMap().put(location, null);
             File lomXmlFile = new File(this.scormPkgDir + location);
             if (!lomXmlFile.exists()) {
                 log.error("Not found {} in {}", location, this.scormPkgDir);
@@ -515,7 +515,7 @@ public class ContentPackageGenerator {
             QNameGenerator qNameGenerator = parseNamespace(lomNode);
             LOM lom = parseLOM(lomNode, qNameGenerator);
             if (lom != null) {
-                metadata.getLomFromLocationList().add(lom);
+                metadata.getLocationLomMap().put(location, lom);
             }
         }
     }

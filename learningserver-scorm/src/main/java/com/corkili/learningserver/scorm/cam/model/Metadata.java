@@ -1,7 +1,9 @@
 package com.corkili.learningserver.scorm.cam.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -10,13 +12,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Metadata {
 
     private List<LOM> lomList; // 0...n
-    private List<String> locationList; // 0...n
-    private List<LOM> lomFromLocationList; // 0...n
+    private Map<String, LOM> locationLomMap; // 0...n
 
     public Metadata() {
         lomList = new ArrayList<>();
-        locationList = new ArrayList<>();
-        lomFromLocationList = new ArrayList<>();
+        locationLomMap = new HashMap<>();
     }
 
     public List<LOM> getLomList() {
@@ -27,28 +27,19 @@ public class Metadata {
         this.lomList = lomList;
     }
 
-    public List<String> getLocationList() {
-        return locationList;
+    public Map<String, LOM> getLocationLomMap() {
+        return locationLomMap;
     }
 
-    public void setLocationList(List<String> locationList) {
-        this.locationList = locationList;
-    }
-
-    public List<LOM> getLomFromLocationList() {
-        return lomFromLocationList;
-    }
-
-    public void setLomFromLocationList(List<LOM> lomFromLocationList) {
-        this.lomFromLocationList = lomFromLocationList;
+    public void setLocationLomMap(Map<String, LOM> locationLomMap) {
+        this.locationLomMap = locationLomMap;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("lomList", lomList)
-                .append("locationList", locationList)
-                .append("lomFromLocationList", lomFromLocationList)
+                .append("locationLomMap", locationLomMap)
                 .toString();
     }
 
@@ -62,8 +53,7 @@ public class Metadata {
 
         return new EqualsBuilder()
                 .append(lomList, metadata.lomList)
-                .append(locationList, metadata.locationList)
-                .append(lomFromLocationList, metadata.lomFromLocationList)
+                .append(locationLomMap, metadata.locationLomMap)
                 .isEquals();
     }
 
@@ -71,8 +61,7 @@ public class Metadata {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(lomList)
-                .append(locationList)
-                .append(lomFromLocationList)
+                .append(locationLomMap)
                 .toHashCode();
     }
 }

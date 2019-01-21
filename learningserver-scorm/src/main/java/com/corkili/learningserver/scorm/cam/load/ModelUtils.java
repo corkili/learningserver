@@ -6,6 +6,7 @@ import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,6 +23,9 @@ import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 import com.corkili.learningserver.scorm.cam.model.datatype.VCard;
 
 public class ModelUtils {
+
+    private static final String[] LANGUAGE_CODES = Locale.getISOLanguages();
+    private static final String[] LANGUAGE_SUBCODES = Locale.getISOCountries();
 
     public static boolean isAnyUriEmpty(AnyURI anyURI) {
         if (anyURI != null) {
@@ -191,6 +195,23 @@ public class ModelUtils {
         }
         uri += parameters;
         return uri;
+    }
+
+    public static boolean isLegalLanguage(String language) {
+        if (StringUtils.isBlank(language)) {
+            return false;
+        }
+        String[] code = language.split("-");
+        boolean result;
+        if (code.length == 1 || code.length == 2) {
+            result = Arrays.binarySearch(LANGUAGE_CODES, code[0]) >= 0;
+            if (code.length == 2) {
+                result &= Arrays.binarySearch(LANGUAGE_SUBCODES, code[1]) >= 0;
+            }
+        } else {
+            result = false;
+        }
+        return result;
     }
 
 }
