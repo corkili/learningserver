@@ -11,4 +11,8 @@ public class NonNegativeInteger extends XMLDataType {
             throw new IllegalArgumentException("value should be non-negative integer");
         }
     }
+
+    public int getIntValue() {
+        return intValue;
+    }
 }

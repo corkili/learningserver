@@ -18,13 +18,13 @@ public class LOM {
     private Rights rights; // 0...1
     private List<Relation> relationList; // 0...n
     private List<Annotation> annotationList; // 0...n
-    private List<Classification> classification; // 0...n
+    private List<Classification> classificationList; // 0...n
 
     public LOM() {
         educationalList = new ArrayList<>();
         relationList = new ArrayList<>();
         annotationList = new ArrayList<>();
-        classification = new ArrayList<>();
+        classificationList = new ArrayList<>();
     }
 
     public General getGeneral() {
@@ -91,12 +91,12 @@ public class LOM {
         this.annotationList = annotationList;
     }
 
-    public List<Classification> getClassification() {
-        return classification;
+    public List<Classification> getClassificationList() {
+        return classificationList;
     }
 
-    public void setClassification(List<Classification> classification) {
-        this.classification = classification;
+    public void setClassificationList(List<Classification> classificationList) {
+        this.classificationList = classificationList;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class LOM {
                 .append("rights", rights)
                 .append("relationList", relationList)
                 .append("annotationList", annotationList)
-                .append("classification", classification)
+                .append("classificationList", classificationList)
                 .toString();
     }
 
@@ -131,7 +131,7 @@ public class LOM {
                 .append(rights, lom.rights)
                 .append(relationList, lom.relationList)
                 .append(annotationList, lom.annotationList)
-                .append(classification, lom.classification)
+                .append(classificationList, lom.classificationList)
                 .isEquals();
     }
 
@@ -146,7 +146,7 @@ public class LOM {
                 .append(rights)
                 .append(relationList)
                 .append(annotationList)
-                .append(classification)
+                .append(classificationList)
                 .toHashCode();
     }
 }

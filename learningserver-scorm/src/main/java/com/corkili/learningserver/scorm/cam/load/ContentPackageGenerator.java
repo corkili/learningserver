@@ -769,7 +769,7 @@ public class ContentPackageGenerator {
                     classification.getKeywordList().add(keyword);
                 }
             }
-            lom.getClassification().add(classification);
+            lom.getClassificationList().add(classification);
         }
     }
 
