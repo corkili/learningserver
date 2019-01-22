@@ -3,8 +3,10 @@ package com.corkili.learningserver.scorm.cam.load;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -173,15 +175,211 @@ public class ContentPackageValidator {
         }
 
         boolean result;
-        boolean flag;
 
         // independent validation
-        result = (flag = validateManifest(contentPackage.getManifest()));
-        if (!flag && isAssert) {
+        result = validateManifest(contentPackage.getManifest());
+        if (!result) {
             return false;
         }
 
         // dependent validation
+        result = indenpendentValidate(contentPackage.getManifest());
+        if (!result) {
+            return false;
+        }
+
+        return result;
+    }
+
+    private boolean indenpendentValidate(Manifest manifest) {
+        boolean result = true;
+        boolean flag;
+
+        Set<String> idSet = new HashSet<>();
+        Set<String> organizationIdSet = new HashSet<>();
+        Set<String> resourceIdSet = new HashSet<>();
+        Set<String> sequencingIdSet = new HashSet<>();
+        int count = 0;
+
+        idSet.add(manifest.getIdentifier().getValue());
+        count++;
+
+        // #1: unique id within manifest
+        for (Organization organization : manifest.getOrganizations().getOrganizationList()) {
+            idSet.add(organization.getIdentifier().getValue());
+            organizationIdSet.add(organization.getIdentifier().getValue());
+            count++;
+            result &= (flag = idSet.size() == count);
+            if (!flag) {
+                recordError("<manifest>.<organizations>.<organization>.identifier",
+                        "must be unique in the manifest: " + organization.getIdentifier().getValue());
+                count--;
+                if (isAssert) {
+                    return false;
+                }
+            }
+            for (Item item : organization.getItemList()) {
+                idSet.add(item.getIdentifier().getValue());
+                count++;
+                result &= (flag = idSet.size() == count);
+                if (!flag) {
+                    recordError("<manifest>.<organizations>.<organization>.<item>[.<item>].identifier",
+                            "must be unique in the manifest: " + item.getIdentifier().getValue());
+                    count--;
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        for (Resource resource : manifest.getResources().getResourceList()) {
+            idSet.add(resource.getIdentifier().getValue());
+            resourceIdSet.add(resource.getIdentifier().getValue());
+            count++;
+            result &= (flag = idSet.size() == count);
+            if (!flag) {
+                recordError("<manifest>.<resources>.<resource>.identifier",
+                        "must be unique in the manifest: " + resource.getIdentifier().getValue());
+                count--;
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        if (manifest.getSequencingCollection() != null) {
+            for (Sequencing sequencing : manifest.getSequencingCollection().getSequencingList()) {
+                idSet.add(sequencing.getId().getValue());
+                count++;
+                result &= (flag = idSet.size() == count);
+                if (!flag) {
+                    recordError("<manifest>.<imsss:sequencingCollction>.<imsss:sequencing>.ID",
+                            "must be unique in the manifest: " + sequencing.getId().getValue());
+                    count--;
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // #2: reference id
+        result &= (flag = organizationIdSet.contains(manifest.getOrganizations().getDefaultOrganizationID().getValue()));
+        if (!flag) {
+            recordError("<manifest>.<organizations>.default",
+                    "must reference an identifier attribute of an <organization>: "
+                            + manifest.getOrganizations().getDefaultOrganizationID().getValue());
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        Set<String> referencedResourceIdSet = new HashSet<>();
+        List<Item> leafItemList = new LinkedList<>();
+        for (Organization organization : manifest.getOrganizations().getOrganizationList()) {
+            for (Item item : organization.getItemList()) {
+                result &= (flag = validateItemIDRef(item, resourceIdSet, referencedResourceIdSet, leafItemList));
+                if (!flag && isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        for (Resource resource : manifest.getResources().getResourceList()) {
+            for (Dependency dependency : resource.getDependencyList()) {
+                result &= (flag = resourceIdSet.contains(dependency.getIdentifierref()));
+                if (!flag) {
+                    recordError("<manifest>.<resources>.<resource>.<dependency>.identifierref",
+                            "must reference an identifier attribute of an <resource>:" + dependency.getIdentifierref());
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        for (Organization organization : manifest.getOrganizations().getOrganizationList()) {
+            if (organization.getSequencing() != null && !ModelUtils.isIDRefEmpty(organization.getSequencing().getIdRef())) {
+                result &= (flag = organizationIdSet.contains(organization.getSequencing().getIdRef().getValue()));
+                if (!flag) {
+                    recordError("<manifest>.<organizations>.<organization>[.<item>[.<item>]].<imsss:sequencing>.IDRef",
+                            "must reference an ID attribute of an <imsss:sequencing> within <imsss:sequencingCollection>: "
+                                    + organization.getSequencing().getIdRef().getValue());
+                }
+            }
+        }
+
+        // #3: referenced <resource> by leaf <item>
+        Set<String> referencedScoResourceIdSet = new HashSet<>();
+        for (Resource resource : manifest.getResources().getResourceList()) {
+            if (referencedResourceIdSet.contains(resource.getIdentifier().getValue())) {
+                result &= (flag = StringUtils.equals(resource.getType(), "webcontent"));
+                if (!flag) {
+                    recordError("<manifest>.<resources>.<resource>.type", "" +
+                            "the type attribute of the <resource> referenced by a leaf <item> must be \"webcontent\"");
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+                result &= (flag = StringUtils.isNotBlank(resource.getHref()));
+                if (!flag) {
+                    recordError("<manifest>.<resources>.<resource>.type", "" +
+                            "the href attribute of the <resource> referenced by a leaf <item> is required");
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+                if (StringUtils.equals(resource.getScormType(), "sco")) {
+                    referencedScoResourceIdSet.add(resource.getIdentifier().getValue());
+                }
+            }
+        }
+
+        // #4: <adlcp:data> element only appear as a child of a leaf <item> element that references a SCO resource
+        for (Item item : leafItemList) {
+            if (item.getData() != null) {
+                result &= (flag = referencedScoResourceIdSet.contains(item.getIdentifierref()));
+                if (!flag) {
+                    recordError("<manifest>.<organizations>.<organization>[.<item>].<item>.<adlcp:data>",
+                            "only appear as a child of a leaf <item> element that references a SCO resource");
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // TODO continue objective and mapInfo
+
+        return result;
+    }
+
+    private boolean validateItemIDRef(Item item, Set<String> resourceIdSet,
+                                      Set<String> referencedResourceIdSet, List<Item> leafItemList) {
+        boolean result = true;
+        boolean flag;
+
+        if (item.getItemList().isEmpty()) {
+            result = (flag = resourceIdSet.contains(item.getIdentifierref()));
+            if (!flag) {
+                recordError("<manifest>.<organizations>.<organization>[.<item>].<item>",
+                        "must reference an identifier attribute of an <resource>: " + item.getIdentifierref());
+                if (isAssert) {
+                    return false;
+                }
+            } else {
+                referencedResourceIdSet.add(item.getIdentifierref());
+                leafItemList.add(item);
+            }
+        } else {
+            for (Item childItem : item.getItemList()) {
+                result &= (flag = validateItemIDRef(childItem, resourceIdSet, referencedResourceIdSet, leafItemList));
+                if (!flag && isAssert) {
+                    return false;
+                }
+            }
+        }
 
         return result;
     }
@@ -201,10 +399,8 @@ public class ContentPackageValidator {
             if (isAssert) {
                 return false;
             }
-        } else {
-            // TODO need to dv <manifest>.identifier -> unique within the manifest element
-            saveId("<manifest>.identifier", manifest.getIdentifier().getValue());
         }
+        // need to dv <manifest>.identifier -> unique within the manifest element
 
         if (!ModelUtils.isAnyUriEmpty(manifest.getXmlBase())) {
             result &= (flag = ModelUtils.isAnyUriFormatCorrect(manifest.getXmlBase()));
@@ -311,11 +507,8 @@ public class ContentPackageValidator {
             if (isAssert) {
                 return false;
             }
-        } else {
-            // TODO need to dv <manifest>.<organizations>.default -> must reference an identifier attribute of an <organization>
-            // element that is a direct descendent of the <organizations> element
-            saveId("<manifest>.<organizations>.default", organizations.getDefaultOrganizationID().getValue());
         }
+        // need to dv <manifest>.<organizations>.default -> must reference an identifier attribute of an <organization>
 
         for (Organization organization : organizations.getOrganizationList()) {
             result &= (flag = validateOrganization(organization));
@@ -333,16 +526,14 @@ public class ContentPackageValidator {
         boolean result;
         boolean flag;
 
-        // TODO need to dv <manifest>.<organizations>.<organization>.identifier -> unique within the manifest file
         result = (flag = !ModelUtils.isIDEmpty(organization.getIdentifier()));
         if (!flag) {
             recordError("<manifest>.<organizations>.<organization>.identifier", "must exist");
             if (isAssert) {
                 return false;
             }
-        } else {
-            saveId("<manifest>.<organizations>.<organization>.identifier", organization.getIdentifier().getValue());
         }
+        // need to dv <manifest>.<organizations>.<organization>.identifier -> unique within the manifest file
 
         result &= (flag = StringUtils.isNotBlank(organization.getTitle()));
         if (!flag) {
@@ -404,10 +595,8 @@ public class ContentPackageValidator {
             if (isAssert) {
                 return false;
             }
-        } else {
-            // TODO need to dv <manifest>.<organizations>.<organization>.<item>[.<item>].identifier -> unique within the manifest
-            saveId("<manifest>.<organizations>.<organization>.<item>[.<item>].identifier", item.getIdentifier().getValue());
         }
+        // need to dv <manifest>.<organizations>.<organization>.<item>[.<item>].identifier -> unique within the manifest
 
         if (item.getItemList().isEmpty()) { // is a leaf <item>
             result &= (flag = StringUtils.isNotBlank(item.getIdentifierref()));
@@ -417,12 +606,9 @@ public class ContentPackageValidator {
                 if (isAssert) {
                     return false;
                 }
-            } else {
-                // TODO need to dv <manifest>.<organizations>.<organization>.<item>[.<item>].identifierref -> reference to an
-                // identifier in resources section
-                // TODO need to dv the resource must be type=webcontent,scormType=sco|asset,href is required
-                saveId("<manifest>.<organizations>.<organization>.<item>[.<item>].identifierref", item.getIdentifierref());
             }
+            // need to dv <manifest>.<organizations>.<organization>.<item>[.<item>].identifierref -> reference to an identifier in resources section
+            // need to dv the resource must be type=webcontent,scormType=sco|asset,href is required
         } else { // not a leaf <item>
             result &= (flag = StringUtils.isBlank(item.getIdentifierref()));
             if (!flag) {
@@ -479,11 +665,20 @@ public class ContentPackageValidator {
             }
         }
 
-        // TODO need to dv CAM-3-36
+        // need to dv CAM-3-36
         if (item.getData() != null) {
-            result &= (flag = validateData(item.getData()));
-            if (!flag & isAssert) {
-                return false;
+            result &= (flag == item.getItemList().isEmpty());
+            if (!flag) {
+                recordError("<manifest>.<organizations>.<organization>.<item>[.<item>].<adlcp:data>",
+                        "only appear as a child of a leaf <item>");
+                if (isAssert) {
+                    return false;
+                }
+            } else {
+                result &= (flag = validateData(item.getData()));
+                if (!flag & isAssert) {
+                    return false;
+                }
             }
         }
 
@@ -611,10 +806,8 @@ public class ContentPackageValidator {
             if (isAssert) {
                 return false;
             }
-        } else {
-            // TODO need to dv <manifest>.<resources>.<resource>.identifier -> unique within the scope of its containing manifest
-            saveId("<manifest>.<resources>.<resource>.identifier", resource.getIdentifier().getValue());
         }
+        // need to dv <manifest>.<resources>.<resource>.identifier -> unique within the scope of its containing manifest
 
         result &= (flag = StringUtils.isNotBlank(resource.getType()));
         if (!flag) {
@@ -665,10 +858,8 @@ public class ContentPackageValidator {
                 if (isAssert) {
                     return false;
                 }
-            } else {
-                // TODO need to dv <manifest>.<resources>.<resource>.<dependency>.identifierref -> reference a <resource>
-                saveId("<manifest>.<resources>.<resource>.<dependency>.identifierref", dependency.getIdentifierref());
             }
+            // need to dv <manifest>.<resources>.<resource>.<dependency>.identifierref -> reference a <resource>
         }
 
         result &= (flag = validateMetadata(resource.getMetadata()));
@@ -1388,10 +1579,9 @@ public class ContentPackageValidator {
                 if (isAssert) {
                     return false;
                 }
-            } else {
-                // TODO need to dv <manifest>.<imsss:sequencingCollection>.<imsss:sequencing>.ID -> unique in manifest
-                saveId(baseTag + ".ID", sequencing.getId().getValue());
             }
+            // need to dv <manifest>.<imsss:sequencingCollection>.<imsss:sequencing>.ID -> unique in manifest
+
             result &= (flag = ModelUtils.isIDRefEmpty(sequencing.getIdRef()));
             if (!flag) {
                 recordError(baseTag + ".IDRef", "cannot exist");
@@ -1407,10 +1597,7 @@ public class ContentPackageValidator {
                     return false;
                 }
             }
-            if (!ModelUtils.isIDRefEmpty(sequencing.getIdRef())) {
-                // TODO need to dv baseTag.IDRef -> reference sequencing id
-                saveId(baseTag + ".IDRef", sequencing.getIdRef().getValue());
-            }
+            // need to dv baseTag.IDRef -> reference sequencing id
         }
 
         if (sequencing.getSequencingRules() != null) {
@@ -1567,7 +1754,7 @@ public class ContentPackageValidator {
         boolean flag;
 
         if (StringUtils.isNotBlank(ruleCondition.getReferencedObjective())) {
-            // TODO need to dv referencedObjective -> shall contain an objectiveID of either the <primaryObjective> or an <objective> elementdefinedfortheactivity.
+            // TODO need to dv referencedObjective -> shall contain an objectiveID of either the <primaryObjective> or an <objective> element defined for the activity.
             saveId(baseTag + ".referencedObjective", ruleCondition.getReferencedObjective());
         }
 
