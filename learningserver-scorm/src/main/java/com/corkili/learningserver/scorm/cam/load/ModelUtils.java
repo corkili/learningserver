@@ -6,7 +6,9 @@ import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,14 +26,14 @@ import com.corkili.learningserver.scorm.cam.model.datatype.VCard;
 
 public class ModelUtils {
 
-    private static final String[] LANGUAGE_CODES = Locale.getISOLanguages();
-    private static final String[] LANGUAGE_SUBCODES = Locale.getISOCountries();
+    private static final Set<String> LANGUAGE_CODES = new HashSet<>(Arrays.asList(Locale.getISOLanguages()));
+    private static final Set<String> LANGUAGE_SUBCODES = new HashSet<>(Arrays.asList(Locale.getISOCountries()));
 
     public static boolean isAnyUriEmpty(AnyURI anyURI) {
         if (anyURI != null) {
             return StringUtils.isBlank(anyURI.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -52,7 +54,7 @@ public class ModelUtils {
         if (decimal != null) {
             return StringUtils.isBlank(decimal.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -72,7 +74,7 @@ public class ModelUtils {
         if (id != null) {
             return StringUtils.isBlank(id.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -80,7 +82,7 @@ public class ModelUtils {
         if (idRef != null) {
             return StringUtils.isBlank(idRef.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -88,7 +90,7 @@ public class ModelUtils {
         if (nonNegativeInteger != null) {
             return StringUtils.isBlank(nonNegativeInteger.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -104,13 +106,13 @@ public class ModelUtils {
         if (token != null) {
             return StringUtils.isBlank(token.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
     public static boolean isLegalToken(Token token, String... vocabularyTable) {
         if (!isTokenEmpty(token)) {
-            return Arrays.binarySearch(vocabularyTable, token.getValue()) >= 0;
+            return Arrays.asList(vocabularyTable).contains(token.getValue());
         } else {
             return false;
         }
@@ -118,7 +120,7 @@ public class ModelUtils {
 
     public static boolean isLegalVocabulary(String data, String... vocabularyTable) {
         if (StringUtils.isNotBlank(data)) {
-            return Arrays.binarySearch(vocabularyTable, data) >= 0;
+            return Arrays.asList(vocabularyTable).contains(data);
         } else {
             return false;
         }
@@ -128,7 +130,7 @@ public class ModelUtils {
         if (vCard != null) {
             return StringUtils.isBlank(vCard.getValue());
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -204,9 +206,9 @@ public class ModelUtils {
         String[] code = language.split("-");
         boolean result;
         if (code.length == 1 || code.length == 2) {
-            result = Arrays.binarySearch(LANGUAGE_CODES, code[0]) >= 0;
+            result = LANGUAGE_CODES.contains(code[0]);
             if (code.length == 2) {
-                result &= Arrays.binarySearch(LANGUAGE_SUBCODES, code[1]) >= 0;
+                result &= LANGUAGE_SUBCODES.contains(code[1]);
             }
         } else {
             result = false;

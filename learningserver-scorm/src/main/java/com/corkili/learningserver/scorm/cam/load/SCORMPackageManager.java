@@ -49,20 +49,20 @@ public class SCORMPackageManager {
             log.error("generate content package error.");
             return null;
         }
-        System.out.println(contentPackage);
 
         // step 4: 验证ContentPackage
-        ContentPackageValidator validator = new ContentPackageValidator();
-        boolean validateResult = validator.validate(contentPackage);
+        ContentPackageValidator validator = new ContentPackageValidator(false);
+        boolean validateResult = validator.validate(contentPackage, saveDir);
         if (!validateResult) {
             log.error("validate content package error: " + validator.getErrors());
             return null;
         }
-        return null;
+        return contentPackage;
     }
 
     public static void main(String[] args) {
-        SCORMPackageManager.getInstance().loadSCORMContentPackageFromZipFile("learningserver-scorm/scorm-test-pkg.zip");
+        System.out.println(SCORMPackageManager.getInstance()
+                .loadSCORMContentPackageFromZipFile("learningserver-scorm/scorm-test-pkg.zip"));
     }
 
 }

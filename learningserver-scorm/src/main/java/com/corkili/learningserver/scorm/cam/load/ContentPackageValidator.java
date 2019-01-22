@@ -10,6 +10,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.scorm.cam.model.AdlseqMapInfo;
 import com.corkili.learningserver.scorm.cam.model.AdlseqObjective;
 import com.corkili.learningserver.scorm.cam.model.AdlseqObjectives;
@@ -17,6 +19,7 @@ import com.corkili.learningserver.scorm.cam.model.Annotation;
 import com.corkili.learningserver.scorm.cam.model.Classification;
 import com.corkili.learningserver.scorm.cam.model.CompletionThreshold;
 import com.corkili.learningserver.scorm.cam.model.ConditionRule;
+import com.corkili.learningserver.scorm.cam.model.Content;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Contribute;
 import com.corkili.learningserver.scorm.cam.model.Data;
@@ -69,6 +72,7 @@ import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 import com.corkili.learningserver.scorm.cam.model.datatype.VCard;
 import com.corkili.learningserver.scorm.common.CommonUtils;
 
+@Slf4j
 public class ContentPackageValidator {
 
     private static final String[] VT_TIME_LIMIT_ACTION
@@ -122,7 +126,7 @@ public class ContentPackageValidator {
             = {"all", "any"};
     private static final String[] VT_SEQUENCING_RULES_RULE_CONDITION_OPERATOR
             = {"not", "noOp"};
-    private static final String[] VT_SEQUENCING_RULES_RULE_CONDTION_CONDITION
+    private static final String[] VT_SEQUENCING_RULES_RULE_CONDITION_CONDITION
             = {"satisfied", "objectiveStatusKnown", "objectiveMeasureKnown", "objectiveMeasureGreaterThan",
             "objectiveMeasureLessThan", "completed", "activityProgressKnown", "attempted", "attemptLimitExceeded",
             "timeLimitExceeded", "outsideAvailableTimeRange", "always"};
@@ -166,7 +170,7 @@ public class ContentPackageValidator {
         this.idMap = new HashMap<>();
     }
 
-    public boolean validate(ContentPackage contentPackage) {
+    public boolean validate(ContentPackage contentPackage, String pkgSaveDir) {
         this.errors.clear();
         this.idMap.clear();
         if (contentPackage == null) {
@@ -183,15 +187,28 @@ public class ContentPackageValidator {
         }
 
         // dependent validation
-        result = indenpendentValidate(contentPackage.getManifest());
-        if (!result) {
-            return false;
-        }
+        result = independentValidate(contentPackage.getManifest());
 
+        result &= validateContent(contentPackage.getContent(), pkgSaveDir);
+        
+        return result;
+    }
+    
+    private boolean validateContent(Content content, String pkgSaveDir) {
+        boolean result = true;
+        boolean flag;
+
+        for (String filePath : content.getPhysicalFilePathList()) {
+            result &= (flag = new java.io.File(pkgSaveDir + filePath).exists());
+            if (!flag) {
+                recordError("physical file", "not found: " + filePath);
+            }
+        }
+        
         return result;
     }
 
-    private boolean indenpendentValidate(Manifest manifest) {
+    private boolean independentValidate(Manifest manifest) {
         boolean result = true;
         boolean flag;
 
@@ -651,7 +668,7 @@ public class ContentPackageValidator {
             result &= (flag = ModelUtils.isLegalVocabulary(item.getTimeLimitAction(), VT_TIME_LIMIT_ACTION));
             if (!flag) {
                 recordError("<manifest>.<organizations>.<organization>.<item>[.<item>].<adlcp:timeLimitAction>",
-                        CommonUtils.format("value must be one of following tokens: {}", (Object) VT_TIME_LIMIT_ACTION));
+                        CommonUtils.format("value must be one of following tokens: {}", Arrays.toString(VT_TIME_LIMIT_ACTION)));
                 if (isAssert) {
                     return false;
                 }
@@ -837,7 +854,7 @@ public class ContentPackageValidator {
             result &= (flag = ModelUtils.isLegalVocabulary(resource.getScormType(), VT_SCORM_TYPE));
             if (!flag) {
                 recordError("<manifest>.<resources>.<resource>.adlcp:scormType", CommonUtils.format(
-                        "value must be one of the following tokens: {}", (Object) VT_SCORM_TYPE));
+                        "value must be one of the following tokens: {}", Arrays.toString(VT_SCORM_TYPE)));
                 if (isAssert) {
                     return false;
                 }
@@ -1508,7 +1525,7 @@ public class ContentPackageValidator {
         result &= (flag = ModelUtils.isLegalVocabulary(vocabulary.getValue(), vt));
         if (!flag) {
             recordError(baseTag + ".<value>", CommonUtils.format(
-                    "value must be one of the following tokens:", (Object) vt));
+                    "value must be one of the following tokens:", Arrays.toString(vt)));
             if (isAssert) {
                 return false;
             }
@@ -1783,7 +1800,7 @@ public class ContentPackageValidator {
                 return false;
             }
         } else {
-            result &= (flag = validateToken(ruleCondition.getCondition(), VT_SEQUENCING_RULES_RULE_CONDTION_CONDITION,
+            result &= (flag = validateToken(ruleCondition.getCondition(), VT_SEQUENCING_RULES_RULE_CONDITION_CONDITION,
                     baseTag + ".condition"));
             if (!flag && isAssert) {
                 return false;
@@ -2253,16 +2270,18 @@ public class ContentPackageValidator {
     private boolean validateToken(Token token, String[] vt, String tag) {
         boolean result = ModelUtils.isLegalToken(token, vt);
         if (!result) {
-            recordError(tag, CommonUtils.format("must be one of the following tokens: {}", (Object) vt));
+            recordError(tag, CommonUtils.format("must be one of the following tokens: {}", Arrays.toString(vt)));
         }
         return result;
     }
 
     private void recordError(String tag, String errorMsg) {
-        errors.getOrDefault(tag, new LinkedList<>())
-                .add(CommonUtils.format("{} -> {}.", tag, errorMsg));
+        String msg = CommonUtils.format("{} -> {}.", tag, errorMsg);
+        errors.computeIfAbsent(tag, k -> new LinkedList<>()).add(msg);
+        log.error("record error: {}", msg);
     }
 
+    // TODO delete method
     private void saveId(String tag, String id) {
         idMap.getOrDefault(tag, new LinkedList<>()).add(id);
     }
