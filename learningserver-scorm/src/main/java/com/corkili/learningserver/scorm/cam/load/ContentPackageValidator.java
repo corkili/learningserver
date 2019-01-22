@@ -2300,4 +2300,12 @@ public class ContentPackageValidator {
         return Collections.unmodifiableMap(res);
     }
 
+    public static void main(String[] args) {
+        String[] table = {"satisfied", "objectiveStatusKnown", "objectiveMeasureKnown", "objectiveMeasureGreaterThan",
+                "objectiveMeasureLessThan", "completed", "activityProgressKnown", "attempted", "attemptLimitExceeded",
+                "timeLimitExceeded", "outsideAvailableTimeRange", "always"};
+        System.out.println(Arrays.binarySearch(table, "completed") >= 0);
+        System.out.println(Arrays.binarySearch(table, "activityProgressKnown") >= 0);
+    }
+
 }
