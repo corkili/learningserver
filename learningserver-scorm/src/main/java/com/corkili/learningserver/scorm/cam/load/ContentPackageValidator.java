@@ -1,5 +1,6 @@
 package com.corkili.learningserver.scorm.cam.load;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7,6 +8,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.corkili.learningserver.scorm.cam.model.AdlseqMapInfo;
+import com.corkili.learningserver.scorm.cam.model.AdlseqObjective;
+import com.corkili.learningserver.scorm.cam.model.AdlseqObjectives;
 import com.corkili.learningserver.scorm.cam.model.Annotation;
 import com.corkili.learningserver.scorm.cam.model.Classification;
 import com.corkili.learningserver.scorm.cam.model.CompletionThreshold;
@@ -20,27 +24,40 @@ import com.corkili.learningserver.scorm.cam.model.Duration;
 import com.corkili.learningserver.scorm.cam.model.Educational;
 import com.corkili.learningserver.scorm.cam.model.File;
 import com.corkili.learningserver.scorm.cam.model.General;
+import com.corkili.learningserver.scorm.cam.model.HideLMSUI;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.LOM;
 import com.corkili.learningserver.scorm.cam.model.LanguageString;
 import com.corkili.learningserver.scorm.cam.model.LanguageStrings;
 import com.corkili.learningserver.scorm.cam.model.LifeCycle;
+import com.corkili.learningserver.scorm.cam.model.LimitConditions;
 import com.corkili.learningserver.scorm.cam.model.Manifest;
 import com.corkili.learningserver.scorm.cam.model.ManifestMetadata;
 import com.corkili.learningserver.scorm.cam.model.Map;
+import com.corkili.learningserver.scorm.cam.model.MapInfo;
 import com.corkili.learningserver.scorm.cam.model.MetaMetadata;
 import com.corkili.learningserver.scorm.cam.model.Metadata;
+import com.corkili.learningserver.scorm.cam.model.Objective;
+import com.corkili.learningserver.scorm.cam.model.Objectives;
 import com.corkili.learningserver.scorm.cam.model.OrComposite;
 import com.corkili.learningserver.scorm.cam.model.Organization;
 import com.corkili.learningserver.scorm.cam.model.Organizations;
+import com.corkili.learningserver.scorm.cam.model.Presentation;
+import com.corkili.learningserver.scorm.cam.model.RandomizationControls;
 import com.corkili.learningserver.scorm.cam.model.Relation;
 import com.corkili.learningserver.scorm.cam.model.Requirement;
 import com.corkili.learningserver.scorm.cam.model.Resource;
 import com.corkili.learningserver.scorm.cam.model.Resources;
 import com.corkili.learningserver.scorm.cam.model.Rights;
+import com.corkili.learningserver.scorm.cam.model.RollupCondition;
+import com.corkili.learningserver.scorm.cam.model.RollupConditions;
+import com.corkili.learningserver.scorm.cam.model.RollupConsiderations;
+import com.corkili.learningserver.scorm.cam.model.RollupRule;
+import com.corkili.learningserver.scorm.cam.model.RollupRules;
 import com.corkili.learningserver.scorm.cam.model.RuleCondition;
 import com.corkili.learningserver.scorm.cam.model.RuleConditions;
 import com.corkili.learningserver.scorm.cam.model.Sequencing;
+import com.corkili.learningserver.scorm.cam.model.SequencingCollection;
 import com.corkili.learningserver.scorm.cam.model.SequencingRules;
 import com.corkili.learningserver.scorm.cam.model.Taxon;
 import com.corkili.learningserver.scorm.cam.model.TaxonPath;
@@ -113,6 +130,25 @@ public class ContentPackageValidator {
             = {"exitParent", "exitAll", "retry", "retryAll", "continue", "previous"};
     private static final String[] VT_SEQUENCING_RULES_RULE_ACTION_EXIT
             = {"exit"};
+    private static final String[] VT_SEQUENCING_ROLLUP_RULE_CHILD_ACTIVITY_SET
+            = {"all", "any", "none", "atLeastCount", "atLeastPercent"};
+    private static final String[] VT_SEQUENCING_ROLLUP_CONDITIONS_CONDITION_COMBINATION
+            = {"all", "any"};
+    private static final String[] VT_SEQUENCING_ROLLUP_CONDITION_OPERATOR
+            = {"not", "noOp"};
+    private static final String[] VT_SEQUENCING_ROLLUP_CONDITION_CONDITION
+            = {"satisfied", "objectiveStatusKnown", "objectiveMeasureKnown", "completed", "activityProgressKnown",
+            "attempted", "attemptLimitExceeded", "timeLimitExceeded", "outsideAvailableTimeRange"};
+    private static final String[] VT_SEQUENCING_ROLLUP_ACTION
+            = {"satisfied", "notSatisfied", "completed", "incomplete"};
+    private static final String[] VT_SEQUENCING_RANDOMIZATION_TIMING
+            = {"never", "once", "onEachNewAttempt"};
+    private static final String[] VT_SEQUENCING_SELECTION_TIMING
+            = {"never", "once", "onEachNewAttempt"};
+    private static final String[] VT_SEQUENCING_ROLLUP_CONSIDERATIONS
+            = {"always", "ifAttempted", "ifNotSkipped", "ifNotSuspended"};
+    private static final String[] VT_PRESENTATION_HIDE_LMS_UI
+            = {"previous", "continue", "exit", "exitAll", "abandon", "abandonAll", "suspendAll"};
 
     private boolean isAssert;
     private java.util.Map<String, List<String>> errors;
@@ -137,10 +173,11 @@ public class ContentPackageValidator {
         }
 
         boolean result;
+        boolean flag;
 
         // independent validation
-        result = validateManifest(contentPackage.getManifest());
-        if (!result && isAssert) {
+        result = (flag = validateManifest(contentPackage.getManifest()));
+        if (!flag && isAssert) {
             return false;
         }
 
@@ -200,7 +237,12 @@ public class ContentPackageValidator {
             }
         }
 
-        // TODO imsss:sequencingCollection
+        if (manifest.getSequencingCollection() != null) {
+            result &= (flag = validateSequencingCollection(manifest.getSequencingCollection()));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
 
         return result;
     }
@@ -246,7 +288,7 @@ public class ContentPackageValidator {
             }
         }
 
-        result &= (flag = valdiateMetadata(manifestMetadata.getMetadata()));
+        result &= (flag = validateMetadata(manifestMetadata.getMetadata()));
         if (!flag && isAssert) {
             return false;
         }
@@ -337,12 +379,17 @@ public class ContentPackageValidator {
             }
         }
 
-        result &= (flag = valdiateMetadata(organization.getMetadata()));
+        result &= (flag = validateMetadata(organization.getMetadata()));
         if (!flag && isAssert) {
             return false;
         }
 
-        // TODO imsss:sequencing
+        if (organization.getSequencing() != null) {
+            result &= (flag = validateSequencing(organization.getSequencing(), false));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
 
         return result;
     }
@@ -432,6 +479,7 @@ public class ContentPackageValidator {
             }
         }
 
+        // TODO need to dv CAM-3-36
         if (item.getData() != null) {
             result &= (flag = validateData(item.getData()));
             if (!flag & isAssert) {
@@ -439,12 +487,33 @@ public class ContentPackageValidator {
             }
         }
 
-        result &= (flag = valdiateMetadata(item.getMetadata()));
+        result &= (flag = validateMetadata(item.getMetadata()));
         if (!flag && isAssert) {
             return false;
         }
 
-        // TODO imsss:sequencing adlnav:presentation
+        if (item.getSequencing() != null) {
+            result &= (flag = validateSequencing(item.getSequencing(), false));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (item.getPresentation() != null) {
+            result &= (flag = item.getItemList().isEmpty());
+            if (!flag) {
+                recordError("<manifest>.<organizations>.<organization>.<item>[.<item>].<adlnav:presentation>",
+                        "only appear as a child of a leaf <item> element");
+                if (isAssert) {
+                    return false;
+                }
+            } else {
+                result &= (flag = validatePresentation(item.getPresentation()));
+                if (!flag && isAssert) {
+                    return false;
+                }
+            }
+        }
 
         return result;
     }
@@ -576,6 +645,9 @@ public class ContentPackageValidator {
             if (!flag) {
                 recordError("<manifest>.<resources>.<resource>.adlcp:scormType", CommonUtils.format(
                         "value must be one of the following tokens: {}", (Object) VT_SCORM_TYPE));
+                if (isAssert) {
+                    return false;
+                }
             }
         }
 
@@ -599,7 +671,7 @@ public class ContentPackageValidator {
             }
         }
 
-        result &= (flag = valdiateMetadata(resource.getMetadata()));
+        result &= (flag = validateMetadata(resource.getMetadata()));
         if (!flag && isAssert) {
             return false;
         }
@@ -619,7 +691,7 @@ public class ContentPackageValidator {
             }
         }
 
-        result &= (flag = valdiateMetadata(file.getMetadata()));
+        result &= (flag = validateMetadata(file.getMetadata()));
         if (!flag && isAssert) {
             return false;
         }
@@ -627,9 +699,9 @@ public class ContentPackageValidator {
         return result;
     }
 
-    private boolean valdiateMetadata(Metadata metadata) {
+    private boolean validateMetadata(Metadata metadata) {
         if (metadata == null) {
-            return false;
+            return true;
         }
 
         boolean result = true;
@@ -1309,34 +1381,89 @@ public class ContentPackageValidator {
         String baseTag = isInSequencingCollection ? "<manifest>.<imsss:sequencingCollection>.<imsss:sequencing>" :
                 "<manifest>.<organizations>.<organization>[.<item>[.<item>]].<imsss:sequencing>";
 
-        result = (flag = ModelUtils.isIDEmpty(sequencing.getId()));
         if (isInSequencingCollection) {
-            if (flag) {
+            result = (flag = !ModelUtils.isIDEmpty(sequencing.getId()));
+            if (!flag) {
                 recordError(baseTag + ".ID", "must exist");
                 if (isAssert) {
                     return false;
                 }
             } else {
-                // TODO need to dv <manifest>.<imsss:sequencingCollection>.<imsss:sequencing>.ID -> unique
+                // TODO need to dv <manifest>.<imsss:sequencingCollection>.<imsss:sequencing>.ID -> unique in manifest
                 saveId(baseTag + ".ID", sequencing.getId().getValue());
             }
+            result &= (flag = ModelUtils.isIDRefEmpty(sequencing.getIdRef()));
+            if (!flag) {
+                recordError(baseTag + ".IDRef", "cannot exist");
+                if (isAssert) {
+                    return false;
+                }
+            }
         } else {
+            result = (flag = ModelUtils.isIDEmpty(sequencing.getId()));
             if (!flag) {
                 recordError(baseTag + ".ID", "cannot exist");
                 if (isAssert) {
                     return false;
                 }
             }
-        }
-
-        if (!ModelUtils.isIDRefEmpty(sequencing.getIdRef())) {
-            // TODO need to dv baseTag.IDRef -> reference sequencing id
-            saveId(baseTag + ".IDRef", sequencing.getIdRef().getValue());
+            if (!ModelUtils.isIDRefEmpty(sequencing.getIdRef())) {
+                // TODO need to dv baseTag.IDRef -> reference sequencing id
+                saveId(baseTag + ".IDRef", sequencing.getIdRef().getValue());
+            }
         }
 
         if (sequencing.getSequencingRules() != null) {
             result &= (flag = validateSequencingRules(sequencing.getSequencingRules(),
-                    baseTag + ".<sequencingRules>"));
+                    baseTag + ".<imsss:sequencingRules>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (sequencing.getLimitConditions() != null) {
+            result &= (flag = validateLimitConditions(sequencing.getLimitConditions(),
+                    baseTag + ".<imsss:limitConditions>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (sequencing.getRollupRules() != null) {
+            result &= (flag = validateRollupRules(sequencing.getRollupRules(),
+                    baseTag + ".<imsss:rollupRules>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (sequencing.getObjectives() != null) {
+            result &= (flag = validateObjectives(sequencing.getObjectives(),
+                    baseTag + ".<imsss:objectives>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (sequencing.getRandomizationControls() != null) {
+            result &= (flag = validateRandomizationControls(sequencing.getRandomizationControls(),
+                    baseTag + ".<imsss:randomizationControls>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (sequencing.getRollupConsiderations() != null) {
+            result &= (flag = validateRollupConsiderations(sequencing.getRollupConsiderations(),
+                    baseTag + ".<adlseq:rollupConsiderations>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        if (sequencing.getAdlseqObjectives() != null) {
+            result &= (flag = validateAdlseqObjectives(sequencing.getAdlseqObjectives(),
+                    baseTag + ".<adlseq:objectives>"));
             if (!flag && isAssert) {
                 return false;
             }
@@ -1351,7 +1478,7 @@ public class ContentPackageValidator {
 
         for (ConditionRule conditionRule : sequencingRules.getPreConditionRuleList()) {
             result &= (flag = validateConditionRule(conditionRule, VT_SEQUENCING_RULES_RULE_ACTION_PRE,
-                    baseTag + ".<preConditionRule>"));
+                    baseTag + ".<imsss:preConditionRule>"));
             if (!flag && isAssert) {
                 return false;
             }
@@ -1359,7 +1486,7 @@ public class ContentPackageValidator {
 
         for (ConditionRule conditionRule : sequencingRules.getPostConditionRuleList()) {
             result &= (flag = validateConditionRule(conditionRule, VT_SEQUENCING_RULES_RULE_ACTION_POST,
-                    baseTag + ".<postConditionRule>"));
+                    baseTag + ".<imsss:postConditionRule>"));
             if (!flag && isAssert) {
                 return false;
             }
@@ -1367,7 +1494,7 @@ public class ContentPackageValidator {
 
         for (ConditionRule conditionRule : sequencingRules.getExitConditionRuleList()) {
             result &= (flag = validateConditionRule(conditionRule, VT_SEQUENCING_RULES_RULE_ACTION_EXIT,
-                    baseTag + ".<exitConditionRule>"));
+                    baseTag + ".<imsss:exitConditionRule>"));
             if (!flag && isAssert) {
                 return false;
             }
@@ -1380,20 +1507,21 @@ public class ContentPackageValidator {
         boolean result;
         boolean flag;
 
-        result = (flag = validateRuleConditions(conditionRule.getRuleConditions(), baseTag + ".<ruleConditions>"));
+        result = (flag = validateRuleConditions(conditionRule.getRuleConditions(),
+                baseTag + ".<imsss:ruleConditions>"));
         if (!flag && isAssert) {
             return false;
         }
 
         result &= (flag = conditionRule.getRuleAction() != null && conditionRule.getRuleAction().getAction() != null);
         if (!flag) {
-            recordError(baseTag + ".<ruleAction>.action", "must exist 1 and only 1 time");
+            recordError(baseTag + ".<imsss:ruleAction>.action", "must exist 1 and only 1 time");
             if (isAssert) {
                 return false;
             }
         } else {
             result &= (flag = validateToken(conditionRule.getRuleAction().getAction(), actionVT,
-                    baseTag + ".<ruleAction>.action"));
+                    baseTag + ".<imsss:ruleAction>.action"));
             if (!flag && isAssert) {
                 return false;
             }
@@ -1407,27 +1535,25 @@ public class ContentPackageValidator {
             recordError(baseTag, "must exist 1 and only 1 time");
             return false;
         }
-        boolean result = true;
+        boolean result;
         boolean flag;
 
-        if (!ModelUtils.isTokenEmpty(ruleConditions.getConditionCombination())) {
-            result = (flag = validateToken(ruleConditions.getConditionCombination(),
-                    VT_SEQUENCING_RULES_CONDITION_COMBINATION, baseTag + ".conditionCombination"));
-            if (!flag && isAssert) {
-                return false;
-            }
+        result = (flag = validateToken(ruleConditions.getConditionCombination(),
+                VT_SEQUENCING_RULES_CONDITION_COMBINATION, baseTag + ".conditionCombination"));
+        if (!flag && isAssert) {
+            return false;
         }
 
         result &= (flag = !ruleConditions.getRuleConditionList().isEmpty());
         if (!flag) {
-            recordError(baseTag + ".<ruleCondition>", "must exist 1 or more times");
+            recordError(baseTag + ".<imsss:ruleCondition>", "must exist 1 or more times");
             if (isAssert) {
                 return false;
             }
         }
 
         for (RuleCondition ruleCondition : ruleConditions.getRuleConditionList()) {
-            result &= (flag = validateRuleCondition(ruleCondition, baseTag + ".<ruleCondition>"));
+            result &= (flag = validateRuleCondition(ruleCondition, baseTag + ".<imsss:ruleCondition>"));
             if (!flag && isAssert) {
                 return false;
             }
@@ -1441,7 +1567,7 @@ public class ContentPackageValidator {
         boolean flag;
 
         if (StringUtils.isNotBlank(ruleCondition.getReferencedObjective())) {
-            // TODO need to dv
+            // TODO need to dv referencedObjective -> shall contain an objectiveID of either the <primaryObjective> or an <objective> elementdefinedfortheactivity.
             saveId(baseTag + ".referencedObjective", ruleCondition.getReferencedObjective());
         }
 
@@ -1474,6 +1600,463 @@ public class ContentPackageValidator {
                     baseTag + ".condition"));
             if (!flag && isAssert) {
                 return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateLimitConditions(LimitConditions limitConditions, String baseTag) {
+        boolean result = true;
+        boolean flag;
+
+        if (ModelUtils.isNonNegativeIntegerEmpty(limitConditions.getAttemptLimit())) {
+            result = (flag = limitConditions.getAttemptLimit().getIntValue() >= 0);
+            if (!flag) {
+                recordError(baseTag + ".attemptLimit", "must be an non-negative integer");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        if (StringUtils.isNotBlank(limitConditions.getAttemptAbsoluteDurationLimit())) {
+            result &= (flag = ModelUtils.isDurationFormatCorrect(limitConditions.getAttemptAbsoluteDurationLimit()));
+            if (!flag) {
+                recordError(baseTag + ".attemptAbsoluteDurationLimit", "incorrect format for duration");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateRollupRules(RollupRules rollupRules, String baseTag) {
+        boolean result = true;
+        boolean flag;
+
+        if (ModelUtils.isDecimalEmpty(rollupRules.getObjectiveMeasureWeight())) {
+            result = (flag = ModelUtils.isDecimalInRange(rollupRules.getObjectiveMeasureWeight(),
+                    0.0000, 1.0000, 4));
+            if (!flag) {
+                recordError(baseTag + ".objectiveMeasureWeight",
+                        "must in range [0.0000, 1.0000], precision to at least 4 significant decimal places");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        for (RollupRule rollupRule : rollupRules.getRollupRuleList()) {
+            result &= (flag = validateRollupRule(rollupRule, baseTag + ".<imsss:rollupRule>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateRollupRule(RollupRule rollupRule, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = validateToken(rollupRule.getChildActivitySet(),
+                VT_SEQUENCING_ROLLUP_RULE_CHILD_ACTIVITY_SET, baseTag + ".childActivitySet"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        if (ModelUtils.isNonNegativeIntegerEmpty(rollupRule.getMinimumCount())) {
+            result &= (flag = rollupRule.getMinimumCount().getIntValue() >= 0);
+            if (!flag) {
+                recordError(baseTag + ".minimumCount", "must be an non-negative integer");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        if (ModelUtils.isDecimalEmpty(rollupRule.getMinimumPercent())) {
+            result &= (flag = ModelUtils.isDecimalInRange(rollupRule.getMinimumPercent(),
+                    0.0000, 1.0000, 4));
+            if (!flag) {
+                recordError(baseTag + ".minimumPercent",
+                        "must be in range [0.0000, 1.0000], precision to at least 4 significant decimal places");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        result &= (flag = validateRollupConditions(rollupRule.getRollupConditions(),
+                baseTag + ".<imsss:rollupConditions>"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        result &= (flag = !ModelUtils.isTokenEmpty(rollupRule.getRollupAction()));
+        if (!flag) {
+            recordError(baseTag + ".<imsss:rollupAction>.action", "must exist 1 and only 1 time");
+            if (isAssert) {
+                return false;
+            }
+        } else {
+            result &= (flag = validateToken(rollupRule.getRollupAction(), VT_SEQUENCING_ROLLUP_ACTION,
+                    baseTag + ".<imsss:rollupAction>.action"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateRollupConditions(RollupConditions rollupConditions, String baseTag) {
+        if (rollupConditions == null) {
+            recordError(baseTag, "must exist 1 and only 1 time");
+            return false;
+        }
+        boolean result;
+        boolean flag;
+
+        result = (flag = validateToken(rollupConditions.getConditionCombination(),
+                VT_SEQUENCING_ROLLUP_CONDITIONS_CONDITION_COMBINATION, baseTag + ".conditionCombination"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        result &= (flag = !rollupConditions.getRollupConditionList().isEmpty());
+        if (!flag) {
+            recordError(baseTag + ".<imsss:rollupCondition>", "must exist 1 or more times");
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        for (RollupCondition rollupCondition : rollupConditions.getRollupConditionList()) {
+            result &= (flag = validateRollupCondition(rollupCondition, baseTag + ".<imsss:rollupCondition>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateRollupCondition(RollupCondition rollupCondition, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = validateToken(rollupCondition.getOperator(), VT_SEQUENCING_ROLLUP_CONDITION_OPERATOR,
+                baseTag + ".operator"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        result &= (flag = !ModelUtils.isTokenEmpty(rollupCondition.getCondition()));
+        if (!flag) {
+            recordError(baseTag + ".condition", "must exist");
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        result &= (flag = validateToken(rollupCondition.getCondition(), VT_SEQUENCING_ROLLUP_CONDITION_CONDITION,
+                baseTag + ".condition"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        return result;
+    }
+
+    private boolean validateObjectives(Objectives objectives, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = objectives.getPrimaryObjective() != null);
+        if (!flag) {
+            recordError(baseTag + ".<imsss:primaryObjective>", "must exist 1 and only 1 time");
+            if (isAssert) {
+                return false;
+            }
+        } else {
+            result = (flag = validateObjective(objectives.getPrimaryObjective(), true,
+                    baseTag + ".<imsss:primaryObjective>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        for (Objective objective : objectives.getObjectiveList()) {
+            result &= (flag = validateObjective(objective, false,
+                    baseTag + ".<imsss:objective>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateObjective(Objective objective, boolean isPrimary, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = (isPrimary && objective.getMapInfoList().isEmpty())
+                || !ModelUtils.isAnyUriEmpty(objective.getObjectiveID()));
+        if (!flag) {
+            recordError(baseTag + ".objectiveID", "must exist");
+            if (isAssert) {
+                return false;
+            }
+        } else if (!ModelUtils.isAnyUriEmpty(objective.getObjectiveID())) {
+            // TODO need to dv .objectiveID -> unique within an activity
+            saveId(baseTag + ".objectiveID", objective.getObjectiveID().getValue());
+            result = (flag = ModelUtils.isAnyUriFormatCorrect(objective.getObjectiveID()));
+            if (!flag) {
+                recordError(baseTag + ".objectiveID", "incorrect anyURI format");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        result &= (flag = ModelUtils.isDecimalInRange(objective.getMinNormalizedMeasure(),
+                -1.0, 1.0, 1));
+        if (!flag) {
+            recordError(baseTag + ".<imssss:minNormalizedMeasure>",
+                    "must in range [-1.00, 1.00], precision is 1");
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        for (MapInfo mapInfo : objective.getMapInfoList()) {
+            result &= (flag = validateMapInfo(mapInfo, baseTag + ".<imsss:mapInfo>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        // TODO need to dv CAM-5-29
+
+        return result;
+    }
+
+    private boolean validateMapInfo(MapInfo mapInfo, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = !ModelUtils.isAnyUriEmpty(mapInfo.getTargetObjectiveID()));
+        if (!flag) {
+            recordError(baseTag + ".targetObjectiveID", "must exist");
+            if (isAssert) {
+                return false;
+            }
+        } else {
+            // TODO need to dv .targetObjectiveID -> referenced the global shared objective targeted for mapping
+            saveId(baseTag + ".targetObjectiveID", mapInfo.getTargetObjectiveID().getValue());
+            result = (flag = ModelUtils.isAnyUriFormatCorrect(mapInfo.getTargetObjectiveID()));
+            if (!flag) {
+                recordError(baseTag + ".targetObjectiveID", "incorrect anyURI format");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateRandomizationControls(RandomizationControls randomizationControls, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = validateToken(randomizationControls.getRandomizationTiming(),
+                VT_SEQUENCING_RANDOMIZATION_TIMING, baseTag + ".randomizationTiming"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        if (!ModelUtils.isNonNegativeIntegerEmpty(randomizationControls.getSelectCount())) {
+            result &= (flag = randomizationControls.getSelectCount().getIntValue() >= 0);
+            if (!flag) {
+                recordError(baseTag + ".selectCount", "must be an non-negative integer");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        result &= (flag = validateToken(randomizationControls.getSelectionTiming(),
+                VT_SEQUENCING_SELECTION_TIMING, baseTag + ".selectionTiming"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        return result;
+    }
+
+    private boolean validateRollupConsiderations(RollupConsiderations rollupConsiderations, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = validateToken(rollupConsiderations.getRequiredForSatisfied(),
+                VT_SEQUENCING_ROLLUP_CONSIDERATIONS, baseTag + ".requiredForSatisfied"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        result &= (flag = validateToken(rollupConsiderations.getRequiredForNotSatisfied(),
+                VT_SEQUENCING_ROLLUP_CONSIDERATIONS, baseTag + ".requiredForNotSatisfied"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        result &= (flag = validateToken(rollupConsiderations.getRequiredForCompleted(),
+                VT_SEQUENCING_ROLLUP_CONSIDERATIONS, baseTag + ".requiredForCompleted"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        result &= (flag = validateToken(rollupConsiderations.getRequiredForIncomplete(),
+                VT_SEQUENCING_ROLLUP_CONSIDERATIONS, baseTag + ".requiredForIncomplete"));
+        if (!flag && isAssert) {
+            return false;
+        }
+
+        return result;
+    }
+
+    private boolean validateAdlseqObjectives(AdlseqObjectives adlseqObjectives, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = !adlseqObjectives.getObjectiveList().isEmpty());
+        if (!flag) {
+            recordError(baseTag + ".<adlseq:objective>", "must exist 1 or more times");
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        for (AdlseqObjective adlseqObjective : adlseqObjectives.getObjectiveList()) {
+            result &= (flag = validateAdlseqObjective(adlseqObjective, baseTag + ".<adlseq:objective>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateAdlseqObjective(AdlseqObjective adlseqObjective, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = !ModelUtils.isAnyUriEmpty(adlseqObjective.getObjectiveID()));
+        if (!flag) {
+            recordError(baseTag + ".objectiveID", "must exist");
+            if (isAssert) {
+                return false;
+            }
+        } else {
+            result = (flag = ModelUtils.isAnyUriFormatCorrect(adlseqObjective.getObjectiveID()));
+            if (!flag) {
+                recordError(baseTag + ".objectiveID", "incorrect anyURI format");
+                if (isAssert) {
+                    return false;
+                }
+            }
+            // TODO need to dv .objectiveID -> match an objectiveID of imsss:objective within the same <sequencing>
+            saveId(baseTag + ".objectiveID", adlseqObjective.getObjectiveID().getValue());
+        }
+
+        result &= (flag = !adlseqObjective.getMapInfoList().isEmpty());
+        if (!flag) {
+            recordError(baseTag + ".<adlseq:mapInfo>", "must exist 1 or more times");
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        for (AdlseqMapInfo adlseqMapInfo : adlseqObjective.getMapInfoList()) {
+            result &= (flag = validateAdlseqMapInfo(adlseqMapInfo, baseTag + ".<adlseq:mapInfo>"));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        // TODO need to dv CAM-5-43
+
+        return result;
+    }
+
+    private  boolean validateAdlseqMapInfo(AdlseqMapInfo adlseqMapInfo, String baseTag) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = !ModelUtils.isAnyUriEmpty(adlseqMapInfo.getTargetObjectiveID()));
+        if (!flag) {
+            recordError(baseTag + ".targetObjectiveID", "must exist");
+            if (isAssert) {
+                return false;
+            }
+        } else {
+            // TODO need to dv .targetObjectiveID -> referenced the global shared objective targeted for mapping
+            saveId(baseTag + ".targetObjectiveID", adlseqMapInfo.getTargetObjectiveID().getValue());
+            result = (flag = ModelUtils.isAnyUriFormatCorrect(adlseqMapInfo.getTargetObjectiveID()));
+            if (!flag) {
+                recordError(baseTag + ".targetObjectiveID", "anyURI format incorrect");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validateSequencingCollection(SequencingCollection sequencingCollection) {
+        boolean result;
+        boolean flag;
+
+        result = (flag = !sequencingCollection.getSequencingList().isEmpty());
+        if (!flag) {
+            recordError("<manifest>.<imsss:sequencingCollection>.<imsss:sequencing>", "must exist 1 or more times");
+            if (isAssert) {
+                return false;
+            }
+        }
+
+        for (Sequencing sequencing : sequencingCollection.getSequencingList()) {
+            result &= (flag = validateSequencing(sequencing, true));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean validatePresentation(Presentation presentation) {
+        boolean result = true;
+        boolean flag;
+
+        if (presentation.getNavigationInterface() != null) {
+            for (HideLMSUI hideLMSUI : presentation.getNavigationInterface().getHideLMSUIList()) {
+                result &= (flag = ModelUtils.isLegalVocabulary(hideLMSUI.getValue(), VT_PRESENTATION_HIDE_LMS_UI));
+                if (!flag) {
+                    recordError("<manifest>.<organizations>.<organization>.<item>[.<item>].<adlnav:presentation>",
+                            "must be one of the following tokens: " + Arrays.toString(VT_PRESENTATION_HIDE_LMS_UI));
+                    if (isAssert) {
+                        return false;
+                    }
+                }
             }
         }
 
