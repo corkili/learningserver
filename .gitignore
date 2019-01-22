@@ -26,3 +26,6 @@
 
 .mvnw*
 .DS_Store
+
+*scorm-test-pkg.zip
+*/scorm-test-pkg/
