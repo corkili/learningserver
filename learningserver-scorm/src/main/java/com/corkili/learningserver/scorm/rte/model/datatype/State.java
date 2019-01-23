@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class State implements TerminalDataType {
+import com.corkili.learningserver.scorm.common.CommonUtils;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
+
+public class State extends AbstractTerminalDataType {
 
     private String value;
     private Set<String> stateTable;
@@ -19,17 +23,27 @@ public class State implements TerminalDataType {
     }
 
     @Override
-    public void set(String value) {
+    public ScormResult set(String value) {
+        ScormResult scormResult = super.handleSet(this, value);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
         if (stateTable.contains(value)) {
             this.value = value;
+            return scormResult;
         } else {
-            throw new IllegalArgumentException();
+            return new ScormResult("false", ScormError.E_407, CommonUtils.format(
+                    "parameter should be one of the following tokens: {}", (Object) stateTable.toArray()));
         }
     }
 
     @Override
-    public String get() {
-        return this.value;
+    public ScormResult get() {
+        ScormResult scormResult = super.handleGet(this);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
+        return scormResult.setReturnValue(value);
     }
 
     public String getValue() {

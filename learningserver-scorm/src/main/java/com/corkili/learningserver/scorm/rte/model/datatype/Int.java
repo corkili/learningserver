@@ -1,6 +1,9 @@
 package com.corkili.learningserver.scorm.rte.model.datatype;
 
-public class Int implements TerminalDataType{
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
+
+public class Int extends AbstractTerminalDataType {
 
     private int value;
 
@@ -12,13 +15,26 @@ public class Int implements TerminalDataType{
     }
 
     @Override
-    public void set(String value) {
-        this.value = Integer.parseInt(value);
+    public ScormResult set(String value) {
+        ScormResult scormResult = super.handleSet(this, value);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
+        try {
+            this.value = Integer.parseInt(value);
+            return scormResult;
+        } catch (Exception e) {
+            return new ScormResult("false", ScormError.E_406, "parameter should be a integer");
+        }
     }
 
     @Override
-    public String get() {
-        return String.valueOf(value);
+    public ScormResult get() {
+        ScormResult scormResult = super.handleGet(this);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
+        return scormResult.setReturnValue(String.valueOf(value));
     }
 
     public int getValue() {

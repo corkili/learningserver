@@ -1,9 +1,11 @@
 package com.corkili.learningserver.scorm.rte.model.datatype;
 
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
+
 public interface TerminalDataType {
 
-    void set(String value);
+    ScormResult set(String value);
 
-    String get();
+    ScormResult get();
 
 }

@@ -1,8 +1,11 @@
 package com.corkili.learningserver.scorm.rte.model.datatype;
 
-public class TimeInterval implements TerminalDataType {
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
-    String value;
+public class TimeInterval extends AbstractTerminalDataType {
+
+    private String value;
 
     public TimeInterval() {
     }
@@ -12,13 +15,22 @@ public class TimeInterval implements TerminalDataType {
     }
 
     @Override
-    public void set(String value) {
+    public ScormResult set(String value) {
+        ScormResult scormResult = super.handleSet(this, value);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
         this.value = value;
+        return scormResult;
     }
 
     @Override
-    public String get() {
-        return this.value;
+    public ScormResult get() {
+        ScormResult scormResult = super.handleGet(this);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
+        return scormResult.setReturnValue(value);
     }
 
     public String getValue() {
