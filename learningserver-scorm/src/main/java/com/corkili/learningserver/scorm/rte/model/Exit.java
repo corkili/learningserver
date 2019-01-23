@@ -2,6 +2,8 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.State;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.handler.WriteOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class Exit implements TerminalDataType {
 
@@ -9,15 +11,20 @@ public class Exit implements TerminalDataType {
 
     public Exit() {
         this.exit = new State(new String[]{"timeout", "suspend", "logout", "normal", "_nil_"});
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        exit.registerGetHandler(new WriteOnlyHandler());
     }
 
     @Override
-    public void set(String value) {
-        exit.set(value);
+    public ScormResult set(String value) {
+        return exit.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return exit.get();
     }
 

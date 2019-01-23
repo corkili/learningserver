@@ -2,6 +2,8 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.State;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class TimeLimitAction implements TerminalDataType {
 
@@ -9,17 +11,22 @@ public class TimeLimitAction implements TerminalDataType {
 
     public TimeLimitAction() {
         this.timeLimitAction
-                = new State(new String[]{"exist_message", "continue_message", "exit_no_message", "continue_no_message"});
+                = new State(new String[]{"exist,message", "continue,message", "exit,no message", "continue,no message"});
+        this.timeLimitAction.setValue("continue,no message");
+        registerHandler();
+    }
 
+    private void registerHandler() {
+        timeLimitAction.registerSetHandler(new ReadOnlyHandler());
     }
 
     @Override
-    public void set(String value) {
-        this.timeLimitAction.set(value);
+    public ScormResult set(String value) {
+        return this.timeLimitAction.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.timeLimitAction.get();
     }
 

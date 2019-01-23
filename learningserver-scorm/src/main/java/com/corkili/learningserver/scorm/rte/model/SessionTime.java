@@ -2,6 +2,8 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.TimeInterval;
+import com.corkili.learningserver.scorm.rte.model.handler.WriteOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class SessionTime implements TerminalDataType {
 
@@ -9,15 +11,20 @@ public class SessionTime implements TerminalDataType {
 
     public SessionTime() {
         this.sessionTime = new TimeInterval();
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        sessionTime.registerGetHandler(new WriteOnlyHandler());
     }
 
     @Override
-    public void set(String value) {
-        this.sessionTime.set(value);
+    public ScormResult set(String value) {
+        return this.sessionTime.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.sessionTime.get();
     }
 

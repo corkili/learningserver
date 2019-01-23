@@ -2,6 +2,8 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.LocalizedString;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class LearnerName implements TerminalDataType {
 
@@ -9,15 +11,20 @@ public class LearnerName implements TerminalDataType {
 
     public LearnerName() {
         this.learnerName = new LocalizedString();
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        learnerName.registerSetHandler(new ReadOnlyHandler());
     }
 
     @Override
-    public void set(String value) {
-        this.learnerName.set(value);
+    public ScormResult set(String value) {
+        return this.learnerName.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.learnerName.get();
     }
 

@@ -5,6 +5,9 @@ import com.corkili.learningserver.scorm.rte.model.datatype.CharacterString;
 import com.corkili.learningserver.scorm.rte.model.datatype.GeneralDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.Real7;
 import com.corkili.learningserver.scorm.rte.model.datatype.Real7WithRange;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class Score implements GeneralDataType {
 
@@ -29,9 +32,42 @@ public class Score implements GeneralDataType {
         this.raw = new Real7();
         this.max = new Real7();
         this.min = new Real7();
+        registerHandler();
     }
 
-    public CharacterString getChildren() {
+    private void registerHandler() {
+        children.registerSetHandler(new ReadOnlyHandler());
+
+        scaled.registerGetHandler(context -> {
+            if (((Real7WithRange) context).getValue() == null) {
+                return new ScormResult("", ScormError.E_403);
+            }
+            return new ScormResult("", ScormError.E_0);
+        });
+
+        raw.registerGetHandler(context -> {
+            if (((Real7) context).getValue() == null) {
+                return new ScormResult("", ScormError.E_403);
+            }
+            return new ScormResult("", ScormError.E_0);
+        });
+
+        min.registerGetHandler(context -> {
+            if (((Real7) context).getValue() == null) {
+                return new ScormResult("", ScormError.E_403);
+            }
+            return new ScormResult("", ScormError.E_0);
+        });
+
+        max.registerGetHandler(context -> {
+            if (((Real7) context).getValue() == null) {
+                return new ScormResult("", ScormError.E_403);
+            }
+            return new ScormResult("", ScormError.E_0);
+        });
+    }
+
+   public CharacterString getChildren() {
         return children;
     }
 

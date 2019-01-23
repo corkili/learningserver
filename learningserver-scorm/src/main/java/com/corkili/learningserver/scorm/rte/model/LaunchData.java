@@ -2,6 +2,9 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.CharacterString;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class LaunchData implements TerminalDataType {
 
@@ -9,15 +12,26 @@ public class LaunchData implements TerminalDataType {
 
     public LaunchData() {
         this.launchData = new CharacterString();
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        launchData.registerGetHandler(context -> {
+            if (((CharacterString) context).getValue() == null) {
+                return new ScormResult("", ScormError.E_403);
+            }
+            return new ScormResult("", ScormError.E_0);
+        }).registerSetHandler(new ReadOnlyHandler());
+
     }
 
     @Override
-    public void set(String value) {
-        this.launchData.set(value);
+    public ScormResult set(String value) {
+        return this.launchData.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.launchData.get();
     }
 

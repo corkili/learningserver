@@ -1,7 +1,10 @@
 package com.corkili.learningserver.scorm.rte.model;
 
+import java.math.BigDecimal;
+
 import com.corkili.learningserver.scorm.rte.model.datatype.Real7WithMin;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class AudioLevel implements TerminalDataType {
 
@@ -9,15 +12,16 @@ public class AudioLevel implements TerminalDataType {
 
     public AudioLevel() {
         this.audioLevel = new Real7WithMin(0);
+        this.audioLevel.setValue(new BigDecimal(0).setScale(7, BigDecimal.ROUND_HALF_UP));
     }
 
     @Override
-    public void set(String value) {
-        this.audioLevel.set(value);
+    public ScormResult set(String value) {
+        return this.audioLevel.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.audioLevel.get();
     }
 

@@ -3,6 +3,7 @@ package com.corkili.learningserver.scorm.rte.model;
 import com.corkili.learningserver.scorm.rte.model.annotation.Meta;
 import com.corkili.learningserver.scorm.rte.model.datatype.CharacterString;
 import com.corkili.learningserver.scorm.rte.model.datatype.GeneralDataType;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
 
 public class CMI implements GeneralDataType {
 
@@ -82,11 +83,10 @@ public class CMI implements GeneralDataType {
     private TotalTime totalTime;
 
     public CMI() {
-        this.version = new CharacterString();
-        version.set("1.0");
+        this.version = new CharacterString("1.0");
         this.commentsFromLearner = new CommentsFromLearner();
         this.commentsFromLMS = new CommentsFromLMS();
-        this.completionStatus = new CompletionStatus();
+        this.completionStatus = new CompletionStatus(this);
         this.completionThreshold = new CompletionThreshold();
         this.credit = new Credit();
         this.entry = new Entry();
@@ -103,10 +103,15 @@ public class CMI implements GeneralDataType {
         this.scaledPassingScore = new ScaledPassingScore();
         this.score = new Score();
         this.sessionTime = new SessionTime();
-        this.successStatus = new SuccessStatus();
+        this.successStatus = new SuccessStatus(this);
         this.suspendData = new SuspendData();
         this.timeLimitAction = new TimeLimitAction();
         this.totalTime = new TotalTime();
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        version.registerSetHandler(new ReadOnlyHandler());
     }
 
     public CharacterString getVersion() {

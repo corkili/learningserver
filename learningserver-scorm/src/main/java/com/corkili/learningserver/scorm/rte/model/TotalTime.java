@@ -2,6 +2,8 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.TimeInterval;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class TotalTime implements TerminalDataType {
 
@@ -9,15 +11,20 @@ public class TotalTime implements TerminalDataType {
 
     public TotalTime() {
         this.totalTime = new TimeInterval();
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        totalTime.registerSetHandler(new ReadOnlyHandler());
     }
 
     @Override
-    public void set(String value) {
-        this.totalTime.set(value);
+    public ScormResult set(String value) {
+        return this.totalTime.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.totalTime.get();
     }
 

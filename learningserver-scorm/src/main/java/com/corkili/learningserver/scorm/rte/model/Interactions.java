@@ -11,6 +11,9 @@ import com.corkili.learningserver.scorm.rte.model.datatype.Real7;
 import com.corkili.learningserver.scorm.rte.model.datatype.State;
 import com.corkili.learningserver.scorm.rte.model.datatype.Time;
 import com.corkili.learningserver.scorm.rte.model.datatype.TimeInterval;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class Interactions extends AbstractCollectionDataType<Interactions.Instance> {
 
@@ -24,11 +27,17 @@ public class Interactions extends AbstractCollectionDataType<Interactions.Instan
         children = new CharacterString("id,type,objectives,timestamp,correct_responses,weighting,learner_response," +
                 "result,latency,description");
         count = new Int(0);
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        children.registerSetHandler(new ReadOnlyHandler());
+        count.registerSetHandler(new ReadOnlyHandler());
     }
 
     @Override
     protected Instance newInstance() {
-        count.set(String.valueOf(Integer.parseInt(count.get()) + 1));
+        count.setValue(count.getValue() + 1);
         return new Instance();
     }
 
@@ -84,12 +93,101 @@ public class Interactions extends AbstractCollectionDataType<Interactions.Instan
             this.id = new LongIdentifier();
             this.type = new State(new String[]{"true_false", "multiple_choice", "fill_in", "long_fill_in", "matching",
                     "performance", "sequencing", "likert", "numeric", "other"});
-            this.objectives = new InteractionsObjectives();
+            this.objectives = new InteractionsObjectives(this);
             this.timestamp = new Time();
-            this.correctResponses = new CorrectResponses();
+            this.correctResponses = new CorrectResponses(this);
             this.weighting = new Real7();
+            this.learnerResponse = new LearnerResponse(this);
             this.result = new Result();
             this.description = new LocalizedString();
+            registerHandler();
+        }
+
+        private void registerHandler() {
+            type.registerGetHandler(context -> {
+                if (((State) context).getValue() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
+            timestamp.registerGetHandler(context -> {
+                if (((Time) context).getValue() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
+            weighting.registerGetHandler(context -> {
+                if (((Real7) context).getValue() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
+            learnerResponse.registerGetHandler(context -> {
+                if (((LearnerResponse) context).getLearnerResponse() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
+            result.registerGetHandler(context -> {
+                if (((Result) context).getResult() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
+            latency.registerGetHandler(context -> {
+                if (((TimeInterval) context).getValue() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
+            description.registerGetHandler(context -> {
+                if (((LocalizedString) context).getValue() == null) {
+                    return new ScormResult("", ScormError.E_403);
+                }
+                return new ScormResult("", ScormError.E_0);
+            }).registerSetHandler((context, value) -> {
+                if (id.getValue() == null) {
+                    return new ScormResult("false", ScormError.E_408);
+                }
+                return new ScormResult("true", ScormError.E_0);
+            });
+
         }
 
         public LongIdentifier getId() {

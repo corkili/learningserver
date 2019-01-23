@@ -32,7 +32,7 @@ public class State extends AbstractTerminalDataType {
             this.value = value;
             return scormResult;
         } else {
-            return new ScormResult("false", ScormError.E_407, CommonUtils.format(
+            return new ScormResult("false", ScormError.E_406, CommonUtils.format(
                     "parameter should be one of the following tokens: {}", (Object) stateTable.toArray()));
         }
     }

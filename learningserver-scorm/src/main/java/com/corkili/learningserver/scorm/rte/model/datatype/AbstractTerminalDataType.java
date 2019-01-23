@@ -10,12 +10,14 @@ public abstract class AbstractTerminalDataType implements TerminalDataType {
     private SetHandler setHandler;
     private GetHandler getHandler;
 
-    public void setSetHandler(SetHandler setHandler) {
+    public AbstractTerminalDataType registerSetHandler(SetHandler setHandler) {
         this.setHandler = setHandler;
+        return this;
     }
 
-    public void setGetHandler(GetHandler getHandler) {
+    public AbstractTerminalDataType registerGetHandler(GetHandler getHandler) {
         this.getHandler = getHandler;
+        return this;
     }
 
     protected ScormResult handleSet(Object context, String value) {

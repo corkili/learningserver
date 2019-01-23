@@ -2,6 +2,8 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.datatype.CharacterString;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 public class SuspendData implements TerminalDataType {
 
@@ -9,15 +11,25 @@ public class SuspendData implements TerminalDataType {
 
     public SuspendData() {
         this.suspendData = new CharacterString();
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        suspendData.registerGetHandler(context -> {
+            if (((CharacterString) context).getValue() == null) {
+                return new ScormResult("", ScormError.E_403);
+            }
+            return new ScormResult("", ScormError.E_0);
+        });
     }
 
     @Override
-    public void set(String value) {
-        this.suspendData.set(value);
+    public ScormResult set(String value) {
+        return this.suspendData.set(value);
     }
 
     @Override
-    public String get() {
+    public ScormResult get() {
         return this.suspendData.get();
     }
 

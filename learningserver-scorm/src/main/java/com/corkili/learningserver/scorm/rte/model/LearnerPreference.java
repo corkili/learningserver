@@ -1,10 +1,13 @@
 package com.corkili.learningserver.scorm.rte.model;
 
+import java.math.BigDecimal;
+
 import com.corkili.learningserver.scorm.rte.model.annotation.Meta;
 import com.corkili.learningserver.scorm.rte.model.datatype.CharacterString;
 import com.corkili.learningserver.scorm.rte.model.datatype.GeneralDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.Real7WithMin;
 import com.corkili.learningserver.scorm.rte.model.datatype.State;
+import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
 
 public class LearnerPreference implements GeneralDataType {
 
@@ -28,7 +31,14 @@ public class LearnerPreference implements GeneralDataType {
         this.audioLevel = new AudioLevel();
         this.language = new Language();
         this.deliverySpeed = new Real7WithMin(0);
-        this.audioCaptioning = new State(new String[]{"off", "no_change", "on"});
+        this.deliverySpeed.setValue(new BigDecimal(1).setScale(7, BigDecimal.ROUND_HALF_UP));
+        this.audioCaptioning = new State(new String[]{"-1", "0", "1"});
+        this.audioCaptioning.setValue("0");
+        registerHandler();
+    }
+
+    private void registerHandler() {
+        children.registerSetHandler(new ReadOnlyHandler());
     }
 
     public CharacterString getChildren() {

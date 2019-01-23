@@ -1,19 +1,38 @@
 package com.corkili.learningserver.scorm.rte.model;
 
-import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.Interactions.Instance;
+import com.corkili.learningserver.scorm.rte.model.datatype.AbstractTerminalDataType;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
-public class LearnerResponse implements TerminalDataType {
+// TODO 4.2.9.2 page 133
+public class LearnerResponse extends AbstractTerminalDataType {
 
     private String learnerResponse;
 
-    @Override
-    public void set(String value) {
-        this.learnerResponse = value;
+    private Interactions.Instance container;
+
+    public LearnerResponse(Instance container) {
+        this.container = container;
     }
 
     @Override
-    public String get() {
-        return this.learnerResponse;
+    public ScormResult set(String value) {
+        ScormResult scormResult = super.handleSet(this, value);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
+        this.learnerResponse = value;
+        return scormResult;
+    }
+
+    @Override
+    public ScormResult get() {
+        ScormResult scormResult = super.handleGet(this);
+        if (!scormResult.getError().equals(ScormError.E_0)) {
+            return scormResult;
+        }
+        return scormResult.setReturnValue(learnerResponse);
     }
 
     public String getLearnerResponse() {
