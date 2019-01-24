@@ -27,8 +27,12 @@ public class CommentsFromLearner extends AbstractCollectionDataType<CommentsFrom
 
     @Override
     protected Instance newInstance() {
-        count.setValue(count.getValue() + 1);
         return new Instance();
+    }
+
+    @Override
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     private void registerHandler() {

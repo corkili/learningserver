@@ -8,4 +8,6 @@ public interface CollectionDataType<Instance> {
 
     CollectionScormResult<Instance> set(int index);
 
+    void syncNewInstance(boolean operatorIsSuccess);
+
 }

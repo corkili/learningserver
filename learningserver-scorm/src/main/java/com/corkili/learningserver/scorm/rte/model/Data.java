@@ -35,8 +35,8 @@ public class Data extends AbstractCollectionDataType<Data.Instance> {
     }
 
     @Override
-    protected boolean hasReadOnlyElement() {
-        return true;
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     public static class Instance implements GeneralDataType {

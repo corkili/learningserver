@@ -11,6 +11,8 @@ public abstract class AbstractCollectionDataType<Instance> implements Collection
 
     private List<Instance> instances;
 
+    private Instance lastNewInstance;
+
     public AbstractCollectionDataType() {
         instances = new ArrayList<>();
     }
@@ -26,24 +28,33 @@ public abstract class AbstractCollectionDataType<Instance> implements Collection
 
     @Override
     public final CollectionScormResult<Instance> set(int index) {
-        if (hasReadOnlyElement() && index >= instances.size()) {
-            return new CollectionScormResult<>("false", ScormError.E_351,
-                    "Data Model Element Collection Set Out Of Range");
-        }
+        Instance instance;
         if (index > instances.size()) {
             return new CollectionScormResult<>("false", ScormError.E_351,
                     Diagnostic.DATA_MODEL_ELEMENT_COLLECTION_SET_OUT_OF_ORDER);
-        } else if (index == instances.size()) {
-            instances.add(newInstance());
+        } else if (index == instances.size()) { // need a new instance
+            instance = this.lastNewInstance = newInstance();
+        } else {
+            instance = instances.get(index);
         }
-        return new CollectionScormResult<>("true", ScormError.E_0, instances.get(index));
+        return new CollectionScormResult<>("true", ScormError.E_0, instance);
+    }
+
+    @Override
+    public void syncNewInstance(boolean operatorIsSuccess) {
+        if (lastNewInstance == null) {
+            return;
+        }
+        if (operatorIsSuccess) {
+            instances.add(lastNewInstance);
+            addCount();
+        }
+        lastNewInstance = null;
     }
 
     protected abstract Instance newInstance();
 
-    protected boolean hasReadOnlyElement() {
-        return false;
-    }
+    protected abstract void addCount();
 
     public List<Instance> getInstances() {
         return instances;

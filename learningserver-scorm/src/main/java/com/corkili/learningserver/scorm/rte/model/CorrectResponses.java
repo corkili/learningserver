@@ -27,8 +27,12 @@ public class CorrectResponses extends AbstractCollectionDataType<CorrectResponse
 
     @Override
     protected Instance newInstance() {
-        count.setValue(count.getValue() + 1);
         return new Instance(container);
+    }
+
+    @Override
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     public static class Instance implements GeneralDataType {
@@ -51,11 +55,28 @@ public class CorrectResponses extends AbstractCollectionDataType<CorrectResponse
                 }
                 return new ScormResult("", ScormError.E_0);
             }).registerSetHandler((context, value) -> {
-                if (superContainer.getId().getValue() == null) {
+                if (superContainer.getId().getValue() == null ||
+                        superContainer.getType().getValue() == null) {
                     return new ScormResult("false", ScormError.E_408);
                 }
                 return new ScormResult("true", ScormError.E_0);
             });
+        }
+
+        public Pattern getPattern() {
+            return pattern;
+        }
+
+        public void setPattern(Pattern pattern) {
+            this.pattern = pattern;
+        }
+
+        public Interactions.Instance getSuperContainer() {
+            return superContainer;
+        }
+
+        public void setSuperContainer(Interactions.Instance superContainer) {
+            this.superContainer = superContainer;
         }
     }
 

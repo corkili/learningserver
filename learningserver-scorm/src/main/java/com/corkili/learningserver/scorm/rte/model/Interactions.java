@@ -37,8 +37,12 @@ public class Interactions extends AbstractCollectionDataType<Interactions.Instan
 
     @Override
     protected Instance newInstance() {
-        count.setValue(count.getValue() + 1);
         return new Instance();
+    }
+
+    @Override
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     public CharacterString getChildren() {
@@ -146,7 +150,7 @@ public class Interactions extends AbstractCollectionDataType<Interactions.Instan
                 }
                 return new ScormResult("", ScormError.E_0);
             }).registerSetHandler((context, value) -> {
-                if (id.getValue() == null) {
+                if (id.getValue() == null || type.getValue() == null) {
                     return new ScormResult("false", ScormError.E_408);
                 }
                 return new ScormResult("true", ScormError.E_0);

@@ -18,13 +18,15 @@ public class CommonUtils {
     private static final Set<String> LANGUAGE_SUBCODES = new HashSet<>(Arrays.asList(Locale.getISOCountries()));
 
     static {
+        Set<String> iso3 = new HashSet<>();
         for (String languageCode : LANGUAGE_CODES) {
             try {
-                LANGUAGE_CODES.add(new Locale(languageCode).getISO3Language());
+                iso3.add(new Locale(languageCode).getISO3Language());
             } catch (Exception ignored) {
 
             }
         }
+        LANGUAGE_CODES.addAll(iso3);
     }
 
     public static String stringifyError(Throwable error) {

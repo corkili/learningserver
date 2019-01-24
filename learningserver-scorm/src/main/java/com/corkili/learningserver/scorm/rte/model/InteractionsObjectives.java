@@ -29,8 +29,12 @@ public class InteractionsObjectives extends AbstractCollectionDataType<Interacti
 
     @Override
     protected Instance newInstance() {
-        count.setValue(count.getValue() + 1);
         return new Instance(container);
+    }
+
+    @Override
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     public Int getCount() {

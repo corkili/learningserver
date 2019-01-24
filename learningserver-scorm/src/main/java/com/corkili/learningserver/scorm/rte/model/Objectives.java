@@ -35,8 +35,12 @@ public class Objectives extends AbstractCollectionDataType<Objectives.Instance> 
 
     @Override
     protected Instance newInstance() {
-        count.setValue(count.getValue() + 1);
         return new Instance(this);
+    }
+
+    @Override
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     public CharacterString getChildren() {

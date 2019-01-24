@@ -31,8 +31,8 @@ public class CommentsFromLMS extends AbstractCollectionDataType<CommentsFromLMS.
     }
 
     @Override
-    protected boolean hasReadOnlyElement() {
-        return true;
+    protected void addCount() {
+        count.setValue(count.getValue() + 1);
     }
 
     private void registerHandler() {
