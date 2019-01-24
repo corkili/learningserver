@@ -1,5 +1,8 @@
 package com.corkili.learningserver.scorm.rte.model.datatype;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.corkili.learningserver.scorm.common.CommonUtils;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
@@ -11,7 +14,7 @@ public class Time extends AbstractTerminalDataType {
     }
 
     public Time(String value) {
-        this.value = value;
+        set0(value);
     }
 
     @Override
@@ -20,7 +23,9 @@ public class Time extends AbstractTerminalDataType {
         if (!scormResult.getError().equals(ScormError.E_0)) {
             return scormResult;
         }
-        this.value = value;
+        if (!set0(value)) {
+            return new ScormResult("false", ScormError.E_406);
+        }
         return scormResult;
     }
 
@@ -33,11 +38,23 @@ public class Time extends AbstractTerminalDataType {
         return scormResult.setReturnValue(value);
     }
 
+    private boolean set0(String value) {
+        if (StringUtils.isBlank(value)) {
+            return false;
+        }
+        if (CommonUtils.isLegalTime(value)) {
+            this.value = value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String getValue() {
         return value;
     }
 
     public void setValue(String value) {
-        this.value = value;
+        set0(value);
     }
 }

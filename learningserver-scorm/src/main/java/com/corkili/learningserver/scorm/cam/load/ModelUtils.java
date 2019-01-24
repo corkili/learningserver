@@ -2,9 +2,6 @@ package com.corkili.learningserver.scorm.cam.load;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URI;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,12 +31,7 @@ public class ModelUtils {
 
     public static boolean isAnyUriFormatCorrect(AnyURI anyURI) {
         if (!isAnyUriEmpty(anyURI)) {
-            try {
-                URI.create(anyURI.getValue());
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+            return CommonUtils.isLegalURI(anyURI.getValue());
         } else {
             return false;
         }
@@ -143,12 +135,7 @@ public class ModelUtils {
 
     public static boolean isDateTimeFormatCorrect(String dateTime) {
         if (!StringUtils.isBlank(dateTime)) {
-            try {
-                Instant.parse(dateTime);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+            return CommonUtils.isLegalTime(dateTime);
         } else {
             return false;
         }
@@ -156,12 +143,7 @@ public class ModelUtils {
 
     public static boolean isDurationFormatCorrect(String duration) {
         if (!StringUtils.isBlank(duration)) {
-            try {
-                Duration.parse(duration);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+            return CommonUtils.isLegalDuration(duration);
         } else {
             return false;
         }

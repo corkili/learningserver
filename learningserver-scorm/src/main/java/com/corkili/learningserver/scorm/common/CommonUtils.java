@@ -2,6 +2,9 @@ package com.corkili.learningserver.scorm.common;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URI;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
@@ -13,6 +16,16 @@ public class CommonUtils {
 
     private static final Set<String> LANGUAGE_CODES = new HashSet<>(Arrays.asList(Locale.getISOLanguages()));
     private static final Set<String> LANGUAGE_SUBCODES = new HashSet<>(Arrays.asList(Locale.getISOCountries()));
+
+    static {
+        for (String languageCode : LANGUAGE_CODES) {
+            try {
+                LANGUAGE_CODES.add(new Locale(languageCode).getISO3Language());
+            } catch (Exception ignored) {
+
+            }
+        }
+    }
 
     public static String stringifyError(Throwable error) {
         StringWriter result = new StringWriter();
@@ -41,6 +54,34 @@ public class CommonUtils {
             result = false;
         }
         return result;
+    }
+
+    public static boolean isLegalURI(String uri) {
+        try {
+            //noinspection ResultOfMethodCallIgnored
+            URI.create(uri);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean isLegalTime(String time) {
+        try {
+            Instant.parse(time);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean isLegalDuration(String duration) {
+        try {
+            Duration.parse(duration);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
