@@ -1,5 +1,7 @@
 package com.corkili.learningserver.scorm.rte.model.result;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.sun.istack.internal.NotNull;
 
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
@@ -42,5 +44,14 @@ public class ScormResult {
     public ScormResult setDiagnostic(@NotNull String diagnostic) {
         this.diagnostic = diagnostic;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("returnValue", returnValue)
+                .append("error", error)
+                .append("diagnostic", diagnostic)
+                .toString();
     }
 }

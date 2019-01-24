@@ -1,7 +1,9 @@
 package com.corkili.learningserver.scorm.rte.model.error;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public enum ScormError {
-    E_0(0, "No ScormError"),
+    E_0(0, "No Error"),
     E_101(101, "General Exception"),
     E_102(102, "General Initialization Failure"),
     E_103(103, "Already Initialized"),
@@ -49,4 +51,11 @@ public enum ScormError {
         return ScormError.valueOf("E_" + c);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("code", code)
+                .append("msg", msg)
+                .toString();
+    }
 }
