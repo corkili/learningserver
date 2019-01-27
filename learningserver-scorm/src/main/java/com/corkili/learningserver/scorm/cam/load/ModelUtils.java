@@ -2,13 +2,7 @@ package com.corkili.learningserver.scorm.cam.load;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URI;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,11 +17,9 @@ import com.corkili.learningserver.scorm.cam.model.datatype.IDRef;
 import com.corkili.learningserver.scorm.cam.model.datatype.NonNegativeInteger;
 import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 import com.corkili.learningserver.scorm.cam.model.datatype.VCard;
+import com.corkili.learningserver.scorm.common.CommonUtils;
 
 public class ModelUtils {
-
-    private static final Set<String> LANGUAGE_CODES = new HashSet<>(Arrays.asList(Locale.getISOLanguages()));
-    private static final Set<String> LANGUAGE_SUBCODES = new HashSet<>(Arrays.asList(Locale.getISOCountries()));
 
     public static boolean isAnyUriEmpty(AnyURI anyURI) {
         if (anyURI != null) {
@@ -39,12 +31,7 @@ public class ModelUtils {
 
     public static boolean isAnyUriFormatCorrect(AnyURI anyURI) {
         if (!isAnyUriEmpty(anyURI)) {
-            try {
-                URI.create(anyURI.getValue());
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+            return CommonUtils.isLegalURI(anyURI.getValue());
         } else {
             return false;
         }
@@ -148,12 +135,7 @@ public class ModelUtils {
 
     public static boolean isDateTimeFormatCorrect(String dateTime) {
         if (!StringUtils.isBlank(dateTime)) {
-            try {
-                Instant.parse(dateTime);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+            return CommonUtils.isLegalTime(dateTime);
         } else {
             return false;
         }
@@ -161,12 +143,7 @@ public class ModelUtils {
 
     public static boolean isDurationFormatCorrect(String duration) {
         if (!StringUtils.isBlank(duration)) {
-            try {
-                Duration.parse(duration);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+            return CommonUtils.isLegalDuration(duration);
         } else {
             return false;
         }
@@ -200,20 +177,7 @@ public class ModelUtils {
     }
 
     public static boolean isLegalLanguage(String language) {
-        if (StringUtils.isBlank(language)) {
-            return false;
-        }
-        String[] code = language.split("-");
-        boolean result;
-        if (code.length == 1 || code.length == 2) {
-            result = LANGUAGE_CODES.contains(code[0]);
-            if (code.length == 2) {
-                result &= LANGUAGE_SUBCODES.contains(code[1]);
-            }
-        } else {
-            result = false;
-        }
-        return result;
+        return CommonUtils.isLegalLanguage(language);
     }
 
 }

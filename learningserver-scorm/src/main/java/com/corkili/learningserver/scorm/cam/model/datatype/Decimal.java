@@ -13,4 +13,12 @@ public class Decimal extends XMLDataType {
         decimalValue = BigDecimal.valueOf(Double.valueOf(value))
                 .setScale(this.scale, BigDecimal.ROUND_HALF_UP);
     }
+
+    public BigDecimal getDecimalValue() {
+        return decimalValue;
+    }
+
+    public int getScale() {
+        return scale;
+    }
 }
