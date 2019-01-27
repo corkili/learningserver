@@ -17,7 +17,7 @@ public enum ScormError {
     E_133(133, "Store Data After Termination"),
     E_142(142, "Commit Before Initialization"),
     E_143(143, "Commit After Termination"),
-    E_201(201, "General Argument ScormError"),
+    E_201(201, "General Argument Error"),
     E_301(301, "General Get Failure"),
     E_351(351, "General Set Failure"),
     E_391(391, "General Commit Failure"),

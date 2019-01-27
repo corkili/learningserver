@@ -3,7 +3,7 @@ package com.corkili.learningserver.scorm.rte.model;
 import com.corkili.learningserver.scorm.rte.model.annotation.Meta;
 import com.corkili.learningserver.scorm.rte.model.datatype.GeneralDataType;
 
-public class RuntimeDataModel implements GeneralDataType {
+public class RuntimeData implements GeneralDataType {
 
     @Meta("cmi")
     private CMI cmi;
@@ -11,7 +11,7 @@ public class RuntimeDataModel implements GeneralDataType {
     @Meta("adl")
     private ADL adl;
 
-    public RuntimeDataModel() {
+    public RuntimeData() {
         this.cmi = new CMI();
         this.adl = new ADL();
     }

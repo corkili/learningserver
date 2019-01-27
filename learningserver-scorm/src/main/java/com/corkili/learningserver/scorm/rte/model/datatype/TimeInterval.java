@@ -55,6 +55,6 @@ public class TimeInterval extends AbstractTerminalDataType {
     }
 
     public void setValue(String value) {
-        set0(value);
+        this.value = value;
     }
 }

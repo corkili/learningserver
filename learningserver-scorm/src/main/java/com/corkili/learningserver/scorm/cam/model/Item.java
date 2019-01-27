@@ -28,6 +28,10 @@ public class Item {
     private Sequencing sequencing; // 0...1
     private Presentation presentation; // 0...1
 
+    // other
+    private Organization parentOrganization;
+    private Item parentItem;
+
     public Item() {
         isvisible = true;
         itemList = new ArrayList<>();
@@ -135,6 +139,30 @@ public class Item {
 
     public void setPresentation(Presentation presentation) {
         this.presentation = presentation;
+    }
+
+    public Organization getParentOrganization() {
+        return parentOrganization;
+    }
+
+    public void setParentOrganization(Organization parentOrganization) {
+        this.parentOrganization = parentOrganization;
+    }
+
+    public Item getParentItem() {
+        return parentItem;
+    }
+
+    public void setParentItem(Item parentItem) {
+        this.parentItem = parentItem;
+    }
+
+    public boolean parentIsItem() {
+        return parentItem != null;
+    }
+
+    public boolean parentIsOrganization() {
+        return parentOrganization != null;
     }
 
     @Override

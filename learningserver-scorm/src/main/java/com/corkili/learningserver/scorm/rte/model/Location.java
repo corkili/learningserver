@@ -11,6 +11,7 @@ public class Location implements TerminalDataType {
 
     public Location() {
         this.location = new CharacterString();
+        this.location.setValue("");
         registerHandler();
     }
 

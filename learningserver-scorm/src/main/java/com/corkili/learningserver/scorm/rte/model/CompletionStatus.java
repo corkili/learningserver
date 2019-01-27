@@ -7,7 +7,6 @@ import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
-// TODO RTE-4-35 (page 95)
 public class CompletionStatus implements TerminalDataType {
 
     private State completionStatus;
@@ -15,6 +14,7 @@ public class CompletionStatus implements TerminalDataType {
 
     public CompletionStatus(CMI containerCMI) {
         this.completionStatus = new State(new String[]{"completed", "incomplete", "not_attempted", "unknown"});
+        this.completionStatus.setValue("unknown");
         this.containerCMI = containerCMI;
     }
 

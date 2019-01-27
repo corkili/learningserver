@@ -1,5 +1,7 @@
 package com.corkili.learningserver.scorm.rte.model;
 
+import java.time.Duration;
+
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.TimeInterval;
 import com.corkili.learningserver.scorm.rte.model.handler.ReadOnlyHandler;
@@ -11,6 +13,7 @@ public class TotalTime implements TerminalDataType {
 
     public TotalTime() {
         this.totalTime = new TimeInterval();
+        this.totalTime.setValue(Duration.ZERO.toString());
         registerHandler();
     }
 

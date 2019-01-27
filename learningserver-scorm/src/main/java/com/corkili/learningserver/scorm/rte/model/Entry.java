@@ -10,7 +10,7 @@ public class Entry implements TerminalDataType {
     private State entry;
 
     public Entry() {
-        entry = new State(new String[]{"ab_initio","resume","_nil_"});
+        entry = new State(new String[]{"ab_initio","resume",""});
         registerHandler();
     }
 

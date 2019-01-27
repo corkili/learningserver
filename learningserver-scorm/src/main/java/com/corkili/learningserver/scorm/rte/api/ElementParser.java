@@ -3,13 +3,17 @@ package com.corkili.learningserver.scorm.rte.api;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.scorm.common.CommonUtils;
-import com.corkili.learningserver.scorm.rte.model.RuntimeDataModel;
+import com.corkili.learningserver.scorm.rte.model.RuntimeData;
 import com.corkili.learningserver.scorm.rte.model.annotation.Meta;
 import com.corkili.learningserver.scorm.rte.model.datatype.CollectionDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
@@ -19,30 +23,58 @@ import com.corkili.learningserver.scorm.rte.model.result.CollectionScormResult;
 import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 
 @Slf4j
-public class ElementParser {
+public class ElementParser implements Delayed {
 
-    private List<CollectionDataType> accessedCollectionElement = new LinkedList<>();
+    private static DelayQueue<ElementParser> parserPool;
 
-    public ScormResult parseSet(RuntimeDataModel runtimeDataModel, String elementName, String value) {
-        return parse(runtimeDataModel, true, elementName, value);
+    static {
+        parserPool = new DelayQueue<>();
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> parserPool.drainTo(new LinkedList<>()),
+                        1, 1, TimeUnit.SECONDS);
     }
 
-    public ScormResult parseGet(RuntimeDataModel runtimeDataModel, String elementName) {
-        return parse(runtimeDataModel, false, elementName, null);
+    private List<CollectionDataType> accessedCollectionElement;
+    private long lastAccessTime;
+
+    private ElementParser() {
+        accessedCollectionElement = new LinkedList<>();
+        lastAccessTime = System.currentTimeMillis();
     }
 
-    private ScormResult parse(RuntimeDataModel runtimeDataModel, boolean isSet, String elementName, String value) {
+    static ScormResult parseSet(RuntimeData runtimeData, String elementName, String value) {
+        return getInstance().parse(runtimeData, true, elementName, value);
+    }
+
+    static ScormResult parseGet(RuntimeData runtimeData, String elementName) {
+        return getInstance().parse(runtimeData, false, elementName, null);
+    }
+
+    private static ElementParser getInstance() {
+        ElementParser parser = parserPool.poll();
+        if (parser == null) {
+            parser = new ElementParser();
+        }
+        return parser;
+    }
+
+    private static void release(ElementParser parser) {
+        parser.lastAccessTime = System.currentTimeMillis();
+        parserPool.offer(parser);
+    }
+
+    private ScormResult parse(RuntimeData runtimeData, boolean isSet, String elementName, String value) {
         if (StringUtils.isBlank(elementName)) {
             return new ScormResult(isSet ? "false" : "", isSet ? ScormError.E_351 : ScormError.E_301,
                     Diagnostic.DATA_MODEL_ELEMENT_NOT_SPECIFIED);
         }
         String[] elementNames = elementName.split("\\.");
-        ScormResult scormResult = parse(runtimeDataModel, elementNames, 0, isSet, value);
+        ScormResult scormResult = parse(runtimeData, elementNames, 0, isSet, value);
         boolean success = scormResult.getError().equals(ScormError.E_0);
         for (CollectionDataType collectionElement : accessedCollectionElement) {
             collectionElement.syncNewInstance(success);
         }
         accessedCollectionElement.clear();
+        release(this);
         return scormResult;
     }
 
@@ -129,4 +161,13 @@ public class ElementParser {
         }
     }
 
+    @Override
+    public long getDelay(TimeUnit unit) {
+        return System.currentTimeMillis() - (lastAccessTime + 600000);
+    }
+
+    @Override
+    public int compareTo(Delayed o) {
+        return (int)(this.lastAccessTime - ((ElementParser) o).lastAccessTime);
+    }
 }

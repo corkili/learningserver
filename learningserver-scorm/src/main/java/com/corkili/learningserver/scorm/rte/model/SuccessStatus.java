@@ -15,6 +15,7 @@ public class SuccessStatus implements TerminalDataType {
 
     public SuccessStatus(CMI containerCMI) {
         this.successStatus = new State(new String[]{"passed", "failed", "unknown"});
+        this.successStatus.setValue("unknown");
         this.containerCMI = containerCMI;
     }
 

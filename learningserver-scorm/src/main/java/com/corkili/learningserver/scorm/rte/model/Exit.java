@@ -10,7 +10,8 @@ public class Exit implements TerminalDataType {
     private State exit;
 
     public Exit() {
-        this.exit = new State(new String[]{"timeout", "suspend", "logout", "normal", "_nil_"});
+        this.exit = new State(new String[]{"timeout", "suspend", "logout", "normal", ""});
+        this.exit.setValue("");
         registerHandler();
     }
 

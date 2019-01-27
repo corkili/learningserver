@@ -171,7 +171,26 @@ public class ContentPackageGenerator {
         // #6: manifest.sequencingCollection
         parseSequencingCollection(manifestNode.element(rootQNameGenerator.imsss("sequencingCollection")));
 
+        // #7: generate dependency
+        generateDependency();
+
         return contentPackage;
+    }
+
+    private void generateDependency() {
+        for (Organization organization : contentPackage.getManifest().getOrganizations().getOrganizationList()) {
+            for (Item item : organization.getItemList()) {
+                item.setParentOrganization(organization);
+                generateDependency(item);
+            }
+        }
+    }
+
+    private void generateDependency(Item item) {
+        for (Item childItem : item.getItemList()) {
+            childItem.setParentItem(item);
+            generateDependency(childItem);
+        }
     }
 
     private QNameGenerator parseNamespace(Element node) {
