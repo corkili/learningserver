@@ -20,4 +20,35 @@ public class ActivityProgressInformation {
         activityExperiencedDuration = Duration.ZERO;
         activityAttemptCount = new NonNegativeInteger(0);
     }
+
+    public boolean isActivityProgressStatus() {
+        return activityProgressStatus;
+    }
+
+    public ActivityProgressInformation setActivityProgressStatus(boolean activityProgressStatus) {
+        this.activityProgressStatus = activityProgressStatus;
+        return this;
+    }
+
+    public Duration getActivityAbsoluteDuration() {
+        return activityAbsoluteDuration;
+    }
+
+    public ActivityProgressInformation setActivityAbsoluteDuration(Duration activityAbsoluteDuration) {
+        this.activityAbsoluteDuration = activityAbsoluteDuration;
+        return this;
+    }
+
+    public Duration getActivityExperiencedDuration() {
+        return activityExperiencedDuration;
+    }
+
+    public ActivityProgressInformation setActivityExperiencedDuration(Duration activityExperiencedDuration) {
+        this.activityExperiencedDuration = activityExperiencedDuration;
+        return this;
+    }
+
+    public NonNegativeInteger getActivityAttemptCount() {
+        return activityAttemptCount;
+    }
 }

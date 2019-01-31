@@ -1,6 +1,8 @@
 package com.corkili.learningserver.scorm.sn.model.tracking;
 
-import com.corkili.learningserver.scorm.sn.tree.Activity;
+import java.util.Objects;
+
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 
 /**
  * for an activity tree
@@ -19,6 +21,9 @@ public class GlobalStateInformation {
 
     public void setCurrentActivity(Activity currentActivity) {
         this.currentActivity = currentActivity;
+        if (Objects.equals(currentActivity, suspendedActivity)) {
+            suspendedActivity = null;
+        }
     }
 
     public Activity getSuspendedActivity() {
@@ -27,5 +32,8 @@ public class GlobalStateInformation {
 
     public void setSuspendedActivity(Activity suspendedActivity) {
         this.suspendedActivity = suspendedActivity;
+        if (Objects.equals(suspendedActivity, currentActivity)) {
+            currentActivity = null;
+        }
     }
 }

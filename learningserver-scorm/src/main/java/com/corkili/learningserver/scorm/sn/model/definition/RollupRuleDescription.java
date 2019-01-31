@@ -25,7 +25,7 @@ public class RollupRuleDescription implements DefinitionElementSet {
         childActivitySet = new Vocabulary("All", "All", "Any", "None", "At Least Count", "At Least Percent");
         rollupMinimumCount = new NonNegativeInteger(0);
         rollupMinimumPercent = new DecimalWithRange(0, 0, 1, 4);
-        rollupAction = new Vocabulary("Satisfied", "Not Satisfied", "Completed", "Incomplete");
+        rollupAction = new Vocabulary("Satisfied", "Satisfied", "Not Satisfied", "Completed", "Incomplete");
     }
 
     public Vocabulary getConditionCombination() {

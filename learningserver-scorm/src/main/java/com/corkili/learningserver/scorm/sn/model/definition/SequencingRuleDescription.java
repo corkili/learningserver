@@ -52,5 +52,8 @@ public class SequencingRuleDescription implements DefinitionElementSet {
 
         private final String[] ruleActionVocabularyTable;
 
+        public String[] getRuleActionVocabularyTable() {
+            return ruleActionVocabularyTable;
+        }
     }
 }

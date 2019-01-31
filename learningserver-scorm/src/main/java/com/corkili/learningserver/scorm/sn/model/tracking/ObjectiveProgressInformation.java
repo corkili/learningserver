@@ -3,43 +3,41 @@ package com.corkili.learningserver.scorm.sn.model.tracking;
 import com.corkili.learningserver.scorm.sn.model.datatype.DecimalWithRange;
 
 /**
- * For each attempt on an activity, a learner gets one set of obejctive progress information for
+ * For each attempt on an activity, a learner gets one set of objective progress information for
  * each objective associated with the activity.
  */
 public class ObjectiveProgressInformation {
 
-    private boolean objectiveProgressStatus4Satisfied;
+    private boolean objectiveProgressStatus;
     private boolean objectiveSatisfiedStatus;
 
     private boolean objectiveMeasureStatus;
     private final DecimalWithRange objectiveNormalizedMeasure;
 
-    private boolean objectiveProgressStatus4Completion;
     private boolean objectiveCompletionStatus;
 
     private boolean objectiveCompletionAmountStatus;
     private final DecimalWithRange objectiveCompletionAmount;
 
     public ObjectiveProgressInformation() {
-        objectiveProgressStatus4Satisfied = false;
+        objectiveProgressStatus = false;
         objectiveSatisfiedStatus = false;
 
         objectiveMeasureStatus = false;
         objectiveNormalizedMeasure = new DecimalWithRange(0, -1, 1, 4);
 
-        objectiveProgressStatus4Completion = false;
         objectiveCompletionStatus = false;
 
         objectiveCompletionAmountStatus = false;
         objectiveCompletionAmount = new DecimalWithRange(0, 0, 1, 4);
     }
 
-    public boolean isObjectiveProgressStatus4Satisfied() {
-        return objectiveProgressStatus4Satisfied;
+    public boolean isObjectiveProgressStatus() {
+        return objectiveProgressStatus;
     }
 
-    public void setObjectiveProgressStatus4Satisfied(boolean objectiveProgressStatus4Satisfied) {
-        this.objectiveProgressStatus4Satisfied = objectiveProgressStatus4Satisfied;
+    public void setObjectiveProgressStatus(boolean objectiveProgressStatus) {
+        this.objectiveProgressStatus = objectiveProgressStatus;
     }
 
     public boolean isObjectiveSatisfiedStatus() {
@@ -60,14 +58,6 @@ public class ObjectiveProgressInformation {
 
     public DecimalWithRange getObjectiveNormalizedMeasure() {
         return objectiveNormalizedMeasure;
-    }
-
-    public boolean isObjectiveProgressStatus4Completion() {
-        return objectiveProgressStatus4Completion;
-    }
-
-    public void setObjectiveProgressStatus4Completion(boolean objectiveProgressStatus4Completion) {
-        this.objectiveProgressStatus4Completion = objectiveProgressStatus4Completion;
     }
 
     public boolean isObjectiveCompletionStatus() {

@@ -2,7 +2,7 @@ package com.corkili.learningserver.scorm.sn.model.datatype;
 
 import java.math.BigDecimal;
 
-public class DecimalWithRange {
+public class DecimalWithRange implements Comparable<DecimalWithRange> {
 
     private BigDecimal value;
     private final BigDecimal min;
@@ -46,5 +46,10 @@ public class DecimalWithRange {
 
     public int getScale() {
         return scale;
+    }
+
+    @Override
+    public int compareTo(DecimalWithRange that) {
+        return this.value.compareTo(that.value);
     }
 }

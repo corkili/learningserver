@@ -3,7 +3,7 @@ package com.corkili.learningserver.scorm.sn.model.tracking;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.corkili.learningserver.scorm.sn.tree.Activity;
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 
 /**
  * For each activity in the activity tree on a per learner basis.
