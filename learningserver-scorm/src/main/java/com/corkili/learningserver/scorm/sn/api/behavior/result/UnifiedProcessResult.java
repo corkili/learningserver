@@ -6,6 +6,8 @@ public class UnifiedProcessResult extends BaseResult {
 
     private Boolean result;
 
+    private boolean limitConditionViolated;
+
     public String getAction() {
         return action;
     }
@@ -21,6 +23,15 @@ public class UnifiedProcessResult extends BaseResult {
 
     public UnifiedProcessResult setResult(Boolean result) {
         this.result = result;
+        return this;
+    }
+
+    public boolean isLimitConditionViolated() {
+        return limitConditionViolated;
+    }
+
+    public UnifiedProcessResult setLimitConditionViolated(boolean limitConditionViolated) {
+        this.limitConditionViolated = limitConditionViolated;
         return this;
     }
 

@@ -13,6 +13,7 @@ import com.corkili.learningserver.scorm.sn.model.definition.LimitConditions;
 import com.corkili.learningserver.scorm.sn.model.definition.ObjectiveDescription;
 import com.corkili.learningserver.scorm.sn.model.definition.RuleCondition;
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription;
+import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tracking.ActivityProgressInformation;
 import com.corkili.learningserver.scorm.sn.model.tracking.AttemptProgressInformation;
 import com.corkili.learningserver.scorm.sn.model.tracking.ObjectiveProgressInformation;
@@ -20,6 +21,68 @@ import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 
 public class UnifiedProcess {
+
+    /**
+     * Limit Conditions Check Process [UP.1]
+     *
+     * For an activity; returns True if any of the activity's limit conditions have been violated.
+     *
+     * Reference:
+     *   Activity Attempt Count TM.1.2.1
+     *   Activity Progress Status TM.1.2.1
+     *   Activity Absolute Duration TM.1.2.1
+     *   Activity Experienced Duration TM.1.2.1
+     *   Attempt Progress Status TM.1.2.2
+     *   Attempt Absolute Duration TM.1.2.2
+     *   Attempt Experienced Duration TM.1.2.2
+     *   Limit Condition Activity Absolute Duration Control SM.3
+     *   Limit Condition Activity Absolute Duration Limit SM.3
+     *   Limit Condition Activity Experienced Duration Control SM.3
+     *   Limit Condition Activity Experienced Duration Limit SM.3
+     *   Limit Condition Attempt Absolute Duration Control SM.3
+     *   Limit Condition Attempt Absolute Duration Limit SM.3
+     *   Limit Condition Attempt Experienced Duration Control SM.3
+     *   Limit Condition Attempt Control SM.3
+     *   Limit Condition Attempt Limit SM.3
+     *   Limit Condition Begin Time Limit SM.3
+     *   Limit Condition Begin Time Limit Control SM.3
+     *   Limit Condition End Time Limit SM.3
+     *   Limit Condition End Time Limit Control SM.3
+     *   Tracked SM.11
+     */
+    public static UnifiedProcessResult processLimitConditionsCheck(UnifiedProcessRequest unifiedProcessRequest) {
+        Activity targetActivity = unifiedProcessRequest.getTargetActivity();
+        LimitConditions limitConditions = targetActivity.getSequencingDefinition().getLimitConditions();
+        // 1
+        // If the activity is not tracked, its limit conditions cannot be violated.
+        if (!targetActivity.getSequencingDefinition().getDeliveryControls().isTracked()) {
+            // 1.1
+            // Activity is not tracked, no limit conditions can be violated, exit UP.1.
+            return new UnifiedProcessResult().setLimitConditionViolated(false);
+        }
+        // 2
+        // Only need to check activities that will begin a new attempt.
+        if (targetActivity.getActivityStateInformation().isActivityIsActive()
+                || targetActivity.getActivityStateInformation().isActivityIsSuspended()) {
+            // 2.1
+            return new UnifiedProcessResult().setLimitConditionViolated(false);
+        }
+        // 3
+        if (limitConditions.isAttemptControl()) {
+            // 3.1
+            if (targetActivity.getActivityProgressInformation().isActivityProgressStatus()
+                    && targetActivity.getActivityProgressInformation().getActivityAttemptCount().getValue()
+                    >= limitConditions.getAttemptLimit().getValue()) {
+                // 3.1.1
+                // Limit conditions have been violated.
+                return new UnifiedProcessResult().setLimitConditionViolated(true);
+            }
+        }
+        // The following code (from 4 to 9) is optionally in this SCORM 2004 4th edition, refer SN-C-64
+        // 10
+        // No limit conditions have been violated.
+        return new UnifiedProcessResult().setLimitConditionViolated(false);
+    }
 
     /**
      * Sequencing Rules Check Process [UP.2]
@@ -240,7 +303,6 @@ public class UnifiedProcess {
         // Ensure that any status change to this activity is propagated through the entire activity tree.
         RollupBehavior.overallRollup(
                 new RollupRequest(unifiedProcessRequest.getTargetActivityTree(), targetActivity));
-
     }
 
     private static Boolean evaluateRuleCondition(RuleCondition ruleCondition, Activity targetActivity) {
@@ -286,6 +348,43 @@ public class UnifiedProcess {
         return null;
     }
 
-
+    /**
+     * Check Activity Process [UP.5]
+     *
+     * For an activity; returns True if the activity is disabled or violates any of its limit conditions.
+     *
+     * Reference:
+     *   Disabled Rules SM.2
+     *   Limit Conditions Check Process UP.1
+     *   Sequencing Rules Check Process UP.2
+     *
+     * @see UnifiedProcess#processLimitConditionsCheck(UnifiedProcessRequest) UP.1
+     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
+     */
+    public static UnifiedProcessResult processCheckActivity(UnifiedProcessRequest unifiedProcessRequest) {
+        Activity targetActivity = unifiedProcessRequest.getTargetActivity();
+        // 1
+        // Make sure the activity is not disabled.
+        UnifiedProcessResult unifiedProcessResult = processSequencingRulesCheck(
+                new UnifiedProcessRequest(unifiedProcessRequest.getTargetActivityTree(), targetActivity)
+                        .setConditionType(ConditionType.PRECONDITION).setRuleActions("Disabled"));
+        // 2
+        if (unifiedProcessResult.getAction() != null) {
+            // 2.1
+            return new UnifiedProcessResult().setResult(true);
+        }
+        // 3
+        // Make sure the activity does not violate any limit condition.
+        unifiedProcessResult = processLimitConditionsCheck(
+                new UnifiedProcessRequest(unifiedProcessRequest.getTargetActivityTree(), targetActivity));
+        // 4
+        if (unifiedProcessResult.isLimitConditionViolated()) {
+            // 4.1
+            return new UnifiedProcessResult().setResult(true);
+        }
+        // 5
+        // Activity is allowed.
+        return new UnifiedProcessResult().setResult(true);
+    }
 
 }

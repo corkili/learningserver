@@ -155,11 +155,13 @@ public class TerminationBehavior {
      *   Sequencing Exit Action Rules Subprocess TB.2.1
      *   Sequencing Post Condition Rules Subprocess TB.2.2
      *   Terminate Descendent Attempts Process UP.3
+     *   Overall Rollup Process RB.1.5
      *
      * @see UnifiedProcess#processEndAttempt(UnifiedProcessRequest) UP.4
      * @see TerminationBehavior#processSequencingExitActionRules(TerminationRequest) TB.2.1
      * @see TerminationBehavior#processSequencingPostConditionRules(TerminationRequest) TB.2.2
      * @see UnifiedProcess#processTerminateDescendentAttempts(UnifiedProcessRequest) UP.3
+     * @see RollupBehavior#overallRollup(RollupRequest) RB.1.5
      */
     public static TerminationBehaviorResult processTerminationRequest(TerminationRequest terminationRequest) {
         ActivityTree activityTree = terminationRequest.getTargetActivityTree();
