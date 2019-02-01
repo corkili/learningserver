@@ -39,6 +39,7 @@ public class TerminationBehavior {
         Activity currentActivity = activityTree.getGlobalStateInformation().getCurrentActivity();
 
         // 1
+        // from the root of the activity tree to the parent of the current activity, inclusive
         LinkedList<Activity> activityPath = new LinkedList<>();
         Activity tmp = currentActivity.getParentActivity();
         while (tmp != null) {
@@ -297,6 +298,7 @@ public class TerminationBehavior {
                 }
             }
             // 5.3
+            // From the suspended activity to the root of the activity tree, inclusive
             List<Activity> activityPath = new LinkedList<>();
             Activity tmp = activityTree.getGlobalStateInformation().getSuspendedActivity();
             while (tmp != null) {
@@ -332,6 +334,7 @@ public class TerminationBehavior {
             return new TerminationBehaviorResult().setValidTerminationRequest(true);
         } else if (terminationRequest.getRequestType() == Type.AbandonAll) { // 7
             // 7.1
+            // From the current activity to the root of the activity tree, inclusive
             List<Activity> activityPath = new LinkedList<>();
             Activity tmp = currentActivity;
             while (tmp != null) {
@@ -365,57 +368,5 @@ public class TerminationBehavior {
         return new TerminationBehaviorResult().setValidTerminationRequest(false)
                 .setException(SequencingException.TB237);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

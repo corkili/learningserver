@@ -1,13 +1,19 @@
 package com.corkili.learningserver.scorm.sn.api.behavior.result;
 
-import com.corkili.learningserver.scorm.sn.api.behavior.rto.EndSequencingSession;
+import com.corkili.learningserver.scorm.sn.api.behavior.common.TraversalDirection;
 import com.corkili.learningserver.scorm.sn.api.request.DeliveryRequest;
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 
 public class SequencingBehaviorResult extends BaseResult {
 
     private boolean validSequencingRequest;
     private DeliveryRequest deliveryRequest;
-    private EndSequencingSession endSequencingSession;
+    private Boolean endSequencingSession;
+    private Activity nextActivity;
+    private TraversalDirection traversalDirection;
+    private boolean deliverable;
+    private Activity identifiedActivity;
+    private boolean reachable;
 
     public boolean isValidSequencingRequest() {
         return validSequencingRequest;
@@ -27,12 +33,57 @@ public class SequencingBehaviorResult extends BaseResult {
         return this;
     }
 
-    public EndSequencingSession getEndSequencingSession() {
+    public Boolean getEndSequencingSession() {
         return endSequencingSession;
     }
 
-    public SequencingBehaviorResult setEndSequencingSession(EndSequencingSession endSequencingSession) {
+    public SequencingBehaviorResult setEndSequencingSession(Boolean endSequencingSession) {
         this.endSequencingSession = endSequencingSession;
+        return this;
+    }
+
+    public Activity getNextActivity() {
+        return nextActivity;
+    }
+
+    public SequencingBehaviorResult setNextActivity(Activity nextActivity) {
+        this.nextActivity = nextActivity;
+        return this;
+    }
+
+    public TraversalDirection getTraversalDirection() {
+        return traversalDirection;
+    }
+
+    public SequencingBehaviorResult setTraversalDirection(TraversalDirection traversalDirection) {
+        this.traversalDirection = traversalDirection;
+        return this;
+    }
+
+    public boolean isDeliverable() {
+        return deliverable;
+    }
+
+    public SequencingBehaviorResult setDeliverable(boolean deliverable) {
+        this.deliverable = deliverable;
+        return this;
+    }
+
+    public Activity getIdentifiedActivity() {
+        return identifiedActivity;
+    }
+
+    public SequencingBehaviorResult setIdentifiedActivity(Activity identifiedActivity) {
+        this.identifiedActivity = identifiedActivity;
+        return this;
+    }
+
+    public boolean isReachable() {
+        return reachable;
+    }
+
+    public SequencingBehaviorResult setReachable(boolean reachable) {
+        this.reachable = reachable;
         return this;
     }
 

@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm.sn.model.tree;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -70,6 +74,28 @@ public class ActivityTree {
         return false;
     }
 
+    public boolean isAvailable(Activity activity) {
+        if (isRoot(activity)) {
+            return true;
+        }
+        return activity.getParentActivity().getActivityStateInformation().getAvailableChildren().contains(activity);
+    }
+
+    public List<Activity> preorder() {
+        List<Activity> list = new ArrayList<>();
+        preorder(list, root);
+        return Collections.unmodifiableList(list);
+    }
+
+    private void preorder(List<Activity> resultList, Activity node) {
+        if (node != null) {
+            resultList.add(node);
+            for (int i = 0; i < node.getChildren().size(); i++) {
+                preorder(resultList, node.getChildren().get(i));
+            }
+        }
+    }
+
     public Activity findCommonAncestorFor(Activity oneActivity, Activity twoActivity) {
         if (!existActivity(oneActivity) || !existActivity(twoActivity)) {
             return null;
@@ -96,6 +122,44 @@ public class ActivityTree {
             twoStack.pop();
         }
         return commonAncestor;
+    }
 
+    public static List<Activity> getActivitySequenceList(Activity from, boolean includeFrom, Activity to, boolean includeTo) {
+        if (from == null || to == null || !from.isSiblingActivity(to)
+                || from.getParentActivity() == null || to.getParentActivity() == null) {
+            return Collections.emptyList();
+        }
+        Activity parent = from.getParentActivity();
+        int indexOfFrom = parent.getChildren().indexOf(from);
+        int indexOfTo = parent.getChildren().indexOf(to);
+        List<Activity> list = new LinkedList<>();
+        if (indexOfFrom < indexOfTo) {
+            if (!includeFrom) {
+                indexOfFrom++;
+            }
+            if (!includeTo) {
+                indexOfTo--;
+            }
+            if (indexOfFrom >= indexOfTo) {
+                return Collections.emptyList();
+            }
+            for (int i = indexOfFrom; i <= indexOfTo; i++) {
+                list.add(parent.getChildren().get(i));
+            }
+        } else {
+            if (!includeFrom) {
+                indexOfFrom--;
+            }
+            if (!includeTo) {
+                indexOfTo++;
+            }
+            if (indexOfTo >=indexOfFrom) {
+                return Collections.emptyList();
+            }
+            for (int i = indexOfFrom; i >= indexOfTo; i--) {
+                list.add(parent.getChildren().get(i));
+            }
+        }
+        return list;
     }
 }

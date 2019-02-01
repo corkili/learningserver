@@ -196,6 +196,7 @@ public class UnifiedProcess {
         Activity commonAncestor = activityTree.findCommonAncestorFor(identifiedActivity, currentActivity);
         // 2
         // The current activity must have already been exited.
+        // From the current activity to the common ancestor, exclusive of the current activity and the common ancestor
         List<Activity> activityPath = new LinkedList<>();
         if (commonAncestor != null) {
             Activity tmp = currentActivity.getParentActivity();

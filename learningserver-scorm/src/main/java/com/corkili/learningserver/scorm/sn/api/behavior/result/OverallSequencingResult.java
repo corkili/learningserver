@@ -1,12 +1,10 @@
 package com.corkili.learningserver.scorm.sn.api.behavior.result;
 
-import com.corkili.learningserver.scorm.sn.api.behavior.rto.EndSequencingSession;
-
 public class OverallSequencingResult extends BaseResult {
 
     private final boolean success;
     private final boolean exit;
-    private EndSequencingSession endSequencingSession;
+    private Boolean endSequencingSession;
 
     public OverallSequencingResult(boolean success) {
         this.success = success;
@@ -26,11 +24,11 @@ public class OverallSequencingResult extends BaseResult {
         return exit;
     }
 
-    public EndSequencingSession getEndSequencingSession() {
+    public Boolean getEndSequencingSession() {
         return endSequencingSession;
     }
 
-    public OverallSequencingResult setEndSequencingSession(EndSequencingSession endSequencingSession) {
+    public OverallSequencingResult setEndSequencingSession(Boolean endSequencingSession) {
         this.endSequencingSession = endSequencingSession;
         return this;
     }

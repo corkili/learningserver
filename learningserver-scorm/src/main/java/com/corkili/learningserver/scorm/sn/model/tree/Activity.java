@@ -92,18 +92,10 @@ public class Activity {
     }
 
     public boolean isSiblingActivity(Activity targetActivity) {
-        if (parentActivity == null) {
+        if (parentActivity == null || targetActivity == null || targetActivity.getParentActivity() == null) {
             return false;
         }
-        int indexOfTargetActivity = parentActivity.getChildren().indexOf(targetActivity);
-        if (indexOfTargetActivity < 0) {
-            return false;
-        }
-        int indexOfCurrentActivity = parentActivity.getChildren().indexOf(this);
-        if (indexOfTargetActivity == indexOfCurrentActivity) {
-            return false;
-        }
-        return Math.abs(indexOfCurrentActivity - indexOfTargetActivity) == 1;
+        return parentActivity.equals(targetActivity.getParentActivity());
     }
 
     public ObjectiveDescription findAssociatedObjectiveByID(String objectiveID) {
@@ -122,6 +114,23 @@ public class Activity {
             }
         }
         return null;
+    }
+
+    public boolean isDescendent(Activity activity) {
+        if (activity == null || isLeaf()) {
+            return false;
+        }
+        if (activity.equals(this)) {
+            return false;
+        }
+        Activity parent = activity.getParentActivity();
+        while (parent != null) {
+            if (parent.equals(this)) {
+                return true;
+            }
+            parent = parent.getParentActivity();
+        }
+        return false;
     }
 
     public boolean isLeaf() {

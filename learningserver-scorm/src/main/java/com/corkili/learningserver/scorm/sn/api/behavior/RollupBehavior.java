@@ -848,6 +848,7 @@ public class RollupBehavior {
     public static void overallRollup(RollupRequest rollupRequest) {
         Activity targetActivity = rollupRequest.getTargetActivity();
         // 1
+        // From the root of the activity tree to the activity, inclusive, in reverse order
         List<Activity> activityPath = new LinkedList<>();
         Activity tmp = targetActivity;
         while (tmp != null) {

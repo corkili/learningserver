@@ -188,6 +188,7 @@ public class NavigationBehavior {
                         // The common ancestor will not terminate as a result of processing the choice sequencing
                         // request, unless the common ancestor is the Current Activity - the current activity should
                         // always be included in the activity path.
+                        // From current activity to common ancestor
                         List<Activity> activityPath = new LinkedList<>();
                         if (commonAncestor != null) {
                             Activity tmp = currentActivity;
