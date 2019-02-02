@@ -372,8 +372,7 @@ public class NavigationBehavior {
                         .setValidNavigationRequest(true)
                         .setTerminationRequest(new TerminationRequest(TerminationRequest.Type.Exit, activityTree, null))
                         .setSequencingRequest(
-                                new SequencingRequest(SequencingRequest.Type.Jump, activityTree, null)
-                                        .setTargetActivity(targetActivity));
+                                new SequencingRequest(SequencingRequest.Type.Jump, activityTree, targetActivity));
             } else { // 13.2
                 // 13.2.1
                 // Target activity does not exist.

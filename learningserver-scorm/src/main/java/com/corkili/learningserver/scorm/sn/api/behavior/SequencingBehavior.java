@@ -11,6 +11,7 @@ import com.corkili.learningserver.scorm.sn.api.behavior.result.SequencingExcepti
 import com.corkili.learningserver.scorm.sn.api.behavior.result.UnifiedProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.DeliveryRequest;
 import com.corkili.learningserver.scorm.sn.api.request.SequencingRequest;
+import com.corkili.learningserver.scorm.sn.api.request.SequencingRequest.Type;
 import com.corkili.learningserver.scorm.sn.api.request.UnifiedProcessRequest;
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
@@ -1090,6 +1091,96 @@ public class SequencingBehavior {
     }
 
     /**
+     * Retry Sequencing Request Process [SB.10]
+     *
+     * May return a delivery request; may return an exception code.
+     *
+     * Reference:
+     *   Activity is Active AM.1.1
+     *   Activity is Suspended AM.1.1
+     *   Current Activity AM.1.2
+     *   Flow Subprocess SB.2.3
+     *
+     * @see SequencingBehavior#processFlow(SequencingRequest) SB.2.3
+     */
+    public static SequencingBehaviorResult processRetrySeqeuncingRequest(SequencingRequest sequencingRequest) {
+        ActivityTree activityTree = sequencingRequest.getTargetActivityTree();
+        Activity currentActivity = activityTree.getGlobalStateInformation().getCurrentActivity();
+        // 1
+        // Make sure the sequencing session has already begun.
+        if (currentActivity == null) {
+            // 1.1
+            return new SequencingBehaviorResult().setException(SequencingException.SB2101);
+        }
+        // 2
+        // Cannot retry an activity that is still active or suspended.
+        if (currentActivity.getActivityStateInformation().isActivityIsActive()
+                || currentActivity.getActivityStateInformation().isActivityIsSuspended()) {
+            // 2.1
+            return new SequencingBehaviorResult().setException(SequencingException.SB2102);
+        }
+        // 3
+        if (!currentActivity.isLeaf()) {
+            // 3.1
+            SequencingBehaviorResult flowResult = processFlow(new SequencingRequest(
+                    sequencingRequest.getRequestType(), activityTree, currentActivity)
+                    .setTraversalDirection(TraversalDirection.Forward)
+                    .setConsiderChildren(true));
+            // 3.2
+            if (!flowResult.isDeliverable()) {
+                // 3.2.1
+                // Nothing to deliver.
+                return new SequencingBehaviorResult().setException(SequencingException.SB2103);
+            } else { // 3.3
+                // 3.3.1
+                return new SequencingBehaviorResult().setDeliveryRequest(
+                        new DeliveryRequest(activityTree, flowResult.getIdentifiedActivity()));
+            }
+        } else { // 4
+            return new SequencingBehaviorResult().setDeliveryRequest(new DeliveryRequest(activityTree, currentActivity));
+        }
+    }
+
+    /**
+     * Exit Sequencing Request Process [SB.2.11]
+     *
+     * Indicates if the sequencing session has ended; may return an exception code.
+     *
+     * Reference:
+     *   Activity is Active AM.1.1
+     *   Current Activity AM.1.2
+     */
+    public static SequencingBehaviorResult processExitSequencingRequest(SequencingRequest sequencingRequest) {
+        ActivityTree activityTree = sequencingRequest.getTargetActivityTree();
+        Activity currentActivity = activityTree.getGlobalStateInformation().getCurrentActivity();
+        // 1
+        // Make sure the sequencing session has already begun.
+        if (currentActivity == null) {
+            // 1.1
+            return new SequencingBehaviorResult()
+                    .setEndSequencingSession(false)
+                    .setException(SequencingException.SB2111);
+        }
+        // 2
+        // Make sure the current activity has already been terminated.
+        if (currentActivity.getActivityStateInformation().isActivityIsActive()) {
+            // 2.1
+            return new SequencingBehaviorResult()
+                    .setEndSequencingSession(false)
+                    .setException(SequencingException.SB2112);
+        }
+        // 3
+        if (activityTree.isRoot(currentActivity)) {
+            // 3.1
+            // The sequencing session has ended, return control to the LTS.
+            return new SequencingBehaviorResult()
+                    .setEndSequencingSession(true);
+        }
+        // 4
+        return new SequencingBehaviorResult().setEndSequencingSession(false);
+    }
+
+    /**
      * Sequencing Request Process [SB.2.12]
      *
      * For a sequencing request; validates the sequencing request; my return a delivery request; may indicate
@@ -1103,10 +1194,170 @@ public class SequencingBehavior {
      *   Resume All Sequencing Request Process SB.2.6
      *   Retry Sequencing Request Process SB.2.10
      *   Start Sequencing Request Process SB.2.5
+     *   Jump Sequencing Request Process SB.2.13
      *
+     * @see SequencingBehavior#processChoiceSequencingRequest(SequencingRequest) SB.2.9
+     * @see SequencingBehavior#processContinueSequencingRequest(SequencingRequest) SB.2.7
+     * @see SequencingBehavior#processExitSequencingRequest(SequencingRequest) SB.2.11
+     * @see SequencingBehavior#processPreviousSequencingRequest(SequencingRequest) SB.2.8
+     * @see SequencingBehavior#processResumeAllSequencingRequest(SequencingRequest) SB.2.6
+     * @see SequencingBehavior#processRetrySeqeuncingRequest(SequencingRequest) SB.2.10
+     * @see SequencingBehavior#processStartSequencingRequest(SequencingRequest) SB.2.5
+     * @see SequencingBehavior#processJumpSequencingRequest(SequencingRequest) SB.2.13
      */
     public static SequencingBehaviorResult processSequencingRequest(SequencingRequest sequencingRequest) {
-        return new SequencingBehaviorResult();
+        SequencingRequest.Type type = sequencingRequest.getRequestType();
+        SequencingBehaviorResult result;
+        // 1
+        if (type == Type.Start) {
+            // 1.1
+            result = processStartSequencingRequest(sequencingRequest);
+            // 1.2
+            if (result.getException() != null) {
+                // 1.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 1.3
+                // 1.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest())
+                        .setEndSequencingSession(result.getEndSequencingSession());
+            }
+        } else if (type == Type.ResumeAll) { // 2
+            // 2.1
+            result = processResumeAllSequencingRequest(sequencingRequest);
+            // 2.2
+            if (result.getException() != null) {
+                // 2.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 2.3
+                // 2.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest());
+            }
+        } else if (type == Type.Exit) { // 3
+            // 3.1
+            result = processExitSequencingRequest(sequencingRequest);
+            // 3.2
+            if (result.getException() != null) {
+                // 3.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 3.3
+                // 3.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setEndSequencingSession(result.getEndSequencingSession());
+            }
+        } else if (type == Type.Retry) { // 4
+            // 4.1
+            result = processRetrySeqeuncingRequest(sequencingRequest);
+            // 4.2
+            if (result.getException() != null) {
+                // 4.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 4.3
+                // 4.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest());
+            }
+        } else if (type == Type.Continue) { // 5
+            // 5.1
+            result = processContinueSequencingRequest(sequencingRequest);
+            // 5.2
+            if (result.getException() != null) {
+                // 5.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 5.3
+                // 5.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest())
+                        .setEndSequencingSession(result.getEndSequencingSession());
+            }
+        } else if (type == Type.Previous) { //6
+            // 6.1
+            result = processPreviousSequencingRequest(sequencingRequest);
+            // 6.2
+            if (result.getException() != null) {
+                // 6.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 6.3
+                // 6.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest());
+            }
+        } else if (type == Type.Choice) { // 7
+            // 7.1
+            result = processChoiceSequencingRequest(sequencingRequest);
+            // 7.2
+            if (result.getException() != null) {
+                // 7.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 7.3
+                // 7.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest());
+            }
+        } else if (type == Type.Jump) { // 8
+            // 8.1
+            result = processJumpSequencingRequest(sequencingRequest);
+            // 8.2
+            if (result.getException() != null) {
+                // 8.2.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(false)
+                        .setException(result.getException());
+            } else { // 8.3
+                // 8.3.1
+                return new SequencingBehaviorResult()
+                        .setValidSequencingRequest(true)
+                        .setDeliveryRequest(result.getDeliveryRequest());
+            }
+        }
+        // 9
+        // Invalid sequencing request.
+        return new SequencingBehaviorResult()
+                .setValidSequencingRequest(false)
+                .setException(SequencingException.SB2121);
+    }
+
+    /**
+     * Jump Sequencing Request Process [SB.2.13]
+     *
+     * For a target activity; may return a delivery request; may return an exception code.
+     *
+     * Reference: Current Activity AM.1.2
+     */
+    public static SequencingBehaviorResult processJumpSequencingRequest(SequencingRequest sequencingRequest) {
+        ActivityTree activityTree = sequencingRequest.getTargetActivityTree();
+        Activity currentActivity = activityTree.getGlobalStateInformation().getCurrentActivity();
+        // 1
+        // Make sure the sequencing session has not already begun.
+        if (currentActivity == null) {
+            // 1.1
+            return new SequencingBehaviorResult().setException(SequencingException.SB2131);
+        }
+        // 2
+        return new SequencingBehaviorResult().setDeliveryRequest(
+                new DeliveryRequest(activityTree, sequencingRequest.getTargetActivity()));
     }
 
 }
