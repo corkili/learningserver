@@ -1,6 +1,6 @@
 package com.corkili.learningserver.scorm.sn.api.behavior.result;
 
-public class UnifiedProcessResult extends BaseResult {
+public class UtilityProcessResult extends BaseResult {
 
     private String action;
 
@@ -12,7 +12,7 @@ public class UnifiedProcessResult extends BaseResult {
         return action;
     }
 
-    public UnifiedProcessResult setAction(String action) {
+    public UtilityProcessResult setAction(String action) {
         this.action = action;
         return this;
     }
@@ -21,7 +21,7 @@ public class UnifiedProcessResult extends BaseResult {
         return result;
     }
 
-    public UnifiedProcessResult setResult(Boolean result) {
+    public UtilityProcessResult setResult(Boolean result) {
         this.result = result;
         return this;
     }
@@ -30,13 +30,13 @@ public class UnifiedProcessResult extends BaseResult {
         return limitConditionViolated;
     }
 
-    public UnifiedProcessResult setLimitConditionViolated(boolean limitConditionViolated) {
+    public UtilityProcessResult setLimitConditionViolated(boolean limitConditionViolated) {
         this.limitConditionViolated = limitConditionViolated;
         return this;
     }
 
     @Override
-    public UnifiedProcessResult setException(SequencingException exception) {
-        return (UnifiedProcessResult) super.setException(exception);
+    public UtilityProcessResult setException(SequencingException exception) {
+        return (UtilityProcessResult) super.setException(exception);
     }
 }

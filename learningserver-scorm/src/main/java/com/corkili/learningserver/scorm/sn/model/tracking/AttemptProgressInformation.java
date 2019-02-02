@@ -25,6 +25,15 @@ public class AttemptProgressInformation {
         attemptExperiencedDuration = Duration.ZERO;
     }
 
+    public void reinit() {
+        attemptProgressStatus = false;
+        attemptCompletionStatus = false;
+        attemptCompletionAmountStatus = false;
+        attemptCompletionAmount.setValue(0);
+        attemptAbsoluteDuration = Duration.ZERO;
+        attemptExperiencedDuration = Duration.ZERO;
+    }
+
     public boolean isAttemptProgressStatus() {
         return attemptProgressStatus;
     }

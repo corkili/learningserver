@@ -32,6 +32,19 @@ public class ObjectiveProgressInformation {
         objectiveCompletionAmount = new DecimalWithRange(0, 0, 1, 4);
     }
 
+    public void reinit() {
+        objectiveProgressStatus = false;
+        objectiveSatisfiedStatus = false;
+
+        objectiveMeasureStatus = false;
+        objectiveNormalizedMeasure.setValue(0);
+
+        objectiveCompletionStatus = false;
+
+        objectiveCompletionAmountStatus = false;
+        objectiveCompletionAmount.setValue(0);
+    }
+
     public boolean isObjectiveProgressStatus() {
         return objectiveProgressStatus;
     }

@@ -6,9 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.corkili.learningserver.scorm.sn.api.behavior.result.RollupBehaviorResult;
-import com.corkili.learningserver.scorm.sn.api.behavior.result.UnifiedProcessResult;
+import com.corkili.learningserver.scorm.sn.api.behavior.result.UtilityProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.RollupRequest;
-import com.corkili.learningserver.scorm.sn.api.request.UnifiedProcessRequest;
+import com.corkili.learningserver.scorm.sn.api.request.UtilityProcessRequest;
 import com.corkili.learningserver.scorm.sn.api.util.BooleanUtils;
 import com.corkili.learningserver.scorm.sn.model.definition.LimitConditions;
 import com.corkili.learningserver.scorm.sn.model.definition.ObjectiveDescription;
@@ -713,7 +713,7 @@ public class RollupBehavior {
      *   adlseq:requiredForCompleted SCORM SN
      *   adlseq:requiredForIncomplete SCORM SN
      *
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
      */
     public static RollupBehaviorResult checkChildForRollup(RollupRequest rollupRequest) {
         Activity targetActivity = rollupRequest.getTargetActivity();
@@ -759,11 +759,11 @@ public class RollupBehavior {
                                 || ("Not Satisfied".equals(rollupAction) && targetActivity.getSequencingDefinition()
                                 .getRollupConsiderationControls().getRequiredForNotSatisfied().getValue().equals("ifNotSkipped"))) {
                             // 2.1.3.2.1.1
-                            UnifiedProcessResult unifiedProcessResult = UnifiedProcess.processSequencingRulesCheck(
-                                    new UnifiedProcessRequest(rollupRequest.getTargetActivityTree(), targetActivity)
+                            UtilityProcessResult utilityProcessResult = UtilityProcess.processSequencingRulesCheck(
+                                    new UtilityProcessRequest(rollupRequest.getTargetActivityTree(), targetActivity)
                                             .setConditionType(ConditionType.PRECONDITION).setRuleActions("Skip"));
                             // 2.1.3.2.1.2
-                            if (unifiedProcessResult.getAction() != null) {
+                            if (utilityProcessResult.getAction() != null) {
                                 included = false;
                             }
                         }
@@ -810,11 +810,11 @@ public class RollupBehavior {
                                 || ("Incomplete".equals(rollupAction) && targetActivity.getSequencingDefinition()
                                 .getRollupConsiderationControls().getRequiredForIncomplete().getValue().equals("ifNotSkipped"))) {
                             // 3.1.3.2.1.1
-                            UnifiedProcessResult unifiedProcessResult = UnifiedProcess.processSequencingRulesCheck(
-                                    new UnifiedProcessRequest(rollupRequest.getTargetActivityTree(), targetActivity)
+                            UtilityProcessResult utilityProcessResult = UtilityProcess.processSequencingRulesCheck(
+                                    new UtilityProcessRequest(rollupRequest.getTargetActivityTree(), targetActivity)
                                             .setConditionType(ConditionType.PRECONDITION).setRuleActions("Skip"));
                             // 3.1.3.2.1.2
-                            if (unifiedProcessResult.getAction() != null) {
+                            if (utilityProcessResult.getAction() != null) {
                                 included = false;
                             }
                         }

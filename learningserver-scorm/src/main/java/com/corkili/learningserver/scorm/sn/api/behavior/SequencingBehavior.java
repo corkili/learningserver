@@ -8,11 +8,11 @@ import java.util.Objects;
 import com.corkili.learningserver.scorm.sn.api.behavior.common.TraversalDirection;
 import com.corkili.learningserver.scorm.sn.api.behavior.result.SequencingBehaviorResult;
 import com.corkili.learningserver.scorm.sn.api.behavior.result.SequencingException;
-import com.corkili.learningserver.scorm.sn.api.behavior.result.UnifiedProcessResult;
+import com.corkili.learningserver.scorm.sn.api.behavior.result.UtilityProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.DeliveryRequest;
 import com.corkili.learningserver.scorm.sn.api.request.SequencingRequest;
 import com.corkili.learningserver.scorm.sn.api.request.SequencingRequest.Type;
-import com.corkili.learningserver.scorm.sn.api.request.UnifiedProcessRequest;
+import com.corkili.learningserver.scorm.sn.api.request.UtilityProcessRequest;
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
@@ -31,7 +31,7 @@ public class SequencingBehavior {
      *   Sequencing Control Forward Only SM.1
      *   Terminate Descendent Attempts Process UP.3
      *
-     * @see UnifiedProcess#processTerminateDescendentAttempts(UnifiedProcessRequest) UP.3\
+     * @see UtilityProcess#processTerminateDescendentAttempts(UtilityProcessRequest) UP.3\
      */
     public static SequencingBehaviorResult processFlowTreeTraversal(SequencingRequest sequencingRequest) {
         ActivityTree activityTree = sequencingRequest.getTargetActivityTree();
@@ -72,8 +72,8 @@ public class SequencingBehavior {
             if (Objects.equals(targetActivity, lastAvailableActivity)
                     || (activityTree.isRoot(targetActivity) && !considerChildren)) {
                 // 3.1.1
-                UnifiedProcess.processTerminateDescendentAttempts(
-                        new UnifiedProcessRequest(activityTree, activityTree.getRoot()));
+                UtilityProcess.processTerminateDescendentAttempts(
+                        new UtilityProcessRequest(activityTree, activityTree.getRoot()));
                 // 3.1.2
                 return new SequencingBehaviorResult().setEndSequencingSession(true);
             }
@@ -201,7 +201,7 @@ public class SequencingBehavior {
      *
      * @see SequencingBehavior#processFlowActivityTraversal(SequencingRequest) SB.2.2
      * @see SequencingBehavior#processFlowTreeTraversal(SequencingRequest) SB.2.1
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
      */
     public static SequencingBehaviorResult processFlowActivityTraversal(SequencingRequest sequencingRequest) {
         ActivityTree activityTree = sequencingRequest.getTargetActivityTree();
@@ -216,13 +216,13 @@ public class SequencingBehavior {
             return new SequencingBehaviorResult().setDeliverable(false).setNextActivity(targetActivity)
                     .setException(SequencingException.SB221);
         }
-        UnifiedProcessResult unifiedProcessResult = UnifiedProcess.processSequencingRulesCheck(
-                new UnifiedProcessRequest(activityTree, targetActivity)
+        UtilityProcessResult utilityProcessResult = UtilityProcess.processSequencingRulesCheck(
+                new UtilityProcessRequest(activityTree, targetActivity)
                         .setConditionType(ConditionType.PRECONDITION)
                         .setRuleActions("Skip"));
         // 3
         // Activity is skipped, try to go to the 'next' activity.
-        if (unifiedProcessResult.getAction() != null) {
+        if (utilityProcessResult.getAction() != null) {
             // 3.1
             SequencingBehaviorResult sequencingBehaviorResult = processFlowTreeTraversal(
                     new SequencingRequest(sequencingRequest.getRequestType(), activityTree, targetActivity)
@@ -263,8 +263,8 @@ public class SequencingBehavior {
         }
         // 4
         // Make sure the activity is allowed
-        UnifiedProcessResult checkActivityResult = UnifiedProcess.processCheckActivity(
-                new UnifiedProcessRequest(activityTree, targetActivity));
+        UtilityProcessResult checkActivityResult = UtilityProcess.processCheckActivity(
+                new UtilityProcessRequest(activityTree, targetActivity));
         // 5
         if (checkActivityResult.getResult()) {
             return new SequencingBehaviorResult().setDeliverable(false).setNextActivity(targetActivity)
@@ -373,7 +373,7 @@ public class SequencingBehavior {
      *   Sequencing Control Forward Only SM.1
      *   Sequencing Rules Check Process UP.2
      *
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
      */
     public static SequencingBehaviorResult processChoiceActivityTraversal(SequencingRequest sequencingRequest) {
         Activity targetActivity = sequencingRequest.getTargetActivity();
@@ -381,8 +381,8 @@ public class SequencingBehavior {
         // 1
         if (traversalDirection == TraversalDirection.Forward) {
             // 1.1
-            UnifiedProcessResult checkResult = UnifiedProcess.processSequencingRulesCheck(
-                    new UnifiedProcessRequest(sequencingRequest.getTargetActivityTree(), targetActivity)
+            UtilityProcessResult checkResult = UtilityProcess.processSequencingRulesCheck(
+                    new UtilityProcessRequest(sequencingRequest.getTargetActivityTree(), targetActivity)
                             .setConditionType(ConditionType.PRECONDITION)
                             .setRuleActions("Stop Forward Traversal"));
             // 1.2
@@ -614,13 +614,13 @@ public class SequencingBehavior {
      *   adlseq:constrainedChoice SCORM SN
      *   adlseq:preventActivation SCORM SN
      *
-     * @see UnifiedProcess#processCheckActivity(UnifiedProcessRequest) UP.5
+     * @see UtilityProcess#processCheckActivity(UtilityProcessRequest) UP.5
      * @see SequencingBehavior#processChoiceFlow(SequencingRequest) SB.2.9.1
      * @see SequencingBehavior#processChoiceActivityTraversal(SequencingRequest) SB.2.4
-     * @see UnifiedProcess#processEndAttempt(UnifiedProcessRequest) UP.4
+     * @see UtilityProcess#processEndAttempt(UtilityProcessRequest) UP.4
      * @see SequencingBehavior#processFlow(SequencingRequest) SB.2.3
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
-     * @see UnifiedProcess#processTerminateDescendentAttempts(UnifiedProcessRequest) UP.3
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
+     * @see UtilityProcess#processTerminateDescendentAttempts(UtilityProcessRequest) UP.3
      */
     public static SequencingBehaviorResult processChoiceSequencingRequest(SequencingRequest sequencingRequest) {
         ActivityTree activityTree = sequencingRequest.getTargetActivityTree();
@@ -655,8 +655,8 @@ public class SequencingBehavior {
             }
             // 3.2
             // Cannot choose something that is hidden.
-            UnifiedProcessResult rulesCheckResult = UnifiedProcess.processSequencingRulesCheck(
-                    new UnifiedProcessRequest(activityTree, activity)
+            UtilityProcessResult rulesCheckResult = UtilityProcess.processSequencingRulesCheck(
+                    new UtilityProcessRequest(activityTree, activity)
                             .setConditionType(ConditionType.PRECONDITION)
                             .setRuleActions("Hidden from Choice"));
             // 3.3
@@ -965,9 +965,9 @@ public class SequencingBehavior {
         // Nothing to deliver, but we succeeded in reaching the target activity - move the current activity.
         if (!flowResult.isDeliverable()) {
             // 14.1
-            UnifiedProcess.processTerminateDescendentAttempts(new UnifiedProcessRequest(activityTree, commonAncestor));
+            UtilityProcess.processTerminateDescendentAttempts(new UtilityProcessRequest(activityTree, commonAncestor));
             // 14.2
-            UnifiedProcess.processEndAttempt(new UnifiedProcessRequest(activityTree, commonAncestor));
+            UtilityProcess.processEndAttempt(new UtilityProcessRequest(activityTree, commonAncestor));
             // 14.3
             activityTree.getGlobalStateInformation().setCurrentActivity(targetActivity);
             // 14.4

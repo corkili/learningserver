@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.corkili.learningserver.scorm.sn.api.behavior.result.UnifiedProcessResult;
+import com.corkili.learningserver.scorm.sn.api.behavior.result.UtilityProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.RollupRequest;
-import com.corkili.learningserver.scorm.sn.api.request.UnifiedProcessRequest;
+import com.corkili.learningserver.scorm.sn.api.request.UtilityProcessRequest;
 import com.corkili.learningserver.scorm.sn.api.util.BooleanUtils;
 import com.corkili.learningserver.scorm.sn.model.definition.DeliveryControls;
 import com.corkili.learningserver.scorm.sn.model.definition.LimitConditions;
@@ -20,7 +20,7 @@ import com.corkili.learningserver.scorm.sn.model.tracking.ObjectiveProgressInfor
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 
-public class UnifiedProcess {
+public class UtilityProcess {
 
     /**
      * Limit Conditions Check Process [UP.1]
@@ -50,22 +50,22 @@ public class UnifiedProcess {
      *   Limit Condition End Time Limit Control SM.3
      *   Tracked SM.11
      */
-    public static UnifiedProcessResult processLimitConditionsCheck(UnifiedProcessRequest unifiedProcessRequest) {
-        Activity targetActivity = unifiedProcessRequest.getTargetActivity();
+    public static UtilityProcessResult processLimitConditionsCheck(UtilityProcessRequest utilityProcessRequest) {
+        Activity targetActivity = utilityProcessRequest.getTargetActivity();
         LimitConditions limitConditions = targetActivity.getSequencingDefinition().getLimitConditions();
         // 1
         // If the activity is not tracked, its limit conditions cannot be violated.
         if (!targetActivity.getSequencingDefinition().getDeliveryControls().isTracked()) {
             // 1.1
             // Activity is not tracked, no limit conditions can be violated, exit UP.1.
-            return new UnifiedProcessResult().setLimitConditionViolated(false);
+            return new UtilityProcessResult().setLimitConditionViolated(false);
         }
         // 2
         // Only need to check activities that will begin a new attempt.
         if (targetActivity.getActivityStateInformation().isActivityIsActive()
                 || targetActivity.getActivityStateInformation().isActivityIsSuspended()) {
             // 2.1
-            return new UnifiedProcessResult().setLimitConditionViolated(false);
+            return new UtilityProcessResult().setLimitConditionViolated(false);
         }
         // 3
         if (limitConditions.isAttemptControl()) {
@@ -75,13 +75,13 @@ public class UnifiedProcess {
                     >= limitConditions.getAttemptLimit().getValue()) {
                 // 3.1.1
                 // Limit conditions have been violated.
-                return new UnifiedProcessResult().setLimitConditionViolated(true);
+                return new UtilityProcessResult().setLimitConditionViolated(true);
             }
         }
         // The following code (from 4 to 9) is optionally in this SCORM 2004 4th edition, refer SN-C-64
         // 10
         // No limit conditions have been violated.
-        return new UnifiedProcessResult().setLimitConditionViolated(false);
+        return new UtilityProcessResult().setLimitConditionViolated(false);
     }
 
     /**
@@ -94,18 +94,18 @@ public class UnifiedProcess {
      *   Sequencing Rule Check Subprocess UP.2.1
      *   Sequencing Rule Description SM.2
      *
-     * @see UnifiedProcess#processSequencingRuleCheck(UnifiedProcessRequest) UP.2.1
+     * @see UtilityProcess#processSequencingRuleCheck(UtilityProcessRequest) UP.2.1
      */
-    public static UnifiedProcessResult processSequencingRulesCheck(UnifiedProcessRequest unifiedProcessRequest) {
-        Activity activity = unifiedProcessRequest.getTargetActivity();
-        List<String> ruleActions = Arrays.asList(unifiedProcessRequest.getRuleActions());
+    public static UtilityProcessResult processSequencingRulesCheck(UtilityProcessRequest utilityProcessRequest) {
+        Activity activity = utilityProcessRequest.getTargetActivity();
+        List<String> ruleActions = Arrays.asList(utilityProcessRequest.getRuleActions());
         // 1
         // Make sure the activity rules to evaluate
         if (!activity.getSequencingDefinition().getSequencingRuleDescriptions().isEmpty()) {
             // 1.1
             List<SequencingRuleDescription> ruleList = new LinkedList<>();
             for (SequencingRuleDescription sequencingRuleDescription : activity.getSequencingDefinition().getSequencingRuleDescriptions()) {
-                if (sequencingRuleDescription.getConditionType() == unifiedProcessRequest.getConditionType() &&
+                if (sequencingRuleDescription.getConditionType() == utilityProcessRequest.getConditionType() &&
                         ruleActions.contains(sequencingRuleDescription.getRuleAction().getValue())
                         && !sequencingRuleDescription.getRuleAction().getValue().equals("Ignore")) {
                     ruleList.add(sequencingRuleDescription);
@@ -115,18 +115,18 @@ public class UnifiedProcess {
             for (SequencingRuleDescription rule : ruleList) {
                 // 1.2.1
                 // Evaluate each rule, one at a time
-                UnifiedProcessResult unifiedProcessResult = processSequencingRuleCheck(
-                        new UnifiedProcessRequest(unifiedProcessRequest.getTargetActivityTree(), activity)
+                UtilityProcessResult utilityProcessResult = processSequencingRuleCheck(
+                        new UtilityProcessRequest(utilityProcessRequest.getTargetActivityTree(), activity)
                                 .setSequencingRuleDescription(rule));
                 // 1.2.2
-                if (unifiedProcessResult.getResult() != null && unifiedProcessResult.getResult()) {
+                if (utilityProcessResult.getResult() != null && utilityProcessResult.getResult()) {
                     // 1.2.2.1
                     // Stop at the first rule that evaluates to true - perform the associated action.
-                    return new UnifiedProcessResult().setAction(rule.getRuleAction().getValue());
+                    return new UtilityProcessResult().setAction(rule.getRuleAction().getValue());
                 }
             }
         }
-        return new UnifiedProcessResult().setAction(null);
+        return new UtilityProcessResult().setAction(null);
     }
 
     /**
@@ -142,15 +142,15 @@ public class UnifiedProcess {
      *   Sequencing Rule Description SM.2
      *   Track Model TM
      */
-    public static UnifiedProcessResult processSequencingRuleCheck(UnifiedProcessRequest unifiedProcessRequest) {
+    public static UtilityProcessResult processSequencingRuleCheck(UtilityProcessRequest utilityProcessRequest) {
         // 1
         // This is used to keep track of the evaluation of the rule's conditions.
         List<Boolean> evaluateResults = new LinkedList<>();
         // 2
-        for (RuleCondition ruleCondition : unifiedProcessRequest.getSequencingRuleDescription().getRuleConditions()) {
+        for (RuleCondition ruleCondition : utilityProcessRequest.getSequencingRuleDescription().getRuleConditions()) {
             // 2.1
             // evaluate each condition against the activity's tracking information.
-            Boolean evaluateResult = evaluateRuleCondition(ruleCondition, unifiedProcessRequest.getTargetActivity());
+            Boolean evaluateResult = evaluateRuleCondition(ruleCondition, utilityProcessRequest.getTargetActivity());
             // 2.2
             if (ruleCondition.getOperator().getValue().equals("Not")) {
                 // 2.2.1
@@ -164,17 +164,17 @@ public class UnifiedProcess {
         // 3
         // If there are no defined conditions for the rule, the rule does not apply.
         if (evaluateResults.isEmpty()) {
-            return new UnifiedProcessResult().setResult(null);
+            return new UtilityProcessResult().setResult(null);
         }
         // 4
         // 'And' or 'Or' the set of evaluated conditions, based on the sequencing rule definition.
         Boolean result;
-        if (unifiedProcessRequest.getSequencingRuleDescription().getConditionCombination().getValue().equals("All")) {
+        if (utilityProcessRequest.getSequencingRuleDescription().getConditionCombination().getValue().equals("All")) {
             result = BooleanUtils.and(evaluateResults.toArray(new Boolean[0]));
         } else {
             result = BooleanUtils.or(evaluateResults.toArray(new Boolean[0]));
         }
-        return new UnifiedProcessResult().setResult(result);
+        return new UtilityProcessResult().setResult(result);
     }
 
     /**
@@ -186,11 +186,11 @@ public class UnifiedProcess {
      *   Current Activity AM.1.2
      *   End Attempt Process UP.4
      *
-     * @see UnifiedProcess#processEndAttempt(UnifiedProcessRequest) UP.4
+     * @see UtilityProcess#processEndAttempt(UtilityProcessRequest) UP.4
      */
-    public static void processTerminateDescendentAttempts(UnifiedProcessRequest unifiedProcessRequest) {
-        Activity identifiedActivity = unifiedProcessRequest.getTargetActivity();
-        ActivityTree activityTree = unifiedProcessRequest.getTargetActivityTree();
+    public static void processTerminateDescendentAttempts(UtilityProcessRequest utilityProcessRequest) {
+        Activity identifiedActivity = utilityProcessRequest.getTargetActivity();
+        ActivityTree activityTree = utilityProcessRequest.getTargetActivityTree();
         Activity currentActivity = activityTree.getGlobalStateInformation().getCurrentActivity();
         // 1
         Activity commonAncestor = activityTree.findCommonAncestorFor(identifiedActivity, currentActivity);
@@ -212,7 +212,7 @@ public class UnifiedProcess {
             for (Activity activity : activityPath) {
                 // 3.1.1
                 // End the current attempt on each activity.
-                processEndAttempt(new UnifiedProcessRequest(activityTree, activity));
+                processEndAttempt(new UtilityProcessRequest(activityTree, activity));
             }
         }
     }
@@ -237,8 +237,8 @@ public class UnifiedProcess {
      *
      * @see RollupBehavior#overallRollup(RollupRequest) RB.1.5
      */
-    public static void processEndAttempt(UnifiedProcessRequest unifiedProcessRequest) {
-        Activity targetActivity = unifiedProcessRequest.getTargetActivity();
+    public static void processEndAttempt(UtilityProcessRequest utilityProcessRequest) {
+        Activity targetActivity = utilityProcessRequest.getTargetActivity();
         DeliveryControls deliveryControls = targetActivity.getSequencingDefinition().getDeliveryControls();
         // 1
         if (targetActivity.isLeaf()) {
@@ -303,7 +303,7 @@ public class UnifiedProcess {
         // 4
         // Ensure that any status change to this activity is propagated through the entire activity tree.
         RollupBehavior.overallRollup(
-                new RollupRequest(unifiedProcessRequest.getTargetActivityTree(), targetActivity));
+                new RollupRequest(utilityProcessRequest.getTargetActivityTree(), targetActivity));
     }
 
     private static Boolean evaluateRuleCondition(RuleCondition ruleCondition, Activity targetActivity) {
@@ -359,33 +359,33 @@ public class UnifiedProcess {
      *   Limit Conditions Check Process UP.1
      *   Sequencing Rules Check Process UP.2
      *
-     * @see UnifiedProcess#processLimitConditionsCheck(UnifiedProcessRequest) UP.1
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
+     * @see UtilityProcess#processLimitConditionsCheck(UtilityProcessRequest) UP.1
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
      */
-    public static UnifiedProcessResult processCheckActivity(UnifiedProcessRequest unifiedProcessRequest) {
-        Activity targetActivity = unifiedProcessRequest.getTargetActivity();
+    public static UtilityProcessResult processCheckActivity(UtilityProcessRequest utilityProcessRequest) {
+        Activity targetActivity = utilityProcessRequest.getTargetActivity();
         // 1
         // Make sure the activity is not disabled.
-        UnifiedProcessResult unifiedProcessResult = processSequencingRulesCheck(
-                new UnifiedProcessRequest(unifiedProcessRequest.getTargetActivityTree(), targetActivity)
+        UtilityProcessResult utilityProcessResult = processSequencingRulesCheck(
+                new UtilityProcessRequest(utilityProcessRequest.getTargetActivityTree(), targetActivity)
                         .setConditionType(ConditionType.PRECONDITION).setRuleActions("Disabled"));
         // 2
-        if (unifiedProcessResult.getAction() != null) {
+        if (utilityProcessResult.getAction() != null) {
             // 2.1
-            return new UnifiedProcessResult().setResult(true);
+            return new UtilityProcessResult().setResult(true);
         }
         // 3
         // Make sure the activity does not violate any limit condition.
-        unifiedProcessResult = processLimitConditionsCheck(
-                new UnifiedProcessRequest(unifiedProcessRequest.getTargetActivityTree(), targetActivity));
+        utilityProcessResult = processLimitConditionsCheck(
+                new UtilityProcessRequest(utilityProcessRequest.getTargetActivityTree(), targetActivity));
         // 4
-        if (unifiedProcessResult.isLimitConditionViolated()) {
+        if (utilityProcessResult.isLimitConditionViolated()) {
             // 4.1
-            return new UnifiedProcessResult().setResult(true);
+            return new UtilityProcessResult().setResult(true);
         }
         // 5
         // Activity is allowed.
-        return new UnifiedProcessResult().setResult(true);
+        return new UtilityProcessResult().setResult(false);
     }
 
 }

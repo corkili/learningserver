@@ -5,7 +5,7 @@ import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescri
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 
-public class UnifiedProcessRequest extends Request {
+public class UtilityProcessRequest extends Request {
 
     private ConditionType conditionType;
 
@@ -13,25 +13,25 @@ public class UnifiedProcessRequest extends Request {
 
     private SequencingRuleDescription sequencingRuleDescription;
 
-    public UnifiedProcessRequest(ActivityTree targetActivityTree, Activity targetActivity) {
+    public UtilityProcessRequest(ActivityTree targetActivityTree, Activity targetActivity) {
         super(targetActivityTree, targetActivity);
     }
 
     @Override
-    public UnifiedProcessRequest setTargetActivityTree(ActivityTree targetActivityTree) {
-        return (UnifiedProcessRequest) super.setTargetActivityTree(targetActivityTree);
+    public UtilityProcessRequest setTargetActivityTree(ActivityTree targetActivityTree) {
+        return (UtilityProcessRequest) super.setTargetActivityTree(targetActivityTree);
     }
 
     @Override
-    public UnifiedProcessRequest setTargetActivity(Activity targetActivity) {
-        return (UnifiedProcessRequest) super.setTargetActivity(targetActivity);
+    public UtilityProcessRequest setTargetActivity(Activity targetActivity) {
+        return (UtilityProcessRequest) super.setTargetActivity(targetActivity);
     }
 
     public ConditionType getConditionType() {
         return conditionType;
     }
 
-    public UnifiedProcessRequest setConditionType(ConditionType conditionType) {
+    public UtilityProcessRequest setConditionType(ConditionType conditionType) {
         this.conditionType = conditionType;
         return this;
     }
@@ -40,7 +40,7 @@ public class UnifiedProcessRequest extends Request {
         return ruleActions;
     }
 
-    public UnifiedProcessRequest setRuleActions(String... ruleActions) {
+    public UtilityProcessRequest setRuleActions(String... ruleActions) {
         this.ruleActions = ruleActions;
         return this;
     }
@@ -49,7 +49,7 @@ public class UnifiedProcessRequest extends Request {
         return sequencingRuleDescription;
     }
 
-    public UnifiedProcessRequest setSequencingRuleDescription(SequencingRuleDescription sequencingRuleDescription) {
+    public UtilityProcessRequest setSequencingRuleDescription(SequencingRuleDescription sequencingRuleDescription) {
         this.sequencingRuleDescription = sequencingRuleDescription;
         return this;
     }

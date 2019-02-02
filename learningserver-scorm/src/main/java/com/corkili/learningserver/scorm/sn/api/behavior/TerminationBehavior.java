@@ -6,12 +6,12 @@ import java.util.List;
 
 import com.corkili.learningserver.scorm.sn.api.behavior.result.SequencingException;
 import com.corkili.learningserver.scorm.sn.api.behavior.result.TerminationBehaviorResult;
-import com.corkili.learningserver.scorm.sn.api.behavior.result.UnifiedProcessResult;
+import com.corkili.learningserver.scorm.sn.api.behavior.result.UtilityProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.RollupRequest;
 import com.corkili.learningserver.scorm.sn.api.request.SequencingRequest;
 import com.corkili.learningserver.scorm.sn.api.request.TerminationRequest;
 import com.corkili.learningserver.scorm.sn.api.request.TerminationRequest.Type;
-import com.corkili.learningserver.scorm.sn.api.request.UnifiedProcessRequest;
+import com.corkili.learningserver.scorm.sn.api.request.UtilityProcessRequest;
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
@@ -30,9 +30,9 @@ public class TerminationBehavior {
      *   Sequencing Rule Description SM.2
      *   Terminate Descendent Attempts Process UP.3
      *
-     * @see UnifiedProcess#processEndAttempt(UnifiedProcessRequest) UP.4
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
-     * @see UnifiedProcess#processTerminateDescendentAttempts(UnifiedProcessRequest) UP.3
+     * @see UtilityProcess#processEndAttempt(UtilityProcessRequest) UP.4
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
+     * @see UtilityProcess#processTerminateDescendentAttempts(UtilityProcessRequest) UP.3
      */
     public static void processSequencingExitActionRules(TerminationRequest terminationRequest) {
         ActivityTree activityTree = terminationRequest.getTargetActivityTree();
@@ -52,11 +52,11 @@ public class TerminationBehavior {
         // Evaluate all exit rules along the active path, starting at the root of the activity tree.
         for (Activity activity : activityPath) {
             // 3.1
-            UnifiedProcessResult unifiedProcessResult = UnifiedProcess.processSequencingRulesCheck(
-                    new UnifiedProcessRequest(activityTree, activity)
+            UtilityProcessResult utilityProcessResult = UtilityProcess.processSequencingRulesCheck(
+                    new UtilityProcessRequest(activityTree, activity)
                             .setConditionType(ConditionType.EXITCONDITION).setRuleActions("Exit"));
             // 3.2
-            if (unifiedProcessResult.getAction() != null) {
+            if (utilityProcessResult.getAction() != null) {
                 // 3.2.1
                 // Stop at the first activity that has an exit rule evaluating to true
                 exitTarget = activity;
@@ -68,12 +68,12 @@ public class TerminationBehavior {
         if (exitTarget != null) {
             // 4.1
             // End the current attempt on all active descendents.
-            UnifiedProcess.processTerminateDescendentAttempts(
-                    new UnifiedProcessRequest(terminationRequest.getTargetActivityTree(), exitTarget));
+            UtilityProcess.processTerminateDescendentAttempts(
+                    new UtilityProcessRequest(terminationRequest.getTargetActivityTree(), exitTarget));
             // 4.2
             // End the current attempt on the 'exiting' activity
-            UnifiedProcess.processEndAttempt(
-                    new UnifiedProcessRequest(terminationRequest.getTargetActivityTree(), exitTarget));
+            UtilityProcess.processEndAttempt(
+                    new UtilityProcessRequest(terminationRequest.getTargetActivityTree(), exitTarget));
             // 4.3
             // Move the current activity to the activity that identified for termination.
             activityTree.getGlobalStateInformation().setCurrentActivity(exitTarget);
@@ -91,7 +91,7 @@ public class TerminationBehavior {
      *   Sequencing Rules Check Process UP.2
      *   Sequencing Rule Description SM.2
      *
-     * @see UnifiedProcess#processSequencingRulesCheck(UnifiedProcessRequest) UP.2
+     * @see UtilityProcess#processSequencingRulesCheck(UtilityProcessRequest) UP.2
      */
     public static TerminationBehaviorResult processSequencingPostConditionRules(TerminationRequest terminationRequest) {
         ActivityTree activityTree = terminationRequest.getTargetActivityTree();
@@ -104,32 +104,32 @@ public class TerminationBehavior {
         }
         // 2
         // Apply the post condition rules to the current activity.
-        UnifiedProcessResult unifiedProcessResult = UnifiedProcess.processSequencingRulesCheck(
-                new UnifiedProcessRequest(activityTree, currentActivity)
+        UtilityProcessResult utilityProcessResult = UtilityProcess.processSequencingRulesCheck(
+                new UtilityProcessRequest(activityTree, currentActivity)
                         .setConditionType(ConditionType.POSTCONDITION)
                         .setRuleActions(ConditionType.POSTCONDITION.getRuleActionVocabularyTable()));
         // 3
-        if (unifiedProcessResult.getAction() != null) {
+        if (utilityProcessResult.getAction() != null) {
             // 3.1
-            if (Arrays.asList("Retry", "Continue", "Previous").contains(unifiedProcessResult.getAction())) {
+            if (Arrays.asList("Retry", "Continue", "Previous").contains(utilityProcessResult.getAction())) {
                 // 3.1.1
                 // Attempt to override any pending sequencing request with this one.
                 return new TerminationBehaviorResult()
                         .setSequencingRequest(new SequencingRequest(
-                                SequencingRequest.Type.valueOf(unifiedProcessResult.getAction()),
+                                SequencingRequest.Type.valueOf(utilityProcessResult.getAction()),
                                 activityTree, currentActivity));
             }
             // 3.2
-            if (Arrays.asList("Exit Parent", "Exit All").contains(unifiedProcessResult.getAction())) {
+            if (Arrays.asList("Exit Parent", "Exit All").contains(utilityProcessResult.getAction())) {
                 // 3.2.1
                 // Terminate the appropriate activity(ies).
-                TerminationRequest.Type type = "Exit Parent".equals(unifiedProcessResult.getAction()) ?
+                TerminationRequest.Type type = "Exit Parent".equals(utilityProcessResult.getAction()) ?
                         Type.ExitParent : Type.ExitAll;
                 return new TerminationBehaviorResult()
                         .setTerminationRequest(new TerminationRequest(type, activityTree, currentActivity));
             }
             // 3.3
-            if ("Retry All".equals(unifiedProcessResult.getAction())) {
+            if ("Retry All".equals(utilityProcessResult.getAction())) {
                 // 3.3.1
                 // Terminate all active activities and move the current activity to the root of the activity tree;
                 // then perform an "in-process" start.
@@ -158,10 +158,10 @@ public class TerminationBehavior {
      *   Terminate Descendent Attempts Process UP.3
      *   Overall Rollup Process RB.1.5
      *
-     * @see UnifiedProcess#processEndAttempt(UnifiedProcessRequest) UP.4
+     * @see UtilityProcess#processEndAttempt(UtilityProcessRequest) UP.4
      * @see TerminationBehavior#processSequencingExitActionRules(TerminationRequest) TB.2.1
      * @see TerminationBehavior#processSequencingPostConditionRules(TerminationRequest) TB.2.2
-     * @see UnifiedProcess#processTerminateDescendentAttempts(UnifiedProcessRequest) UP.3
+     * @see UtilityProcess#processTerminateDescendentAttempts(UtilityProcessRequest) UP.3
      * @see RollupBehavior#overallRollup(RollupRequest) RB.1.5
      */
     public static TerminationBehaviorResult processTerminationRequest(TerminationRequest terminationRequest) {
@@ -186,7 +186,7 @@ public class TerminationBehavior {
         if (terminationRequest.getRequestType() == Type.Exit) {
             // 3.1
             // Ensure the state of the current activity is up to date.
-            UnifiedProcess.processEndAttempt(new UnifiedProcessRequest(activityTree, currentActivity));
+            UtilityProcess.processEndAttempt(new UtilityProcessRequest(activityTree, currentActivity));
             // 3.2
             // Check if any of the current activity's ancestors need to terminate.
             processSequencingExitActionRules(new TerminationRequest(terminationRequest.getRequestType(), activityTree, currentActivity));
@@ -225,7 +225,7 @@ public class TerminationBehavior {
                         activityTree.getGlobalStateInformation().setCurrentActivity(currentActivity.getParentActivity());
                         currentActivity = activityTree.getGlobalStateInformation().getCurrentActivity();
                         // 3.3.4.1.2
-                        UnifiedProcess.processEndAttempt(new UnifiedProcessRequest(activityTree, currentActivity));
+                        UtilityProcess.processEndAttempt(new UtilityProcessRequest(activityTree, currentActivity));
                         // 3.3.4.1.3
                         // Need to evaluate post conditions on the new current activity.
                         processedExit = true;
@@ -257,13 +257,13 @@ public class TerminationBehavior {
             // Has the completion subprocess and rollup been applied to the current activity yet?
             if (currentActivity.getActivityStateInformation().isActivityIsActive()) {
                 // 4.1.1
-                UnifiedProcess.processEndAttempt(new UnifiedProcessRequest(activityTree, currentActivity));
+                UtilityProcess.processEndAttempt(new UtilityProcessRequest(activityTree, currentActivity));
             }
             // 4.2
-            UnifiedProcess.processTerminateDescendentAttempts(
-                    new UnifiedProcessRequest(activityTree, activityTree.getRoot()));
+            UtilityProcess.processTerminateDescendentAttempts(
+                    new UtilityProcessRequest(activityTree, activityTree.getRoot()));
             // 4.3
-            UnifiedProcess.processEndAttempt(new UnifiedProcessRequest(activityTree, activityTree.getRoot()));
+            UtilityProcess.processEndAttempt(new UtilityProcessRequest(activityTree, activityTree.getRoot()));
             // 4.4
             // Move the current activity to the root of the activity tree.
             activityTree.getGlobalStateInformation().setCurrentActivity(activityTree.getRoot());
