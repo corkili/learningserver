@@ -8,8 +8,12 @@ public class ADL implements GeneralDataType {
     @Meta("data")
     private Data data;
 
+    @Meta("nav")
+    private Nav nav;
+
     public ADL() {
         this.data = new Data();
+        this.nav = new Nav();
     }
 
     public Data getData() {
@@ -18,5 +22,14 @@ public class ADL implements GeneralDataType {
 
     public void setData(Data data) {
         this.data = data;
+    }
+
+    public Nav getNav() {
+        return nav;
+    }
+
+    public ADL setNav(Nav nav) {
+        this.nav = nav;
+        return this;
     }
 }

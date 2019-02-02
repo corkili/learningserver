@@ -16,6 +16,7 @@ import com.corkili.learningserver.scorm.common.CommonUtils;
 import com.corkili.learningserver.scorm.rte.model.RuntimeData;
 import com.corkili.learningserver.scorm.rte.model.annotation.Meta;
 import com.corkili.learningserver.scorm.rte.model.datatype.CollectionDataType;
+import com.corkili.learningserver.scorm.rte.model.datatype.MapDataType;
 import com.corkili.learningserver.scorm.rte.model.datatype.TerminalDataType;
 import com.corkili.learningserver.scorm.rte.model.error.Diagnostic;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
@@ -98,6 +99,9 @@ public class ElementParser implements Delayed {
                 Object instance = collectionScormResult.getInstance();
                 if (instance instanceof TerminalDataType){
                     return parse((TerminalDataType) instance, isSet, value);
+                } else if (instance instanceof MapDataType) {
+                    String key = index == elementNames.length - 1 ? null : elementNames[index + 1];
+                    return parse((MapDataType) instance, isSet, key, value);
                 } else {
                     return parse(instance, elementNames, index + 1, isSet, value);
                 }
@@ -110,6 +114,9 @@ public class ElementParser implements Delayed {
                         Object childElement = field.get(element);
                         if (childElement instanceof TerminalDataType){
                             return parse((TerminalDataType) childElement, isSet, value);
+                        } else if (childElement instanceof MapDataType) {
+                            String key = index == elementNames.length - 1 ? null : elementNames[index + 1];
+                            return parse((MapDataType) childElement, isSet, key, value);
                         } else {
                             return parse(childElement, elementNames, index + 1, isSet, value);
                         }
@@ -131,6 +138,16 @@ public class ElementParser implements Delayed {
             scormResult = terminalElement.set(value);
         } else {
             scormResult = terminalElement.get();
+        }
+        return scormResult;
+    }
+
+    private ScormResult parse(MapDataType mapElement, boolean isSet, String key, String value) {
+        ScormResult scormResult;
+        if (isSet) {
+            scormResult = mapElement.set(key, value);
+        } else {
+            scormResult = mapElement.get(key);
         }
         return scormResult;
     }
