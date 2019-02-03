@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.corkili.learningserver.scorm.sn.model.definition.ObjectiveDescription;
+import com.corkili.learningserver.scorm.sn.model.definition.HideLmsUIControls;
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingDefinition;
 import com.corkili.learningserver.scorm.sn.model.tracking.ActivityProgressInformation;
 import com.corkili.learningserver.scorm.sn.model.tracking.ActivityStateInformation;
@@ -15,54 +16,71 @@ import com.corkili.learningserver.scorm.sn.model.tracking.AttemptProgressInforma
 
 public class Activity {
 
-    private String id;
+    private final ID id;
 
-    private SequencingDefinition sequencingDefinition;
+    private final SequencingDefinition sequencingDefinition;
 
-    private ActivityProgressInformation activityProgressInformation;
+    private final ActivityProgressInformation activityProgressInformation;
 
-    private AttemptProgressInformation attemptProgressInformation;
+    private final AttemptProgressInformation attemptProgressInformation;
 
-    private ActivityStateInformation activityStateInformation;
+    private final ActivityStateInformation activityStateInformation;
+
+    private final HideLmsUIControls hideLmsUIControls;
+
+    private boolean visible;
+
+    private String title;
+
+    private String referenceResource;
+
+    private String parameters;
 
     private Activity parentActivity;
 
     private final List<Activity> children;
 
-    public Activity() {
+    public Activity(ID id) {
+        this.id = id;
         children = new ArrayList<>();
+        sequencingDefinition = new SequencingDefinition();
+        activityProgressInformation = new ActivityProgressInformation();
+        attemptProgressInformation = new AttemptProgressInformation();
+        activityStateInformation = new ActivityStateInformation();
+        hideLmsUIControls = new HideLmsUIControls();
+        visible = true;
+        title = "";
+        referenceResource = "";
+        parameters = "";
     }
 
     public SequencingDefinition getSequencingDefinition() {
         return sequencingDefinition;
     }
 
-    public void setSequencingDefinition(SequencingDefinition sequencingDefinition) {
-        this.sequencingDefinition = sequencingDefinition;
-    }
-
     public ActivityProgressInformation getActivityProgressInformation() {
         return activityProgressInformation;
-    }
-
-    public void setActivityProgressInformation(ActivityProgressInformation activityProgressInformation) {
-        this.activityProgressInformation = activityProgressInformation;
     }
 
     public AttemptProgressInformation getAttemptProgressInformation() {
         return attemptProgressInformation;
     }
 
-    public void setAttemptProgressInformation(AttemptProgressInformation attemptProgressInformation) {
-        this.attemptProgressInformation = attemptProgressInformation;
-    }
-
     public ActivityStateInformation getActivityStateInformation() {
         return activityStateInformation;
     }
 
-    public void setActivityStateInformation(ActivityStateInformation activityStateInformation) {
-        this.activityStateInformation = activityStateInformation;
+    public HideLmsUIControls getHideLmsUIControls() {
+        return hideLmsUIControls;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public Activity setVisible(boolean visible) {
+        this.visible = visible;
+        return this;
     }
 
     public List<Activity> getChildren() {
@@ -77,12 +95,35 @@ public class Activity {
         this.parentActivity = parentActivity;
     }
 
-    public String getId() {
+    public ID getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getTitle() {
+        return title;
+    }
+
+    public Activity setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public String getReferenceResource() {
+        return referenceResource;
+    }
+
+    public Activity setReferenceResource(String referenceResource) {
+        this.referenceResource = referenceResource;
+        return this;
+    }
+
+    public String getParameters() {
+        return parameters;
+    }
+
+    public Activity setParameters(String parameters) {
+        this.parameters = parameters;
+        return this;
     }
 
     public void addChildren(Activity activity) {

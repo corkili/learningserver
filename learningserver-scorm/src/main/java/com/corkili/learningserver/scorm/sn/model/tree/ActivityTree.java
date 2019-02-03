@@ -13,12 +13,13 @@ import com.corkili.learningserver.scorm.sn.model.tracking.GlobalStateInformation
 
 public class ActivityTree {
 
-    private String id;
+    private final ID id;
     private boolean objectivesGlobalToSystem; // SN-3-39 3.10.2
     private Activity root;
     private final GlobalStateInformation globalStateInformation;
 
-    public ActivityTree() {
+    public ActivityTree(ID id) {
+        this.id = id;
         objectivesGlobalToSystem = true;
         globalStateInformation = new GlobalStateInformation();
     }
@@ -43,12 +44,8 @@ public class ActivityTree {
         return globalStateInformation;
     }
 
-    public String getId() {
+    public ID getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public boolean isRoot(Activity activity) {
