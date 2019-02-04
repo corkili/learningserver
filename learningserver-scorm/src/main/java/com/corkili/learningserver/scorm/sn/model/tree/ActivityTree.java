@@ -9,6 +9,7 @@ import java.util.Stack;
 
 import com.sun.istack.internal.NotNull;
 
+import com.corkili.learningserver.scorm.sn.common.ID;
 import com.corkili.learningserver.scorm.sn.model.tracking.GlobalStateInformation;
 
 public class ActivityTree {
@@ -50,6 +51,15 @@ public class ActivityTree {
 
     public boolean isRoot(Activity activity) {
         return activity.getParentActivity() == null && Objects.equals(activity, root);
+    }
+
+    public Activity findActivityByID(ID id) {
+        for (Activity activity : preorder()) {
+            if (activity.getId().equals(id)) {
+                return activity;
+            }
+        }
+        return null;
     }
 
     public boolean existActivity(@NotNull Activity activity) {

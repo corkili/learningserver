@@ -50,7 +50,7 @@ import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescri
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
-import com.corkili.learningserver.scorm.sn.model.tree.ID;
+import com.corkili.learningserver.scorm.sn.common.ID;
 
 @Slf4j
 public class ActivityTreeGenerator {
@@ -65,6 +65,7 @@ public class ActivityTreeGenerator {
             if (activityTree == null) {
                 log.error("derive activity tree error - activity tree \"{}\"", id);
             } else {
+                initAvailableChildren(activityTree);
                 map.put(id, activityTree);
             }
         }
@@ -111,6 +112,20 @@ public class ActivityTreeGenerator {
             activity.getChildren().add(childActivity);
         }
         return activity;
+    }
+
+    private static void initAvailableChildren(ActivityTree activityTree) {
+        initAvailableChildren(activityTree.getRoot());
+    }
+
+    private static void initAvailableChildren(Activity activity) {
+        if (activity == null) {
+            return;
+        }
+        for (Activity child : activity.getChildren()) {
+            activity.getActivityStateInformation().getAvailableChildren().add(child);
+            initAvailableChildren(child);
+        }
     }
 
     private static void initSequencingDefinition(Activity activity, Sequencing sequencing, SequencingCollection sequencingCollection) {

@@ -1,28 +1,94 @@
 package com.corkili.learningserver.scorm.sn.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import com.corkili.learningserver.scorm.sn.common.ID;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 
-public class ActivityAttempt {
+public final class ActivityAttempt {
+
+    private final ID id;
 
     private final Activity targetActivity;
 
-    private final AttemptContext attemptContext;
+    private final ActivityAttempt parentAttempt;
 
-    private ActivityAttempt(Activity targetActivity) {
+    private final List<ActivityAttempt> childrenAttempt;
+
+    private final boolean isRoot;
+
+    private boolean state;
+
+    public ActivityAttempt(Activity targetActivity, ActivityAttempt parentAttempt) {
         this.targetActivity = targetActivity;
-        attemptContext = new AttemptContext(null);
+        this.parentAttempt = parentAttempt;
+        this.childrenAttempt = new ArrayList<>();
+        this.id = targetActivity.getId();
+        this.isRoot = parentAttempt == null;
+        if (parentAttempt != null) {
+            parentAttempt.childrenAttempt.add(this);
+        }
+        active();
     }
 
-    private ActivityAttempt(Activity targetActivity, AttemptContext parentAttemptActivityContext) {
-        this.targetActivity = targetActivity;
-        this.attemptContext = new AttemptContext(parentAttemptActivityContext);
+    public final ID getId() {
+        return id;
     }
 
-    public static ActivityAttempt createRootAttempt(Activity targetActivity) {
-        return new ActivityAttempt(targetActivity);
+    public Activity getTargetActivity() {
+        return targetActivity;
     }
 
-    public static ActivityAttempt createChildAttempt(Activity targetActivity, ActivityAttempt parentAttemptActivity) {
-        return new ActivityAttempt(targetActivity, parentAttemptActivity.attemptContext);
+    public ActivityAttempt getParentAttempt() {
+        return parentAttempt;
+    }
+
+    public List<ActivityAttempt> getChildrenAttempt() {
+        return childrenAttempt;
+    }
+
+    public boolean isRoot() {
+        return isRoot;
+    }
+
+    public void active() {
+        this.state = true;
+    }
+
+    public void suspend() {
+        this.state = false;
+    }
+
+    public boolean isActive() {
+        return state;
+    }
+
+    public boolean isSuspend() {
+        return !state;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ActivityAttempt that = (ActivityAttempt) o;
+
+        return new EqualsBuilder()
+                .append(id, that.id)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .toHashCode();
     }
 }
+

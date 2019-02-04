@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.corkili.learningserver.scorm.sn.common.ID;
 import com.corkili.learningserver.scorm.sn.model.definition.ObjectiveDescription;
 import com.corkili.learningserver.scorm.sn.model.definition.HideLmsUIControls;
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingDefinition;

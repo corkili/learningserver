@@ -1,10 +1,10 @@
-package com.corkili.learningserver.scorm.sn.model.tree;
+package com.corkili.learningserver.scorm.sn.common;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class ID {
+public final class ID {
 
     private final String identifier;
 
@@ -18,15 +18,15 @@ public class ID {
         this.lmsLearnerID = lmsLearnerID;
     }
 
-    public String getIdentifier() {
+    public final String getIdentifier() {
         return identifier;
     }
 
-    public String getLmsContentPackageID() {
+    public final String getLmsContentPackageID() {
         return lmsContentPackageID;
     }
 
-    public String getLmsLearnerID() {
+    public final String getLmsLearnerID() {
         return lmsLearnerID;
     }
 
