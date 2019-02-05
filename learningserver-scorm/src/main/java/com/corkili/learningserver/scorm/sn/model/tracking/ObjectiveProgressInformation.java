@@ -14,6 +14,7 @@ public class ObjectiveProgressInformation {
     private boolean objectiveMeasureStatus;
     private final DecimalWithRange objectiveNormalizedMeasure;
 
+    private boolean objectiveProgress4CompletionStatus;
     private boolean objectiveCompletionStatus;
 
     private boolean objectiveCompletionAmountStatus;
@@ -71,6 +72,15 @@ public class ObjectiveProgressInformation {
 
     public DecimalWithRange getObjectiveNormalizedMeasure() {
         return objectiveNormalizedMeasure;
+    }
+
+    public boolean isObjectiveProgress4CompletionStatus() {
+        return objectiveProgress4CompletionStatus;
+    }
+
+    public ObjectiveProgressInformation setObjectiveProgress4CompletionStatus(boolean objectiveProgress4CompletionStatus) {
+        this.objectiveProgress4CompletionStatus = objectiveProgress4CompletionStatus;
+        return this;
     }
 
     public boolean isObjectiveCompletionStatus() {

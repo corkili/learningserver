@@ -12,7 +12,6 @@ import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import com.corkili.learningserver.scorm.common.ID;
-import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 
 @Slf4j
@@ -20,14 +19,11 @@ public class SCORMRuntimeManager {
 
     private static SCORMRuntimeManager instance;
 
-    private LMSPersistDriverManager lmsPersistDriverManager;
-
     private SCORMPackageManager scormPackageManager;
 
     private Map<ID, LearnerAttempt> learnerAttemptMap;
 
     private SCORMRuntimeManager() {
-        lmsPersistDriverManager = LMSPersistDriverManager.getInstance();
         scormPackageManager = SCORMPackageManager.getInstance();
         learnerAttemptMap = new ConcurrentHashMap<>();
     }

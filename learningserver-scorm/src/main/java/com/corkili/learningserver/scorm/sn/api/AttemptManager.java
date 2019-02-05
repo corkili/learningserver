@@ -76,7 +76,7 @@ public class AttemptManager {
             }
         }
         Activity currentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
-        if (currentActivity != null && !currentActivity.equals(oldCurrentActivity)) {
+        if (currentActivity != null && currentActivity.isLeaf() && !currentActivity.equals(oldCurrentActivity)) {
             // has a new delivery activity
             return new ProcessResult(currentActivity);
         } else {
@@ -169,6 +169,13 @@ public class AttemptManager {
 
     public ActivityAttempt getActivityAttempt() {
         return activityAttempt;
+    }
+
+    public EventType getLastProcessedEventType() {
+        if (processedEventTypeSeries.isEmpty()) {
+            return null;
+        }
+        return processedEventTypeSeries.get(processedEventTypeSeries.size() - 1);
     }
 
     @Override

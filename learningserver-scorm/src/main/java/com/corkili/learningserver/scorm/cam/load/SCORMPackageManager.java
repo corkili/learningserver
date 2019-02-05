@@ -33,7 +33,6 @@ public class SCORMPackageManager {
         return instance;
     }
 
-
     public ContentPackage launch(String lmsContentPackageID) {
         return launch(lmsContentPackageID, false);
     }
@@ -110,7 +109,8 @@ public class SCORMPackageManager {
 
     public static void main(String[] args) {
         System.out.println(SCORMPackageManager.getInstance()
-                .loadSCORMContentPackageFromZipFile("1", "learningserver-scorm/scorm-test-pkg.zip"));
+                .loadSCORMContentPackageFromZipFile("1", "learningserver-scorm/scorm-test-pkg.zip")
+                .getContent());
     }
 
 }

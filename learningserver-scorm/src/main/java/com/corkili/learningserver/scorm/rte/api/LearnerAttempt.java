@@ -77,6 +77,10 @@ public class LearnerAttempt {
         return state.equals(State.CLOSED);
     }
 
+    public RuntimeData getRuntimeData() {
+        return runtimeData;
+    }
+
     String initialize(String parameter) {
         if (currentLearnerSession == null || currentLearnerSession.isNotOpen()
                 || currentLearnerSession.isClosed() || !currentLearnerSession.isOpen()) {
@@ -366,13 +370,13 @@ public class LearnerAttempt {
         }
         initObjectives(item.getSequencing());
         // TODO: 是否有必要
-        if (item.getSequencing().getIdRef() != null && StringUtils.isNotBlank(item.getSequencing().getIdRef().getValue())) {
-            Sequencing sequencing = CPUtils.findSequencingByID(contentPackage.getManifest().getSequencingCollection(),
-                    item.getSequencing().getIdRef().getValue());
-            if (sequencing != null) {
-                initObjectives(sequencing);
-            }
-        }
+//        if (item.getSequencing().getIdRef() != null && StringUtils.isNotBlank(item.getSequencing().getIdRef().getValue())) {
+//            Sequencing sequencing = CPUtils.findSequencingByID(contentPackage.getManifest().getSequencingCollection(),
+//                    item.getSequencing().getIdRef().getValue());
+//            if (sequencing != null) {
+//                initObjectives(sequencing);
+//            }
+//        }
         runtimeData.getCmi().getObjectives().getCount().setValue(
                 runtimeData.getCmi().getObjectives().getInstances().size());
     }
@@ -383,11 +387,11 @@ public class LearnerAttempt {
         }
         Objectives objectives = sequencing.getObjectives();
         Objective primaryObjective = objectives.getPrimaryObjective();
-        Instance primaryInstance = new Instance(runtimeData.getCmi().getObjectives());
         if (primaryObjective.getObjectiveID() != null) {
+            Instance primaryInstance = new Instance(runtimeData.getCmi().getObjectives());
             primaryInstance.getId().setValue(primaryObjective.getObjectiveID().getValue());
+            runtimeData.getCmi().getObjectives().getInstances().add(primaryInstance);
         }
-        runtimeData.getCmi().getObjectives().getInstances().add(primaryInstance);
         for (Objective objective : objectives.getObjectiveList()) {
             Instance instance = new Instance(runtimeData.getCmi().getObjectives());
             instance.getId().setValue(objective.getObjectiveID().getValue());

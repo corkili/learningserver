@@ -2,6 +2,7 @@ package com.corkili.learningserver.scorm.sn.model.definition;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SequencingDefinition {
 
@@ -79,5 +80,14 @@ public class SequencingDefinition {
 
     public CompletionThreshold getCompletionThreshold() {
         return completionThreshold;
+    }
+
+    public ObjectiveDescription findObjectiveDescriptionByID(String objectiveID) {
+        for (ObjectiveDescription objectiveDescription : objectiveDescriptions) {
+            if (Objects.equals(objectiveID, objectiveDescription.getObjectiveID())) {
+                return objectiveDescription;
+            }
+        }
+        return null;
     }
 }

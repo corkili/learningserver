@@ -105,4 +105,8 @@ public class SCORMSeqNavManager {
         return new ProcessResult(CommonUtils.format("manager id \"{}\" not exist."));
     }
 
+    public AttemptManager findAttemptManagerBy(ID id) {
+        return attemptManagerMap.get(id);
+    }
+
 }

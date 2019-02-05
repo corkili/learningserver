@@ -179,6 +179,17 @@ public class Activity {
         return this.children.isEmpty();
     }
 
+    public ID getBelongActivityTreeID() {
+        return getBelongActivityTreeID(this);
+    }
+
+    private ID getBelongActivityTreeID(Activity activity) {
+        if (activity.parentActivity == null) {
+            return activity.id;
+        }
+        return getBelongActivityTreeID(activity.getParentActivity());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

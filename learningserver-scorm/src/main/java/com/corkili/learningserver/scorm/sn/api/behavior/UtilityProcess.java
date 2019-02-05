@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.corkili.learningserver.scorm.SCORM;
 import com.corkili.learningserver.scorm.sn.api.behavior.result.UtilityProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.RollupRequest;
 import com.corkili.learningserver.scorm.sn.api.request.UtilityProcessRequest;
@@ -242,8 +243,9 @@ public class UtilityProcess {
         DeliveryControls deliveryControls = targetActivity.getSequencingDefinition().getDeliveryControls();
         // 1
         if (targetActivity.isLeaf()) {
-            // 1.1
+            // TODO 1.1
             if (deliveryControls.isTracked()) {
+                SCORM.getInstance().mapRuntimeDataToTrackingInfo(targetActivity);
                 // 1.1.1
                 // The sequencer will not affect the state of suspended activities.
                 if (!targetActivity.getActivityStateInformation().isActivityIsSuspended()) {
