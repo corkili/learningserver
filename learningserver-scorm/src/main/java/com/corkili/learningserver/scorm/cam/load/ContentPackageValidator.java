@@ -70,6 +70,7 @@ import com.corkili.learningserver.scorm.cam.model.Technical;
 import com.corkili.learningserver.scorm.cam.model.Vocabulary;
 import com.corkili.learningserver.scorm.cam.model.datatype.Token;
 import com.corkili.learningserver.scorm.cam.model.datatype.VCard;
+import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import com.corkili.learningserver.scorm.common.CommonUtils;
 
 @Slf4j
@@ -158,7 +159,6 @@ public class ContentPackageValidator {
 
     private boolean isAssert;
     private java.util.Map<String, List<String>> errors;
-    private java.util.Map<String, List<String>> idMap;
 
     public ContentPackageValidator() {
         this(true);
@@ -167,12 +167,10 @@ public class ContentPackageValidator {
     public ContentPackageValidator(boolean isAssert) {
         this.isAssert = isAssert;
         this.errors = new HashMap<>();
-        this.idMap = new HashMap<>();
     }
 
     public boolean validate(ContentPackage contentPackage, String pkgSaveDir) {
         this.errors.clear();
-        this.idMap.clear();
         if (contentPackage == null) {
             recordError("ContentPackage", "cannot be null");
             return false;
@@ -215,7 +213,6 @@ public class ContentPackageValidator {
         Set<String> idSet = new HashSet<>();
         Set<String> organizationIdSet = new HashSet<>();
         Set<String> resourceIdSet = new HashSet<>();
-        Set<String> sequencingIdSet = new HashSet<>();
         int count = 0;
 
         idSet.add(manifest.getIdentifier().getValue());
@@ -368,7 +365,129 @@ public class ContentPackageValidator {
         }
 
         // TODO continue objective and mapInfo
+        // #5: objective unique within an activity.
+        for (Organization organization : manifest.getOrganizations().getOrganizationList()) {
+            if (organization.getSequencing() != null) {
+                result &= (flag = validateObjectiveID(organization.getSequencing(), manifest.getSequencingCollection()));
+                if (!flag && isAssert) {
+                    return false;
+                }
+            }
+            for (Item item : organization.getItemList()) {
+                result &= (flag = validateObjectiveID(item, manifest.getSequencingCollection()));
+                if (!flag && isAssert) {
+                    return false;
+                }
+            }
+        }
 
+        return result;
+    }
+
+    private boolean validateObjectiveID(Item item, SequencingCollection sequencingCollection) {
+        boolean result = true;
+        boolean flag;
+        if (item.getSequencing() != null) {
+            result = (flag = validateObjectiveID(item.getSequencing(), sequencingCollection));
+            if (!flag && isAssert) {
+                return false;
+            }
+        }
+        for (Item child : item.getItemList()) {
+            if (child.getSequencing() != null) {
+                result &= (flag = validateObjectiveID(child.getSequencing(), sequencingCollection));
+                if (!flag && isAssert) {
+                    return false;
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean validateObjectiveID(Sequencing sequencing, SequencingCollection sequencingCollection) {
+        List<Objective> objectiveList = new LinkedList<>();
+        List<AdlseqObjective> adlseqObjectiveList = new LinkedList<>();
+        List<RuleCondition> ruleConditionList = new LinkedList<>();
+        if (sequencing.getObjectives() != null) {
+            if (!ModelUtils.isAnyUriEmpty(sequencing.getObjectives().getPrimaryObjective().getObjectiveID())) {
+                objectiveList.add(sequencing.getObjectives().getPrimaryObjective());
+            }
+            objectiveList.addAll(sequencing.getObjectives().getObjectiveList());
+        }
+        if (sequencing.getAdlseqObjectives() != null) {
+            adlseqObjectiveList.addAll(sequencing.getAdlseqObjectives().getObjectiveList());
+        }
+        if (!ModelUtils.isIDRefEmpty(sequencing.getIdRef())) {
+            Sequencing refSeq = CPUtils.findSequencingByID(sequencingCollection, sequencing.getIdRef().getValue());
+            if (refSeq != null) {
+                if (refSeq.getObjectives() != null) {
+                    objectiveList.add(refSeq.getObjectives().getPrimaryObjective());
+                    objectiveList.addAll(refSeq.getObjectives().getObjectiveList());
+                }
+                if (refSeq.getAdlseqObjectives() != null) {
+                    adlseqObjectiveList.addAll(refSeq.getAdlseqObjectives().getObjectiveList());
+                }
+            }
+        }
+        if (sequencing.getSequencingRules() != null) {
+            for (ConditionRule conditionRule : sequencing.getSequencingRules().getPreConditionRuleList()) {
+                ruleConditionList.addAll(conditionRule.getRuleConditions().getRuleConditionList());
+            }
+            for (ConditionRule conditionRule : sequencing.getSequencingRules().getPostConditionRuleList()) {
+                ruleConditionList.addAll(conditionRule.getRuleConditions().getRuleConditionList());
+            }
+            for (ConditionRule conditionRule : sequencing.getSequencingRules().getExitConditionRuleList()) {
+                ruleConditionList.addAll(conditionRule.getRuleConditions().getRuleConditionList());
+            }
+        }
+        return validateObjectiveID(objectiveList, adlseqObjectiveList, ruleConditionList);
+    }
+
+    private boolean validateObjectiveID(List<Objective> objectiveList, List<AdlseqObjective> adlseqObjectiveList,
+                                        List<RuleCondition> ruleConditionList) {
+        boolean result;
+        boolean flag;
+        Set<String> objectiveIDSet = new HashSet<>();
+        for (Objective objective : objectiveList) {
+            objectiveIDSet.add(objective.getObjectiveID().getValue());
+        }
+        result = (flag = objectiveIDSet.size() == objectiveList.size());
+        if (!flag) {
+            recordError("<manifest>.<organizations>.<organization>[[.<item>].<item>].<imsss:sequencing>" +
+                            ".<imsss:objectives>.<imsss:objective>.objectiveID",
+                    "must be unique in an item(exclude ancestor item or organization, " +
+                            "include reference sequencing in sequencing Collection)");
+            if (isAssert) {
+                return false;
+            }
+        }
+        for (AdlseqObjective adlseqObjective : adlseqObjectiveList) {
+            result &= (flag = objectiveIDSet.contains(adlseqObjective.getObjectiveID().getValue()));
+            if (!flag) {
+                recordError("<manifest>.<organizations>.<organization>[[.<item>].<item>].<imsss:sequencing>" +
+                                ".<adlseq:objectives>.<adlseq:objective>.objectiveID",
+                        "must match one objectiveID of the IMS SS <objective>.objectiveID in the same item, " +
+                                "(exclude ancestor item or organization, include reference sequencing in SequencingCollection)");
+                if (isAssert) {
+                    return false;
+                }
+            }
+        }
+        for (RuleCondition ruleCondition : ruleConditionList) {
+            if (StringUtils.isNotBlank(ruleCondition.getReferencedObjective())) {
+                result &= (flag = objectiveIDSet.contains(ruleCondition.getReferencedObjective()));
+                if (!flag) {
+                    recordError("<manifest>.<organizations>.<organization>[[.<item>].<item>].<imsss:sequencing>" +
+                                    ".<imsss:sequencingRules>.(<imsss:preConditionRule>|<imsss:postConditionRule>|" +
+                                    "<imsss:exitConditionRule>).<ruleConditions>.<ruleCondition>.referencedObjective",
+                            "must be one objectiveID of the IMS SS <objective>.objectiveID in the same item, " +
+                                    "(exclude ancestor item or organization, include reference sequencing in SequencingCollection)");
+                    if (isAssert) {
+                        return false;
+                    }
+                }
+            }
+        }
         return result;
     }
 
@@ -1770,10 +1889,7 @@ public class ContentPackageValidator {
         boolean result = true;
         boolean flag;
 
-        if (StringUtils.isNotBlank(ruleCondition.getReferencedObjective())) {
-            // TODO need to dv referencedObjective -> shall contain an objectiveID of either the <primaryObjective> or an <objective> element defined for the activity.
-            saveId(baseTag + ".referencedObjective", ruleCondition.getReferencedObjective());
-        }
+        // need to dv referencedObjective -> shall contain an objectiveID of either the <primaryObjective> or an <objective> element defined for the activity.
 
         if (!ModelUtils.isDecimalEmpty(ruleCondition.getMeasureThreshold())) {
             result = (flag = ModelUtils.isDecimalInRange(ruleCondition.getMeasureThreshold(),
@@ -2018,8 +2134,7 @@ public class ContentPackageValidator {
                 return false;
             }
         } else if (!ModelUtils.isAnyUriEmpty(objective.getObjectiveID())) {
-            // TODO need to dv .objectiveID -> unique within an activity
-            saveId(baseTag + ".objectiveID", objective.getObjectiveID().getValue());
+            // need to dv .objectiveID -> unique within an activity
             result = (flag = ModelUtils.isAnyUriFormatCorrect(objective.getObjectiveID()));
             if (!flag) {
                 recordError(baseTag + ".objectiveID", "incorrect anyURI format");
@@ -2063,7 +2178,7 @@ public class ContentPackageValidator {
             }
         } else {
             // TODO need to dv .targetObjectiveID -> referenced the global shared objective targeted for mapping
-            saveId(baseTag + ".targetObjectiveID", mapInfo.getTargetObjectiveID().getValue());
+//            saveId(baseTag + ".targetObjectiveID", mapInfo.getTargetObjectiveID().getValue());
             result = (flag = ModelUtils.isAnyUriFormatCorrect(mapInfo.getTargetObjectiveID()));
             if (!flag) {
                 recordError(baseTag + ".targetObjectiveID", "incorrect anyURI format");
@@ -2176,8 +2291,7 @@ public class ContentPackageValidator {
                     return false;
                 }
             }
-            // TODO need to dv .objectiveID -> match an objectiveID of imsss:objective within the same <sequencing>
-            saveId(baseTag + ".objectiveID", adlseqObjective.getObjectiveID().getValue());
+            // need to dv .objectiveID -> match an objectiveID of imsss:objective within the same <sequencing>
         }
 
         result &= (flag = !adlseqObjective.getMapInfoList().isEmpty());
@@ -2212,7 +2326,7 @@ public class ContentPackageValidator {
             }
         } else {
             // TODO need to dv .targetObjectiveID -> referenced the global shared objective targeted for mapping
-            saveId(baseTag + ".targetObjectiveID", adlseqMapInfo.getTargetObjectiveID().getValue());
+//            saveId(baseTag + ".targetObjectiveID", adlseqMapInfo.getTargetObjectiveID().getValue());
             result = (flag = ModelUtils.isAnyUriFormatCorrect(adlseqMapInfo.getTargetObjectiveID()));
             if (!flag) {
                 recordError(baseTag + ".targetObjectiveID", "anyURI format incorrect");
@@ -2279,11 +2393,6 @@ public class ContentPackageValidator {
         String msg = CommonUtils.format("{} -> {}.", tag, errorMsg);
         errors.computeIfAbsent(tag, k -> new LinkedList<>()).add(msg);
         log.error("record error: {}", msg);
-    }
-
-    // TODO delete method
-    private void saveId(String tag, String id) {
-        idMap.getOrDefault(tag, new LinkedList<>()).add(id);
     }
 
     public boolean isAssert() {

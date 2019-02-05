@@ -145,7 +145,7 @@ public class ContentPackageGenerator {
             return contentPackage;
         }
 
-        contentPackage = new ContentPackage();
+        contentPackage = new ContentPackage(scormPkgDir);
         Element manifestNode = manifestXml.getRootElement();
 
         // #1: 确定本次解析的名称空间

@@ -15,6 +15,7 @@ import com.corkili.learningserver.scorm.cam.model.Objective;
 import com.corkili.learningserver.scorm.cam.model.Objectives;
 import com.corkili.learningserver.scorm.cam.model.Sequencing;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.rte.model.Data;
 import com.corkili.learningserver.scorm.rte.model.Objectives.Instance;
 import com.corkili.learningserver.scorm.rte.model.RuntimeData;
@@ -24,7 +25,7 @@ import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 @Slf4j
 public class LearnerAttempt {
 
-    private AttemptID attemptID;
+    private ID attemptID;
 
     private State state;
 
@@ -42,7 +43,7 @@ public class LearnerAttempt {
 
     private String lastDiagnostic;
 
-    LearnerAttempt(AttemptID attemptID) {
+    LearnerAttempt(ID attemptID) {
         this.attemptID = attemptID;
         state = State.INITIALIZED;
         learnerSessionMap = new ConcurrentHashMap<>();
@@ -52,7 +53,7 @@ public class LearnerAttempt {
         lastDiagnostic = ScormError.E_0.getMsg();
     }
 
-    AttemptID getAttemptID() {
+    ID getAttemptID() {
         return attemptID;
     }
 
@@ -74,6 +75,10 @@ public class LearnerAttempt {
 
     boolean isClosed() {
         return state.equals(State.CLOSED);
+    }
+
+    public RuntimeData getRuntimeData() {
+        return runtimeData;
     }
 
     String initialize(String parameter) {
@@ -365,13 +370,13 @@ public class LearnerAttempt {
         }
         initObjectives(item.getSequencing());
         // TODO: 是否有必要
-        if (item.getSequencing().getIdRef() != null && StringUtils.isNotBlank(item.getSequencing().getIdRef().getValue())) {
-            Sequencing sequencing = CPUtils.findSequencingByID(contentPackage.getManifest().getSequencingCollection(),
-                    item.getSequencing().getIdRef().getValue());
-            if (sequencing != null) {
-                initObjectives(sequencing);
-            }
-        }
+//        if (item.getSequencing().getIdRef() != null && StringUtils.isNotBlank(item.getSequencing().getIdRef().getValue())) {
+//            Sequencing sequencing = CPUtils.findSequencingByID(contentPackage.getManifest().getSequencingCollection(),
+//                    item.getSequencing().getIdRef().getValue());
+//            if (sequencing != null) {
+//                initObjectives(sequencing);
+//            }
+//        }
         runtimeData.getCmi().getObjectives().getCount().setValue(
                 runtimeData.getCmi().getObjectives().getInstances().size());
     }
@@ -382,11 +387,11 @@ public class LearnerAttempt {
         }
         Objectives objectives = sequencing.getObjectives();
         Objective primaryObjective = objectives.getPrimaryObjective();
-        Instance primaryInstance = new Instance(runtimeData.getCmi().getObjectives());
         if (primaryObjective.getObjectiveID() != null) {
+            Instance primaryInstance = new Instance(runtimeData.getCmi().getObjectives());
             primaryInstance.getId().setValue(primaryObjective.getObjectiveID().getValue());
+            runtimeData.getCmi().getObjectives().getInstances().add(primaryInstance);
         }
-        runtimeData.getCmi().getObjectives().getInstances().add(primaryInstance);
         for (Objective objective : objectives.getObjectiveList()) {
             Instance instance = new Instance(runtimeData.getCmi().getObjectives());
             instance.getId().setValue(objective.getObjectiveID().getValue());
