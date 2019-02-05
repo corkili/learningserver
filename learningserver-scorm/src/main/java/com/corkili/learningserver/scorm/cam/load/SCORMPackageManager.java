@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 
 @Slf4j
 public class SCORMPackageManager {
@@ -14,8 +15,11 @@ public class SCORMPackageManager {
 
     private Map<String, ContentPackage> contentPackageMap;
 
+    private LMSPersistDriverManager lmsPersistDriverManager;
+
     private SCORMPackageManager() {
         contentPackageMap = new ConcurrentHashMap<>();
+        lmsPersistDriverManager = LMSPersistDriverManager.getInstance();
     }
 
     public static SCORMPackageManager getInstance() {
@@ -29,7 +33,39 @@ public class SCORMPackageManager {
         return instance;
     }
 
-    public ContentPackage loadSCORMContentPackageFromZipFile(String lmsContentPackageID,String zipFilePath) {
+
+    public ContentPackage launch(String lmsContentPackageID) {
+        return launch(lmsContentPackageID, false);
+    }
+
+
+    public ContentPackage launch(String lmsContentPackageID, boolean reloadIfPresent) {
+        ContentPackage contentPackage = contentPackageMap.get(lmsContentPackageID);
+        if (contentPackage != null && !reloadIfPresent) {
+            return contentPackage;
+        }
+        if (lmsPersistDriverManager.getDriver() == null) {
+            log.error("not found lms persist driver");
+            return null;
+        }
+        String zipFilePath = lmsPersistDriverManager.getDriver().querySCORMPackageZipFilePathBy(lmsContentPackageID);
+        if (zipFilePath == null) {
+            log.error("not found scorm package for {}", lmsContentPackageID);
+            return null;
+        }
+        contentPackage = loadSCORMContentPackageFromZipFile(lmsContentPackageID, zipFilePath);
+        if (contentPackage == null) {
+            log.error("load scorm content package error");
+            return null;
+        }
+        return contentPackage;
+    }
+
+    public void unlaunch(String lmsContentPackageID) {
+        contentPackageMap.remove(lmsContentPackageID);
+    }
+
+    private ContentPackage loadSCORMContentPackageFromZipFile(String lmsContentPackageID,String zipFilePath) {
         if (!ZipUtils.isEndWithZip(zipFilePath)) {
             return null;
         }
@@ -66,10 +102,6 @@ public class SCORMPackageManager {
         contentPackageMap.put(lmsContentPackageID, contentPackage);
 
         return contentPackage;
-    }
-
-    public ContentPackage getContentPackage(String lmsContentPackageID) {
-        return contentPackageMap.get(lmsContentPackageID);
     }
 
     public int contentPackageCount() {

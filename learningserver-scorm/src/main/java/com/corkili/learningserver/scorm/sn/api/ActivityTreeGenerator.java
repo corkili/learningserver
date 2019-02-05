@@ -34,6 +34,7 @@ import com.corkili.learningserver.scorm.cam.model.Sequencing;
 import com.corkili.learningserver.scorm.cam.model.SequencingCollection;
 import com.corkili.learningserver.scorm.cam.model.SequencingRules;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
 import com.corkili.learningserver.scorm.sn.model.datatype.Vocabulary;
 import com.corkili.learningserver.scorm.sn.model.definition.ConstrainChoiceControls;
@@ -54,6 +55,8 @@ import com.corkili.learningserver.scorm.sn.common.ID;
 
 @Slf4j
 public class ActivityTreeGenerator {
+
+    private static LMSPersistDriverManager lmsPersistDriverManager = LMSPersistDriverManager.getInstance();
 
     public static Map<ID, ActivityTree> deriveActivityTreesFrom(
             ContentPackage contentPackage, String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo) {
@@ -88,6 +91,7 @@ public class ActivityTreeGenerator {
                     new ID(item.getIdentifierref(), id.getLmsContentPackageID(), id.getLmsLearnerID()), root);
             root.getChildren().add(activity);
         }
+        initActivityProgressInformation(root);
         return activityTree;
     }
 
@@ -111,6 +115,7 @@ public class ActivityTreeGenerator {
                     new ID(childItem.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), activity);
             activity.getChildren().add(childActivity);
         }
+        initActivityProgressInformation(activity);
         return activity;
     }
 
@@ -136,6 +141,20 @@ public class ActivityTreeGenerator {
                         activity, CPUtils.findSequencingByID(sequencingCollection, sequencing.getIdRef().getValue()));
             }
             initSequencingDefinition(activity, sequencing);
+        }
+    }
+
+    private static void initActivityProgressInformation(Activity activity) {
+        if (lmsPersistDriverManager.getDriver() == null) {
+            log.error("not found lms persist driver");
+            return;
+        }
+        ID id = activity.getId();
+        int attemptCount = lmsPersistDriverManager.getDriver().queryActivityAttemptCountBy(
+                id.getLmsContentPackageID(), id.getIdentifier(), id.getLmsLearnerID());
+        if (attemptCount > 0) {
+            activity.getActivityProgressInformation().setActivityProgressStatus(true)
+                    .getActivityAttemptCount().setValue(attemptCount);
         }
     }
 

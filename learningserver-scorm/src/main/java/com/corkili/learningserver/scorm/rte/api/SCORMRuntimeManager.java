@@ -1,5 +1,7 @@
 package com.corkili.learningserver.scorm.rte.api;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -9,21 +11,22 @@ import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 
 @Slf4j
-// TODO 卸载LearnerAttempt的接口方法
 public class SCORMRuntimeManager {
 
     private static SCORMRuntimeManager instance;
 
-    private LMSQueryDriver lmsQueryDriver;
+    private LMSPersistDriverManager lmsPersistDriverManager;
 
     private SCORMPackageManager scormPackageManager;
 
     private Map<AttemptID, LearnerAttempt> learnerAttemptMap;
 
     private SCORMRuntimeManager() {
+        lmsPersistDriverManager = LMSPersistDriverManager.getInstance();
         scormPackageManager = SCORMPackageManager.getInstance();
         learnerAttemptMap = new ConcurrentHashMap<>();
     }
@@ -39,49 +42,73 @@ public class SCORMRuntimeManager {
         return instance;
     }
 
-    public void registerLMSQueryDriver(LMSQueryDriver lmsQueryDriver) {
-        this.lmsQueryDriver = lmsQueryDriver;
-    }
-
     public boolean launch(String lmsContentPackageID, String activityItemID, LMSLearnerInfo lmsLearnerInfo) {
         return launch(lmsContentPackageID, lmsLearnerInfo, activityItemID, false);
     }
 
     public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo, String activityItemID, boolean reloadIfPresent) {
-        ContentPackage contentPackage = scormPackageManager.getContentPackage(lmsContentPackageID);
-        if (contentPackage != null && !reloadIfPresent) {
-            return launch(lmsContentPackageID, contentPackage, lmsLearnerInfo, activityItemID);
-        }
-        if (lmsQueryDriver == null) {
-            log.error("not found lms query driver");
-            return false;
-        }
-        String zipFilePath = lmsQueryDriver.querySCORMPackageZipFilePath(lmsContentPackageID);
-        if (zipFilePath == null) {
-            log.error("not found scorm package for {}", lmsContentPackageID);
-            return false;
-        }
-        contentPackage = scormPackageManager.loadSCORMContentPackageFromZipFile(lmsContentPackageID, zipFilePath);
+        ContentPackage contentPackage = scormPackageManager.launch(lmsContentPackageID, reloadIfPresent);
         if (contentPackage == null) {
-            log.error("load scorm content package error");
             return false;
         }
-        return launch(lmsContentPackageID, contentPackage, lmsLearnerInfo, activityItemID);
+        return launch(lmsContentPackageID, contentPackage, lmsLearnerInfo, activityItemID, reloadIfPresent);
     }
 
-    private boolean launch(String lmsContentPackageID, ContentPackage contentPackage, LMSLearnerInfo lmsLearnerInfo, String activityItemID) {
+    private boolean launch(String lmsContentPackageID, ContentPackage contentPackage, LMSLearnerInfo lmsLearnerInfo,
+                           String activityItemID, boolean reloadIfPresent) {
         Item item = CPUtils.findItemByIdentifier(contentPackage, activityItemID);
         if (item == null) {
             log.error("not found the activity's item {}", activityItemID);
             return false;
         }
-        LearnerAttempt learnerAttempt = new LearnerAttempt(new AttemptID(lmsLearnerInfo, lmsContentPackageID, activityItemID));
+        AttemptID attemptID = new AttemptID(lmsLearnerInfo, lmsContentPackageID, activityItemID);
+        if (learnerAttemptMap.containsKey(attemptID) && !reloadIfPresent) {
+            return true;
+        }
+        LearnerAttempt learnerAttempt = new LearnerAttempt(attemptID);
         if (!learnerAttempt.initRuntimeData(contentPackage, item, lmsLearnerInfo)) {
             log.error("init run-time data error");
             return false;
         }
         learnerAttemptMap.put(learnerAttempt.getAttemptID(), learnerAttempt);
         return true;
+    }
+
+    public void unlaunch(LMSLearnerInfo lmsLearnerInfo) {
+        List<AttemptID> shouldDelete = new LinkedList<>();
+        for (AttemptID attemptID : learnerAttemptMap.keySet()) {
+            if (attemptID.getLmsLearnerInfo().equals(lmsLearnerInfo)) {
+                shouldDelete.add(attemptID);
+            }
+        }
+        unlaunch(shouldDelete);
+    }
+
+    public void unlaunch(String lmsContentPackageID) {
+        List<AttemptID> shouldDelete = new LinkedList<>();
+        for (AttemptID attemptID : learnerAttemptMap.keySet()) {
+            if (attemptID.getLmsContentPackageID().equals(lmsContentPackageID)) {
+                shouldDelete.add(attemptID);
+            }
+        }
+        unlaunch(shouldDelete);
+    }
+
+    public void unlaunch(LMSLearnerInfo lmsLearnerInfo, String lmsContentPackageID) {
+        List<AttemptID> shouldDelete = new LinkedList<>();
+        for (AttemptID attemptID : learnerAttemptMap.keySet()) {
+            if (attemptID.getLmsLearnerInfo().equals(lmsLearnerInfo)
+                    && attemptID.getLmsContentPackageID().equals(lmsContentPackageID)) {
+                shouldDelete.add(attemptID);
+            }
+        }
+        unlaunch(shouldDelete);
+    }
+
+    private void unlaunch(List<AttemptID> shouldDelete) {
+        for (AttemptID attemptID : shouldDelete) {
+            learnerAttemptMap.remove(attemptID);
+        }
     }
 
     public String initialize(AttemptID attemptID, String parameter) {

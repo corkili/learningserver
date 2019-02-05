@@ -48,23 +48,25 @@ public class AttemptManager {
         this.sequencingSession = new SequencingSession();
     }
 
-    public boolean process(NavigationEvent event) {
+    public ProcessResult process(NavigationEvent event) {
         processedEventTypeSeries.add(event.getType());
         Activity targetActivity = null;
         if (StringUtils.isNotBlank(event.getTargetActivityID())) {
             targetActivity = targetActivityTree.findActivityByID(generateID(event.getTargetActivityID()));
         } else {
             if (event.getType() == EventType.Choose || event.getType() == EventType.Jump) {
-                return false;
+                return new ProcessResult("choose or jump event expected target activity");
             }
         }
         NavigationRequest request = EventTranslator.translateEventToRequestType(event, targetActivityTree, targetActivity);
+        Activity oldCurrentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
         OverallSequencingResult result = OverallSequencingBehavior.overallSequencing(request);
         if (updateAttempt()) {
             log.error("update ActivityAttempt error");
         }
-        if (result.getException() != null) {
-            return false;
+        if (!result.isSuccess()) {
+            log.error("Exception: {} - {}", result.getException().getCode(), result.getException().getDescription());
+            return new ProcessResult(result.getException());
         }
         if (result.isExit() && result.getEndSequencingSession()) {
             if (event.getType() == EventType.SuspendAll) {
@@ -73,7 +75,13 @@ public class AttemptManager {
                 sequencingSession.close();
             }
         }
-        return true;
+        Activity currentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
+        if (currentActivity != null && !currentActivity.equals(oldCurrentActivity)) {
+            // has a new delivery activity
+            return new ProcessResult(currentActivity);
+        } else {
+            return new ProcessResult();
+        }
     }
 
     private ID generateID(String id) {
