@@ -15,6 +15,7 @@ import com.corkili.learningserver.scorm.cam.model.Objective;
 import com.corkili.learningserver.scorm.cam.model.Objectives;
 import com.corkili.learningserver.scorm.cam.model.Sequencing;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.rte.model.Data;
 import com.corkili.learningserver.scorm.rte.model.Objectives.Instance;
 import com.corkili.learningserver.scorm.rte.model.RuntimeData;
@@ -24,7 +25,7 @@ import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 @Slf4j
 public class LearnerAttempt {
 
-    private AttemptID attemptID;
+    private ID attemptID;
 
     private State state;
 
@@ -42,7 +43,7 @@ public class LearnerAttempt {
 
     private String lastDiagnostic;
 
-    LearnerAttempt(AttemptID attemptID) {
+    LearnerAttempt(ID attemptID) {
         this.attemptID = attemptID;
         state = State.INITIALIZED;
         learnerSessionMap = new ConcurrentHashMap<>();
@@ -52,7 +53,7 @@ public class LearnerAttempt {
         lastDiagnostic = ScormError.E_0.getMsg();
     }
 
-    AttemptID getAttemptID() {
+    ID getAttemptID() {
         return attemptID;
     }
 

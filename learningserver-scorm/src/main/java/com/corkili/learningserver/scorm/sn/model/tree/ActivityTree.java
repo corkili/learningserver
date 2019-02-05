@@ -9,7 +9,7 @@ import java.util.Stack;
 
 import com.sun.istack.internal.NotNull;
 
-import com.corkili.learningserver.scorm.sn.common.ID;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.sn.model.tracking.GlobalStateInformation;
 
 public class ActivityTree {

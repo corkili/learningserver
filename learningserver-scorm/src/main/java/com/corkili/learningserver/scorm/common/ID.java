@@ -1,4 +1,4 @@
-package com.corkili.learningserver.scorm.sn.common;
+package com.corkili.learningserver.scorm.common;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

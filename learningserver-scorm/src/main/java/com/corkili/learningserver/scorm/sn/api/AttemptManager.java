@@ -18,7 +18,7 @@ import com.corkili.learningserver.scorm.sn.api.event.EventTranslator;
 import com.corkili.learningserver.scorm.sn.api.event.EventType;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.scorm.sn.api.request.NavigationRequest;
-import com.corkili.learningserver.scorm.sn.common.ID;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 

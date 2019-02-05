@@ -12,7 +12,7 @@ import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.common.CommonUtils;
 import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
-import com.corkili.learningserver.scorm.sn.common.ID;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 
 @Slf4j

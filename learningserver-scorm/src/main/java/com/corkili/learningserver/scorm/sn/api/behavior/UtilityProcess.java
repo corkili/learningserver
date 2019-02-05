@@ -279,6 +279,7 @@ public class UtilityProcess {
                     }
                 }
             }
+            // TODO SN P115
         } else { // 2 The activity has children.
             // 2.1
             // The suspended status of the parent is dependent on the suspended status of its children.

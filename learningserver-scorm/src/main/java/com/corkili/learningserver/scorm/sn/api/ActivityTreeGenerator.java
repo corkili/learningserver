@@ -51,7 +51,7 @@ import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescri
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
-import com.corkili.learningserver.scorm.sn.common.ID;
+import com.corkili.learningserver.scorm.common.ID;
 
 @Slf4j
 public class ActivityTreeGenerator {
