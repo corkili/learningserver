@@ -119,10 +119,11 @@ public class Question {
      *   correctChoice1{&&&}correctChoice2{&&&}correctChoice3
      *
      * 5. Essay:
-     *   a string represent the correct answer
+     *   a string represent the correct answer. if contains image(s), use {##image##} divide text and imagePaths,
+     *   then use {!!!} divide each image path in imagePaths
      *
      */
-    @Column(name = "answer", nullable = false, length = 5000)
+    @Column(name = "answer", nullable = false, length = 10000)
     @NotBlank
     private String answer;
 
