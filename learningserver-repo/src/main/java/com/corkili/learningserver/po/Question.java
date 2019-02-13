@@ -61,7 +61,7 @@ public class Question {
     @Range(min = POConstant.EXISTED, max = POConstant.DELETED)
     private byte deleted;
 
-    @Column(name = "question", nullable = false, length = 10000)
+    @Column(name = "question", nullable = false, length = 1000)
     @NotBlank
     private String question;
 
@@ -125,7 +125,7 @@ public class Question {
      *   then use {!!!} divide each image path in imagePaths
      *
      */
-    @Column(name = "answer", nullable = false, length = 10000)
+    @Column(name = "answer", nullable = false, length = 2000)
     @NotBlank
     private String answer;
 
