@@ -78,9 +78,9 @@ public class Course {
      *
      *   tag1;tag2;tag3
      */
-    @Column(name = "tag", nullable = false, length = 2000)
+    @Column(name = "tags", nullable = false, length = 2000)
     @NotBlank
-    private String tag;
+    private String tags;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "category_fk", nullable = false)
