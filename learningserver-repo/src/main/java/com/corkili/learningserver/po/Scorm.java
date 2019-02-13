@@ -18,6 +18,7 @@ import org.hibernate.annotations.Where;
 import org.hibernate.annotations.WhereJoinTable;
 import org.hibernate.validator.constraints.Range;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,6 +34,7 @@ import com.corkili.learningserver.common.POConstant;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 public class Scorm {
 
     @Id
