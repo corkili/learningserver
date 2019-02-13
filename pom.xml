@@ -29,8 +29,11 @@
 
     <modules>
         <module>learningserver-scorm</module>
+        <module>learningserver-repo</module>
+        <module>learningserver-service</module>
         <module>learningserver-starter</module>
         <module>learningserver-dist</module>
+        <module>learningserver-web</module>
     </modules>
 
     <properties>
