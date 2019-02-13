@@ -16,6 +16,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.corkili</groupId>
+            <artifactId>learningserver-scorm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.corkili</groupId>
+            <artifactId>learningserver-service</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

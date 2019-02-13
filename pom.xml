@@ -31,9 +31,9 @@
         <module>learningserver-scorm</module>
         <module>learningserver-repo</module>
         <module>learningserver-service</module>
+        <module>learningserver-web</module>
         <module>learningserver-starter</module>
         <module>learningserver-dist</module>
-        <module>learningserver-web</module>
     </modules>
 
     <properties>
@@ -47,12 +47,27 @@
             <dependency>
                 <groupId>com.corkili</groupId>
                 <artifactId>learningserver-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.corkili</groupId>
+                <artifactId>learningserver-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.corkili</groupId>
+                <artifactId>learningserver-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.corkili</groupId>
+                <artifactId>learningserver-repo</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.corkili</groupId>
                 <artifactId>learningserver-scorm</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

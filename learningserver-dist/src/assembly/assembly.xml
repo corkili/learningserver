@@ -37,6 +37,21 @@
             <destName>learningserver-starter-${project.version}.jar</destName>
         </file>
         <file>
+            <source>${project.basedir}/../learningserver-web/target/learningserver-web-${project.version}.jar</source>
+            <outputDirectory>/lib</outputDirectory>
+            <destName>learningserver-web-${project.version}.jar</destName>
+        </file>
+        <file>
+            <source>${project.basedir}/../learningserver-service/target/learningserver-service-${project.version}.jar</source>
+            <outputDirectory>/lib</outputDirectory>
+            <destName>learningserver-service-${project.version}.jar</destName>
+        </file>
+        <file>
+            <source>${project.basedir}/../learningserver-repo/target/learningserver-repo-${project.version}.jar</source>
+            <outputDirectory>/lib</outputDirectory>
+            <destName>learningserver-repo-${project.version}.jar</destName>
+        </file>
+        <file>
             <source>${project.basedir}/../learningserver-scorm/target/learningserver-scorm-${project.version}.jar</source>
             <outputDirectory>/lib</outputDirectory>
             <destName>learningserver-scorm-${project.version}.jar</destName>
