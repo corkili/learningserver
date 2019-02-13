@@ -60,9 +60,16 @@ public class SubmittedExam {
     /**
      * Format:
      *   use {^^^} divide each question's submitted answer
-     *   use {###} divide question index, submitted answer, score(negative if not check)
-     *   use {%%%} divide answerIndex and answerContent in submitted answer, if questionType is MultipleFilling
+     *
+     *   use {###} divide question index, submitted answer, check status(0 or 1)
+     *
+     *   use {***} divide each filling answer in submitted answer,
+     *   use {%%%} divide answerIndex and answerContent in each filling answer, if questionType is MultipleFilling
+     *
      *   use {&&&} divide choice in submitted answer, if questionType is MultipleChoice
+     *
+     *   when type is essay, a string represent the correct answer. if contains image(s),
+     *   use {##image##} divide text and imagePaths, then use {!!!} divide each image path in imagePaths
      */
     @Column(name = "submitted_answers", nullable = false, length = 10000)
     @NotBlank
