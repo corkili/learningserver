@@ -9,7 +9,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import com.corkili.learningserver.common.ServiceUtils;
 
@@ -26,6 +29,10 @@ public interface SubmittedAnswer {
         }
     }
 
+    @Setter
+    @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     class SingleFillingSubmittedAnswer extends AbstractSubmittedAnswer {
 
         private String answer;
@@ -45,7 +52,10 @@ public interface SubmittedAnswer {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     class MultipleFillingSubmittedAnswer extends AbstractSubmittedAnswer {
 
         private Map<Integer, String> answerMap;
@@ -79,7 +89,10 @@ public interface SubmittedAnswer {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     class SingleChoiceSubmittedAnswer extends AbstractSubmittedAnswer {
 
         private int choice;
@@ -99,7 +112,10 @@ public interface SubmittedAnswer {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     class MultipleChoiceSubmittedAnswer extends AbstractSubmittedAnswer {
 
         private List<Integer> choices;
@@ -128,7 +144,10 @@ public interface SubmittedAnswer {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     class EssaySubmittedAnswer extends AbstractSubmittedAnswer {
 
         private String text;

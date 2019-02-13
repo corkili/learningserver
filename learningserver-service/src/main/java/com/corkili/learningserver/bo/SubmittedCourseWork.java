@@ -6,11 +6,15 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class SubmittedCourseWork {
 
     private Long id;

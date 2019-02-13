@@ -11,13 +11,17 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import com.corkili.learningserver.common.ServiceUtils;
 
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class Question {
 
     public Question() {
@@ -198,7 +202,10 @@ public class Question {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     public static class SingleFillingAnswer extends AbstractAnswer {
 
         private List<String> answerList;
@@ -218,7 +225,10 @@ public class Question {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     public static class MultipleFillingAnswer extends AbstractAnswer {
 
         private Map<Integer, SingleFillingAnswer> answerMap;
@@ -252,7 +262,10 @@ public class Question {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     public static class SingleChoiceAnswer extends AbstractAnswer {
 
         private int choice;
@@ -272,7 +285,10 @@ public class Question {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     public static class MultipleChoiceAnswer extends AbstractAnswer {
         private List<Integer> choices;
         private boolean selectAllIsCorrect;
@@ -318,7 +334,10 @@ public class Question {
         }
     }
 
+    @Setter
     @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = true)
     public static class EssayAnswer extends AbstractAnswer {
 
         private String text;

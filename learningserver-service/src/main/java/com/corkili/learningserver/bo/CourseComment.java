@@ -7,13 +7,17 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import com.corkili.learningserver.common.ServiceUtils;
 
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class CourseComment {
 
     public CourseComment() {
