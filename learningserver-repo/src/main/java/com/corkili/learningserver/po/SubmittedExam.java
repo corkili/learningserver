@@ -61,7 +61,7 @@ public class SubmittedExam {
      * Format:
      *   use {^^^} divide each question's submitted answer
      *
-     *   use {###} divide question index, submitted answer, check status(0 or 1)
+     *   use {###} divide question index, submitted answer, score
      *
      *   use {***} divide each filling answer in submitted answer,
      *   use {%%%} divide answerIndex and answerContent in each filling answer, if questionType is MultipleFilling
