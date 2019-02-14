@@ -47,4 +47,8 @@ public class ServiceUtils {
         return result.toString();
     }
 
+    public static String format(String format, Object... objects) {
+        return String.format(format.replace("{}", "%s"), objects);
+    }
+
 }

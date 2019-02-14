@@ -2,7 +2,10 @@ package com.corkili.learningserver.bo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,6 +13,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import com.corkili.learningserver.common.ServiceUtils;
 
 @Getter
 @Setter
@@ -45,6 +50,22 @@ public class SubmittedCourseWork implements BusinessObject {
 
     private Long submitterId;
 
+    public void setSubmittedAnswers(String submittedAnswersStr, Map<Integer, QuestionType> questionTypeMap) {
+        List<String> submittedAnswerList = ServiceUtils.string2List(submittedAnswersStr, Pattern.compile("\\{\\^\\^\\^}"));
+        for (String answer : submittedAnswerList) {
+            InnerSubmittedAnswer innerSubmittedAnswer = new InnerSubmittedAnswer(answer, questionTypeMap, belongCourseWorkId);
+            submittedAnswers.put(innerSubmittedAnswer.getQuestionIndex(), innerSubmittedAnswer);
+        }
+    }
+
+    public String getSubmittedAnswersStr() {
+        List<String> submittedAnswerList = new LinkedList<>();
+        for (InnerSubmittedAnswer innerSubmittedAnswer : submittedAnswers.values()) {
+            submittedAnswerList.add(innerSubmittedAnswer.getAnswer());
+        }
+        return ServiceUtils.list2String(submittedAnswerList, "{^^^}");
+    }
+
     @Getter
     @Setter
     public static class InnerSubmittedAnswer {
@@ -52,11 +73,15 @@ public class SubmittedCourseWork implements BusinessObject {
         private SubmittedAnswer submittedAnswer;
         private boolean checked;
 
-        public String getAnswer() {
+        private InnerSubmittedAnswer(String answer, Map<Integer, QuestionType> questionTypeMap, Long belongCourseWorkId) {
+            setAnswer(answer, questionTypeMap, belongCourseWorkId);
+        }
+
+        private String getAnswer() {
             return questionIndex + "{###}" + submittedAnswer.getAnswer() + "{###}" + (checked ? 1 : 0);
         }
 
-        public void setAnswer(String answer, QuestionType questionType) {
+        private void setAnswer(String answer, Map<Integer, QuestionType> questionTypeMap, Long belongCourseWorkId) {
             if (StringUtils.isBlank(answer)) {
                 throw new IllegalArgumentException("answer is null or blank!");
             }
@@ -67,6 +92,12 @@ public class SubmittedCourseWork implements BusinessObject {
             this.questionIndex = Integer.parseInt(tmp[0]);
             this.checked = false;
             try {
+                QuestionType questionType = questionTypeMap.get(questionIndex);
+                if (questionType == null) {
+                    throw new IllegalArgumentException(ServiceUtils.format(
+                            "questionType of question [{}] associated with courseWork [{}] not exist!",
+                            questionIndex, belongCourseWorkId));
+                }
                 this.submittedAnswer = questionType.getSubmittedAnswerType()
                         .getConstructor(String.class).newInstance(tmp[1]);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
