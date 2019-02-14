@@ -42,9 +42,9 @@ public class SubmittedExam {
 
     private double totalScore;
 
-    private Exam belongExam;
+    private Long belongExamId;
 
-    private User submitter;
+    private Long submitterId;
 
     @Getter
     @Setter

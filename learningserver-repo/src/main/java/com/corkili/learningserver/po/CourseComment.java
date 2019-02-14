@@ -2,7 +2,6 @@ package com.corkili.learningserver.po;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -53,7 +52,7 @@ public class CourseComment {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 
@@ -76,11 +75,11 @@ public class CourseComment {
     @Column(name = "image_paths", length = 10000)
     private String imagePaths;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "comment_author_fk", nullable = false)
     private User commentAuthor;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "commented_course", nullable = false)
     private Course commentedCourse;
 

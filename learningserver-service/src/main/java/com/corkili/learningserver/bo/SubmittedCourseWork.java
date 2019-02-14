@@ -41,9 +41,9 @@ public class SubmittedCourseWork {
 
     private boolean alreadyCheckAllAnswer;
 
-    private CourseWork belongCourseWork;
+    private Long belongCourseWorkId;
 
-    private User submitter;
+    private Long submitterId;
 
     @Getter
     @Setter

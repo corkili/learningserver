@@ -27,9 +27,9 @@ public class Message {
 
     private boolean isImage;
 
-    private User receiver;
+    private Long receiverId;
 
-    private User sender;
+    private Long senderId;
 
     public void setContent(String formatContent) {
         if (formatContent.startsWith("{##image##}")) {

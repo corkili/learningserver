@@ -40,9 +40,9 @@ public class CourseComment {
      */
     private List<String> imagePaths;
 
-    private User commentAuthor;
+    private Long commentAuthorId;
 
-    private Course commentedCourse;
+    private Long commentedCourseId;
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

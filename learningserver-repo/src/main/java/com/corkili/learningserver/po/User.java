@@ -51,7 +51,7 @@ public class User {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 

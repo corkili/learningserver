@@ -48,11 +48,11 @@ public class Course {
      */
     private List<String> tags;
 
-    private CourseCategory category;
+    private Long categoryId;
 
-    private User teacher;
+    private Long teacherId;
 
-    private Scorm courseware;
+    private Long coursewareId;
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));
@@ -72,8 +72,9 @@ public class Course {
         return ServiceUtils.list2String(imagePaths, "{!!!}");
     }
 
-    public void setTags(String tagsStr) {
+    public boolean setTags(String tagsStr) {
         tags = ServiceUtils.string2List(tagsStr, Pattern.compile(";"));
+        return !tags.isEmpty();
     }
 
     public void addTag(String tag) {

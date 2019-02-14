@@ -38,9 +38,9 @@ public class TopicComment {
      */
     private List<String> imagePaths;
 
-    private User author;
+    private Long authorId;
 
-    private ForumTopic belongTopic;
+    private Long belongTopicId;
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

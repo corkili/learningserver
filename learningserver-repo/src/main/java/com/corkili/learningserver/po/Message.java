@@ -2,7 +2,6 @@ package com.corkili.learningserver.po;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,7 +50,7 @@ public class Message {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 
@@ -67,11 +66,11 @@ public class Message {
     @NotBlank
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "receiver", nullable = false)
     private User receiver;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "sender", nullable = false)
     private User sender;
 

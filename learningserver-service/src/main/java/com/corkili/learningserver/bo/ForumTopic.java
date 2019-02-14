@@ -40,9 +40,9 @@ public class ForumTopic {
      */
     private List<String> imagePaths;
 
-    private User author;
+    private Long authorId;
 
-    private Course belongCourse;
+    private Long belongCourseId;
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

@@ -51,7 +51,7 @@ public class Exam {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 
@@ -63,7 +63,7 @@ public class Exam {
     @NotBlank
     private String examName;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "belong_course_fk")
     private Course belongCourse;
 

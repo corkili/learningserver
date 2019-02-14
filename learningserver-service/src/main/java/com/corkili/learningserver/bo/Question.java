@@ -93,7 +93,7 @@ public class Question {
      */
     private Answer answer;
 
-    private User author;
+    private Long authorId;
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

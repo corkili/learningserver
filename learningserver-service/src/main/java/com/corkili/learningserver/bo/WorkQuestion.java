@@ -21,8 +21,8 @@ public class WorkQuestion {
 
     private int index;
 
-    private CourseWork belongCourseWork;
+    private Long belongCourseWorkId;
 
-    private Question question;
+    private Long questionId;
 
 }

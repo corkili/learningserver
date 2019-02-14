@@ -50,7 +50,7 @@ public class ExamQuestion {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 
@@ -62,11 +62,11 @@ public class ExamQuestion {
     @Range(min = 1)
     private Integer index;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "belong_exam_id", nullable = false)
     private Exam belongExam;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 

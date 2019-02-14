@@ -23,7 +23,7 @@ public class ExamQuestion {
 
     private Exam belongExam;
 
-    private Question question;
+    private Long questionId;
 
     private Double score;
 }

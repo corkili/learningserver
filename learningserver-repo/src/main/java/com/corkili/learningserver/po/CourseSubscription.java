@@ -50,7 +50,7 @@ public class CourseSubscription {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 
@@ -58,11 +58,11 @@ public class CourseSubscription {
     @Range(min = POConstant.EXISTED, max = POConstant.DELETED)
     private byte deleted;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "subscriber_fk_user_id", nullable = false)
     private User subscriber;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "subscribed_course_fk_course_id", nullable = false)
     private Course subscribedCourse;
 

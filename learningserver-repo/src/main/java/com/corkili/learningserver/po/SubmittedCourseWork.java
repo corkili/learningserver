@@ -51,7 +51,7 @@ public class SubmittedCourseWork {
     private Date createTime;
 
     @Column(name = "update_time", nullable = false,
-            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+            columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updateTime;
 
@@ -80,11 +80,11 @@ public class SubmittedCourseWork {
     @Column(name = "already_check_all_answer", nullable = false)
     private boolean alreadyCheckAllAnswer;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "belong_course_work_fk", nullable = false)
     private CourseWork belongCourseWork;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "submitter_fk", nullable = false)
     private User submitter;
 
