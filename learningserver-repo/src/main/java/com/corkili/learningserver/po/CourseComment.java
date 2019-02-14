@@ -39,7 +39,7 @@ import com.corkili.learningserver.common.POConstant;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class CourseComment {
+public class CourseComment implements PersistObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

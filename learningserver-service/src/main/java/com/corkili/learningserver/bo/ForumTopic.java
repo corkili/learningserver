@@ -18,7 +18,7 @@ import com.corkili.learningserver.common.ServiceUtils;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class ForumTopic {
+public class ForumTopic implements BusinessObject {
 
     public ForumTopic() {
         imagePaths = new ArrayList<>();

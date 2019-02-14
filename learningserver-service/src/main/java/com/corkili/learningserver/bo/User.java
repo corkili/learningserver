@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class User {
+public class User implements BusinessObject {
 
     private Long id;
 
@@ -22,6 +22,10 @@ public class User {
     private String phone;
 
     private String username;
+
+    private String password;
+
+    private boolean rawPassword;
 
     private Type userType;
 

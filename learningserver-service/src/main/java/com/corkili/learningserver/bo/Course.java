@@ -18,7 +18,7 @@ import com.corkili.learningserver.common.ServiceUtils;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Course {
+public class Course implements BusinessObject {
 
     public Course() {
         this.imagePaths = new ArrayList<>();

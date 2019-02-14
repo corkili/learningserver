@@ -22,7 +22,7 @@ import com.corkili.learningserver.common.ServiceUtils;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Question {
+public class Question implements BusinessObject {
 
     public Question() {
         this.imagePaths = new ArrayList<>();

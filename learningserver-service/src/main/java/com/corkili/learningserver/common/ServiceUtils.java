@@ -1,5 +1,7 @@
 package com.corkili.learningserver.common;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.corkili.learningserver.bo.Question;
+import com.corkili.learningserver.po.PersistObject;
 
 public class ServiceUtils {
 
@@ -30,8 +32,19 @@ public class ServiceUtils {
                 sb.append(delimiter);
             }
         }
-        Question question;
         return sb.toString();
+    }
+
+    public static boolean isEntityReferenceNull(PersistObject po) {
+        return po == null || po.getId() == null;
+    }
+
+    public static String stringifyError(Throwable error) {
+        StringWriter result = new StringWriter();
+        PrintWriter printer = new PrintWriter(result);
+        error.printStackTrace(printer);
+        printer.close();
+        return result.toString();
     }
 
 }

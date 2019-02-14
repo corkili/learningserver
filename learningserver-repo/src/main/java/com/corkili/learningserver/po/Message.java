@@ -37,7 +37,7 @@ import com.corkili.learningserver.common.POConstant;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Message {
+public class Message implements PersistObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

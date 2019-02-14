@@ -35,7 +35,7 @@ import com.corkili.learningserver.common.POConstant;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Scorm {
+public class Scorm implements PersistObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

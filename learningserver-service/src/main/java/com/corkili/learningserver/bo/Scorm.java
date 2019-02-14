@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Scorm {
+public class Scorm implements BusinessObject {
 
     private Long id;
 

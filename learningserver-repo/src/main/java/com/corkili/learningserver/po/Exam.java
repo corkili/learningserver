@@ -2,7 +2,6 @@ package com.corkili.learningserver.po;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +37,7 @@ import com.corkili.learningserver.common.POConstant;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Exam {
+public class Exam implements PersistObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +63,7 @@ public class Exam {
     private String examName;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "belong_course_fk")
+    @JoinColumn(name = "belong_course_fk", nullable = false)
     private Course belongCourse;
 
     @Column(name = "start_time")

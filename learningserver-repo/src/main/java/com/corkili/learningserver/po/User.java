@@ -38,7 +38,7 @@ import com.corkili.learningserver.common.POConstant;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class User {
+public class User implements PersistObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +64,7 @@ public class User {
     @Size(min = 1, max = 16)
     private String phone;
 
-    @Column(name = "password", nullable = false, length = 128)
+    @Column(name = "password", nullable = false, length = 512)
     @NotBlank
     @Size(min = 6, max = 128)
     private String password;

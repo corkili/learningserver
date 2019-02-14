@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class CourseSubscription {
+public class CourseSubscription implements BusinessObject {
 
     private Long id;
 
