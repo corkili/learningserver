@@ -1,5 +1,8 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
+import com.corkili.learningserver.po.WorkQuestion;
 import com.corkili.learningserver.repo.SubmittedCourseWorkRepository;
+import com.corkili.learningserver.repo.WorkQuestionRepository;
 import com.corkili.learningserver.service.SubmittedCourseWorkService;
 
 @Slf4j
@@ -19,6 +25,9 @@ public class SubmittedCourseWorkServiceImpl extends ServiceImpl<SubmittedCourseW
     @Autowired
     private SubmittedCourseWorkRepository submittedCourseWorkRepository;
 
+    @Autowired
+    private WorkQuestionRepository workQuestionRepository;
+    
     @Override
     public Optional<SubmittedCourseWork> po2bo(com.corkili.learningserver.po.SubmittedCourseWork submittedCourseWorkPO) {
         Optional<SubmittedCourseWork> superOptional = super.po2bo(submittedCourseWorkPO);
@@ -26,7 +35,12 @@ public class SubmittedCourseWorkServiceImpl extends ServiceImpl<SubmittedCourseW
             return Optional.empty();
         }
         SubmittedCourseWork submittedCourseWork = superOptional.get();
-        // TODO submittedAnswers
+        Map<Integer, QuestionType> questionTypeMap = new HashMap<>();
+        List<WorkQuestion> workQuestionList = workQuestionRepository.findWorkQuestionsByBelongCourseWork(submittedCourseWorkPO.getBelongCourseWork());
+        for (WorkQuestion workQuestion : workQuestionList) {
+            questionTypeMap.put(workQuestion.getIndex(), QuestionType.valueOf(workQuestion.getQuestion().getQuestionType().name()));
+        }
+        submittedCourseWork.setSubmittedAnswers(submittedCourseWorkPO.getSubmittedAnswers(), questionTypeMap);
         return Optional.of(submittedCourseWork);
     }
 

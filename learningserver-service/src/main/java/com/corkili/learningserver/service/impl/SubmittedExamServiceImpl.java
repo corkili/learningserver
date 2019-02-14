@@ -1,5 +1,8 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.bo.SubmittedExam;
+import com.corkili.learningserver.po.ExamQuestion;
+import com.corkili.learningserver.repo.ExamQuestionRepository;
 import com.corkili.learningserver.repo.SubmittedExamRepository;
 import com.corkili.learningserver.service.SubmittedExamService;
 
@@ -19,6 +25,9 @@ public class SubmittedExamServiceImpl extends ServiceImpl<SubmittedExam, com.cor
     @Autowired
     private SubmittedExamRepository submittedExamRepository;
 
+    @Autowired
+    private ExamQuestionRepository examQuestionRepository;
+
     @Override
     public Optional<SubmittedExam> po2bo(com.corkili.learningserver.po.SubmittedExam submittedExamPO) {
         Optional<SubmittedExam> superOptional = super.po2bo(submittedExamPO);
@@ -26,7 +35,12 @@ public class SubmittedExamServiceImpl extends ServiceImpl<SubmittedExam, com.cor
             return Optional.empty();
         }
         SubmittedExam submittedExam = superOptional.get();
-        // TODO submittedAnswers
+        Map<Integer, QuestionType> questionTypeMap = new HashMap<>();
+        List<ExamQuestion> examQuestionList = examQuestionRepository.findExamQuestionsByBelongExam(submittedExamPO.getBelongExam());
+        for (ExamQuestion examQuestion : examQuestionList) {
+            questionTypeMap.put(examQuestion.getIndex(), QuestionType.valueOf(examQuestion.getQuestion().getQuestionType().name()));
+        }
+        submittedExam.setSubmittedAnswers(submittedExamPO.getSubmittedAnswers(), questionTypeMap);
         return Optional.of(submittedExam);
     }
 
