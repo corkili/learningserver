@@ -17,6 +17,7 @@ import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.User.Type;
 import com.corkili.learningserver.common.SecurityUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.UserRepository;
 import com.corkili.learningserver.service.UserService;
 
@@ -52,9 +53,10 @@ public class UserServiceImpl extends ServiceImpl<User, com.corkili.learningserve
         com.corkili.learningserver.po.User userPO = superOptional.get();
         if (user.isRawPassword()) {
             try {
-                user.setPassword(SecurityUtils.generateStrongPasswordHash(user.getPassword()));
+                userPO.setPassword(SecurityUtils.generateStrongPasswordHash(user.getPassword()));
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-                log.error("exception occurs when transfer user bo [{}] to user po", user.getId() == null ? "" : userPO.getId());
+                log.error("exception occurs when transfer user bo [{}] to user po, hashing password - {}",
+                        user.getId() == null ? "" : userPO.getId(), ServiceUtils.stringifyError(e));
                 return Optional.empty();
             }
         }

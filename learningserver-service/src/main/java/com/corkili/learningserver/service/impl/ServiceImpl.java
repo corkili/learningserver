@@ -126,41 +126,47 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
         String id = po.getId() == null ? "" : po.getId().toString();
         try {
             for (Field fieldOfPO : po.getClass().getDeclaredFields()) {
-                if (Arrays.asList(fieldOfPO.getType().getInterfaces()).contains(PersistObject.class)) {
-                    Field fieldOfBO = bo.getClass().getDeclaredField(fieldOfPO.getName() + "Id");
-                    if (!fieldOfBO.getType().equals(Long.class)) {
-                        logger().error("{} of {} bo [{}] is not a Long", fieldOfBO.getName(), entityName(), id);
-                        return Optional.empty();
-                    }
-                    try {
-                        fieldOfPO.setAccessible(true);
-                        fieldOfBO.setAccessible(true);
-                        Object valueOfPO = fieldOfPO.get(po);
-                        if (valueOfPO == null) {
-                            fieldOfBO.set(bo, null);
-                        } else {
-                            fieldOfBO.set(bo, ((PersistObject) valueOfPO).getId());
+                try {
+                    if (Arrays.asList(fieldOfPO.getType().getInterfaces()).contains(PersistObject.class)) {
+                        Field fieldOfBO = bo.getClass().getDeclaredField(fieldOfPO.getName() + "Id");
+                        if (!fieldOfBO.getType().equals(Long.class)) {
+                            logger().error("{} of {} bo [{}] is not a Long", fieldOfBO.getName(), entityName(), id);
+                            return Optional.empty();
                         }
-                    } finally {
-                        fieldOfPO.setAccessible(false);
-                        fieldOfBO.setAccessible(false);
-                    }
-                } else {
-                    Field fieldOfBO = bo.getClass().getDeclaredField(fieldOfPO.getName());
-                    if (fieldOfBO.getType().equals(fieldOfPO.getType())) { // otherwise, processed by subclass
                         try {
                             fieldOfPO.setAccessible(true);
                             fieldOfBO.setAccessible(true);
-                            fieldOfBO.set(bo, fieldOfPO.get(po));
+                            Object valueOfPO = fieldOfPO.get(po);
+                            if (valueOfPO == null) {
+                                fieldOfBO.set(bo, null);
+                            } else {
+                                fieldOfBO.set(bo, ((PersistObject) valueOfPO).getId());
+                            }
                         } finally {
                             fieldOfPO.setAccessible(false);
                             fieldOfBO.setAccessible(false);
                         }
+                    } else {
+                        Field fieldOfBO = bo.getClass().getDeclaredField(fieldOfPO.getName());
+                        if (fieldOfBO.getType().equals(fieldOfPO.getType())) { // otherwise, processed by subclass
+                            try {
+                                fieldOfPO.setAccessible(true);
+                                fieldOfBO.setAccessible(true);
+                                fieldOfBO.set(bo, fieldOfPO.get(po));
+                            } finally {
+                                fieldOfPO.setAccessible(false);
+                                fieldOfBO.setAccessible(false);
+                            }
+                        }
                     }
+                } catch (NoSuchFieldException e) {
+                    logger().warn("exception occurs when transfer {} po [{}] to {} bo, NoSuchFieldException: {}",
+                            entityName(), id, entityName(), e.getMessage());
                 }
             }
         } catch (Exception e) {
-            logger().error("exception occurs when transfer {} po [{}] to {} bo", entityName(), id, entityName());
+            logger().error("exception occurs when transfer {} po [{}] to {} bo - {}",
+                    entityName(), id, entityName(), ServiceUtils.stringifyError(e));
             return Optional.empty();
         }
         return Optional.of(bo);
@@ -176,44 +182,50 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
         String id = bo.getId() == null ? "" : bo.getId().toString();
         try {
             for (Field fieldOfBO : bo.getClass().getDeclaredFields()) {
-                if (fieldOfBO.getName().endsWith("Id") && fieldOfBO.getType().equals(Long.class)) {
-                    Field fieldOfPO = po.getClass().getDeclaredField(
-                            fieldOfBO.getName().substring(0, fieldOfBO.getName().length() - 2));
-                    if (!Arrays.asList(fieldOfPO.getType().getInterfaces()).contains(PersistObject.class)) {
-                        logger().error("{} of {} po [{}] is not a PersistObject", fieldOfPO.getName(), entityName(), id);
-                        return Optional.empty();
-                    }
-                    try {
-                        fieldOfPO.setAccessible(true);
-                        fieldOfBO.setAccessible(true);
-                        Long valueOfBO = (Long) fieldOfBO.get(bo);
-                        if (valueOfBO == null) {
-                            fieldOfPO.set(po, null);
-                        } else {
-                            Object obj = fieldOfPO.getType().getConstructor().newInstance();
-                            ((PersistObject) obj).setId(valueOfBO);
-                            fieldOfPO.set(po, obj);
+                try {
+                    if (fieldOfBO.getName().endsWith("Id") && fieldOfBO.getType().equals(Long.class)) {
+                        Field fieldOfPO = po.getClass().getDeclaredField(
+                                fieldOfBO.getName().substring(0, fieldOfBO.getName().length() - 2));
+                        if (!Arrays.asList(fieldOfPO.getType().getInterfaces()).contains(PersistObject.class)) {
+                            logger().error("{} of {} po [{}] is not a PersistObject", fieldOfPO.getName(), entityName(), id);
+                            return Optional.empty();
                         }
-                    } finally {
-                        fieldOfPO.setAccessible(false);
-                        fieldOfBO.setAccessible(false);
-                    }
-                } else {
-                    Field fieldOfPO = po.getClass().getDeclaredField(fieldOfBO.getName());
-                    if (fieldOfBO.getType().equals(fieldOfPO.getType())) { // otherwise, processed by subclass
                         try {
                             fieldOfPO.setAccessible(true);
                             fieldOfBO.setAccessible(true);
-                            fieldOfPO.set(po, fieldOfBO.get(bo));
+                            Long valueOfBO = (Long) fieldOfBO.get(bo);
+                            if (valueOfBO == null) {
+                                fieldOfPO.set(po, null);
+                            } else {
+                                Object obj = fieldOfPO.getType().getConstructor().newInstance();
+                                ((PersistObject) obj).setId(valueOfBO);
+                                fieldOfPO.set(po, obj);
+                            }
                         } finally {
                             fieldOfPO.setAccessible(false);
                             fieldOfBO.setAccessible(false);
                         }
+                    } else {
+                        Field fieldOfPO = po.getClass().getDeclaredField(fieldOfBO.getName());
+                        if (fieldOfBO.getType().equals(fieldOfPO.getType())) { // otherwise, processed by subclass
+                            try {
+                                fieldOfPO.setAccessible(true);
+                                fieldOfBO.setAccessible(true);
+                                fieldOfPO.set(po, fieldOfBO.get(bo));
+                            } finally {
+                                fieldOfPO.setAccessible(false);
+                                fieldOfBO.setAccessible(false);
+                            }
+                        }
                     }
+                } catch (NoSuchFieldException e) {
+                    logger().warn("exception occurs when transfer {} bo [{}] to {} po, NoSuchFieldException: {}",
+                            entityName(), id, entityName(), e.getMessage());
                 }
             }
         } catch (Exception e) {
-            logger().error("exception occurs when transfer {} bo [{}] to {} po", entityName(), id, entityName());
+            logger().error("exception occurs when transfer {} bo [{}] to {} po - {}", entityName(), id, entityName(),
+                    ServiceUtils.stringifyError(e));
             return Optional.empty();
         }
         return Optional.of(po);

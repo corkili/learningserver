@@ -32,7 +32,7 @@ public class TokenManager {
         String token;
         do {
             token = UUID.randomUUID().toString();
-        } while (!tokenMap.containsKey(token));
+        } while (tokenMap.containsKey(token));
         tokenMap.put(token, new Token(token));
         return token;
     }

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.config.PersistenceConfiguration;
 import net.sf.ehcache.config.PersistenceConfiguration.Strategy;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
 
@@ -31,11 +32,10 @@ public class EhcacheConfiguration implements CachingConfigurer {
         cacheConfiguration.setName("memoryCache");
         cacheConfiguration.setMaxEntriesLocalHeap(500);
         cacheConfiguration.setMaxEntriesLocalDisk(0);
-        cacheConfiguration.setMaxEntriesInCache(500);
         cacheConfiguration.setMemoryStoreEvictionPolicyFromObject(MemoryStoreEvictionPolicy.LRU);
         cacheConfiguration.setEternal(false);
         cacheConfiguration.setOverflowToOffHeap(false);
-        cacheConfiguration.getPersistenceConfiguration().strategy(Strategy.NONE);
+        cacheConfiguration.addPersistence(new PersistenceConfiguration().strategy(Strategy.NONE));
         cacheConfiguration.setTimeToIdleSeconds(300);
         cacheConfiguration.setTimeToLiveSeconds(600);
         config.addCache(cacheConfiguration);

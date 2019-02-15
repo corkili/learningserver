@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.corkili.learningserver.bo.User;
@@ -29,7 +30,7 @@ public class UserController {
     private UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/register", produces = "application/x-protobuf")
+    @RequestMapping(value = "/register", produces = "application/x-protobuf", method = RequestMethod.POST)
     public UserRegisterResponse register(@RequestBody UserRegisterRequest request) {
         String token = tokenManager.getOrNewToken(request.getRequest().getToken());
         ServiceResult registerResult = userService.register(request.getUserInfo().getPhone(),
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/login", produces = "application/x-protobuf")
+    @RequestMapping(value = "/login", produces = "application/x-protobuf", method = RequestMethod.POST)
     public UserLoginResponse login(@RequestBody UserLoginRequest request) {
         String token = tokenManager.getOrNewToken(request.getRequest().getToken());
         ServiceResult loginResult = userService.login(request.getPhone(), request.getPassword(),
@@ -78,5 +79,6 @@ public class UserController {
                 .setUserInfo(userInfo)
                 .build();
     }
+
 
 }

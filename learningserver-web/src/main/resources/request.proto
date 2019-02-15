@@ -21,3 +21,7 @@ message UserRegisterRequest {
     UserInfo userInfo = 2;
     string password = 3;
 }
+
+message UserLogoutRequest {
+    BaseRequest request = 1;
+}

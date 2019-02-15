@@ -67,7 +67,7 @@ public class User implements PersistObject {
 
     @Column(name = "password", nullable = false, length = 512)
     @NotBlank
-    @Size(min = 6, max = 128)
+    @Size(min = 6, max = 512)
     private String password;
 
     @Column(name = "username", nullable = false, length = 50)
