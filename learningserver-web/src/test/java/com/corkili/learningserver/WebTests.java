@@ -17,35 +17,37 @@ import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.corkili.learningserver.generate.protobuf.Request.BaseRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserLoginRequest;
+import com.corkili.learningserver.generate.protobuf.Request.UserLogoutRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserRegisterRequest;
 import com.corkili.learningserver.generate.protobuf.Response.UserLoginResponse;
+import com.corkili.learningserver.generate.protobuf.Response.UserLogoutResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserRegisterResponse;
 
 
 public class WebTests {
 
-    private static final String token = "710b35e4-5dc1-42ca-8b37-63cbc86ecc88";
+    private static final String token = "b69e0c70-494a-4b12-8d49-4d284bfaec26";
 
     @Test
     public void testRegister() {
         try {
             URI uri = new URI("http", null, "127.0.0.1", 8080, "/user/register", "", null);
-            HttpPost request = new HttpPost(uri);
+            HttpPost httpRequest = new HttpPost(uri);
             BaseRequest baseRequest = BaseRequest.newBuilder().setToken(token).build();
             UserInfo userInfo = UserInfo.newBuilder()
                     .setPhone("18681255793")
                     .setUsername("corkili")
                     .setUserType(UserType.Teacher)
                     .build();
-            UserRegisterRequest userRegisterRequest = UserRegisterRequest.newBuilder()
+            UserRegisterRequest request = UserRegisterRequest.newBuilder()
                     .setRequest(baseRequest)
                     .setUserInfo(userInfo)
                     .setPassword("123456")
                     .build();
-            HttpResponse response = doPost(request, userRegisterRequest);
-            UserRegisterResponse userRegisterResponse = UserRegisterResponse.parseFrom(response.getEntity().getContent());
-            System.out.println(userRegisterRequest.toString());
-            System.out.println(userRegisterResponse.toString());
+            HttpResponse httpResponse = doPost(httpRequest, request);
+            UserRegisterResponse response = UserRegisterResponse.parseFrom(httpResponse.getEntity().getContent());
+            System.out.println(request.toString());
+            System.out.println(response.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,22 +57,42 @@ public class WebTests {
     public void testLogin() {
         try {
             URI uri = new URI("http", null, "127.0.0.1", 8080, "/user/login", "", null);
-            HttpPost request = new HttpPost(uri);
+            HttpPost httpRequest = new HttpPost(uri);
             BaseRequest baseRequest = BaseRequest.newBuilder().setToken(token).build();
-            UserLoginRequest userLoginRequest = UserLoginRequest.newBuilder()
+            UserLoginRequest request = UserLoginRequest.newBuilder()
                     .setRequest(baseRequest)
                     .setPhone("18681255793")
                     .setPassword("123456")
                     .setUserType(UserType.Teacher)
                     .build();
-            HttpResponse response = doPost(request, userLoginRequest);
-            UserLoginResponse userLoginResponse = UserLoginResponse.parseFrom(response.getEntity().getContent());
-            System.out.println(userLoginRequest.toString());
-            System.out.println(userLoginResponse.toString());
+            HttpResponse httpResponse = doPost(httpRequest, request);
+            UserLoginResponse response = UserLoginResponse.parseFrom(httpResponse.getEntity().getContent());
+            System.out.println(request.toString());
+            System.out.println(response.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testLogout() {
+        try {
+            URI uri = new URI("http", null, "127.0.0.1", 8080, "/user/logout", "", null);
+            HttpPost httpRequest = new HttpPost(uri);
+            BaseRequest baseRequest = BaseRequest.newBuilder().setToken(token).build();
+            UserLogoutRequest request = UserLogoutRequest.newBuilder()
+                    .setRequest(baseRequest)
+                    .build();
+            HttpResponse httpResponse = doPost(httpRequest, request);
+            UserLogoutResponse response = UserLogoutResponse.parseFrom(httpResponse.getEntity().getContent());
+            System.out.println(request.toString());
+            System.out.println(response.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private static HttpResponse doPost(HttpPost post, GeneratedMessageV3 message) throws IOException {
         HttpClient httpclient = HttpClients.createDefault();

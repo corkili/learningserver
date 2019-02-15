@@ -22,7 +22,7 @@ public class TokenManager {
     }
 
     public String getOrNewToken(String token) {
-        if (StringUtils.isBlank(token)) {
+        if (StringUtils.isBlank(token) || !tokenMap.containsKey(token)) {
             return createToken();
         }
         return token;

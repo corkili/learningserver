@@ -13,8 +13,12 @@ import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.corkili.learningserver.generate.protobuf.Request.UserLoginRequest;
+import com.corkili.learningserver.generate.protobuf.Request.UserLogoutRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserRegisterRequest;
+import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
+import com.corkili.learningserver.generate.protobuf.Response.ResponseCode;
 import com.corkili.learningserver.generate.protobuf.Response.UserLoginResponse;
+import com.corkili.learningserver.generate.protobuf.Response.UserLogoutResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserRegisterResponse;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
@@ -80,5 +84,30 @@ public class UserController {
                 .build();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/logout", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public UserLogoutResponse logout(@RequestBody UserLogoutRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse;
+        if (tokenManager.isLogin(token)) {
+            baseResponse = BaseResponse.newBuilder()
+                    .setToken("")
+                    .setResult(true)
+                    .setMsg("logout success")
+                    .setResponseCode(ResponseCode.SUCCESS)
+                    .build();
+        } else {
+            baseResponse = BaseResponse.newBuilder()
+                    .setToken("")
+                    .setResult(false)
+                    .setMsg("already logout")
+                    .setResponseCode(ResponseCode.GENERAL_ERROR)
+                    .build();
+        }
+        tokenManager.removeToken(token);
+        return UserLogoutResponse.newBuilder()
+                .setResponse(baseResponse)
+                .build();
+    }
 
 }
