@@ -10,19 +10,18 @@ import javax.persistence.JoinColumn;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Range;
+import org.slf4j.Logger;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.bo.BusinessObject;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.po.PersistObject;
 import com.corkili.learningserver.service.Service;
 
-@Slf4j
 public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistObject> implements Service<BO, PO> {
 
     private static final String CACHE_NAME = "memoryCache";
@@ -51,12 +50,12 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     public BO saveOrUpdate(BO bo, boolean isUpdate, String entityName) {
         Optional<PO> poOptional = bo2po(bo);
         if (!poOptional.isPresent()) {
-            log.error("transfer {} bo to {} po failed.", entityName, entityName);
+            logger().error("transfer {} bo to {} po failed.", entityName, entityName);
             return null;
         }
         PO po = poOptional.get();
         if (!checkPO(po, isUpdate)) {
-            log.error("validate {} po failed", entityName);
+            logger().error("validate {} po failed", entityName);
             return null;
         }
         if (isUpdate) {
@@ -68,21 +67,21 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
             po = repository().saveAndFlush(po);
         } catch (Exception e) {
             if (isUpdate) {
-                log.error("exception occurs when update {} po - {}", entityName, ServiceUtils.stringifyError(e));
+                logger().error("exception occurs when update {} po - {}", entityName, ServiceUtils.stringifyError(e));
             } else {
-                log.error("exception occurs when create {} po - {}", entityName, ServiceUtils.stringifyError(e));
+                logger().error("exception occurs when create {} po - {}", entityName, ServiceUtils.stringifyError(e));
             }
             return null;
         }
         poOptional = repository().findById(po.getId());
         if (!poOptional.isPresent()) {
-            log.error("retrieve {} po [{}] from db failed.", entityName, po.getId());
+            logger().error("retrieveUserByPhoneAndUserType {} po [{}] from db failed.", entityName, po.getId());
             return null;
         }
         po = poOptional.get();
         Optional<BO> boOptional = po2bo(po);
         if (!boOptional.isPresent()) {
-            log.error("transfer {} po [{}] to bo failed", entityName, po.getId());
+            logger().error("transfer {} po [{}] to bo failed", entityName, po.getId());
             return null;
         }
         return boOptional.get();
@@ -91,12 +90,12 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     @Cacheable(cacheNames = CACHE_NAME, key = "#entityName + #result.id", unless = "#result == null or #result.id == null")
     public BO retrieve(Long id, String entityName) {
         if (id == null) {
-            log.error("id of {} is null", entityName);
+            logger().error("id of {} is null", entityName);
         return null;
     }
         Optional<PO> poOptional = repository().findById(id);
         if (!poOptional.isPresent()) {
-            log.error("{} [{}] not exist in db", entityName, id);
+            logger().error("{} [{}] not exist in db", entityName, id);
             return null;
         }
         return po2bo(poOptional.get()).orElse(null);
@@ -105,13 +104,13 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     @CacheEvict(cacheNames = CACHE_NAME, key = "#entityName + #id", condition = "#result == true")
     public boolean delete(Long id, String entityName) {
         if (id == null) {
-            log.error("id of {} is null", entityName);
+            logger().error("id of {} is null", entityName);
             return false;
         }
         try {
             repository().deleteById(id);
         } catch (Exception e) {
-            log.error("exception occurs when delete {} from db - {}", entityName, ServiceUtils.stringifyError(e));
+            logger().error("exception occurs when delete {} from db - {}", entityName, ServiceUtils.stringifyError(e));
             return false;
         }
         return true;
@@ -120,7 +119,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     @Override
     public Optional<BO> po2bo(PO po) {
         if (po == null) {
-            log.error("{} po [] is null", entityName());
+            logger().error("{} po [] is null", entityName());
             return Optional.empty();
         }
         BO bo = newBusinessObject();
@@ -130,7 +129,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                 if (Arrays.asList(fieldOfPO.getType().getInterfaces()).contains(PersistObject.class)) {
                     Field fieldOfBO = bo.getClass().getDeclaredField(fieldOfPO.getName() + "Id");
                     if (!fieldOfBO.getType().equals(Long.class)) {
-                        log.error("{} of {} bo [{}] is not a Long", fieldOfBO.getName(), entityName(), id);
+                        logger().error("{} of {} bo [{}] is not a Long", fieldOfBO.getName(), entityName(), id);
                         return Optional.empty();
                     }
                     try {
@@ -161,7 +160,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                 }
             }
         } catch (Exception e) {
-            log.error("exception occurs when transfer {} po [{}] to {} bo", entityName(), id, entityName());
+            logger().error("exception occurs when transfer {} po [{}] to {} bo", entityName(), id, entityName());
             return Optional.empty();
         }
         return Optional.of(bo);
@@ -170,7 +169,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     @Override
     public Optional<PO> bo2po(BO bo) {
         if (bo == null) {
-            log.error("{} bo [] is null", entityName());
+            logger().error("{} bo [] is null", entityName());
             return Optional.empty();
         }
         PO po = newPersistObject();
@@ -181,7 +180,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                     Field fieldOfPO = po.getClass().getDeclaredField(
                             fieldOfBO.getName().substring(0, fieldOfBO.getName().length() - 2));
                     if (!Arrays.asList(fieldOfPO.getType().getInterfaces()).contains(PersistObject.class)) {
-                        log.error("{} of {} po [{}] is not a PersistObject", fieldOfPO.getName(), entityName(), id);
+                        logger().error("{} of {} po [{}] is not a PersistObject", fieldOfPO.getName(), entityName(), id);
                         return Optional.empty();
                     }
                     try {
@@ -214,7 +213,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                 }
             }
         } catch (Exception e) {
-            log.error("exception occurs when transfer {} bo [{}] to {} po", entityName(), id, entityName());
+            logger().error("exception occurs when transfer {} bo [{}] to {} po", entityName(), id, entityName());
             return Optional.empty();
         }
         return Optional.of(po);
@@ -223,17 +222,17 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     @Override
     public boolean checkPO(PO po, boolean isUpdate) {
         if (po == null) {
-            log.error("{} po [] is null", entityName());
+            logger().error("{} po [] is null", entityName());
             return false;
         }
         String id = po.getId() == null ? "" : po.getId().toString();
         if (isUpdate) {
             if (po.getId() == null) {
-                log.error("id of {} po [] is null when update", entityName());
+                logger().error("id of {} po [] is null when update", entityName());
                 return false;
             }
             if (po.getUpdateTime() == null) {
-                log.error("updateTime of {} po [{}] is null when update", entityName(), id);
+                logger().error("updateTime of {} po [{}] is null when update", entityName(), id);
                 return false;
             }
         }
@@ -253,16 +252,16 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                     String str = (String) value;
                     if (!column.nullable()) {
                         if (StringUtils.isBlank(str)) {
-                            log.error("{} of {} po [{}] is empty", name, entityName(), id);
+                            logger().error("{} of {} po [{}] is empty", name, entityName(), id);
                             return false;
                         }
                         if (str.length() > column.length()) {
-                            log.error("{} of {} po [{}] exceed {}", name, entityName(), id, column.length());
+                            logger().error("{} of {} po [{}] exceed {}", name, entityName(), id, column.length());
                             return false;
                         }
                     } else {
                         if (StringUtils.isNotBlank(str) && str.length() > column.length()) {
-                            log.error("{} of {} po [{}] exceed {}", name, entityName(), id, column.length());
+                            logger().error("{} of {} po [{}] exceed {}", name, entityName(), id, column.length());
                             return false;
                         }
                     }
@@ -274,14 +273,14 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                     Integer i = (Integer) value;
                     if (!column.nullable()) {
                         if (i == null) {
-                            log.error("{} of {} po [{}] is empty", name, entityName(), id);
+                            logger().error("{} of {} po [{}] is empty", name, entityName(), id);
                             return false;
                         }
                     }
                     if (field.isAnnotationPresent(Range.class)) {
                         Range range = field.getAnnotation(Range.class);
                         if (i != null && (i < range.min() || i > range.max())) {
-                            log.error("{} of {} po [{}] out of range [{}, {}]", name, entityName(), id, range.min(), range.max());
+                            logger().error("{} of {} po [{}] out of range [{}, {}]", name, entityName(), id, range.min(), range.max());
                             return false;
                         }
                     }
@@ -293,14 +292,14 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                     Double d = (Double) value;
                     if (!column.nullable()) {
                         if (d == null) {
-                            log.error("{} of {} po [{}] is empty", name, entityName(), id);
+                            logger().error("{} of {} po [{}] is empty", name, entityName(), id);
                             return false;
                         }
                     }
                     if (field.isAnnotationPresent(Range.class)) {
                         Range range = field.getAnnotation(Range.class);
                         if (d != null && (d < range.min() || d > range.max())) {
-                            log.error("{} of {} po [{}] out of range [{}, {}]", name, entityName(), id, range.min(), range.max());
+                            logger().error("{} of {} po [{}] out of range [{}, {}]", name, entityName(), id, range.min(), range.max());
                             return false;
                         }
                     }
@@ -312,13 +311,13 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                     PersistObject persistObject = (PersistObject) value;
                     if (!column.nullable()) {
                         if (ServiceUtils.isEntityReferenceNull(persistObject)) {
-                            log.error("{} of {} po [{}] or id of {} of {} po [{}] is null",
+                            logger().error("{} of {} po [{}] or id of {} of {} po [{}] is null",
                                     name, entityName(), id, name, entityName(), id);
                             return false;
                         }
                     } else {
                         if (persistObject != null && ServiceUtils.isEntityReferenceNull(persistObject)) {
-                            log.error("id of {} of {} po [{}] is null", name, entityName(), id);
+                            logger().error("id of {} of {} po [{}] is null", name, entityName(), id);
                             return false;
                         }
                     }
@@ -328,18 +327,23 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                     }
                     Column column = field.getAnnotation(Column.class);
                     if (!column.nullable() && value == null) {
-                        log.error("{} of {} po [{}] is null", name, entityName(), id);
+                        logger().error("{} of {} po [{}] is null", name, entityName(), id);
                         return false;
                     }
                 }
             } catch (Exception e) {
-                log.error("exception occurs when check {} po [{}]", entityName(), id);
+                logger().error("exception occurs when check {} po [{}]", entityName(), id);
                 return false;
             } finally {
                 field.setAccessible(false);
             }
         }
         return true;
+    }
+    
+    protected ServiceResult recordErrorAndCreateFailResultWithMessage(String msg, Object... args) {
+        logger().error(msg, args);
+        return ServiceResult.failResultWithMessage(ServiceUtils.format(msg, args));
     }
 
     protected abstract JpaRepository<PO, Long> repository();
@@ -349,5 +353,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     protected abstract BO newBusinessObject();
 
     protected abstract PO newPersistObject();
+    
+    protected abstract Logger logger();
 
 }

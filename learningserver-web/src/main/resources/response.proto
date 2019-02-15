@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_package = "com.corkili.learningserver.generate.protobuf";
+option java_outer_classname = "Response";
+
+import "info.proto";
+
+enum ResponseCode {
+    SUCCESS = 0;
+    GENERAL_ERROR = 1;
+    UNAUTHORIZED = 2;
+}
+
+message BaseResponse {
+    string token = 1;
+    bool result = 2;
+    string msg = 3;
+    ResponseCode responseCode = 4;
+}
+
+message UserLoginResponse {
+    BaseResponse response = 1;
+    UserInfo userInfo = 2;
+}
+
+message UserRegisterResponse {
+    BaseResponse response = 1;
+    UserInfo userInfo = 2;
+}

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -29,7 +30,7 @@ import lombok.ToString;
 import com.corkili.learningserver.common.POConstant;
 
 @Entity
-@Table(name = "t_user")
+@Table(name = "t_user", uniqueConstraints = @UniqueConstraint(columnNames = {"phone", "user_type"}))
 @SQLDelete(sql = "update t_user set " + POConstant.KEY_DELETED + " = " + POConstant.DELETED + " where id = ?")
 @SQLDeleteAll(sql = "update t_user set " + POConstant.KEY_DELETED + " = " + POConstant.DELETED + " where id = ?")
 @Where(clause = POConstant.KEY_DELETED + " = " + POConstant.EXISTED)
@@ -59,7 +60,7 @@ public class User implements PersistObject {
     @Range(min = POConstant.EXISTED, max = POConstant.DELETED)
     private byte deleted;
 
-    @Column(name = "phone", unique = true, nullable = false, length = 16)
+    @Column(name = "phone", nullable = false, length = 16)
     @NotBlank
     @Size(min = 1, max = 16)
     private String phone;

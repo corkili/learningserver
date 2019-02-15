@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "com.corkili.learningserver.generate.protobuf";
+option java_outer_classname = "Request";
+
+import "info.proto";
+
+message BaseRequest {
+    string token = 1;
+}
+
+message UserLoginRequest {
+    BaseRequest request = 1;
+    string phone = 2;
+    string password = 3;
+    UserType userType = 4;
+}
+
+message UserRegisterRequest {
+    BaseRequest request = 1;
+    UserInfo userInfo = 2;
+    string password = 3;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "com.corkili.learningserver.generate.protobuf";
+option java_outer_classname = "Info";
+
+enum UserType {
+    Teacher = 0;
+    Student = 1;
+}
+
+message UserInfo {
+    string phone = 1;
+    string username = 2;
+    UserType userType = 3;
+}

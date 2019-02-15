@@ -1,5 +1,6 @@
 package com.corkili.learningserver.service.impl;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,10 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
     @Override
     protected com.corkili.learningserver.po.ExamQuestion newPersistObject() {
         return new com.corkili.learningserver.po.ExamQuestion();
+    }
+
+    @Override
+    protected Logger logger() {
+        return log;
     }
 }

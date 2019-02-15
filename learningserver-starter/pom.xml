@@ -31,6 +31,10 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>com.corkili</groupId>
+            <artifactId>learningserver-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
