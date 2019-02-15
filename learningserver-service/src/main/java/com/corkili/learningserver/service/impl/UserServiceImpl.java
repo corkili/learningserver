@@ -174,4 +174,35 @@ public class UserServiceImpl extends ServiceImpl<User, com.corkili.learningserve
         }
         return ServiceResult.successResult("login success", User.class, user);
     }
+
+    @Override
+    public ServiceResult modifyUserInfo(User user) {
+        if (StringUtils.isBlank(user.getPhone())) {
+            return recordErrorAndCreateFailResultWithMessage("modify user info error: phone is empty");
+        }
+        if (StringUtils.isBlank(user.getPassword())) {
+            return recordErrorAndCreateFailResultWithMessage("modify user info error: password is empty");
+        }
+        if (StringUtils.isBlank(user.getUsername())) {
+            return recordErrorAndCreateFailResultWithMessage("modify user info error: username is empty");
+        }
+        if (user.getUserType() == null) {
+            return recordErrorAndCreateFailResultWithMessage("modify user info error: userType is null");
+        }
+        if (user.getPhone().length() != 11) {
+            return recordErrorAndCreateFailResultWithMessage("modify user info error: length of phone is not 11");
+        }
+        Optional<User> otherUserOptional = retrieveUserByPhoneAndUserType(user.getPhone(), user.getUserType());
+        if (otherUserOptional.isPresent() && !otherUserOptional.get().getId().equals(user.getId())) {
+            return recordErrorAndCreateFailResultWithMessage(
+                    "modify user info error: phone [{}] with userType [{}] already exist",
+                    user.getPhone(), user.getUserType());
+        }
+        Optional<User> userOptional = update(user);
+        if (!userOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("modify user info error: update failed");
+        }
+        User newUser = userOptional.get();
+        return ServiceResult.successResult("modify user info successful", User.class, newUser);
+    }
 }

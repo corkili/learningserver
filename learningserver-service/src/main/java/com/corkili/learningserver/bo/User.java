@@ -29,6 +29,19 @@ public class User implements BusinessObject {
 
     private Type userType;
 
+    public static User copyFrom(User user) {
+        User copyUser = new User();
+        copyUser.id = user.id;
+        copyUser.createTime = user.createTime;
+        copyUser.updateTime = user.updateTime;
+        copyUser.phone = user.phone;
+        copyUser.username = user.username;
+        copyUser.password = user.password;
+        copyUser.rawPassword = user.rawPassword;
+        copyUser.userType = user.userType;
+        return copyUser;
+    }
+
     public boolean isTeacher() {
         return userType == Type.Teacher;
     }

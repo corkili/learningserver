@@ -31,3 +31,8 @@ message UserRegisterResponse {
 message UserLogoutResponse {
     BaseResponse response = 1;
 }
+
+message UserUpdateInfoResponse {
+    BaseResponse response = 1;
+    UserInfo userInfo = 2;
+}

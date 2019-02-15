@@ -1,5 +1,7 @@
 package com.corkili.learningserver.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,16 +12,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ControllerUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.corkili.learningserver.generate.protobuf.Request.UserLoginRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserLogoutRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserRegisterRequest;
+import com.corkili.learningserver.generate.protobuf.Request.UserUpdateInfoRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.ResponseCode;
 import com.corkili.learningserver.generate.protobuf.Response.UserLoginResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserLogoutResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserRegisterResponse;
+import com.corkili.learningserver.generate.protobuf.Response.UserUpdateInfoResponse;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
 
@@ -107,6 +112,54 @@ public class UserController {
         tokenManager.removeToken(token);
         return UserLogoutResponse.newBuilder()
                 .setResponse(baseResponse)
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateInfo", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public UserUpdateInfoResponse updateUserInfo(@RequestBody UserUpdateInfoRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        Optional<User> userOptional;
+        if (tokenManager.isLogin(token)) {
+            userOptional = userService.retrieve(tokenManager.getUserIdAssociatedWithToken(token));
+        } else {
+            userOptional = userService.retrieveUserByPhoneAndUserType(request.getPhone(),
+                    User.Type.valueOf(request.getUserType().name()));
+        }
+        BaseResponse baseResponse;
+        UserInfo userInfo;
+        if (!userOptional.isPresent()) {
+            baseResponse = BaseResponse.newBuilder()
+                    .setToken(token)
+                    .setResult(false)
+                    .setMsg(ServiceUtils.format("user [{}@{}] not exists", request.getPhone(), request.getUserType()))
+                    .setResponseCode(ResponseCode.GENERAL_ERROR)
+                    .build();
+            userInfo = UserInfo.newBuilder().build();
+        } else {
+            User user = userOptional.get();
+            User copyUser = User.copyFrom(user);
+            if (request.getUpdatePhone()) {
+                copyUser.setPhone(request.getNewPhone());
+            }
+            if (request.getUpdateUsername()) {
+                copyUser.setUsername(request.getNewUsername());
+            }
+            if (request.getUpdatePassword()) {
+                copyUser.setPassword(request.getNewPassword());
+                copyUser.setRawPassword(true);
+            }
+            ServiceResult serviceResult = userService.modifyUserInfo(copyUser);
+            baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+            userInfo = UserInfo.newBuilder()
+                    .setPhone(user.getPhone())
+                    .setUsername(user.getUsername())
+                    .setUserType(UserType.valueOf(user.getUserType().name()))
+                    .build();
+        }
+        return UserUpdateInfoResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setUserInfo(userInfo)
                 .build();
     }
 

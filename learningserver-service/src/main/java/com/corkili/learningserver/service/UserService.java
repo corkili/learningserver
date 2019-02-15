@@ -13,4 +13,6 @@ public interface UserService extends Service<User, com.corkili.learningserver.po
 
     ServiceResult login(String phone, String password, User.Type userType);
 
+    ServiceResult modifyUserInfo(User user);
+
 }

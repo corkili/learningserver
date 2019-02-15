@@ -25,3 +25,15 @@ message UserRegisterRequest {
 message UserLogoutRequest {
     BaseRequest request = 1;
 }
+
+message UserUpdateInfoRequest {
+    BaseRequest request = 1;
+    string phone = 2;
+    UserType userType = 3;
+    bool updatePhone = 4;
+    string newPhone = 5;
+    bool updateUsername = 6;
+    string newUsername = 7;
+    bool updatePassword = 8;
+    string newPassword = 9;
+}

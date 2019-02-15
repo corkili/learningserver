@@ -19,14 +19,16 @@ import com.corkili.learningserver.generate.protobuf.Request.BaseRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserLoginRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserLogoutRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserRegisterRequest;
+import com.corkili.learningserver.generate.protobuf.Request.UserUpdateInfoRequest;
 import com.corkili.learningserver.generate.protobuf.Response.UserLoginResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserLogoutResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserRegisterResponse;
+import com.corkili.learningserver.generate.protobuf.Response.UserUpdateInfoResponse;
 
 
 public class WebTests {
 
-    private static final String token = "b69e0c70-494a-4b12-8d49-4d284bfaec26";
+    private static final String token = "";
 
     @Test
     public void testRegister() {
@@ -61,8 +63,8 @@ public class WebTests {
             BaseRequest baseRequest = BaseRequest.newBuilder().setToken(token).build();
             UserLoginRequest request = UserLoginRequest.newBuilder()
                     .setRequest(baseRequest)
-                    .setPhone("18681255793")
-                    .setPassword("123456")
+                    .setPhone("15528235793")
+                    .setPassword("654321")
                     .setUserType(UserType.Teacher)
                     .build();
             HttpResponse httpResponse = doPost(httpRequest, request);
@@ -92,6 +94,31 @@ public class WebTests {
         }
     }
 
+    @Test
+    public void testUpdateInfo() {
+        try {
+            URI uri = new URI("http", null, "127.0.0.1", 8080, "/user/updateInfo", "", null);
+            HttpPost httpRequest = new HttpPost(uri);
+            BaseRequest baseRequest = BaseRequest.newBuilder().setToken(token).build();
+            UserUpdateInfoRequest request = UserUpdateInfoRequest.newBuilder()
+                    .setRequest(baseRequest)
+                    .setPhone("15528235793")
+                    .setUserType(UserType.Teacher)
+                    .setUpdatePhone(false)
+                    .setNewPhone("18681255793")
+                    .setUpdateUsername(false)
+                    .setNewUsername("corki")
+                    .setUpdatePassword(true)
+                    .setNewPassword("654321")
+                    .build();
+            HttpResponse httpResponse = doPost(httpRequest, request);
+            UserUpdateInfoResponse response = UserUpdateInfoResponse.parseFrom(httpResponse.getEntity().getContent());
+            System.out.println(request.toString());
+            System.out.println(response.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private static HttpResponse doPost(HttpPost post, GeneratedMessageV3 message) throws IOException {
