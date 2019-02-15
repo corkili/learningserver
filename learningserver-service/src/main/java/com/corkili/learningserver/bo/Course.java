@@ -48,8 +48,6 @@ public class Course implements BusinessObject {
      */
     private List<String> tags;
 
-    private Long categoryId;
-
     private Long teacherId;
 
     private Long coursewareId;

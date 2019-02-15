@@ -1,7 +1,10 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.Course;
+import com.corkili.learningserver.common.ImageUtils;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.service.CourseService;
 
@@ -71,5 +76,38 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult createCourse(Course course, Map<String, byte[]> images) {
+        if (StringUtils.isBlank(course.getCourseName())) {
+            return recordErrorAndCreateFailResultWithMessage("create course error: courseName is empty");
+        }
+        if (StringUtils.isBlank(course.getDescription())) {
+            return recordErrorAndCreateFailResultWithMessage("create course error: description is empty");
+        }
+        if (course.getTags().isEmpty()) {
+            return recordErrorAndCreateFailResultWithMessage("create course error: tag is empty");
+        }
+        if (course.getTeacherId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("create course error: teacher is null");
+        }
+        boolean storeSuccess = true;
+        for (Entry<String, byte[]> entry : images.entrySet()) {
+            if (!ImageUtils.storeImage(entry.getKey(), entry.getValue())) {
+                storeSuccess = false;
+            }
+        }
+        if (!storeSuccess) {
+            for (String path : images.keySet()) {
+                ImageUtils.deleteImage(path);
+            }
+            return recordErrorAndCreateFailResultWithMessage("create course error: store image failed");
+        }
+        Optional<Course> courseOptional = create(course);
+        if (!courseOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("create course error: create course failed");
+        }
+        return ServiceResult.successResult("create course success", Course.class, course);
     }
 }

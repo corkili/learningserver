@@ -8,8 +8,24 @@ enum UserType {
     Student = 1;
 }
 
+message Image {
+    string path = 1;
+    bool hasData = 2;
+    bytes image = 3;
+}
+
 message UserInfo {
     string phone = 1;
     string username = 2;
     UserType userType = 3;
+}
+
+message CourseInfo {
+    fixed64 createTime = 1;
+    fixed64 updateTime = 2;
+    string courseName = 3;
+    string description = 4;
+    repeated Image image = 5;
+    repeated string tag = 6;
+    UserInfo teacherInfo = 7;
 }

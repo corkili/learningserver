@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ControllerUtils;
+import com.corkili.learningserver.common.ProtoUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
-import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.corkili.learningserver.generate.protobuf.Request.UserLoginRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserLogoutRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserRegisterRequest;
 import com.corkili.learningserver.generate.protobuf.Request.UserUpdateInfoRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
-import com.corkili.learningserver.generate.protobuf.Response.ResponseCode;
 import com.corkili.learningserver.generate.protobuf.Response.UserLoginResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserLogoutResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserRegisterResponse;
@@ -48,11 +47,7 @@ public class UserController {
         User user = (User) registerResult.extra(User.class);
         UserInfo userInfo;
         if (registerResult.isSuccess() && user != null) {
-            userInfo = UserInfo.newBuilder()
-                    .setPhone(user.getPhone())
-                    .setUsername(user.getUsername())
-                    .setUserType(UserType.valueOf(user.getUserType().name()))
-                    .build();
+            userInfo = ProtoUtils.generateUserInfo(user);
         } else {
             userInfo = request.getUserInfo();
         }
@@ -71,11 +66,7 @@ public class UserController {
         User user = (User) loginResult.extra(User.class);
         UserInfo userInfo;
         if (loginResult.isSuccess() && user != null) {
-            userInfo = UserInfo.newBuilder()
-                    .setPhone(user.getPhone())
-                    .setUsername(user.getUsername())
-                    .setUserType(UserType.valueOf(user.getUserType().name()))
-                    .build();
+            userInfo = ProtoUtils.generateUserInfo(user);
             tokenManager.setTokenAssociatedUserAndLogin(token, user.getId());
         } else {
             userInfo = UserInfo.newBuilder()
@@ -95,19 +86,9 @@ public class UserController {
         String token = tokenManager.getOrNewToken(request.getRequest().getToken());
         BaseResponse baseResponse;
         if (tokenManager.isLogin(token)) {
-            baseResponse = BaseResponse.newBuilder()
-                    .setToken("")
-                    .setResult(true)
-                    .setMsg("logout success")
-                    .setResponseCode(ResponseCode.SUCCESS)
-                    .build();
+            baseResponse = ControllerUtils.generateSuccessBaseResponse("", "logout success");
         } else {
-            baseResponse = BaseResponse.newBuilder()
-                    .setToken("")
-                    .setResult(false)
-                    .setMsg("already logout")
-                    .setResponseCode(ResponseCode.GENERAL_ERROR)
-                    .build();
+            baseResponse = ControllerUtils.generateErrorBaseResponse("", "already logout");
         }
         tokenManager.removeToken(token);
         return UserLogoutResponse.newBuilder()
@@ -129,12 +110,8 @@ public class UserController {
         BaseResponse baseResponse;
         UserInfo userInfo;
         if (!userOptional.isPresent()) {
-            baseResponse = BaseResponse.newBuilder()
-                    .setToken(token)
-                    .setResult(false)
-                    .setMsg(ServiceUtils.format("user [{}@{}] not exists", request.getPhone(), request.getUserType()))
-                    .setResponseCode(ResponseCode.GENERAL_ERROR)
-                    .build();
+            baseResponse = ControllerUtils.generateErrorBaseResponse(token,
+                    ServiceUtils.format("user [{}@{}] not exists", request.getPhone(), request.getUserType()));
             userInfo = UserInfo.newBuilder().build();
         } else {
             User user = userOptional.get();
@@ -151,11 +128,7 @@ public class UserController {
             }
             ServiceResult serviceResult = userService.modifyUserInfo(copyUser);
             baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
-            userInfo = UserInfo.newBuilder()
-                    .setPhone(user.getPhone())
-                    .setUsername(user.getUsername())
-                    .setUserType(UserType.valueOf(user.getUserType().name()))
-                    .build();
+            userInfo = ProtoUtils.generateUserInfo((User) serviceResult.extra(User.class));
         }
         return UserUpdateInfoResponse.newBuilder()
                 .setResponse(baseResponse)

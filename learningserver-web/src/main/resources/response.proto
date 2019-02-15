@@ -36,3 +36,8 @@ message UserUpdateInfoResponse {
     BaseResponse response = 1;
     UserInfo userInfo = 2;
 }
+
+message CourseCreateResponse {
+    BaseResponse response = 1;
+    CourseInfo courseInfo = 2;
+}

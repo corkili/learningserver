@@ -37,3 +37,11 @@ message UserUpdateInfoRequest {
     bool updatePassword = 8;
     string newPassword = 9;
 }
+
+message CourseCreateRequest {
+    BaseRequest request = 1;
+    string courseName = 2;
+    string description = 3;
+    repeated Image image = 4;
+    repeated string tag = 5;
+}

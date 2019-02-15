@@ -85,10 +85,6 @@ public class Course implements PersistObject {
     private String tags;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "category_fk", nullable = false)
-    private CourseCategory category;
-
-    @ManyToOne(optional = false)
     @JoinColumn(name = "teacher_fk", nullable = false)
     private User teacher;
 
