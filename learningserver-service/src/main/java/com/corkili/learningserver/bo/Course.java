@@ -31,6 +31,8 @@ public class Course implements BusinessObject {
 
     private Date updateTime;
 
+    private boolean open;
+
     private String courseName;
 
     private String description;

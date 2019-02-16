@@ -58,6 +58,9 @@ public class CourseWork implements PersistObject {
     @Range(min = POConstant.EXISTED, max = POConstant.DELETED)
     private byte deleted;
 
+    @Column(name = "open", nullable = false)
+    private boolean open;
+
     @Column(name = "work_name", nullable = false, length = 100)
     @NotBlank
     private String workName;

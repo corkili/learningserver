@@ -19,6 +19,8 @@ public class CourseWork implements BusinessObject {
 
     private Date updateTime;
 
+    private boolean open;
+
     private String workName;
 
     private Course belongCourse;

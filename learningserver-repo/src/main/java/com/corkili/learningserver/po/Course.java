@@ -60,6 +60,9 @@ public class Course implements PersistObject {
     @Range(min = POConstant.EXISTED, max = POConstant.DELETED)
     private byte deleted;
 
+    @Column(name = "open", nullable = false)
+    private boolean open;
+
     @Column(name = "course_name", nullable = false, length = 50)
     @NotBlank
     private String courseName;
