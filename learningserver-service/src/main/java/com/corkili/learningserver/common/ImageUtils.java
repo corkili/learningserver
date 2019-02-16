@@ -15,11 +15,12 @@ public class ImageUtils {
 
     private static final String basePath = "../images/";
 
-    public static String getImagePath(String imageName, long teacherId) {
+    public static String getImagePath(String entityName, String imageName, long teacherId) {
         while (imageName.startsWith("/")) {
             imageName = imageName.substring(1);
         }
-        return UUID.randomUUID().toString().replaceAll("-", "") + "-" + teacherId + "-" + imageName;
+        return ServiceUtils.format("{}-{}-{}-{}", entityName, teacherId,
+                UUID.randomUUID().toString().replaceAll("-", ""), imageName);
     }
 
     public static boolean storeImage(String imagePath, byte[] imageData) {

@@ -67,7 +67,7 @@ public class CourseController {
         Map<String, byte[]> images = new HashMap<>();
         for (Image image : request.getImageList()) {
             if (image.getHasData()) {
-                images.put(ImageUtils.getImagePath(image.getPath(), teacherId), image.getImage().toByteArray());
+                images.put(ImageUtils.getImagePath("course", image.getPath(), teacherId), image.getImage().toByteArray());
             }
         }
         for (String tag : request.getTagList()) {

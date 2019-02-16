@@ -9,6 +9,11 @@ message BaseRequest {
     string token = 1;
 }
 
+message ImageLoadRequest {
+    BaseRequest request = 1;
+    repeated string imagePath = 2;
+}
+
 message UserLoginRequest {
     BaseRequest request = 1;
     string phone = 2;
