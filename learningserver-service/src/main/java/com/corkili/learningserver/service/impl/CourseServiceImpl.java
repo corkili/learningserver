@@ -1,5 +1,9 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -7,6 +11,8 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +21,26 @@ import lombok.extern.slf4j.Slf4j;
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
+import com.corkili.learningserver.po.User;
 import com.corkili.learningserver.repo.CourseRepository;
+import com.corkili.learningserver.repo.UserRepository;
 import com.corkili.learningserver.service.CourseService;
 
 @Slf4j
 @Service
 public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learningserver.po.Course> implements CourseService {
 
+    private static final String CACHE_NAME = "memoryCache";
+
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CacheManager cacheManager;
 
     @Override
     public Optional<Course> po2bo(com.corkili.learningserver.po.Course coursePO) {
@@ -109,5 +126,73 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
             return recordErrorAndCreateFailResultWithMessage("create course error: create course failed");
         }
         return ServiceResult.successResult("create course success", Course.class, course);
+    }
+
+    @Override
+    public ServiceResult findAllCourse(boolean all, Long teacherId, String teacherName, List<String> keywords) {
+        String msg = "find all course success";
+        Map<Long, com.corkili.learningserver.po.Course> coursePOMap = new HashMap<>();
+        if (all) {
+            List<com.corkili.learningserver.po.Course> allCoursePO = courseRepository.findAll();
+            for (com.corkili.learningserver.po.Course course : allCoursePO) {
+                coursePOMap.put(course.getId(), course);
+            }
+        } else {
+            if (teacherId != null) {
+                Optional<com.corkili.learningserver.po.User> userPOOptional = userRepository.findById(teacherId);
+                if (!userPOOptional.isPresent()) {
+                    msg = "find all course warn: retrieve teacher failed";
+                } else {
+                    List<com.corkili.learningserver.po.Course> coursePOList = courseRepository
+                            .findAllByTeacher(userPOOptional.get());
+                    for (com.corkili.learningserver.po.Course course : coursePOList) {
+                        coursePOMap.put(course.getId(), course);
+                    }
+                }
+            }
+            if (StringUtils.isNotBlank(teacherName)) {
+                List<com.corkili.learningserver.po.User> teacherList = userRepository.findAllByUsernameContaining(teacherName);
+                for (User teacher : teacherList) {
+                    List<com.corkili.learningserver.po.Course> coursePOList = courseRepository.findAllByTeacher(teacher);
+                    for (com.corkili.learningserver.po.Course course : coursePOList) {
+                        coursePOMap.put(course.getId(), course);
+                    }
+                }
+            }
+            if (keywords != null && !keywords.isEmpty()) {
+                for (String keyword : keywords) {
+                    List<com.corkili.learningserver.po.Course> coursePOList = courseRepository
+                            .findAllByTagsContainingOrCourseNameContaining(keyword, keyword);
+                    for (com.corkili.learningserver.po.Course course : coursePOList) {
+                        coursePOMap.put(course.getId(), course);
+                    }
+                }
+            }
+        }
+        List<Course> allCourse = new LinkedList<>();
+        Collection<com.corkili.learningserver.po.Course> allCoursePO = coursePOMap.values();
+        StringBuilder errId = new StringBuilder();
+        Cache cache = cacheManager.getCache(CACHE_NAME);
+        int i = 0;
+        for (com.corkili.learningserver.po.Course coursePO : allCoursePO) {
+            Optional<Course> courseOptional = po2bo(coursePO);
+            if (!courseOptional.isPresent()) {
+                errId.append(coursePO.getId());
+                if (++i != allCoursePO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                Course course = courseOptional.get();
+                allCourse.add(course);
+                // cache
+                if (cache != null) {
+                    cache.put(entityName() + course.getId(), course);
+                }
+            }
+        }
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all course warn: transfer course po [{}] to bo failed.", errId.toString());
+        }
+        return ServiceResult.successResult(msg, List.class, allCourse);
     }
 }

@@ -30,7 +30,7 @@ public class EhcacheConfiguration implements CachingConfigurer {
         Configuration config = new Configuration();
         CacheConfiguration cacheConfiguration = new CacheConfiguration();
         cacheConfiguration.setName("memoryCache");
-        cacheConfiguration.setMaxEntriesLocalHeap(500);
+        cacheConfiguration.setMaxEntriesLocalHeap(1000);
         cacheConfiguration.setMaxEntriesLocalDisk(0);
         cacheConfiguration.setMemoryStoreEvictionPolicyFromObject(MemoryStoreEvictionPolicy.LRU);
         cacheConfiguration.setEternal(false);

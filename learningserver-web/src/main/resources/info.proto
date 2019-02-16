@@ -21,11 +21,13 @@ message UserInfo {
 }
 
 message CourseInfo {
-    fixed64 createTime = 1;
-    fixed64 updateTime = 2;
-    string courseName = 3;
-    string description = 4;
-    repeated Image image = 5;
-    repeated string tag = 6;
-    UserInfo teacherInfo = 7;
+    sint64 courseId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool open = 4;
+    string courseName = 5;
+    string description = 6;
+    repeated Image image = 7;
+    repeated string tag = 8;
+    UserInfo teacherInfo = 9;
 }

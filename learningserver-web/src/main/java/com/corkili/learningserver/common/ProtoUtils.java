@@ -31,8 +31,10 @@ public class ProtoUtils {
             }
         }
         return CourseInfo.newBuilder()
+                .setCourseId(course.getId())
                 .setCreateTime(course.getCreateTime().getTime())
                 .setUpdateTime(course.getUpdateTime().getTime())
+                .setOpen(course.isOpen())
                 .setCourseName(course.getCourseName())
                 .setDescription(course.getDescription())
                 .addAllImage(imageList)

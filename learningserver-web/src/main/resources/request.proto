@@ -45,3 +45,14 @@ message CourseCreateRequest {
     repeated Image image = 4;
     repeated string tag = 5;
 }
+
+message CourseFindAllRequest {
+    BaseRequest request = 1;
+    bool all = 2;
+    bool byTeacherId = 3;
+    sint64 teacherId = 4;
+    bool byTeacherName = 5;
+    string teacherName = 6;
+    bool byKeyword = 7;
+    repeated string keyword = 8;
+}

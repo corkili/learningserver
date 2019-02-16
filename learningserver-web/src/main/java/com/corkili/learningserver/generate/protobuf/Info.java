@@ -1578,88 +1578,98 @@ public final class Info {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>fixed64 createTime = 1;</code>
+     * <code>sint64 courseId = 1;</code>
+     */
+    long getCourseId();
+
+    /**
+     * <code>fixed64 createTime = 2;</code>
      */
     long getCreateTime();
 
     /**
-     * <code>fixed64 updateTime = 2;</code>
+     * <code>fixed64 updateTime = 3;</code>
      */
     long getUpdateTime();
 
     /**
-     * <code>string courseName = 3;</code>
+     * <code>bool open = 4;</code>
+     */
+    boolean getOpen();
+
+    /**
+     * <code>string courseName = 5;</code>
      */
     java.lang.String getCourseName();
     /**
-     * <code>string courseName = 3;</code>
+     * <code>string courseName = 5;</code>
      */
     com.google.protobuf.ByteString
         getCourseNameBytes();
 
     /**
-     * <code>string description = 4;</code>
+     * <code>string description = 6;</code>
      */
     java.lang.String getDescription();
     /**
-     * <code>string description = 4;</code>
+     * <code>string description = 6;</code>
      */
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> 
         getImageList();
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index);
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     int getImageCount();
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
         getImageOrBuilderList();
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
         int index);
 
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     java.util.List<java.lang.String>
         getTagList();
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     int getTagCount();
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     java.lang.String getTag(int index);
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     com.google.protobuf.ByteString
         getTagBytes(int index);
 
     /**
-     * <code>.UserInfo teacherInfo = 7;</code>
+     * <code>.UserInfo teacherInfo = 9;</code>
      */
     boolean hasTeacherInfo();
     /**
-     * <code>.UserInfo teacherInfo = 7;</code>
+     * <code>.UserInfo teacherInfo = 9;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.UserInfo getTeacherInfo();
     /**
-     * <code>.UserInfo teacherInfo = 7;</code>
+     * <code>.UserInfo teacherInfo = 9;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getTeacherInfoOrBuilder();
   }
@@ -1676,8 +1686,10 @@ public final class Info {
       super(builder);
     }
     private CourseInfo() {
+      courseId_ = 0L;
       createTime_ = 0L;
       updateTime_ = 0L;
+      open_ = false;
       courseName_ = "";
       description_ = "";
       image_ = java.util.Collections.emptyList();
@@ -1708,47 +1720,57 @@ public final class Info {
             case 0:
               done = true;
               break;
-            case 9: {
+            case 8: {
 
-              createTime_ = input.readFixed64();
+              courseId_ = input.readSInt64();
               break;
             }
             case 17: {
 
+              createTime_ = input.readFixed64();
+              break;
+            }
+            case 25: {
+
               updateTime_ = input.readFixed64();
               break;
             }
-            case 26: {
+            case 32: {
+
+              open_ = input.readBool();
+              break;
+            }
+            case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
               courseName_ = s;
               break;
             }
-            case 34: {
+            case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
               description_ = s;
               break;
             }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 image_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.Image>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000040;
               }
               image_.add(
                   input.readMessage(com.corkili.learningserver.generate.protobuf.Info.Image.parser(), extensionRegistry));
               break;
             }
-            case 50: {
+            case 66: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 tag_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000080;
               }
               tag_.add(s);
               break;
             }
-            case 58: {
+            case 74: {
               com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder subBuilder = null;
               if (teacherInfo_ != null) {
                 subBuilder = teacherInfo_.toBuilder();
@@ -1776,10 +1798,10 @@ public final class Info {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           image_ = java.util.Collections.unmodifiableList(image_);
         }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           tag_ = tag_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -1800,28 +1822,46 @@ public final class Info {
     }
 
     private int bitField0_;
-    public static final int CREATETIME_FIELD_NUMBER = 1;
+    public static final int COURSEID_FIELD_NUMBER = 1;
+    private long courseId_;
+    /**
+     * <code>sint64 courseId = 1;</code>
+     */
+    public long getCourseId() {
+      return courseId_;
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 2;
     private long createTime_;
     /**
-     * <code>fixed64 createTime = 1;</code>
+     * <code>fixed64 createTime = 2;</code>
      */
     public long getCreateTime() {
       return createTime_;
     }
 
-    public static final int UPDATETIME_FIELD_NUMBER = 2;
+    public static final int UPDATETIME_FIELD_NUMBER = 3;
     private long updateTime_;
     /**
-     * <code>fixed64 updateTime = 2;</code>
+     * <code>fixed64 updateTime = 3;</code>
      */
     public long getUpdateTime() {
       return updateTime_;
     }
 
-    public static final int COURSENAME_FIELD_NUMBER = 3;
+    public static final int OPEN_FIELD_NUMBER = 4;
+    private boolean open_;
+    /**
+     * <code>bool open = 4;</code>
+     */
+    public boolean getOpen() {
+      return open_;
+    }
+
+    public static final int COURSENAME_FIELD_NUMBER = 5;
     private volatile java.lang.Object courseName_;
     /**
-     * <code>string courseName = 3;</code>
+     * <code>string courseName = 5;</code>
      */
     public java.lang.String getCourseName() {
       java.lang.Object ref = courseName_;
@@ -1836,7 +1876,7 @@ public final class Info {
       }
     }
     /**
-     * <code>string courseName = 3;</code>
+     * <code>string courseName = 5;</code>
      */
     public com.google.protobuf.ByteString
         getCourseNameBytes() {
@@ -1852,10 +1892,10 @@ public final class Info {
       }
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 4;
+    public static final int DESCRIPTION_FIELD_NUMBER = 6;
     private volatile java.lang.Object description_;
     /**
-     * <code>string description = 4;</code>
+     * <code>string description = 6;</code>
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -1870,7 +1910,7 @@ public final class Info {
       }
     }
     /**
-     * <code>string description = 4;</code>
+     * <code>string description = 6;</code>
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -1886,86 +1926,86 @@ public final class Info {
       }
     }
 
-    public static final int IMAGE_FIELD_NUMBER = 5;
+    public static final int IMAGE_FIELD_NUMBER = 7;
     private java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> image_;
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> getImageList() {
       return image_;
     }
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
         getImageOrBuilderList() {
       return image_;
     }
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     public int getImageCount() {
       return image_.size();
     }
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     public com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index) {
       return image_.get(index);
     }
     /**
-     * <code>repeated .Image image = 5;</code>
+     * <code>repeated .Image image = 7;</code>
      */
     public com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
         int index) {
       return image_.get(index);
     }
 
-    public static final int TAG_FIELD_NUMBER = 6;
+    public static final int TAG_FIELD_NUMBER = 8;
     private com.google.protobuf.LazyStringList tag_;
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     public com.google.protobuf.ProtocolStringList
         getTagList() {
       return tag_;
     }
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     public int getTagCount() {
       return tag_.size();
     }
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     public java.lang.String getTag(int index) {
       return tag_.get(index);
     }
     /**
-     * <code>repeated string tag = 6;</code>
+     * <code>repeated string tag = 8;</code>
      */
     public com.google.protobuf.ByteString
         getTagBytes(int index) {
       return tag_.getByteString(index);
     }
 
-    public static final int TEACHERINFO_FIELD_NUMBER = 7;
+    public static final int TEACHERINFO_FIELD_NUMBER = 9;
     private com.corkili.learningserver.generate.protobuf.Info.UserInfo teacherInfo_;
     /**
-     * <code>.UserInfo teacherInfo = 7;</code>
+     * <code>.UserInfo teacherInfo = 9;</code>
      */
     public boolean hasTeacherInfo() {
       return teacherInfo_ != null;
     }
     /**
-     * <code>.UserInfo teacherInfo = 7;</code>
+     * <code>.UserInfo teacherInfo = 9;</code>
      */
     public com.corkili.learningserver.generate.protobuf.Info.UserInfo getTeacherInfo() {
       return teacherInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : teacherInfo_;
     }
     /**
-     * <code>.UserInfo teacherInfo = 7;</code>
+     * <code>.UserInfo teacherInfo = 9;</code>
      */
     public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getTeacherInfoOrBuilder() {
       return getTeacherInfo();
@@ -1985,26 +2025,32 @@ public final class Info {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (courseId_ != 0L) {
+        output.writeSInt64(1, courseId_);
+      }
       if (createTime_ != 0L) {
-        output.writeFixed64(1, createTime_);
+        output.writeFixed64(2, createTime_);
       }
       if (updateTime_ != 0L) {
-        output.writeFixed64(2, updateTime_);
+        output.writeFixed64(3, updateTime_);
+      }
+      if (open_ != false) {
+        output.writeBool(4, open_);
       }
       if (!getCourseNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, courseName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, courseName_);
       }
       if (!getDescriptionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, description_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, description_);
       }
       for (int i = 0; i < image_.size(); i++) {
-        output.writeMessage(5, image_.get(i));
+        output.writeMessage(7, image_.get(i));
       }
       for (int i = 0; i < tag_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, tag_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, tag_.getRaw(i));
       }
       if (teacherInfo_ != null) {
-        output.writeMessage(7, getTeacherInfo());
+        output.writeMessage(9, getTeacherInfo());
       }
       unknownFields.writeTo(output);
     }
@@ -2015,23 +2061,31 @@ public final class Info {
       if (size != -1) return size;
 
       size = 0;
+      if (courseId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(1, courseId_);
+      }
       if (createTime_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed64Size(1, createTime_);
+          .computeFixed64Size(2, createTime_);
       }
       if (updateTime_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed64Size(2, updateTime_);
+          .computeFixed64Size(3, updateTime_);
+      }
+      if (open_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, open_);
       }
       if (!getCourseNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, courseName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, courseName_);
       }
       if (!getDescriptionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, description_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, description_);
       }
       for (int i = 0; i < image_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, image_.get(i));
+          .computeMessageSize(7, image_.get(i));
       }
       {
         int dataSize = 0;
@@ -2043,7 +2097,7 @@ public final class Info {
       }
       if (teacherInfo_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getTeacherInfo());
+          .computeMessageSize(9, getTeacherInfo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2061,10 +2115,14 @@ public final class Info {
       com.corkili.learningserver.generate.protobuf.Info.CourseInfo other = (com.corkili.learningserver.generate.protobuf.Info.CourseInfo) obj;
 
       boolean result = true;
+      result = result && (getCourseId()
+          == other.getCourseId());
       result = result && (getCreateTime()
           == other.getCreateTime());
       result = result && (getUpdateTime()
           == other.getUpdateTime());
+      result = result && (getOpen()
+          == other.getOpen());
       result = result && getCourseName()
           .equals(other.getCourseName());
       result = result && getDescription()
@@ -2089,12 +2147,18 @@ public final class Info {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + COURSEID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCourseId());
       hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getCreateTime());
       hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getUpdateTime());
+      hash = (37 * hash) + OPEN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getOpen());
       hash = (37 * hash) + COURSENAME_FIELD_NUMBER;
       hash = (53 * hash) + getCourseName().hashCode();
       hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
@@ -2245,9 +2309,13 @@ public final class Info {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        courseId_ = 0L;
+
         createTime_ = 0L;
 
         updateTime_ = 0L;
+
+        open_ = false;
 
         courseName_ = "";
 
@@ -2255,12 +2323,12 @@ public final class Info {
 
         if (imageBuilder_ == null) {
           image_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           imageBuilder_.clear();
         }
         tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000080);
         if (teacherInfoBuilder_ == null) {
           teacherInfo_ = null;
         } else {
@@ -2295,22 +2363,24 @@ public final class Info {
         com.corkili.learningserver.generate.protobuf.Info.CourseInfo result = new com.corkili.learningserver.generate.protobuf.Info.CourseInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        result.courseId_ = courseId_;
         result.createTime_ = createTime_;
         result.updateTime_ = updateTime_;
+        result.open_ = open_;
         result.courseName_ = courseName_;
         result.description_ = description_;
         if (imageBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             image_ = java.util.Collections.unmodifiableList(image_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.image_ = image_;
         } else {
           result.image_ = imageBuilder_.build();
         }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
           tag_ = tag_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.tag_ = tag_;
         if (teacherInfoBuilder_ == null) {
@@ -2367,11 +2437,17 @@ public final class Info {
 
       public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.CourseInfo other) {
         if (other == com.corkili.learningserver.generate.protobuf.Info.CourseInfo.getDefaultInstance()) return this;
+        if (other.getCourseId() != 0L) {
+          setCourseId(other.getCourseId());
+        }
         if (other.getCreateTime() != 0L) {
           setCreateTime(other.getCreateTime());
         }
         if (other.getUpdateTime() != 0L) {
           setUpdateTime(other.getUpdateTime());
+        }
+        if (other.getOpen() != false) {
+          setOpen(other.getOpen());
         }
         if (!other.getCourseName().isEmpty()) {
           courseName_ = other.courseName_;
@@ -2385,7 +2461,7 @@ public final class Info {
           if (!other.image_.isEmpty()) {
             if (image_.isEmpty()) {
               image_ = other.image_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureImageIsMutable();
               image_.addAll(other.image_);
@@ -2398,7 +2474,7 @@ public final class Info {
               imageBuilder_.dispose();
               imageBuilder_ = null;
               image_ = other.image_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000040);
               imageBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getImageFieldBuilder() : null;
@@ -2410,7 +2486,7 @@ public final class Info {
         if (!other.tag_.isEmpty()) {
           if (tag_.isEmpty()) {
             tag_ = other.tag_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensureTagIsMutable();
             tag_.addAll(other.tag_);
@@ -2450,15 +2526,41 @@ public final class Info {
       }
       private int bitField0_;
 
+      private long courseId_ ;
+      /**
+       * <code>sint64 courseId = 1;</code>
+       */
+      public long getCourseId() {
+        return courseId_;
+      }
+      /**
+       * <code>sint64 courseId = 1;</code>
+       */
+      public Builder setCourseId(long value) {
+        
+        courseId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 courseId = 1;</code>
+       */
+      public Builder clearCourseId() {
+        
+        courseId_ = 0L;
+        onChanged();
+        return this;
+      }
+
       private long createTime_ ;
       /**
-       * <code>fixed64 createTime = 1;</code>
+       * <code>fixed64 createTime = 2;</code>
        */
       public long getCreateTime() {
         return createTime_;
       }
       /**
-       * <code>fixed64 createTime = 1;</code>
+       * <code>fixed64 createTime = 2;</code>
        */
       public Builder setCreateTime(long value) {
         
@@ -2467,7 +2569,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>fixed64 createTime = 1;</code>
+       * <code>fixed64 createTime = 2;</code>
        */
       public Builder clearCreateTime() {
         
@@ -2478,13 +2580,13 @@ public final class Info {
 
       private long updateTime_ ;
       /**
-       * <code>fixed64 updateTime = 2;</code>
+       * <code>fixed64 updateTime = 3;</code>
        */
       public long getUpdateTime() {
         return updateTime_;
       }
       /**
-       * <code>fixed64 updateTime = 2;</code>
+       * <code>fixed64 updateTime = 3;</code>
        */
       public Builder setUpdateTime(long value) {
         
@@ -2493,7 +2595,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>fixed64 updateTime = 2;</code>
+       * <code>fixed64 updateTime = 3;</code>
        */
       public Builder clearUpdateTime() {
         
@@ -2502,9 +2604,35 @@ public final class Info {
         return this;
       }
 
+      private boolean open_ ;
+      /**
+       * <code>bool open = 4;</code>
+       */
+      public boolean getOpen() {
+        return open_;
+      }
+      /**
+       * <code>bool open = 4;</code>
+       */
+      public Builder setOpen(boolean value) {
+        
+        open_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool open = 4;</code>
+       */
+      public Builder clearOpen() {
+        
+        open_ = false;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object courseName_ = "";
       /**
-       * <code>string courseName = 3;</code>
+       * <code>string courseName = 5;</code>
        */
       public java.lang.String getCourseName() {
         java.lang.Object ref = courseName_;
@@ -2519,7 +2647,7 @@ public final class Info {
         }
       }
       /**
-       * <code>string courseName = 3;</code>
+       * <code>string courseName = 5;</code>
        */
       public com.google.protobuf.ByteString
           getCourseNameBytes() {
@@ -2535,7 +2663,7 @@ public final class Info {
         }
       }
       /**
-       * <code>string courseName = 3;</code>
+       * <code>string courseName = 5;</code>
        */
       public Builder setCourseName(
           java.lang.String value) {
@@ -2548,7 +2676,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>string courseName = 3;</code>
+       * <code>string courseName = 5;</code>
        */
       public Builder clearCourseName() {
         
@@ -2557,7 +2685,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>string courseName = 3;</code>
+       * <code>string courseName = 5;</code>
        */
       public Builder setCourseNameBytes(
           com.google.protobuf.ByteString value) {
@@ -2573,7 +2701,7 @@ public final class Info {
 
       private java.lang.Object description_ = "";
       /**
-       * <code>string description = 4;</code>
+       * <code>string description = 6;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -2588,7 +2716,7 @@ public final class Info {
         }
       }
       /**
-       * <code>string description = 4;</code>
+       * <code>string description = 6;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -2604,7 +2732,7 @@ public final class Info {
         }
       }
       /**
-       * <code>string description = 4;</code>
+       * <code>string description = 6;</code>
        */
       public Builder setDescription(
           java.lang.String value) {
@@ -2617,7 +2745,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>string description = 4;</code>
+       * <code>string description = 6;</code>
        */
       public Builder clearDescription() {
         
@@ -2626,7 +2754,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>string description = 4;</code>
+       * <code>string description = 6;</code>
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
@@ -2643,9 +2771,9 @@ public final class Info {
       private java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> image_ =
         java.util.Collections.emptyList();
       private void ensureImageIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           image_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.Image>(image_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -2653,7 +2781,7 @@ public final class Info {
           com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> imageBuilder_;
 
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> getImageList() {
         if (imageBuilder_ == null) {
@@ -2663,7 +2791,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public int getImageCount() {
         if (imageBuilder_ == null) {
@@ -2673,7 +2801,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index) {
         if (imageBuilder_ == null) {
@@ -2683,7 +2811,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder setImage(
           int index, com.corkili.learningserver.generate.protobuf.Info.Image value) {
@@ -2700,7 +2828,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder setImage(
           int index, com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
@@ -2714,7 +2842,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder addImage(com.corkili.learningserver.generate.protobuf.Info.Image value) {
         if (imageBuilder_ == null) {
@@ -2730,7 +2858,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder addImage(
           int index, com.corkili.learningserver.generate.protobuf.Info.Image value) {
@@ -2747,7 +2875,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder addImage(
           com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
@@ -2761,7 +2889,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder addImage(
           int index, com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
@@ -2775,7 +2903,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder addAllImage(
           java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.Image> values) {
@@ -2790,12 +2918,12 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder clearImage() {
         if (imageBuilder_ == null) {
           image_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           imageBuilder_.clear();
@@ -2803,7 +2931,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public Builder removeImage(int index) {
         if (imageBuilder_ == null) {
@@ -2816,14 +2944,14 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.Image.Builder getImageBuilder(
           int index) {
         return getImageFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
           int index) {
@@ -2833,7 +2961,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
            getImageOrBuilderList() {
@@ -2844,14 +2972,14 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.Image.Builder addImageBuilder() {
         return getImageFieldBuilder().addBuilder(
             com.corkili.learningserver.generate.protobuf.Info.Image.getDefaultInstance());
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.Image.Builder addImageBuilder(
           int index) {
@@ -2859,7 +2987,7 @@ public final class Info {
             index, com.corkili.learningserver.generate.protobuf.Info.Image.getDefaultInstance());
       }
       /**
-       * <code>repeated .Image image = 5;</code>
+       * <code>repeated .Image image = 7;</code>
        */
       public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image.Builder> 
            getImageBuilderList() {
@@ -2872,7 +3000,7 @@ public final class Info {
           imageBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder>(
                   image_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           image_ = null;
@@ -2882,39 +3010,39 @@ public final class Info {
 
       private com.google.protobuf.LazyStringList tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureTagIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           tag_ = new com.google.protobuf.LazyStringArrayList(tag_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000080;
          }
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public com.google.protobuf.ProtocolStringList
           getTagList() {
         return tag_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public int getTagCount() {
         return tag_.size();
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public java.lang.String getTag(int index) {
         return tag_.get(index);
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public com.google.protobuf.ByteString
           getTagBytes(int index) {
         return tag_.getByteString(index);
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public Builder setTag(
           int index, java.lang.String value) {
@@ -2927,7 +3055,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public Builder addTag(
           java.lang.String value) {
@@ -2940,7 +3068,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public Builder addAllTag(
           java.lang.Iterable<java.lang.String> values) {
@@ -2951,16 +3079,16 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public Builder clearTag() {
         tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string tag = 6;</code>
+       * <code>repeated string tag = 8;</code>
        */
       public Builder addTagBytes(
           com.google.protobuf.ByteString value) {
@@ -2978,13 +3106,13 @@ public final class Info {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> teacherInfoBuilder_;
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public boolean hasTeacherInfo() {
         return teacherInfoBuilder_ != null || teacherInfo_ != null;
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.UserInfo getTeacherInfo() {
         if (teacherInfoBuilder_ == null) {
@@ -2994,7 +3122,7 @@ public final class Info {
         }
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public Builder setTeacherInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
         if (teacherInfoBuilder_ == null) {
@@ -3010,7 +3138,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public Builder setTeacherInfo(
           com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder builderForValue) {
@@ -3024,7 +3152,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public Builder mergeTeacherInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
         if (teacherInfoBuilder_ == null) {
@@ -3042,7 +3170,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public Builder clearTeacherInfo() {
         if (teacherInfoBuilder_ == null) {
@@ -3056,7 +3184,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder getTeacherInfoBuilder() {
         
@@ -3064,7 +3192,7 @@ public final class Info {
         return getTeacherInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getTeacherInfoOrBuilder() {
         if (teacherInfoBuilder_ != null) {
@@ -3075,7 +3203,7 @@ public final class Info {
         }
       }
       /**
-       * <code>.UserInfo teacherInfo = 7;</code>
+       * <code>.UserInfo teacherInfo = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> 
@@ -3170,14 +3298,14 @@ public final class Info {
       "\n\ninfo.proto\"5\n\005Image\022\014\n\004path\030\001 \001(\t\022\017\n\007h" +
       "asData\030\002 \001(\010\022\r\n\005image\030\003 \001(\014\"H\n\010UserInfo\022" +
       "\r\n\005phone\030\001 \001(\t\022\020\n\010username\030\002 \001(\t\022\033\n\010user" +
-      "Type\030\003 \001(\0162\t.UserType\"\241\001\n\nCourseInfo\022\022\n\n" +
-      "createTime\030\001 \001(\006\022\022\n\nupdateTime\030\002 \001(\006\022\022\n\n" +
-      "courseName\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\025\n" +
-      "\005image\030\005 \003(\0132\006.Image\022\013\n\003tag\030\006 \003(\t\022\036\n\013tea" +
-      "cherInfo\030\007 \001(\0132\t.UserInfo*$\n\010UserType\022\013\n" +
-      "\007Teacher\020\000\022\013\n\007Student\020\001B4\n,com.corkili.l" +
-      "earningserver.generate.protobufB\004Infob\006p" +
-      "roto3"
+      "Type\030\003 \001(\0162\t.UserType\"\301\001\n\nCourseInfo\022\020\n\010" +
+      "courseId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nup" +
+      "dateTime\030\003 \001(\006\022\014\n\004open\030\004 \001(\010\022\022\n\ncourseNa" +
+      "me\030\005 \001(\t\022\023\n\013description\030\006 \001(\t\022\025\n\005image\030\007" +
+      " \003(\0132\006.Image\022\013\n\003tag\030\010 \003(\t\022\036\n\013teacherInfo" +
+      "\030\t \001(\0132\t.UserInfo*$\n\010UserType\022\013\n\007Teacher" +
+      "\020\000\022\013\n\007Student\020\001B4\n,com.corkili.learnings" +
+      "erver.generate.protobufB\004Infob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3208,7 +3336,7 @@ public final class Info {
     internal_static_CourseInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseInfo_descriptor,
-        new java.lang.String[] { "CreateTime", "UpdateTime", "CourseName", "Description", "Image", "Tag", "TeacherInfo", });
+        new java.lang.String[] { "CourseId", "CreateTime", "UpdateTime", "Open", "CourseName", "Description", "Image", "Tag", "TeacherInfo", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

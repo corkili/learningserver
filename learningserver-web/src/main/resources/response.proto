@@ -41,3 +41,8 @@ message CourseCreateResponse {
     BaseResponse response = 1;
     CourseInfo courseInfo = 2;
 }
+
+message CourseFindAllResponse {
+    BaseResponse response = 1;
+    repeated CourseInfo courseInfo = 2;
+}
