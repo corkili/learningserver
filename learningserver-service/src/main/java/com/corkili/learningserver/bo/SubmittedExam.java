@@ -35,7 +35,7 @@ public class SubmittedExam implements BusinessObject {
      *   use {###} divide question index, submitted answer, score(negative if not checked)
      *
      *   use {***} divide each filling answer in submitted answer,
-     *   use {%%%} divide answerIndex and answerContent in each filling answer, if questionType is MultipleFilling
+     *   use {%%%} divide answerIndex, answerContent and score(negative if not checked) in each filling answer, if questionType is MultipleFilling
      *
      *   use {&&&} divide choice in submitted answer, if questionType is MultipleChoice
      *
@@ -68,12 +68,22 @@ public class SubmittedExam implements BusinessObject {
         return ServiceUtils.list2String(submittedAnswerList, "{^^^}");
     }
 
+    public void putNewSubmittedAnswer(int questionIndex, SubmittedAnswer submittedAnswer) {
+        submittedAnswers.put(questionIndex, new InnerSubmittedAnswer(questionIndex, submittedAnswer));
+    }
+
     @Getter
     @Setter
     public static class InnerSubmittedAnswer {
         private int questionIndex;
         private SubmittedAnswer submittedAnswer;
         private double score;
+
+        public InnerSubmittedAnswer(int questionIndex, SubmittedAnswer submittedAnswer) {
+            this.questionIndex = questionIndex;
+            this.submittedAnswer = submittedAnswer;
+            this.score = -1;
+        }
 
         private InnerSubmittedAnswer(String answer, Map<Integer, QuestionType> questionTypeMap, Long belongExamId) {
             setAnswer(answer, questionTypeMap, belongExamId);
@@ -92,7 +102,7 @@ public class SubmittedExam implements BusinessObject {
                 throw new IllegalArgumentException("answer's format invalid!");
             }
             this.questionIndex = Integer.parseInt(tmp[0]);
-            this.score = -1;
+            this.score = Double.parseDouble(tmp[2]);
             try {
                 QuestionType questionType = questionTypeMap.get(questionIndex);
                 if (questionType == null) {

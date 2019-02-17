@@ -58,7 +58,7 @@ public interface SubmittedAnswer {
     @EqualsAndHashCode(callSuper = true)
     class MultipleFillingSubmittedAnswer extends AbstractSubmittedAnswer {
 
-        private Map<Integer, String> answerMap;
+        private Map<Integer, Pair> answerMap;
 
         public MultipleFillingSubmittedAnswer(String answer) {
             super(answer);
@@ -67,25 +67,42 @@ public interface SubmittedAnswer {
         @Override
         public String getAnswer() {
             List<String> pairs = new LinkedList<>();
-            this.answerMap.forEach((index, answer) -> pairs.add(index + "{%%%}" + answer));
+            this.answerMap.values().forEach(a -> pairs.add(a.index + "{%%%}" + a.answer + "{%%%}" + a.scoreOrCheckStatus));
             return ServiceUtils.list2String(pairs, "{***}");
         }
 
         @Override
         public void setAnswer(String answer) {
             List<String> choicePairs = ServiceUtils.string2List(answer, Pattern.compile("\\{\\*\\*\\*}"));
-            Map<Integer, String> map = new HashMap<>();
+            Map<Integer, Pair> map = new HashMap<>();
             for (String choicePair : choicePairs) {
-                String[] keyValue = choicePair.split("\\{%%%}");
-                if (keyValue.length != 2) {
+                String[] tmp = choicePair.split("\\{%%%}");
+                if (tmp.length != 3) {
                     continue;
                 }
                 try {
-                    map.put(Integer.valueOf(keyValue[0]), keyValue[1]);
+                    Pair pair = new Pair(Integer.valueOf(tmp[0]), tmp[1], Double.parseDouble(tmp[2]));
+                    map.put(pair.index, pair);
                 } catch (NumberFormatException ignored) {
                 }
             }
             this.answerMap = map;
+        }
+
+        @Setter
+        @Getter
+        @ToString
+        @EqualsAndHashCode
+        public static class Pair {
+            int index;
+            String answer;
+            double scoreOrCheckStatus;
+
+            private Pair(int index, String answer, double scoreOrCheckStatus) {
+                this.index = index;
+                this.answer = answer;
+                this.scoreOrCheckStatus = scoreOrCheckStatus;
+            }
         }
     }
 

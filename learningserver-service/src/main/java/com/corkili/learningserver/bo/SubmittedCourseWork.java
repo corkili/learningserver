@@ -32,10 +32,10 @@ public class SubmittedCourseWork implements BusinessObject {
      * Format:
      *   use {^^^} divide each question's submitted answer
      *
-     *   use {###} divide question index, submitted answer, check status(0 or 1)
+     *   use {###} divide question index, submitted answer, check status(-1 not checked, 0 false, 1 true)
      *
      *   use {***} divide each filling answer in submitted answer,
-     *   use {%%%} divide answerIndex and answerContent in each filling answer, if questionType is MultipleFilling
+     *   use {%%%} divide answerIndex, answerContent and checkStatus (-1 not checked, 0 false, 1 true) in each filling answer, if questionType is MultipleFilling
      *
      *   use {&&&} divide choice in submitted answer, if questionType is MultipleChoice
      *
@@ -66,19 +66,29 @@ public class SubmittedCourseWork implements BusinessObject {
         return ServiceUtils.list2String(submittedAnswerList, "{^^^}");
     }
 
+    public void putNewSubmittedAnswer(int questionIndex, SubmittedAnswer submittedAnswer) {
+        submittedAnswers.put(questionIndex, new InnerSubmittedAnswer(questionIndex, submittedAnswer));
+    }
+
     @Getter
     @Setter
     public static class InnerSubmittedAnswer {
         private int questionIndex;
         private SubmittedAnswer submittedAnswer;
-        private boolean checked;
+        private int checkStatus;
+
+        private InnerSubmittedAnswer(int questionIndex, SubmittedAnswer submittedAnswer) {
+            this.questionIndex = questionIndex;
+            this.submittedAnswer = submittedAnswer;
+            this.checkStatus = -1;
+        }
 
         private InnerSubmittedAnswer(String answer, Map<Integer, QuestionType> questionTypeMap, Long belongCourseWorkId) {
             setAnswer(answer, questionTypeMap, belongCourseWorkId);
         }
 
         private String getAnswer() {
-            return questionIndex + "{###}" + submittedAnswer.getAnswer() + "{###}" + (checked ? 1 : 0);
+            return questionIndex + "{###}" + submittedAnswer.getAnswer() + "{###}" + checkStatus;
         }
 
         private void setAnswer(String answer, Map<Integer, QuestionType> questionTypeMap, Long belongCourseWorkId) {
@@ -90,7 +100,7 @@ public class SubmittedCourseWork implements BusinessObject {
                 throw new IllegalArgumentException("answer's format invalid!");
             }
             this.questionIndex = Integer.parseInt(tmp[0]);
-            this.checked = false;
+            this.checkStatus = Integer.parseInt(tmp[2]);
             try {
                 QuestionType questionType = questionTypeMap.get(questionIndex);
                 if (questionType == null) {

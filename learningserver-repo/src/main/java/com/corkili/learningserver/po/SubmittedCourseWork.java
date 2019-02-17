@@ -62,10 +62,10 @@ public class SubmittedCourseWork implements PersistObject {
      * Format:
      *   use {^^^} divide each question's submitted answer
      *
-     *   use {###} divide question index, submitted answer, check status(0 or 1)
+     *   use {###} divide question index, submitted answer, check status(-1 not checked, 0 false, 1 true)
      *
      *   use {***} divide each filling answer in submitted answer,
-     *   use {%%%} divide answerIndex and answerContent in each filling answer, if questionType is MultipleFilling
+     *   use {%%%} divide answerIndex, answerContent and checkStatus (-1 not checked, 0 false, 1 true) in each filling answer, if questionType is MultipleFilling
      *
      *   use {&&&} divide choice in submitted answer, if questionType is MultipleChoice
      *

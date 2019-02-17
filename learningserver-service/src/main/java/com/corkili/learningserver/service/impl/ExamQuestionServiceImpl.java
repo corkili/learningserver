@@ -1,6 +1,7 @@
 package com.corkili.learningserver.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,28 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
 
     @Autowired
     private ExamQuestionRepository examQuestionRepository;
+
+    @Override
+    public Optional<ExamQuestion> po2bo(com.corkili.learningserver.po.ExamQuestion examQuestionPO) {
+        Optional<ExamQuestion> superOptional = super.po2bo(examQuestionPO);
+        if (!superOptional.isPresent()) {
+            return Optional.empty();
+        }
+        ExamQuestion examQuestion = superOptional.get();
+        examQuestion.setScore(examQuestionPO.getScore());
+        return Optional.of(examQuestion);
+    }
+
+    @Override
+    public Optional<com.corkili.learningserver.po.ExamQuestion> bo2po(ExamQuestion examQuestion) {
+        Optional<com.corkili.learningserver.po.ExamQuestion> superOptional = super.bo2po(examQuestion);
+        if (!superOptional.isPresent()) {
+            return Optional.empty();
+        }
+        com.corkili.learningserver.po.ExamQuestion examQuestionPO = superOptional.get();
+        examQuestionPO.setScore(examQuestion.getScoreStr());
+        return Optional.of(examQuestionPO);
+    }
 
     @Override
     protected JpaRepository<com.corkili.learningserver.po.ExamQuestion, Long> repository() {

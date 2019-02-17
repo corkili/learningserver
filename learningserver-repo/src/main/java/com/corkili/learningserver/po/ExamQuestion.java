@@ -69,7 +69,10 @@ public class ExamQuestion implements PersistObject {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @Column(name = "score", nullable = false, scale = 2)
-    @Range(min = 0)
-    private Double score;
+    /**
+     * if questionType is MultipleFilling,
+     * use ; divide each index/score pair, use , divide index and score in each pair
+     */
+    @Column(name = "score", nullable = false, length = 100)
+    private String score;
 }
