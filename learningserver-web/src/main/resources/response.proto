@@ -51,3 +51,13 @@ message CourseFindAllResponse {
     BaseResponse response = 1;
     repeated CourseInfo courseInfo = 2;
 }
+
+message CourseUpdateResponse {
+    BaseResponse response = 1;
+    CourseInfo courseInfo = 2;
+}
+
+message CourseDeleteResponse {
+    BaseResponse response = 1;
+    sint64 courseId = 2;
+}

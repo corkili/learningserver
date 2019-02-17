@@ -2,6 +2,7 @@ package com.corkili.learningserver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.corkili.learningserver.po.Course;
 import com.corkili.learningserver.po.Message;
 import com.corkili.learningserver.po.User;
 import com.corkili.learningserver.po.User.Type;
+import com.corkili.learningserver.repo.CourseCommentRepository;
+import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.repo.MessageRepository;
 import com.corkili.learningserver.repo.UserRepository;
 
@@ -26,6 +30,12 @@ public class POTests {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private CourseCommentRepository courseCommentRepository;
 
     @Test
     public void testCreateUser() {
@@ -159,6 +169,18 @@ public class POTests {
         messageRepository.saveAndFlush(message);
         System.out.println("after update:");
         System.out.println("message" + messageRepository.findById(message.getId()).get());
+    }
+
+    @Test
+    public void testQueryCourseCommentId() {
+        List<Long> idList = courseCommentRepository.findAllCourseCommentIdByCommentedCourseId(1L);
+        System.out.println(idList);
+    }
+
+    @Test
+    public void testQueryCourse() {
+        List<Course> courseList = courseRepository.findAllByTeacherUsernameContaining("sender");
+        System.out.println(courseList);
     }
 
 }

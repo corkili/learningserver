@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.Scorm;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.ScormRepository;
 import com.corkili.learningserver.service.ScormService;
 
@@ -41,5 +42,13 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteScorm(Long scormId) {
+        if (!delete(scormId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete scorm success");
+        }
+        return ServiceResult.successResultWithMesage("delete scorm success");
     }
 }

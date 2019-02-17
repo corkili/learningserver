@@ -142,6 +142,7 @@ public class UserServiceImpl extends ServiceImpl<User, com.corkili.learningserve
         if (!userOptional.isPresent()) {
             return recordErrorAndCreateFailResultWithMessage("register error: create user failed");
         }
+        user = userOptional.get();
         return ServiceResult.successResult("register success", User.class, user);
     }
 

@@ -61,3 +61,21 @@ message CourseFindAllRequest {
     bool byKeyword = 7;
     repeated string keyword = 8;
 }
+
+message CourseUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseId = 2;
+    bool updateCourseName = 3;
+    string courseName = 4;
+    bool updateDescription = 5;
+    string description = 6;
+    bool updateImage = 7;
+    repeated Image image = 8;
+    bool updateTags = 9;
+    repeated string tag = 10;
+}
+
+message CourseDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseId = 2;
+}

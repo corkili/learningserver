@@ -358,6 +358,11 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
         return ServiceResult.failResultWithMessage(ServiceUtils.format(msg, args));
     }
 
+    protected ServiceResult recordWarnAndCreateSuccessResultWithMessage(String msg, Object... args) {
+        logger().warn(msg, args);
+        return ServiceResult.successResultWithMesage(ServiceUtils.format(msg, args));
+    }
+
     protected abstract JpaRepository<PO, Long> repository();
 
     protected abstract String entityName();

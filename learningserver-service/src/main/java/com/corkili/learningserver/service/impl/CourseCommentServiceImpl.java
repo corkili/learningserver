@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.CourseComment;
 import com.corkili.learningserver.bo.CourseComment.Type;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.CourseCommentRepository;
 import com.corkili.learningserver.service.CourseCommentService;
 
@@ -68,5 +69,13 @@ public class CourseCommentServiceImpl extends ServiceImpl<CourseComment, com.cor
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteCourseComment(Long courseCommentId) {
+        if (!delete(courseCommentId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete course comment success");
+        }
+        return ServiceResult.successResultWithMesage("delete course comment success");
     }
 }

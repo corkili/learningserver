@@ -12,4 +12,8 @@ public interface CourseService extends Service<Course, com.corkili.learningserve
 
     ServiceResult findAllCourse(boolean all, Long teacherId, String teacherName, List<String> keywords);
 
+    ServiceResult updateCourse(Course course, Map<String, byte[]> images);
+
+    ServiceResult deleteCourse(Long courseId);
+
 }

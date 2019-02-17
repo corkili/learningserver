@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.po.WorkQuestion;
 import com.corkili.learningserver.repo.SubmittedCourseWorkRepository;
 import com.corkili.learningserver.repo.WorkQuestionRepository;
@@ -79,5 +80,13 @@ public class SubmittedCourseWorkServiceImpl extends ServiceImpl<SubmittedCourseW
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteSubmittedCourseWork(Long submittedCourseWorkId) {
+        if (!delete(submittedCourseWorkId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete submitted course work success");
+        }
+        return ServiceResult.successResultWithMesage("delete submitted course work success");
     }
 }

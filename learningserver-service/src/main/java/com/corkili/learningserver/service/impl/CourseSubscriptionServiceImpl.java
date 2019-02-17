@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.CourseSubscription;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.CourseSubscriptionRepository;
 import com.corkili.learningserver.service.CourseSubscriptionService;
 
@@ -41,5 +42,13 @@ public class CourseSubscriptionServiceImpl extends ServiceImpl<CourseSubscriptio
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteCourseSubscription(Long courseSubscriptionId) {
+        if (!delete(courseSubscriptionId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete course subscription success");
+        }
+        return ServiceResult.successResultWithMesage("delete course subscription success");
     }
 }

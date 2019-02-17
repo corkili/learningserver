@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.ExamQuestion;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.ExamQuestionRepository;
 import com.corkili.learningserver.service.ExamQuestionService;
 
@@ -41,5 +42,13 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteExamQuestion(Long examQuestionId) {
+        if (!delete(examQuestionId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete exam question success");
+        }
+        return ServiceResult.successResultWithMesage("delete exam question success");
     }
 }

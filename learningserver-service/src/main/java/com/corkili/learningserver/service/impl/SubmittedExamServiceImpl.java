@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.bo.SubmittedExam;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.po.ExamQuestion;
 import com.corkili.learningserver.repo.ExamQuestionRepository;
 import com.corkili.learningserver.repo.SubmittedExamRepository;
@@ -79,5 +80,13 @@ public class SubmittedExamServiceImpl extends ServiceImpl<SubmittedExam, com.cor
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteSubmittedExam(Long submittedExamId) {
+        if (!delete(submittedExamId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete submitted exam success");
+        }
+        return ServiceResult.successResultWithMesage("delete submitted exam success");
     }
 }

@@ -1,6 +1,5 @@
 package com.corkili.learningserver.controller;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ControllerUtils;
-import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ProtoUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
-import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Request.CourseCreateRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CourseDeleteRequest;
 import com.corkili.learningserver.generate.protobuf.Request.CourseFindAllRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CourseUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseCreateResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CourseDeleteResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseFindAllResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CourseUpdateResponse;
 import com.corkili.learningserver.service.CourseService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
@@ -57,19 +59,14 @@ public class CourseController {
         Optional<User> userOptional = userService.retrieve(teacherId);
         if (!userOptional.isPresent()) {
             return CourseCreateResponse.newBuilder()
-                    .setResponse(ControllerUtils.generateErrorBaseResponse(token, "user info not found"))
+                    .setResponse(ControllerUtils.generateErrorBaseResponse(token, "teacher info not found"))
                     .build();
         }
         User teacher = userOptional.get();
         Course course = new Course();
         course.setCourseName(request.getCourseName());
         course.setDescription(request.getDescription());
-        Map<String, byte[]> images = new HashMap<>();
-        for (Image image : request.getImageList()) {
-            if (image.getHasData()) {
-                images.put(ImageUtils.getImagePath("course", image.getPath(), teacherId), image.getImage().toByteArray());
-            }
-        }
+        Map<String, byte[]> images = ControllerUtils.generateImageMap("course", teacherId, request.getImageList());
         for (String tag : request.getTagList()) {
             course.addTag(tag);
         }
@@ -117,4 +114,74 @@ public class CourseController {
                 .build();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/update", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CourseUpdateResponse updateCourse(@RequestBody CourseUpdateRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CourseUpdateResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        Optional<Course> courseOptional = courseService.retrieve(request.getCourseId());
+        CourseInfo courseInfo;
+        if (!courseOptional.isPresent()) {
+            baseResponse = ControllerUtils.generateErrorBaseResponse(token,
+                    ServiceUtils.format("course [{}] not exist", request.getCourseId()));
+            courseInfo = CourseInfo.newBuilder().build();
+        } else {
+            Optional<User> userOptional = userService.retrieve(courseOptional.get().getTeacherId());
+            if (!userOptional.isPresent()) {
+                return CourseUpdateResponse.newBuilder()
+                        .setResponse(ControllerUtils.generateErrorBaseResponse(token, "teacher info not found"))
+                        .build();
+            }
+            User teacher = userOptional.get();
+            Course copyCourse = Course.copyFrom(courseOptional.get());
+            if (request.getUpdateCourseName()) {
+                copyCourse.setCourseName(request.getCourseName());
+            }
+            if (request.getUpdateDescription()) {
+                copyCourse.setDescription(request.getDescription());
+            }
+            Map<String, byte[]> images = null;
+            if (request.getUpdateImage()) {
+                images = ControllerUtils.generateImageMap("course", copyCourse.getTeacherId(), request.getImageList());
+            }
+            if (request.getUpdateTags()) {
+                copyCourse.getTags().clear();
+                copyCourse.getTags().addAll(request.getTagList());
+            }
+            ServiceResult serviceResult = courseService.updateCourse(copyCourse, images);
+            baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+            if (serviceResult.isSuccess()) {
+                courseInfo = ProtoUtils.generateCourseInfo((Course) serviceResult.extra(Course.class), teacher, false);
+            } else {
+                courseInfo = ProtoUtils.generateCourseInfo(copyCourse, teacher, false);
+            }
+        }
+        return CourseUpdateResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setCourseInfo(courseInfo)
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CourseDeleteResponse deleteCourse(@RequestBody CourseDeleteRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CourseDeleteResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = courseService.deleteCourse(request.getCourseId());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        return CourseDeleteResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setCourseId(request.getCourseId())
+                .build();
+    }
 }

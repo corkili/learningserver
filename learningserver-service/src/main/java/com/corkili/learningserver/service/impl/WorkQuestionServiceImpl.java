@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.WorkQuestion;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.WorkQuestionRepository;
 import com.corkili.learningserver.service.WorkQuestionService;
 
@@ -41,5 +42,13 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteWorkQuestion(Long workQuestionId) {
+        if (!delete(workQuestionId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete work question success");
+        }
+        return ServiceResult.successResultWithMesage("delete work question success");
     }
 }

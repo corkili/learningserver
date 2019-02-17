@@ -1,5 +1,6 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.ForumTopic;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.ForumTopicRepository;
+import com.corkili.learningserver.repo.TopicCommentRepository;
 import com.corkili.learningserver.service.ForumTopicService;
+import com.corkili.learningserver.service.TopicCommentService;
 
 @Slf4j
 @Service
@@ -19,6 +23,12 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
 
     @Autowired
     private ForumTopicRepository forumTopicRepository;
+
+    @Autowired
+    private TopicCommentRepository topicCommentRepository;
+
+    @Autowired
+    private TopicCommentService topicCommentService;
 
     @Override
     public Optional<ForumTopic> po2bo(com.corkili.learningserver.po.ForumTopic forumTopicPO) {
@@ -65,5 +75,21 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteForumTopic(Long forumTopicId) {
+        ServiceResult serviceResult;
+        if (delete(forumTopicId)) {
+            serviceResult = ServiceResult.successResultWithMesage("delete forum topic success");
+        } else {
+            serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete forum topic success");
+        }
+        // delete associated topic comment
+        List<Long> topicCommentIdList = topicCommentRepository.findAllTopicCommentIdByBelongTopicId(forumTopicId);
+        for (Long id : topicCommentIdList) {
+            serviceResult = serviceResult.mergeFrom(topicCommentService.deleteTopicComment(id), true);
+        }
+        return serviceResult;
     }
 }

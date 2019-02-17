@@ -1,5 +1,10 @@
 package com.corkili.learningserver.common;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.ResponseCode;
 import com.corkili.learningserver.token.TokenManager;
@@ -46,6 +51,16 @@ public class ControllerUtils {
                     .build();
         }
         return null;
+    }
+
+    public static Map<String, byte[]> generateImageMap(String entityName, Long userId, List<Image> imageList) {
+        Map<String, byte[]> images = new HashMap<>();
+        for (Image image : imageList) {
+            if (image.getHasData()) {
+                images.put(ImageUtils.getImagePath(entityName, image.getPath(), userId), image.getImage().toByteArray());
+            }
+        }
+        return images;
     }
 
 }

@@ -54,6 +54,21 @@ public class Course implements BusinessObject {
 
     private Long coursewareId;
 
+    public static Course copyFrom(Course course) {
+        Course copyCourse = new Course();
+        copyCourse.id = course.id;
+        copyCourse.createTime = course.createTime;
+        copyCourse.updateTime = course.updateTime;
+        copyCourse.open = course.open;
+        copyCourse.courseName = course.courseName;
+        copyCourse.description = course.description;
+        copyCourse.imagePaths.addAll(course.imagePaths);
+        copyCourse.tags.addAll(course.tags);
+        copyCourse.teacherId = course.teacherId;
+        copyCourse.coursewareId = course.coursewareId;
+        return copyCourse;
+    }
+
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));
     }

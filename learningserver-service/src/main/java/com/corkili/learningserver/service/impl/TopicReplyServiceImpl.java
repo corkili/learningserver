@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.TopicReply;
+import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.TopicReplyRepository;
 import com.corkili.learningserver.service.TopicReplyService;
 
@@ -65,5 +66,13 @@ public class TopicReplyServiceImpl extends ServiceImpl<TopicReply, com.corkili.l
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult deleteTopicReply(Long topicReplyId) {
+        if (!delete(topicReplyId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete topic reply success");
+        }
+        return ServiceResult.successResultWithMesage("delete topic reply success");
     }
 }
