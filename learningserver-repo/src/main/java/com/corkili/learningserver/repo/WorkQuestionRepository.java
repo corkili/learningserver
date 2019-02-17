@@ -15,4 +15,6 @@ public interface WorkQuestionRepository extends JpaRepository<WorkQuestion, Long
     @Query("select wq.id from WorkQuestion wq left join wq.belongCourseWork wqbcw where wqbcw.id = ?1")
     List<Long> findAllWorkQuestionIdByBelongCourseWorkId(Long belongCourseWorkId);
 
+    void deleteAllByBelongCourseWorkId(Long belongCourseWorkId);
+
 }

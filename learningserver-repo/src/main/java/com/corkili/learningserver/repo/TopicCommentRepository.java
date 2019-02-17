@@ -12,4 +12,6 @@ public interface TopicCommentRepository extends JpaRepository<TopicComment, Long
     @Query("select tc.id from TopicComment tc left join tc.belongTopic tcbt where tcbt.id = ?1")
     List<Long> findAllTopicCommentIdByBelongTopicId(Long belongTopicId);
 
+    void deleteAllByBelongTopicId(Long belongTopicId);
+
 }

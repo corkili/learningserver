@@ -12,4 +12,6 @@ public interface CourseWorkRepository extends JpaRepository<CourseWork, Long> {
     @Query("select cw.id from CourseWork cw left join cw.belongCourse cwbc where cwbc.id = ?1")
     List<Long> findAllCourseWorkIdByBelongCourseId(Long belongCourseId);
 
+    void deleteAllByBelongCourseId(Long belongCourseId);
+
 }

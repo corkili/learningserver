@@ -7,4 +7,6 @@ public interface CourseSubscriptionService extends Service<CourseSubscription, c
 
     ServiceResult deleteCourseSubscription(Long courseSubscriptionId);
 
+    ServiceResult deleteCourseSubscriptionBySubscribedCourseId(Long subscribedCourseId);
+
 }

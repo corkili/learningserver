@@ -89,4 +89,14 @@ public class SubmittedCourseWorkServiceImpl extends ServiceImpl<SubmittedCourseW
         }
         return ServiceResult.successResultWithMesage("delete submitted course work success");
     }
+
+    @Override
+    public ServiceResult deleteSubmittedCourseWorkByBelongCourseWorkId(Long belongCourseWorkId) {
+        List<Long> submittedCourseWorkIdList = submittedCourseWorkRepository.findAllSubmittedCourseWorkIdByBelongCourseWorkId(belongCourseWorkId);
+        submittedCourseWorkRepository.deleteAllByBelongCourseWorkId(belongCourseWorkId);
+        for (Long id : submittedCourseWorkIdList) {
+            evictFromCache(entityName() + id);
+        }
+        return ServiceResult.successResultWithMesage("delete submitted course work success");
+    }
 }

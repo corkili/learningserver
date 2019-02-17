@@ -12,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.CourseWorkRepository;
-import com.corkili.learningserver.repo.SubmittedCourseWorkRepository;
-import com.corkili.learningserver.repo.WorkQuestionRepository;
 import com.corkili.learningserver.service.CourseWorkService;
 import com.corkili.learningserver.service.SubmittedCourseWorkService;
 import com.corkili.learningserver.service.WorkQuestionService;
@@ -24,12 +22,6 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
 
     @Autowired
     private CourseWorkRepository courseWorkRepository;
-
-    @Autowired
-    private WorkQuestionRepository workQuestionRepository;
-
-    @Autowired
-    private SubmittedCourseWorkRepository submittedCourseWorkRepository;
 
     @Autowired
     private WorkQuestionService workQuestionService;
@@ -72,15 +64,23 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete course work success");
         }
         // delete associated work question
-        List<Long> workQuestionIdList = workQuestionRepository.findAllWorkQuestionIdByBelongCourseWorkId(courseWorkId);
-        for (Long id : workQuestionIdList) {
-            serviceResult = serviceResult.mergeFrom(workQuestionService.deleteWorkQuestion(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(workQuestionService.deleteWorkQuestionByBelongCourseWorkId(courseWorkId), true);
         // delete associated submitted course work
-        List<Long> submittedCourseWorkIdList = submittedCourseWorkRepository.findAllSubmittedCourseWorkIdByBelongCourseWork(courseWorkId);
-        for (Long id : submittedCourseWorkIdList) {
-            serviceResult = serviceResult.mergeFrom(submittedCourseWorkService.deleteSubmittedCourseWork(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(submittedCourseWorkService.deleteSubmittedCourseWorkByBelongCourseWorkId(courseWorkId), true);
         return serviceResult;
+    }
+
+    @Override
+    public ServiceResult deleteCourseWorkByBelongCourseId(Long belongCourseId) {
+        List<Long> courseWorkIdList = courseWorkRepository.findAllCourseWorkIdByBelongCourseId(belongCourseId);
+        courseWorkRepository.deleteAllByBelongCourseId(belongCourseId);
+        for (Long id : courseWorkIdList) {
+            // delete associated work question
+            workQuestionService.deleteWorkQuestionByBelongCourseWorkId(id);
+            // delete associated submitted course work
+            submittedCourseWorkService.deleteSubmittedCourseWorkByBelongCourseWorkId(id);
+            evictFromCache(entityName() + id);
+        }
+        return ServiceResult.successResultWithMesage("delete course work success");
     }
 }

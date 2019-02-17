@@ -12,4 +12,6 @@ public interface CourseCommentRepository extends JpaRepository<CourseComment, Lo
     @Query("select cc.id from CourseComment cc left join cc.commentedCourse c where c.id = ?1")
     List<Long> findAllCourseCommentIdByCommentedCourseId(Long commentedCourseId);
 
+    void deleteAllByCommentedCourseId(Long commentedCourseId);
+
 }

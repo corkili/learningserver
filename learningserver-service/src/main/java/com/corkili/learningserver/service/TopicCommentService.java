@@ -7,4 +7,6 @@ public interface TopicCommentService extends Service<TopicComment, com.corkili.l
 
     ServiceResult deleteTopicComment(Long topicCommentId);
 
+    ServiceResult deleteTopicCommentByBelongTopicId(Long belongTopicId);
+
 }

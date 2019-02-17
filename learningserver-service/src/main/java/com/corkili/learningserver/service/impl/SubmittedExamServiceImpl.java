@@ -89,4 +89,14 @@ public class SubmittedExamServiceImpl extends ServiceImpl<SubmittedExam, com.cor
         }
         return ServiceResult.successResultWithMesage("delete submitted exam success");
     }
+
+    @Override
+    public ServiceResult deleteSubmittedExamByBelongExamId(Long belongExamId) {
+        List<Long> submittedExamIdList = submittedExamRepository.findAllSubmittedExamIdByBelongExamId(belongExamId);
+        submittedExamRepository.deleteAllByBelongExamId(belongExamId);
+        for (Long id : submittedExamIdList) {
+            evictFromCache(entityName() + id);
+        }
+        return ServiceResult.successResult("delete submitted exam success");
+    }
 }

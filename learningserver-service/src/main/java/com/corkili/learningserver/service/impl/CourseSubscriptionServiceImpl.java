@@ -1,5 +1,7 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -48,6 +50,16 @@ public class CourseSubscriptionServiceImpl extends ServiceImpl<CourseSubscriptio
     public ServiceResult deleteCourseSubscription(Long courseSubscriptionId) {
         if (!delete(courseSubscriptionId)) {
             return recordWarnAndCreateSuccessResultWithMessage("delete course subscription success");
+        }
+        return ServiceResult.successResultWithMesage("delete course subscription success");
+    }
+
+    @Override
+    public ServiceResult deleteCourseSubscriptionBySubscribedCourseId(Long subscribedCourseId) {
+        List<Long> courseSubscriptionIdList = courseSubscriptionRepository.findAllCourseSubscriptionIdBySubscribedCourseId(subscribedCourseId);
+        courseSubscriptionRepository.deleteAllBySubscribedCourseId(subscribedCourseId);
+        for (Long id : courseSubscriptionIdList) {
+            evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete course subscription success");
     }

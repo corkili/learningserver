@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.common.ServiceResult;
-import com.corkili.learningserver.repo.ExamQuestionRepository;
 import com.corkili.learningserver.repo.ExamRepository;
-import com.corkili.learningserver.repo.SubmittedExamRepository;
 import com.corkili.learningserver.service.ExamQuestionService;
 import com.corkili.learningserver.service.ExamService;
 import com.corkili.learningserver.service.SubmittedExamService;
@@ -26,13 +24,7 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
     private ExamRepository examRepository;
 
     @Autowired
-    private ExamQuestionRepository examQuestionRepository;
-
-    @Autowired
     private ExamQuestionService examQuestionService;
-
-    @Autowired
-    private SubmittedExamRepository submittedExamRepository;
 
     @Autowired
     private SubmittedExamService submittedExamService;
@@ -71,15 +63,23 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
             serviceResult = ServiceResult.successResultWithMesage("delete exam success");
         }
         // delete associated exam question
-        List<Long> examQuestionIdList = examQuestionRepository.findAllExamQuestionIdByBelongExamId(examId);
-        for (Long id : examQuestionIdList) {
-            serviceResult = serviceResult.mergeFrom(examQuestionService.deleteExamQuestion(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(examQuestionService.deleteExamQuestionByBelongExamId(examId), true);
         // delete associated submitted exam
-        List<Long> submittedExamIdList = submittedExamRepository.findAllSubmittedExamIdByBelongExam(examId);
-        for (Long id : submittedExamIdList) {
-            serviceResult = serviceResult.mergeFrom(submittedExamService.deleteSubmittedExam(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(submittedExamService.deleteSubmittedExamByBelongExamId(examId), true);
         return serviceResult;
+    }
+
+    @Override
+    public ServiceResult deleteExamByBelongCourseId(Long belongCourseId) {
+        List<Long> examIdList = examRepository.findAllExamIdByBelongCourseId(belongCourseId);
+        examRepository.deleteAllByBelongCourseId(belongCourseId);
+        for (Long id : examIdList) {
+            // delete associated exam question
+            examQuestionService.deleteExamQuestionByBelongExamId(id);
+            // delete associated submitted exam
+            submittedExamService.deleteSubmittedExamByBelongExamId(id);
+            evictFromCache(entityName() + id);
+        }
+        return ServiceResult.successResultWithMesage("delete exam success");
     }
 }

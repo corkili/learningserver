@@ -1,5 +1,6 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -72,6 +73,16 @@ public class TopicReplyServiceImpl extends ServiceImpl<TopicReply, com.corkili.l
     public ServiceResult deleteTopicReply(Long topicReplyId) {
         if (!delete(topicReplyId)) {
             return recordWarnAndCreateSuccessResultWithMessage("delete topic reply success");
+        }
+        return ServiceResult.successResultWithMesage("delete topic reply success");
+    }
+
+    @Override
+    public ServiceResult deleteTopicReplyByBelongCommentId(Long belongCommentId) {
+        List<Long> topicReplyIdList = topicReplyRepository.findAllTopicReplyIdByBelongCommentId(belongCommentId);
+        topicReplyRepository.deleteAllByBelongCommentId(belongCommentId);
+        for (Long id : topicReplyIdList) {
+            evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete topic reply success");
     }

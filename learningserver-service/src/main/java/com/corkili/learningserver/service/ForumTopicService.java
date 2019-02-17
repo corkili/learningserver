@@ -7,4 +7,6 @@ public interface ForumTopicService extends Service<ForumTopic, com.corkili.learn
 
     ServiceResult deleteForumTopic(Long forumTopicId);
 
+    ServiceResult deleteForumTopicByBelongCourseId(Long belongCourseId);
+
 }

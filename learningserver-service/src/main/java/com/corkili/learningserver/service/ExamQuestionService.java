@@ -7,4 +7,6 @@ public interface ExamQuestionService extends Service<ExamQuestion, com.corkili.l
 
     ServiceResult deleteExamQuestion(Long examQuestionId);
 
+    ServiceResult deleteExamQuestionByBelongExamId(Long belongExamId);
+
 }

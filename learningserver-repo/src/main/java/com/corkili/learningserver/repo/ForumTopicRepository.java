@@ -12,4 +12,6 @@ public interface ForumTopicRepository extends JpaRepository<ForumTopic, Long> {
     @Query("select ft.id from ForumTopic ft left join ft.belongCourse ftbc where ftbc.id = ?1")
     List<Long> findAllForumTopicIdByBelongCourseId(Long belongCourseId);
 
+    void deleteAllByBelongCourseId(Long belongCourseId);
+
 }

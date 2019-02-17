@@ -11,8 +11,6 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +20,7 @@ import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
-import com.corkili.learningserver.repo.CourseCommentRepository;
 import com.corkili.learningserver.repo.CourseRepository;
-import com.corkili.learningserver.repo.CourseSubscriptionRepository;
-import com.corkili.learningserver.repo.CourseWorkRepository;
-import com.corkili.learningserver.repo.ExamRepository;
-import com.corkili.learningserver.repo.ForumTopicRepository;
-import com.corkili.learningserver.repo.UserRepository;
 import com.corkili.learningserver.service.CourseCommentService;
 import com.corkili.learningserver.service.CourseService;
 import com.corkili.learningserver.service.CourseSubscriptionService;
@@ -41,31 +33,8 @@ import com.corkili.learningserver.service.ScormService;
 @Service
 public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learningserver.po.Course> implements CourseService {
 
-    private static final String CACHE_NAME = "memoryCache";
-
     @Autowired
     private CourseRepository courseRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private CourseCommentRepository courseCommentRepository;
-
-    @Autowired
-    private CourseSubscriptionRepository courseSubscriptionRepository;
-
-    @Autowired
-    private ForumTopicRepository forumTopicRepository;
-
-    @Autowired
-    private CourseWorkRepository courseWorkRepository;
-
-    @Autowired
-    private ExamRepository examRepository;
-
-    @Autowired
-    private CacheManager cacheManager;
 
     @Autowired
     private ScormService scormService;
@@ -209,7 +178,6 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         List<Course> allCourse = new LinkedList<>();
         Collection<com.corkili.learningserver.po.Course> allCoursePO = coursePOMap.values();
         StringBuilder errId = new StringBuilder();
-        Cache cache = cacheManager.getCache(CACHE_NAME);
         int i = 0;
         for (com.corkili.learningserver.po.Course coursePO : allCoursePO) {
             Optional<Course> courseOptional = po2bo(coursePO);
@@ -222,9 +190,7 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
                 Course course = courseOptional.get();
                 allCourse.add(course);
                 // cache
-                if (cache != null) {
-                    cache.put(entityName() + course.getId(), course);
-                }
+                putToCache(entityName() + course.getId(), course);
             }
         }
         if (errId.length() != 0) {
@@ -292,30 +258,15 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete course success");
         }
         // delete associated course comment
-        List<Long> courseCommentIdList = courseCommentRepository.findAllCourseCommentIdByCommentedCourseId(courseId);
-        for (Long id : courseCommentIdList) {
-            serviceResult.mergeFrom(courseCommentService.deleteCourseComment(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(courseCommentService.deleteCourseCommentByCommentedCourseId(courseId), true);
         // delete associated course subscription
-        List<Long> courseSubscriptionIdList = courseSubscriptionRepository.findAllCourseSubScriptionIdBySubscribedCourseId(courseId);
-        for (Long id : courseSubscriptionIdList) {
-            serviceResult.mergeFrom(courseSubscriptionService.deleteCourseSubscription(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(courseSubscriptionService.deleteCourseSubscriptionBySubscribedCourseId(courseId), true);
         // delete associated forum topic
-        List<Long> forumTopicIdList = forumTopicRepository.findAllForumTopicIdByBelongCourseId(courseId);
-        for (Long id : forumTopicIdList) {
-            serviceResult.mergeFrom(forumTopicService.deleteForumTopic(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(forumTopicService.deleteForumTopicByBelongCourseId(courseId), true);
         // delete associated course work
-        List<Long> courseWorkIdList = courseWorkRepository.findAllCourseWorkIdByBelongCourseId(courseId);
-        for (Long id : courseWorkIdList) {
-            serviceResult.mergeFrom(courseWorkService.deleteCourseWork(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(courseWorkService.deleteCourseWorkByBelongCourseId(courseId), true);
         // delete associated exam
-        List<Long> examIdList = examRepository.findAllExamIdByBelongCourseId(courseId);
-        for (Long id : examIdList) {
-            serviceResult = serviceResult.mergeFrom(examService.deleteExam(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(examService.deleteExamByBelongCourseId(courseId), true);
         return serviceResult;
     }
 }

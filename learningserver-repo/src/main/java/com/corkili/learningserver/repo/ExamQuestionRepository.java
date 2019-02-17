@@ -15,4 +15,6 @@ public interface ExamQuestionRepository extends JpaRepository<ExamQuestion, Long
     @Query("select eq.id from ExamQuestion eq left join eq.belongExam eqbe where eqbe.id = ?1")
     List<Long> findAllExamQuestionIdByBelongExamId(Long belongExamId);
 
+    void deleteAllByBelongExamId(Long belongExamId);
+
 }

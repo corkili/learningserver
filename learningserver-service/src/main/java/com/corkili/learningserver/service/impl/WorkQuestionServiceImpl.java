@@ -1,5 +1,7 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -48,6 +50,16 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
     public ServiceResult deleteWorkQuestion(Long workQuestionId) {
         if (!delete(workQuestionId)) {
             return recordWarnAndCreateSuccessResultWithMessage("delete work question success");
+        }
+        return ServiceResult.successResultWithMesage("delete work question success");
+    }
+
+    @Override
+    public ServiceResult deleteWorkQuestionByBelongCourseWorkId(Long belongCourseWorkId) {
+        List<Long> workQuestionIdList = workQuestionRepository.findAllWorkQuestionIdByBelongCourseWorkId(belongCourseWorkId);
+        workQuestionRepository.deleteAllByBelongCourseWorkId(belongCourseWorkId);
+        for (Long id : workQuestionIdList) {
+            evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete work question success");
     }

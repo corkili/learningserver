@@ -10,6 +10,8 @@ import com.corkili.learningserver.po.SubmittedExam;
 public interface SubmittedExamRepository extends JpaRepository<SubmittedExam, Long> {
 
     @Query("select se.id from SubmittedExam se left join se.belongExam sebe where sebe.id = ?1")
-    List<Long> findAllSubmittedExamIdByBelongExam(Long submittedExamId);
+    List<Long> findAllSubmittedExamIdByBelongExamId(Long belongExamId);
+
+    void deleteAllByBelongExamId(Long belongExamId);
 
 }

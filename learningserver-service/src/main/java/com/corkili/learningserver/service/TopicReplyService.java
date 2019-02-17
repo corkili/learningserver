@@ -7,4 +7,6 @@ public interface TopicReplyService extends Service<TopicReply, com.corkili.learn
 
     ServiceResult deleteTopicReply(Long topicReplyId);
 
+    ServiceResult deleteTopicReplyByBelongCommentId(Long belongCommentId);
+
 }

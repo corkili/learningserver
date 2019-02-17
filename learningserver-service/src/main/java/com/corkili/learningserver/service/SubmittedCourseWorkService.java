@@ -7,4 +7,6 @@ public interface SubmittedCourseWorkService extends Service<SubmittedCourseWork,
 
     ServiceResult deleteSubmittedCourseWork(Long submittedCourseWorkId);
 
+    ServiceResult deleteSubmittedCourseWorkByBelongCourseWorkId(Long belongCourseWorkId);
+
 }

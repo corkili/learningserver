@@ -11,10 +11,14 @@ import javax.persistence.JoinColumn;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Range;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 import com.corkili.learningserver.bo.BusinessObject;
 import com.corkili.learningserver.common.ServiceResult;
@@ -22,9 +26,13 @@ import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.po.PersistObject;
 import com.corkili.learningserver.service.Service;
 
+@Component
 public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistObject> implements Service<BO, PO> {
 
     private static final String CACHE_NAME = "memoryCache";
+
+    @Autowired
+    private CacheManager cacheManager;
 
     @Override
     public final Optional<BO> create(BO bo) {
@@ -361,6 +369,20 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     protected ServiceResult recordWarnAndCreateSuccessResultWithMessage(String msg, Object... args) {
         logger().warn(msg, args);
         return ServiceResult.successResultWithMesage(ServiceUtils.format(msg, args));
+    }
+
+    protected final void putToCache(Object key, Object value) {
+        Cache cache = cacheManager.getCache(CACHE_NAME);
+        if (cache != null) {
+            cache.put(key, value);
+        }
+    }
+
+    protected final void evictFromCache(Object key) {
+        Cache cache = cacheManager.getCache(CACHE_NAME);
+        if (cache != null) {
+            cache.evict(key);
+        }
     }
 
     protected abstract JpaRepository<PO, Long> repository();

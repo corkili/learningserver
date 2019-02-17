@@ -10,6 +10,8 @@ import com.corkili.learningserver.po.SubmittedCourseWork;
 public interface SubmittedCourseWorkRepository extends JpaRepository<SubmittedCourseWork, Long> {
 
     @Query("select scw.id from SubmittedCourseWork scw left join scw.belongCourseWork scwbcw where scwbcw.id = ?1")
-    List<Long> findAllSubmittedCourseWorkIdByBelongCourseWork(Long belongCourseId);
+    List<Long> findAllSubmittedCourseWorkIdByBelongCourseWorkId(Long belongCourseWorkId);
+
+    void deleteAllByBelongCourseWorkId(Long belongCourseWorkId);
 
 }

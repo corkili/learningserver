@@ -7,4 +7,5 @@ public interface SubmittedExamService extends Service<SubmittedExam, com.corkili
 
     ServiceResult deleteSubmittedExam(Long submittedExamId);
 
+    ServiceResult deleteSubmittedExamByBelongExamId(Long belongExamId);
 }

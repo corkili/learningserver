@@ -10,6 +10,8 @@ import com.corkili.learningserver.po.CourseSubscription;
 public interface CourseSubscriptionRepository extends JpaRepository<CourseSubscription, Long> {
 
     @Query("select cs.id from CourseSubscription cs left join cs.subscribedCourse cssc where cssc.id = ?1")
-    List<Long> findAllCourseSubScriptionIdBySubscribedCourseId(Long subscribedCourseId);
+    List<Long> findAllCourseSubscriptionIdBySubscribedCourseId(Long subscribedCourseId);
+
+    void deleteAllBySubscribedCourseId(Long subscribedCourseId);
 
 }

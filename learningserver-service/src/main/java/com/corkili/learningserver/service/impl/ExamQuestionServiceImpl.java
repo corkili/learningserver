@@ -1,5 +1,7 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -48,6 +50,16 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
     public ServiceResult deleteExamQuestion(Long examQuestionId) {
         if (!delete(examQuestionId)) {
             return recordWarnAndCreateSuccessResultWithMessage("delete exam question success");
+        }
+        return ServiceResult.successResultWithMesage("delete exam question success");
+    }
+
+    @Override
+    public ServiceResult deleteExamQuestionByBelongExamId(Long belongExamId) {
+        List<Long> examQuestionIdList = examQuestionRepository.findAllExamQuestionIdByBelongExamId(belongExamId);
+        examQuestionRepository.deleteAllByBelongExamId(belongExamId);
+        for (Long id : examQuestionIdList) {
+            evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete exam question success");
     }

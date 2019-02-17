@@ -1,5 +1,6 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -75,6 +76,16 @@ public class CourseCommentServiceImpl extends ServiceImpl<CourseComment, com.cor
     public ServiceResult deleteCourseComment(Long courseCommentId) {
         if (!delete(courseCommentId)) {
             return recordWarnAndCreateSuccessResultWithMessage("delete course comment success");
+        }
+        return ServiceResult.successResultWithMesage("delete course comment success");
+    }
+
+    @Override
+    public ServiceResult deleteCourseCommentByCommentedCourseId(Long commentedCourseId) {
+        List<Long> courseCommentIdList = courseCommentRepository.findAllCourseCommentIdByCommentedCourseId(commentedCourseId);
+        courseCommentRepository.deleteAllByCommentedCourseId(commentedCourseId);
+        for (Long id : courseCommentIdList) {
+            evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete course comment success");
     }

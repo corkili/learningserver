@@ -7,4 +7,6 @@ public interface ExamService extends Service<Exam, com.corkili.learningserver.po
 
     ServiceResult deleteExam(Long examId);
 
+    ServiceResult deleteExamByBelongCourseId(Long belongCourseId);
+
 }

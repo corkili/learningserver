@@ -7,4 +7,6 @@ public interface CourseWorkService extends Service<CourseWork, com.corkili.learn
 
     ServiceResult deleteCourseWork(Long courseWorkId);
 
+    ServiceResult deleteCourseWorkByBelongCourseId(Long belongCourseId);
+
 }

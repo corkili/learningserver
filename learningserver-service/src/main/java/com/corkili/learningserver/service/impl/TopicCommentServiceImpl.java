@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import com.corkili.learningserver.bo.TopicComment;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.TopicCommentRepository;
-import com.corkili.learningserver.repo.TopicReplyRepository;
 import com.corkili.learningserver.service.TopicCommentService;
 import com.corkili.learningserver.service.TopicReplyService;
 
@@ -23,9 +22,6 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
 
     @Autowired
     private TopicCommentRepository topicCommentRepository;
-
-    @Autowired
-    private TopicReplyRepository topicReplyRepository;
 
     @Autowired
     private TopicReplyService topicReplyService;
@@ -86,10 +82,18 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete topic comment success");
         }
         // delete associated topic reply
-        List<Long> topicReplyIdList = topicReplyRepository.findAllTopicReplyIdByBelongCommentId(topicCommentId);
-        for (Long id : topicReplyIdList) {
-            serviceResult = serviceResult.mergeFrom(topicReplyService.deleteTopicReply(id), true);
-        }
+        serviceResult = serviceResult.mergeFrom(topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId), true);
         return serviceResult;
+    }
+
+    @Override
+    public ServiceResult deleteTopicCommentByBelongTopicId(Long belongTopicId) {
+        List<Long> topicCommentIdList = topicCommentRepository.findAllTopicCommentIdByBelongTopicId(belongTopicId);
+        topicCommentRepository.deleteAllByBelongTopicId(belongTopicId);
+        for (Long id : topicCommentIdList) {
+            topicReplyService.deleteTopicReplyByBelongCommentId(id);
+            evictFromCache(entityName() + id);
+        }
+        return ServiceResult.successResultWithMesage("delete topic comment success");
     }
 }

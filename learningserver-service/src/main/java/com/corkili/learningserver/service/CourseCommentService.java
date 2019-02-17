@@ -7,4 +7,6 @@ public interface CourseCommentService extends Service<CourseComment, com.corkili
 
     ServiceResult deleteCourseComment(Long courseCommentId);
 
+    ServiceResult deleteCourseCommentByCommentedCourseId(Long commentedCourseId);
+
 }

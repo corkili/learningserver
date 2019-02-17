@@ -7,4 +7,6 @@ public interface WorkQuestionService extends Service<WorkQuestion, com.corkili.l
 
     ServiceResult deleteWorkQuestion(Long workQuestionId);
 
+    ServiceResult deleteWorkQuestionByBelongCourseWorkId(Long belongCourseWorkId);
+
 }
