@@ -13,4 +13,6 @@ public interface QuestionService extends Service<Question, com.corkili.learnings
 
     ServiceResult findAllQuestion(Long authorId, boolean all, List<String> keywordList, List<QuestionType> questionTypeList);
 
+    ServiceResult updateQuestion(Question question, Map<String, byte[]> questionImages, Map<String, byte[]> essayImages);
+
 }

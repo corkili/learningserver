@@ -77,3 +77,8 @@ message QuestionGetResponse {
     repeated QuestionInfo questionInfo = 2;
     repeated sint64 failedQuestionId = 3;
 }
+
+message QuestionUpdateResponse {
+    BaseResponse response = 1;
+    QuestionInfo questionInfo = 2;
+}

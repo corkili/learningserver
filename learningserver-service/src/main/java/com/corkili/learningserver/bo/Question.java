@@ -95,6 +95,21 @@ public class Question implements BusinessObject {
 
     private Long authorId;
 
+    public static Question copyFrom(Question question) {
+        Question copyQuestion = new Question();
+        copyQuestion.id = question.id;
+        copyQuestion.createTime = question.createTime;
+        copyQuestion.updateTime = question.updateTime;
+        copyQuestion.question = question.question;
+        copyQuestion.imagePaths.addAll(question.getImagePaths());
+        copyQuestion.questionType = question.questionType;
+        copyQuestion.autoCheck = question.autoCheck;
+        copyQuestion.choices.putAll(question.getChoices());
+        copyQuestion.setAnswer(question.getAnswerStr(), question.questionType);
+        copyQuestion.authorId = question.getAuthorId();
+        return copyQuestion;
+    }
+
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));
     }

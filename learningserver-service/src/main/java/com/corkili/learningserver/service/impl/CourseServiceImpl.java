@@ -218,6 +218,8 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
             if (images != null) {
                 ImageUtils.deleteImages(images.keySet());
             }
+            course.getImagePaths().clear();
+            course.getImagePaths().addAll(oldImagePaths);
             return recordErrorAndCreateFailResultWithMessage("update course error: create course failed");
         }
         if (images != null) {

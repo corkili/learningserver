@@ -104,3 +104,20 @@ message QuestionGetRequest {
     repeated sint64 questionId = 2;
     bool loadImage = 3;
 }
+
+message QuestionUpdateRequest {
+    BaseRequest request = 1;
+    sint64 questionId = 2;
+    bool updateQuestion = 3;
+    string question = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+    bool updateQuestionType = 7;
+    QuestionType questionType = 8;
+    bool updateAutoCheck = 9;
+    bool autoCheck = 10;
+    bool updateChoices = 11;
+    map<int32, string> choices = 12;
+    bool updateAnswer = 13;
+    Answer answer = 14;
+}

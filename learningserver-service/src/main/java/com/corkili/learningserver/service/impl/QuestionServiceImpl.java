@@ -165,7 +165,7 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
             }
             essayAnswer.getImagePaths().clear();
             if (essayImages != null) {
-                essayAnswer.getImagePaths().addAll(questionImages.keySet());
+                essayAnswer.getImagePaths().addAll(essayImages.keySet());
             }
         }
         Optional<Question> questionOptional = create(question);
@@ -230,6 +230,117 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
             msg = ServiceUtils.format("find all question warn: transfer question po [{}] to bo failed.", errId.toString());
         }
         return ServiceResult.successResult(msg, List.class, allQuestion);
+    }
+
+    @Override
+    public ServiceResult updateQuestion(Question question, Map<String, byte[]> questionImages, Map<String, byte[]> essayImages) {
+        if (StringUtils.isBlank(question.getQuestion())) {
+            return recordErrorAndCreateFailResultWithMessage("update question error: question is empty");
+        }
+        if (question.getQuestionType() == null) {
+            return recordErrorAndCreateFailResultWithMessage("update question error: question type is null");
+        }
+        switch (question.getQuestionType()) {
+            case SingleChoice:
+            case MultipleChoice:
+                question.setAutoCheck(true);
+                if (question.getChoices() == null || question.getChoices().isEmpty()) {
+                    return recordErrorAndCreateFailResultWithMessage("update question error: choices of choice question is empty");
+                }
+                break;
+            case Essay:
+                question.setAutoCheck(false);
+                break;
+        }
+        boolean notMatches = false;
+        switch (question.getQuestionType()) {
+            case SingleFilling:
+                if (!(question.getAnswer() instanceof SingleFillingAnswer)) {
+                    notMatches = true;
+                }
+                break;
+            case MultipleFilling:
+                if (!(question.getAnswer() instanceof MultipleFillingAnswer)) {
+                    notMatches = true;
+                }
+                break;
+            case SingleChoice:
+                if (!(question.getAnswer() instanceof SingleChoiceAnswer)) {
+                    notMatches = true;
+                }
+                break;
+            case MultipleChoice:
+                if (!(question.getAnswer() instanceof MultipleChoiceAnswer)) {
+                    notMatches = true;
+                }
+                break;
+            case Essay:
+                if (!(question.getAnswer() instanceof EssayAnswer)) {
+                    notMatches = true;
+                }
+                break;
+        }
+        if (notMatches) {
+            return recordErrorAndCreateFailResultWithMessage("update question error: answer type and question type is not matched");
+        }
+        Optional<User> userOptional = userService.retrieve(question.getAuthorId());
+        if (!userOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("update question error: user info of author [{}] not exist",
+                    question.getAuthorId() == null ? "" : question.getAuthorId());
+        }
+        // questionImages
+        List<String> oldQuestionImages = new LinkedList<>(question.getImagePaths());
+        if (questionImages != null) {
+            if (!ImageUtils.storeImages(questionImages)) {
+                return recordErrorAndCreateFailResultWithMessage("update question error: store images of question failed");
+            }
+            question.getImagePaths().clear();
+            question.getImagePaths().addAll(questionImages.keySet());
+        }
+        // essayImages
+        List<String> oldEssayImages = new LinkedList<>();
+        if (question.getQuestionType() == QuestionType.Essay) {
+            EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
+            oldEssayImages.addAll(essayAnswer.getImagePaths());
+            if (essayImages != null) {
+                if (!ImageUtils.storeImages(essayImages)) {
+                    // rollback
+                    if (questionImages != null) {
+                        ImageUtils.deleteImages(questionImages.keySet());
+                    }
+                    question.getImagePaths().clear();
+                    question.getImagePaths().addAll(oldQuestionImages);
+                    return recordErrorAndCreateFailResultWithMessage("update question error: store images of essay answer failed");
+                }
+                essayAnswer.getImagePaths().clear();
+                essayAnswer.getImagePaths().addAll(essayImages.keySet());
+            }
+        }
+        Optional<Question> questionOptional = create(question);
+        if (!questionOptional.isPresent()) {
+            // rollback
+            if (questionImages != null) {
+                ImageUtils.deleteImages(questionImages.keySet());
+            }
+            question.getImagePaths().clear();
+            question.getImagePaths().addAll(oldQuestionImages);
+            if (essayImages != null) {
+                ImageUtils.deleteImages(essayImages.keySet());
+            }
+            if (question.getQuestionType() == QuestionType.Essay) {
+                EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
+                essayAnswer.getImagePaths().clear();
+                essayAnswer.getImagePaths().addAll(oldEssayImages);
+            }
+            return recordErrorAndCreateFailResultWithMessage("update question error: store into db failed");
+        }
+        if (questionImages != null) {
+            ImageUtils.deleteImages(oldQuestionImages);
+        }
+        if (essayImages != null) {
+            ImageUtils.deleteImages(oldEssayImages);
+        }
+        return ServiceResult.successResult("update question success", Question.class, questionOptional.get());
     }
 
 

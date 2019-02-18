@@ -24,10 +24,12 @@ import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionImportRequest;
+import com.corkili.learningserver.generate.protobuf.Request.QuestionUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.QuestionFindAllResponse;
 import com.corkili.learningserver.generate.protobuf.Response.QuestionGetResponse;
 import com.corkili.learningserver.generate.protobuf.Response.QuestionImportResponse;
+import com.corkili.learningserver.generate.protobuf.Response.QuestionUpdateResponse;
 import com.corkili.learningserver.service.QuestionService;
 import com.corkili.learningserver.token.TokenManager;
 
@@ -156,4 +158,60 @@ public class QuestionController {
                 .build();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/update", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public QuestionUpdateResponse updateQuestion(@RequestBody QuestionUpdateRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return QuestionUpdateResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        Long authorId = tokenManager.getUserIdAssociatedWithToken(token);
+        Optional<Question> questionOptional = questionService.retrieve(request.getQuestionId());
+        if (!questionOptional.isPresent()) {
+            return QuestionUpdateResponse.newBuilder()
+                    .setResponse(ControllerUtils.generateErrorBaseResponse(token, ServiceUtils.format(
+                            "question [{}] not exist", request.getQuestionId())))
+                    .build();
+        }
+        Question copyQuestion = Question.copyFrom(questionOptional.get());
+        if (request.getUpdateQuestion()) {
+            copyQuestion.setQuestion(request.getQuestion());
+        }
+        Map<String, byte[]> images = null;
+        if (request.getUpdateImage()) {
+            images = ControllerUtils.generateImageMap("question", authorId, request.getImageList());
+        }
+        if (request.getUpdateQuestionType()) {
+            copyQuestion.setQuestionType(QuestionType.valueOf(request.getQuestionType().name()));
+        }
+        if (request.getUpdateAutoCheck()) {
+            copyQuestion.setAutoCheck(request.getAutoCheck());
+        }
+        if (request.getUpdateChoices()) {
+            request.getChoicesMap().forEach(copyQuestion::putChoice);
+        }
+        Map<String, byte[]> essayImages = null;
+        if (request.getUpdateAnswer()) {
+            copyQuestion.setAnswer(ProtoUtils.generateQuestionAnswer(request.getQuestionType(), request.getAnswer()));
+            if (request.getQuestionType() == Info.QuestionType.Essay && request.getAnswer().hasEssayAnswer()) {
+                essayImages = ControllerUtils.generateImageMap("question", authorId,
+                        request.getAnswer().getEssayAnswer().getImageList());
+            }
+        }
+        ServiceResult serviceResult = questionService.updateQuestion(copyQuestion, images, essayImages);
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        QuestionInfo questionInfo;
+        if (serviceResult.isSuccess()) {
+            questionInfo = ProtoUtils.generateQuestionInfo((Question) serviceResult.extra(Question.class), false);
+        } else {
+            questionInfo = ProtoUtils.generateQuestionInfo(copyQuestion, false);
+        }
+        return QuestionUpdateResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setQuestionInfo(questionInfo)
+                .build();
+    }
 }
