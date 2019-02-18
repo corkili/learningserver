@@ -8,6 +8,14 @@ enum UserType {
     Student = 1;
 }
 
+enum QuestionType {
+    SingleFilling = 0;
+    MultipleFilling = 1;
+    SingleChoice = 2;
+    MultipleChoice = 3;
+    Essay = 4;
+}
+
 message Image {
     string path = 1;
     bool hasData = 2;
@@ -31,3 +39,50 @@ message CourseInfo {
     repeated string tag = 8;
     UserInfo teacherInfo = 9;
 }
+
+message QuestionInfo {
+    sint64 questionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string question = 4;
+    repeated Image image = 5;
+    QuestionType questionType = 6;
+    bool autoCheck = 7;
+    map<int32, string> choices = 8;
+    Answer answer = 9;
+    sint64 authorId = 10;
+}
+
+message Answer {
+    oneof answer {
+        SingleFillingAnswer singleFillingAnswer = 1;
+        MultipleFillingAnswer multipleFillingAnswer = 2;
+        SingleChoiceAnswer singleChoiceAnswer = 3;
+        MultipleChoiceAnswer multipleChoiceAnswer = 4;
+        EssayAnswer essayAnswer = 5;
+    }
+}
+
+message SingleFillingAnswer {
+    repeated string answer = 1;
+}
+
+message MultipleFillingAnswer {
+    map<int32, SingleFillingAnswer> answer = 1;
+}
+
+message SingleChoiceAnswer {
+    int32 choice = 1;
+}
+
+message MultipleChoiceAnswer {
+    repeated int32 choice = 1;
+    bool selectAllIsCorrect = 2;
+}
+
+message EssayAnswer {
+    string text = 1;
+    repeated Image image = 2;
+}
+
+

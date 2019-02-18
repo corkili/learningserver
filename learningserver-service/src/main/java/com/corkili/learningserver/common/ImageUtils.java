@@ -4,6 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
@@ -21,6 +24,24 @@ public class ImageUtils {
         }
         return ServiceUtils.format("{}-{}-{}-{}", entityName, teacherId,
                 UUID.randomUUID().toString().replaceAll("-", ""), imageName);
+    }
+
+    public static boolean storeImages(Map<String, byte[]> images) {
+        if (images == null) {
+            return true;
+        }
+        boolean storeSuccess = true;
+        for (Entry<String, byte[]> entry : images.entrySet()) {
+            if (!ImageUtils.storeImage(entry.getKey(), entry.getValue())) {
+                storeSuccess = false;
+            }
+        }
+        if (!storeSuccess) {
+            for (String path : images.keySet()) {
+                ImageUtils.deleteImage(path);
+            }
+        }
+        return storeSuccess;
     }
 
     public static boolean storeImage(String imagePath, byte[] imageData) {
@@ -66,4 +87,9 @@ public class ImageUtils {
         }
     }
 
+    public static void deleteImages(Collection<String> imagePaths) {
+        if (imagePaths != null) {
+            imagePaths.forEach(ImageUtils::deleteImage);
+        }
+    }
 }

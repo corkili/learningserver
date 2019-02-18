@@ -61,3 +61,8 @@ message CourseDeleteResponse {
     BaseResponse response = 1;
     sint64 courseId = 2;
 }
+
+message QuestionImportResponse {
+    BaseResponse response = 1;
+    QuestionInfo questionInfo = 2;
+}

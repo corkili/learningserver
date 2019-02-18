@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -121,22 +120,14 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         if (course.getTeacherId() == null) {
             return recordErrorAndCreateFailResultWithMessage("create course error: teacher is null");
         }
-        boolean storeSuccess = true;
-        for (Entry<String, byte[]> entry : images.entrySet()) {
-            if (!ImageUtils.storeImage(entry.getKey(), entry.getValue())) {
-                storeSuccess = false;
-            }
-        }
-        if (!storeSuccess) {
-            for (String path : images.keySet()) {
-                ImageUtils.deleteImage(path);
-            }
+        if (ImageUtils.storeImages(images)) {
             return recordErrorAndCreateFailResultWithMessage("create course error: store image failed");
         }
         course.getImagePaths().clear();
         course.getImagePaths().addAll(images.keySet());
         Optional<Course> courseOptional = create(course);
         if (!courseOptional.isPresent()) {
+            ImageUtils.deleteImages(images.keySet());
             return recordErrorAndCreateFailResultWithMessage("create course error: create course failed");
         }
         course = courseOptional.get();
@@ -213,31 +204,25 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         if (course.getTeacherId() == null) {
             return recordErrorAndCreateFailResultWithMessage("update course error: teacher is null");
         }
+        List<String> oldImagePaths = new LinkedList<>(course.getImagePaths());
         if (images != null) {
-            for (String imagePath : course.getImagePaths()) {
-                ImageUtils.deleteImage(imagePath);
-            }
-            course.getImagePaths().clear();
-            boolean storeSuccess = true;
-            for (Entry<String, byte[]> entry : images.entrySet()) {
-                if (!ImageUtils.storeImage(entry.getKey(), entry.getValue())) {
-                    storeSuccess = false;
-                }
-            }
-            if (!storeSuccess) {
-                for (String path : images.keySet()) {
-                    ImageUtils.deleteImage(path);
-                }
+            if (!ImageUtils.storeImages(images)) {
                 return recordErrorAndCreateFailResultWithMessage("update course error: store image failed");
             }
+            course.getImagePaths().clear();
             course.getImagePaths().addAll(images.keySet());
         }
         Optional<Course> courseOptional = update(course);
         if (!courseOptional.isPresent()) {
+            if (images != null) {
+                ImageUtils.deleteImages(images.keySet());
+            }
             return recordErrorAndCreateFailResultWithMessage("update course error: create course failed");
         }
-        course = courseOptional.get();
-        return ServiceResult.successResult("update course success", Course.class, course);
+        if (images != null) {
+            ImageUtils.deleteImages(oldImagePaths);
+        }
+        return ServiceResult.successResult("update course success", Course.class, courseOptional.get());
     }
 
     @Override

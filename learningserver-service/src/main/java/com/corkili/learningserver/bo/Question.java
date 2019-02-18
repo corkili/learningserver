@@ -140,6 +140,9 @@ public class Question implements BusinessObject {
     }
 
     public String getChoicesStr() {
+        if (this.choices == null) {
+            return "";
+        }
         List<String> pairs = new LinkedList<>();
         this.choices.forEach((index, choice) -> pairs.add(index + "{@@@}" + choice));
         return ServiceUtils.list2String(pairs, "{###}");
@@ -147,6 +150,14 @@ public class Question implements BusinessObject {
 
     public Answer getAnswer() {
         return this.answer;
+    }
+
+    public String getAnswerStr() {
+        if (this.answer == null) {
+            return "";
+        } else {
+            return this.answer.getAnswer();
+        }
     }
 
     public void setAnswer(String answer, QuestionType questionType) {
@@ -197,6 +208,10 @@ public class Question implements BusinessObject {
 
     public static abstract class AbstractAnswer implements Answer {
 
+        public AbstractAnswer() {
+
+        }
+
         public AbstractAnswer(String answer) {
             setAnswer(answer);
         }
@@ -209,6 +224,10 @@ public class Question implements BusinessObject {
     public static class SingleFillingAnswer extends AbstractAnswer {
 
         private List<String> answerList;
+
+        public SingleFillingAnswer() {
+            this.answerList = new LinkedList<>();
+        }
 
         public SingleFillingAnswer(String answer) {
             super(answer);
@@ -232,6 +251,10 @@ public class Question implements BusinessObject {
     public static class MultipleFillingAnswer extends AbstractAnswer {
 
         private Map<Integer, SingleFillingAnswer> answerMap;
+
+        public MultipleFillingAnswer() {
+            this.answerMap = new HashMap<>();
+        }
 
         public MultipleFillingAnswer(String answer) {
             super(answer);
@@ -270,6 +293,10 @@ public class Question implements BusinessObject {
 
         private int choice;
 
+        public SingleChoiceAnswer(int choice) {
+            this.choice = choice;
+        }
+
         public SingleChoiceAnswer(String answer) {
             super(answer);
         }
@@ -292,6 +319,11 @@ public class Question implements BusinessObject {
     public static class MultipleChoiceAnswer extends AbstractAnswer {
         private List<Integer> choices;
         private boolean selectAllIsCorrect;
+
+        public MultipleChoiceAnswer(boolean selectAllIsCorrect) {
+            choices = new LinkedList<>();
+            this.selectAllIsCorrect = selectAllIsCorrect;
+        }
 
         public MultipleChoiceAnswer(String answer) {
             super(answer);
@@ -342,6 +374,10 @@ public class Question implements BusinessObject {
 
         private String text;
         private List<String> imagePaths;
+
+        public EssayAnswer() {
+            imagePaths = new ArrayList<>();
+        }
 
         public EssayAnswer(String answer) {
             super(answer);

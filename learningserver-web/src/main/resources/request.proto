@@ -79,3 +79,13 @@ message CourseDeleteRequest {
     BaseRequest request = 1;
     sint64 courseId = 2;
 }
+
+message QuestionImportRequest {
+    BaseRequest request = 1;
+    string question = 2;
+    repeated Image image = 3;
+    QuestionType questionType = 4;
+    bool autoCheck = 5;
+    map<int32, string> choices = 6;
+    Answer answer = 7;
+}
