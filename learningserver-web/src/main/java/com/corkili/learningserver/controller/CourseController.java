@@ -95,9 +95,9 @@ public class CourseController {
                     .setResponse(baseResponse)
                     .build();
         }
-        Long teacherId = request.getByTeacherId() ? null : request.getTeacherId();
-        String teacherName = request.getByTeacherName() ? null : request.getTeacherName();
-        List<String> keywords = request.getByKeyword() ? null : new LinkedList<>(request.getKeywordList());
+        Long teacherId = !request.getByTeacherId() ? null : request.getTeacherId();
+        String teacherName = !request.getByTeacherName() ? null : request.getTeacherName();
+        List<String> keywords = !request.getByKeyword() ? null : new LinkedList<>(request.getKeywordList());
         ServiceResult serviceResult = courseService.findAllCourse(request.getAll(), teacherId, teacherName, keywords);
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         List<CourseInfo> courseInfoList = new LinkedList<>();

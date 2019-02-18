@@ -1,5 +1,9 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,6 +25,7 @@ import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.po.Question.Type;
 import com.corkili.learningserver.repo.QuestionRepository;
 import com.corkili.learningserver.service.QuestionService;
@@ -173,6 +178,58 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
         }
         question = questionOptional.get();
         return ServiceResult.successResult("import question success", Question.class, question);
+    }
+
+    @Override
+    public ServiceResult findAllQuestion(Long authorId, boolean all, List<String> keywordList, List<QuestionType> questionTypeList) {
+        if (authorId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("author id not exist").mergeFrom(
+                    ServiceResult.successResultWithExtra(List.class, new LinkedList<Question>()), true);
+        }
+        String msg = "find all question success";
+        Map<Long, com.corkili.learningserver.po.Question> questionPOMap = new HashMap<>();
+        if (all) {
+            List<com.corkili.learningserver.po.Question> questionPOList = questionRepository.findAllByAuthorId(authorId);
+            questionPOList.forEach(question -> questionPOMap.put(question.getId(), question));
+        } else {
+            if (keywordList != null) {
+                for (String keyword : keywordList) {
+                    questionRepository.findAllByAuthorIdAndQuestionContaining(authorId, keyword).forEach(
+                            question -> questionPOMap.put(question.getId(), question));
+                }
+            }
+            if (questionTypeList != null) {
+                List<com.corkili.learningserver.po.Question.Type> questionTypes = new LinkedList<>();
+                for (QuestionType questionType : questionTypeList) {
+                    questionTypes.add(com.corkili.learningserver.po.Question.Type.valueOf(questionType.name()));
+                }
+                questionRepository.findAllByAuthorIdAndQuestionTypeIn(authorId, questionTypes).forEach(
+                        question -> questionPOMap.put(question.getId(), question));
+            }
+        }
+        List<Question> allQuestion = new LinkedList<>();
+        Collection<com.corkili.learningserver.po.Question> allQuestionPO = questionPOMap.values();
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.Question questionPO : allQuestionPO) {
+            Optional<Question> questionOptional = po2bo(questionPO);
+            i++;
+            if (!questionOptional.isPresent()) {
+                errId.append(questionPO.getId());
+                if (i != allQuestionPO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                Question question = questionOptional.get();
+                allQuestion.add(question);
+                // cache
+                putToCache(entityName() + question.getId(), question);
+            }
+        }
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all question warn: transfer question po [{}] to bo failed.", errId.toString());
+        }
+        return ServiceResult.successResult(msg, List.class, allQuestion);
     }
 
 

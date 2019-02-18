@@ -89,3 +89,18 @@ message QuestionImportRequest {
     map<int32, string> choices = 6;
     Answer answer = 7;
 }
+
+message QuestionFindAllRequest {
+    BaseRequest request = 1;
+    bool all = 2;
+    bool byKeyword = 3;
+    repeated string keyword = 4;
+    bool byQuestionType = 5;
+    repeated QuestionType questionType = 6;
+}
+
+message QuestionGetRequest {
+    BaseRequest request = 1;
+    repeated sint64 questionId = 2;
+    bool loadImage = 3;
+}

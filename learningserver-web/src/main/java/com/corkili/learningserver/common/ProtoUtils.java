@@ -18,6 +18,7 @@ import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionInfo;
+import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionType;
 import com.corkili.learningserver.generate.protobuf.Info.SingleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.SingleFillingAnswer;
@@ -82,6 +83,16 @@ public class ProtoUtils {
                 .setAutoCheck(question.isAutoCheck())
                 .putAllChoices(question.getChoices())
                 .setAnswer(generateAnswer(question.getQuestionType(), question.getAnswer(), loadImageData))
+                .setAuthorId(question.getAuthorId())
+                .build();
+    }
+
+    public static QuestionSimpleInfo generateQuestionSimpleInfo(Question question) {
+        return QuestionSimpleInfo.newBuilder()
+                .setQuestionId(question.getId())
+                .setQuestion(question.getQuestion())
+                .setQuestionType(QuestionType.valueOf(question.getQuestionType().name()))
+                .setAutoCheck(question.isAutoCheck())
                 .setAuthorId(question.getAuthorId())
                 .build();
     }

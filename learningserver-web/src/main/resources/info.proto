@@ -53,6 +53,14 @@ message QuestionInfo {
     sint64 authorId = 10;
 }
 
+message QuestionSimpleInfo {
+    sint64 questionId = 1;
+    string question = 2;
+    QuestionType questionType = 3;
+    bool autoCheck = 4;
+    sint64 authorId = 5;
+}
+
 message Answer {
     oneof answer {
         SingleFillingAnswer singleFillingAnswer = 1;

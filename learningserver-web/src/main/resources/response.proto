@@ -66,3 +66,14 @@ message QuestionImportResponse {
     BaseResponse response = 1;
     QuestionInfo questionInfo = 2;
 }
+
+message QuestionFindAllResponse {
+    BaseResponse response = 1;
+    repeated QuestionSimpleInfo questionSimpleInfo = 2;
+}
+
+message QuestionGetResponse {
+    BaseResponse response = 1;
+    repeated QuestionInfo questionInfo = 2;
+    repeated sint64 failedQuestionId = 3;
+}

@@ -12234,6 +12234,2102 @@ public final class Request {
 
   }
 
+  public interface QuestionFindAllRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:QuestionFindAllRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
+
+    /**
+     * <code>bool all = 2;</code>
+     */
+    boolean getAll();
+
+    /**
+     * <code>bool byKeyword = 3;</code>
+     */
+    boolean getByKeyword();
+
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    java.util.List<java.lang.String>
+        getKeywordList();
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    int getKeywordCount();
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    java.lang.String getKeyword(int index);
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeywordBytes(int index);
+
+    /**
+     * <code>bool byQuestionType = 5;</code>
+     */
+    boolean getByQuestionType();
+
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionType> getQuestionTypeList();
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    int getQuestionTypeCount();
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.QuestionType getQuestionType(int index);
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    java.util.List<java.lang.Integer>
+    getQuestionTypeValueList();
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    int getQuestionTypeValue(int index);
+  }
+  /**
+   * Protobuf type {@code QuestionFindAllRequest}
+   */
+  public  static final class QuestionFindAllRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:QuestionFindAllRequest)
+      QuestionFindAllRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use QuestionFindAllRequest.newBuilder() to construct.
+    private QuestionFindAllRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private QuestionFindAllRequest() {
+      all_ = false;
+      byKeyword_ = false;
+      keyword_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      byQuestionType_ = false;
+      questionType_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestionFindAllRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder subBuilder = null;
+              if (request_ != null) {
+                subBuilder = request_.toBuilder();
+              }
+              request_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Request.BaseRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(request_);
+                request_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+
+              all_ = input.readBool();
+              break;
+            }
+            case 24: {
+
+              byKeyword_ = input.readBool();
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                keyword_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              keyword_.add(s);
+              break;
+            }
+            case 40: {
+
+              byQuestionType_ = input.readBool();
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                questionType_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              questionType_.add(rawValue);
+              break;
+            }
+            case 50: {
+              int length = input.readRawVarint32();
+              int oldLimit = input.pushLimit(length);
+              while(input.getBytesUntilLimit() > 0) {
+                int rawValue = input.readEnum();
+                if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                  questionType_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000020;
+                }
+                questionType_.add(rawValue);
+              }
+              input.popLimit(oldLimit);
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          keyword_ = keyword_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          questionType_ = java.util.Collections.unmodifiableList(questionType_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionFindAllRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionFindAllRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.class, com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int REQUEST_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_;
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public boolean hasRequest() {
+      return request_ != null;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+      return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+      return getRequest();
+    }
+
+    public static final int ALL_FIELD_NUMBER = 2;
+    private boolean all_;
+    /**
+     * <code>bool all = 2;</code>
+     */
+    public boolean getAll() {
+      return all_;
+    }
+
+    public static final int BYKEYWORD_FIELD_NUMBER = 3;
+    private boolean byKeyword_;
+    /**
+     * <code>bool byKeyword = 3;</code>
+     */
+    public boolean getByKeyword() {
+      return byKeyword_;
+    }
+
+    public static final int KEYWORD_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList keyword_;
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getKeywordList() {
+      return keyword_;
+    }
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    public int getKeywordCount() {
+      return keyword_.size();
+    }
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    public java.lang.String getKeyword(int index) {
+      return keyword_.get(index);
+    }
+    /**
+     * <code>repeated string keyword = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeywordBytes(int index) {
+      return keyword_.getByteString(index);
+    }
+
+    public static final int BYQUESTIONTYPE_FIELD_NUMBER = 5;
+    private boolean byQuestionType_;
+    /**
+     * <code>bool byQuestionType = 5;</code>
+     */
+    public boolean getByQuestionType() {
+      return byQuestionType_;
+    }
+
+    public static final int QUESTIONTYPE_FIELD_NUMBER = 6;
+    private java.util.List<java.lang.Integer> questionType_;
+    private static final com.google.protobuf.Internal.ListAdapter.Converter<
+        java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.QuestionType> questionType_converter_ =
+            new com.google.protobuf.Internal.ListAdapter.Converter<
+                java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.QuestionType>() {
+              public com.corkili.learningserver.generate.protobuf.Info.QuestionType convert(java.lang.Integer from) {
+                @SuppressWarnings("deprecation")
+                com.corkili.learningserver.generate.protobuf.Info.QuestionType result = com.corkili.learningserver.generate.protobuf.Info.QuestionType.valueOf(from);
+                return result == null ? com.corkili.learningserver.generate.protobuf.Info.QuestionType.UNRECOGNIZED : result;
+              }
+            };
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionType> getQuestionTypeList() {
+      return new com.google.protobuf.Internal.ListAdapter<
+          java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.QuestionType>(questionType_, questionType_converter_);
+    }
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    public int getQuestionTypeCount() {
+      return questionType_.size();
+    }
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.QuestionType getQuestionType(int index) {
+      return questionType_converter_.convert(questionType_.get(index));
+    }
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    public java.util.List<java.lang.Integer>
+    getQuestionTypeValueList() {
+      return questionType_;
+    }
+    /**
+     * <code>repeated .QuestionType questionType = 6;</code>
+     */
+    public int getQuestionTypeValue(int index) {
+      return questionType_.get(index);
+    }
+    private int questionTypeMemoizedSerializedSize;
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (request_ != null) {
+        output.writeMessage(1, getRequest());
+      }
+      if (all_ != false) {
+        output.writeBool(2, all_);
+      }
+      if (byKeyword_ != false) {
+        output.writeBool(3, byKeyword_);
+      }
+      for (int i = 0; i < keyword_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, keyword_.getRaw(i));
+      }
+      if (byQuestionType_ != false) {
+        output.writeBool(5, byQuestionType_);
+      }
+      if (getQuestionTypeList().size() > 0) {
+        output.writeUInt32NoTag(50);
+        output.writeUInt32NoTag(questionTypeMemoizedSerializedSize);
+      }
+      for (int i = 0; i < questionType_.size(); i++) {
+        output.writeEnumNoTag(questionType_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (request_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getRequest());
+      }
+      if (all_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, all_);
+      }
+      if (byKeyword_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, byKeyword_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < keyword_.size(); i++) {
+          dataSize += computeStringSizeNoTag(keyword_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getKeywordList().size();
+      }
+      if (byQuestionType_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, byQuestionType_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < questionType_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeEnumSizeNoTag(questionType_.get(i));
+        }
+        size += dataSize;
+        if (!getQuestionTypeList().isEmpty()) {  size += 1;
+          size += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(dataSize);
+        }questionTypeMemoizedSerializedSize = dataSize;
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest other = (com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest) obj;
+
+      boolean result = true;
+      result = result && (hasRequest() == other.hasRequest());
+      if (hasRequest()) {
+        result = result && getRequest()
+            .equals(other.getRequest());
+      }
+      result = result && (getAll()
+          == other.getAll());
+      result = result && (getByKeyword()
+          == other.getByKeyword());
+      result = result && getKeywordList()
+          .equals(other.getKeywordList());
+      result = result && (getByQuestionType()
+          == other.getByQuestionType());
+      result = result && questionType_.equals(other.questionType_);
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasRequest()) {
+        hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRequest().hashCode();
+      }
+      hash = (37 * hash) + ALL_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getAll());
+      hash = (37 * hash) + BYKEYWORD_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getByKeyword());
+      if (getKeywordCount() > 0) {
+        hash = (37 * hash) + KEYWORD_FIELD_NUMBER;
+        hash = (53 * hash) + getKeywordList().hashCode();
+      }
+      hash = (37 * hash) + BYQUESTIONTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getByQuestionType());
+      if (getQuestionTypeCount() > 0) {
+        hash = (37 * hash) + QUESTIONTYPE_FIELD_NUMBER;
+        hash = (53 * hash) + questionType_.hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code QuestionFindAllRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:QuestionFindAllRequest)
+        com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionFindAllRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionFindAllRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.class, com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (requestBuilder_ == null) {
+          request_ = null;
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+        all_ = false;
+
+        byKeyword_ = false;
+
+        keyword_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        byQuestionType_ = false;
+
+        questionType_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionFindAllRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest build() {
+        com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest result = new com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (requestBuilder_ == null) {
+          result.request_ = request_;
+        } else {
+          result.request_ = requestBuilder_.build();
+        }
+        result.all_ = all_;
+        result.byKeyword_ = byKeyword_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          keyword_ = keyword_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.keyword_ = keyword_;
+        result.byQuestionType_ = byQuestionType_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          questionType_ = java.util.Collections.unmodifiableList(questionType_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.questionType_ = questionType_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest.getDefaultInstance()) return this;
+        if (other.hasRequest()) {
+          mergeRequest(other.getRequest());
+        }
+        if (other.getAll() != false) {
+          setAll(other.getAll());
+        }
+        if (other.getByKeyword() != false) {
+          setByKeyword(other.getByKeyword());
+        }
+        if (!other.keyword_.isEmpty()) {
+          if (keyword_.isEmpty()) {
+            keyword_ = other.keyword_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureKeywordIsMutable();
+            keyword_.addAll(other.keyword_);
+          }
+          onChanged();
+        }
+        if (other.getByQuestionType() != false) {
+          setByQuestionType(other.getByQuestionType());
+        }
+        if (!other.questionType_.isEmpty()) {
+          if (questionType_.isEmpty()) {
+            questionType_ = other.questionType_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureQuestionTypeIsMutable();
+            questionType_.addAll(other.questionType_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> requestBuilder_;
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public boolean hasRequest() {
+        return requestBuilder_ != null || request_ != null;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+        if (requestBuilder_ == null) {
+          return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        } else {
+          return requestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder builderForValue) {
+        if (requestBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder mergeRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (request_ != null) {
+            request_ =
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.newBuilder(request_).mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          requestBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
+          request_ = null;
+          onChanged();
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder getRequestBuilder() {
+        
+        onChanged();
+        return getRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+        if (requestBuilder_ != null) {
+          return requestBuilder_.getMessageOrBuilder();
+        } else {
+          return request_ == null ?
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder>(
+                  getRequest(),
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        return requestBuilder_;
+      }
+
+      private boolean all_ ;
+      /**
+       * <code>bool all = 2;</code>
+       */
+      public boolean getAll() {
+        return all_;
+      }
+      /**
+       * <code>bool all = 2;</code>
+       */
+      public Builder setAll(boolean value) {
+        
+        all_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool all = 2;</code>
+       */
+      public Builder clearAll() {
+        
+        all_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean byKeyword_ ;
+      /**
+       * <code>bool byKeyword = 3;</code>
+       */
+      public boolean getByKeyword() {
+        return byKeyword_;
+      }
+      /**
+       * <code>bool byKeyword = 3;</code>
+       */
+      public Builder setByKeyword(boolean value) {
+        
+        byKeyword_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool byKeyword = 3;</code>
+       */
+      public Builder clearByKeyword() {
+        
+        byKeyword_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList keyword_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureKeywordIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          keyword_ = new com.google.protobuf.LazyStringArrayList(keyword_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getKeywordList() {
+        return keyword_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public int getKeywordCount() {
+        return keyword_.size();
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public java.lang.String getKeyword(int index) {
+        return keyword_.get(index);
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeywordBytes(int index) {
+        return keyword_.getByteString(index);
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public Builder setKeyword(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeywordIsMutable();
+        keyword_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public Builder addKeyword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeywordIsMutable();
+        keyword_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public Builder addAllKeyword(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureKeywordIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, keyword_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public Builder clearKeyword() {
+        keyword_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string keyword = 4;</code>
+       */
+      public Builder addKeywordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureKeywordIsMutable();
+        keyword_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private boolean byQuestionType_ ;
+      /**
+       * <code>bool byQuestionType = 5;</code>
+       */
+      public boolean getByQuestionType() {
+        return byQuestionType_;
+      }
+      /**
+       * <code>bool byQuestionType = 5;</code>
+       */
+      public Builder setByQuestionType(boolean value) {
+        
+        byQuestionType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool byQuestionType = 5;</code>
+       */
+      public Builder clearByQuestionType() {
+        
+        byQuestionType_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> questionType_ =
+        java.util.Collections.emptyList();
+      private void ensureQuestionTypeIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          questionType_ = new java.util.ArrayList<java.lang.Integer>(questionType_);
+          bitField0_ |= 0x00000020;
+        }
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionType> getQuestionTypeList() {
+        return new com.google.protobuf.Internal.ListAdapter<
+            java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.QuestionType>(questionType_, questionType_converter_);
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public int getQuestionTypeCount() {
+        return questionType_.size();
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.QuestionType getQuestionType(int index) {
+        return questionType_converter_.convert(questionType_.get(index));
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder setQuestionType(
+          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureQuestionTypeIsMutable();
+        questionType_.set(index, value.getNumber());
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder addQuestionType(com.corkili.learningserver.generate.protobuf.Info.QuestionType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureQuestionTypeIsMutable();
+        questionType_.add(value.getNumber());
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder addAllQuestionType(
+          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionType> values) {
+        ensureQuestionTypeIsMutable();
+        for (com.corkili.learningserver.generate.protobuf.Info.QuestionType value : values) {
+          questionType_.add(value.getNumber());
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder clearQuestionType() {
+        questionType_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public java.util.List<java.lang.Integer>
+      getQuestionTypeValueList() {
+        return java.util.Collections.unmodifiableList(questionType_);
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public int getQuestionTypeValue(int index) {
+        return questionType_.get(index);
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder setQuestionTypeValue(
+          int index, int value) {
+        ensureQuestionTypeIsMutable();
+        questionType_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder addQuestionTypeValue(int value) {
+        ensureQuestionTypeIsMutable();
+        questionType_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .QuestionType questionType = 6;</code>
+       */
+      public Builder addAllQuestionTypeValue(
+          java.lang.Iterable<java.lang.Integer> values) {
+        ensureQuestionTypeIsMutable();
+        for (int value : values) {
+          questionType_.add(value);
+        }
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:QuestionFindAllRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:QuestionFindAllRequest)
+    private static final com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<QuestionFindAllRequest>
+        PARSER = new com.google.protobuf.AbstractParser<QuestionFindAllRequest>() {
+      @java.lang.Override
+      public QuestionFindAllRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestionFindAllRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<QuestionFindAllRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestionFindAllRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface QuestionGetRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:QuestionGetRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
+
+    /**
+     * <code>repeated sint64 questionId = 2;</code>
+     */
+    java.util.List<java.lang.Long> getQuestionIdList();
+    /**
+     * <code>repeated sint64 questionId = 2;</code>
+     */
+    int getQuestionIdCount();
+    /**
+     * <code>repeated sint64 questionId = 2;</code>
+     */
+    long getQuestionId(int index);
+
+    /**
+     * <code>bool loadImage = 3;</code>
+     */
+    boolean getLoadImage();
+  }
+  /**
+   * Protobuf type {@code QuestionGetRequest}
+   */
+  public  static final class QuestionGetRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:QuestionGetRequest)
+      QuestionGetRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use QuestionGetRequest.newBuilder() to construct.
+    private QuestionGetRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private QuestionGetRequest() {
+      questionId_ = java.util.Collections.emptyList();
+      loadImage_ = false;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private QuestionGetRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder subBuilder = null;
+              if (request_ != null) {
+                subBuilder = request_.toBuilder();
+              }
+              request_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Request.BaseRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(request_);
+                request_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                questionId_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              questionId_.add(input.readSInt64());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                questionId_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                questionId_.add(input.readSInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 24: {
+
+              loadImage_ = input.readBool();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          questionId_ = java.util.Collections.unmodifiableList(questionId_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionGetRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionGetRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.class, com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int REQUEST_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_;
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public boolean hasRequest() {
+      return request_ != null;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+      return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+      return getRequest();
+    }
+
+    public static final int QUESTIONID_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Long> questionId_;
+    /**
+     * <code>repeated sint64 questionId = 2;</code>
+     */
+    public java.util.List<java.lang.Long>
+        getQuestionIdList() {
+      return questionId_;
+    }
+    /**
+     * <code>repeated sint64 questionId = 2;</code>
+     */
+    public int getQuestionIdCount() {
+      return questionId_.size();
+    }
+    /**
+     * <code>repeated sint64 questionId = 2;</code>
+     */
+    public long getQuestionId(int index) {
+      return questionId_.get(index);
+    }
+    private int questionIdMemoizedSerializedSize = -1;
+
+    public static final int LOADIMAGE_FIELD_NUMBER = 3;
+    private boolean loadImage_;
+    /**
+     * <code>bool loadImage = 3;</code>
+     */
+    public boolean getLoadImage() {
+      return loadImage_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (request_ != null) {
+        output.writeMessage(1, getRequest());
+      }
+      if (getQuestionIdList().size() > 0) {
+        output.writeUInt32NoTag(18);
+        output.writeUInt32NoTag(questionIdMemoizedSerializedSize);
+      }
+      for (int i = 0; i < questionId_.size(); i++) {
+        output.writeSInt64NoTag(questionId_.get(i));
+      }
+      if (loadImage_ != false) {
+        output.writeBool(3, loadImage_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (request_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getRequest());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < questionId_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeSInt64SizeNoTag(questionId_.get(i));
+        }
+        size += dataSize;
+        if (!getQuestionIdList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        questionIdMemoizedSerializedSize = dataSize;
+      }
+      if (loadImage_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, loadImage_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest other = (com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest) obj;
+
+      boolean result = true;
+      result = result && (hasRequest() == other.hasRequest());
+      if (hasRequest()) {
+        result = result && getRequest()
+            .equals(other.getRequest());
+      }
+      result = result && getQuestionIdList()
+          .equals(other.getQuestionIdList());
+      result = result && (getLoadImage()
+          == other.getLoadImage());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasRequest()) {
+        hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRequest().hashCode();
+      }
+      if (getQuestionIdCount() > 0) {
+        hash = (37 * hash) + QUESTIONID_FIELD_NUMBER;
+        hash = (53 * hash) + getQuestionIdList().hashCode();
+      }
+      hash = (37 * hash) + LOADIMAGE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getLoadImage());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code QuestionGetRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:QuestionGetRequest)
+        com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionGetRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionGetRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.class, com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (requestBuilder_ == null) {
+          request_ = null;
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+        questionId_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        loadImage_ = false;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_QuestionGetRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest build() {
+        com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest result = new com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (requestBuilder_ == null) {
+          result.request_ = request_;
+        } else {
+          result.request_ = requestBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          questionId_ = java.util.Collections.unmodifiableList(questionId_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.questionId_ = questionId_;
+        result.loadImage_ = loadImage_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest.getDefaultInstance()) return this;
+        if (other.hasRequest()) {
+          mergeRequest(other.getRequest());
+        }
+        if (!other.questionId_.isEmpty()) {
+          if (questionId_.isEmpty()) {
+            questionId_ = other.questionId_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureQuestionIdIsMutable();
+            questionId_.addAll(other.questionId_);
+          }
+          onChanged();
+        }
+        if (other.getLoadImage() != false) {
+          setLoadImage(other.getLoadImage());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> requestBuilder_;
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public boolean hasRequest() {
+        return requestBuilder_ != null || request_ != null;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+        if (requestBuilder_ == null) {
+          return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        } else {
+          return requestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder builderForValue) {
+        if (requestBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder mergeRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (request_ != null) {
+            request_ =
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.newBuilder(request_).mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          requestBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
+          request_ = null;
+          onChanged();
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder getRequestBuilder() {
+        
+        onChanged();
+        return getRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+        if (requestBuilder_ != null) {
+          return requestBuilder_.getMessageOrBuilder();
+        } else {
+          return request_ == null ?
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder>(
+                  getRequest(),
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        return requestBuilder_;
+      }
+
+      private java.util.List<java.lang.Long> questionId_ = java.util.Collections.emptyList();
+      private void ensureQuestionIdIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          questionId_ = new java.util.ArrayList<java.lang.Long>(questionId_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public java.util.List<java.lang.Long>
+          getQuestionIdList() {
+        return java.util.Collections.unmodifiableList(questionId_);
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public int getQuestionIdCount() {
+        return questionId_.size();
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public long getQuestionId(int index) {
+        return questionId_.get(index);
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public Builder setQuestionId(
+          int index, long value) {
+        ensureQuestionIdIsMutable();
+        questionId_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public Builder addQuestionId(long value) {
+        ensureQuestionIdIsMutable();
+        questionId_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public Builder addAllQuestionId(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureQuestionIdIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, questionId_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated sint64 questionId = 2;</code>
+       */
+      public Builder clearQuestionId() {
+        questionId_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      private boolean loadImage_ ;
+      /**
+       * <code>bool loadImage = 3;</code>
+       */
+      public boolean getLoadImage() {
+        return loadImage_;
+      }
+      /**
+       * <code>bool loadImage = 3;</code>
+       */
+      public Builder setLoadImage(boolean value) {
+        
+        loadImage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool loadImage = 3;</code>
+       */
+      public Builder clearLoadImage() {
+        
+        loadImage_ = false;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:QuestionGetRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:QuestionGetRequest)
+    private static final com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<QuestionGetRequest>
+        PARSER = new com.google.protobuf.AbstractParser<QuestionGetRequest>() {
+      @java.lang.Override
+      public QuestionGetRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new QuestionGetRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<QuestionGetRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<QuestionGetRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_BaseRequest_descriptor;
   private static final 
@@ -12294,6 +14390,16 @@ public final class Request {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_QuestionImportRequest_ChoicesEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_QuestionFindAllRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_QuestionFindAllRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_QuestionGetRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_QuestionGetRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -12341,9 +14447,15 @@ public final class Request {
       "utoCheck\030\005 \001(\010\0224\n\007choices\030\006 \003(\0132#.Questi" +
       "onImportRequest.ChoicesEntry\022\027\n\006answer\030\007" +
       " \001(\0132\007.Answer\032.\n\014ChoicesEntry\022\013\n\003key\030\001 \001" +
-      "(\005\022\r\n\005value\030\002 \001(\t:\0028\001B7\n,com.corkili.lea" +
-      "rningserver.generate.protobufB\007Requestb\006" +
-      "proto3"
+      "(\005\022\r\n\005value\030\002 \001(\t:\0028\001\"\245\001\n\026QuestionFindAl" +
+      "lRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
+      "\013\n\003all\030\002 \001(\010\022\021\n\tbyKeyword\030\003 \001(\010\022\017\n\007keywo" +
+      "rd\030\004 \003(\t\022\026\n\016byQuestionType\030\005 \001(\010\022#\n\014ques" +
+      "tionType\030\006 \003(\0162\r.QuestionType\"Z\n\022Questio" +
+      "nGetRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
+      "st\022\022\n\nquestionId\030\002 \003(\022\022\021\n\tloadImage\030\003 \001(" +
+      "\010B7\n,com.corkili.learningserver.generate" +
+      ".protobufB\007Requestb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12430,6 +14542,18 @@ public final class Request {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_QuestionImportRequest_ChoicesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
+    internal_static_QuestionFindAllRequest_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_QuestionFindAllRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_QuestionFindAllRequest_descriptor,
+        new java.lang.String[] { "Request", "All", "ByKeyword", "Keyword", "ByQuestionType", "QuestionType", });
+    internal_static_QuestionGetRequest_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_QuestionGetRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_QuestionGetRequest_descriptor,
+        new java.lang.String[] { "Request", "QuestionId", "LoadImage", });
     com.corkili.learningserver.generate.protobuf.Info.getDescriptor();
   }
 

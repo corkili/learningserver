@@ -172,9 +172,10 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         int i = 0;
         for (com.corkili.learningserver.po.Course coursePO : allCoursePO) {
             Optional<Course> courseOptional = po2bo(coursePO);
+            i++;
             if (!courseOptional.isPresent()) {
                 errId.append(coursePO.getId());
-                if (++i != allCoursePO.size()) {
+                if (i != allCoursePO.size()) {
                     errId.append(",");
                 }
             } else {
