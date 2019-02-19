@@ -141,4 +141,57 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
         }
         return ServiceResult.successResult(msg, Exam.class, exam, List.class, examQuestionList);
     }
+
+    @Override
+    public ServiceResult updateExam(Exam exam, Collection<ExamQuestion> examQuestions) {
+        if (StringUtils.isBlank(exam.getExamName())) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: workName is empty");
+        }
+        if (exam.getExamName().length() > 100) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: length of workName > 100");
+        }
+        if (exam.getCreateTime() == null) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: start time is null");
+        }
+        if (exam.getCreateTime().before(new Date())) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: start time is before now");
+        }
+        if (exam.getEndTime() == null) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: end time is null");
+        }
+        if (exam.getEndTime().before(new Date())) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: end time is before now");
+        }
+        if (exam.getStartTime().after(exam.getEndTime())) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: start time is after end time");
+        }
+        if (exam.getDuration() < 1) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: duration < 1");
+        }
+        if (exam.getBelongCourseId() == null || !courseRepository.existsById(exam.getBelongCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: belong course [{}] not exist",
+                    exam.getBelongCourseId() == null ? "" : exam.getBelongCourseId());
+        }
+        Optional<Exam> examOptional = update(exam);
+        if (!examOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("update exam error: save CourseWork failed");
+        }
+        exam = examOptional.get();
+        ServiceResult serviceResult = examQuestionService.createOrUpdateExamQuestionForExam(examQuestions, exam.getId());
+        String msg = "update exam success";
+        List<ExamQuestion> examQuestionList = null;
+        if (examQuestions != null) {
+            if (serviceResult.isFail()) {
+                msg += ", but " + serviceResult.msg();
+            } else {
+                msg += ", and " + serviceResult.msg();
+            }
+            examQuestionList = (List<ExamQuestion>) serviceResult.extra(List.class);
+        }
+        if (examQuestionList == null) {
+            examQuestionList = (List<ExamQuestion>) examQuestionService.findAllExamQuestionByBelongExamId(
+                    exam.getId()).extra(List.class);
+        }
+        return ServiceResult.successResult(msg, Exam.class, exam, List.class, examQuestionList);
+    }
 }

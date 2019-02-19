@@ -16,4 +16,5 @@ public interface ExamQuestionService extends Service<ExamQuestion, com.corkili.l
 
     ServiceResult createOrUpdateExamQuestionForExam(Collection<ExamQuestion> examQuestions, Long examId);
 
+    ServiceResult findAllExamQuestionByBelongExamId(Long belongExamId);
 }

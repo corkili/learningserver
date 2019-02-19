@@ -29,4 +29,6 @@ public interface ExamQuestionRepository extends JpaRepository<ExamQuestion, Long
 
     void deleteAllByBelongExamIdAndIndexGreaterThan(Long belongExamId, int minIndex);
 
+    List<ExamQuestion> findAllByBelongExamId(Long belongExamId);
+
 }

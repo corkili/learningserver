@@ -148,7 +148,7 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
             return recordErrorAndCreateFailResultWithMessage("update course work error: save CourseWork failed");
         }
         courseWork = courseWorkOptional.get();
-        String msg = "create course work success";
+        String msg = "update course work success";
         List<WorkQuestion> workQuestionList = null;
         if (workQuestions != null) {
             ServiceResult serviceResult = workQuestionService.createOrUpdateWorkQuestionsForCourseWork(workQuestions, courseWork.getId());

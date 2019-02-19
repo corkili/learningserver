@@ -14,4 +14,6 @@ public interface ExamService extends Service<Exam, com.corkili.learningserver.po
 
     ServiceResult createExam(Exam exam, Collection<ExamQuestion> examQuestions);
 
+    ServiceResult updateExam(Exam exam, Collection<ExamQuestion> examQuestions);
+
 }

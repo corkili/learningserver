@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.ExamQuestionRepository;
 import com.corkili.learningserver.repo.ExamRepository;
 import com.corkili.learningserver.repo.QuestionRepository;
@@ -188,5 +189,39 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
             return recordErrorAndCreateFailResultWithMessage("create or update exam question error: " +
                     "no exam question create or update successfully");
         }
+    }
+
+    @Override
+    public ServiceResult findAllExamQuestionByBelongExamId(Long belongExamId) {
+        if (belongExamId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("belongExamId is null").mergeFrom(
+                    ServiceResult.successResultWithExtra(List.class, new LinkedList<ExamQuestion>()), true);
+        }
+        String msg = "find exam questions success";
+        List<com.corkili.learningserver.po.ExamQuestion> examQuestionPOList = examQuestionRepository
+                .findAllByBelongExamId(belongExamId);
+        List<ExamQuestion> examQuestionList = new LinkedList<>();
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.ExamQuestion examQuestionPO : examQuestionPOList) {
+            Optional<ExamQuestion> examQuestionOptional = po2bo(examQuestionPO);
+            i++;
+            if (!examQuestionOptional.isPresent()) {
+                errId.append(examQuestionPO.getId());
+                if (i != examQuestionPOList.size()) {
+                    errId.append(",");
+                }
+            } else {
+                ExamQuestion examQuestion = examQuestionOptional.get();
+                examQuestionList.add(examQuestion);
+                // cache
+                putToCache(entityName() + examQuestion.getId(), examQuestion);
+            }
+        }
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find exam question warn: transfer work question po [{}] to question bo failed", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, examQuestionList);
     }
 }
