@@ -83,20 +83,20 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
     }
 
     @Override
-    public Optional<WorkQuestion> retrieveWorkQuestionByBelongCourseIdAndIndex(Long belongCourseId, int index) {
-        return Optional.ofNullable(retrieveWorkQuestionByBelongCourseIdAndIndex(belongCourseId, index, entityName()));
+    public Optional<WorkQuestion> retrieveWorkQuestionByBelongCourseWorkIdAndIndex(Long belongCourseWorkId, int index) {
+        return Optional.ofNullable(retrieveWorkQuestionByBelongCourseIdAndIndex(belongCourseWorkId, index, entityName()));
     }
 
     @Cacheable(cacheNames = CACHE_NAME, key = "#entityName + #result.id", unless = "#result == null or #result.id == null")
-    public WorkQuestion retrieveWorkQuestionByBelongCourseIdAndIndex(Long belongCourseId, int index, String entityName) {
-        if (belongCourseId == null) {
+    public WorkQuestion retrieveWorkQuestionByBelongCourseIdAndIndex(Long belongCourseWorkId, int index, String entityName) {
+        if (belongCourseWorkId == null) {
             log.error("belong course id is null");
             return null;
         }
         Optional<com.corkili.learningserver.po.WorkQuestion> workQuestionPOOptional = workQuestionRepository
-                .findWorkQuestionByBelongCourseWorkIdAndIndex(belongCourseId, index);
+                .findWorkQuestionByBelongCourseWorkIdAndIndex(belongCourseWorkId, index);
         if (!workQuestionPOOptional.isPresent()) {
-            log.error("{} with belongWork [{}] and index [{}] not exists in db", entityName, belongCourseId, index);
+            log.error("{} with belongCourseWork [{}] and index [{}] not exists in db", entityName, belongCourseWorkId, index);
             return null;
         }
         return po2bo(workQuestionPOOptional.get()).orElse(null);
@@ -130,7 +130,7 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
         for (WorkQuestion workQuestion : workQuestionList) {
             workQuestion.setIndex(workQuestion.getIndex() - indexDiff);
             Optional<WorkQuestion> optional = workQuestion.getId() != null ? retrieve(workQuestion.getId()) :
-                    retrieveWorkQuestionByBelongCourseIdAndIndex(courseWorkId, workQuestion.getIndex());
+                    retrieveWorkQuestionByBelongCourseWorkIdAndIndex(courseWorkId, workQuestion.getIndex());
             Optional<WorkQuestion> workQuestionOptional;
             if (optional.isPresent()) {
                 workQuestion.setId(optional.get().getId());

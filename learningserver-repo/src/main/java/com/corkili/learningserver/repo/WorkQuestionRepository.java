@@ -20,13 +20,13 @@ public interface WorkQuestionRepository extends JpaRepository<WorkQuestion, Long
 
     boolean existsWorkQuestionByQuestionId(Long questionId);
 
-    boolean existsWorkQuestionByBelongCourseWorkIdAndIndex(Long belongCourseId, int index);
+    boolean existsWorkQuestionByBelongCourseWorkIdAndIndex(Long belongCourseWorkId, int index);
 
-    Optional<WorkQuestion> findWorkQuestionByBelongCourseWorkIdAndIndex(Long belongCourseId, int index);
+    Optional<WorkQuestion> findWorkQuestionByBelongCourseWorkIdAndIndex(Long belongCourseWorkId, int index);
 
     @Query("select wq.id from WorkQuestion wq left join wq.belongCourseWork c where c.id = ?1 and wq.index > ?2")
-    List<Long> findAllWorkQuestionIdByBelongCourseWorkIdAndIndexGreaterThan(Long belongCourseId, int minIndex);
+    List<Long> findAllWorkQuestionIdByBelongCourseWorkIdAndIndexGreaterThan(Long belongCourseWorkId, int minIndex);
 
-    void deleteAllByBelongCourseWorkIdAndIndexGreaterThan(Long belongCourseId, int minIndex);
+    void deleteAllByBelongCourseWorkIdAndIndexGreaterThan(Long belongCourseWorkId, int minIndex);
 
 }

@@ -15043,14 +15043,14 @@ public final class Info {
     long getUpdateTime();
 
     /**
-     * <code>string courseWorkName = 4;</code>
+     * <code>string examName = 4;</code>
      */
-    java.lang.String getCourseWorkName();
+    java.lang.String getExamName();
     /**
-     * <code>string courseWorkName = 4;</code>
+     * <code>string examName = 4;</code>
      */
     com.google.protobuf.ByteString
-        getCourseWorkNameBytes();
+        getExamNameBytes();
 
     /**
      * <code>sint64 belongCourseId = 5;</code>
@@ -15107,7 +15107,7 @@ public final class Info {
       examId_ = 0L;
       createTime_ = 0L;
       updateTime_ = 0L;
-      courseWorkName_ = "";
+      examName_ = "";
       belongCourseId_ = 0L;
       startTime_ = 0L;
       endTime_ = 0L;
@@ -15156,7 +15156,7 @@ public final class Info {
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              courseWorkName_ = s;
+              examName_ = s;
               break;
             }
             case 40: {
@@ -15246,34 +15246,34 @@ public final class Info {
       return updateTime_;
     }
 
-    public static final int COURSEWORKNAME_FIELD_NUMBER = 4;
-    private volatile java.lang.Object courseWorkName_;
+    public static final int EXAMNAME_FIELD_NUMBER = 4;
+    private volatile java.lang.Object examName_;
     /**
-     * <code>string courseWorkName = 4;</code>
+     * <code>string examName = 4;</code>
      */
-    public java.lang.String getCourseWorkName() {
-      java.lang.Object ref = courseWorkName_;
+    public java.lang.String getExamName() {
+      java.lang.Object ref = examName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        courseWorkName_ = s;
+        examName_ = s;
         return s;
       }
     }
     /**
-     * <code>string courseWorkName = 4;</code>
+     * <code>string examName = 4;</code>
      */
     public com.google.protobuf.ByteString
-        getCourseWorkNameBytes() {
-      java.lang.Object ref = courseWorkName_;
+        getExamNameBytes() {
+      java.lang.Object ref = examName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        courseWorkName_ = b;
+        examName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -15365,8 +15365,8 @@ public final class Info {
       if (updateTime_ != 0L) {
         output.writeFixed64(3, updateTime_);
       }
-      if (!getCourseWorkNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, courseWorkName_);
+      if (!getExamNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, examName_);
       }
       if (belongCourseId_ != 0L) {
         output.writeSInt64(5, belongCourseId_);
@@ -15401,8 +15401,8 @@ public final class Info {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed64Size(3, updateTime_);
       }
-      if (!getCourseWorkNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, courseWorkName_);
+      if (!getExamNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, examName_);
       }
       if (belongCourseId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
@@ -15442,8 +15442,8 @@ public final class Info {
           == other.getCreateTime());
       result = result && (getUpdateTime()
           == other.getUpdateTime());
-      result = result && getCourseWorkName()
-          .equals(other.getCourseWorkName());
+      result = result && getExamName()
+          .equals(other.getExamName());
       result = result && (getBelongCourseId()
           == other.getBelongCourseId());
       result = result && (getStartTime()
@@ -15472,8 +15472,8 @@ public final class Info {
       hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getUpdateTime());
-      hash = (37 * hash) + COURSEWORKNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getCourseWorkName().hashCode();
+      hash = (37 * hash) + EXAMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getExamName().hashCode();
       hash = (37 * hash) + BELONGCOURSEID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getBelongCourseId());
@@ -15627,7 +15627,7 @@ public final class Info {
 
         updateTime_ = 0L;
 
-        courseWorkName_ = "";
+        examName_ = "";
 
         belongCourseId_ = 0L;
 
@@ -15672,7 +15672,7 @@ public final class Info {
         result.examId_ = examId_;
         result.createTime_ = createTime_;
         result.updateTime_ = updateTime_;
-        result.courseWorkName_ = courseWorkName_;
+        result.examName_ = examName_;
         result.belongCourseId_ = belongCourseId_;
         result.startTime_ = startTime_;
         result.endTime_ = endTime_;
@@ -15743,8 +15743,8 @@ public final class Info {
         if (other.getUpdateTime() != 0L) {
           setUpdateTime(other.getUpdateTime());
         }
-        if (!other.getCourseWorkName().isEmpty()) {
-          courseWorkName_ = other.courseWorkName_;
+        if (!other.getExamName().isEmpty()) {
+          examName_ = other.examName_;
           onChanged();
         }
         if (other.getBelongCourseId() != 0L) {
@@ -15890,71 +15890,71 @@ public final class Info {
         return this;
       }
 
-      private java.lang.Object courseWorkName_ = "";
+      private java.lang.Object examName_ = "";
       /**
-       * <code>string courseWorkName = 4;</code>
+       * <code>string examName = 4;</code>
        */
-      public java.lang.String getCourseWorkName() {
-        java.lang.Object ref = courseWorkName_;
+      public java.lang.String getExamName() {
+        java.lang.Object ref = examName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          courseWorkName_ = s;
+          examName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string courseWorkName = 4;</code>
+       * <code>string examName = 4;</code>
        */
       public com.google.protobuf.ByteString
-          getCourseWorkNameBytes() {
-        java.lang.Object ref = courseWorkName_;
+          getExamNameBytes() {
+        java.lang.Object ref = examName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          courseWorkName_ = b;
+          examName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string courseWorkName = 4;</code>
+       * <code>string examName = 4;</code>
        */
-      public Builder setCourseWorkName(
+      public Builder setExamName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        courseWorkName_ = value;
+        examName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string courseWorkName = 4;</code>
+       * <code>string examName = 4;</code>
        */
-      public Builder clearCourseWorkName() {
+      public Builder clearExamName() {
         
-        courseWorkName_ = getDefaultInstance().getCourseWorkName();
+        examName_ = getDefaultInstance().getExamName();
         onChanged();
         return this;
       }
       /**
-       * <code>string courseWorkName = 4;</code>
+       * <code>string examName = 4;</code>
        */
-      public Builder setCourseWorkNameBytes(
+      public Builder setExamNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        courseWorkName_ = value;
+        examName_ = value;
         onChanged();
         return this;
       }
@@ -26471,58 +26471,57 @@ public final class Info {
       "ttedAnswer:\0028\001\"r\n\031CourseWorkSubmittedAns" +
       "wer\022\025\n\rquestionIndex\030\001 \001(\005\022)\n\017submittedA" +
       "nswer\030\002 \001(\0132\020.SubmittedAnswer\022\023\n\013checkSt" +
-      "atus\030\003 \001(\005\"\303\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022" +
+      "atus\030\003 \001(\005\"\275\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022" +
       "\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022" +
-      "\026\n\016courseWorkName\030\004 \001(\t\022\026\n\016belongCourseI" +
-      "d\030\005 \001(\022\022\021\n\tstartTime\030\006 \001(\006\022\017\n\007endTime\030\007 " +
-      "\001(\006\022+\n\020examQuestionInfo\030\010 \003(\0132\021.ExamQues" +
-      "tionInfo\"\242\001\n\020ExamQuestionInfo\022\026\n\016examQue" +
-      "stionId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupd" +
-      "ateTime\030\003 \001(\006\022\r\n\005index\030\004 \001(\005\022\024\n\014belongEx" +
-      "amId\030\005 \001(\022\022\022\n\nquestionId\030\006 \001(\022\022\025\n\005score\030" +
-      "\007 \001(\0132\006.Score\"\305\001\n\005Score\022\025\n\013singleScore\030\001" +
-      " \001(\001H\000\022-\n\rmultipleScore\030\002 \001(\0132\024.Score.Mu" +
-      "ltipleScoreH\000\032m\n\rMultipleScore\022.\n\005score\030" +
-      "\001 \003(\0132\037.Score.MultipleScore.ScoreEntry\032," +
-      "\n\nScoreEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001" +
-      ":\0028\001B\007\n\005score\"\302\002\n\021SubmittedExamInfo\022\027\n\017s" +
-      "ubmittedExamId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006" +
-      "\022\022\n\nupdateTime\030\003 \001(\006\022@\n\017submittedAnswer\030" +
-      "\004 \003(\0132\'.SubmittedExamInfo.SubmittedAnswe" +
-      "rEntry\022\035\n\025alreadyCheckAllAnswer\030\005 \001(\010\022\022\n" +
-      "\ntotalScore\030\006 \001(\001\022\024\n\014belongExamId\030\007 \001(\022\022" +
-      "\023\n\013submitterId\030\010 \001(\022\032L\n\024SubmittedAnswerE" +
-      "ntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024.ExamS" +
-      "ubmittedAnswer:\0028\001\"f\n\023ExamSubmittedAnswe" +
-      "r\022\025\n\rquestionIndex\030\001 \001(\005\022)\n\017submittedAns" +
-      "wer\030\002 \001(\0132\020.SubmittedAnswer\022\r\n\005score\030\003 \001" +
-      "(\001\"\373\002\n\017SubmittedAnswer\022E\n\034singleFillingS" +
-      "ubmittedAnswer\030\001 \001(\0132\035.SingleFillingSubm" +
-      "ittedAnswerH\000\022I\n\036multipleFillingSubmitte" +
-      "dAnswer\030\002 \001(\0132\037.MultipleFillingSubmitted" +
-      "AnswerH\000\022C\n\033singleChoiceSubmittedAnswer\030" +
-      "\003 \001(\0132\034.SingleChoiceSubmittedAnswerH\000\022G\n" +
-      "\035multipleChoiceSubmittedAnswer\030\004 \001(\0132\036.M" +
-      "ultipleChoiceSubmittedAnswerH\000\0225\n\024essayS" +
-      "ubmittedAnswer\030\005 \001(\0132\025.EssaySubmittedAns" +
-      "werH\000B\021\n\017submittedAnswer\".\n\034SingleFillin" +
-      "gSubmittedAnswer\022\016\n\006answer\030\001 \001(\t\"\365\001\n\036Mul" +
-      "tipleFillingSubmittedAnswer\022;\n\006answer\030\001 " +
-      "\003(\0132+.MultipleFillingSubmittedAnswer.Ans" +
-      "werEntry\032A\n\004Pair\022\r\n\005index\030\001 \001(\005\022\016\n\006answe" +
-      "r\030\002 \001(\t\022\032\n\022scoreOrCheckStatus\030\003 \001(\001\032S\n\013A" +
-      "nswerEntry\022\013\n\003key\030\001 \001(\005\0223\n\005value\030\002 \001(\0132$" +
-      ".MultipleFillingSubmittedAnswer.Pair:\0028\001" +
-      "\"-\n\033SingleChoiceSubmittedAnswer\022\016\n\006choic" +
-      "e\030\001 \001(\005\"/\n\035MultipleChoiceSubmittedAnswer" +
-      "\022\016\n\006choice\030\001 \003(\005\";\n\024EssaySubmittedAnswer" +
-      "\022\014\n\004text\030\001 \001(\t\022\025\n\005image\030\002 \003(\0132\006.Image*$\n" +
-      "\010UserType\022\013\n\007Teacher\020\000\022\013\n\007Student\020\001*g\n\014Q" +
-      "uestionType\022\021\n\rSingleFilling\020\000\022\023\n\017Multip" +
-      "leFilling\020\001\022\020\n\014SingleChoice\020\002\022\022\n\016Multipl" +
-      "eChoice\020\003\022\t\n\005Essay\020\004B4\n,com.corkili.lear" +
-      "ningserver.generate.protobufB\004Infob\006prot" +
-      "o3"
+      "\020\n\010examName\030\004 \001(\t\022\026\n\016belongCourseId\030\005 \001(" +
+      "\022\022\021\n\tstartTime\030\006 \001(\006\022\017\n\007endTime\030\007 \001(\006\022+\n" +
+      "\020examQuestionInfo\030\010 \003(\0132\021.ExamQuestionIn" +
+      "fo\"\242\001\n\020ExamQuestionInfo\022\026\n\016examQuestionI" +
+      "d\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTim" +
+      "e\030\003 \001(\006\022\r\n\005index\030\004 \001(\005\022\024\n\014belongExamId\030\005" +
+      " \001(\022\022\022\n\nquestionId\030\006 \001(\022\022\025\n\005score\030\007 \001(\0132" +
+      "\006.Score\"\305\001\n\005Score\022\025\n\013singleScore\030\001 \001(\001H\000" +
+      "\022-\n\rmultipleScore\030\002 \001(\0132\024.Score.Multiple" +
+      "ScoreH\000\032m\n\rMultipleScore\022.\n\005score\030\001 \003(\0132" +
+      "\037.Score.MultipleScore.ScoreEntry\032,\n\nScor" +
+      "eEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028\001B\007" +
+      "\n\005score\"\302\002\n\021SubmittedExamInfo\022\027\n\017submitt" +
+      "edExamId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nup" +
+      "dateTime\030\003 \001(\006\022@\n\017submittedAnswer\030\004 \003(\0132" +
+      "\'.SubmittedExamInfo.SubmittedAnswerEntry" +
+      "\022\035\n\025alreadyCheckAllAnswer\030\005 \001(\010\022\022\n\ntotal" +
+      "Score\030\006 \001(\001\022\024\n\014belongExamId\030\007 \001(\022\022\023\n\013sub" +
+      "mitterId\030\010 \001(\022\032L\n\024SubmittedAnswerEntry\022\013" +
+      "\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024.ExamSubmitt" +
+      "edAnswer:\0028\001\"f\n\023ExamSubmittedAnswer\022\025\n\rq" +
+      "uestionIndex\030\001 \001(\005\022)\n\017submittedAnswer\030\002 " +
+      "\001(\0132\020.SubmittedAnswer\022\r\n\005score\030\003 \001(\001\"\373\002\n" +
+      "\017SubmittedAnswer\022E\n\034singleFillingSubmitt" +
+      "edAnswer\030\001 \001(\0132\035.SingleFillingSubmittedA" +
+      "nswerH\000\022I\n\036multipleFillingSubmittedAnswe" +
+      "r\030\002 \001(\0132\037.MultipleFillingSubmittedAnswer" +
+      "H\000\022C\n\033singleChoiceSubmittedAnswer\030\003 \001(\0132" +
+      "\034.SingleChoiceSubmittedAnswerH\000\022G\n\035multi" +
+      "pleChoiceSubmittedAnswer\030\004 \001(\0132\036.Multipl" +
+      "eChoiceSubmittedAnswerH\000\0225\n\024essaySubmitt" +
+      "edAnswer\030\005 \001(\0132\025.EssaySubmittedAnswerH\000B" +
+      "\021\n\017submittedAnswer\".\n\034SingleFillingSubmi" +
+      "ttedAnswer\022\016\n\006answer\030\001 \001(\t\"\365\001\n\036MultipleF" +
+      "illingSubmittedAnswer\022;\n\006answer\030\001 \003(\0132+." +
+      "MultipleFillingSubmittedAnswer.AnswerEnt" +
+      "ry\032A\n\004Pair\022\r\n\005index\030\001 \001(\005\022\016\n\006answer\030\002 \001(" +
+      "\t\022\032\n\022scoreOrCheckStatus\030\003 \001(\001\032S\n\013AnswerE" +
+      "ntry\022\013\n\003key\030\001 \001(\005\0223\n\005value\030\002 \001(\0132$.Multi" +
+      "pleFillingSubmittedAnswer.Pair:\0028\001\"-\n\033Si" +
+      "ngleChoiceSubmittedAnswer\022\016\n\006choice\030\001 \001(" +
+      "\005\"/\n\035MultipleChoiceSubmittedAnswer\022\016\n\006ch" +
+      "oice\030\001 \003(\005\";\n\024EssaySubmittedAnswer\022\014\n\004te" +
+      "xt\030\001 \001(\t\022\025\n\005image\030\002 \003(\0132\006.Image*$\n\010UserT" +
+      "ype\022\013\n\007Teacher\020\000\022\013\n\007Student\020\001*g\n\014Questio" +
+      "nType\022\021\n\rSingleFilling\020\000\022\023\n\017MultipleFill" +
+      "ing\020\001\022\020\n\014SingleChoice\020\002\022\022\n\016MultipleChoic" +
+      "e\020\003\022\t\n\005Essay\020\004B4\n,com.corkili.learningse" +
+      "rver.generate.protobufB\004Infob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -26649,7 +26648,7 @@ public final class Info {
     internal_static_ExamInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamInfo_descriptor,
-        new java.lang.String[] { "ExamId", "CreateTime", "UpdateTime", "CourseWorkName", "BelongCourseId", "StartTime", "EndTime", "ExamQuestionInfo", });
+        new java.lang.String[] { "ExamId", "CreateTime", "UpdateTime", "ExamName", "BelongCourseId", "StartTime", "EndTime", "ExamQuestionInfo", });
     internal_static_ExamQuestionInfo_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_ExamQuestionInfo_fieldAccessorTable = new

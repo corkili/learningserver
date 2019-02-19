@@ -134,7 +134,7 @@ message ExamInfo {
     sint64 examId = 1;
     fixed64 createTime = 2;
     fixed64 updateTime = 3;
-    string courseWorkName = 4;
+    string examName = 4;
     sint64 belongCourseId = 5;
     fixed64 startTime = 6;
     fixed64 endTime = 7;

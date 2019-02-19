@@ -139,7 +139,7 @@ message CourseWorkCreateRequest {
 
 message ExamCreateRequest {
     BaseRequest request = 1;
-    string courseWorkName = 2;
+    string examName = 2;
     sint64 belongCourseId = 3;
     fixed64 startTime = 4;
     fixed64 endTime = 5;

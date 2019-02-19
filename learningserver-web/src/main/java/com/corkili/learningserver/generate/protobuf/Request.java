@@ -18554,14 +18554,14 @@ public final class Request {
     com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>string courseWorkName = 2;</code>
+     * <code>string examName = 2;</code>
      */
-    java.lang.String getCourseWorkName();
+    java.lang.String getExamName();
     /**
-     * <code>string courseWorkName = 2;</code>
+     * <code>string examName = 2;</code>
      */
     com.google.protobuf.ByteString
-        getCourseWorkNameBytes();
+        getExamNameBytes();
 
     /**
      * <code>sint64 belongCourseId = 3;</code>
@@ -18659,7 +18659,7 @@ public final class Request {
       super(builder);
     }
     private ExamCreateRequest() {
-      courseWorkName_ = "";
+      examName_ = "";
       belongCourseId_ = 0L;
       startTime_ = 0L;
       endTime_ = 0L;
@@ -18705,7 +18705,7 @@ public final class Request {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              courseWorkName_ = s;
+              examName_ = s;
               break;
             }
             case 24: {
@@ -18817,34 +18817,34 @@ public final class Request {
       return getRequest();
     }
 
-    public static final int COURSEWORKNAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object courseWorkName_;
+    public static final int EXAMNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object examName_;
     /**
-     * <code>string courseWorkName = 2;</code>
+     * <code>string examName = 2;</code>
      */
-    public java.lang.String getCourseWorkName() {
-      java.lang.Object ref = courseWorkName_;
+    public java.lang.String getExamName() {
+      java.lang.Object ref = examName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        courseWorkName_ = s;
+        examName_ = s;
         return s;
       }
     }
     /**
-     * <code>string courseWorkName = 2;</code>
+     * <code>string examName = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getCourseWorkNameBytes() {
-      java.lang.Object ref = courseWorkName_;
+        getExamNameBytes() {
+      java.lang.Object ref = examName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        courseWorkName_ = b;
+        examName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -19047,8 +19047,8 @@ public final class Request {
       if (request_ != null) {
         output.writeMessage(1, getRequest());
       }
-      if (!getCourseWorkNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, courseWorkName_);
+      if (!getExamNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, examName_);
       }
       if (belongCourseId_ != 0L) {
         output.writeSInt64(3, belongCourseId_);
@@ -19084,8 +19084,8 @@ public final class Request {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getRequest());
       }
-      if (!getCourseWorkNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, courseWorkName_);
+      if (!getExamNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, examName_);
       }
       if (belongCourseId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
@@ -19140,8 +19140,8 @@ public final class Request {
         result = result && getRequest()
             .equals(other.getRequest());
       }
-      result = result && getCourseWorkName()
-          .equals(other.getCourseWorkName());
+      result = result && getExamName()
+          .equals(other.getExamName());
       result = result && (getBelongCourseId()
           == other.getBelongCourseId());
       result = result && (getStartTime()
@@ -19167,8 +19167,8 @@ public final class Request {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
       }
-      hash = (37 * hash) + COURSEWORKNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getCourseWorkName().hashCode();
+      hash = (37 * hash) + EXAMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getExamName().hashCode();
       hash = (37 * hash) + BELONGCOURSEID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getBelongCourseId());
@@ -19351,7 +19351,7 @@ public final class Request {
           request_ = null;
           requestBuilder_ = null;
         }
-        courseWorkName_ = "";
+        examName_ = "";
 
         belongCourseId_ = 0L;
 
@@ -19394,7 +19394,7 @@ public final class Request {
         } else {
           result.request_ = requestBuilder_.build();
         }
-        result.courseWorkName_ = courseWorkName_;
+        result.examName_ = examName_;
         result.belongCourseId_ = belongCourseId_;
         result.startTime_ = startTime_;
         result.endTime_ = endTime_;
@@ -19454,8 +19454,8 @@ public final class Request {
         if (other.hasRequest()) {
           mergeRequest(other.getRequest());
         }
-        if (!other.getCourseWorkName().isEmpty()) {
-          courseWorkName_ = other.courseWorkName_;
+        if (!other.getExamName().isEmpty()) {
+          examName_ = other.examName_;
           onChanged();
         }
         if (other.getBelongCourseId() != 0L) {
@@ -19618,71 +19618,71 @@ public final class Request {
         return requestBuilder_;
       }
 
-      private java.lang.Object courseWorkName_ = "";
+      private java.lang.Object examName_ = "";
       /**
-       * <code>string courseWorkName = 2;</code>
+       * <code>string examName = 2;</code>
        */
-      public java.lang.String getCourseWorkName() {
-        java.lang.Object ref = courseWorkName_;
+      public java.lang.String getExamName() {
+        java.lang.Object ref = examName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          courseWorkName_ = s;
+          examName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string courseWorkName = 2;</code>
+       * <code>string examName = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getCourseWorkNameBytes() {
-        java.lang.Object ref = courseWorkName_;
+          getExamNameBytes() {
+        java.lang.Object ref = examName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          courseWorkName_ = b;
+          examName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string courseWorkName = 2;</code>
+       * <code>string examName = 2;</code>
        */
-      public Builder setCourseWorkName(
+      public Builder setExamName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        courseWorkName_ = value;
+        examName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string courseWorkName = 2;</code>
+       * <code>string examName = 2;</code>
        */
-      public Builder clearCourseWorkName() {
+      public Builder clearExamName() {
         
-        courseWorkName_ = getDefaultInstance().getCourseWorkName();
+        examName_ = getDefaultInstance().getExamName();
         onChanged();
         return this;
       }
       /**
-       * <code>string courseWorkName = 2;</code>
+       * <code>string examName = 2;</code>
        */
-      public Builder setCourseWorkNameBytes(
+      public Builder setExamNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        courseWorkName_ = value;
+        examName_ = value;
         onChanged();
         return this;
       }
@@ -20246,18 +20246,18 @@ public final class Request {
       "(\022\022\023\n\013hasDeadline\030\005 \001(\010\022\020\n\010deadline\030\006 \001(" +
       "\006\022<\n\nquestionId\030\007 \003(\0132(.CourseWorkCreate" +
       "Request.QuestionIdEntry\0321\n\017QuestionIdEnt" +
-      "ry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\355\002\n\021E" +
+      "ry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\347\002\n\021E" +
       "xamCreateRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
-      "Request\022\026\n\016courseWorkName\030\002 \001(\t\022\026\n\016belon" +
-      "gCourseId\030\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007en" +
-      "dTime\030\005 \001(\006\0226\n\nquestionId\030\010 \003(\0132\".ExamCr" +
-      "eateRequest.QuestionIdEntry\022<\n\rquestionS" +
-      "core\030\t \003(\0132%.ExamCreateRequest.QuestionS" +
-      "coreEntry\0321\n\017QuestionIdEntry\022\013\n\003key\030\001 \001(" +
-      "\005\022\r\n\005value\030\002 \001(\022:\0028\001\032<\n\022QuestionScoreEnt" +
-      "ry\022\013\n\003key\030\001 \001(\005\022\025\n\005value\030\002 \001(\0132\006.Score:\002" +
-      "8\001B7\n,com.corkili.learningserver.generat" +
-      "e.protobufB\007Requestb\006proto3"
+      "Request\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCours" +
+      "eId\030\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTime\030" +
+      "\005 \001(\006\0226\n\nquestionId\030\010 \003(\0132\".ExamCreateRe" +
+      "quest.QuestionIdEntry\022<\n\rquestionScore\030\t" +
+      " \003(\0132%.ExamCreateRequest.QuestionScoreEn" +
+      "try\0321\n\017QuestionIdEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005v" +
+      "alue\030\002 \001(\022:\0028\001\032<\n\022QuestionScoreEntry\022\013\n\003" +
+      "key\030\001 \001(\005\022\025\n\005value\030\002 \001(\0132\006.Score:\0028\001B7\n," +
+      "com.corkili.learningserver.generate.prot" +
+      "obufB\007Requestb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20391,7 +20391,7 @@ public final class Request {
     internal_static_ExamCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamCreateRequest_descriptor,
-        new java.lang.String[] { "Request", "CourseWorkName", "BelongCourseId", "StartTime", "EndTime", "QuestionId", "QuestionScore", });
+        new java.lang.String[] { "Request", "ExamName", "BelongCourseId", "StartTime", "EndTime", "QuestionId", "QuestionScore", });
     internal_static_ExamCreateRequest_QuestionIdEntry_descriptor =
       internal_static_ExamCreateRequest_descriptor.getNestedTypes().get(0);
     internal_static_ExamCreateRequest_QuestionIdEntry_fieldAccessorTable = new

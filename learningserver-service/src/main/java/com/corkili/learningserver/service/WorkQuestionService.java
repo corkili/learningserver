@@ -12,7 +12,7 @@ public interface WorkQuestionService extends Service<WorkQuestion, com.corkili.l
 
     ServiceResult deleteWorkQuestionByBelongCourseWorkId(Long belongCourseWorkId);
 
-    Optional<WorkQuestion> retrieveWorkQuestionByBelongCourseIdAndIndex(Long belongCourseId, int index);
+    Optional<WorkQuestion> retrieveWorkQuestionByBelongCourseWorkIdAndIndex(Long belongCourseWorkId, int index);
 
     ServiceResult createOrUpdateWorkQuestionsForCourseWork(Collection<WorkQuestion> workQuestions, Long courseWorkId);
 

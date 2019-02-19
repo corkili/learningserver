@@ -11,6 +11,8 @@ import com.google.protobuf.ByteString;
 
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.CourseWork;
+import com.corkili.learningserver.bo.Exam;
+import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
@@ -19,12 +21,16 @@ import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.EssayAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
+import com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionType;
+import com.corkili.learningserver.generate.protobuf.Info.Score;
+import com.corkili.learningserver.generate.protobuf.Info.Score.MultipleScore;
 import com.corkili.learningserver.generate.protobuf.Info.SingleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.SingleFillingAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
@@ -52,6 +58,56 @@ public class ProtoUtils {
             }
         }
         return imageList;
+    }
+
+
+    public static ExamInfo generateExamInfo(Exam exam, List<ExamQuestion> examQuestionList) {
+        if (exam == null) {
+            return ExamInfo.getDefaultInstance();
+        }
+        List<ExamQuestionInfo> examQuestionInfos = new LinkedList<>();
+        if (examQuestionList != null) {
+            for (ExamQuestion examQuestion : examQuestionList) {
+                examQuestionInfos.add(generateExamQuestionInfo(examQuestion));
+            }
+        }
+        return ExamInfo.newBuilder()
+                .setExamId(exam.getId())
+                .setCreateTime(getTime(exam.getCreateTime()))
+                .setUpdateTime(getTime(exam.getUpdateTime()))
+                .setExamName(exam.getExamName())
+                .setBelongCourseId(exam.getBelongCourseId())
+                .setStartTime(getTime(exam.getStartTime()))
+                .setEndTime(getTime(exam.getEndTime()))
+                .addAllExamQuestionInfo(examQuestionInfos)
+                .build();
+    }
+
+    public static ExamQuestionInfo generateExamQuestionInfo(ExamQuestion examQuestion) {
+        if (examQuestion == null) {
+            return ExamQuestionInfo.getDefaultInstance();
+        }
+        Score score;
+        if (examQuestion.getScore() != null) {
+            score = Score.newBuilder()
+                    .setSingleScore(examQuestion.getScore())
+                    .build();
+        } else {
+            score = Score.newBuilder()
+                    .setMultipleScore(MultipleScore.newBuilder()
+                            .putAllScore(examQuestion.getScoreMap())
+                            .build())
+                    .build();
+        }
+        return ExamQuestionInfo.newBuilder()
+                .setExamQuestionId(examQuestion.getId())
+                .setCreateTime(getTime(examQuestion.getCreateTime()))
+                .setUpdateTime(getTime(examQuestion.getUpdateTime()))
+                .setIndex(examQuestion.getIndex())
+                .setBelongExamId(examQuestion.getBelongExamId())
+                .setQuestionId(examQuestion.getQuestionId())
+                .setScore(score)
+                .build();
     }
 
     public static CourseWorkInfo generateCourseWorkInfo(CourseWork courseWork, List<WorkQuestion> workQuestionList) {

@@ -1,10 +1,17 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +20,24 @@ import lombok.extern.slf4j.Slf4j;
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.repo.ExamQuestionRepository;
+import com.corkili.learningserver.repo.ExamRepository;
+import com.corkili.learningserver.repo.QuestionRepository;
 import com.corkili.learningserver.service.ExamQuestionService;
 
 @Slf4j
 @Service
 public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corkili.learningserver.po.ExamQuestion> implements ExamQuestionService {
 
+    private static final String CACHE_NAME = "memoryCache";
+
     @Autowired
     private ExamQuestionRepository examQuestionRepository;
+
+    @Autowired
+    private ExamRepository examRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @Override
     public Optional<ExamQuestion> po2bo(com.corkili.learningserver.po.ExamQuestion examQuestionPO) {
@@ -85,5 +102,91 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
             evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete exam question success");
+    }
+
+    @Override
+    public Optional<ExamQuestion> retrieveExamQuestionByBelongExamIdAndIndex(Long belongExamId, int index) {
+        return Optional.ofNullable(retrieveExamQuestionByBelongExamIdAndIndex(belongExamId, index, entityName()));
+    }
+
+    @Cacheable(cacheNames = CACHE_NAME, key = "#entityName + #result.id", unless = "#result == null or #result.id == null")
+    public ExamQuestion retrieveExamQuestionByBelongExamIdAndIndex(Long belongExamId, int index, String entityName) {
+        if (belongExamId == null) {
+            log.error("belong course id is null");
+            return null;
+        }
+        Optional<com.corkili.learningserver.po.ExamQuestion> examQuestionPOOptional = examQuestionRepository
+                .findExamQuestionByBelongExamIdAndIndex(belongExamId, index);
+        if (!examQuestionPOOptional.isPresent()) {
+            log.error("{} with belongExam [{}] and index [{}] not exists in db", entityName, belongExamId, index);
+            return null;
+        }
+        return po2bo(examQuestionPOOptional.get()).orElse(null);
+    }
+
+    @Override
+    public ServiceResult createOrUpdateExamQuestionForExam(Collection<ExamQuestion> examQuestions, Long examId) {
+        if (examQuestions == null || examQuestions.isEmpty()) {
+            return recordWarnAndCreateSuccessResultWithMessage("create or update exam question warn: no exam question")
+                    .mergeFrom(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
+        }
+        if (examId == null || examRepository.existsById(examId)) {
+            return recordErrorAndCreateFailResultWithMessage("create or update exam question error: course work id is null");
+        }
+        List<ExamQuestion> examQuestionList = new ArrayList<>(examQuestions);
+        examQuestionList.forEach(examQuestion -> examQuestion.setBelongExamId(examId));
+        examQuestionList.sort(Comparator.comparingInt(ExamQuestion::getIndex));
+        for (int i = 0; i < examQuestionList.size(); i++) {
+            examQuestionList.get(i).setIndex(i + 1);
+        }
+        Set<Long> questionIdSet = new HashSet<>();
+        examQuestionList.forEach(examQuestion -> questionIdSet.add(examQuestion.getQuestionId()));
+        if (questionIdSet.contains(null)) {
+            return recordErrorAndCreateFailResultWithMessage("create or update exam question error: has null question id");
+        }
+        if (questionRepository.countByIdIn(questionIdSet) != (long) questionIdSet.size()) {
+            return recordErrorAndCreateFailResultWithMessage("create or update exam question error: some question not exists");
+        }
+        List<ExamQuestion> successList = new ArrayList<>();
+        int indexDiff = 0;
+        for (ExamQuestion examQuestion : examQuestionList) {
+            examQuestion.setIndex(examQuestion.getIndex() - indexDiff);
+            Optional<ExamQuestion> optional = examQuestion.getId() != null ? retrieve(examQuestion.getId()) :
+                    retrieveExamQuestionByBelongExamIdAndIndex(examId, examQuestion.getIndex());
+            Optional<ExamQuestion> examQuestionOptional;
+            if (optional.isPresent()) {
+                examQuestion.setId(optional.get().getId());
+                examQuestion.setCreateTime(optional.get().getCreateTime());
+                examQuestion.setUpdateTime(optional.get().getUpdateTime());
+                examQuestionOptional = update(examQuestion);
+            } else {
+                examQuestionOptional = create(examQuestion);
+            }
+            if (examQuestionOptional.isPresent()) {
+                successList.add(examQuestionOptional.get());
+            } else {
+                indexDiff++;
+            }
+        }
+        // delete
+        if (!successList.isEmpty()) {
+            List<Long> deleteId = examQuestionRepository.findAllExamQuestionIdByBelongExamIdAndIndexGreaterThan(
+                    examId, successList.get(successList.size() - 1).getIndex());
+            examQuestionRepository.deleteAllByBelongExamIdAndIndexGreaterThan(
+                    examId, successList.get(successList.size() - 1).getIndex());
+            for (Long id : deleteId) {
+                evictFromCache(entityName() + id);
+            }
+            if (indexDiff > 0) {
+                return recordWarnAndCreateSuccessResultWithMessage("create or update exam question warn: some " +
+                        "exam question create or update failed").mergeFrom(ServiceResult.successResultWithExtra(
+                        List.class, successList), true);
+            } else {
+                return ServiceResult.successResult("create or update exam question success", List.class, successList);
+            }
+        } else {
+            return recordErrorAndCreateFailResultWithMessage("create or update exam question error: " +
+                    "no exam question create or update successfully");
+        }
     }
 }
