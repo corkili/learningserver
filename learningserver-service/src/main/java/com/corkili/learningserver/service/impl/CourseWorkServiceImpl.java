@@ -1,7 +1,12 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +15,9 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.CourseWork;
+import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.repo.CourseWorkRepository;
 import com.corkili.learningserver.service.CourseWorkService;
 import com.corkili.learningserver.service.SubmittedCourseWorkService;
@@ -22,6 +29,9 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
 
     @Autowired
     private CourseWorkRepository courseWorkRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Autowired
     private WorkQuestionService workQuestionService;
@@ -82,5 +92,39 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
             evictFromCache(entityName() + id);
         }
         return ServiceResult.successResultWithMesage("delete course work success");
+    }
+
+    @Override
+    public ServiceResult createCourseWork(CourseWork courseWork, Collection<WorkQuestion> workQuestions) {
+        if (StringUtils.isBlank(courseWork.getWorkName())) {
+            return recordErrorAndCreateFailResultWithMessage("create course work error: workName is empty");
+        }
+        if (courseWork.getWorkName().length() > 100) {
+            return recordErrorAndCreateFailResultWithMessage("create course work error: length of workName > 100");
+        }
+        if (courseWork.getDeadline() != null && courseWork.getDeadline().before(new Date())) {
+            return recordErrorAndCreateFailResultWithMessage("create course work error: deadline is before now");
+        }
+        if (courseWork.getBelongCourseId() == null || !courseRepository.existsById(courseWork.getBelongCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("create course work error: belong course [{}] not exist",
+                    courseWork.getBelongCourseId() == null ? "" : courseWork.getBelongCourseId());
+        }
+        Optional<CourseWork> courseWorkOptional = create(courseWork);
+        if (!courseWorkOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("create course work error: save CourseWork failed");
+        }
+        courseWork = courseWorkOptional.get();
+        ServiceResult serviceResult = workQuestionService.createOrUpdateWorkQuestionsForCourseWork(workQuestions, courseWork.getId());
+        String msg = "create course work success";
+        if (serviceResult.isFail()) {
+            msg += ", but " + serviceResult.msg();
+        } else {
+            msg += ", and " + serviceResult.msg();
+        }
+        List<WorkQuestion> workQuestionList = (List<WorkQuestion>) serviceResult.extra(List.class);
+        if (workQuestionList == null) {
+            workQuestionList = new ArrayList<>();
+        }
+        return ServiceResult.successResult(msg, CourseWork.class, courseWork, List.class, workQuestionList);
     }
 }

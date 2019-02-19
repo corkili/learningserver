@@ -93,4 +93,124 @@ message EssayAnswer {
     repeated Image image = 2;
 }
 
+message CourseWorkInfo {
+    sint64 courseWorkId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool open = 4;
+    string courseWorkName = 5;
+    sint64 belongCourseId = 6;
+    bool hasDeadline = 7;
+    fixed64 deadline = 8;
+    repeated CourseWorkQuestionInfo courseWorkQuestionInfo = 9;
+}
+
+message CourseWorkQuestionInfo {
+    sint64 courseWorkQuestionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    int32 index = 4;
+    sint64 belongCourseWorkId = 5;
+    sint64 questionId = 6;
+}
+
+message SubmittedCourseWorkInfo {
+    sint64 submittedCourseWorkId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    map<int32, CourseWorkSubmittedAnswer> submittedAnswer = 4;
+    bool alreadyCheckAllAnswer = 5;
+    sint64 belongCourseWorkId = 6;
+    sint64 submitterId = 7;
+}
+
+message CourseWorkSubmittedAnswer {
+    int32 questionIndex = 1;
+    SubmittedAnswer submittedAnswer = 2;
+    int32 checkStatus = 3;
+}
+
+message ExamInfo {
+    sint64 examId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string courseWorkName = 4;
+    sint64 belongCourseId = 5;
+    fixed64 startTime = 6;
+    fixed64 endTime = 7;
+    repeated ExamQuestionInfo examQuestionInfo = 8;
+}
+
+message ExamQuestionInfo {
+    sint64 examQuestionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    int32 index = 4;
+    sint64 belongExamId = 5;
+    sint64 questionId = 6;
+    Score score = 7;
+}
+
+message Score {
+    oneof score {
+        double singleScore = 1;
+        MultipleScore multipleScore = 2;
+    }
+    message MultipleScore {
+        map<int32, double> score = 1;
+    }
+}
+
+message SubmittedExamInfo {
+    sint64 submittedExamId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    map<int32, ExamSubmittedAnswer> submittedAnswer = 4;
+    bool alreadyCheckAllAnswer = 5;
+    double totalScore = 6;
+    sint64 belongExamId = 7;
+    sint64 submitterId = 8;
+}
+
+message ExamSubmittedAnswer {
+    int32 questionIndex = 1;
+    SubmittedAnswer submittedAnswer = 2;
+    double score = 3;
+}
+
+message SubmittedAnswer {
+    oneof submittedAnswer {
+        SingleFillingSubmittedAnswer singleFillingSubmittedAnswer = 1;
+        MultipleFillingSubmittedAnswer multipleFillingSubmittedAnswer = 2;
+        SingleChoiceSubmittedAnswer singleChoiceSubmittedAnswer = 3;
+        MultipleChoiceSubmittedAnswer multipleChoiceSubmittedAnswer = 4;
+        EssaySubmittedAnswer essaySubmittedAnswer = 5;
+    }
+}
+
+message SingleFillingSubmittedAnswer {
+    string answer = 1;
+}
+
+message MultipleFillingSubmittedAnswer {
+    message Pair {
+        int32 index = 1;
+        string answer = 2;
+        double scoreOrCheckStatus = 3;
+    }
+    map<int32, Pair> answer = 1;
+}
+
+message SingleChoiceSubmittedAnswer {
+    int32 choice = 1;
+}
+
+message MultipleChoiceSubmittedAnswer {
+    repeated int32 choice = 1;
+}
+
+message EssaySubmittedAnswer {
+    string text = 1;
+    repeated Image image = 2;
+}
 

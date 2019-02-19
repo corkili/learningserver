@@ -87,3 +87,13 @@ message QuestionDeleteResponse {
     BaseResponse response = 1;
     sint64 questionId = 2;
 }
+
+message CourseWorkCreateResponse {
+    BaseResponse response = 1;
+    CourseWorkInfo courseWorkInfo = 2;
+}
+
+message ExamCreateResponse {
+    BaseResponse response = 1;
+    ExamInfo examInfo = 2;
+}

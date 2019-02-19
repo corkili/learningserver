@@ -1,5 +1,6 @@
 package com.corkili.learningserver.common;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,10 +10,14 @@ import java.util.Map.Entry;
 import com.google.protobuf.ByteString;
 
 import com.corkili.learningserver.bo.Course;
+import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.User;
+import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
 import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.EssayAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
@@ -49,12 +54,52 @@ public class ProtoUtils {
         return imageList;
     }
 
+    public static CourseWorkInfo generateCourseWorkInfo(CourseWork courseWork, List<WorkQuestion> workQuestionList) {
+        if (courseWork == null) {
+            return CourseWorkInfo.getDefaultInstance();
+        }
+        List<CourseWorkQuestionInfo> courseWorkQuestionInfos = new LinkedList<>();
+        if (workQuestionList != null) {
+            for (WorkQuestion workQuestion : workQuestionList) {
+                courseWorkQuestionInfos.add(generateCourseWorkQuestionInfo(workQuestion));
+            }
+        }
+        return CourseWorkInfo.newBuilder()
+                .setCourseWorkId(courseWork.getId())
+                .setCreateTime(getTime(courseWork.getCreateTime()))
+                .setUpdateTime(getTime(courseWork.getUpdateTime()))
+                .setOpen(courseWork.isOpen())
+                .setCourseWorkName(courseWork.getWorkName())
+                .setBelongCourseId(courseWork.getBelongCourseId())
+                .setHasDeadline(courseWork.getDeadline() != null)
+                .setDeadline(getTime(courseWork.getDeadline()))
+                .addAllCourseWorkQuestionInfo(courseWorkQuestionInfos)
+                .build();
+    }
+    
+    public static CourseWorkQuestionInfo generateCourseWorkQuestionInfo(WorkQuestion workQuestion) {
+        if (workQuestion == null) {
+            return CourseWorkQuestionInfo.getDefaultInstance();
+        }
+        return CourseWorkQuestionInfo.newBuilder()
+                .setCourseWorkQuestionId(workQuestion.getId())
+                .setCreateTime(getTime(workQuestion.getCreateTime()))
+                .setUpdateTime(getTime(workQuestion.getUpdateTime()))
+                .setIndex(workQuestion.getIndex())
+                .setBelongCourseWorkId(workQuestion.getBelongCourseWorkId())
+                .setQuestionId(workQuestion.getQuestionId())
+                .build();
+    }
+
     public static CourseInfo generateCourseInfo(Course course, User teacher, boolean loadImageData) {
+        if (course == null) {
+            return CourseInfo.getDefaultInstance();
+        }
         List<Image> imageList = generateImageList(course.getImagePaths(), loadImageData);
         return CourseInfo.newBuilder()
                 .setCourseId(course.getId())
-                .setCreateTime(course.getCreateTime().getTime())
-                .setUpdateTime(course.getUpdateTime().getTime())
+                .setCreateTime(getTime(course.getCreateTime()))
+                .setUpdateTime(getTime(course.getUpdateTime()))
                 .setOpen(course.isOpen())
                 .setCourseName(course.getCourseName())
                 .setDescription(course.getDescription())
@@ -65,6 +110,9 @@ public class ProtoUtils {
     }
 
     public static UserInfo generateUserInfo(User user) {
+        if (user == null) {
+            return UserInfo.getDefaultInstance();
+        }
         return UserInfo.newBuilder()
                 .setPhone(user.getPhone())
                 .setUsername(user.getUsername())
@@ -73,10 +121,13 @@ public class ProtoUtils {
     }
 
     public static QuestionInfo generateQuestionInfo(Question question, boolean loadImageData) {
+        if (question == null) {
+            return QuestionInfo.getDefaultInstance();
+        }
         return QuestionInfo.newBuilder()
                 .setQuestionId(question.getId())
-                .setCreateTime(question.getCreateTime().getTime())
-                .setUpdateTime(question.getUpdateTime().getTime())
+                .setCreateTime(getTime(question.getCreateTime()))
+                .setUpdateTime(getTime(question.getUpdateTime()))
                 .setQuestion(question.getQuestion())
                 .addAllImage(generateImageList(question.getImagePaths(), loadImageData))
                 .setQuestionType(QuestionType.valueOf(question.getQuestionType().name()))
@@ -88,6 +139,9 @@ public class ProtoUtils {
     }
 
     public static QuestionSimpleInfo generateQuestionSimpleInfo(Question question) {
+        if (question == null) {
+            return QuestionSimpleInfo.getDefaultInstance();
+        }
         return QuestionSimpleInfo.newBuilder()
                 .setQuestionId(question.getId())
                 .setQuestion(question.getQuestion())
@@ -158,7 +212,7 @@ public class ProtoUtils {
     public static Answer generateAnswer(com.corkili.learningserver.bo.QuestionType questionType,
                                         Question.Answer questionAnswer, boolean loadImageData) {
         if (questionType == null || questionAnswer == null) {
-            return Answer.newBuilder().build();
+            return Answer.getDefaultInstance();
         }
         switch (questionType) {
             case SingleFilling: {
@@ -228,6 +282,14 @@ public class ProtoUtils {
                 break;
             }
         }
-        return Answer.newBuilder().build();
+        return Answer.getDefaultInstance();
+    }
+    
+    private static long getTime(Date time) {
+        if (time != null) {
+            return time.getTime();
+        } else {
+            return 0;
+        }
     }
 }

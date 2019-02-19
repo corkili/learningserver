@@ -19,8 +19,8 @@ public class CourseSubscription implements BusinessObject {
 
     private Date updateTime;
 
-    private User subscriber;
+    private Long subscriberId;
 
-    private Course subscribedCourse;
+    private Long subscribedCourseId;
 
 }

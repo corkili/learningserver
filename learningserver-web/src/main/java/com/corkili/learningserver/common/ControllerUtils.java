@@ -31,7 +31,7 @@ public class ControllerUtils {
 
     public static BaseResponse generateBaseResponseFrom(String token, ServiceResult serviceResult) {
         if (serviceResult == null) {
-            return BaseResponse.newBuilder().build();
+            return BaseResponse.getDefaultInstance();
         }
         return BaseResponse.newBuilder()
                 .setToken(token)

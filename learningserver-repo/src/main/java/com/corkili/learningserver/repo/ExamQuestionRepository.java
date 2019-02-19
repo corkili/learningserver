@@ -17,6 +17,6 @@ public interface ExamQuestionRepository extends JpaRepository<ExamQuestion, Long
 
     void deleteAllByBelongExamId(Long belongExamId);
 
-    boolean existsExamQuestionsByQuestionId(Long questionId);
+    boolean existsExamQuestionByQuestionId(Long questionId);
 
 }

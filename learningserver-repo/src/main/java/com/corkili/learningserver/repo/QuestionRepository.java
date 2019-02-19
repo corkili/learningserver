@@ -15,4 +15,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findAllByAuthorIdAndQuestionTypeIn(Long authorId, Collection<Question.Type> questionTypes);
 
+    long countByIdIn(Collection<Long> idCollection);
+
 }

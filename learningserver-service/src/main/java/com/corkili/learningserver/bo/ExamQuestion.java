@@ -35,7 +35,7 @@ public class ExamQuestion implements BusinessObject {
 
     private int index;
 
-    private Exam belongExam;
+    private Long belongExamId;
 
     private Long questionId;
 

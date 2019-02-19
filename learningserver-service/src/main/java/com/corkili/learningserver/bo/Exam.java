@@ -21,7 +21,7 @@ public class Exam implements BusinessObject {
 
     private String examName;
 
-    private Course belongCourse;
+    private Long belongCourseId;
 
     private Date startTime;
 

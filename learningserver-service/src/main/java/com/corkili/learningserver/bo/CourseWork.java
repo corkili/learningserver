@@ -23,7 +23,7 @@ public class CourseWork implements BusinessObject {
 
     private String workName;
 
-    private Course belongCourse;
+    private Long belongCourseId;
 
     private Date deadline;
 

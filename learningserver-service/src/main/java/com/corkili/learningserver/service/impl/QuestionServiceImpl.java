@@ -353,11 +353,11 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
 
     @Override
     public ServiceResult deleteQuestion(Long questionId) {
-        if (workQuestionRepository.existsWorkQuestionsByQuestionId(questionId)) {
+        if (workQuestionRepository.existsWorkQuestionByQuestionId(questionId)) {
             return recordErrorAndCreateFailResultWithMessage("delete question error: the question [{}] " +
                     "is referenced by course work", questionId);
         }
-        if (examQuestionRepository.existsExamQuestionsByQuestionId(questionId)) {
+        if (examQuestionRepository.existsExamQuestionByQuestionId(questionId)) {
             return recordErrorAndCreateFailResultWithMessage("delete question error: the question [{}] " +
                     "is referenced by exam", questionId);
         }
