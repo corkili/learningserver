@@ -21,11 +21,13 @@ import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
+import com.corkili.learningserver.generate.protobuf.Request.QuestionDeleteRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionImportRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
+import com.corkili.learningserver.generate.protobuf.Response.QuestionDeleteResponse;
 import com.corkili.learningserver.generate.protobuf.Response.QuestionFindAllResponse;
 import com.corkili.learningserver.generate.protobuf.Response.QuestionGetResponse;
 import com.corkili.learningserver.generate.protobuf.Response.QuestionImportResponse;
@@ -212,6 +214,24 @@ public class QuestionController {
         return QuestionUpdateResponse.newBuilder()
                 .setResponse(baseResponse)
                 .setQuestionInfo(questionInfo)
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public QuestionDeleteResponse deleteQuestion(@RequestBody QuestionDeleteRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return QuestionDeleteResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = questionService.deleteQuestion(request.getQuestionId());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        return QuestionDeleteResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setQuestionId(request.getQuestionId())
                 .build();
     }
 }

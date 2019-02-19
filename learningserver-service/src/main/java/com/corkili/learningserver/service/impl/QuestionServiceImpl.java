@@ -27,7 +27,9 @@ import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.po.Question.Type;
+import com.corkili.learningserver.repo.ExamQuestionRepository;
 import com.corkili.learningserver.repo.QuestionRepository;
+import com.corkili.learningserver.repo.WorkQuestionRepository;
 import com.corkili.learningserver.service.QuestionService;
 import com.corkili.learningserver.service.UserService;
 
@@ -37,6 +39,12 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private WorkQuestionRepository workQuestionRepository;
+
+    @Autowired
+    private ExamQuestionRepository examQuestionRepository;
 
     @Autowired
     private UserService userService;
@@ -341,6 +349,22 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
             ImageUtils.deleteImages(oldEssayImages);
         }
         return ServiceResult.successResult("update question success", Question.class, questionOptional.get());
+    }
+
+    @Override
+    public ServiceResult deleteQuestion(Long questionId) {
+        if (workQuestionRepository.existsWorkQuestionsByQuestionId(questionId)) {
+            return recordErrorAndCreateFailResultWithMessage("delete question error: the question [{}] " +
+                    "is referenced by course work", questionId);
+        }
+        if (examQuestionRepository.existsExamQuestionsByQuestionId(questionId)) {
+            return recordErrorAndCreateFailResultWithMessage("delete question error: the question [{}] " +
+                    "is referenced by exam", questionId);
+        }
+        if (!delete(questionId)) {
+            return recordWarnAndCreateSuccessResultWithMessage("delete question success");
+        }
+        return ServiceResult.successResultWithMesage("delete question success");
     }
 
 

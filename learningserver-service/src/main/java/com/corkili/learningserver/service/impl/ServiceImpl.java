@@ -35,22 +35,22 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     private CacheManager cacheManager;
 
     @Override
-    public final Optional<BO> create(BO bo) {
+    public Optional<BO> create(BO bo) {
         return Optional.ofNullable(saveOrUpdate(bo, false, entityName()));
     }
 
     @Override
-    public final Optional<BO> retrieve(Long id) {
+    public Optional<BO> retrieve(Long id) {
         return Optional.ofNullable(retrieve(id, entityName()));
     }
 
     @Override
-    public final Optional<BO> update(BO bo) {
+    public Optional<BO> update(BO bo) {
         return Optional.ofNullable(saveOrUpdate(bo, true, entityName()));
     }
 
     @Override
-    public final boolean delete(Long id) {
+    public boolean delete(Long id) {
         return delete(id, entityName());
     }
 

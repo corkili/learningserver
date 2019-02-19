@@ -82,3 +82,8 @@ message QuestionUpdateResponse {
     BaseResponse response = 1;
     QuestionInfo questionInfo = 2;
 }
+
+message QuestionDeleteResponse {
+    BaseResponse response = 1;
+    sint64 questionId = 2;
+}

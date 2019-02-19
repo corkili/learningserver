@@ -121,3 +121,8 @@ message QuestionUpdateRequest {
     bool updateAnswer = 13;
     Answer answer = 14;
 }
+
+message QuestionDeleteRequest {
+    BaseRequest request = 1;
+    sint64 questionId = 2;
+}

@@ -15,4 +15,6 @@ public interface QuestionService extends Service<Question, com.corkili.learnings
 
     ServiceResult updateQuestion(Question question, Map<String, byte[]> questionImages, Map<String, byte[]> essayImages);
 
+    ServiceResult deleteQuestion(Long questionId);
+
 }

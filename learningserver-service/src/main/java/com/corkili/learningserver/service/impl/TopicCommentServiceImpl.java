@@ -76,7 +76,7 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
     @Override
     public ServiceResult deleteTopicComment(Long topicCommentId) {
         ServiceResult serviceResult;
-        if (!delete(topicCommentId)) {
+        if (delete(topicCommentId)) {
             serviceResult = ServiceResult.successResult("delete topic comment success");
         } else {
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete topic comment success");

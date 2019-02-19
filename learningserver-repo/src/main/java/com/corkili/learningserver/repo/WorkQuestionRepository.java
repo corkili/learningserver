@@ -17,4 +17,6 @@ public interface WorkQuestionRepository extends JpaRepository<WorkQuestion, Long
 
     void deleteAllByBelongCourseWorkId(Long belongCourseWorkId);
 
+    boolean existsWorkQuestionsByQuestionId(Long questionId);
+
 }
