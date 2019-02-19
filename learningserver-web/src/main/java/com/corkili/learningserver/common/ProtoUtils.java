@@ -79,6 +79,7 @@ public class ProtoUtils {
                 .setBelongCourseId(exam.getBelongCourseId())
                 .setStartTime(getTime(exam.getStartTime()))
                 .setEndTime(getTime(exam.getEndTime()))
+                .setDuration(exam.getDuration())
                 .addAllExamQuestionInfo(examQuestionInfos)
                 .build();
     }

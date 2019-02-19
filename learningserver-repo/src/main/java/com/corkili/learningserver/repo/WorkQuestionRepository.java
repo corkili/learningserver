@@ -29,4 +29,6 @@ public interface WorkQuestionRepository extends JpaRepository<WorkQuestion, Long
 
     void deleteAllByBelongCourseWorkIdAndIndexGreaterThan(Long belongCourseWorkId, int minIndex);
 
+    List<WorkQuestion> findAllByBelongCourseWorkId(Long belongCourseWorkId);
+
 }

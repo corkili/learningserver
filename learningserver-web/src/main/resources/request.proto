@@ -129,12 +129,25 @@ message QuestionDeleteRequest {
 
 message CourseWorkCreateRequest {
     BaseRequest request = 1;
-    bool open = 2;
-    string courseWorkName = 3;
-    sint64 belongCourseId = 4;
-    bool hasDeadline = 5;
-    fixed64 deadline = 6;
-    map<int32, sint64> questionId = 7;
+    string courseWorkName = 2;
+    sint64 belongCourseId = 3;
+    bool hasDeadline = 4;
+    fixed64 deadline = 5;
+    map<int32, sint64> questionId = 6;
+}
+
+message CourseWorkUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseWorkId = 2;
+    bool updateOpen = 3;
+    bool open = 4;
+    bool updateCourseWorkName = 5;
+    string courseWorkName = 6;
+    bool updateDeadline = 7;
+    bool hasDeadline = 8;
+    fixed64 deadline = 9;
+    bool updateQuestion = 10;
+    map<int32, sint64> questionId = 11;
 }
 
 message ExamCreateRequest {
@@ -143,6 +156,23 @@ message ExamCreateRequest {
     sint64 belongCourseId = 3;
     fixed64 startTime = 4;
     fixed64 endTime = 5;
-    map<int32, sint64> questionId = 8;
-    map<int32, Score> questionScore = 9;
+    int32 duration = 6;
+    map<int32, sint64> questionId = 7;
+    map<int32, Score> questionScore = 8;
+}
+
+message ExamUpdateRequest {
+    BaseRequest request = 1;
+    sint64 examId = 2;
+    bool updateExamName = 3;
+    string examName = 4;
+    bool updateStartTime = 5;
+    fixed64 startTime = 6;
+    bool updateEndTime = 7;
+    fixed64 endTime = 8;
+    bool updateDuration = 9;
+    int32 duration = 10;
+    bool updateQuestion = 11;
+    map<int32, sint64> questionId = 12;
+    map<int32, Score> questionScore = 13;
 }

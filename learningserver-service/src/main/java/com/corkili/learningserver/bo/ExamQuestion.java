@@ -33,7 +33,7 @@ public class ExamQuestion implements BusinessObject {
 
     private Date updateTime;
 
-    private int index;
+    private Integer index;
 
     private Long belongExamId;
 

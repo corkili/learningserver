@@ -27,4 +27,6 @@ public class Exam implements BusinessObject {
 
     private Date endTime;
 
+    private Integer duration;
+
 }

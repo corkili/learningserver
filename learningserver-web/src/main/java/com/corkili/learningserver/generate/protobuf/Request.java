@@ -17242,41 +17242,36 @@ public final class Request {
     com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
 
     /**
-     * <code>bool open = 2;</code>
-     */
-    boolean getOpen();
-
-    /**
-     * <code>string courseWorkName = 3;</code>
+     * <code>string courseWorkName = 2;</code>
      */
     java.lang.String getCourseWorkName();
     /**
-     * <code>string courseWorkName = 3;</code>
+     * <code>string courseWorkName = 2;</code>
      */
     com.google.protobuf.ByteString
         getCourseWorkNameBytes();
 
     /**
-     * <code>sint64 belongCourseId = 4;</code>
+     * <code>sint64 belongCourseId = 3;</code>
      */
     long getBelongCourseId();
 
     /**
-     * <code>bool hasDeadline = 5;</code>
+     * <code>bool hasDeadline = 4;</code>
      */
     boolean getHasDeadline();
 
     /**
-     * <code>fixed64 deadline = 6;</code>
+     * <code>fixed64 deadline = 5;</code>
      */
     long getDeadline();
 
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
     int getQuestionIdCount();
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
     boolean containsQuestionId(
         int key);
@@ -17287,19 +17282,19 @@ public final class Request {
     java.util.Map<java.lang.Integer, java.lang.Long>
     getQuestionId();
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
     java.util.Map<java.lang.Integer, java.lang.Long>
     getQuestionIdMap();
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
 
     long getQuestionIdOrDefault(
         int key,
         long defaultValue);
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
 
     long getQuestionIdOrThrow(
@@ -17318,7 +17313,6 @@ public final class Request {
       super(builder);
     }
     private CourseWorkCreateRequest() {
-      open_ = false;
       courseWorkName_ = "";
       belongCourseId_ = 0L;
       hasDeadline_ = false;
@@ -17362,37 +17356,32 @@ public final class Request {
 
               break;
             }
-            case 16: {
-
-              open_ = input.readBool();
-              break;
-            }
-            case 26: {
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
               courseWorkName_ = s;
               break;
             }
-            case 32: {
+            case 24: {
 
               belongCourseId_ = input.readSInt64();
               break;
             }
-            case 40: {
+            case 32: {
 
               hasDeadline_ = input.readBool();
               break;
             }
-            case 49: {
+            case 41: {
 
               deadline_ = input.readFixed64();
               break;
             }
-            case 58: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
                 questionId_ = com.google.protobuf.MapField.newMapField(
                     QuestionIdDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000020;
               }
               com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
               questionId__ = input.readMessage(
@@ -17430,7 +17419,7 @@ public final class Request {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 7:
+        case 6:
           return internalGetQuestionId();
         default:
           throw new RuntimeException(
@@ -17467,19 +17456,10 @@ public final class Request {
       return getRequest();
     }
 
-    public static final int OPEN_FIELD_NUMBER = 2;
-    private boolean open_;
-    /**
-     * <code>bool open = 2;</code>
-     */
-    public boolean getOpen() {
-      return open_;
-    }
-
-    public static final int COURSEWORKNAME_FIELD_NUMBER = 3;
+    public static final int COURSEWORKNAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object courseWorkName_;
     /**
-     * <code>string courseWorkName = 3;</code>
+     * <code>string courseWorkName = 2;</code>
      */
     public java.lang.String getCourseWorkName() {
       java.lang.Object ref = courseWorkName_;
@@ -17494,7 +17474,7 @@ public final class Request {
       }
     }
     /**
-     * <code>string courseWorkName = 3;</code>
+     * <code>string courseWorkName = 2;</code>
      */
     public com.google.protobuf.ByteString
         getCourseWorkNameBytes() {
@@ -17510,34 +17490,34 @@ public final class Request {
       }
     }
 
-    public static final int BELONGCOURSEID_FIELD_NUMBER = 4;
+    public static final int BELONGCOURSEID_FIELD_NUMBER = 3;
     private long belongCourseId_;
     /**
-     * <code>sint64 belongCourseId = 4;</code>
+     * <code>sint64 belongCourseId = 3;</code>
      */
     public long getBelongCourseId() {
       return belongCourseId_;
     }
 
-    public static final int HASDEADLINE_FIELD_NUMBER = 5;
+    public static final int HASDEADLINE_FIELD_NUMBER = 4;
     private boolean hasDeadline_;
     /**
-     * <code>bool hasDeadline = 5;</code>
+     * <code>bool hasDeadline = 4;</code>
      */
     public boolean getHasDeadline() {
       return hasDeadline_;
     }
 
-    public static final int DEADLINE_FIELD_NUMBER = 6;
+    public static final int DEADLINE_FIELD_NUMBER = 5;
     private long deadline_;
     /**
-     * <code>fixed64 deadline = 6;</code>
+     * <code>fixed64 deadline = 5;</code>
      */
     public long getDeadline() {
       return deadline_;
     }
 
-    public static final int QUESTIONID_FIELD_NUMBER = 7;
+    public static final int QUESTIONID_FIELD_NUMBER = 6;
     private static final class QuestionIdDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, java.lang.Long> defaultEntry =
@@ -17564,7 +17544,7 @@ public final class Request {
       return internalGetQuestionId().getMap().size();
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
 
     public boolean containsQuestionId(
@@ -17580,14 +17560,14 @@ public final class Request {
       return getQuestionIdMap();
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
 
     public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
       return internalGetQuestionId().getMap();
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
 
     public long getQuestionIdOrDefault(
@@ -17599,7 +17579,7 @@ public final class Request {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
      */
 
     public long getQuestionIdOrThrow(
@@ -17630,27 +17610,24 @@ public final class Request {
       if (request_ != null) {
         output.writeMessage(1, getRequest());
       }
-      if (open_ != false) {
-        output.writeBool(2, open_);
-      }
       if (!getCourseWorkNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, courseWorkName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, courseWorkName_);
       }
       if (belongCourseId_ != 0L) {
-        output.writeSInt64(4, belongCourseId_);
+        output.writeSInt64(3, belongCourseId_);
       }
       if (hasDeadline_ != false) {
-        output.writeBool(5, hasDeadline_);
+        output.writeBool(4, hasDeadline_);
       }
       if (deadline_ != 0L) {
-        output.writeFixed64(6, deadline_);
+        output.writeFixed64(5, deadline_);
       }
       com.google.protobuf.GeneratedMessageV3
         .serializeIntegerMapTo(
           output,
           internalGetQuestionId(),
           QuestionIdDefaultEntryHolder.defaultEntry,
-          7);
+          6);
       unknownFields.writeTo(output);
     }
 
@@ -17664,24 +17641,20 @@ public final class Request {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getRequest());
       }
-      if (open_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, open_);
-      }
       if (!getCourseWorkNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, courseWorkName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, courseWorkName_);
       }
       if (belongCourseId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(4, belongCourseId_);
+          .computeSInt64Size(3, belongCourseId_);
       }
       if (hasDeadline_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, hasDeadline_);
+          .computeBoolSize(4, hasDeadline_);
       }
       if (deadline_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed64Size(6, deadline_);
+          .computeFixed64Size(5, deadline_);
       }
       for (java.util.Map.Entry<java.lang.Integer, java.lang.Long> entry
            : internalGetQuestionId().getMap().entrySet()) {
@@ -17691,7 +17664,7 @@ public final class Request {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(7, questionId__);
+            .computeMessageSize(6, questionId__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -17714,8 +17687,6 @@ public final class Request {
         result = result && getRequest()
             .equals(other.getRequest());
       }
-      result = result && (getOpen()
-          == other.getOpen());
       result = result && getCourseWorkName()
           .equals(other.getCourseWorkName());
       result = result && (getBelongCourseId()
@@ -17741,9 +17712,6 @@ public final class Request {
         hash = (37 * hash) + REQUEST_FIELD_NUMBER;
         hash = (53 * hash) + getRequest().hashCode();
       }
-      hash = (37 * hash) + OPEN_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getOpen());
       hash = (37 * hash) + COURSEWORKNAME_FIELD_NUMBER;
       hash = (53 * hash) + getCourseWorkName().hashCode();
       hash = (37 * hash) + BELONGCOURSEID_FIELD_NUMBER;
@@ -17870,7 +17838,7 @@ public final class Request {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 7:
+          case 6:
             return internalGetQuestionId();
           default:
             throw new RuntimeException(
@@ -17881,7 +17849,7 @@ public final class Request {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 7:
+          case 6:
             return internalGetMutableQuestionId();
           default:
             throw new RuntimeException(
@@ -17920,8 +17888,6 @@ public final class Request {
           request_ = null;
           requestBuilder_ = null;
         }
-        open_ = false;
-
         courseWorkName_ = "";
 
         belongCourseId_ = 0L;
@@ -17964,7 +17930,6 @@ public final class Request {
         } else {
           result.request_ = requestBuilder_.build();
         }
-        result.open_ = open_;
         result.courseWorkName_ = courseWorkName_;
         result.belongCourseId_ = belongCourseId_;
         result.hasDeadline_ = hasDeadline_;
@@ -18022,9 +17987,6 @@ public final class Request {
         if (other == com.corkili.learningserver.generate.protobuf.Request.CourseWorkCreateRequest.getDefaultInstance()) return this;
         if (other.hasRequest()) {
           mergeRequest(other.getRequest());
-        }
-        if (other.getOpen() != false) {
-          setOpen(other.getOpen());
         }
         if (!other.getCourseWorkName().isEmpty()) {
           courseWorkName_ = other.courseWorkName_;
@@ -18188,35 +18150,9 @@ public final class Request {
         return requestBuilder_;
       }
 
-      private boolean open_ ;
-      /**
-       * <code>bool open = 2;</code>
-       */
-      public boolean getOpen() {
-        return open_;
-      }
-      /**
-       * <code>bool open = 2;</code>
-       */
-      public Builder setOpen(boolean value) {
-        
-        open_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool open = 2;</code>
-       */
-      public Builder clearOpen() {
-        
-        open_ = false;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object courseWorkName_ = "";
       /**
-       * <code>string courseWorkName = 3;</code>
+       * <code>string courseWorkName = 2;</code>
        */
       public java.lang.String getCourseWorkName() {
         java.lang.Object ref = courseWorkName_;
@@ -18231,7 +18167,7 @@ public final class Request {
         }
       }
       /**
-       * <code>string courseWorkName = 3;</code>
+       * <code>string courseWorkName = 2;</code>
        */
       public com.google.protobuf.ByteString
           getCourseWorkNameBytes() {
@@ -18247,7 +18183,7 @@ public final class Request {
         }
       }
       /**
-       * <code>string courseWorkName = 3;</code>
+       * <code>string courseWorkName = 2;</code>
        */
       public Builder setCourseWorkName(
           java.lang.String value) {
@@ -18260,7 +18196,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>string courseWorkName = 3;</code>
+       * <code>string courseWorkName = 2;</code>
        */
       public Builder clearCourseWorkName() {
         
@@ -18269,7 +18205,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>string courseWorkName = 3;</code>
+       * <code>string courseWorkName = 2;</code>
        */
       public Builder setCourseWorkNameBytes(
           com.google.protobuf.ByteString value) {
@@ -18285,13 +18221,13 @@ public final class Request {
 
       private long belongCourseId_ ;
       /**
-       * <code>sint64 belongCourseId = 4;</code>
+       * <code>sint64 belongCourseId = 3;</code>
        */
       public long getBelongCourseId() {
         return belongCourseId_;
       }
       /**
-       * <code>sint64 belongCourseId = 4;</code>
+       * <code>sint64 belongCourseId = 3;</code>
        */
       public Builder setBelongCourseId(long value) {
         
@@ -18300,7 +18236,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>sint64 belongCourseId = 4;</code>
+       * <code>sint64 belongCourseId = 3;</code>
        */
       public Builder clearBelongCourseId() {
         
@@ -18311,13 +18247,13 @@ public final class Request {
 
       private boolean hasDeadline_ ;
       /**
-       * <code>bool hasDeadline = 5;</code>
+       * <code>bool hasDeadline = 4;</code>
        */
       public boolean getHasDeadline() {
         return hasDeadline_;
       }
       /**
-       * <code>bool hasDeadline = 5;</code>
+       * <code>bool hasDeadline = 4;</code>
        */
       public Builder setHasDeadline(boolean value) {
         
@@ -18326,7 +18262,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>bool hasDeadline = 5;</code>
+       * <code>bool hasDeadline = 4;</code>
        */
       public Builder clearHasDeadline() {
         
@@ -18337,13 +18273,13 @@ public final class Request {
 
       private long deadline_ ;
       /**
-       * <code>fixed64 deadline = 6;</code>
+       * <code>fixed64 deadline = 5;</code>
        */
       public long getDeadline() {
         return deadline_;
       }
       /**
-       * <code>fixed64 deadline = 6;</code>
+       * <code>fixed64 deadline = 5;</code>
        */
       public Builder setDeadline(long value) {
         
@@ -18352,7 +18288,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>fixed64 deadline = 6;</code>
+       * <code>fixed64 deadline = 5;</code>
        */
       public Builder clearDeadline() {
         
@@ -18388,7 +18324,7 @@ public final class Request {
         return internalGetQuestionId().getMap().size();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
 
       public boolean containsQuestionId(
@@ -18404,14 +18340,14 @@ public final class Request {
         return getQuestionIdMap();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
 
       public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
         return internalGetQuestionId().getMap();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
 
       public long getQuestionIdOrDefault(
@@ -18423,7 +18359,7 @@ public final class Request {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
 
       public long getQuestionIdOrThrow(
@@ -18443,7 +18379,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
 
       public Builder removeQuestionId(
@@ -18462,7 +18398,7 @@ public final class Request {
         return internalGetMutableQuestionId().getMutableMap();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
       public Builder putQuestionId(
           int key,
@@ -18474,7 +18410,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 6;</code>
        */
 
       public Builder putAllQuestionId(
@@ -18536,6 +18472,1574 @@ public final class Request {
 
   }
 
+  public interface CourseWorkUpdateRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CourseWorkUpdateRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
+
+    /**
+     * <code>sint64 courseWorkId = 2;</code>
+     */
+    long getCourseWorkId();
+
+    /**
+     * <code>bool updateOpen = 3;</code>
+     */
+    boolean getUpdateOpen();
+
+    /**
+     * <code>bool open = 4;</code>
+     */
+    boolean getOpen();
+
+    /**
+     * <code>bool updateCourseWorkName = 5;</code>
+     */
+    boolean getUpdateCourseWorkName();
+
+    /**
+     * <code>string courseWorkName = 6;</code>
+     */
+    java.lang.String getCourseWorkName();
+    /**
+     * <code>string courseWorkName = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getCourseWorkNameBytes();
+
+    /**
+     * <code>bool updateDeadline = 7;</code>
+     */
+    boolean getUpdateDeadline();
+
+    /**
+     * <code>bool hasDeadline = 8;</code>
+     */
+    boolean getHasDeadline();
+
+    /**
+     * <code>fixed64 deadline = 9;</code>
+     */
+    long getDeadline();
+
+    /**
+     * <code>bool updateQuestion = 10;</code>
+     */
+    boolean getUpdateQuestion();
+
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+    int getQuestionIdCount();
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+    boolean containsQuestionId(
+        int key);
+    /**
+     * Use {@link #getQuestionIdMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.Integer, java.lang.Long>
+    getQuestionId();
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+    java.util.Map<java.lang.Integer, java.lang.Long>
+    getQuestionIdMap();
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+
+    long getQuestionIdOrDefault(
+        int key,
+        long defaultValue);
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+
+    long getQuestionIdOrThrow(
+        int key);
+  }
+  /**
+   * Protobuf type {@code CourseWorkUpdateRequest}
+   */
+  public  static final class CourseWorkUpdateRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CourseWorkUpdateRequest)
+      CourseWorkUpdateRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CourseWorkUpdateRequest.newBuilder() to construct.
+    private CourseWorkUpdateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CourseWorkUpdateRequest() {
+      courseWorkId_ = 0L;
+      updateOpen_ = false;
+      open_ = false;
+      updateCourseWorkName_ = false;
+      courseWorkName_ = "";
+      updateDeadline_ = false;
+      hasDeadline_ = false;
+      deadline_ = 0L;
+      updateQuestion_ = false;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CourseWorkUpdateRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder subBuilder = null;
+              if (request_ != null) {
+                subBuilder = request_.toBuilder();
+              }
+              request_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Request.BaseRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(request_);
+                request_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+
+              courseWorkId_ = input.readSInt64();
+              break;
+            }
+            case 24: {
+
+              updateOpen_ = input.readBool();
+              break;
+            }
+            case 32: {
+
+              open_ = input.readBool();
+              break;
+            }
+            case 40: {
+
+              updateCourseWorkName_ = input.readBool();
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              courseWorkName_ = s;
+              break;
+            }
+            case 56: {
+
+              updateDeadline_ = input.readBool();
+              break;
+            }
+            case 64: {
+
+              hasDeadline_ = input.readBool();
+              break;
+            }
+            case 73: {
+
+              deadline_ = input.readFixed64();
+              break;
+            }
+            case 80: {
+
+              updateQuestion_ = input.readBool();
+              break;
+            }
+            case 90: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                questionId_ = com.google.protobuf.MapField.newMapField(
+                    QuestionIdDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000400;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
+              questionId__ = input.readMessage(
+                  QuestionIdDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              questionId_.getMutableMap().put(
+                  questionId__.getKey(), questionId__.getValue());
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_CourseWorkUpdateRequest_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 11:
+          return internalGetQuestionId();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_CourseWorkUpdateRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.class, com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int REQUEST_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_;
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public boolean hasRequest() {
+      return request_ != null;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+      return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+      return getRequest();
+    }
+
+    public static final int COURSEWORKID_FIELD_NUMBER = 2;
+    private long courseWorkId_;
+    /**
+     * <code>sint64 courseWorkId = 2;</code>
+     */
+    public long getCourseWorkId() {
+      return courseWorkId_;
+    }
+
+    public static final int UPDATEOPEN_FIELD_NUMBER = 3;
+    private boolean updateOpen_;
+    /**
+     * <code>bool updateOpen = 3;</code>
+     */
+    public boolean getUpdateOpen() {
+      return updateOpen_;
+    }
+
+    public static final int OPEN_FIELD_NUMBER = 4;
+    private boolean open_;
+    /**
+     * <code>bool open = 4;</code>
+     */
+    public boolean getOpen() {
+      return open_;
+    }
+
+    public static final int UPDATECOURSEWORKNAME_FIELD_NUMBER = 5;
+    private boolean updateCourseWorkName_;
+    /**
+     * <code>bool updateCourseWorkName = 5;</code>
+     */
+    public boolean getUpdateCourseWorkName() {
+      return updateCourseWorkName_;
+    }
+
+    public static final int COURSEWORKNAME_FIELD_NUMBER = 6;
+    private volatile java.lang.Object courseWorkName_;
+    /**
+     * <code>string courseWorkName = 6;</code>
+     */
+    public java.lang.String getCourseWorkName() {
+      java.lang.Object ref = courseWorkName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        courseWorkName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string courseWorkName = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCourseWorkNameBytes() {
+      java.lang.Object ref = courseWorkName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        courseWorkName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int UPDATEDEADLINE_FIELD_NUMBER = 7;
+    private boolean updateDeadline_;
+    /**
+     * <code>bool updateDeadline = 7;</code>
+     */
+    public boolean getUpdateDeadline() {
+      return updateDeadline_;
+    }
+
+    public static final int HASDEADLINE_FIELD_NUMBER = 8;
+    private boolean hasDeadline_;
+    /**
+     * <code>bool hasDeadline = 8;</code>
+     */
+    public boolean getHasDeadline() {
+      return hasDeadline_;
+    }
+
+    public static final int DEADLINE_FIELD_NUMBER = 9;
+    private long deadline_;
+    /**
+     * <code>fixed64 deadline = 9;</code>
+     */
+    public long getDeadline() {
+      return deadline_;
+    }
+
+    public static final int UPDATEQUESTION_FIELD_NUMBER = 10;
+    private boolean updateQuestion_;
+    /**
+     * <code>bool updateQuestion = 10;</code>
+     */
+    public boolean getUpdateQuestion() {
+      return updateQuestion_;
+    }
+
+    public static final int QUESTIONID_FIELD_NUMBER = 11;
+    private static final class QuestionIdDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, java.lang.Long> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, java.lang.Long>newDefaultInstance(
+                  com.corkili.learningserver.generate.protobuf.Request.internal_static_CourseWorkUpdateRequest_QuestionIdEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.SINT64,
+                  0L);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, java.lang.Long> questionId_;
+    private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+    internalGetQuestionId() {
+      if (questionId_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            QuestionIdDefaultEntryHolder.defaultEntry);
+      }
+      return questionId_;
+    }
+
+    public int getQuestionIdCount() {
+      return internalGetQuestionId().getMap().size();
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+
+    public boolean containsQuestionId(
+        int key) {
+      
+      return internalGetQuestionId().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getQuestionIdMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionId() {
+      return getQuestionIdMap();
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
+      return internalGetQuestionId().getMap();
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+
+    public long getQuestionIdOrDefault(
+        int key,
+        long defaultValue) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Long> map =
+          internalGetQuestionId().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+     */
+
+    public long getQuestionIdOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Long> map =
+          internalGetQuestionId().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (request_ != null) {
+        output.writeMessage(1, getRequest());
+      }
+      if (courseWorkId_ != 0L) {
+        output.writeSInt64(2, courseWorkId_);
+      }
+      if (updateOpen_ != false) {
+        output.writeBool(3, updateOpen_);
+      }
+      if (open_ != false) {
+        output.writeBool(4, open_);
+      }
+      if (updateCourseWorkName_ != false) {
+        output.writeBool(5, updateCourseWorkName_);
+      }
+      if (!getCourseWorkNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, courseWorkName_);
+      }
+      if (updateDeadline_ != false) {
+        output.writeBool(7, updateDeadline_);
+      }
+      if (hasDeadline_ != false) {
+        output.writeBool(8, hasDeadline_);
+      }
+      if (deadline_ != 0L) {
+        output.writeFixed64(9, deadline_);
+      }
+      if (updateQuestion_ != false) {
+        output.writeBool(10, updateQuestion_);
+      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeIntegerMapTo(
+          output,
+          internalGetQuestionId(),
+          QuestionIdDefaultEntryHolder.defaultEntry,
+          11);
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (request_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getRequest());
+      }
+      if (courseWorkId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(2, courseWorkId_);
+      }
+      if (updateOpen_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, updateOpen_);
+      }
+      if (open_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, open_);
+      }
+      if (updateCourseWorkName_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, updateCourseWorkName_);
+      }
+      if (!getCourseWorkNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, courseWorkName_);
+      }
+      if (updateDeadline_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, updateDeadline_);
+      }
+      if (hasDeadline_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(8, hasDeadline_);
+      }
+      if (deadline_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(9, deadline_);
+      }
+      if (updateQuestion_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, updateQuestion_);
+      }
+      for (java.util.Map.Entry<java.lang.Integer, java.lang.Long> entry
+           : internalGetQuestionId().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
+        questionId__ = QuestionIdDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(11, questionId__);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest other = (com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest) obj;
+
+      boolean result = true;
+      result = result && (hasRequest() == other.hasRequest());
+      if (hasRequest()) {
+        result = result && getRequest()
+            .equals(other.getRequest());
+      }
+      result = result && (getCourseWorkId()
+          == other.getCourseWorkId());
+      result = result && (getUpdateOpen()
+          == other.getUpdateOpen());
+      result = result && (getOpen()
+          == other.getOpen());
+      result = result && (getUpdateCourseWorkName()
+          == other.getUpdateCourseWorkName());
+      result = result && getCourseWorkName()
+          .equals(other.getCourseWorkName());
+      result = result && (getUpdateDeadline()
+          == other.getUpdateDeadline());
+      result = result && (getHasDeadline()
+          == other.getHasDeadline());
+      result = result && (getDeadline()
+          == other.getDeadline());
+      result = result && (getUpdateQuestion()
+          == other.getUpdateQuestion());
+      result = result && internalGetQuestionId().equals(
+          other.internalGetQuestionId());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasRequest()) {
+        hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRequest().hashCode();
+      }
+      hash = (37 * hash) + COURSEWORKID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCourseWorkId());
+      hash = (37 * hash) + UPDATEOPEN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateOpen());
+      hash = (37 * hash) + OPEN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getOpen());
+      hash = (37 * hash) + UPDATECOURSEWORKNAME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateCourseWorkName());
+      hash = (37 * hash) + COURSEWORKNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getCourseWorkName().hashCode();
+      hash = (37 * hash) + UPDATEDEADLINE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateDeadline());
+      hash = (37 * hash) + HASDEADLINE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getHasDeadline());
+      hash = (37 * hash) + DEADLINE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getDeadline());
+      hash = (37 * hash) + UPDATEQUESTION_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateQuestion());
+      if (!internalGetQuestionId().getMap().isEmpty()) {
+        hash = (37 * hash) + QUESTIONID_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetQuestionId().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CourseWorkUpdateRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CourseWorkUpdateRequest)
+        com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_CourseWorkUpdateRequest_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 11:
+            return internalGetQuestionId();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 11:
+            return internalGetMutableQuestionId();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_CourseWorkUpdateRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.class, com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (requestBuilder_ == null) {
+          request_ = null;
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+        courseWorkId_ = 0L;
+
+        updateOpen_ = false;
+
+        open_ = false;
+
+        updateCourseWorkName_ = false;
+
+        courseWorkName_ = "";
+
+        updateDeadline_ = false;
+
+        hasDeadline_ = false;
+
+        deadline_ = 0L;
+
+        updateQuestion_ = false;
+
+        internalGetMutableQuestionId().clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_CourseWorkUpdateRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest build() {
+        com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest result = new com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (requestBuilder_ == null) {
+          result.request_ = request_;
+        } else {
+          result.request_ = requestBuilder_.build();
+        }
+        result.courseWorkId_ = courseWorkId_;
+        result.updateOpen_ = updateOpen_;
+        result.open_ = open_;
+        result.updateCourseWorkName_ = updateCourseWorkName_;
+        result.courseWorkName_ = courseWorkName_;
+        result.updateDeadline_ = updateDeadline_;
+        result.hasDeadline_ = hasDeadline_;
+        result.deadline_ = deadline_;
+        result.updateQuestion_ = updateQuestion_;
+        result.questionId_ = internalGetQuestionId();
+        result.questionId_.makeImmutable();
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest.getDefaultInstance()) return this;
+        if (other.hasRequest()) {
+          mergeRequest(other.getRequest());
+        }
+        if (other.getCourseWorkId() != 0L) {
+          setCourseWorkId(other.getCourseWorkId());
+        }
+        if (other.getUpdateOpen() != false) {
+          setUpdateOpen(other.getUpdateOpen());
+        }
+        if (other.getOpen() != false) {
+          setOpen(other.getOpen());
+        }
+        if (other.getUpdateCourseWorkName() != false) {
+          setUpdateCourseWorkName(other.getUpdateCourseWorkName());
+        }
+        if (!other.getCourseWorkName().isEmpty()) {
+          courseWorkName_ = other.courseWorkName_;
+          onChanged();
+        }
+        if (other.getUpdateDeadline() != false) {
+          setUpdateDeadline(other.getUpdateDeadline());
+        }
+        if (other.getHasDeadline() != false) {
+          setHasDeadline(other.getHasDeadline());
+        }
+        if (other.getDeadline() != 0L) {
+          setDeadline(other.getDeadline());
+        }
+        if (other.getUpdateQuestion() != false) {
+          setUpdateQuestion(other.getUpdateQuestion());
+        }
+        internalGetMutableQuestionId().mergeFrom(
+            other.internalGetQuestionId());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> requestBuilder_;
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public boolean hasRequest() {
+        return requestBuilder_ != null || request_ != null;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+        if (requestBuilder_ == null) {
+          return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        } else {
+          return requestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder builderForValue) {
+        if (requestBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder mergeRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (request_ != null) {
+            request_ =
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.newBuilder(request_).mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          requestBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
+          request_ = null;
+          onChanged();
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder getRequestBuilder() {
+        
+        onChanged();
+        return getRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+        if (requestBuilder_ != null) {
+          return requestBuilder_.getMessageOrBuilder();
+        } else {
+          return request_ == null ?
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder>(
+                  getRequest(),
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        return requestBuilder_;
+      }
+
+      private long courseWorkId_ ;
+      /**
+       * <code>sint64 courseWorkId = 2;</code>
+       */
+      public long getCourseWorkId() {
+        return courseWorkId_;
+      }
+      /**
+       * <code>sint64 courseWorkId = 2;</code>
+       */
+      public Builder setCourseWorkId(long value) {
+        
+        courseWorkId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 courseWorkId = 2;</code>
+       */
+      public Builder clearCourseWorkId() {
+        
+        courseWorkId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateOpen_ ;
+      /**
+       * <code>bool updateOpen = 3;</code>
+       */
+      public boolean getUpdateOpen() {
+        return updateOpen_;
+      }
+      /**
+       * <code>bool updateOpen = 3;</code>
+       */
+      public Builder setUpdateOpen(boolean value) {
+        
+        updateOpen_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateOpen = 3;</code>
+       */
+      public Builder clearUpdateOpen() {
+        
+        updateOpen_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean open_ ;
+      /**
+       * <code>bool open = 4;</code>
+       */
+      public boolean getOpen() {
+        return open_;
+      }
+      /**
+       * <code>bool open = 4;</code>
+       */
+      public Builder setOpen(boolean value) {
+        
+        open_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool open = 4;</code>
+       */
+      public Builder clearOpen() {
+        
+        open_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateCourseWorkName_ ;
+      /**
+       * <code>bool updateCourseWorkName = 5;</code>
+       */
+      public boolean getUpdateCourseWorkName() {
+        return updateCourseWorkName_;
+      }
+      /**
+       * <code>bool updateCourseWorkName = 5;</code>
+       */
+      public Builder setUpdateCourseWorkName(boolean value) {
+        
+        updateCourseWorkName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateCourseWorkName = 5;</code>
+       */
+      public Builder clearUpdateCourseWorkName() {
+        
+        updateCourseWorkName_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object courseWorkName_ = "";
+      /**
+       * <code>string courseWorkName = 6;</code>
+       */
+      public java.lang.String getCourseWorkName() {
+        java.lang.Object ref = courseWorkName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          courseWorkName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string courseWorkName = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCourseWorkNameBytes() {
+        java.lang.Object ref = courseWorkName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          courseWorkName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string courseWorkName = 6;</code>
+       */
+      public Builder setCourseWorkName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        courseWorkName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string courseWorkName = 6;</code>
+       */
+      public Builder clearCourseWorkName() {
+        
+        courseWorkName_ = getDefaultInstance().getCourseWorkName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string courseWorkName = 6;</code>
+       */
+      public Builder setCourseWorkNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        courseWorkName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateDeadline_ ;
+      /**
+       * <code>bool updateDeadline = 7;</code>
+       */
+      public boolean getUpdateDeadline() {
+        return updateDeadline_;
+      }
+      /**
+       * <code>bool updateDeadline = 7;</code>
+       */
+      public Builder setUpdateDeadline(boolean value) {
+        
+        updateDeadline_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateDeadline = 7;</code>
+       */
+      public Builder clearUpdateDeadline() {
+        
+        updateDeadline_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean hasDeadline_ ;
+      /**
+       * <code>bool hasDeadline = 8;</code>
+       */
+      public boolean getHasDeadline() {
+        return hasDeadline_;
+      }
+      /**
+       * <code>bool hasDeadline = 8;</code>
+       */
+      public Builder setHasDeadline(boolean value) {
+        
+        hasDeadline_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool hasDeadline = 8;</code>
+       */
+      public Builder clearHasDeadline() {
+        
+        hasDeadline_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long deadline_ ;
+      /**
+       * <code>fixed64 deadline = 9;</code>
+       */
+      public long getDeadline() {
+        return deadline_;
+      }
+      /**
+       * <code>fixed64 deadline = 9;</code>
+       */
+      public Builder setDeadline(long value) {
+        
+        deadline_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 deadline = 9;</code>
+       */
+      public Builder clearDeadline() {
+        
+        deadline_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateQuestion_ ;
+      /**
+       * <code>bool updateQuestion = 10;</code>
+       */
+      public boolean getUpdateQuestion() {
+        return updateQuestion_;
+      }
+      /**
+       * <code>bool updateQuestion = 10;</code>
+       */
+      public Builder setUpdateQuestion(boolean value) {
+        
+        updateQuestion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateQuestion = 10;</code>
+       */
+      public Builder clearUpdateQuestion() {
+        
+        updateQuestion_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.Integer, java.lang.Long> questionId_;
+      private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+      internalGetQuestionId() {
+        if (questionId_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              QuestionIdDefaultEntryHolder.defaultEntry);
+        }
+        return questionId_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+      internalGetMutableQuestionId() {
+        onChanged();;
+        if (questionId_ == null) {
+          questionId_ = com.google.protobuf.MapField.newMapField(
+              QuestionIdDefaultEntryHolder.defaultEntry);
+        }
+        if (!questionId_.isMutable()) {
+          questionId_ = questionId_.copy();
+        }
+        return questionId_;
+      }
+
+      public int getQuestionIdCount() {
+        return internalGetQuestionId().getMap().size();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+
+      public boolean containsQuestionId(
+          int key) {
+        
+        return internalGetQuestionId().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getQuestionIdMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionId() {
+        return getQuestionIdMap();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
+        return internalGetQuestionId().getMap();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+
+      public long getQuestionIdOrDefault(
+          int key,
+          long defaultValue) {
+        
+        java.util.Map<java.lang.Integer, java.lang.Long> map =
+            internalGetQuestionId().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+
+      public long getQuestionIdOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, java.lang.Long> map =
+            internalGetQuestionId().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearQuestionId() {
+        internalGetMutableQuestionId().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+
+      public Builder removeQuestionId(
+          int key) {
+        
+        internalGetMutableQuestionId().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, java.lang.Long>
+      getMutableQuestionId() {
+        return internalGetMutableQuestionId().getMutableMap();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+      public Builder putQuestionId(
+          int key,
+          long value) {
+        
+        
+        internalGetMutableQuestionId().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 11;</code>
+       */
+
+      public Builder putAllQuestionId(
+          java.util.Map<java.lang.Integer, java.lang.Long> values) {
+        internalGetMutableQuestionId().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CourseWorkUpdateRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:CourseWorkUpdateRequest)
+    private static final com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CourseWorkUpdateRequest>
+        PARSER = new com.google.protobuf.AbstractParser<CourseWorkUpdateRequest>() {
+      @java.lang.Override
+      public CourseWorkUpdateRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CourseWorkUpdateRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CourseWorkUpdateRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CourseWorkUpdateRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ExamCreateRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ExamCreateRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -18579,11 +20083,16 @@ public final class Request {
     long getEndTime();
 
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>int32 duration = 6;</code>
+     */
+    int getDuration();
+
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
     int getQuestionIdCount();
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
     boolean containsQuestionId(
         int key);
@@ -18594,30 +20103,30 @@ public final class Request {
     java.util.Map<java.lang.Integer, java.lang.Long>
     getQuestionId();
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
     java.util.Map<java.lang.Integer, java.lang.Long>
     getQuestionIdMap();
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
 
     long getQuestionIdOrDefault(
         int key,
         long defaultValue);
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
 
     long getQuestionIdOrThrow(
         int key);
 
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
     int getQuestionScoreCount();
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
     boolean containsQuestionScore(
         int key);
@@ -18628,19 +20137,19 @@ public final class Request {
     java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
     getQuestionScore();
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
     java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
     getQuestionScoreMap();
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
 
     com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrDefault(
         int key,
         com.corkili.learningserver.generate.protobuf.Info.Score defaultValue);
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
 
     com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrThrow(
@@ -18663,6 +20172,7 @@ public final class Request {
       belongCourseId_ = 0L;
       startTime_ = 0L;
       endTime_ = 0L;
+      duration_ = 0;
     }
 
     @java.lang.Override
@@ -18723,11 +20233,16 @@ public final class Request {
               endTime_ = input.readFixed64();
               break;
             }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            case 48: {
+
+              duration_ = input.readInt32();
+              break;
+            }
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 questionId_ = com.google.protobuf.MapField.newMapField(
                     QuestionIdDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
               questionId__ = input.readMessage(
@@ -18736,11 +20251,11 @@ public final class Request {
                   questionId__.getKey(), questionId__.getValue());
               break;
             }
-            case 74: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 questionScore_ = com.google.protobuf.MapField.newMapField(
                     QuestionScoreDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000080;
               }
               com.google.protobuf.MapEntry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
               questionScore__ = input.readMessage(
@@ -18778,9 +20293,9 @@ public final class Request {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 8:
+        case 7:
           return internalGetQuestionId();
-        case 9:
+        case 8:
           return internalGetQuestionScore();
         default:
           throw new RuntimeException(
@@ -18878,7 +20393,16 @@ public final class Request {
       return endTime_;
     }
 
-    public static final int QUESTIONID_FIELD_NUMBER = 8;
+    public static final int DURATION_FIELD_NUMBER = 6;
+    private int duration_;
+    /**
+     * <code>int32 duration = 6;</code>
+     */
+    public int getDuration() {
+      return duration_;
+    }
+
+    public static final int QUESTIONID_FIELD_NUMBER = 7;
     private static final class QuestionIdDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, java.lang.Long> defaultEntry =
@@ -18905,7 +20429,7 @@ public final class Request {
       return internalGetQuestionId().getMap().size();
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
 
     public boolean containsQuestionId(
@@ -18921,14 +20445,14 @@ public final class Request {
       return getQuestionIdMap();
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
 
     public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
       return internalGetQuestionId().getMap();
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
 
     public long getQuestionIdOrDefault(
@@ -18940,7 +20464,7 @@ public final class Request {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+     * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
      */
 
     public long getQuestionIdOrThrow(
@@ -18954,7 +20478,7 @@ public final class Request {
       return map.get(key);
     }
 
-    public static final int QUESTIONSCORE_FIELD_NUMBER = 9;
+    public static final int QUESTIONSCORE_FIELD_NUMBER = 8;
     private static final class QuestionScoreDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> defaultEntry =
@@ -18981,7 +20505,7 @@ public final class Request {
       return internalGetQuestionScore().getMap().size();
     }
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
 
     public boolean containsQuestionScore(
@@ -18997,14 +20521,14 @@ public final class Request {
       return getQuestionScoreMap();
     }
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
 
     public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> getQuestionScoreMap() {
       return internalGetQuestionScore().getMap();
     }
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
 
     public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrDefault(
@@ -19016,7 +20540,7 @@ public final class Request {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+     * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
      */
 
     public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrThrow(
@@ -19059,18 +20583,21 @@ public final class Request {
       if (endTime_ != 0L) {
         output.writeFixed64(5, endTime_);
       }
+      if (duration_ != 0) {
+        output.writeInt32(6, duration_);
+      }
       com.google.protobuf.GeneratedMessageV3
         .serializeIntegerMapTo(
           output,
           internalGetQuestionId(),
           QuestionIdDefaultEntryHolder.defaultEntry,
-          8);
+          7);
       com.google.protobuf.GeneratedMessageV3
         .serializeIntegerMapTo(
           output,
           internalGetQuestionScore(),
           QuestionScoreDefaultEntryHolder.defaultEntry,
-          9);
+          8);
       unknownFields.writeTo(output);
     }
 
@@ -19099,6 +20626,10 @@ public final class Request {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed64Size(5, endTime_);
       }
+      if (duration_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, duration_);
+      }
       for (java.util.Map.Entry<java.lang.Integer, java.lang.Long> entry
            : internalGetQuestionId().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
@@ -19107,7 +20638,7 @@ public final class Request {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(8, questionId__);
+            .computeMessageSize(7, questionId__);
       }
       for (java.util.Map.Entry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> entry
            : internalGetQuestionScore().getMap().entrySet()) {
@@ -19117,7 +20648,7 @@ public final class Request {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(9, questionScore__);
+            .computeMessageSize(8, questionScore__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -19148,6 +20679,8 @@ public final class Request {
           == other.getStartTime());
       result = result && (getEndTime()
           == other.getEndTime());
+      result = result && (getDuration()
+          == other.getDuration());
       result = result && internalGetQuestionId().equals(
           other.internalGetQuestionId());
       result = result && internalGetQuestionScore().equals(
@@ -19178,6 +20711,8 @@ public final class Request {
       hash = (37 * hash) + ENDTIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getEndTime());
+      hash = (37 * hash) + DURATION_FIELD_NUMBER;
+      hash = (53 * hash) + getDuration();
       if (!internalGetQuestionId().getMap().isEmpty()) {
         hash = (37 * hash) + QUESTIONID_FIELD_NUMBER;
         hash = (53 * hash) + internalGetQuestionId().hashCode();
@@ -19297,9 +20832,9 @@ public final class Request {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 8:
+          case 7:
             return internalGetQuestionId();
-          case 9:
+          case 8:
             return internalGetQuestionScore();
           default:
             throw new RuntimeException(
@@ -19310,9 +20845,9 @@ public final class Request {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 8:
+          case 7:
             return internalGetMutableQuestionId();
-          case 9:
+          case 8:
             return internalGetMutableQuestionScore();
           default:
             throw new RuntimeException(
@@ -19359,6 +20894,8 @@ public final class Request {
 
         endTime_ = 0L;
 
+        duration_ = 0;
+
         internalGetMutableQuestionId().clear();
         internalGetMutableQuestionScore().clear();
         return this;
@@ -19398,6 +20935,7 @@ public final class Request {
         result.belongCourseId_ = belongCourseId_;
         result.startTime_ = startTime_;
         result.endTime_ = endTime_;
+        result.duration_ = duration_;
         result.questionId_ = internalGetQuestionId();
         result.questionId_.makeImmutable();
         result.questionScore_ = internalGetQuestionScore();
@@ -19466,6 +21004,9 @@ public final class Request {
         }
         if (other.getEndTime() != 0L) {
           setEndTime(other.getEndTime());
+        }
+        if (other.getDuration() != 0) {
+          setDuration(other.getDuration());
         }
         internalGetMutableQuestionId().mergeFrom(
             other.internalGetQuestionId());
@@ -19765,6 +21306,32 @@ public final class Request {
         return this;
       }
 
+      private int duration_ ;
+      /**
+       * <code>int32 duration = 6;</code>
+       */
+      public int getDuration() {
+        return duration_;
+      }
+      /**
+       * <code>int32 duration = 6;</code>
+       */
+      public Builder setDuration(int value) {
+        
+        duration_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 duration = 6;</code>
+       */
+      public Builder clearDuration() {
+        
+        duration_ = 0;
+        onChanged();
+        return this;
+      }
+
       private com.google.protobuf.MapField<
           java.lang.Integer, java.lang.Long> questionId_;
       private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
@@ -19792,7 +21359,7 @@ public final class Request {
         return internalGetQuestionId().getMap().size();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
 
       public boolean containsQuestionId(
@@ -19808,14 +21375,14 @@ public final class Request {
         return getQuestionIdMap();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
 
       public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
         return internalGetQuestionId().getMap();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
 
       public long getQuestionIdOrDefault(
@@ -19827,7 +21394,7 @@ public final class Request {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
 
       public long getQuestionIdOrThrow(
@@ -19847,7 +21414,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
 
       public Builder removeQuestionId(
@@ -19866,7 +21433,7 @@ public final class Request {
         return internalGetMutableQuestionId().getMutableMap();
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
       public Builder putQuestionId(
           int key,
@@ -19878,7 +21445,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>map&lt;int32, sint64&gt; questionId = 8;</code>
+       * <code>map&lt;int32, sint64&gt; questionId = 7;</code>
        */
 
       public Builder putAllQuestionId(
@@ -19915,7 +21482,7 @@ public final class Request {
         return internalGetQuestionScore().getMap().size();
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
 
       public boolean containsQuestionScore(
@@ -19931,14 +21498,14 @@ public final class Request {
         return getQuestionScoreMap();
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
 
       public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> getQuestionScoreMap() {
         return internalGetQuestionScore().getMap();
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
 
       public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrDefault(
@@ -19950,7 +21517,7 @@ public final class Request {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
 
       public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrThrow(
@@ -19970,7 +21537,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
 
       public Builder removeQuestionScore(
@@ -19989,7 +21556,7 @@ public final class Request {
         return internalGetMutableQuestionScore().getMutableMap();
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
       public Builder putQuestionScore(
           int key,
@@ -20001,7 +21568,7 @@ public final class Request {
         return this;
       }
       /**
-       * <code>map&lt;int32, .Score&gt; questionScore = 9;</code>
+       * <code>map&lt;int32, .Score&gt; questionScore = 8;</code>
        */
 
       public Builder putAllQuestionScore(
@@ -20058,6 +21625,1916 @@ public final class Request {
 
     @java.lang.Override
     public com.corkili.learningserver.generate.protobuf.Request.ExamCreateRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ExamUpdateRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ExamUpdateRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
+
+    /**
+     * <code>sint64 examId = 2;</code>
+     */
+    long getExamId();
+
+    /**
+     * <code>bool updateExamName = 3;</code>
+     */
+    boolean getUpdateExamName();
+
+    /**
+     * <code>string examName = 4;</code>
+     */
+    java.lang.String getExamName();
+    /**
+     * <code>string examName = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getExamNameBytes();
+
+    /**
+     * <code>bool updateStartTime = 5;</code>
+     */
+    boolean getUpdateStartTime();
+
+    /**
+     * <code>fixed64 startTime = 6;</code>
+     */
+    long getStartTime();
+
+    /**
+     * <code>bool updateEndTime = 7;</code>
+     */
+    boolean getUpdateEndTime();
+
+    /**
+     * <code>fixed64 endTime = 8;</code>
+     */
+    long getEndTime();
+
+    /**
+     * <code>bool updateDuration = 9;</code>
+     */
+    boolean getUpdateDuration();
+
+    /**
+     * <code>int32 duration = 10;</code>
+     */
+    int getDuration();
+
+    /**
+     * <code>bool updateQuestion = 11;</code>
+     */
+    boolean getUpdateQuestion();
+
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+    int getQuestionIdCount();
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+    boolean containsQuestionId(
+        int key);
+    /**
+     * Use {@link #getQuestionIdMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.Integer, java.lang.Long>
+    getQuestionId();
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+    java.util.Map<java.lang.Integer, java.lang.Long>
+    getQuestionIdMap();
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+
+    long getQuestionIdOrDefault(
+        int key,
+        long defaultValue);
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+
+    long getQuestionIdOrThrow(
+        int key);
+
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+    int getQuestionScoreCount();
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+    boolean containsQuestionScore(
+        int key);
+    /**
+     * Use {@link #getQuestionScoreMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+    getQuestionScore();
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+    java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+    getQuestionScoreMap();
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+
+    com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrDefault(
+        int key,
+        com.corkili.learningserver.generate.protobuf.Info.Score defaultValue);
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+
+    com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrThrow(
+        int key);
+  }
+  /**
+   * Protobuf type {@code ExamUpdateRequest}
+   */
+  public  static final class ExamUpdateRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ExamUpdateRequest)
+      ExamUpdateRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ExamUpdateRequest.newBuilder() to construct.
+    private ExamUpdateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ExamUpdateRequest() {
+      examId_ = 0L;
+      updateExamName_ = false;
+      examName_ = "";
+      updateStartTime_ = false;
+      startTime_ = 0L;
+      updateEndTime_ = false;
+      endTime_ = 0L;
+      updateDuration_ = false;
+      duration_ = 0;
+      updateQuestion_ = false;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ExamUpdateRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder subBuilder = null;
+              if (request_ != null) {
+                subBuilder = request_.toBuilder();
+              }
+              request_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Request.BaseRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(request_);
+                request_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+
+              examId_ = input.readSInt64();
+              break;
+            }
+            case 24: {
+
+              updateExamName_ = input.readBool();
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              examName_ = s;
+              break;
+            }
+            case 40: {
+
+              updateStartTime_ = input.readBool();
+              break;
+            }
+            case 49: {
+
+              startTime_ = input.readFixed64();
+              break;
+            }
+            case 56: {
+
+              updateEndTime_ = input.readBool();
+              break;
+            }
+            case 65: {
+
+              endTime_ = input.readFixed64();
+              break;
+            }
+            case 72: {
+
+              updateDuration_ = input.readBool();
+              break;
+            }
+            case 80: {
+
+              duration_ = input.readInt32();
+              break;
+            }
+            case 88: {
+
+              updateQuestion_ = input.readBool();
+              break;
+            }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                questionId_ = com.google.protobuf.MapField.newMapField(
+                    QuestionIdDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000800;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
+              questionId__ = input.readMessage(
+                  QuestionIdDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              questionId_.getMutableMap().put(
+                  questionId__.getKey(), questionId__.getValue());
+              break;
+            }
+            case 106: {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                questionScore_ = com.google.protobuf.MapField.newMapField(
+                    QuestionScoreDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00001000;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+              questionScore__ = input.readMessage(
+                  QuestionScoreDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              questionScore_.getMutableMap().put(
+                  questionScore__.getKey(), questionScore__.getValue());
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 12:
+          return internalGetQuestionId();
+        case 13:
+          return internalGetQuestionScore();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.class, com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int REQUEST_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_;
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public boolean hasRequest() {
+      return request_ != null;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+      return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+      return getRequest();
+    }
+
+    public static final int EXAMID_FIELD_NUMBER = 2;
+    private long examId_;
+    /**
+     * <code>sint64 examId = 2;</code>
+     */
+    public long getExamId() {
+      return examId_;
+    }
+
+    public static final int UPDATEEXAMNAME_FIELD_NUMBER = 3;
+    private boolean updateExamName_;
+    /**
+     * <code>bool updateExamName = 3;</code>
+     */
+    public boolean getUpdateExamName() {
+      return updateExamName_;
+    }
+
+    public static final int EXAMNAME_FIELD_NUMBER = 4;
+    private volatile java.lang.Object examName_;
+    /**
+     * <code>string examName = 4;</code>
+     */
+    public java.lang.String getExamName() {
+      java.lang.Object ref = examName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        examName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string examName = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getExamNameBytes() {
+      java.lang.Object ref = examName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        examName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int UPDATESTARTTIME_FIELD_NUMBER = 5;
+    private boolean updateStartTime_;
+    /**
+     * <code>bool updateStartTime = 5;</code>
+     */
+    public boolean getUpdateStartTime() {
+      return updateStartTime_;
+    }
+
+    public static final int STARTTIME_FIELD_NUMBER = 6;
+    private long startTime_;
+    /**
+     * <code>fixed64 startTime = 6;</code>
+     */
+    public long getStartTime() {
+      return startTime_;
+    }
+
+    public static final int UPDATEENDTIME_FIELD_NUMBER = 7;
+    private boolean updateEndTime_;
+    /**
+     * <code>bool updateEndTime = 7;</code>
+     */
+    public boolean getUpdateEndTime() {
+      return updateEndTime_;
+    }
+
+    public static final int ENDTIME_FIELD_NUMBER = 8;
+    private long endTime_;
+    /**
+     * <code>fixed64 endTime = 8;</code>
+     */
+    public long getEndTime() {
+      return endTime_;
+    }
+
+    public static final int UPDATEDURATION_FIELD_NUMBER = 9;
+    private boolean updateDuration_;
+    /**
+     * <code>bool updateDuration = 9;</code>
+     */
+    public boolean getUpdateDuration() {
+      return updateDuration_;
+    }
+
+    public static final int DURATION_FIELD_NUMBER = 10;
+    private int duration_;
+    /**
+     * <code>int32 duration = 10;</code>
+     */
+    public int getDuration() {
+      return duration_;
+    }
+
+    public static final int UPDATEQUESTION_FIELD_NUMBER = 11;
+    private boolean updateQuestion_;
+    /**
+     * <code>bool updateQuestion = 11;</code>
+     */
+    public boolean getUpdateQuestion() {
+      return updateQuestion_;
+    }
+
+    public static final int QUESTIONID_FIELD_NUMBER = 12;
+    private static final class QuestionIdDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, java.lang.Long> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, java.lang.Long>newDefaultInstance(
+                  com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_QuestionIdEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.SINT64,
+                  0L);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, java.lang.Long> questionId_;
+    private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+    internalGetQuestionId() {
+      if (questionId_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            QuestionIdDefaultEntryHolder.defaultEntry);
+      }
+      return questionId_;
+    }
+
+    public int getQuestionIdCount() {
+      return internalGetQuestionId().getMap().size();
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+
+    public boolean containsQuestionId(
+        int key) {
+      
+      return internalGetQuestionId().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getQuestionIdMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionId() {
+      return getQuestionIdMap();
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
+      return internalGetQuestionId().getMap();
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+
+    public long getQuestionIdOrDefault(
+        int key,
+        long defaultValue) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Long> map =
+          internalGetQuestionId().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+     */
+
+    public long getQuestionIdOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Long> map =
+          internalGetQuestionId().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public static final int QUESTIONSCORE_FIELD_NUMBER = 13;
+    private static final class QuestionScoreDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>newDefaultInstance(
+                  com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_QuestionScoreEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.corkili.learningserver.generate.protobuf.Info.Score.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> questionScore_;
+    private com.google.protobuf.MapField<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+    internalGetQuestionScore() {
+      if (questionScore_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            QuestionScoreDefaultEntryHolder.defaultEntry);
+      }
+      return questionScore_;
+    }
+
+    public int getQuestionScoreCount() {
+      return internalGetQuestionScore().getMap().size();
+    }
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+
+    public boolean containsQuestionScore(
+        int key) {
+      
+      return internalGetQuestionScore().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getQuestionScoreMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> getQuestionScore() {
+      return getQuestionScoreMap();
+    }
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> getQuestionScoreMap() {
+      return internalGetQuestionScore().getMap();
+    }
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+
+    public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrDefault(
+        int key,
+        com.corkili.learningserver.generate.protobuf.Info.Score defaultValue) {
+      
+      java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> map =
+          internalGetQuestionScore().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+     */
+
+    public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> map =
+          internalGetQuestionScore().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (request_ != null) {
+        output.writeMessage(1, getRequest());
+      }
+      if (examId_ != 0L) {
+        output.writeSInt64(2, examId_);
+      }
+      if (updateExamName_ != false) {
+        output.writeBool(3, updateExamName_);
+      }
+      if (!getExamNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, examName_);
+      }
+      if (updateStartTime_ != false) {
+        output.writeBool(5, updateStartTime_);
+      }
+      if (startTime_ != 0L) {
+        output.writeFixed64(6, startTime_);
+      }
+      if (updateEndTime_ != false) {
+        output.writeBool(7, updateEndTime_);
+      }
+      if (endTime_ != 0L) {
+        output.writeFixed64(8, endTime_);
+      }
+      if (updateDuration_ != false) {
+        output.writeBool(9, updateDuration_);
+      }
+      if (duration_ != 0) {
+        output.writeInt32(10, duration_);
+      }
+      if (updateQuestion_ != false) {
+        output.writeBool(11, updateQuestion_);
+      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeIntegerMapTo(
+          output,
+          internalGetQuestionId(),
+          QuestionIdDefaultEntryHolder.defaultEntry,
+          12);
+      com.google.protobuf.GeneratedMessageV3
+        .serializeIntegerMapTo(
+          output,
+          internalGetQuestionScore(),
+          QuestionScoreDefaultEntryHolder.defaultEntry,
+          13);
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (request_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getRequest());
+      }
+      if (examId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(2, examId_);
+      }
+      if (updateExamName_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, updateExamName_);
+      }
+      if (!getExamNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, examName_);
+      }
+      if (updateStartTime_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, updateStartTime_);
+      }
+      if (startTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(6, startTime_);
+      }
+      if (updateEndTime_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, updateEndTime_);
+      }
+      if (endTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(8, endTime_);
+      }
+      if (updateDuration_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, updateDuration_);
+      }
+      if (duration_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, duration_);
+      }
+      if (updateQuestion_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, updateQuestion_);
+      }
+      for (java.util.Map.Entry<java.lang.Integer, java.lang.Long> entry
+           : internalGetQuestionId().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
+        questionId__ = QuestionIdDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(12, questionId__);
+      }
+      for (java.util.Map.Entry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> entry
+           : internalGetQuestionScore().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+        questionScore__ = QuestionScoreDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(13, questionScore__);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest other = (com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest) obj;
+
+      boolean result = true;
+      result = result && (hasRequest() == other.hasRequest());
+      if (hasRequest()) {
+        result = result && getRequest()
+            .equals(other.getRequest());
+      }
+      result = result && (getExamId()
+          == other.getExamId());
+      result = result && (getUpdateExamName()
+          == other.getUpdateExamName());
+      result = result && getExamName()
+          .equals(other.getExamName());
+      result = result && (getUpdateStartTime()
+          == other.getUpdateStartTime());
+      result = result && (getStartTime()
+          == other.getStartTime());
+      result = result && (getUpdateEndTime()
+          == other.getUpdateEndTime());
+      result = result && (getEndTime()
+          == other.getEndTime());
+      result = result && (getUpdateDuration()
+          == other.getUpdateDuration());
+      result = result && (getDuration()
+          == other.getDuration());
+      result = result && (getUpdateQuestion()
+          == other.getUpdateQuestion());
+      result = result && internalGetQuestionId().equals(
+          other.internalGetQuestionId());
+      result = result && internalGetQuestionScore().equals(
+          other.internalGetQuestionScore());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasRequest()) {
+        hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRequest().hashCode();
+      }
+      hash = (37 * hash) + EXAMID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getExamId());
+      hash = (37 * hash) + UPDATEEXAMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateExamName());
+      hash = (37 * hash) + EXAMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getExamName().hashCode();
+      hash = (37 * hash) + UPDATESTARTTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateStartTime());
+      hash = (37 * hash) + STARTTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getStartTime());
+      hash = (37 * hash) + UPDATEENDTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateEndTime());
+      hash = (37 * hash) + ENDTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getEndTime());
+      hash = (37 * hash) + UPDATEDURATION_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateDuration());
+      hash = (37 * hash) + DURATION_FIELD_NUMBER;
+      hash = (53 * hash) + getDuration();
+      hash = (37 * hash) + UPDATEQUESTION_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateQuestion());
+      if (!internalGetQuestionId().getMap().isEmpty()) {
+        hash = (37 * hash) + QUESTIONID_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetQuestionId().hashCode();
+      }
+      if (!internalGetQuestionScore().getMap().isEmpty()) {
+        hash = (37 * hash) + QUESTIONSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetQuestionScore().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ExamUpdateRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ExamUpdateRequest)
+        com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 12:
+            return internalGetQuestionId();
+          case 13:
+            return internalGetQuestionScore();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 12:
+            return internalGetMutableQuestionId();
+          case 13:
+            return internalGetMutableQuestionScore();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.class, com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (requestBuilder_ == null) {
+          request_ = null;
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+        examId_ = 0L;
+
+        updateExamName_ = false;
+
+        examName_ = "";
+
+        updateStartTime_ = false;
+
+        startTime_ = 0L;
+
+        updateEndTime_ = false;
+
+        endTime_ = 0L;
+
+        updateDuration_ = false;
+
+        duration_ = 0;
+
+        updateQuestion_ = false;
+
+        internalGetMutableQuestionId().clear();
+        internalGetMutableQuestionScore().clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_ExamUpdateRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest build() {
+        com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest result = new com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (requestBuilder_ == null) {
+          result.request_ = request_;
+        } else {
+          result.request_ = requestBuilder_.build();
+        }
+        result.examId_ = examId_;
+        result.updateExamName_ = updateExamName_;
+        result.examName_ = examName_;
+        result.updateStartTime_ = updateStartTime_;
+        result.startTime_ = startTime_;
+        result.updateEndTime_ = updateEndTime_;
+        result.endTime_ = endTime_;
+        result.updateDuration_ = updateDuration_;
+        result.duration_ = duration_;
+        result.updateQuestion_ = updateQuestion_;
+        result.questionId_ = internalGetQuestionId();
+        result.questionId_.makeImmutable();
+        result.questionScore_ = internalGetQuestionScore();
+        result.questionScore_.makeImmutable();
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest.getDefaultInstance()) return this;
+        if (other.hasRequest()) {
+          mergeRequest(other.getRequest());
+        }
+        if (other.getExamId() != 0L) {
+          setExamId(other.getExamId());
+        }
+        if (other.getUpdateExamName() != false) {
+          setUpdateExamName(other.getUpdateExamName());
+        }
+        if (!other.getExamName().isEmpty()) {
+          examName_ = other.examName_;
+          onChanged();
+        }
+        if (other.getUpdateStartTime() != false) {
+          setUpdateStartTime(other.getUpdateStartTime());
+        }
+        if (other.getStartTime() != 0L) {
+          setStartTime(other.getStartTime());
+        }
+        if (other.getUpdateEndTime() != false) {
+          setUpdateEndTime(other.getUpdateEndTime());
+        }
+        if (other.getEndTime() != 0L) {
+          setEndTime(other.getEndTime());
+        }
+        if (other.getUpdateDuration() != false) {
+          setUpdateDuration(other.getUpdateDuration());
+        }
+        if (other.getDuration() != 0) {
+          setDuration(other.getDuration());
+        }
+        if (other.getUpdateQuestion() != false) {
+          setUpdateQuestion(other.getUpdateQuestion());
+        }
+        internalGetMutableQuestionId().mergeFrom(
+            other.internalGetQuestionId());
+        internalGetMutableQuestionScore().mergeFrom(
+            other.internalGetQuestionScore());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> requestBuilder_;
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public boolean hasRequest() {
+        return requestBuilder_ != null || request_ != null;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+        if (requestBuilder_ == null) {
+          return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        } else {
+          return requestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder builderForValue) {
+        if (requestBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder mergeRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (request_ != null) {
+            request_ =
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.newBuilder(request_).mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          requestBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
+          request_ = null;
+          onChanged();
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder getRequestBuilder() {
+        
+        onChanged();
+        return getRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+        if (requestBuilder_ != null) {
+          return requestBuilder_.getMessageOrBuilder();
+        } else {
+          return request_ == null ?
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder>(
+                  getRequest(),
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        return requestBuilder_;
+      }
+
+      private long examId_ ;
+      /**
+       * <code>sint64 examId = 2;</code>
+       */
+      public long getExamId() {
+        return examId_;
+      }
+      /**
+       * <code>sint64 examId = 2;</code>
+       */
+      public Builder setExamId(long value) {
+        
+        examId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 examId = 2;</code>
+       */
+      public Builder clearExamId() {
+        
+        examId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateExamName_ ;
+      /**
+       * <code>bool updateExamName = 3;</code>
+       */
+      public boolean getUpdateExamName() {
+        return updateExamName_;
+      }
+      /**
+       * <code>bool updateExamName = 3;</code>
+       */
+      public Builder setUpdateExamName(boolean value) {
+        
+        updateExamName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateExamName = 3;</code>
+       */
+      public Builder clearUpdateExamName() {
+        
+        updateExamName_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object examName_ = "";
+      /**
+       * <code>string examName = 4;</code>
+       */
+      public java.lang.String getExamName() {
+        java.lang.Object ref = examName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          examName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string examName = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getExamNameBytes() {
+        java.lang.Object ref = examName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          examName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string examName = 4;</code>
+       */
+      public Builder setExamName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        examName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string examName = 4;</code>
+       */
+      public Builder clearExamName() {
+        
+        examName_ = getDefaultInstance().getExamName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string examName = 4;</code>
+       */
+      public Builder setExamNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        examName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateStartTime_ ;
+      /**
+       * <code>bool updateStartTime = 5;</code>
+       */
+      public boolean getUpdateStartTime() {
+        return updateStartTime_;
+      }
+      /**
+       * <code>bool updateStartTime = 5;</code>
+       */
+      public Builder setUpdateStartTime(boolean value) {
+        
+        updateStartTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateStartTime = 5;</code>
+       */
+      public Builder clearUpdateStartTime() {
+        
+        updateStartTime_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long startTime_ ;
+      /**
+       * <code>fixed64 startTime = 6;</code>
+       */
+      public long getStartTime() {
+        return startTime_;
+      }
+      /**
+       * <code>fixed64 startTime = 6;</code>
+       */
+      public Builder setStartTime(long value) {
+        
+        startTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 startTime = 6;</code>
+       */
+      public Builder clearStartTime() {
+        
+        startTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateEndTime_ ;
+      /**
+       * <code>bool updateEndTime = 7;</code>
+       */
+      public boolean getUpdateEndTime() {
+        return updateEndTime_;
+      }
+      /**
+       * <code>bool updateEndTime = 7;</code>
+       */
+      public Builder setUpdateEndTime(boolean value) {
+        
+        updateEndTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateEndTime = 7;</code>
+       */
+      public Builder clearUpdateEndTime() {
+        
+        updateEndTime_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long endTime_ ;
+      /**
+       * <code>fixed64 endTime = 8;</code>
+       */
+      public long getEndTime() {
+        return endTime_;
+      }
+      /**
+       * <code>fixed64 endTime = 8;</code>
+       */
+      public Builder setEndTime(long value) {
+        
+        endTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 endTime = 8;</code>
+       */
+      public Builder clearEndTime() {
+        
+        endTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateDuration_ ;
+      /**
+       * <code>bool updateDuration = 9;</code>
+       */
+      public boolean getUpdateDuration() {
+        return updateDuration_;
+      }
+      /**
+       * <code>bool updateDuration = 9;</code>
+       */
+      public Builder setUpdateDuration(boolean value) {
+        
+        updateDuration_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateDuration = 9;</code>
+       */
+      public Builder clearUpdateDuration() {
+        
+        updateDuration_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int duration_ ;
+      /**
+       * <code>int32 duration = 10;</code>
+       */
+      public int getDuration() {
+        return duration_;
+      }
+      /**
+       * <code>int32 duration = 10;</code>
+       */
+      public Builder setDuration(int value) {
+        
+        duration_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 duration = 10;</code>
+       */
+      public Builder clearDuration() {
+        
+        duration_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean updateQuestion_ ;
+      /**
+       * <code>bool updateQuestion = 11;</code>
+       */
+      public boolean getUpdateQuestion() {
+        return updateQuestion_;
+      }
+      /**
+       * <code>bool updateQuestion = 11;</code>
+       */
+      public Builder setUpdateQuestion(boolean value) {
+        
+        updateQuestion_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateQuestion = 11;</code>
+       */
+      public Builder clearUpdateQuestion() {
+        
+        updateQuestion_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.Integer, java.lang.Long> questionId_;
+      private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+      internalGetQuestionId() {
+        if (questionId_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              QuestionIdDefaultEntryHolder.defaultEntry);
+        }
+        return questionId_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+      internalGetMutableQuestionId() {
+        onChanged();;
+        if (questionId_ == null) {
+          questionId_ = com.google.protobuf.MapField.newMapField(
+              QuestionIdDefaultEntryHolder.defaultEntry);
+        }
+        if (!questionId_.isMutable()) {
+          questionId_ = questionId_.copy();
+        }
+        return questionId_;
+      }
+
+      public int getQuestionIdCount() {
+        return internalGetQuestionId().getMap().size();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+
+      public boolean containsQuestionId(
+          int key) {
+        
+        return internalGetQuestionId().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getQuestionIdMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionId() {
+        return getQuestionIdMap();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, java.lang.Long> getQuestionIdMap() {
+        return internalGetQuestionId().getMap();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+
+      public long getQuestionIdOrDefault(
+          int key,
+          long defaultValue) {
+        
+        java.util.Map<java.lang.Integer, java.lang.Long> map =
+            internalGetQuestionId().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+
+      public long getQuestionIdOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, java.lang.Long> map =
+            internalGetQuestionId().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearQuestionId() {
+        internalGetMutableQuestionId().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+
+      public Builder removeQuestionId(
+          int key) {
+        
+        internalGetMutableQuestionId().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, java.lang.Long>
+      getMutableQuestionId() {
+        return internalGetMutableQuestionId().getMutableMap();
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+      public Builder putQuestionId(
+          int key,
+          long value) {
+        
+        
+        internalGetMutableQuestionId().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, sint64&gt; questionId = 12;</code>
+       */
+
+      public Builder putAllQuestionId(
+          java.util.Map<java.lang.Integer, java.lang.Long> values) {
+        internalGetMutableQuestionId().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> questionScore_;
+      private com.google.protobuf.MapField<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+      internalGetQuestionScore() {
+        if (questionScore_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              QuestionScoreDefaultEntryHolder.defaultEntry);
+        }
+        return questionScore_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+      internalGetMutableQuestionScore() {
+        onChanged();;
+        if (questionScore_ == null) {
+          questionScore_ = com.google.protobuf.MapField.newMapField(
+              QuestionScoreDefaultEntryHolder.defaultEntry);
+        }
+        if (!questionScore_.isMutable()) {
+          questionScore_ = questionScore_.copy();
+        }
+        return questionScore_;
+      }
+
+      public int getQuestionScoreCount() {
+        return internalGetQuestionScore().getMap().size();
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+
+      public boolean containsQuestionScore(
+          int key) {
+        
+        return internalGetQuestionScore().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getQuestionScoreMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> getQuestionScore() {
+        return getQuestionScoreMap();
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> getQuestionScoreMap() {
+        return internalGetQuestionScore().getMap();
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+
+      public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrDefault(
+          int key,
+          com.corkili.learningserver.generate.protobuf.Info.Score defaultValue) {
+        
+        java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> map =
+            internalGetQuestionScore().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+
+      public com.corkili.learningserver.generate.protobuf.Info.Score getQuestionScoreOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> map =
+            internalGetQuestionScore().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearQuestionScore() {
+        internalGetMutableQuestionScore().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+
+      public Builder removeQuestionScore(
+          int key) {
+        
+        internalGetMutableQuestionScore().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score>
+      getMutableQuestionScore() {
+        return internalGetMutableQuestionScore().getMutableMap();
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+      public Builder putQuestionScore(
+          int key,
+          com.corkili.learningserver.generate.protobuf.Info.Score value) {
+        
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableQuestionScore().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .Score&gt; questionScore = 13;</code>
+       */
+
+      public Builder putAllQuestionScore(
+          java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.Score> values) {
+        internalGetMutableQuestionScore().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ExamUpdateRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ExamUpdateRequest)
+    private static final com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ExamUpdateRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ExamUpdateRequest>() {
+      @java.lang.Override
+      public ExamUpdateRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ExamUpdateRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ExamUpdateRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ExamUpdateRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -20159,6 +23636,16 @@ public final class Request {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CourseWorkCreateRequest_QuestionIdEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseWorkUpdateRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseWorkUpdateRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseWorkUpdateRequest_QuestionIdEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseWorkUpdateRequest_QuestionIdEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ExamCreateRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -20173,6 +23660,21 @@ public final class Request {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ExamCreateRequest_QuestionScoreEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ExamUpdateRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ExamUpdateRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ExamUpdateRequest_QuestionIdEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ExamUpdateRequest_QuestionIdEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ExamUpdateRequest_QuestionScoreEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ExamUpdateRequest_QuestionScoreEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -20240,24 +23742,46 @@ public final class Request {
       "\014ChoicesEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(" +
       "\t:\0028\001\"J\n\025QuestionDeleteRequest\022\035\n\007reques" +
       "t\030\001 \001(\0132\014.BaseRequest\022\022\n\nquestionId\030\002 \001(" +
-      "\022\"\216\002\n\027CourseWorkCreateRequest\022\035\n\007request" +
-      "\030\001 \001(\0132\014.BaseRequest\022\014\n\004open\030\002 \001(\010\022\026\n\016co" +
-      "urseWorkName\030\003 \001(\t\022\026\n\016belongCourseId\030\004 \001" +
-      "(\022\022\023\n\013hasDeadline\030\005 \001(\010\022\020\n\010deadline\030\006 \001(" +
-      "\006\022<\n\nquestionId\030\007 \003(\0132(.CourseWorkCreate" +
-      "Request.QuestionIdEntry\0321\n\017QuestionIdEnt" +
-      "ry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\347\002\n\021E" +
-      "xamCreateRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
-      "Request\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCours" +
-      "eId\030\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTime\030" +
-      "\005 \001(\006\0226\n\nquestionId\030\010 \003(\0132\".ExamCreateRe" +
-      "quest.QuestionIdEntry\022<\n\rquestionScore\030\t" +
-      " \003(\0132%.ExamCreateRequest.QuestionScoreEn" +
-      "try\0321\n\017QuestionIdEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005v" +
-      "alue\030\002 \001(\022:\0028\001\032<\n\022QuestionScoreEntry\022\013\n\003" +
-      "key\030\001 \001(\005\022\025\n\005value\030\002 \001(\0132\006.Score:\0028\001B7\n," +
-      "com.corkili.learningserver.generate.prot" +
-      "obufB\007Requestb\006proto3"
+      "\022\"\200\002\n\027CourseWorkCreateRequest\022\035\n\007request" +
+      "\030\001 \001(\0132\014.BaseRequest\022\026\n\016courseWorkName\030\002" +
+      " \001(\t\022\026\n\016belongCourseId\030\003 \001(\022\022\023\n\013hasDeadl" +
+      "ine\030\004 \001(\010\022\020\n\010deadline\030\005 \001(\006\022<\n\nquestionI" +
+      "d\030\006 \003(\0132(.CourseWorkCreateRequest.Questi" +
+      "onIdEntry\0321\n\017QuestionIdEntry\022\013\n\003key\030\001 \001(" +
+      "\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\356\002\n\027CourseWorkUpdat" +
+      "eRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
+      "\024\n\014courseWorkId\030\002 \001(\022\022\022\n\nupdateOpen\030\003 \001(" +
+      "\010\022\014\n\004open\030\004 \001(\010\022\034\n\024updateCourseWorkName\030" +
+      "\005 \001(\010\022\026\n\016courseWorkName\030\006 \001(\t\022\026\n\016updateD" +
+      "eadline\030\007 \001(\010\022\023\n\013hasDeadline\030\010 \001(\010\022\020\n\010de" +
+      "adline\030\t \001(\006\022\026\n\016updateQuestion\030\n \001(\010\022<\n\n" +
+      "questionId\030\013 \003(\0132(.CourseWorkUpdateReque" +
+      "st.QuestionIdEntry\0321\n\017QuestionIdEntry\022\013\n" +
+      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\371\002\n\021ExamCr" +
+      "eateRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
+      "st\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCourseId\030\003" +
+      " \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTime\030\005 \001(\006" +
+      "\022\020\n\010duration\030\006 \001(\005\0226\n\nquestionId\030\007 \003(\0132\"" +
+      ".ExamCreateRequest.QuestionIdEntry\022<\n\rqu" +
+      "estionScore\030\010 \003(\0132%.ExamCreateRequest.Qu" +
+      "estionScoreEntry\0321\n\017QuestionIdEntry\022\013\n\003k" +
+      "ey\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\032<\n\022QuestionS" +
+      "coreEntry\022\013\n\003key\030\001 \001(\005\022\025\n\005value\030\002 \001(\0132\006." +
+      "Score:\0028\001\"\351\003\n\021ExamUpdateRequest\022\035\n\007reque" +
+      "st\030\001 \001(\0132\014.BaseRequest\022\016\n\006examId\030\002 \001(\022\022\026" +
+      "\n\016updateExamName\030\003 \001(\010\022\020\n\010examName\030\004 \001(\t" +
+      "\022\027\n\017updateStartTime\030\005 \001(\010\022\021\n\tstartTime\030\006" +
+      " \001(\006\022\025\n\rupdateEndTime\030\007 \001(\010\022\017\n\007endTime\030\010" +
+      " \001(\006\022\026\n\016updateDuration\030\t \001(\010\022\020\n\010duration" +
+      "\030\n \001(\005\022\026\n\016updateQuestion\030\013 \001(\010\0226\n\nquesti" +
+      "onId\030\014 \003(\0132\".ExamUpdateRequest.QuestionI" +
+      "dEntry\022<\n\rquestionScore\030\r \003(\0132%.ExamUpda" +
+      "teRequest.QuestionScoreEntry\0321\n\017Question" +
+      "IdEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\032" +
+      "<\n\022QuestionScoreEntry\022\013\n\003key\030\001 \001(\005\022\025\n\005va" +
+      "lue\030\002 \001(\0132\006.Score:\0028\001B7\n,com.corkili.lea" +
+      "rningserver.generate.protobufB\007Requestb\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20379,19 +23903,31 @@ public final class Request {
     internal_static_CourseWorkCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseWorkCreateRequest_descriptor,
-        new java.lang.String[] { "Request", "Open", "CourseWorkName", "BelongCourseId", "HasDeadline", "Deadline", "QuestionId", });
+        new java.lang.String[] { "Request", "CourseWorkName", "BelongCourseId", "HasDeadline", "Deadline", "QuestionId", });
     internal_static_CourseWorkCreateRequest_QuestionIdEntry_descriptor =
       internal_static_CourseWorkCreateRequest_descriptor.getNestedTypes().get(0);
     internal_static_CourseWorkCreateRequest_QuestionIdEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseWorkCreateRequest_QuestionIdEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_ExamCreateRequest_descriptor =
+    internal_static_CourseWorkUpdateRequest_descriptor =
       getDescriptor().getMessageTypes().get(16);
+    internal_static_CourseWorkUpdateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseWorkUpdateRequest_descriptor,
+        new java.lang.String[] { "Request", "CourseWorkId", "UpdateOpen", "Open", "UpdateCourseWorkName", "CourseWorkName", "UpdateDeadline", "HasDeadline", "Deadline", "UpdateQuestion", "QuestionId", });
+    internal_static_CourseWorkUpdateRequest_QuestionIdEntry_descriptor =
+      internal_static_CourseWorkUpdateRequest_descriptor.getNestedTypes().get(0);
+    internal_static_CourseWorkUpdateRequest_QuestionIdEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseWorkUpdateRequest_QuestionIdEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_ExamCreateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(17);
     internal_static_ExamCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamCreateRequest_descriptor,
-        new java.lang.String[] { "Request", "ExamName", "BelongCourseId", "StartTime", "EndTime", "QuestionId", "QuestionScore", });
+        new java.lang.String[] { "Request", "ExamName", "BelongCourseId", "StartTime", "EndTime", "Duration", "QuestionId", "QuestionScore", });
     internal_static_ExamCreateRequest_QuestionIdEntry_descriptor =
       internal_static_ExamCreateRequest_descriptor.getNestedTypes().get(0);
     internal_static_ExamCreateRequest_QuestionIdEntry_fieldAccessorTable = new
@@ -20403,6 +23939,24 @@ public final class Request {
     internal_static_ExamCreateRequest_QuestionScoreEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamCreateRequest_QuestionScoreEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_ExamUpdateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_ExamUpdateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ExamUpdateRequest_descriptor,
+        new java.lang.String[] { "Request", "ExamId", "UpdateExamName", "ExamName", "UpdateStartTime", "StartTime", "UpdateEndTime", "EndTime", "UpdateDuration", "Duration", "UpdateQuestion", "QuestionId", "QuestionScore", });
+    internal_static_ExamUpdateRequest_QuestionIdEntry_descriptor =
+      internal_static_ExamUpdateRequest_descriptor.getNestedTypes().get(0);
+    internal_static_ExamUpdateRequest_QuestionIdEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ExamUpdateRequest_QuestionIdEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_ExamUpdateRequest_QuestionScoreEntry_descriptor =
+      internal_static_ExamUpdateRequest_descriptor.getNestedTypes().get(1);
+    internal_static_ExamUpdateRequest_QuestionScoreEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ExamUpdateRequest_QuestionScoreEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     com.corkili.learningserver.generate.protobuf.Info.getDescriptor();
   }

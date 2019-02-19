@@ -15068,25 +15068,30 @@ public final class Info {
     long getEndTime();
 
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>int32 duration = 8;</code>
+     */
+    int getDuration();
+
+    /**
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     java.util.List<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo> 
         getExamQuestionInfoList();
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo getExamQuestionInfo(int index);
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     int getExamQuestionInfoCount();
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder> 
         getExamQuestionInfoOrBuilderList();
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder getExamQuestionInfoOrBuilder(
         int index);
@@ -15111,6 +15116,7 @@ public final class Info {
       belongCourseId_ = 0L;
       startTime_ = 0L;
       endTime_ = 0L;
+      duration_ = 0;
       examQuestionInfo_ = java.util.Collections.emptyList();
     }
 
@@ -15174,10 +15180,15 @@ public final class Info {
               endTime_ = input.readFixed64();
               break;
             }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+            case 64: {
+
+              duration_ = input.readInt32();
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 examQuestionInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo>();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000100;
               }
               examQuestionInfo_.add(
                   input.readMessage(com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.parser(), extensionRegistry));
@@ -15198,7 +15209,7 @@ public final class Info {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           examQuestionInfo_ = java.util.Collections.unmodifiableList(examQuestionInfo_);
         }
         this.unknownFields = unknownFields.build();
@@ -15307,35 +15318,44 @@ public final class Info {
       return endTime_;
     }
 
-    public static final int EXAMQUESTIONINFO_FIELD_NUMBER = 8;
+    public static final int DURATION_FIELD_NUMBER = 8;
+    private int duration_;
+    /**
+     * <code>int32 duration = 8;</code>
+     */
+    public int getDuration() {
+      return duration_;
+    }
+
+    public static final int EXAMQUESTIONINFO_FIELD_NUMBER = 9;
     private java.util.List<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo> examQuestionInfo_;
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     public java.util.List<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo> getExamQuestionInfoList() {
       return examQuestionInfo_;
     }
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder> 
         getExamQuestionInfoOrBuilderList() {
       return examQuestionInfo_;
     }
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     public int getExamQuestionInfoCount() {
       return examQuestionInfo_.size();
     }
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo getExamQuestionInfo(int index) {
       return examQuestionInfo_.get(index);
     }
     /**
-     * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+     * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
      */
     public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder getExamQuestionInfoOrBuilder(
         int index) {
@@ -15377,8 +15397,11 @@ public final class Info {
       if (endTime_ != 0L) {
         output.writeFixed64(7, endTime_);
       }
+      if (duration_ != 0) {
+        output.writeInt32(8, duration_);
+      }
       for (int i = 0; i < examQuestionInfo_.size(); i++) {
-        output.writeMessage(8, examQuestionInfo_.get(i));
+        output.writeMessage(9, examQuestionInfo_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -15416,9 +15439,13 @@ public final class Info {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed64Size(7, endTime_);
       }
+      if (duration_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, duration_);
+      }
       for (int i = 0; i < examQuestionInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, examQuestionInfo_.get(i));
+          .computeMessageSize(9, examQuestionInfo_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -15450,6 +15477,8 @@ public final class Info {
           == other.getStartTime());
       result = result && (getEndTime()
           == other.getEndTime());
+      result = result && (getDuration()
+          == other.getDuration());
       result = result && getExamQuestionInfoList()
           .equals(other.getExamQuestionInfoList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -15483,6 +15512,8 @@ public final class Info {
       hash = (37 * hash) + ENDTIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getEndTime());
+      hash = (37 * hash) + DURATION_FIELD_NUMBER;
+      hash = (53 * hash) + getDuration();
       if (getExamQuestionInfoCount() > 0) {
         hash = (37 * hash) + EXAMQUESTIONINFO_FIELD_NUMBER;
         hash = (53 * hash) + getExamQuestionInfoList().hashCode();
@@ -15635,9 +15666,11 @@ public final class Info {
 
         endTime_ = 0L;
 
+        duration_ = 0;
+
         if (examQuestionInfoBuilder_ == null) {
           examQuestionInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000100);
         } else {
           examQuestionInfoBuilder_.clear();
         }
@@ -15676,10 +15709,11 @@ public final class Info {
         result.belongCourseId_ = belongCourseId_;
         result.startTime_ = startTime_;
         result.endTime_ = endTime_;
+        result.duration_ = duration_;
         if (examQuestionInfoBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
             examQuestionInfo_ = java.util.Collections.unmodifiableList(examQuestionInfo_);
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000100);
           }
           result.examQuestionInfo_ = examQuestionInfo_;
         } else {
@@ -15756,11 +15790,14 @@ public final class Info {
         if (other.getEndTime() != 0L) {
           setEndTime(other.getEndTime());
         }
+        if (other.getDuration() != 0) {
+          setDuration(other.getDuration());
+        }
         if (examQuestionInfoBuilder_ == null) {
           if (!other.examQuestionInfo_.isEmpty()) {
             if (examQuestionInfo_.isEmpty()) {
               examQuestionInfo_ = other.examQuestionInfo_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000100);
             } else {
               ensureExamQuestionInfoIsMutable();
               examQuestionInfo_.addAll(other.examQuestionInfo_);
@@ -15773,7 +15810,7 @@ public final class Info {
               examQuestionInfoBuilder_.dispose();
               examQuestionInfoBuilder_ = null;
               examQuestionInfo_ = other.examQuestionInfo_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000100);
               examQuestionInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExamQuestionInfoFieldBuilder() : null;
@@ -16037,12 +16074,38 @@ public final class Info {
         return this;
       }
 
+      private int duration_ ;
+      /**
+       * <code>int32 duration = 8;</code>
+       */
+      public int getDuration() {
+        return duration_;
+      }
+      /**
+       * <code>int32 duration = 8;</code>
+       */
+      public Builder setDuration(int value) {
+        
+        duration_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 duration = 8;</code>
+       */
+      public Builder clearDuration() {
+        
+        duration_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo> examQuestionInfo_ =
         java.util.Collections.emptyList();
       private void ensureExamQuestionInfoIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           examQuestionInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo>(examQuestionInfo_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
          }
       }
 
@@ -16050,7 +16113,7 @@ public final class Info {
           com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder> examQuestionInfoBuilder_;
 
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public java.util.List<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo> getExamQuestionInfoList() {
         if (examQuestionInfoBuilder_ == null) {
@@ -16060,7 +16123,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public int getExamQuestionInfoCount() {
         if (examQuestionInfoBuilder_ == null) {
@@ -16070,7 +16133,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo getExamQuestionInfo(int index) {
         if (examQuestionInfoBuilder_ == null) {
@@ -16080,7 +16143,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder setExamQuestionInfo(
           int index, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo value) {
@@ -16097,7 +16160,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder setExamQuestionInfo(
           int index, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder builderForValue) {
@@ -16111,7 +16174,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder addExamQuestionInfo(com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo value) {
         if (examQuestionInfoBuilder_ == null) {
@@ -16127,7 +16190,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder addExamQuestionInfo(
           int index, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo value) {
@@ -16144,7 +16207,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder addExamQuestionInfo(
           com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder builderForValue) {
@@ -16158,7 +16221,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder addExamQuestionInfo(
           int index, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder builderForValue) {
@@ -16172,7 +16235,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder addAllExamQuestionInfo(
           java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo> values) {
@@ -16187,12 +16250,12 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder clearExamQuestionInfo() {
         if (examQuestionInfoBuilder_ == null) {
           examQuestionInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000100);
           onChanged();
         } else {
           examQuestionInfoBuilder_.clear();
@@ -16200,7 +16263,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public Builder removeExamQuestionInfo(int index) {
         if (examQuestionInfoBuilder_ == null) {
@@ -16213,14 +16276,14 @@ public final class Info {
         return this;
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder getExamQuestionInfoBuilder(
           int index) {
         return getExamQuestionInfoFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder getExamQuestionInfoOrBuilder(
           int index) {
@@ -16230,7 +16293,7 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder> 
            getExamQuestionInfoOrBuilderList() {
@@ -16241,14 +16304,14 @@ public final class Info {
         }
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder addExamQuestionInfoBuilder() {
         return getExamQuestionInfoFieldBuilder().addBuilder(
             com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder addExamQuestionInfoBuilder(
           int index) {
@@ -16256,7 +16319,7 @@ public final class Info {
             index, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .ExamQuestionInfo examQuestionInfo = 8;</code>
+       * <code>repeated .ExamQuestionInfo examQuestionInfo = 9;</code>
        */
       public java.util.List<com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder> 
            getExamQuestionInfoBuilderList() {
@@ -16269,7 +16332,7 @@ public final class Info {
           examQuestionInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfoOrBuilder>(
                   examQuestionInfo_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  ((bitField0_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
                   isClean());
           examQuestionInfo_ = null;
@@ -26471,57 +26534,58 @@ public final class Info {
       "ttedAnswer:\0028\001\"r\n\031CourseWorkSubmittedAns" +
       "wer\022\025\n\rquestionIndex\030\001 \001(\005\022)\n\017submittedA" +
       "nswer\030\002 \001(\0132\020.SubmittedAnswer\022\023\n\013checkSt" +
-      "atus\030\003 \001(\005\"\275\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022" +
+      "atus\030\003 \001(\005\"\317\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022" +
       "\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022" +
       "\020\n\010examName\030\004 \001(\t\022\026\n\016belongCourseId\030\005 \001(" +
-      "\022\022\021\n\tstartTime\030\006 \001(\006\022\017\n\007endTime\030\007 \001(\006\022+\n" +
-      "\020examQuestionInfo\030\010 \003(\0132\021.ExamQuestionIn" +
-      "fo\"\242\001\n\020ExamQuestionInfo\022\026\n\016examQuestionI" +
-      "d\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTim" +
-      "e\030\003 \001(\006\022\r\n\005index\030\004 \001(\005\022\024\n\014belongExamId\030\005" +
-      " \001(\022\022\022\n\nquestionId\030\006 \001(\022\022\025\n\005score\030\007 \001(\0132" +
-      "\006.Score\"\305\001\n\005Score\022\025\n\013singleScore\030\001 \001(\001H\000" +
-      "\022-\n\rmultipleScore\030\002 \001(\0132\024.Score.Multiple" +
-      "ScoreH\000\032m\n\rMultipleScore\022.\n\005score\030\001 \003(\0132" +
-      "\037.Score.MultipleScore.ScoreEntry\032,\n\nScor" +
-      "eEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028\001B\007" +
-      "\n\005score\"\302\002\n\021SubmittedExamInfo\022\027\n\017submitt" +
-      "edExamId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nup" +
-      "dateTime\030\003 \001(\006\022@\n\017submittedAnswer\030\004 \003(\0132" +
-      "\'.SubmittedExamInfo.SubmittedAnswerEntry" +
-      "\022\035\n\025alreadyCheckAllAnswer\030\005 \001(\010\022\022\n\ntotal" +
-      "Score\030\006 \001(\001\022\024\n\014belongExamId\030\007 \001(\022\022\023\n\013sub" +
-      "mitterId\030\010 \001(\022\032L\n\024SubmittedAnswerEntry\022\013" +
-      "\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024.ExamSubmitt" +
-      "edAnswer:\0028\001\"f\n\023ExamSubmittedAnswer\022\025\n\rq" +
-      "uestionIndex\030\001 \001(\005\022)\n\017submittedAnswer\030\002 " +
-      "\001(\0132\020.SubmittedAnswer\022\r\n\005score\030\003 \001(\001\"\373\002\n" +
-      "\017SubmittedAnswer\022E\n\034singleFillingSubmitt" +
-      "edAnswer\030\001 \001(\0132\035.SingleFillingSubmittedA" +
-      "nswerH\000\022I\n\036multipleFillingSubmittedAnswe" +
-      "r\030\002 \001(\0132\037.MultipleFillingSubmittedAnswer" +
-      "H\000\022C\n\033singleChoiceSubmittedAnswer\030\003 \001(\0132" +
-      "\034.SingleChoiceSubmittedAnswerH\000\022G\n\035multi" +
-      "pleChoiceSubmittedAnswer\030\004 \001(\0132\036.Multipl" +
-      "eChoiceSubmittedAnswerH\000\0225\n\024essaySubmitt" +
-      "edAnswer\030\005 \001(\0132\025.EssaySubmittedAnswerH\000B" +
-      "\021\n\017submittedAnswer\".\n\034SingleFillingSubmi" +
-      "ttedAnswer\022\016\n\006answer\030\001 \001(\t\"\365\001\n\036MultipleF" +
-      "illingSubmittedAnswer\022;\n\006answer\030\001 \003(\0132+." +
-      "MultipleFillingSubmittedAnswer.AnswerEnt" +
-      "ry\032A\n\004Pair\022\r\n\005index\030\001 \001(\005\022\016\n\006answer\030\002 \001(" +
-      "\t\022\032\n\022scoreOrCheckStatus\030\003 \001(\001\032S\n\013AnswerE" +
-      "ntry\022\013\n\003key\030\001 \001(\005\0223\n\005value\030\002 \001(\0132$.Multi" +
-      "pleFillingSubmittedAnswer.Pair:\0028\001\"-\n\033Si" +
-      "ngleChoiceSubmittedAnswer\022\016\n\006choice\030\001 \001(" +
-      "\005\"/\n\035MultipleChoiceSubmittedAnswer\022\016\n\006ch" +
-      "oice\030\001 \003(\005\";\n\024EssaySubmittedAnswer\022\014\n\004te" +
-      "xt\030\001 \001(\t\022\025\n\005image\030\002 \003(\0132\006.Image*$\n\010UserT" +
-      "ype\022\013\n\007Teacher\020\000\022\013\n\007Student\020\001*g\n\014Questio" +
-      "nType\022\021\n\rSingleFilling\020\000\022\023\n\017MultipleFill" +
-      "ing\020\001\022\020\n\014SingleChoice\020\002\022\022\n\016MultipleChoic" +
-      "e\020\003\022\t\n\005Essay\020\004B4\n,com.corkili.learningse" +
-      "rver.generate.protobufB\004Infob\006proto3"
+      "\022\022\021\n\tstartTime\030\006 \001(\006\022\017\n\007endTime\030\007 \001(\006\022\020\n" +
+      "\010duration\030\010 \001(\005\022+\n\020examQuestionInfo\030\t \003(" +
+      "\0132\021.ExamQuestionInfo\"\242\001\n\020ExamQuestionInf" +
+      "o\022\026\n\016examQuestionId\030\001 \001(\022\022\022\n\ncreateTime\030" +
+      "\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\r\n\005index\030\004 \001(\005" +
+      "\022\024\n\014belongExamId\030\005 \001(\022\022\022\n\nquestionId\030\006 \001" +
+      "(\022\022\025\n\005score\030\007 \001(\0132\006.Score\"\305\001\n\005Score\022\025\n\013s" +
+      "ingleScore\030\001 \001(\001H\000\022-\n\rmultipleScore\030\002 \001(" +
+      "\0132\024.Score.MultipleScoreH\000\032m\n\rMultipleSco" +
+      "re\022.\n\005score\030\001 \003(\0132\037.Score.MultipleScore." +
+      "ScoreEntry\032,\n\nScoreEntry\022\013\n\003key\030\001 \001(\005\022\r\n" +
+      "\005value\030\002 \001(\001:\0028\001B\007\n\005score\"\302\002\n\021SubmittedE" +
+      "xamInfo\022\027\n\017submittedExamId\030\001 \001(\022\022\022\n\ncrea" +
+      "teTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022@\n\017subm" +
+      "ittedAnswer\030\004 \003(\0132\'.SubmittedExamInfo.Su" +
+      "bmittedAnswerEntry\022\035\n\025alreadyCheckAllAns" +
+      "wer\030\005 \001(\010\022\022\n\ntotalScore\030\006 \001(\001\022\024\n\014belongE" +
+      "xamId\030\007 \001(\022\022\023\n\013submitterId\030\010 \001(\022\032L\n\024Subm" +
+      "ittedAnswerEntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002" +
+      " \001(\0132\024.ExamSubmittedAnswer:\0028\001\"f\n\023ExamSu" +
+      "bmittedAnswer\022\025\n\rquestionIndex\030\001 \001(\005\022)\n\017" +
+      "submittedAnswer\030\002 \001(\0132\020.SubmittedAnswer\022" +
+      "\r\n\005score\030\003 \001(\001\"\373\002\n\017SubmittedAnswer\022E\n\034si" +
+      "ngleFillingSubmittedAnswer\030\001 \001(\0132\035.Singl" +
+      "eFillingSubmittedAnswerH\000\022I\n\036multipleFil" +
+      "lingSubmittedAnswer\030\002 \001(\0132\037.MultipleFill" +
+      "ingSubmittedAnswerH\000\022C\n\033singleChoiceSubm" +
+      "ittedAnswer\030\003 \001(\0132\034.SingleChoiceSubmitte" +
+      "dAnswerH\000\022G\n\035multipleChoiceSubmittedAnsw" +
+      "er\030\004 \001(\0132\036.MultipleChoiceSubmittedAnswer" +
+      "H\000\0225\n\024essaySubmittedAnswer\030\005 \001(\0132\025.Essay" +
+      "SubmittedAnswerH\000B\021\n\017submittedAnswer\".\n\034" +
+      "SingleFillingSubmittedAnswer\022\016\n\006answer\030\001" +
+      " \001(\t\"\365\001\n\036MultipleFillingSubmittedAnswer\022" +
+      ";\n\006answer\030\001 \003(\0132+.MultipleFillingSubmitt" +
+      "edAnswer.AnswerEntry\032A\n\004Pair\022\r\n\005index\030\001 " +
+      "\001(\005\022\016\n\006answer\030\002 \001(\t\022\032\n\022scoreOrCheckStatu" +
+      "s\030\003 \001(\001\032S\n\013AnswerEntry\022\013\n\003key\030\001 \001(\005\0223\n\005v" +
+      "alue\030\002 \001(\0132$.MultipleFillingSubmittedAns" +
+      "wer.Pair:\0028\001\"-\n\033SingleChoiceSubmittedAns" +
+      "wer\022\016\n\006choice\030\001 \001(\005\"/\n\035MultipleChoiceSub" +
+      "mittedAnswer\022\016\n\006choice\030\001 \003(\005\";\n\024EssaySub" +
+      "mittedAnswer\022\014\n\004text\030\001 \001(\t\022\025\n\005image\030\002 \003(" +
+      "\0132\006.Image*$\n\010UserType\022\013\n\007Teacher\020\000\022\013\n\007St" +
+      "udent\020\001*g\n\014QuestionType\022\021\n\rSingleFilling" +
+      "\020\000\022\023\n\017MultipleFilling\020\001\022\020\n\014SingleChoice\020" +
+      "\002\022\022\n\016MultipleChoice\020\003\022\t\n\005Essay\020\004B4\n,com." +
+      "corkili.learningserver.generate.protobuf" +
+      "B\004Infob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -26648,7 +26712,7 @@ public final class Info {
     internal_static_ExamInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamInfo_descriptor,
-        new java.lang.String[] { "ExamId", "CreateTime", "UpdateTime", "ExamName", "BelongCourseId", "StartTime", "EndTime", "ExamQuestionInfo", });
+        new java.lang.String[] { "ExamId", "CreateTime", "UpdateTime", "ExamName", "BelongCourseId", "StartTime", "EndTime", "Duration", "ExamQuestionInfo", });
     internal_static_ExamQuestionInfo_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_ExamQuestionInfo_fieldAccessorTable = new

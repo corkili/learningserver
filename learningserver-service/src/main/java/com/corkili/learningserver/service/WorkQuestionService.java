@@ -16,4 +16,6 @@ public interface WorkQuestionService extends Service<WorkQuestion, com.corkili.l
 
     ServiceResult createOrUpdateWorkQuestionsForCourseWork(Collection<WorkQuestion> workQuestions, Long courseWorkId);
 
+    ServiceResult findAllWorkQuestionByBelongCourseWorkId(Long belongCourseWorkId);
+
 }

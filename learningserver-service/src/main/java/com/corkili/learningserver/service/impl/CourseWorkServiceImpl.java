@@ -127,4 +127,42 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
         }
         return ServiceResult.successResult(msg, CourseWork.class, courseWork, List.class, workQuestionList);
     }
+
+    @Override
+    public ServiceResult updateCourseWork(CourseWork courseWork, Collection<WorkQuestion> workQuestions) {
+        if (StringUtils.isBlank(courseWork.getWorkName())) {
+            return recordErrorAndCreateFailResultWithMessage("update course work error: workName is empty");
+        }
+        if (courseWork.getWorkName().length() > 100) {
+            return recordErrorAndCreateFailResultWithMessage("update course work error: length of workName > 100");
+        }
+        if (courseWork.getDeadline() != null && courseWork.getDeadline().before(new Date())) {
+            return recordErrorAndCreateFailResultWithMessage("update course work error: deadline is before now");
+        }
+        if (courseWork.getBelongCourseId() == null || !courseRepository.existsById(courseWork.getBelongCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("update course work error: belong course [{}] not exist",
+                    courseWork.getBelongCourseId() == null ? "" : courseWork.getBelongCourseId());
+        }
+        Optional<CourseWork> courseWorkOptional = update(courseWork);
+        if (!courseWorkOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("update course work error: save CourseWork failed");
+        }
+        courseWork = courseWorkOptional.get();
+        String msg = "create course work success";
+        List<WorkQuestion> workQuestionList = null;
+        if (workQuestions != null) {
+            ServiceResult serviceResult = workQuestionService.createOrUpdateWorkQuestionsForCourseWork(workQuestions, courseWork.getId());
+            if (serviceResult.isFail()) {
+                msg += ", but " + serviceResult.msg();
+            } else {
+                msg += ", and " + serviceResult.msg();
+            }
+            workQuestionList = (List<WorkQuestion>) serviceResult.extra(List.class);
+        }
+        if (workQuestionList == null) {
+            workQuestionList = (List<WorkQuestion>) workQuestionService.findAllWorkQuestionByBelongCourseWorkId(
+                    courseWork.getId()).extra(List.class);
+        }
+        return ServiceResult.successResult(msg, CourseWork.class, courseWork, List.class, workQuestionList);
+    }
 }

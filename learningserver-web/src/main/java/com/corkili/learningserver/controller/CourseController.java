@@ -75,7 +75,7 @@ public class CourseController {
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         CourseInfo courseInfo;
         if (serviceResult.isSuccess()) {
-            courseInfo = ProtoUtils.generateCourseInfo((Course) serviceResult.extra(Course.class), teacher, false);
+            courseInfo = ProtoUtils.generateCourseInfo(serviceResult.extra(Course.class), teacher, false);
         } else {
             courseInfo = ProtoUtils.generateCourseInfo(course, teacher, false);
         }
@@ -156,7 +156,7 @@ public class CourseController {
             ServiceResult serviceResult = courseService.updateCourse(copyCourse, images);
             baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
             if (serviceResult.isSuccess()) {
-                courseInfo = ProtoUtils.generateCourseInfo((Course) serviceResult.extra(Course.class), teacher, false);
+                courseInfo = ProtoUtils.generateCourseInfo(serviceResult.extra(Course.class), teacher, false);
             } else {
                 courseInfo = ProtoUtils.generateCourseInfo(copyCourse, teacher, false);
             }

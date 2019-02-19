@@ -73,7 +73,7 @@ public class QuestionController {
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         QuestionInfo questionInfo;
         if (serviceResult.isSuccess()) {
-            questionInfo = ProtoUtils.generateQuestionInfo((Question) serviceResult.extra(Question.class), false);
+            questionInfo = ProtoUtils.generateQuestionInfo(serviceResult.extra(Question.class), false);
         } else {
             questionInfo = ProtoUtils.generateQuestionInfo(question, false);
         }
@@ -207,7 +207,7 @@ public class QuestionController {
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         QuestionInfo questionInfo;
         if (serviceResult.isSuccess()) {
-            questionInfo = ProtoUtils.generateQuestionInfo((Question) serviceResult.extra(Question.class), false);
+            questionInfo = ProtoUtils.generateQuestionInfo(serviceResult.extra(Question.class), false);
         } else {
             questionInfo = ProtoUtils.generateQuestionInfo(copyQuestion, false);
         }

@@ -116,6 +116,9 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
         if (exam.getStartTime().after(exam.getEndTime())) {
             return recordErrorAndCreateFailResultWithMessage("create exam error: start time is after end time");
         }
+        if (exam.getDuration() < 1) {
+            return recordErrorAndCreateFailResultWithMessage("create exam error: duration < 1");
+        }
         if (exam.getBelongCourseId() == null || !courseRepository.existsById(exam.getBelongCourseId())) {
             return recordErrorAndCreateFailResultWithMessage("create exam error: belong course [{}] not exist",
                     exam.getBelongCourseId() == null ? "" : exam.getBelongCourseId());

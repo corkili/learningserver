@@ -14,4 +14,6 @@ public interface CourseWorkService extends Service<CourseWork, com.corkili.learn
 
     ServiceResult createCourseWork(CourseWork courseWork, Collection<WorkQuestion> workQuestions);
 
+    ServiceResult updateCourseWork(CourseWork courseWork, Collection<WorkQuestion> workQuestions);
+
 }

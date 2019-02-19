@@ -91,4 +91,13 @@ public class ServiceResult {
     public Object extra(Object key) {
         return extraMap == null ? null : extraMap.getOrDefault(key, null);
     }
+
+    public <T> T extra(Class<T> key) {
+        Object value = extraMap == null ? null : extraMap.getOrDefault(key, null);
+        if (key.isInstance(value)) {
+            return key.cast(value);
+        } else {
+            return null;
+        }
+    }
 }

@@ -44,7 +44,7 @@ public class UserController {
         ServiceResult registerResult = userService.register(request.getUserInfo().getPhone(),
                 request.getPassword(), request.getUserInfo().getUsername(),
                 User.Type.valueOf(request.getUserInfo().getUserType().name()));
-        User user = (User) registerResult.extra(User.class);
+        User user = registerResult.extra(User.class);
         UserInfo userInfo;
         if (registerResult.isSuccess() && user != null) {
             userInfo = ProtoUtils.generateUserInfo(user);
@@ -63,7 +63,7 @@ public class UserController {
         String token = tokenManager.getOrNewToken(request.getRequest().getToken());
         ServiceResult loginResult = userService.login(request.getPhone(), request.getPassword(),
                 User.Type.valueOf(request.getUserType().name()));
-        User user = (User) loginResult.extra(User.class);
+        User user = loginResult.extra(User.class);
         UserInfo userInfo;
         if (loginResult.isSuccess() && user != null) {
             userInfo = ProtoUtils.generateUserInfo(user);
@@ -128,7 +128,7 @@ public class UserController {
             }
             ServiceResult serviceResult = userService.modifyUserInfo(copyUser);
             baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
-            userInfo = ProtoUtils.generateUserInfo((User) serviceResult.extra(User.class));
+            userInfo = ProtoUtils.generateUserInfo(serviceResult.extra(User.class));
         }
         return UserUpdateInfoResponse.newBuilder()
                 .setResponse(baseResponse)

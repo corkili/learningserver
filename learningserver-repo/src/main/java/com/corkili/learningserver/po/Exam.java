@@ -66,12 +66,16 @@ public class Exam implements PersistObject {
     @JoinColumn(name = "belong_course_fk", nullable = false)
     private Course belongCourse;
 
-    @Column(name = "start_time")
+    @Column(name = "start_time", nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @Column(name = "end_time")
+    @Column(name = "end_time", nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date endTime;
+
+    @Column(name = "duration", nullable = false)
+    @Range(min = 1)
+    private Integer duration;
 
 }

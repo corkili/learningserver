@@ -19,7 +19,7 @@ public class WorkQuestion implements BusinessObject {
 
     private Date updateTime;
 
-    private int index;
+    private Integer index;
 
     private Long belongCourseWorkId;
 

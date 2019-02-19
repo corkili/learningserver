@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.CourseWorkRepository;
 import com.corkili.learningserver.repo.QuestionRepository;
 import com.corkili.learningserver.repo.WorkQuestionRepository;
@@ -166,5 +167,39 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
             return recordErrorAndCreateFailResultWithMessage("create or update work question error: " +
                     "no work question create or update successfully");
         }
+    }
+
+    @Override
+    public ServiceResult findAllWorkQuestionByBelongCourseWorkId(Long belongCourseWorkId) {
+        if (belongCourseWorkId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("belongCourseId is null").mergeFrom(
+                    ServiceResult.successResultWithExtra(List.class, new LinkedList<WorkQuestion>()), true);
+        }
+        String msg = "find work questions success";
+        List<com.corkili.learningserver.po.WorkQuestion> workQuestionPOList = workQuestionRepository
+                .findAllByBelongCourseWorkId(belongCourseWorkId);
+        List<WorkQuestion> workQuestionList = new LinkedList<>();
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.WorkQuestion workQuestionPO : workQuestionPOList) {
+            Optional<WorkQuestion> workQuestionOptional = po2bo(workQuestionPO);
+            i++;
+            if (!workQuestionOptional.isPresent()) {
+                errId.append(workQuestionPO.getId());
+                if (i != workQuestionPOList.size()) {
+                    errId.append(",");
+                }
+            } else {
+                WorkQuestion workQuestion = workQuestionOptional.get();
+                workQuestionList.add(workQuestion);
+                // cache
+                putToCache(entityName() + workQuestion.getId(), workQuestion);
+            }
+        }
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find work question warn: transfer work question po [{}] to question bo failed", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, workQuestionList);
     }
 }

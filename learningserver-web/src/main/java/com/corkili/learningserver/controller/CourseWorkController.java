@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,13 @@ import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.common.ControllerUtils;
 import com.corkili.learningserver.common.ProtoUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Request.CourseWorkCreateRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseWorkCreateResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CourseWorkUpdateResponse;
 import com.corkili.learningserver.service.CourseWorkService;
 import com.corkili.learningserver.token.TokenManager;
 
@@ -45,7 +49,7 @@ public class CourseWorkController {
                     .build();
         }
         CourseWork courseWork = new CourseWork();
-        courseWork.setOpen(request.getOpen());
+        courseWork.setOpen(false);
         courseWork.setWorkName(request.getCourseWorkName());
         courseWork.setBelongCourseId(request.getBelongCourseId());
         courseWork.setDeadline(request.getHasDeadline() ? new Date(request.getDeadline()) : null);
@@ -60,7 +64,7 @@ public class CourseWorkController {
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         CourseWorkInfo courseWorkInfo;
         if (serviceResult.isSuccess()) {
-            courseWorkInfo = ProtoUtils.generateCourseWorkInfo((CourseWork) serviceResult.extra(CourseWork.class),
+            courseWorkInfo = ProtoUtils.generateCourseWorkInfo(serviceResult.extra(CourseWork.class),
                     (List<WorkQuestion>) serviceResult.extra(List.class));
         } else {
             courseWorkInfo = ProtoUtils.generateCourseWorkInfo(courseWork, workQuestions);
@@ -71,4 +75,57 @@ public class CourseWorkController {
                 .build();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/update", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CourseWorkUpdateResponse updateCourseWork(@RequestBody CourseWorkUpdateRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CourseWorkUpdateResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        Optional<CourseWork> courseWorkOptional = courseWorkService.retrieve(request.getCourseWorkId());
+        if (!courseWorkOptional.isPresent()) {
+            return CourseWorkUpdateResponse.newBuilder()
+                    .setResponse(ControllerUtils.generateErrorBaseResponse(token,
+                            ServiceUtils.format("courseWork [{}] not exists", request.getCourseWorkId())))
+                    .build();
+        }
+        CourseWork courseWork = courseWorkOptional.get();
+        boolean notOpen = courseWork.isOpen();
+        CourseWork copyCourseWork = CourseWork.copyFrom(courseWork);
+        if (request.getUpdateOpen() && notOpen) {
+            copyCourseWork.setOpen(request.getOpen());
+        }
+        if (request.getUpdateCourseWorkName()) {
+            copyCourseWork.setWorkName(request.getCourseWorkName());
+        }
+        if (request.getUpdateDeadline()) {
+            copyCourseWork.setDeadline(request.getHasDeadline() ? new Date(request.getDeadline()) : null);
+        }
+        List<WorkQuestion> workQuestions = null;
+        if (request.getUpdateQuestion() && notOpen) {
+            workQuestions = new ArrayList<>(request.getQuestionIdCount());
+            for (Entry<Integer, Long> entry : request.getQuestionIdMap().entrySet()) {
+                WorkQuestion workQuestion = new WorkQuestion();
+                workQuestion.setIndex(entry.getKey());
+                workQuestion.setQuestionId(entry.getValue());
+                workQuestions.add(workQuestion);
+            }
+        }
+        ServiceResult serviceResult = courseWorkService.updateCourseWork(copyCourseWork, workQuestions);
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        CourseWorkInfo courseWorkInfo;
+        if (serviceResult.isSuccess()) {
+            courseWorkInfo = ProtoUtils.generateCourseWorkInfo(serviceResult.extra(CourseWork.class),
+                    (List<WorkQuestion>) serviceResult.extra(List.class));
+        } else {
+            courseWorkInfo = ProtoUtils.generateCourseWorkInfo(copyCourseWork, workQuestions);
+        }
+        return CourseWorkUpdateResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setCourseWorkInfo(courseWorkInfo)
+                .build();
+    }
 }

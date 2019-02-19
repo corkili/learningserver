@@ -138,7 +138,8 @@ message ExamInfo {
     sint64 belongCourseId = 5;
     fixed64 startTime = 6;
     fixed64 endTime = 7;
-    repeated ExamQuestionInfo examQuestionInfo = 8;
+    int32 duration = 8;
+    repeated ExamQuestionInfo examQuestionInfo = 9;
 }
 
 message ExamQuestionInfo {

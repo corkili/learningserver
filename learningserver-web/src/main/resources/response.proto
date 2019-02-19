@@ -93,7 +93,17 @@ message CourseWorkCreateResponse {
     CourseWorkInfo courseWorkInfo = 2;
 }
 
+message CourseWorkUpdateResponse {
+    BaseResponse response = 1;
+    CourseWorkInfo courseWorkInfo = 2;
+}
+
 message ExamCreateResponse {
+    BaseResponse response = 1;
+    ExamInfo examInfo = 2;
+}
+
+message ExamUpdateResponse {
     BaseResponse response = 1;
     ExamInfo examInfo = 2;
 }

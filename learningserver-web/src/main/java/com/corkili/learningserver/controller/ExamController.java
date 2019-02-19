@@ -50,6 +50,7 @@ public class ExamController {
         exam.setBelongCourseId(request.getBelongCourseId());
         exam.setStartTime(new Date(request.getStartTime()));
         exam.setEndTime(new Date(request.getEndTime()));
+        exam.setDuration(request.getDuration());
         List<ExamQuestion> examQuestions = new ArrayList<>(request.getQuestionIdCount());
         for (Entry<Integer, Long> entry : request.getQuestionIdMap().entrySet()) {
             ExamQuestion examQuestion = new ExamQuestion();
@@ -72,7 +73,7 @@ public class ExamController {
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         ExamInfo examInfo;
         if (serviceResult.isSuccess()) {
-            examInfo = ProtoUtils.generateExamInfo((Exam) serviceResult.extra(Exam.class),
+            examInfo = ProtoUtils.generateExamInfo(serviceResult.extra(Exam.class),
                     (List<ExamQuestion>) serviceResult.extra(List.class));
         } else {
             examInfo = ProtoUtils.generateExamInfo(exam, examQuestions);

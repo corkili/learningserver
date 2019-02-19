@@ -27,4 +27,16 @@ public class CourseWork implements BusinessObject {
 
     private Date deadline;
 
+    public static CourseWork copyFrom(CourseWork courseWork) {
+        CourseWork copyCourseWork = new CourseWork();
+        copyCourseWork.id = courseWork.id;
+        copyCourseWork.createTime = courseWork.createTime;
+        copyCourseWork.updateTime = courseWork.updateTime;
+        copyCourseWork.open = courseWork.open;
+        copyCourseWork.workName = courseWork.workName;
+        copyCourseWork.belongCourseId = courseWork.belongCourseId;
+        copyCourseWork.deadline = courseWork.deadline;
+        return copyCourseWork;
+    }
+
 }

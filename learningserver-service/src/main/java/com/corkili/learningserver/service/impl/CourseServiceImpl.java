@@ -187,6 +187,7 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         }
         if (errId.length() != 0) {
             msg = ServiceUtils.format("find all course warn: transfer course po [{}] to bo failed.", errId.toString());
+            log.warn(msg);
         }
         return ServiceResult.successResult(msg, List.class, allCourse);
     }
