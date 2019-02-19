@@ -126,16 +126,16 @@ public class QuestionUtils {
         double result = -1;
         switch (questionType) {
             case SingleFilling:
-                result = checkQuestionAnswer(question, (SingleFillingSubmittedAnswer) submittedAnswer);
+                result = checkQuestionAnswer(question, (SingleFillingSubmittedAnswer) submittedAnswer, scoreMap);
                 break;
             case MultipleFilling:
                 result = checkQuestionAnswer(question, (MultipleFillingSubmittedAnswer) submittedAnswer, scoreMap);
                 break;
             case SingleChoice:
-                result = checkQuestionAnswer(question, (SingleChoiceSubmittedAnswer) submittedAnswer);
+                result = checkQuestionAnswer(question, (SingleChoiceSubmittedAnswer) submittedAnswer, scoreMap);
                 break;
             case MultipleChoice:
-                result = checkQuestionAnswer(question, (MultipleChoiceSubmittedAnswer) submittedAnswer);
+                result = checkQuestionAnswer(question, (MultipleChoiceSubmittedAnswer) submittedAnswer, scoreMap);
                 break;
         }
         return result;
@@ -143,10 +143,15 @@ public class QuestionUtils {
 
     /**
      * -1: not check
+     *
+     * scoreMap == null:
      *  0: false
      *  1: true
+     *
+     * scoreMap != null:
+     *  score
      */
-    private static double checkQuestionAnswer(Question question, SingleFillingSubmittedAnswer submittedAnswer) {
+    private static double checkQuestionAnswer(Question question, SingleFillingSubmittedAnswer submittedAnswer, Map<Integer, Double> scoreMap) {
         if (!question.isAutoCheck()) {
             return -1;
         }
@@ -163,7 +168,11 @@ public class QuestionUtils {
                     break;
                 }
             }
-            return checkResult ? 1 : 0;
+            if (scoreMap == null) {
+                return checkResult ? 1 : 0;
+            } else {
+                return checkResult ? scoreMap.getOrDefault(-1, 0d) : 0;
+            }
         } else {
             return -1;
         }
@@ -172,10 +181,10 @@ public class QuestionUtils {
     /**
      * -1: not check
      *
-     * score == null:
+     * scoreMap == null:
      *   0: false
      *   1: true
-     * score != null:
+     * scoreMap != null:
      *   return totalScore(>= 0)
      */
     private static double checkQuestionAnswer(Question question, MultipleFillingSubmittedAnswer submittedAnswer, Map<Integer, Double> scoreMap) {
@@ -220,10 +229,15 @@ public class QuestionUtils {
 
     /**
      * -1: not check
+     *
+     * scoreMap == null:
      *  0: false
      *  1: true
+     *
+     * scoreMap != null:
+     *  score
      */
-    private static double checkQuestionAnswer(Question question, SingleChoiceSubmittedAnswer submittedAnswer) {
+    private static double checkQuestionAnswer(Question question, SingleChoiceSubmittedAnswer submittedAnswer, Map<Integer, Double> scoreMap) {
         if (!question.isAutoCheck()) {
             return -1;
         }
@@ -233,7 +247,11 @@ public class QuestionUtils {
         }
         if (question.getAnswer() instanceof SingleChoiceAnswer) {
             SingleChoiceAnswer answer = (SingleChoiceAnswer) question.getAnswer();
-            return answer.getChoice() == submittedAnswer.getChoice() ? 1 : 0;
+            if (scoreMap == null) {
+                return answer.getChoice() == submittedAnswer.getChoice() ? 1 : 0;
+            } else {
+                return answer.getChoice() == submittedAnswer.getChoice() ? scoreMap.getOrDefault(-1, 0d) : 0;
+            }
         } else {
             return -1;
         }
@@ -241,11 +259,16 @@ public class QuestionUtils {
 
     /**
      * -1: not check
+     *
+     * scoreMap == null:
      *  0: false
      *  1: half_true
      *  2: true
+     *
+     * scoreMap != null:
+     *  score
      */
-    private static double checkQuestionAnswer(Question question, MultipleChoiceSubmittedAnswer submittedAnswer) {
+    private static double checkQuestionAnswer(Question question, MultipleChoiceSubmittedAnswer submittedAnswer, Map<Integer, Double> scoreMap) {
         if (!question.isAutoCheck()) {
             return -1;
         }
@@ -262,9 +285,18 @@ public class QuestionUtils {
                 }
             }
             if (answer.isSelectAllIsCorrect()) {
-                return count == answer.getChoices().size() ? 2 : 0;
+                if (scoreMap == null) {
+                    return count == answer.getChoices().size() ? 2 : 0;
+                } else {
+                    return count == answer.getChoices().size() ? scoreMap.getOrDefault(-1, 0d) : 0;
+                }
             } else {
-                return count == 0 ? 0 : (count == answer.getChoices().size() ? 2 : 1);
+                if (scoreMap == null) {
+                    return count == 0 ? 0 : (count == answer.getChoices().size() ? 2 : 1);
+                } else {
+                    double score = scoreMap.getOrDefault(-1, 0d);
+                    return count == 0 ? 0 : (count == answer.getChoices().size() ? score : score / 2);
+                }
             }
         } else {
             return -1;
