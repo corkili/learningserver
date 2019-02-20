@@ -14,6 +14,6 @@ public interface CourseWorkRepository extends JpaRepository<CourseWork, Long> {
 
     void deleteAllByBelongCourseId(Long belongCourseId);
 
-
+    List<CourseWork> findAllByBelongCourseId(Long belongCourseId);
 
 }

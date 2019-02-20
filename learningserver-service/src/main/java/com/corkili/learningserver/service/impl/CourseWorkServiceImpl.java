@@ -3,6 +3,7 @@ package com.corkili.learningserver.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.repo.CourseWorkRepository;
 import com.corkili.learningserver.service.CourseWorkService;
@@ -164,5 +166,39 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
                     courseWork.getId()).extra(List.class);
         }
         return ServiceResult.successResult(msg, CourseWork.class, courseWork, List.class, workQuestionList);
+    }
+
+    @Override
+    public ServiceResult findAllCourseWork(Long belongCourseId) {
+        List<CourseWork> allCourseWork = new LinkedList<>();
+        if (belongCourseId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("belongCourseId is null")
+                    .mergeFrom(ServiceResult.successResultWithExtra(List.class, allCourseWork), true);
+        }
+        List<com.corkili.learningserver.po.CourseWork> allCourseWorkPO = courseWorkRepository
+                .findAllByBelongCourseId(belongCourseId);
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.CourseWork courseWorkPO : allCourseWorkPO) {
+            Optional<CourseWork> courseOptional = po2bo(courseWorkPO);
+            i++;
+            if (!courseOptional.isPresent()) {
+                errId.append(courseWorkPO.getId());
+                if (i != allCourseWorkPO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                CourseWork courseWork = courseOptional.get();
+                allCourseWork.add(courseWork);
+                // cache
+                putToCache(entityName() + courseWork.getId(), courseWork);
+            }
+        }
+        String msg = "find all course work success";
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all course work warn: transfer course po [{}] to bo failed.", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, allCourseWork);
     }
 }

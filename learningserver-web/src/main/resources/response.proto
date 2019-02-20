@@ -98,6 +98,21 @@ message CourseWorkUpdateResponse {
     CourseWorkInfo courseWorkInfo = 2;
 }
 
+message CourseWorkFindAllResponse {
+    BaseResponse response = 1;
+    repeated CourseWorkSimpleInfo courseWorkSimpleInfo = 2;
+}
+
+message CourseWorkGetResponse {
+    BaseResponse response = 1;
+    CourseWorkInfo courseWorkInfo = 2;
+}
+
+message CourseWorkDeleteResponse {
+    BaseResponse response = 1;
+    sint64 courseWorkId = 2;
+}
+
 message ExamCreateResponse {
     BaseResponse response = 1;
     ExamInfo examInfo = 2;
@@ -106,4 +121,19 @@ message ExamCreateResponse {
 message ExamUpdateResponse {
     BaseResponse response = 1;
     ExamInfo examInfo = 2;
+}
+
+message ExamFindAllResponse {
+    BaseResponse response = 1;
+    repeated ExamSimpleInfo examSimpleInfo = 2;
+}
+
+message ExamGetResponse {
+    BaseResponse response = 1;
+    ExamInfo examInfo = 2;
+}
+
+message ExamDeleteResponse {
+    BaseResponse response = 1;
+    sint64 examId = 2;
 }

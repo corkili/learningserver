@@ -150,6 +150,21 @@ message CourseWorkUpdateRequest {
     map<int32, sint64> questionId = 11;
 }
 
+message CourseWorkFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseId = 2;
+}
+
+message CourseWorkGetRequest {
+    BaseRequest request = 1;
+    sint64 courseWorkId = 2;
+}
+
+message CourseWorkDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseWorkId = 2;
+}
+
 message ExamCreateRequest {
     BaseRequest request = 1;
     string examName = 2;
@@ -175,4 +190,19 @@ message ExamUpdateRequest {
     bool updateQuestion = 11;
     map<int32, sint64> questionId = 12;
     map<int32, Score> questionScore = 13;
+}
+
+message ExamFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseId = 2;
+}
+
+message ExamGetRequest {
+    BaseRequest request = 1;
+    sint64 examId = 2;
+}
+
+message ExamDeleteRequest {
+    BaseRequest request = 1;
+    sint64 examId = 2;
 }

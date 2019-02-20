@@ -2,6 +2,7 @@ package com.corkili.learningserver.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -20,12 +21,20 @@ import com.corkili.learningserver.common.ProtoUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
+import com.corkili.learningserver.generate.protobuf.Info.ExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.Score;
+import com.corkili.learningserver.generate.protobuf.Request.ExamDeleteRequest;
 import com.corkili.learningserver.generate.protobuf.Request.ExamCreateRequest;
+import com.corkili.learningserver.generate.protobuf.Request.ExamFindAllRequest;
+import com.corkili.learningserver.generate.protobuf.Request.ExamGetRequest;
 import com.corkili.learningserver.generate.protobuf.Request.ExamUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
+import com.corkili.learningserver.generate.protobuf.Response.ExamDeleteResponse;
 import com.corkili.learningserver.generate.protobuf.Response.ExamCreateResponse;
+import com.corkili.learningserver.generate.protobuf.Response.ExamFindAllResponse;
+import com.corkili.learningserver.generate.protobuf.Response.ExamGetResponse;
 import com.corkili.learningserver.generate.protobuf.Response.ExamUpdateResponse;
+import com.corkili.learningserver.service.ExamQuestionService;
 import com.corkili.learningserver.service.ExamService;
 import com.corkili.learningserver.token.TokenManager;
 
@@ -38,6 +47,9 @@ public class ExamController {
 
     @Autowired
     private ExamService examService;
+
+    @Autowired
+    private ExamQuestionService examQuestionService;
 
     @ResponseBody
     @RequestMapping(value = "/create", produces = "application/x-protobuf", method = RequestMethod.POST)
@@ -153,6 +165,73 @@ public class ExamController {
         return ExamUpdateResponse.newBuilder()
                 .setResponse(baseResponse)
                 .setExamInfo(examInfo)
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/findAll", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public ExamFindAllResponse findAllExam(@RequestBody ExamFindAllRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return ExamFindAllResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = examService.findAllExam(request.getBelongCourseId());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        List<ExamSimpleInfo> examSimpleInfos = new LinkedList<>();
+        for (Exam exam : (List<Exam>) serviceResult.extra(List.class)) {
+            examSimpleInfos.add(ProtoUtils.generateExamSimpleInfo(exam));
+        }
+        return ExamFindAllResponse.newBuilder()
+                .setResponse(baseResponse)
+                .addAllExamSimpleInfo(examSimpleInfos)
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public ExamGetResponse getExam(@RequestBody ExamGetRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return ExamGetResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        Optional<Exam> examOptional = examService.retrieve(request.getExamId());
+        if (!examOptional.isPresent()) {
+            return ExamGetResponse.newBuilder()
+                    .setResponse(ControllerUtils.generateErrorBaseResponse(token,
+                            ServiceUtils.format("no exam [{}] exists", request.getExamId())))
+                    .build();
+        }
+        Exam exam = examOptional.get();
+        ServiceResult serviceResult = examQuestionService
+                .findAllExamQuestionByBelongExamId(exam.getId());
+        List<ExamQuestion> examQuestionList = (List<ExamQuestion>) serviceResult.extra(List.class);
+        return ExamGetResponse.newBuilder()
+                .setResponse(ControllerUtils.generateSuccessBaseResponse(token, "get exam success"))
+                .setExamInfo(ProtoUtils.generateExamInfo(exam, examQuestionList))
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public ExamDeleteResponse getExam(@RequestBody ExamDeleteRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return ExamDeleteResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = examService.deleteExam(request.getExamId());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        return ExamDeleteResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setExamId(request.getExamId())
                 .build();
     }
 

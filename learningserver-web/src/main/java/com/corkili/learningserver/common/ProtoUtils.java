@@ -20,9 +20,11 @@ import com.corkili.learningserver.generate.protobuf.Info.Answer;
 import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.EssayAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo;
+import com.corkili.learningserver.generate.protobuf.Info.ExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingAnswer;
@@ -60,6 +62,32 @@ public class ProtoUtils {
         return imageList;
     }
 
+    public static ExamSimpleInfo generateExamSimpleInfo(Exam exam) {
+        if (exam == null) {
+            return ExamSimpleInfo.getDefaultInstance();
+        }
+        return ExamSimpleInfo.newBuilder()
+                .setExamId(exam.getId())
+                .setExamName(exam.getExamName())
+                .setBelongCourseId(exam.getBelongCourseId())
+                .setStartTime(getTime(exam.getStartTime()))
+                .setEndTime(getTime(exam.getEndTime()))
+                .build();
+    }
+
+    public static CourseWorkSimpleInfo generateCourseWorkSimpleInfo(CourseWork courseWork) {
+        if (courseWork == null) {
+            return CourseWorkSimpleInfo.getDefaultInstance();
+        }
+        return CourseWorkSimpleInfo.newBuilder()
+                .setCourseWorkId(courseWork.getId())
+                .setOpen(courseWork.isOpen())
+                .setCourseWorkName(courseWork.getWorkName())
+                .setBelongCourseId(courseWork.getBelongCourseId())
+                .setHasDeadline(courseWork.getDeadline() != null)
+                .setDeadline(getTime(courseWork.getDeadline()))
+                .build();
+    }
 
     public static ExamInfo generateExamInfo(Exam exam, List<ExamQuestion> examQuestionList) {
         if (exam == null) {

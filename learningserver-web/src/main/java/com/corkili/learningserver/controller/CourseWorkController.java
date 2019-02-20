@@ -2,6 +2,7 @@ package com.corkili.learningserver.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -20,12 +21,20 @@ import com.corkili.learningserver.common.ProtoUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Request.CourseWorkCreateRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CourseWorkDeleteRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CourseWorkFindAllRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CourseWorkGetRequest;
 import com.corkili.learningserver.generate.protobuf.Request.CourseWorkUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseWorkCreateResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CourseWorkDeleteResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CourseWorkFindAllResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CourseWorkGetResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseWorkUpdateResponse;
 import com.corkili.learningserver.service.CourseWorkService;
+import com.corkili.learningserver.service.WorkQuestionService;
 import com.corkili.learningserver.token.TokenManager;
 
 @Controller
@@ -37,6 +46,9 @@ public class CourseWorkController {
 
     @Autowired
     private CourseWorkService courseWorkService;
+
+    @Autowired
+    private WorkQuestionService workQuestionService;
 
     @ResponseBody
     @RequestMapping(value = "/create", produces = "application/x-protobuf", method = RequestMethod.POST)
@@ -128,4 +140,72 @@ public class CourseWorkController {
                 .setCourseWorkInfo(courseWorkInfo)
                 .build();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/findAll", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CourseWorkFindAllResponse findAllCourseWork(@RequestBody CourseWorkFindAllRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CourseWorkFindAllResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = courseWorkService.findAllCourseWork(request.getBelongCourseId());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        List<CourseWorkSimpleInfo> courseWorkSimpleInfos = new LinkedList<>();
+        for (CourseWork courseWork : (List<CourseWork>) serviceResult.extra(List.class)) {
+            courseWorkSimpleInfos.add(ProtoUtils.generateCourseWorkSimpleInfo(courseWork));
+        }
+        return CourseWorkFindAllResponse.newBuilder()
+                .setResponse(baseResponse)
+                .addAllCourseWorkSimpleInfo(courseWorkSimpleInfos)
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CourseWorkGetResponse getCourseWork(@RequestBody CourseWorkGetRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CourseWorkGetResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        Optional<CourseWork> courseWorkOptional = courseWorkService.retrieve(request.getCourseWorkId());
+        if (!courseWorkOptional.isPresent()) {
+            return CourseWorkGetResponse.newBuilder()
+                    .setResponse(ControllerUtils.generateErrorBaseResponse(token,
+                            ServiceUtils.format("no courseWork [{}] exists", request.getCourseWorkId())))
+                    .build();
+        }
+        CourseWork courseWork = courseWorkOptional.get();
+        ServiceResult serviceResult = workQuestionService
+                .findAllWorkQuestionByBelongCourseWorkId(courseWork.getId());
+        List<WorkQuestion> workQuestionList = (List<WorkQuestion>) serviceResult.extra(List.class);
+        return CourseWorkGetResponse.newBuilder()
+                .setResponse(ControllerUtils.generateSuccessBaseResponse(token, "get courseWork success"))
+                .setCourseWorkInfo(ProtoUtils.generateCourseWorkInfo(courseWork, workQuestionList))
+                .build();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CourseWorkDeleteResponse getCourseWork(@RequestBody CourseWorkDeleteRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CourseWorkDeleteResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = courseWorkService.deleteCourseWork(request.getCourseWorkId());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        return CourseWorkDeleteResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setCourseWorkId(request.getCourseWorkId())
+                .build();
+    }
+
 }

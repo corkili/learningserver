@@ -3,6 +3,7 @@ package com.corkili.learningserver.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.repo.ExamRepository;
 import com.corkili.learningserver.service.ExamQuestionService;
@@ -125,7 +127,7 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
         }
         Optional<Exam> examOptional = create(exam);
         if (!examOptional.isPresent()) {
-            return recordErrorAndCreateFailResultWithMessage("create exam error: save CourseWork failed");
+            return recordErrorAndCreateFailResultWithMessage("create exam error: save Exam failed");
         }
         exam = examOptional.get();
         ServiceResult serviceResult = examQuestionService.createOrUpdateExamQuestionForExam(examQuestions, exam.getId());
@@ -174,7 +176,7 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
         }
         Optional<Exam> examOptional = update(exam);
         if (!examOptional.isPresent()) {
-            return recordErrorAndCreateFailResultWithMessage("update exam error: save CourseWork failed");
+            return recordErrorAndCreateFailResultWithMessage("update exam error: save Exam failed");
         }
         exam = examOptional.get();
         ServiceResult serviceResult = examQuestionService.createOrUpdateExamQuestionForExam(examQuestions, exam.getId());
@@ -193,5 +195,39 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
                     exam.getId()).extra(List.class);
         }
         return ServiceResult.successResult(msg, Exam.class, exam, List.class, examQuestionList);
+    }
+
+    @Override
+    public ServiceResult findAllExam(Long belongCourseId) {
+        List<Exam> allExam = new LinkedList<>();
+        if (belongCourseId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("belongCourseId is null")
+                    .mergeFrom(ServiceResult.successResultWithExtra(List.class, allExam), true);
+        }
+        List<com.corkili.learningserver.po.Exam> allExamPO = examRepository
+                .findAllByBelongCourseId(belongCourseId);
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.Exam examPO : allExamPO) {
+            Optional<Exam> courseOptional = po2bo(examPO);
+            i++;
+            if (!courseOptional.isPresent()) {
+                errId.append(examPO.getId());
+                if (i != allExamPO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                Exam exam = courseOptional.get();
+                allExam.add(exam);
+                // cache
+                putToCache(entityName() + exam.getId(), exam);
+            }
+        }
+        String msg = "find all exam success";
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all exam warn: transfer course po [{}] to bo failed.", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, allExam);
     }
 }

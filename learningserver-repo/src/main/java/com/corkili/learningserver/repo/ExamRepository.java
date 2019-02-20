@@ -14,4 +14,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
 
     void deleteAllByBelongCourseId(Long belongCourseId);
 
+    List<Exam> findAllByBelongCourseId(Long belongCourseId);
+
 }

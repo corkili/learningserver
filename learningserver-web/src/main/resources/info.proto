@@ -105,6 +105,15 @@ message CourseWorkInfo {
     repeated CourseWorkQuestionInfo courseWorkQuestionInfo = 9;
 }
 
+message CourseWorkSimpleInfo {
+    sint64 courseWorkId = 1;
+    bool open = 2;
+    string courseWorkName = 3;
+    sint64 belongCourseId = 4;
+    bool hasDeadline = 5;
+    fixed64 deadline = 6;
+}
+
 message CourseWorkQuestionInfo {
     sint64 courseWorkQuestionId = 1;
     fixed64 createTime = 2;
@@ -140,6 +149,15 @@ message ExamInfo {
     fixed64 endTime = 7;
     int32 duration = 8;
     repeated ExamQuestionInfo examQuestionInfo = 9;
+}
+
+message ExamSimpleInfo {
+    sint64 examId = 1;
+    string examName = 2;
+    sint64 belongCourseId = 3;
+    fixed64 startTime = 4;
+    fixed64 endTime = 5;
+    int32 duration = 6;
 }
 
 message ExamQuestionInfo {
