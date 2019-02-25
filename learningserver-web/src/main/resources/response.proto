@@ -1,0 +1,139 @@
+syntax = "proto3";
+
+option java_package = "com.corkili.learningserver.generate.protobuf";
+option java_outer_classname = "Response";
+
+import "info.proto";
+
+enum ResponseCode {
+    SUCCESS = 0;
+    GENERAL_ERROR = 1;
+    UNAUTHORIZED = 2;
+}
+
+message ImageLoadResponse {
+    BaseResponse response = 1;
+    repeated Image image = 2;
+}
+
+message BaseResponse {
+    string token = 1;
+    bool result = 2;
+    string msg = 3;
+    ResponseCode responseCode = 4;
+}
+
+message UserLoginResponse {
+    BaseResponse response = 1;
+    UserInfo userInfo = 2;
+}
+
+message UserRegisterResponse {
+    BaseResponse response = 1;
+    UserInfo userInfo = 2;
+}
+
+message UserLogoutResponse {
+    BaseResponse response = 1;
+}
+
+message UserUpdateInfoResponse {
+    BaseResponse response = 1;
+    UserInfo userInfo = 2;
+}
+
+message CourseCreateResponse {
+    BaseResponse response = 1;
+    CourseInfo courseInfo = 2;
+}
+
+message CourseFindAllResponse {
+    BaseResponse response = 1;
+    repeated CourseInfo courseInfo = 2;
+}
+
+message CourseUpdateResponse {
+    BaseResponse response = 1;
+    CourseInfo courseInfo = 2;
+}
+
+message CourseDeleteResponse {
+    BaseResponse response = 1;
+    sint64 courseId = 2;
+}
+
+message QuestionImportResponse {
+    BaseResponse response = 1;
+    QuestionInfo questionInfo = 2;
+}
+
+message QuestionFindAllResponse {
+    BaseResponse response = 1;
+    repeated QuestionSimpleInfo questionSimpleInfo = 2;
+}
+
+message QuestionGetResponse {
+    BaseResponse response = 1;
+    repeated QuestionInfo questionInfo = 2;
+    repeated sint64 failedQuestionId = 3;
+}
+
+message QuestionUpdateResponse {
+    BaseResponse response = 1;
+    QuestionInfo questionInfo = 2;
+}
+
+message QuestionDeleteResponse {
+    BaseResponse response = 1;
+    sint64 questionId = 2;
+}
+
+message CourseWorkCreateResponse {
+    BaseResponse response = 1;
+    CourseWorkInfo courseWorkInfo = 2;
+}
+
+message CourseWorkUpdateResponse {
+    BaseResponse response = 1;
+    CourseWorkInfo courseWorkInfo = 2;
+}
+
+message CourseWorkFindAllResponse {
+    BaseResponse response = 1;
+    repeated CourseWorkSimpleInfo courseWorkSimpleInfo = 2;
+}
+
+message CourseWorkGetResponse {
+    BaseResponse response = 1;
+    CourseWorkInfo courseWorkInfo = 2;
+}
+
+message CourseWorkDeleteResponse {
+    BaseResponse response = 1;
+    sint64 courseWorkId = 2;
+}
+
+message ExamCreateResponse {
+    BaseResponse response = 1;
+    ExamInfo examInfo = 2;
+}
+
+message ExamUpdateResponse {
+    BaseResponse response = 1;
+    ExamInfo examInfo = 2;
+}
+
+message ExamFindAllResponse {
+    BaseResponse response = 1;
+    repeated ExamSimpleInfo examSimpleInfo = 2;
+}
+
+message ExamGetResponse {
+    BaseResponse response = 1;
+    ExamInfo examInfo = 2;
+}
+
+message ExamDeleteResponse {
+    BaseResponse response = 1;
+    sint64 examId = 2;
+}

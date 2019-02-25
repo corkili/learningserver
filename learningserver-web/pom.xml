@@ -10,29 +10,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>learningserver-starter</artifactId>
-    <name>learning-server-starter</name>
+    <artifactId>learningserver-web</artifactId>
+    <name>learning-server-web</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.corkili</groupId>
-            <artifactId>learningserver-repo</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.corkili</groupId>
             <artifactId>learningserver-service</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.corkili</groupId>
-                    <artifactId>learningserver-repo</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.corkili</groupId>
-            <artifactId>learningserver-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,6 +27,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+        </dependency>
     </dependencies>
+
 
 </project>

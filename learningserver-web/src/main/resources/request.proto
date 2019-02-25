@@ -1,0 +1,208 @@
+syntax = "proto3";
+
+option java_package = "com.corkili.learningserver.generate.protobuf";
+option java_outer_classname = "Request";
+
+import "info.proto";
+
+message BaseRequest {
+    string token = 1;
+}
+
+message ImageLoadRequest {
+    BaseRequest request = 1;
+    repeated string imagePath = 2;
+}
+
+message UserLoginRequest {
+    BaseRequest request = 1;
+    string phone = 2;
+    string password = 3;
+    UserType userType = 4;
+}
+
+message UserRegisterRequest {
+    BaseRequest request = 1;
+    UserInfo userInfo = 2;
+    string password = 3;
+}
+
+message UserLogoutRequest {
+    BaseRequest request = 1;
+}
+
+message UserUpdateInfoRequest {
+    BaseRequest request = 1;
+    string phone = 2;
+    UserType userType = 3;
+    bool updatePhone = 4;
+    string newPhone = 5;
+    bool updateUsername = 6;
+    string newUsername = 7;
+    bool updatePassword = 8;
+    string newPassword = 9;
+}
+
+message CourseCreateRequest {
+    BaseRequest request = 1;
+    string courseName = 2;
+    string description = 3;
+    repeated Image image = 4;
+    repeated string tag = 5;
+}
+
+message CourseFindAllRequest {
+    BaseRequest request = 1;
+    bool all = 2;
+    bool byTeacherId = 3;
+    sint64 teacherId = 4;
+    bool byTeacherName = 5;
+    string teacherName = 6;
+    bool byKeyword = 7;
+    repeated string keyword = 8;
+}
+
+message CourseUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseId = 2;
+    bool updateCourseName = 3;
+    string courseName = 4;
+    bool updateDescription = 5;
+    string description = 6;
+    bool updateImage = 7;
+    repeated Image image = 8;
+    bool updateTags = 9;
+    repeated string tag = 10;
+}
+
+message CourseDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseId = 2;
+}
+
+message QuestionImportRequest {
+    BaseRequest request = 1;
+    string question = 2;
+    repeated Image image = 3;
+    QuestionType questionType = 4;
+    bool autoCheck = 5;
+    map<int32, string> choices = 6;
+    Answer answer = 7;
+}
+
+message QuestionFindAllRequest {
+    BaseRequest request = 1;
+    bool all = 2;
+    bool byKeyword = 3;
+    repeated string keyword = 4;
+    bool byQuestionType = 5;
+    repeated QuestionType questionType = 6;
+}
+
+message QuestionGetRequest {
+    BaseRequest request = 1;
+    repeated sint64 questionId = 2;
+    bool loadImage = 3;
+}
+
+message QuestionUpdateRequest {
+    BaseRequest request = 1;
+    sint64 questionId = 2;
+    bool updateQuestion = 3;
+    string question = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+    bool updateQuestionType = 7;
+    QuestionType questionType = 8;
+    bool updateAutoCheck = 9;
+    bool autoCheck = 10;
+    bool updateChoices = 11;
+    map<int32, string> choices = 12;
+    bool updateAnswer = 13;
+    Answer answer = 14;
+}
+
+message QuestionDeleteRequest {
+    BaseRequest request = 1;
+    sint64 questionId = 2;
+}
+
+message CourseWorkCreateRequest {
+    BaseRequest request = 1;
+    string courseWorkName = 2;
+    sint64 belongCourseId = 3;
+    bool hasDeadline = 4;
+    fixed64 deadline = 5;
+    map<int32, sint64> questionId = 6;
+}
+
+message CourseWorkUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseWorkId = 2;
+    bool updateOpen = 3;
+    bool open = 4;
+    bool updateCourseWorkName = 5;
+    string courseWorkName = 6;
+    bool updateDeadline = 7;
+    bool hasDeadline = 8;
+    fixed64 deadline = 9;
+    bool updateQuestion = 10;
+    map<int32, sint64> questionId = 11;
+}
+
+message CourseWorkFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseId = 2;
+}
+
+message CourseWorkGetRequest {
+    BaseRequest request = 1;
+    sint64 courseWorkId = 2;
+}
+
+message CourseWorkDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseWorkId = 2;
+}
+
+message ExamCreateRequest {
+    BaseRequest request = 1;
+    string examName = 2;
+    sint64 belongCourseId = 3;
+    fixed64 startTime = 4;
+    fixed64 endTime = 5;
+    int32 duration = 6;
+    map<int32, sint64> questionId = 7;
+    map<int32, Score> questionScore = 8;
+}
+
+message ExamUpdateRequest {
+    BaseRequest request = 1;
+    sint64 examId = 2;
+    bool updateExamName = 3;
+    string examName = 4;
+    bool updateStartTime = 5;
+    fixed64 startTime = 6;
+    bool updateEndTime = 7;
+    fixed64 endTime = 8;
+    bool updateDuration = 9;
+    int32 duration = 10;
+    bool updateQuestion = 11;
+    map<int32, sint64> questionId = 12;
+    map<int32, Score> questionScore = 13;
+}
+
+message ExamFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseId = 2;
+}
+
+message ExamGetRequest {
+    BaseRequest request = 1;
+    sint64 examId = 2;
+}
+
+message ExamDeleteRequest {
+    BaseRequest request = 1;
+    sint64 examId = 2;
+}

@@ -1,0 +1,237 @@
+syntax = "proto3";
+
+option java_package = "com.corkili.learningserver.generate.protobuf";
+option java_outer_classname = "Info";
+
+enum UserType {
+    Teacher = 0;
+    Student = 1;
+}
+
+enum QuestionType {
+    SingleFilling = 0;
+    MultipleFilling = 1;
+    SingleChoice = 2;
+    MultipleChoice = 3;
+    Essay = 4;
+}
+
+message Image {
+    string path = 1;
+    bool hasData = 2;
+    bytes image = 3;
+}
+
+message UserInfo {
+    string phone = 1;
+    string username = 2;
+    UserType userType = 3;
+}
+
+message CourseInfo {
+    sint64 courseId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool open = 4;
+    string courseName = 5;
+    string description = 6;
+    repeated Image image = 7;
+    repeated string tag = 8;
+    UserInfo teacherInfo = 9;
+}
+
+message QuestionInfo {
+    sint64 questionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string question = 4;
+    repeated Image image = 5;
+    QuestionType questionType = 6;
+    bool autoCheck = 7;
+    map<int32, string> choices = 8;
+    Answer answer = 9;
+    sint64 authorId = 10;
+}
+
+message QuestionSimpleInfo {
+    sint64 questionId = 1;
+    string question = 2;
+    QuestionType questionType = 3;
+    bool autoCheck = 4;
+    sint64 authorId = 5;
+}
+
+message Answer {
+    oneof answer {
+        SingleFillingAnswer singleFillingAnswer = 1;
+        MultipleFillingAnswer multipleFillingAnswer = 2;
+        SingleChoiceAnswer singleChoiceAnswer = 3;
+        MultipleChoiceAnswer multipleChoiceAnswer = 4;
+        EssayAnswer essayAnswer = 5;
+    }
+}
+
+message SingleFillingAnswer {
+    repeated string answer = 1;
+}
+
+message MultipleFillingAnswer {
+    map<int32, SingleFillingAnswer> answer = 1;
+}
+
+message SingleChoiceAnswer {
+    int32 choice = 1;
+}
+
+message MultipleChoiceAnswer {
+    repeated int32 choice = 1;
+    bool selectAllIsCorrect = 2;
+}
+
+message EssayAnswer {
+    string text = 1;
+    repeated Image image = 2;
+}
+
+message CourseWorkInfo {
+    sint64 courseWorkId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool open = 4;
+    string courseWorkName = 5;
+    sint64 belongCourseId = 6;
+    bool hasDeadline = 7;
+    fixed64 deadline = 8;
+    repeated CourseWorkQuestionInfo courseWorkQuestionInfo = 9;
+}
+
+message CourseWorkSimpleInfo {
+    sint64 courseWorkId = 1;
+    bool open = 2;
+    string courseWorkName = 3;
+    sint64 belongCourseId = 4;
+    bool hasDeadline = 5;
+    fixed64 deadline = 6;
+}
+
+message CourseWorkQuestionInfo {
+    sint64 courseWorkQuestionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    int32 index = 4;
+    sint64 belongCourseWorkId = 5;
+    sint64 questionId = 6;
+}
+
+message SubmittedCourseWorkInfo {
+    sint64 submittedCourseWorkId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    map<int32, CourseWorkSubmittedAnswer> submittedAnswer = 4;
+    bool alreadyCheckAllAnswer = 5;
+    bool finished = 6;
+    sint64 belongCourseWorkId = 7;
+    sint64 submitterId = 8;
+}
+
+message CourseWorkSubmittedAnswer {
+    int32 questionIndex = 1;
+    SubmittedAnswer submittedAnswer = 2;
+    int32 checkStatus = 3;
+}
+
+message ExamInfo {
+    sint64 examId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string examName = 4;
+    sint64 belongCourseId = 5;
+    fixed64 startTime = 6;
+    fixed64 endTime = 7;
+    int32 duration = 8;
+    repeated ExamQuestionInfo examQuestionInfo = 9;
+}
+
+message ExamSimpleInfo {
+    sint64 examId = 1;
+    string examName = 2;
+    sint64 belongCourseId = 3;
+    fixed64 startTime = 4;
+    fixed64 endTime = 5;
+    int32 duration = 6;
+}
+
+message ExamQuestionInfo {
+    sint64 examQuestionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    int32 index = 4;
+    sint64 belongExamId = 5;
+    sint64 questionId = 6;
+    Score score = 7;
+}
+
+message Score {
+    oneof score {
+        double singleScore = 1;
+        MultipleScore multipleScore = 2;
+    }
+    message MultipleScore {
+        map<int32, double> score = 1;
+    }
+}
+
+message SubmittedExamInfo {
+    sint64 submittedExamId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    map<int32, ExamSubmittedAnswer> submittedAnswer = 4;
+    bool alreadyCheckAllAnswer = 5;
+    double totalScore = 6;
+    bool finished = 7;
+    sint64 belongExamId = 8;
+    sint64 submitterId = 9;
+}
+
+message ExamSubmittedAnswer {
+    int32 questionIndex = 1;
+    SubmittedAnswer submittedAnswer = 2;
+    double score = 3;
+}
+
+message SubmittedAnswer {
+    oneof submittedAnswer {
+        SingleFillingSubmittedAnswer singleFillingSubmittedAnswer = 1;
+        MultipleFillingSubmittedAnswer multipleFillingSubmittedAnswer = 2;
+        SingleChoiceSubmittedAnswer singleChoiceSubmittedAnswer = 3;
+        MultipleChoiceSubmittedAnswer multipleChoiceSubmittedAnswer = 4;
+        EssaySubmittedAnswer essaySubmittedAnswer = 5;
+    }
+}
+
+message SingleFillingSubmittedAnswer {
+    string answer = 1;
+}
+
+message MultipleFillingSubmittedAnswer {
+    message Pair {
+        int32 index = 1;
+        string answer = 2;
+        double scoreOrCheckStatus = 3;
+    }
+    map<int32, Pair> answer = 1;
+}
+
+message SingleChoiceSubmittedAnswer {
+    int32 choice = 1;
+}
+
+message MultipleChoiceSubmittedAnswer {
+    repeated int32 choice = 1;
+}
+
+message EssaySubmittedAnswer {
+    string text = 1;
+    repeated Image image = 2;
+}
+

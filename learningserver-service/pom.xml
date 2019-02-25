@@ -10,29 +10,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>learningserver-starter</artifactId>
-    <name>learning-server-starter</name>
+    <artifactId>learningserver-service</artifactId>
+    <name>learning-server-service</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.corkili</groupId>
+            <artifactId>learningserver-scorm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.corkili</groupId>
             <artifactId>learningserver-repo</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.corkili</groupId>
-            <artifactId>learningserver-service</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.corkili</groupId>
-                    <artifactId>learningserver-repo</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.corkili</groupId>
-            <artifactId>learningserver-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,8 +29,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>
