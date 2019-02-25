@@ -83,6 +83,9 @@ public class SubmittedExam implements PersistObject {
     @Range(min = 0)
     private Double totalScore;
 
+    @Column(name = "finished", nullable = false)
+    private boolean finished;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "belong_exam_fk", nullable = false)
     private Exam belongExam;

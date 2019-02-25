@@ -79,6 +79,9 @@ public class SubmittedCourseWork implements PersistObject {
     @Column(name = "already_check_all_answer", nullable = false)
     private boolean alreadyCheckAllAnswer;
 
+    @Column(name = "finished", nullable = false)
+    private boolean finished;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "belong_course_work_fk", nullable = false)
     private CourseWork belongCourseWork;

@@ -48,6 +48,8 @@ public class SubmittedExam implements BusinessObject {
 
     private double totalScore;
 
+    private boolean finished;
+
     private Long belongExamId;
 
     private Long submitterId;

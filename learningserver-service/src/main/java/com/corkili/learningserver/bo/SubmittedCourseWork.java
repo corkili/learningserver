@@ -46,6 +46,8 @@ public class SubmittedCourseWork implements BusinessObject {
 
     private boolean alreadyCheckAllAnswer;
 
+    private boolean finished;
+
     private Long belongCourseWorkId;
 
     private Long submitterId;
