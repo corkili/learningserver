@@ -107,7 +107,7 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
     public ServiceResult createOrUpdateWorkQuestionsForCourseWork(Collection<WorkQuestion> workQuestions, Long courseWorkId) {
         if (workQuestions == null || workQuestions.isEmpty()) {
             return recordWarnAndCreateSuccessResultWithMessage("create or update work question warn: no work question")
-                    .mergeFrom(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
+                    .merge(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
         }
         if (courseWorkId == null || courseWorkRepository.existsById(courseWorkId)) {
             return recordErrorAndCreateFailResultWithMessage("create or update work question error: course work id is null");
@@ -158,7 +158,7 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
             }
             if (indexDiff > 0) {
                 return recordWarnAndCreateSuccessResultWithMessage("create or update work question warn: some " +
-                        "work question create or update failed").mergeFrom(ServiceResult.successResultWithExtra(
+                        "work question create or update failed").merge(ServiceResult.successResultWithExtra(
                                 List.class, successList), true);
             } else {
                 return ServiceResult.successResult("create or update work question success", List.class, successList);
@@ -172,7 +172,7 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
     @Override
     public ServiceResult findAllWorkQuestionByBelongCourseWorkId(Long belongCourseWorkId) {
         if (belongCourseWorkId == null) {
-            return recordWarnAndCreateSuccessResultWithMessage("belongCourseId is null").mergeFrom(
+            return recordWarnAndCreateSuccessResultWithMessage("belongCourseId is null").merge(
                     ServiceResult.successResultWithExtra(List.class, new LinkedList<WorkQuestion>()), true);
         }
         String msg = "find work questions success";

@@ -129,7 +129,7 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
     public ServiceResult createOrUpdateExamQuestionForExam(Collection<ExamQuestion> examQuestions, Long examId) {
         if (examQuestions == null || examQuestions.isEmpty()) {
             return recordWarnAndCreateSuccessResultWithMessage("create or update exam question warn: no exam question")
-                    .mergeFrom(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
+                    .merge(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
         }
         if (examId == null || examRepository.existsById(examId)) {
             return recordErrorAndCreateFailResultWithMessage("create or update exam question error: course work id is null");
@@ -180,7 +180,7 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
             }
             if (indexDiff > 0) {
                 return recordWarnAndCreateSuccessResultWithMessage("create or update exam question warn: some " +
-                        "exam question create or update failed").mergeFrom(ServiceResult.successResultWithExtra(
+                        "exam question create or update failed").merge(ServiceResult.successResultWithExtra(
                         List.class, successList), true);
             } else {
                 return ServiceResult.successResult("create or update exam question success", List.class, successList);
@@ -194,7 +194,7 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
     @Override
     public ServiceResult findAllExamQuestionByBelongExamId(Long belongExamId) {
         if (belongExamId == null) {
-            return recordWarnAndCreateSuccessResultWithMessage("belongExamId is null").mergeFrom(
+            return recordWarnAndCreateSuccessResultWithMessage("belongExamId is null").merge(
                     ServiceResult.successResultWithExtra(List.class, new LinkedList<ExamQuestion>()), true);
         }
         String msg = "find exam questions success";

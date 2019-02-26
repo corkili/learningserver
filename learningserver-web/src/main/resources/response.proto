@@ -137,3 +137,28 @@ message ExamDeleteResponse {
     BaseResponse response = 1;
     sint64 examId = 2;
 }
+
+message SubmittedCourseWorkCreateResponse {
+    BaseResponse response = 1;
+    SubmittedCourseWorkInfo submittedCourseWorkInfo = 2;
+}
+
+message SubmittedCourseWorkUpdateResponse {
+    BaseResponse response = 1;
+    SubmittedCourseWorkInfo submittedCourseWorkInfo = 2;
+}
+
+message SubmittedCourseWorkFindAllResponse {
+    BaseResponse response = 1;
+    repeated SubmittedCourseWorkSimpleInfo submittedCourseWorkSimpleInfo = 2;
+}
+
+message SubmittedCourseWorkGetResponse {
+    BaseResponse response = 1;
+    SubmittedCourseWorkInfo submittedCourseWorkInfo = 2;
+}
+
+message SubmittedCourseWorkDeleteResponse {
+    BaseResponse response = 1;
+    sint64 submittedCourseWorkId = 2;
+}

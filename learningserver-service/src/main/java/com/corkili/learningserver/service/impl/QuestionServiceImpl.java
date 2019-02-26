@@ -1,20 +1,5 @@
 package com.corkili.learningserver.service.impl;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.Question.EssayAnswer;
 import com.corkili.learningserver.bo.Question.MultipleChoiceAnswer;
@@ -32,6 +17,19 @@ import com.corkili.learningserver.repo.QuestionRepository;
 import com.corkili.learningserver.repo.WorkQuestionRepository;
 import com.corkili.learningserver.service.QuestionService;
 import com.corkili.learningserver.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -103,7 +101,7 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
     }
 
     @Override
-    public ServiceResult importQuestion(Question question, Map<String, byte[]> questionImages, Map<String, byte[]> essayImages) {
+    public ServiceResult importQuestion(Question question, Map<String, byte[]> questionImages) {
         if (StringUtils.isBlank(question.getQuestion())) {
             return recordErrorAndCreateFailResultWithMessage("import question error: question is empty");
         }
@@ -164,24 +162,24 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
         }
         question.getImagePaths().clear();
         question.getImagePaths().addAll(questionImages.keySet());
-        // essayImages
-        if (question.getQuestionType() == QuestionType.Essay) {
-            EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
-            if (!ImageUtils.storeImages(essayImages)) {
-                ImageUtils.deleteImages(questionImages.keySet());
-                return recordErrorAndCreateFailResultWithMessage("import question error: store images of essay answer failed");
-            }
-            essayAnswer.getImagePaths().clear();
-            if (essayImages != null) {
-                essayAnswer.getImagePaths().addAll(essayImages.keySet());
-            }
-        }
+//        // essayImages
+//        if (question.getQuestionType() == QuestionType.Essay) {
+//            EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
+//            if (!ImageUtils.storeImages(essayImages)) {
+//                ImageUtils.deleteImages(questionImages.keySet());
+//                return recordErrorAndCreateFailResultWithMessage("import question error: store images of essay answer failed");
+//            }
+//            essayAnswer.getImagePaths().clear();
+//            if (essayImages != null) {
+//                essayAnswer.getImagePaths().addAll(essayImages.keySet());
+//            }
+//        }
         Optional<Question> questionOptional = create(question);
         if (!questionOptional.isPresent()) {
             ImageUtils.deleteImages(questionImages.keySet());
-            if (essayImages != null) {
-                ImageUtils.deleteImages(essayImages.keySet());
-            }
+//            if (essayImages != null) {
+//                ImageUtils.deleteImages(essayImages.keySet());
+//            }
             return recordErrorAndCreateFailResultWithMessage("import question error: store into db failed");
         }
         question = questionOptional.get();
@@ -191,7 +189,7 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
     @Override
     public ServiceResult findAllQuestion(Long authorId, boolean all, List<String> keywordList, List<QuestionType> questionTypeList) {
         if (authorId == null) {
-            return recordWarnAndCreateSuccessResultWithMessage("author id not exist").mergeFrom(
+            return recordWarnAndCreateSuccessResultWithMessage("author id not exist").merge(
                     ServiceResult.successResultWithExtra(List.class, new LinkedList<Question>()), true);
         }
         String msg = "find all question success";
@@ -241,7 +239,7 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
     }
 
     @Override
-    public ServiceResult updateQuestion(Question question, Map<String, byte[]> questionImages, Map<String, byte[]> essayImages) {
+    public ServiceResult updateQuestion(Question question, Map<String, byte[]> questionImages) {
         if (StringUtils.isBlank(question.getQuestion())) {
             return recordErrorAndCreateFailResultWithMessage("update question error: question is empty");
         }
@@ -306,24 +304,24 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
             question.getImagePaths().addAll(questionImages.keySet());
         }
         // essayImages
-        List<String> oldEssayImages = new LinkedList<>();
-        if (question.getQuestionType() == QuestionType.Essay) {
-            EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
-            oldEssayImages.addAll(essayAnswer.getImagePaths());
-            if (essayImages != null) {
-                if (!ImageUtils.storeImages(essayImages)) {
-                    // rollback
-                    if (questionImages != null) {
-                        ImageUtils.deleteImages(questionImages.keySet());
-                    }
-                    question.getImagePaths().clear();
-                    question.getImagePaths().addAll(oldQuestionImages);
-                    return recordErrorAndCreateFailResultWithMessage("update question error: store images of essay answer failed");
-                }
-                essayAnswer.getImagePaths().clear();
-                essayAnswer.getImagePaths().addAll(essayImages.keySet());
-            }
-        }
+//        List<String> oldEssayImages = new LinkedList<>();
+//        if (question.getQuestionType() == QuestionType.Essay) {
+//            EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
+//            oldEssayImages.addAll(essayAnswer.getImagePaths());
+//            if (essayImages != null) {
+//                if (!ImageUtils.storeImages(essayImages)) {
+//                    // rollback
+//                    if (questionImages != null) {
+//                        ImageUtils.deleteImages(questionImages.keySet());
+//                    }
+//                    question.getImagePaths().clear();
+//                    question.getImagePaths().addAll(oldQuestionImages);
+//                    return recordErrorAndCreateFailResultWithMessage("update question error: store images of essay answer failed");
+//                }
+//                essayAnswer.getImagePaths().clear();
+//                essayAnswer.getImagePaths().addAll(essayImages.keySet());
+//            }
+//        }
         Optional<Question> questionOptional = create(question);
         if (!questionOptional.isPresent()) {
             // rollback
@@ -332,22 +330,22 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
             }
             question.getImagePaths().clear();
             question.getImagePaths().addAll(oldQuestionImages);
-            if (essayImages != null) {
-                ImageUtils.deleteImages(essayImages.keySet());
-            }
-            if (question.getQuestionType() == QuestionType.Essay) {
-                EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
-                essayAnswer.getImagePaths().clear();
-                essayAnswer.getImagePaths().addAll(oldEssayImages);
-            }
+//            if (essayImages != null) {
+//                ImageUtils.deleteImages(essayImages.keySet());
+//            }
+//            if (question.getQuestionType() == QuestionType.Essay) {
+//                EssayAnswer essayAnswer = (EssayAnswer) question.getAnswer();
+//                essayAnswer.getImagePaths().clear();
+//                essayAnswer.getImagePaths().addAll(oldEssayImages);
+//            }
             return recordErrorAndCreateFailResultWithMessage("update question error: store into db failed");
         }
         if (questionImages != null) {
             ImageUtils.deleteImages(oldQuestionImages);
         }
-        if (essayImages != null) {
-            ImageUtils.deleteImages(oldEssayImages);
-        }
+//        if (essayImages != null) {
+//            ImageUtils.deleteImages(oldEssayImages);
+//        }
         return ServiceResult.successResult("update question success", Question.class, questionOptional.get());
     }
 

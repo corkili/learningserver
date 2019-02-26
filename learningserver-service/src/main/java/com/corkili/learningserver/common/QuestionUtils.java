@@ -1,12 +1,5 @@
 package com.corkili.learningserver.common;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.Question.MultipleChoiceAnswer;
@@ -24,6 +17,11 @@ import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedCourseWork.InnerSubmittedAnswer;
 import com.corkili.learningserver.bo.SubmittedExam;
 import com.corkili.learningserver.bo.WorkQuestion;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 @Slf4j
 public class QuestionUtils {
@@ -92,7 +90,7 @@ public class QuestionUtils {
         rollupAnswerCheckResult(submittedExam);
     }
 
-    public static void rollupAnswerCheckResult(SubmittedCourseWork submittedCourseWork) {
+    private static void rollupAnswerCheckResult(SubmittedCourseWork submittedCourseWork) {
         boolean alreadyCheckAllAnswer = true;
         for (InnerSubmittedAnswer innerSubmittedAnswer : submittedCourseWork.getSubmittedAnswers().values()) {
             if (innerSubmittedAnswer.getCheckStatus() < 0) {
@@ -103,7 +101,7 @@ public class QuestionUtils {
         submittedCourseWork.setAlreadyCheckAllAnswer(alreadyCheckAllAnswer);
     }
 
-    public static void rollupAnswerCheckResult(SubmittedExam submittedExam) {
+    private static void rollupAnswerCheckResult(SubmittedExam submittedExam) {
         boolean alreadyCheckAllAnswer = true;
         double totalScore = 0.0;
         for (SubmittedExam.InnerSubmittedAnswer innerSubmittedAnswer : submittedExam.getSubmittedAnswers().values()) {

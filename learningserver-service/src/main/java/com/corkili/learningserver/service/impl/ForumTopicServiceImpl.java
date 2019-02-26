@@ -82,7 +82,7 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete forum topic success");
         }
         // delete associated topic comment
-        serviceResult = serviceResult.mergeFrom(topicCommentService.deleteTopicCommentByBelongTopicId(forumTopicId), true);
+        serviceResult = serviceResult.merge(topicCommentService.deleteTopicCommentByBelongTopicId(forumTopicId), true);
         return serviceResult;
     }
 

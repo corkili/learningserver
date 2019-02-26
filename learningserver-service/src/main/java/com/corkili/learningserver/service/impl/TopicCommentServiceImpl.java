@@ -82,7 +82,7 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete topic comment success");
         }
         // delete associated topic reply
-        serviceResult = serviceResult.mergeFrom(topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId), true);
+        serviceResult = serviceResult.merge(topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId), true);
         return serviceResult;
     }
 

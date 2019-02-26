@@ -206,3 +206,37 @@ message ExamDeleteRequest {
     BaseRequest request = 1;
     sint64 examId = 2;
 }
+
+message SubmittedCourseWorkCreateRequest {
+    BaseRequest request = 1;
+    map<int32, SubmittedAnswer> submittedAnswer = 2;
+    bool finished = 3;
+    sint64 belongCourseWorkId = 4;
+}
+
+message SubmittedCourseWorkUpdateRequest {
+    BaseRequest request = 1;
+    sint64 submittedCourseWorkId = 2;
+    bool updateSubmittedAnswer = 3;
+    map<int32, CourseWorkSubmittedAnswer> submittedAnswer = 4;
+    bool updateFinished = 5;
+    bool finished = 6;
+}
+
+message SubmittedCourseWorkFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseWorkId = 2;
+}
+
+message SubmittedCourseWorkGetRequest {
+    BaseRequest request = 1;
+    bool byId = 2;
+    sint64 submittedCourseWorkId = 3;
+    sint64 belongCourseWorkId = 4;
+    sint64 submitterId = 5;
+}
+
+message SubmittedCourseWorkDeleteRequest {
+    BaseRequest request = 1;
+    sint64 submittedCourseWorkId = 2;
+}

@@ -1,19 +1,11 @@
 package com.corkili.learningserver.common;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.protobuf.ByteString;
-
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.Question;
+import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
@@ -21,24 +13,162 @@ import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSimpleInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.EssayAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingSubmittedAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingSubmittedAnswer.Pair;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionType;
 import com.corkili.learningserver.generate.protobuf.Info.Score;
 import com.corkili.learningserver.generate.protobuf.Info.Score.MultipleScore;
 import com.corkili.learningserver.generate.protobuf.Info.SingleChoiceAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.SingleChoiceSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.SingleFillingAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.SingleFillingSubmittedAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.SubmittedAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo;
+import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
+import com.google.protobuf.ByteString;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ProtoUtils {
+
+    public static SubmittedCourseWorkSimpleInfo generateSubmittedCourseWorkSimpleInfo(
+            SubmittedCourseWork submittedCourseWork, User submitter) {
+        if (submittedCourseWork == null) {
+            return SubmittedCourseWorkSimpleInfo.getDefaultInstance();
+        }
+        return SubmittedCourseWorkSimpleInfo.newBuilder()
+                .setSubmittedCourseWorkId(submittedCourseWork.getId())
+                .setCreateTime(getTime(submittedCourseWork.getCreateTime()))
+                .setUpdateTime(getTime(submittedCourseWork.getUpdateTime()))
+                .setAlreadyCheckAllAnswer(submittedCourseWork.isAlreadyCheckAllAnswer())
+                .setFinished(submittedCourseWork.isFinished())
+                .setBelongCourseWorkId(submittedCourseWork.getBelongCourseWorkId())
+                .setSubmitterId(submittedCourseWork.getSubmitterId())
+                .setSubmitterInfo(generateUserInfo(submitter))
+                .build();
+    }
+
+    public static SubmittedCourseWorkInfo generateSubmittedCourseWorkInfo(SubmittedCourseWork submittedCourseWork, User submitter) {
+        if (submittedCourseWork == null) {
+            return SubmittedCourseWorkInfo.getDefaultInstance();
+        }
+        Map<Integer, CourseWorkSubmittedAnswer> submittedAnswerMap = new HashMap<>();
+        submittedCourseWork.getSubmittedAnswers().forEach((index, ans) -> {
+            submittedAnswerMap.put(index, CourseWorkSubmittedAnswer.newBuilder()
+                    .setQuestionIndex(ans.getQuestionIndex())
+                    .setSubmittedAnswer(generateSubmittedAnswer(ans.getSubmittedAnswer()))
+                    .setCheckStatus(ans.getCheckStatus())
+                    .build());
+        });
+        return SubmittedCourseWorkInfo.newBuilder()
+                .setSubmittedCourseWorkId(submittedCourseWork.getId())
+                .setCreateTime(getTime(submittedCourseWork.getCreateTime()))
+                .setUpdateTime(getTime(submittedCourseWork.getUpdateTime()))
+                .putAllSubmittedAnswer(submittedAnswerMap)
+                .setAlreadyCheckAllAnswer(submittedCourseWork.isAlreadyCheckAllAnswer())
+                .setFinished(submittedCourseWork.isFinished())
+                .setBelongCourseWorkId(submittedCourseWork.getBelongCourseWorkId())
+                .setSubmitterId(submittedCourseWork.getSubmitterId())
+                .setSubmitterInfo(generateUserInfo(submitter))
+                .build();
+    }
+
+    public static com.corkili.learningserver.bo.SubmittedAnswer generateSubmittedAnswer(SubmittedAnswer submittedAnswer) {
+        com.corkili.learningserver.bo.SubmittedAnswer result = null;
+        if (submittedAnswer.hasSingleFillingSubmittedAnswer()) {
+            SingleFillingSubmittedAnswer raw = submittedAnswer.getSingleFillingSubmittedAnswer();
+            result = new com.corkili.learningserver.bo.SubmittedAnswer.SingleFillingSubmittedAnswer(raw.getAnswer());
+        } else if (submittedAnswer.hasMultipleFillingSubmittedAnswer()) {
+            MultipleFillingSubmittedAnswer raw = submittedAnswer.getMultipleFillingSubmittedAnswer();
+            com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer res =
+                    new com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer();
+            for (Entry<Integer, Pair> entry : raw.getAnswerMap().entrySet()) {
+                Pair pair = entry.getValue();
+                res.getAnswerMap().put(entry.getKey(),
+                        new com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer.Pair(
+                                pair.getIndex(), pair.getAnswer(), pair.getScoreOrCheckStatus()));
+            }
+            result = res;
+        } else if (submittedAnswer.hasSingleChoiceSubmittedAnswer()) {
+            SingleChoiceSubmittedAnswer raw = submittedAnswer.getSingleChoiceSubmittedAnswer();
+            result = new com.corkili.learningserver.bo.SubmittedAnswer.SingleChoiceSubmittedAnswer(
+                    String.valueOf(raw.getChoice()));
+        } else if (submittedAnswer.hasMultipleChoiceSubmittedAnswer()) {
+            MultipleChoiceSubmittedAnswer raw = submittedAnswer.getMultipleChoiceSubmittedAnswer();
+            com.corkili.learningserver.bo.SubmittedAnswer.MultipleChoiceSubmittedAnswer res =
+                    new com.corkili.learningserver.bo.SubmittedAnswer.MultipleChoiceSubmittedAnswer();
+            res.getChoices().addAll(raw.getChoiceList());
+            result = res;
+        } else if (submittedAnswer.hasEssaySubmittedAnswer()) {
+            EssaySubmittedAnswer raw = submittedAnswer.getEssaySubmittedAnswer();
+            com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer res
+                    = new com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer();
+            res.setText(raw.getText());
+        }
+        return result;
+    }
+
+    public static SubmittedAnswer generateSubmittedAnswer(com.corkili.learningserver.bo.SubmittedAnswer submittedAnswer) {
+        SubmittedAnswer.Builder builder = SubmittedAnswer.newBuilder();
+        if (submittedAnswer instanceof com.corkili.learningserver.bo.SubmittedAnswer.SingleFillingSubmittedAnswer) {
+            com.corkili.learningserver.bo.SubmittedAnswer.SingleFillingSubmittedAnswer raw =
+                    (com.corkili.learningserver.bo.SubmittedAnswer.SingleFillingSubmittedAnswer) submittedAnswer;
+            builder.setSingleFillingSubmittedAnswer(SingleFillingSubmittedAnswer.newBuilder()
+                    .setAnswer(raw.getAnswer())
+                    .build());
+        } else if (submittedAnswer instanceof com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer) {
+            com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer raw =
+                    (com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer) submittedAnswer;
+            MultipleFillingSubmittedAnswer.Builder rb = MultipleFillingSubmittedAnswer.newBuilder();
+            for (Entry<Integer, com.corkili.learningserver.bo.SubmittedAnswer.MultipleFillingSubmittedAnswer.Pair> entry
+                    : raw.getAnswerMap().entrySet()) {
+                Pair.Builder pb = Pair.newBuilder();
+                pb.setIndex(entry.getValue().getIndex());
+                pb.setAnswer(entry.getValue().getAnswer());
+                pb.setScoreOrCheckStatus(entry.getValue().getScoreOrCheckStatus());
+                rb.putAnswer(entry.getKey(), pb.build());
+            }
+            builder.setMultipleFillingSubmittedAnswer(rb.build());
+        } else if (submittedAnswer instanceof com.corkili.learningserver.bo.SubmittedAnswer.SingleChoiceSubmittedAnswer) {
+            com.corkili.learningserver.bo.SubmittedAnswer.SingleChoiceSubmittedAnswer raw =
+                    (com.corkili.learningserver.bo.SubmittedAnswer.SingleChoiceSubmittedAnswer) submittedAnswer;
+            builder.setSingleChoiceSubmittedAnswer(SingleChoiceSubmittedAnswer.newBuilder()
+                    .setChoice(raw.getChoice())
+                    .build());
+        } else if (submittedAnswer instanceof com.corkili.learningserver.bo.SubmittedAnswer.MultipleChoiceSubmittedAnswer) {
+            com.corkili.learningserver.bo.SubmittedAnswer.MultipleChoiceSubmittedAnswer raw =
+                    (com.corkili.learningserver.bo.SubmittedAnswer.MultipleChoiceSubmittedAnswer) submittedAnswer;
+            builder.setMultipleChoiceSubmittedAnswer(MultipleChoiceSubmittedAnswer.newBuilder()
+                    .addAllChoice(raw.getChoices())
+                    .build());
+        } else if (submittedAnswer instanceof com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer) {
+            com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer raw =
+                    (com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer) submittedAnswer;
+            builder.setEssaySubmittedAnswer(EssaySubmittedAnswer.newBuilder()
+                    .setText(raw.getText())
+                    .build());
+        }
+        return builder.build();
+    }
 
     public static List<Image> generateImageList(List<String> imagePaths, boolean loadImageData) {
         List<Image> imageList = new LinkedList<>();
@@ -358,7 +488,7 @@ public class ProtoUtils {
                     Question.EssayAnswer ans = (Question.EssayAnswer) questionAnswer;
                     EssayAnswer essayAnswer = EssayAnswer.newBuilder()
                             .setText(ans.getText())
-                            .addAllImage(generateImageList(ans.getImagePaths(), loadImageData))
+//                            .addAllImage(generateImageList(ans.getImagePaths(), loadImageData))
                             .build();
                     return Answer.newBuilder()
                             .setEssayAnswer(essayAnswer)

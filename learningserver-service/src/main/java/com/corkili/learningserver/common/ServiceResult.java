@@ -51,7 +51,7 @@ public class ServiceResult {
         return new ServiceResult(false, msg, generateExtraMap(keyAndValues));
     }
 
-    public ServiceResult mergeFrom(ServiceResult serviceResult, boolean useBaseResultMessage) {
+    public ServiceResult merge(ServiceResult serviceResult, boolean useBaseResultMessage) {
         boolean mergeResult = result & serviceResult.result;
         String mergeMsg = useBaseResultMessage ? msg : serviceResult.msg;
         Map<Object, Object> mergeExtraMap = new HashMap<>();

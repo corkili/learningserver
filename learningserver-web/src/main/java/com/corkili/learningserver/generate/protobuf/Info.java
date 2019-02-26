@@ -10098,38 +10098,22 @@ public final class Info {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     java.lang.String getText();
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     com.google.protobuf.ByteString
         getTextBytes();
-
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> 
-        getImageList();
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index);
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    int getImageCount();
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-        getImageOrBuilderList();
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
-        int index);
   }
   /**
    * Protobuf type {@code EssayAnswer}
@@ -10145,7 +10129,6 @@ public final class Info {
     }
     private EssayAnswer() {
       text_ = "";
-      image_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -10178,15 +10161,6 @@ public final class Info {
               text_ = s;
               break;
             }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                image_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.Image>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              image_.add(
-                  input.readMessage(com.corkili.learningserver.generate.protobuf.Info.Image.parser(), extensionRegistry));
-              break;
-            }
             default: {
               if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -10202,9 +10176,6 @@ public final class Info {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          image_ = java.util.Collections.unmodifiableList(image_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -10222,10 +10193,13 @@ public final class Info {
               com.corkili.learningserver.generate.protobuf.Info.EssayAnswer.class, com.corkili.learningserver.generate.protobuf.Info.EssayAnswer.Builder.class);
     }
 
-    private int bitField0_;
     public static final int TEXT_FIELD_NUMBER = 1;
     private volatile java.lang.Object text_;
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     public java.lang.String getText() {
@@ -10241,6 +10215,10 @@ public final class Info {
       }
     }
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -10255,41 +10233,6 @@ public final class Info {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
-    }
-
-    public static final int IMAGE_FIELD_NUMBER = 2;
-    private java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> image_;
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> getImageList() {
-      return image_;
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-        getImageOrBuilderList() {
-      return image_;
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public int getImageCount() {
-      return image_.size();
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index) {
-      return image_.get(index);
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
-        int index) {
-      return image_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10309,9 +10252,6 @@ public final class Info {
       if (!getTextBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
       }
-      for (int i = 0; i < image_.size(); i++) {
-        output.writeMessage(2, image_.get(i));
-      }
       unknownFields.writeTo(output);
     }
 
@@ -10323,10 +10263,6 @@ public final class Info {
       size = 0;
       if (!getTextBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
-      }
-      for (int i = 0; i < image_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, image_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -10346,8 +10282,6 @@ public final class Info {
       boolean result = true;
       result = result && getText()
           .equals(other.getText());
-      result = result && getImageList()
-          .equals(other.getImageList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -10361,10 +10295,6 @@ public final class Info {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TEXT_FIELD_NUMBER;
       hash = (53 * hash) + getText().hashCode();
-      if (getImageCount() > 0) {
-        hash = (37 * hash) + IMAGE_FIELD_NUMBER;
-        hash = (53 * hash) + getImageList().hashCode();
-      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -10493,7 +10423,6 @@ public final class Info {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getImageFieldBuilder();
         }
       }
       @java.lang.Override
@@ -10501,12 +10430,6 @@ public final class Info {
         super.clear();
         text_ = "";
 
-        if (imageBuilder_ == null) {
-          image_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          imageBuilder_.clear();
-        }
         return this;
       }
 
@@ -10533,19 +10456,7 @@ public final class Info {
       @java.lang.Override
       public com.corkili.learningserver.generate.protobuf.Info.EssayAnswer buildPartial() {
         com.corkili.learningserver.generate.protobuf.Info.EssayAnswer result = new com.corkili.learningserver.generate.protobuf.Info.EssayAnswer(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.text_ = text_;
-        if (imageBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            image_ = java.util.Collections.unmodifiableList(image_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.image_ = image_;
-        } else {
-          result.image_ = imageBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -10598,32 +10509,6 @@ public final class Info {
           text_ = other.text_;
           onChanged();
         }
-        if (imageBuilder_ == null) {
-          if (!other.image_.isEmpty()) {
-            if (image_.isEmpty()) {
-              image_ = other.image_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureImageIsMutable();
-              image_.addAll(other.image_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.image_.isEmpty()) {
-            if (imageBuilder_.isEmpty()) {
-              imageBuilder_.dispose();
-              imageBuilder_ = null;
-              image_ = other.image_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              imageBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getImageFieldBuilder() : null;
-            } else {
-              imageBuilder_.addAllMessages(other.image_);
-            }
-          }
-        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -10652,10 +10537,13 @@ public final class Info {
         }
         return this;
       }
-      private int bitField0_;
 
       private java.lang.Object text_ = "";
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public java.lang.String getText() {
@@ -10671,6 +10559,10 @@ public final class Info {
         }
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -10687,6 +10579,10 @@ public final class Info {
         }
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public Builder setText(
@@ -10700,6 +10596,10 @@ public final class Info {
         return this;
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public Builder clearText() {
@@ -10709,6 +10609,10 @@ public final class Info {
         return this;
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public Builder setTextBytes(
@@ -10721,246 +10625,6 @@ public final class Info {
         text_ = value;
         onChanged();
         return this;
-      }
-
-      private java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> image_ =
-        java.util.Collections.emptyList();
-      private void ensureImageIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          image_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.Image>(image_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> imageBuilder_;
-
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> getImageList() {
-        if (imageBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(image_);
-        } else {
-          return imageBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public int getImageCount() {
-        if (imageBuilder_ == null) {
-          return image_.size();
-        } else {
-          return imageBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index) {
-        if (imageBuilder_ == null) {
-          return image_.get(index);
-        } else {
-          return imageBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder setImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image value) {
-        if (imageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureImageIsMutable();
-          image_.set(index, value);
-          onChanged();
-        } else {
-          imageBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder setImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          imageBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(com.corkili.learningserver.generate.protobuf.Info.Image value) {
-        if (imageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureImageIsMutable();
-          image_.add(value);
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image value) {
-        if (imageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureImageIsMutable();
-          image_.add(index, value);
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(
-          com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.add(builderForValue.build());
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addAllImage(
-          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.Image> values) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, image_);
-          onChanged();
-        } else {
-          imageBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder clearImage() {
-        if (imageBuilder_ == null) {
-          image_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          imageBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder removeImage(int index) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.remove(index);
-          onChanged();
-        } else {
-          imageBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image.Builder getImageBuilder(
-          int index) {
-        return getImageFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
-          int index) {
-        if (imageBuilder_ == null) {
-          return image_.get(index);  } else {
-          return imageBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-           getImageOrBuilderList() {
-        if (imageBuilder_ != null) {
-          return imageBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(image_);
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image.Builder addImageBuilder() {
-        return getImageFieldBuilder().addBuilder(
-            com.corkili.learningserver.generate.protobuf.Info.Image.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image.Builder addImageBuilder(
-          int index) {
-        return getImageFieldBuilder().addBuilder(
-            index, com.corkili.learningserver.generate.protobuf.Info.Image.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image.Builder> 
-           getImageBuilderList() {
-        return getImageFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-          getImageFieldBuilder() {
-        if (imageBuilder_ == null) {
-          imageBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder>(
-                  image_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          image_ = null;
-        }
-        return imageBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -14110,14 +13774,32 @@ public final class Info {
     boolean getAlreadyCheckAllAnswer();
 
     /**
-     * <code>sint64 belongCourseWorkId = 6;</code>
+     * <code>bool finished = 6;</code>
+     */
+    boolean getFinished();
+
+    /**
+     * <code>sint64 belongCourseWorkId = 7;</code>
      */
     long getBelongCourseWorkId();
 
     /**
-     * <code>sint64 submitterId = 7;</code>
+     * <code>sint64 submitterId = 8;</code>
      */
     long getSubmitterId();
+
+    /**
+     * <code>.UserInfo submitterInfo = 9;</code>
+     */
+    boolean hasSubmitterInfo();
+    /**
+     * <code>.UserInfo submitterInfo = 9;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo();
+    /**
+     * <code>.UserInfo submitterInfo = 9;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder();
   }
   /**
    * Protobuf type {@code SubmittedCourseWorkInfo}
@@ -14136,6 +13818,7 @@ public final class Info {
       createTime_ = 0L;
       updateTime_ = 0L;
       alreadyCheckAllAnswer_ = false;
+      finished_ = false;
       belongCourseWorkId_ = 0L;
       submitterId_ = 0L;
     }
@@ -14199,12 +13882,30 @@ public final class Info {
             }
             case 48: {
 
-              belongCourseWorkId_ = input.readSInt64();
+              finished_ = input.readBool();
               break;
             }
             case 56: {
 
+              belongCourseWorkId_ = input.readSInt64();
+              break;
+            }
+            case 64: {
+
               submitterId_ = input.readSInt64();
+              break;
+            }
+            case 74: {
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder subBuilder = null;
+              if (submitterInfo_ != null) {
+                subBuilder = submitterInfo_.toBuilder();
+              }
+              submitterInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.UserInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(submitterInfo_);
+                submitterInfo_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -14364,22 +14065,52 @@ public final class Info {
       return alreadyCheckAllAnswer_;
     }
 
-    public static final int BELONGCOURSEWORKID_FIELD_NUMBER = 6;
+    public static final int FINISHED_FIELD_NUMBER = 6;
+    private boolean finished_;
+    /**
+     * <code>bool finished = 6;</code>
+     */
+    public boolean getFinished() {
+      return finished_;
+    }
+
+    public static final int BELONGCOURSEWORKID_FIELD_NUMBER = 7;
     private long belongCourseWorkId_;
     /**
-     * <code>sint64 belongCourseWorkId = 6;</code>
+     * <code>sint64 belongCourseWorkId = 7;</code>
      */
     public long getBelongCourseWorkId() {
       return belongCourseWorkId_;
     }
 
-    public static final int SUBMITTERID_FIELD_NUMBER = 7;
+    public static final int SUBMITTERID_FIELD_NUMBER = 8;
     private long submitterId_;
     /**
-     * <code>sint64 submitterId = 7;</code>
+     * <code>sint64 submitterId = 8;</code>
      */
     public long getSubmitterId() {
       return submitterId_;
+    }
+
+    public static final int SUBMITTERINFO_FIELD_NUMBER = 9;
+    private com.corkili.learningserver.generate.protobuf.Info.UserInfo submitterInfo_;
+    /**
+     * <code>.UserInfo submitterInfo = 9;</code>
+     */
+    public boolean hasSubmitterInfo() {
+      return submitterInfo_ != null;
+    }
+    /**
+     * <code>.UserInfo submitterInfo = 9;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo() {
+      return submitterInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+    }
+    /**
+     * <code>.UserInfo submitterInfo = 9;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder() {
+      return getSubmitterInfo();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -14414,11 +14145,17 @@ public final class Info {
       if (alreadyCheckAllAnswer_ != false) {
         output.writeBool(5, alreadyCheckAllAnswer_);
       }
+      if (finished_ != false) {
+        output.writeBool(6, finished_);
+      }
       if (belongCourseWorkId_ != 0L) {
-        output.writeSInt64(6, belongCourseWorkId_);
+        output.writeSInt64(7, belongCourseWorkId_);
       }
       if (submitterId_ != 0L) {
-        output.writeSInt64(7, submitterId_);
+        output.writeSInt64(8, submitterId_);
+      }
+      if (submitterInfo_ != null) {
+        output.writeMessage(9, getSubmitterInfo());
       }
       unknownFields.writeTo(output);
     }
@@ -14455,13 +14192,21 @@ public final class Info {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, alreadyCheckAllAnswer_);
       }
+      if (finished_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, finished_);
+      }
       if (belongCourseWorkId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(6, belongCourseWorkId_);
+          .computeSInt64Size(7, belongCourseWorkId_);
       }
       if (submitterId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(7, submitterId_);
+          .computeSInt64Size(8, submitterId_);
+      }
+      if (submitterInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getSubmitterInfo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -14489,10 +14234,17 @@ public final class Info {
           other.internalGetSubmittedAnswer());
       result = result && (getAlreadyCheckAllAnswer()
           == other.getAlreadyCheckAllAnswer());
+      result = result && (getFinished()
+          == other.getFinished());
       result = result && (getBelongCourseWorkId()
           == other.getBelongCourseWorkId());
       result = result && (getSubmitterId()
           == other.getSubmitterId());
+      result = result && (hasSubmitterInfo() == other.hasSubmitterInfo());
+      if (hasSubmitterInfo()) {
+        result = result && getSubmitterInfo()
+            .equals(other.getSubmitterInfo());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -14520,12 +14272,19 @@ public final class Info {
       hash = (37 * hash) + ALREADYCHECKALLANSWER_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getAlreadyCheckAllAnswer());
+      hash = (37 * hash) + FINISHED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getFinished());
       hash = (37 * hash) + BELONGCOURSEWORKID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getBelongCourseWorkId());
       hash = (37 * hash) + SUBMITTERID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSubmitterId());
+      if (hasSubmitterInfo()) {
+        hash = (37 * hash) + SUBMITTERINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getSubmitterInfo().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -14690,10 +14449,18 @@ public final class Info {
         internalGetMutableSubmittedAnswer().clear();
         alreadyCheckAllAnswer_ = false;
 
+        finished_ = false;
+
         belongCourseWorkId_ = 0L;
 
         submitterId_ = 0L;
 
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = null;
+        } else {
+          submitterInfo_ = null;
+          submitterInfoBuilder_ = null;
+        }
         return this;
       }
 
@@ -14728,8 +14495,14 @@ public final class Info {
         result.submittedAnswer_ = internalGetSubmittedAnswer();
         result.submittedAnswer_.makeImmutable();
         result.alreadyCheckAllAnswer_ = alreadyCheckAllAnswer_;
+        result.finished_ = finished_;
         result.belongCourseWorkId_ = belongCourseWorkId_;
         result.submitterId_ = submitterId_;
+        if (submitterInfoBuilder_ == null) {
+          result.submitterInfo_ = submitterInfo_;
+        } else {
+          result.submitterInfo_ = submitterInfoBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -14793,11 +14566,17 @@ public final class Info {
         if (other.getAlreadyCheckAllAnswer() != false) {
           setAlreadyCheckAllAnswer(other.getAlreadyCheckAllAnswer());
         }
+        if (other.getFinished() != false) {
+          setFinished(other.getFinished());
+        }
         if (other.getBelongCourseWorkId() != 0L) {
           setBelongCourseWorkId(other.getBelongCourseWorkId());
         }
         if (other.getSubmitterId() != 0L) {
           setSubmitterId(other.getSubmitterId());
+        }
+        if (other.hasSubmitterInfo()) {
+          mergeSubmitterInfo(other.getSubmitterInfo());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -15056,6 +14835,1087 @@ public final class Info {
         return this;
       }
 
+      private boolean finished_ ;
+      /**
+       * <code>bool finished = 6;</code>
+       */
+      public boolean getFinished() {
+        return finished_;
+      }
+      /**
+       * <code>bool finished = 6;</code>
+       */
+      public Builder setFinished(boolean value) {
+        
+        finished_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool finished = 6;</code>
+       */
+      public Builder clearFinished() {
+        
+        finished_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long belongCourseWorkId_ ;
+      /**
+       * <code>sint64 belongCourseWorkId = 7;</code>
+       */
+      public long getBelongCourseWorkId() {
+        return belongCourseWorkId_;
+      }
+      /**
+       * <code>sint64 belongCourseWorkId = 7;</code>
+       */
+      public Builder setBelongCourseWorkId(long value) {
+        
+        belongCourseWorkId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 belongCourseWorkId = 7;</code>
+       */
+      public Builder clearBelongCourseWorkId() {
+        
+        belongCourseWorkId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long submitterId_ ;
+      /**
+       * <code>sint64 submitterId = 8;</code>
+       */
+      public long getSubmitterId() {
+        return submitterId_;
+      }
+      /**
+       * <code>sint64 submitterId = 8;</code>
+       */
+      public Builder setSubmitterId(long value) {
+        
+        submitterId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 submitterId = 8;</code>
+       */
+      public Builder clearSubmitterId() {
+        
+        submitterId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.UserInfo submitterInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> submitterInfoBuilder_;
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public boolean hasSubmitterInfo() {
+        return submitterInfoBuilder_ != null || submitterInfo_ != null;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo() {
+        if (submitterInfoBuilder_ == null) {
+          return submitterInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+        } else {
+          return submitterInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public Builder setSubmitterInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (submitterInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          submitterInfo_ = value;
+          onChanged();
+        } else {
+          submitterInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public Builder setSubmitterInfo(
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder builderForValue) {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          submitterInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public Builder mergeSubmitterInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (submitterInfoBuilder_ == null) {
+          if (submitterInfo_ != null) {
+            submitterInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.newBuilder(submitterInfo_).mergeFrom(value).buildPartial();
+          } else {
+            submitterInfo_ = value;
+          }
+          onChanged();
+        } else {
+          submitterInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public Builder clearSubmitterInfo() {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = null;
+          onChanged();
+        } else {
+          submitterInfo_ = null;
+          submitterInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder getSubmitterInfoBuilder() {
+        
+        onChanged();
+        return getSubmitterInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder() {
+        if (submitterInfoBuilder_ != null) {
+          return submitterInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return submitterInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+        }
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> 
+          getSubmitterInfoFieldBuilder() {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder>(
+                  getSubmitterInfo(),
+                  getParentForChildren(),
+                  isClean());
+          submitterInfo_ = null;
+        }
+        return submitterInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:SubmittedCourseWorkInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:SubmittedCourseWorkInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SubmittedCourseWorkInfo>
+        PARSER = new com.google.protobuf.AbstractParser<SubmittedCourseWorkInfo>() {
+      @java.lang.Override
+      public SubmittedCourseWorkInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SubmittedCourseWorkInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SubmittedCourseWorkInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SubmittedCourseWorkInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SubmittedCourseWorkSimpleInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SubmittedCourseWorkSimpleInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>sint64 submittedCourseWorkId = 1;</code>
+     */
+    long getSubmittedCourseWorkId();
+
+    /**
+     * <code>fixed64 createTime = 2;</code>
+     */
+    long getCreateTime();
+
+    /**
+     * <code>fixed64 updateTime = 3;</code>
+     */
+    long getUpdateTime();
+
+    /**
+     * <code>bool alreadyCheckAllAnswer = 4;</code>
+     */
+    boolean getAlreadyCheckAllAnswer();
+
+    /**
+     * <code>bool finished = 5;</code>
+     */
+    boolean getFinished();
+
+    /**
+     * <code>sint64 belongCourseWorkId = 6;</code>
+     */
+    long getBelongCourseWorkId();
+
+    /**
+     * <code>sint64 submitterId = 7;</code>
+     */
+    long getSubmitterId();
+
+    /**
+     * <code>.UserInfo submitterInfo = 8;</code>
+     */
+    boolean hasSubmitterInfo();
+    /**
+     * <code>.UserInfo submitterInfo = 8;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo();
+    /**
+     * <code>.UserInfo submitterInfo = 8;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code SubmittedCourseWorkSimpleInfo}
+   */
+  public  static final class SubmittedCourseWorkSimpleInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:SubmittedCourseWorkSimpleInfo)
+      SubmittedCourseWorkSimpleInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SubmittedCourseWorkSimpleInfo.newBuilder() to construct.
+    private SubmittedCourseWorkSimpleInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SubmittedCourseWorkSimpleInfo() {
+      submittedCourseWorkId_ = 0L;
+      createTime_ = 0L;
+      updateTime_ = 0L;
+      alreadyCheckAllAnswer_ = false;
+      finished_ = false;
+      belongCourseWorkId_ = 0L;
+      submitterId_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SubmittedCourseWorkSimpleInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              submittedCourseWorkId_ = input.readSInt64();
+              break;
+            }
+            case 17: {
+
+              createTime_ = input.readFixed64();
+              break;
+            }
+            case 25: {
+
+              updateTime_ = input.readFixed64();
+              break;
+            }
+            case 32: {
+
+              alreadyCheckAllAnswer_ = input.readBool();
+              break;
+            }
+            case 40: {
+
+              finished_ = input.readBool();
+              break;
+            }
+            case 48: {
+
+              belongCourseWorkId_ = input.readSInt64();
+              break;
+            }
+            case 56: {
+
+              submitterId_ = input.readSInt64();
+              break;
+            }
+            case 66: {
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder subBuilder = null;
+              if (submitterInfo_ != null) {
+                subBuilder = submitterInfo_.toBuilder();
+              }
+              submitterInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.UserInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(submitterInfo_);
+                submitterInfo_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_SubmittedCourseWorkSimpleInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_SubmittedCourseWorkSimpleInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.class, com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.Builder.class);
+    }
+
+    public static final int SUBMITTEDCOURSEWORKID_FIELD_NUMBER = 1;
+    private long submittedCourseWorkId_;
+    /**
+     * <code>sint64 submittedCourseWorkId = 1;</code>
+     */
+    public long getSubmittedCourseWorkId() {
+      return submittedCourseWorkId_;
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 2;
+    private long createTime_;
+    /**
+     * <code>fixed64 createTime = 2;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    public static final int UPDATETIME_FIELD_NUMBER = 3;
+    private long updateTime_;
+    /**
+     * <code>fixed64 updateTime = 3;</code>
+     */
+    public long getUpdateTime() {
+      return updateTime_;
+    }
+
+    public static final int ALREADYCHECKALLANSWER_FIELD_NUMBER = 4;
+    private boolean alreadyCheckAllAnswer_;
+    /**
+     * <code>bool alreadyCheckAllAnswer = 4;</code>
+     */
+    public boolean getAlreadyCheckAllAnswer() {
+      return alreadyCheckAllAnswer_;
+    }
+
+    public static final int FINISHED_FIELD_NUMBER = 5;
+    private boolean finished_;
+    /**
+     * <code>bool finished = 5;</code>
+     */
+    public boolean getFinished() {
+      return finished_;
+    }
+
+    public static final int BELONGCOURSEWORKID_FIELD_NUMBER = 6;
+    private long belongCourseWorkId_;
+    /**
+     * <code>sint64 belongCourseWorkId = 6;</code>
+     */
+    public long getBelongCourseWorkId() {
+      return belongCourseWorkId_;
+    }
+
+    public static final int SUBMITTERID_FIELD_NUMBER = 7;
+    private long submitterId_;
+    /**
+     * <code>sint64 submitterId = 7;</code>
+     */
+    public long getSubmitterId() {
+      return submitterId_;
+    }
+
+    public static final int SUBMITTERINFO_FIELD_NUMBER = 8;
+    private com.corkili.learningserver.generate.protobuf.Info.UserInfo submitterInfo_;
+    /**
+     * <code>.UserInfo submitterInfo = 8;</code>
+     */
+    public boolean hasSubmitterInfo() {
+      return submitterInfo_ != null;
+    }
+    /**
+     * <code>.UserInfo submitterInfo = 8;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo() {
+      return submitterInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+    }
+    /**
+     * <code>.UserInfo submitterInfo = 8;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder() {
+      return getSubmitterInfo();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (submittedCourseWorkId_ != 0L) {
+        output.writeSInt64(1, submittedCourseWorkId_);
+      }
+      if (createTime_ != 0L) {
+        output.writeFixed64(2, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        output.writeFixed64(3, updateTime_);
+      }
+      if (alreadyCheckAllAnswer_ != false) {
+        output.writeBool(4, alreadyCheckAllAnswer_);
+      }
+      if (finished_ != false) {
+        output.writeBool(5, finished_);
+      }
+      if (belongCourseWorkId_ != 0L) {
+        output.writeSInt64(6, belongCourseWorkId_);
+      }
+      if (submitterId_ != 0L) {
+        output.writeSInt64(7, submitterId_);
+      }
+      if (submitterInfo_ != null) {
+        output.writeMessage(8, getSubmitterInfo());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (submittedCourseWorkId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(1, submittedCourseWorkId_);
+      }
+      if (createTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(2, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(3, updateTime_);
+      }
+      if (alreadyCheckAllAnswer_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, alreadyCheckAllAnswer_);
+      }
+      if (finished_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, finished_);
+      }
+      if (belongCourseWorkId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(6, belongCourseWorkId_);
+      }
+      if (submitterId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(7, submitterId_);
+      }
+      if (submitterInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getSubmitterInfo());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo other = (com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo) obj;
+
+      boolean result = true;
+      result = result && (getSubmittedCourseWorkId()
+          == other.getSubmittedCourseWorkId());
+      result = result && (getCreateTime()
+          == other.getCreateTime());
+      result = result && (getUpdateTime()
+          == other.getUpdateTime());
+      result = result && (getAlreadyCheckAllAnswer()
+          == other.getAlreadyCheckAllAnswer());
+      result = result && (getFinished()
+          == other.getFinished());
+      result = result && (getBelongCourseWorkId()
+          == other.getBelongCourseWorkId());
+      result = result && (getSubmitterId()
+          == other.getSubmitterId());
+      result = result && (hasSubmitterInfo() == other.hasSubmitterInfo());
+      if (hasSubmitterInfo()) {
+        result = result && getSubmitterInfo()
+            .equals(other.getSubmitterInfo());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SUBMITTEDCOURSEWORKID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getSubmittedCourseWorkId());
+      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCreateTime());
+      hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getUpdateTime());
+      hash = (37 * hash) + ALREADYCHECKALLANSWER_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getAlreadyCheckAllAnswer());
+      hash = (37 * hash) + FINISHED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getFinished());
+      hash = (37 * hash) + BELONGCOURSEWORKID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getBelongCourseWorkId());
+      hash = (37 * hash) + SUBMITTERID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getSubmitterId());
+      if (hasSubmitterInfo()) {
+        hash = (37 * hash) + SUBMITTERINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getSubmitterInfo().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SubmittedCourseWorkSimpleInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:SubmittedCourseWorkSimpleInfo)
+        com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_SubmittedCourseWorkSimpleInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_SubmittedCourseWorkSimpleInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.class, com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        submittedCourseWorkId_ = 0L;
+
+        createTime_ = 0L;
+
+        updateTime_ = 0L;
+
+        alreadyCheckAllAnswer_ = false;
+
+        finished_ = false;
+
+        belongCourseWorkId_ = 0L;
+
+        submitterId_ = 0L;
+
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = null;
+        } else {
+          submitterInfo_ = null;
+          submitterInfoBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_SubmittedCourseWorkSimpleInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo build() {
+        com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo result = new com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo(this);
+        result.submittedCourseWorkId_ = submittedCourseWorkId_;
+        result.createTime_ = createTime_;
+        result.updateTime_ = updateTime_;
+        result.alreadyCheckAllAnswer_ = alreadyCheckAllAnswer_;
+        result.finished_ = finished_;
+        result.belongCourseWorkId_ = belongCourseWorkId_;
+        result.submitterId_ = submitterId_;
+        if (submitterInfoBuilder_ == null) {
+          result.submitterInfo_ = submitterInfo_;
+        } else {
+          result.submitterInfo_ = submitterInfoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo.getDefaultInstance()) return this;
+        if (other.getSubmittedCourseWorkId() != 0L) {
+          setSubmittedCourseWorkId(other.getSubmittedCourseWorkId());
+        }
+        if (other.getCreateTime() != 0L) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.getUpdateTime() != 0L) {
+          setUpdateTime(other.getUpdateTime());
+        }
+        if (other.getAlreadyCheckAllAnswer() != false) {
+          setAlreadyCheckAllAnswer(other.getAlreadyCheckAllAnswer());
+        }
+        if (other.getFinished() != false) {
+          setFinished(other.getFinished());
+        }
+        if (other.getBelongCourseWorkId() != 0L) {
+          setBelongCourseWorkId(other.getBelongCourseWorkId());
+        }
+        if (other.getSubmitterId() != 0L) {
+          setSubmitterId(other.getSubmitterId());
+        }
+        if (other.hasSubmitterInfo()) {
+          mergeSubmitterInfo(other.getSubmitterInfo());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long submittedCourseWorkId_ ;
+      /**
+       * <code>sint64 submittedCourseWorkId = 1;</code>
+       */
+      public long getSubmittedCourseWorkId() {
+        return submittedCourseWorkId_;
+      }
+      /**
+       * <code>sint64 submittedCourseWorkId = 1;</code>
+       */
+      public Builder setSubmittedCourseWorkId(long value) {
+        
+        submittedCourseWorkId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 submittedCourseWorkId = 1;</code>
+       */
+      public Builder clearSubmittedCourseWorkId() {
+        
+        submittedCourseWorkId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long createTime_ ;
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public Builder setCreateTime(long value) {
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long updateTime_ ;
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public long getUpdateTime() {
+        return updateTime_;
+      }
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public Builder setUpdateTime(long value) {
+        
+        updateTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public Builder clearUpdateTime() {
+        
+        updateTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean alreadyCheckAllAnswer_ ;
+      /**
+       * <code>bool alreadyCheckAllAnswer = 4;</code>
+       */
+      public boolean getAlreadyCheckAllAnswer() {
+        return alreadyCheckAllAnswer_;
+      }
+      /**
+       * <code>bool alreadyCheckAllAnswer = 4;</code>
+       */
+      public Builder setAlreadyCheckAllAnswer(boolean value) {
+        
+        alreadyCheckAllAnswer_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool alreadyCheckAllAnswer = 4;</code>
+       */
+      public Builder clearAlreadyCheckAllAnswer() {
+        
+        alreadyCheckAllAnswer_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean finished_ ;
+      /**
+       * <code>bool finished = 5;</code>
+       */
+      public boolean getFinished() {
+        return finished_;
+      }
+      /**
+       * <code>bool finished = 5;</code>
+       */
+      public Builder setFinished(boolean value) {
+        
+        finished_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool finished = 5;</code>
+       */
+      public Builder clearFinished() {
+        
+        finished_ = false;
+        onChanged();
+        return this;
+      }
+
       private long belongCourseWorkId_ ;
       /**
        * <code>sint64 belongCourseWorkId = 6;</code>
@@ -15107,6 +15967,123 @@ public final class Info {
         onChanged();
         return this;
       }
+
+      private com.corkili.learningserver.generate.protobuf.Info.UserInfo submitterInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> submitterInfoBuilder_;
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public boolean hasSubmitterInfo() {
+        return submitterInfoBuilder_ != null || submitterInfo_ != null;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo() {
+        if (submitterInfoBuilder_ == null) {
+          return submitterInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+        } else {
+          return submitterInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public Builder setSubmitterInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (submitterInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          submitterInfo_ = value;
+          onChanged();
+        } else {
+          submitterInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public Builder setSubmitterInfo(
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder builderForValue) {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          submitterInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public Builder mergeSubmitterInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (submitterInfoBuilder_ == null) {
+          if (submitterInfo_ != null) {
+            submitterInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.newBuilder(submitterInfo_).mergeFrom(value).buildPartial();
+          } else {
+            submitterInfo_ = value;
+          }
+          onChanged();
+        } else {
+          submitterInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public Builder clearSubmitterInfo() {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = null;
+          onChanged();
+        } else {
+          submitterInfo_ = null;
+          submitterInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder getSubmitterInfoBuilder() {
+        
+        onChanged();
+        return getSubmitterInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder() {
+        if (submitterInfoBuilder_ != null) {
+          return submitterInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return submitterInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+        }
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> 
+          getSubmitterInfoFieldBuilder() {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder>(
+                  getSubmitterInfo(),
+                  getParentForChildren(),
+                  isClean());
+          submitterInfo_ = null;
+        }
+        return submitterInfoBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -15120,41 +16097,41 @@ public final class Info {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:SubmittedCourseWorkInfo)
+      // @@protoc_insertion_point(builder_scope:SubmittedCourseWorkSimpleInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:SubmittedCourseWorkInfo)
-    private static final com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:SubmittedCourseWorkSimpleInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo();
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo();
     }
 
-    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo getDefaultInstance() {
+    public static com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SubmittedCourseWorkInfo>
-        PARSER = new com.google.protobuf.AbstractParser<SubmittedCourseWorkInfo>() {
+    private static final com.google.protobuf.Parser<SubmittedCourseWorkSimpleInfo>
+        PARSER = new com.google.protobuf.AbstractParser<SubmittedCourseWorkSimpleInfo>() {
       @java.lang.Override
-      public SubmittedCourseWorkInfo parsePartialFrom(
+      public SubmittedCourseWorkSimpleInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SubmittedCourseWorkInfo(input, extensionRegistry);
+        return new SubmittedCourseWorkSimpleInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<SubmittedCourseWorkInfo> parser() {
+    public static com.google.protobuf.Parser<SubmittedCourseWorkSimpleInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SubmittedCourseWorkInfo> getParserForType() {
+    public com.google.protobuf.Parser<SubmittedCourseWorkSimpleInfo> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo getDefaultInstanceForType() {
+    public com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -20687,14 +21664,32 @@ public final class Info {
     double getTotalScore();
 
     /**
-     * <code>sint64 belongExamId = 7;</code>
+     * <code>bool finished = 7;</code>
+     */
+    boolean getFinished();
+
+    /**
+     * <code>sint64 belongExamId = 8;</code>
      */
     long getBelongExamId();
 
     /**
-     * <code>sint64 submitterId = 8;</code>
+     * <code>sint64 submitterId = 9;</code>
      */
     long getSubmitterId();
+
+    /**
+     * <code>.UserInfo submitterInfo = 10;</code>
+     */
+    boolean hasSubmitterInfo();
+    /**
+     * <code>.UserInfo submitterInfo = 10;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo();
+    /**
+     * <code>.UserInfo submitterInfo = 10;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder();
   }
   /**
    * Protobuf type {@code SubmittedExamInfo}
@@ -20714,6 +21709,7 @@ public final class Info {
       updateTime_ = 0L;
       alreadyCheckAllAnswer_ = false;
       totalScore_ = 0D;
+      finished_ = false;
       belongExamId_ = 0L;
       submitterId_ = 0L;
     }
@@ -20782,12 +21778,30 @@ public final class Info {
             }
             case 56: {
 
-              belongExamId_ = input.readSInt64();
+              finished_ = input.readBool();
               break;
             }
             case 64: {
 
+              belongExamId_ = input.readSInt64();
+              break;
+            }
+            case 72: {
+
               submitterId_ = input.readSInt64();
+              break;
+            }
+            case 82: {
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder subBuilder = null;
+              if (submitterInfo_ != null) {
+                subBuilder = submitterInfo_.toBuilder();
+              }
+              submitterInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.UserInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(submitterInfo_);
+                submitterInfo_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -20956,22 +21970,52 @@ public final class Info {
       return totalScore_;
     }
 
-    public static final int BELONGEXAMID_FIELD_NUMBER = 7;
+    public static final int FINISHED_FIELD_NUMBER = 7;
+    private boolean finished_;
+    /**
+     * <code>bool finished = 7;</code>
+     */
+    public boolean getFinished() {
+      return finished_;
+    }
+
+    public static final int BELONGEXAMID_FIELD_NUMBER = 8;
     private long belongExamId_;
     /**
-     * <code>sint64 belongExamId = 7;</code>
+     * <code>sint64 belongExamId = 8;</code>
      */
     public long getBelongExamId() {
       return belongExamId_;
     }
 
-    public static final int SUBMITTERID_FIELD_NUMBER = 8;
+    public static final int SUBMITTERID_FIELD_NUMBER = 9;
     private long submitterId_;
     /**
-     * <code>sint64 submitterId = 8;</code>
+     * <code>sint64 submitterId = 9;</code>
      */
     public long getSubmitterId() {
       return submitterId_;
+    }
+
+    public static final int SUBMITTERINFO_FIELD_NUMBER = 10;
+    private com.corkili.learningserver.generate.protobuf.Info.UserInfo submitterInfo_;
+    /**
+     * <code>.UserInfo submitterInfo = 10;</code>
+     */
+    public boolean hasSubmitterInfo() {
+      return submitterInfo_ != null;
+    }
+    /**
+     * <code>.UserInfo submitterInfo = 10;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo() {
+      return submitterInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+    }
+    /**
+     * <code>.UserInfo submitterInfo = 10;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder() {
+      return getSubmitterInfo();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -21009,11 +22053,17 @@ public final class Info {
       if (totalScore_ != 0D) {
         output.writeDouble(6, totalScore_);
       }
+      if (finished_ != false) {
+        output.writeBool(7, finished_);
+      }
       if (belongExamId_ != 0L) {
-        output.writeSInt64(7, belongExamId_);
+        output.writeSInt64(8, belongExamId_);
       }
       if (submitterId_ != 0L) {
-        output.writeSInt64(8, submitterId_);
+        output.writeSInt64(9, submitterId_);
+      }
+      if (submitterInfo_ != null) {
+        output.writeMessage(10, getSubmitterInfo());
       }
       unknownFields.writeTo(output);
     }
@@ -21054,13 +22104,21 @@ public final class Info {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(6, totalScore_);
       }
+      if (finished_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, finished_);
+      }
       if (belongExamId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(7, belongExamId_);
+          .computeSInt64Size(8, belongExamId_);
       }
       if (submitterId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(8, submitterId_);
+          .computeSInt64Size(9, submitterId_);
+      }
+      if (submitterInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, getSubmitterInfo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -21092,10 +22150,17 @@ public final class Info {
           java.lang.Double.doubleToLongBits(getTotalScore())
           == java.lang.Double.doubleToLongBits(
               other.getTotalScore()));
+      result = result && (getFinished()
+          == other.getFinished());
       result = result && (getBelongExamId()
           == other.getBelongExamId());
       result = result && (getSubmitterId()
           == other.getSubmitterId());
+      result = result && (hasSubmitterInfo() == other.hasSubmitterInfo());
+      if (hasSubmitterInfo()) {
+        result = result && getSubmitterInfo()
+            .equals(other.getSubmitterInfo());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -21126,12 +22191,19 @@ public final class Info {
       hash = (37 * hash) + TOTALSCORE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getTotalScore()));
+      hash = (37 * hash) + FINISHED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getFinished());
       hash = (37 * hash) + BELONGEXAMID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getBelongExamId());
       hash = (37 * hash) + SUBMITTERID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSubmitterId());
+      if (hasSubmitterInfo()) {
+        hash = (37 * hash) + SUBMITTERINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getSubmitterInfo().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -21298,10 +22370,18 @@ public final class Info {
 
         totalScore_ = 0D;
 
+        finished_ = false;
+
         belongExamId_ = 0L;
 
         submitterId_ = 0L;
 
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = null;
+        } else {
+          submitterInfo_ = null;
+          submitterInfoBuilder_ = null;
+        }
         return this;
       }
 
@@ -21337,8 +22417,14 @@ public final class Info {
         result.submittedAnswer_.makeImmutable();
         result.alreadyCheckAllAnswer_ = alreadyCheckAllAnswer_;
         result.totalScore_ = totalScore_;
+        result.finished_ = finished_;
         result.belongExamId_ = belongExamId_;
         result.submitterId_ = submitterId_;
+        if (submitterInfoBuilder_ == null) {
+          result.submitterInfo_ = submitterInfo_;
+        } else {
+          result.submitterInfo_ = submitterInfoBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -21405,11 +22491,17 @@ public final class Info {
         if (other.getTotalScore() != 0D) {
           setTotalScore(other.getTotalScore());
         }
+        if (other.getFinished() != false) {
+          setFinished(other.getFinished());
+        }
         if (other.getBelongExamId() != 0L) {
           setBelongExamId(other.getBelongExamId());
         }
         if (other.getSubmitterId() != 0L) {
           setSubmitterId(other.getSubmitterId());
+        }
+        if (other.hasSubmitterInfo()) {
+          mergeSubmitterInfo(other.getSubmitterInfo());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -21694,15 +22786,41 @@ public final class Info {
         return this;
       }
 
+      private boolean finished_ ;
+      /**
+       * <code>bool finished = 7;</code>
+       */
+      public boolean getFinished() {
+        return finished_;
+      }
+      /**
+       * <code>bool finished = 7;</code>
+       */
+      public Builder setFinished(boolean value) {
+        
+        finished_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool finished = 7;</code>
+       */
+      public Builder clearFinished() {
+        
+        finished_ = false;
+        onChanged();
+        return this;
+      }
+
       private long belongExamId_ ;
       /**
-       * <code>sint64 belongExamId = 7;</code>
+       * <code>sint64 belongExamId = 8;</code>
        */
       public long getBelongExamId() {
         return belongExamId_;
       }
       /**
-       * <code>sint64 belongExamId = 7;</code>
+       * <code>sint64 belongExamId = 8;</code>
        */
       public Builder setBelongExamId(long value) {
         
@@ -21711,7 +22829,7 @@ public final class Info {
         return this;
       }
       /**
-       * <code>sint64 belongExamId = 7;</code>
+       * <code>sint64 belongExamId = 8;</code>
        */
       public Builder clearBelongExamId() {
         
@@ -21722,13 +22840,13 @@ public final class Info {
 
       private long submitterId_ ;
       /**
-       * <code>sint64 submitterId = 8;</code>
+       * <code>sint64 submitterId = 9;</code>
        */
       public long getSubmitterId() {
         return submitterId_;
       }
       /**
-       * <code>sint64 submitterId = 8;</code>
+       * <code>sint64 submitterId = 9;</code>
        */
       public Builder setSubmitterId(long value) {
         
@@ -21737,13 +22855,130 @@ public final class Info {
         return this;
       }
       /**
-       * <code>sint64 submitterId = 8;</code>
+       * <code>sint64 submitterId = 9;</code>
        */
       public Builder clearSubmitterId() {
         
         submitterId_ = 0L;
         onChanged();
         return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.UserInfo submitterInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> submitterInfoBuilder_;
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public boolean hasSubmitterInfo() {
+        return submitterInfoBuilder_ != null || submitterInfo_ != null;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubmitterInfo() {
+        if (submitterInfoBuilder_ == null) {
+          return submitterInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+        } else {
+          return submitterInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public Builder setSubmitterInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (submitterInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          submitterInfo_ = value;
+          onChanged();
+        } else {
+          submitterInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public Builder setSubmitterInfo(
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder builderForValue) {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          submitterInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public Builder mergeSubmitterInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (submitterInfoBuilder_ == null) {
+          if (submitterInfo_ != null) {
+            submitterInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.newBuilder(submitterInfo_).mergeFrom(value).buildPartial();
+          } else {
+            submitterInfo_ = value;
+          }
+          onChanged();
+        } else {
+          submitterInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public Builder clearSubmitterInfo() {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfo_ = null;
+          onChanged();
+        } else {
+          submitterInfo_ = null;
+          submitterInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder getSubmitterInfoBuilder() {
+        
+        onChanged();
+        return getSubmitterInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubmitterInfoOrBuilder() {
+        if (submitterInfoBuilder_ != null) {
+          return submitterInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return submitterInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : submitterInfo_;
+        }
+      }
+      /**
+       * <code>.UserInfo submitterInfo = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> 
+          getSubmitterInfoFieldBuilder() {
+        if (submitterInfoBuilder_ == null) {
+          submitterInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder>(
+                  getSubmitterInfo(),
+                  getParentForChildren(),
+                  isClean());
+          submitterInfo_ = null;
+        }
+        return submitterInfoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -27121,38 +28356,22 @@ public final class Info {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     java.lang.String getText();
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     com.google.protobuf.ByteString
         getTextBytes();
-
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> 
-        getImageList();
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index);
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    int getImageCount();
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-        getImageOrBuilderList();
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
-        int index);
   }
   /**
    * Protobuf type {@code EssaySubmittedAnswer}
@@ -27168,7 +28387,6 @@ public final class Info {
     }
     private EssaySubmittedAnswer() {
       text_ = "";
-      image_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -27201,15 +28419,6 @@ public final class Info {
               text_ = s;
               break;
             }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                image_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.Image>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              image_.add(
-                  input.readMessage(com.corkili.learningserver.generate.protobuf.Info.Image.parser(), extensionRegistry));
-              break;
-            }
             default: {
               if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -27225,9 +28434,6 @@ public final class Info {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          image_ = java.util.Collections.unmodifiableList(image_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -27245,10 +28451,13 @@ public final class Info {
               com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer.class, com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer.Builder.class);
     }
 
-    private int bitField0_;
     public static final int TEXT_FIELD_NUMBER = 1;
     private volatile java.lang.Object text_;
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     public java.lang.String getText() {
@@ -27264,6 +28473,10 @@ public final class Info {
       }
     }
     /**
+     * <pre>
+     *    repeated Image image = 2;
+     * </pre>
+     *
      * <code>string text = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -27278,41 +28491,6 @@ public final class Info {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
-    }
-
-    public static final int IMAGE_FIELD_NUMBER = 2;
-    private java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> image_;
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> getImageList() {
-      return image_;
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-        getImageOrBuilderList() {
-      return image_;
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public int getImageCount() {
-      return image_.size();
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index) {
-      return image_.get(index);
-    }
-    /**
-     * <code>repeated .Image image = 2;</code>
-     */
-    public com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
-        int index) {
-      return image_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -27332,9 +28510,6 @@ public final class Info {
       if (!getTextBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
       }
-      for (int i = 0; i < image_.size(); i++) {
-        output.writeMessage(2, image_.get(i));
-      }
       unknownFields.writeTo(output);
     }
 
@@ -27346,10 +28521,6 @@ public final class Info {
       size = 0;
       if (!getTextBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
-      }
-      for (int i = 0; i < image_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, image_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -27369,8 +28540,6 @@ public final class Info {
       boolean result = true;
       result = result && getText()
           .equals(other.getText());
-      result = result && getImageList()
-          .equals(other.getImageList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -27384,10 +28553,6 @@ public final class Info {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TEXT_FIELD_NUMBER;
       hash = (53 * hash) + getText().hashCode();
-      if (getImageCount() > 0) {
-        hash = (37 * hash) + IMAGE_FIELD_NUMBER;
-        hash = (53 * hash) + getImageList().hashCode();
-      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -27516,7 +28681,6 @@ public final class Info {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getImageFieldBuilder();
         }
       }
       @java.lang.Override
@@ -27524,12 +28688,6 @@ public final class Info {
         super.clear();
         text_ = "";
 
-        if (imageBuilder_ == null) {
-          image_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          imageBuilder_.clear();
-        }
         return this;
       }
 
@@ -27556,19 +28714,7 @@ public final class Info {
       @java.lang.Override
       public com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer buildPartial() {
         com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer result = new com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.text_ = text_;
-        if (imageBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            image_ = java.util.Collections.unmodifiableList(image_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.image_ = image_;
-        } else {
-          result.image_ = imageBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -27621,32 +28767,6 @@ public final class Info {
           text_ = other.text_;
           onChanged();
         }
-        if (imageBuilder_ == null) {
-          if (!other.image_.isEmpty()) {
-            if (image_.isEmpty()) {
-              image_ = other.image_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureImageIsMutable();
-              image_.addAll(other.image_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.image_.isEmpty()) {
-            if (imageBuilder_.isEmpty()) {
-              imageBuilder_.dispose();
-              imageBuilder_ = null;
-              image_ = other.image_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              imageBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getImageFieldBuilder() : null;
-            } else {
-              imageBuilder_.addAllMessages(other.image_);
-            }
-          }
-        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -27675,10 +28795,13 @@ public final class Info {
         }
         return this;
       }
-      private int bitField0_;
 
       private java.lang.Object text_ = "";
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public java.lang.String getText() {
@@ -27694,6 +28817,10 @@ public final class Info {
         }
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -27710,6 +28837,10 @@ public final class Info {
         }
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public Builder setText(
@@ -27723,6 +28854,10 @@ public final class Info {
         return this;
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public Builder clearText() {
@@ -27732,6 +28867,10 @@ public final class Info {
         return this;
       }
       /**
+       * <pre>
+       *    repeated Image image = 2;
+       * </pre>
+       *
        * <code>string text = 1;</code>
        */
       public Builder setTextBytes(
@@ -27744,246 +28883,6 @@ public final class Info {
         text_ = value;
         onChanged();
         return this;
-      }
-
-      private java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> image_ =
-        java.util.Collections.emptyList();
-      private void ensureImageIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          image_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.Image>(image_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> imageBuilder_;
-
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image> getImageList() {
-        if (imageBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(image_);
-        } else {
-          return imageBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public int getImageCount() {
-        if (imageBuilder_ == null) {
-          return image_.size();
-        } else {
-          return imageBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image getImage(int index) {
-        if (imageBuilder_ == null) {
-          return image_.get(index);
-        } else {
-          return imageBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder setImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image value) {
-        if (imageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureImageIsMutable();
-          image_.set(index, value);
-          onChanged();
-        } else {
-          imageBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder setImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          imageBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(com.corkili.learningserver.generate.protobuf.Info.Image value) {
-        if (imageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureImageIsMutable();
-          image_.add(value);
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image value) {
-        if (imageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureImageIsMutable();
-          image_.add(index, value);
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(
-          com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.add(builderForValue.build());
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addImage(
-          int index, com.corkili.learningserver.generate.protobuf.Info.Image.Builder builderForValue) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          imageBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder addAllImage(
-          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.Image> values) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, image_);
-          onChanged();
-        } else {
-          imageBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder clearImage() {
-        if (imageBuilder_ == null) {
-          image_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          imageBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public Builder removeImage(int index) {
-        if (imageBuilder_ == null) {
-          ensureImageIsMutable();
-          image_.remove(index);
-          onChanged();
-        } else {
-          imageBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image.Builder getImageBuilder(
-          int index) {
-        return getImageFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder getImageOrBuilder(
-          int index) {
-        if (imageBuilder_ == null) {
-          return image_.get(index);  } else {
-          return imageBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-           getImageOrBuilderList() {
-        if (imageBuilder_ != null) {
-          return imageBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(image_);
-        }
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image.Builder addImageBuilder() {
-        return getImageFieldBuilder().addBuilder(
-            com.corkili.learningserver.generate.protobuf.Info.Image.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public com.corkili.learningserver.generate.protobuf.Info.Image.Builder addImageBuilder(
-          int index) {
-        return getImageFieldBuilder().addBuilder(
-            index, com.corkili.learningserver.generate.protobuf.Info.Image.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Image image = 2;</code>
-       */
-      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.Image.Builder> 
-           getImageBuilderList() {
-        return getImageFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder> 
-          getImageFieldBuilder() {
-        if (imageBuilder_ == null) {
-          imageBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.corkili.learningserver.generate.protobuf.Info.Image, com.corkili.learningserver.generate.protobuf.Info.Image.Builder, com.corkili.learningserver.generate.protobuf.Info.ImageOrBuilder>(
-                  image_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          image_ = null;
-        }
-        return imageBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -28129,6 +29028,11 @@ public final class Info {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_SubmittedCourseWorkInfo_SubmittedAnswerEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SubmittedCourseWorkSimpleInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_SubmittedCourseWorkSimpleInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_CourseWorkSubmittedAnswer_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -28260,88 +29164,95 @@ public final class Info {
       "\005\022#\n\005value\030\002 \001(\0132\024.SingleFillingAnswer:\002" +
       "8\001\"$\n\022SingleChoiceAnswer\022\016\n\006choice\030\001 \001(\005" +
       "\"B\n\024MultipleChoiceAnswer\022\016\n\006choice\030\001 \003(\005" +
-      "\022\032\n\022selectAllIsCorrect\030\002 \001(\010\"2\n\013EssayAns" +
-      "wer\022\014\n\004text\030\001 \001(\t\022\025\n\005image\030\002 \003(\0132\006.Image" +
-      "\"\354\001\n\016CourseWorkInfo\022\024\n\014courseWorkId\030\001 \001(" +
-      "\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(" +
-      "\006\022\014\n\004open\030\004 \001(\010\022\026\n\016courseWorkName\030\005 \001(\t\022" +
-      "\026\n\016belongCourseId\030\006 \001(\022\022\023\n\013hasDeadline\030\007" +
-      " \001(\010\022\020\n\010deadline\030\010 \001(\006\0227\n\026courseWorkQues" +
-      "tionInfo\030\t \003(\0132\027.CourseWorkQuestionInfo\"" +
-      "\221\001\n\024CourseWorkSimpleInfo\022\024\n\014courseWorkId" +
-      "\030\001 \001(\022\022\014\n\004open\030\002 \001(\010\022\026\n\016courseWorkName\030\003" +
-      " \001(\t\022\026\n\016belongCourseId\030\004 \001(\022\022\023\n\013hasDeadl" +
-      "ine\030\005 \001(\010\022\020\n\010deadline\030\006 \001(\006\"\235\001\n\026CourseWo" +
-      "rkQuestionInfo\022\034\n\024courseWorkQuestionId\030\001" +
-      " \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003" +
-      " \001(\006\022\r\n\005index\030\004 \001(\005\022\032\n\022belongCourseWorkI" +
-      "d\030\005 \001(\022\022\022\n\nquestionId\030\006 \001(\022\"\314\002\n\027Submitte" +
-      "dCourseWorkInfo\022\035\n\025submittedCourseWorkId" +
-      "\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime" +
-      "\030\003 \001(\006\022F\n\017submittedAnswer\030\004 \003(\0132-.Submit" +
-      "tedCourseWorkInfo.SubmittedAnswerEntry\022\035" +
-      "\n\025alreadyCheckAllAnswer\030\005 \001(\010\022\032\n\022belongC" +
-      "ourseWorkId\030\006 \001(\022\022\023\n\013submitterId\030\007 \001(\022\032R" +
-      "\n\024SubmittedAnswerEntry\022\013\n\003key\030\001 \001(\005\022)\n\005v" +
-      "alue\030\002 \001(\0132\032.CourseWorkSubmittedAnswer:\002" +
-      "8\001\"r\n\031CourseWorkSubmittedAnswer\022\025\n\rquest" +
-      "ionIndex\030\001 \001(\005\022)\n\017submittedAnswer\030\002 \001(\0132" +
-      "\020.SubmittedAnswer\022\023\n\013checkStatus\030\003 \001(\005\"\317" +
-      "\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022\022\n\ncreateTim" +
-      "e\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\020\n\010examName\030" +
-      "\004 \001(\t\022\026\n\016belongCourseId\030\005 \001(\022\022\021\n\tstartTi" +
-      "me\030\006 \001(\006\022\017\n\007endTime\030\007 \001(\006\022\020\n\010duration\030\010 " +
-      "\001(\005\022+\n\020examQuestionInfo\030\t \003(\0132\021.ExamQues" +
-      "tionInfo\"\200\001\n\016ExamSimpleInfo\022\016\n\006examId\030\001 " +
-      "\001(\022\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCourseId\030" +
-      "\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTime\030\005 \001(" +
-      "\006\022\020\n\010duration\030\006 \001(\005\"\242\001\n\020ExamQuestionInfo" +
-      "\022\026\n\016examQuestionId\030\001 \001(\022\022\022\n\ncreateTime\030\002" +
-      " \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\r\n\005index\030\004 \001(\005\022" +
-      "\024\n\014belongExamId\030\005 \001(\022\022\022\n\nquestionId\030\006 \001(" +
-      "\022\022\025\n\005score\030\007 \001(\0132\006.Score\"\305\001\n\005Score\022\025\n\013si" +
-      "ngleScore\030\001 \001(\001H\000\022-\n\rmultipleScore\030\002 \001(\013" +
-      "2\024.Score.MultipleScoreH\000\032m\n\rMultipleScor" +
-      "e\022.\n\005score\030\001 \003(\0132\037.Score.MultipleScore.S" +
-      "coreEntry\032,\n\nScoreEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005" +
-      "value\030\002 \001(\001:\0028\001B\007\n\005score\"\302\002\n\021SubmittedEx" +
-      "amInfo\022\027\n\017submittedExamId\030\001 \001(\022\022\022\n\ncreat" +
-      "eTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022@\n\017submi" +
-      "ttedAnswer\030\004 \003(\0132\'.SubmittedExamInfo.Sub" +
-      "mittedAnswerEntry\022\035\n\025alreadyCheckAllAnsw" +
-      "er\030\005 \001(\010\022\022\n\ntotalScore\030\006 \001(\001\022\024\n\014belongEx" +
-      "amId\030\007 \001(\022\022\023\n\013submitterId\030\010 \001(\022\032L\n\024Submi" +
-      "ttedAnswerEntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 " +
-      "\001(\0132\024.ExamSubmittedAnswer:\0028\001\"f\n\023ExamSub" +
-      "mittedAnswer\022\025\n\rquestionIndex\030\001 \001(\005\022)\n\017s" +
-      "ubmittedAnswer\030\002 \001(\0132\020.SubmittedAnswer\022\r" +
-      "\n\005score\030\003 \001(\001\"\373\002\n\017SubmittedAnswer\022E\n\034sin" +
-      "gleFillingSubmittedAnswer\030\001 \001(\0132\035.Single" +
-      "FillingSubmittedAnswerH\000\022I\n\036multipleFill" +
-      "ingSubmittedAnswer\030\002 \001(\0132\037.MultipleFilli" +
-      "ngSubmittedAnswerH\000\022C\n\033singleChoiceSubmi" +
-      "ttedAnswer\030\003 \001(\0132\034.SingleChoiceSubmitted" +
-      "AnswerH\000\022G\n\035multipleChoiceSubmittedAnswe" +
-      "r\030\004 \001(\0132\036.MultipleChoiceSubmittedAnswerH" +
-      "\000\0225\n\024essaySubmittedAnswer\030\005 \001(\0132\025.EssayS" +
-      "ubmittedAnswerH\000B\021\n\017submittedAnswer\".\n\034S" +
-      "ingleFillingSubmittedAnswer\022\016\n\006answer\030\001 " +
-      "\001(\t\"\365\001\n\036MultipleFillingSubmittedAnswer\022;" +
-      "\n\006answer\030\001 \003(\0132+.MultipleFillingSubmitte" +
-      "dAnswer.AnswerEntry\032A\n\004Pair\022\r\n\005index\030\001 \001" +
-      "(\005\022\016\n\006answer\030\002 \001(\t\022\032\n\022scoreOrCheckStatus" +
-      "\030\003 \001(\001\032S\n\013AnswerEntry\022\013\n\003key\030\001 \001(\005\0223\n\005va" +
-      "lue\030\002 \001(\0132$.MultipleFillingSubmittedAnsw" +
-      "er.Pair:\0028\001\"-\n\033SingleChoiceSubmittedAnsw" +
-      "er\022\016\n\006choice\030\001 \001(\005\"/\n\035MultipleChoiceSubm" +
-      "ittedAnswer\022\016\n\006choice\030\001 \003(\005\";\n\024EssaySubm" +
-      "ittedAnswer\022\014\n\004text\030\001 \001(\t\022\025\n\005image\030\002 \003(\013" +
-      "2\006.Image*$\n\010UserType\022\013\n\007Teacher\020\000\022\013\n\007Stu" +
-      "dent\020\001*g\n\014QuestionType\022\021\n\rSingleFilling\020" +
-      "\000\022\023\n\017MultipleFilling\020\001\022\020\n\014SingleChoice\020\002" +
-      "\022\022\n\016MultipleChoice\020\003\022\t\n\005Essay\020\004B4\n,com.c" +
-      "orkili.learningserver.generate.protobufB" +
-      "\004Infob\006proto3"
+      "\022\032\n\022selectAllIsCorrect\030\002 \001(\010\"\033\n\013EssayAns" +
+      "wer\022\014\n\004text\030\001 \001(\t\"\354\001\n\016CourseWorkInfo\022\024\n\014" +
+      "courseWorkId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022" +
+      "\n\nupdateTime\030\003 \001(\006\022\014\n\004open\030\004 \001(\010\022\026\n\016cour" +
+      "seWorkName\030\005 \001(\t\022\026\n\016belongCourseId\030\006 \001(\022" +
+      "\022\023\n\013hasDeadline\030\007 \001(\010\022\020\n\010deadline\030\010 \001(\006\022" +
+      "7\n\026courseWorkQuestionInfo\030\t \003(\0132\027.Course" +
+      "WorkQuestionInfo\"\221\001\n\024CourseWorkSimpleInf" +
+      "o\022\024\n\014courseWorkId\030\001 \001(\022\022\014\n\004open\030\002 \001(\010\022\026\n" +
+      "\016courseWorkName\030\003 \001(\t\022\026\n\016belongCourseId\030" +
+      "\004 \001(\022\022\023\n\013hasDeadline\030\005 \001(\010\022\020\n\010deadline\030\006" +
+      " \001(\006\"\235\001\n\026CourseWorkQuestionInfo\022\034\n\024cours" +
+      "eWorkQuestionId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(" +
+      "\006\022\022\n\nupdateTime\030\003 \001(\006\022\r\n\005index\030\004 \001(\005\022\032\n\022" +
+      "belongCourseWorkId\030\005 \001(\022\022\022\n\nquestionId\030\006" +
+      " \001(\022\"\200\003\n\027SubmittedCourseWorkInfo\022\035\n\025subm" +
+      "ittedCourseWorkId\030\001 \001(\022\022\022\n\ncreateTime\030\002 " +
+      "\001(\006\022\022\n\nupdateTime\030\003 \001(\006\022F\n\017submittedAnsw" +
+      "er\030\004 \003(\0132-.SubmittedCourseWorkInfo.Submi" +
+      "ttedAnswerEntry\022\035\n\025alreadyCheckAllAnswer" +
+      "\030\005 \001(\010\022\020\n\010finished\030\006 \001(\010\022\032\n\022belongCourse" +
+      "WorkId\030\007 \001(\022\022\023\n\013submitterId\030\010 \001(\022\022 \n\rsub" +
+      "mitterInfo\030\t \001(\0132\t.UserInfo\032R\n\024Submitted" +
+      "AnswerEntry\022\013\n\003key\030\001 \001(\005\022)\n\005value\030\002 \001(\0132" +
+      "\032.CourseWorkSubmittedAnswer:\0028\001\"\352\001\n\035Subm" +
+      "ittedCourseWorkSimpleInfo\022\035\n\025submittedCo" +
+      "urseWorkId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\n" +
+      "updateTime\030\003 \001(\006\022\035\n\025alreadyCheckAllAnswe" +
+      "r\030\004 \001(\010\022\020\n\010finished\030\005 \001(\010\022\032\n\022belongCours" +
+      "eWorkId\030\006 \001(\022\022\023\n\013submitterId\030\007 \001(\022\022 \n\rsu" +
+      "bmitterInfo\030\010 \001(\0132\t.UserInfo\"r\n\031CourseWo" +
+      "rkSubmittedAnswer\022\025\n\rquestionIndex\030\001 \001(\005" +
+      "\022)\n\017submittedAnswer\030\002 \001(\0132\020.SubmittedAns" +
+      "wer\022\023\n\013checkStatus\030\003 \001(\005\"\317\001\n\010ExamInfo\022\016\n" +
+      "\006examId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupd" +
+      "ateTime\030\003 \001(\006\022\020\n\010examName\030\004 \001(\t\022\026\n\016belon" +
+      "gCourseId\030\005 \001(\022\022\021\n\tstartTime\030\006 \001(\006\022\017\n\007en" +
+      "dTime\030\007 \001(\006\022\020\n\010duration\030\010 \001(\005\022+\n\020examQue" +
+      "stionInfo\030\t \003(\0132\021.ExamQuestionInfo\"\200\001\n\016E" +
+      "xamSimpleInfo\022\016\n\006examId\030\001 \001(\022\022\020\n\010examNam" +
+      "e\030\002 \001(\t\022\026\n\016belongCourseId\030\003 \001(\022\022\021\n\tstart" +
+      "Time\030\004 \001(\006\022\017\n\007endTime\030\005 \001(\006\022\020\n\010duration\030" +
+      "\006 \001(\005\"\242\001\n\020ExamQuestionInfo\022\026\n\016examQuesti" +
+      "onId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdate" +
+      "Time\030\003 \001(\006\022\r\n\005index\030\004 \001(\005\022\024\n\014belongExamI" +
+      "d\030\005 \001(\022\022\022\n\nquestionId\030\006 \001(\022\022\025\n\005score\030\007 \001" +
+      "(\0132\006.Score\"\305\001\n\005Score\022\025\n\013singleScore\030\001 \001(" +
+      "\001H\000\022-\n\rmultipleScore\030\002 \001(\0132\024.Score.Multi" +
+      "pleScoreH\000\032m\n\rMultipleScore\022.\n\005score\030\001 \003" +
+      "(\0132\037.Score.MultipleScore.ScoreEntry\032,\n\nS" +
+      "coreEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028" +
+      "\001B\007\n\005score\"\366\002\n\021SubmittedExamInfo\022\027\n\017subm" +
+      "ittedExamId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n" +
+      "\nupdateTime\030\003 \001(\006\022@\n\017submittedAnswer\030\004 \003" +
+      "(\0132\'.SubmittedExamInfo.SubmittedAnswerEn" +
+      "try\022\035\n\025alreadyCheckAllAnswer\030\005 \001(\010\022\022\n\nto" +
+      "talScore\030\006 \001(\001\022\020\n\010finished\030\007 \001(\010\022\024\n\014belo" +
+      "ngExamId\030\010 \001(\022\022\023\n\013submitterId\030\t \001(\022\022 \n\rs" +
+      "ubmitterInfo\030\n \001(\0132\t.UserInfo\032L\n\024Submitt" +
+      "edAnswerEntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(" +
+      "\0132\024.ExamSubmittedAnswer:\0028\001\"f\n\023ExamSubmi" +
+      "ttedAnswer\022\025\n\rquestionIndex\030\001 \001(\005\022)\n\017sub" +
+      "mittedAnswer\030\002 \001(\0132\020.SubmittedAnswer\022\r\n\005" +
+      "score\030\003 \001(\001\"\373\002\n\017SubmittedAnswer\022E\n\034singl" +
+      "eFillingSubmittedAnswer\030\001 \001(\0132\035.SingleFi" +
+      "llingSubmittedAnswerH\000\022I\n\036multipleFillin" +
+      "gSubmittedAnswer\030\002 \001(\0132\037.MultipleFilling" +
+      "SubmittedAnswerH\000\022C\n\033singleChoiceSubmitt" +
+      "edAnswer\030\003 \001(\0132\034.SingleChoiceSubmittedAn" +
+      "swerH\000\022G\n\035multipleChoiceSubmittedAnswer\030" +
+      "\004 \001(\0132\036.MultipleChoiceSubmittedAnswerH\000\022" +
+      "5\n\024essaySubmittedAnswer\030\005 \001(\0132\025.EssaySub" +
+      "mittedAnswerH\000B\021\n\017submittedAnswer\".\n\034Sin" +
+      "gleFillingSubmittedAnswer\022\016\n\006answer\030\001 \001(" +
+      "\t\"\365\001\n\036MultipleFillingSubmittedAnswer\022;\n\006" +
+      "answer\030\001 \003(\0132+.MultipleFillingSubmittedA" +
+      "nswer.AnswerEntry\032A\n\004Pair\022\r\n\005index\030\001 \001(\005" +
+      "\022\016\n\006answer\030\002 \001(\t\022\032\n\022scoreOrCheckStatus\030\003" +
+      " \001(\001\032S\n\013AnswerEntry\022\013\n\003key\030\001 \001(\005\0223\n\005valu" +
+      "e\030\002 \001(\0132$.MultipleFillingSubmittedAnswer" +
+      ".Pair:\0028\001\"-\n\033SingleChoiceSubmittedAnswer" +
+      "\022\016\n\006choice\030\001 \001(\005\"/\n\035MultipleChoiceSubmit" +
+      "tedAnswer\022\016\n\006choice\030\001 \003(\005\"$\n\024EssaySubmit" +
+      "tedAnswer\022\014\n\004text\030\001 \001(\t*$\n\010UserType\022\013\n\007T" +
+      "eacher\020\000\022\013\n\007Student\020\001*g\n\014QuestionType\022\021\n" +
+      "\rSingleFilling\020\000\022\023\n\017MultipleFilling\020\001\022\020\n" +
+      "\014SingleChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t\n\005E" +
+      "ssay\020\004B4\n,com.corkili.learningserver.gen" +
+      "erate.protobufB\004Infob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -28432,7 +29343,7 @@ public final class Info {
     internal_static_EssayAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_EssayAnswer_descriptor,
-        new java.lang.String[] { "Text", "Image", });
+        new java.lang.String[] { "Text", });
     internal_static_CourseWorkInfo_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_CourseWorkInfo_fieldAccessorTable = new
@@ -28456,39 +29367,45 @@ public final class Info {
     internal_static_SubmittedCourseWorkInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubmittedCourseWorkInfo_descriptor,
-        new java.lang.String[] { "SubmittedCourseWorkId", "CreateTime", "UpdateTime", "SubmittedAnswer", "AlreadyCheckAllAnswer", "BelongCourseWorkId", "SubmitterId", });
+        new java.lang.String[] { "SubmittedCourseWorkId", "CreateTime", "UpdateTime", "SubmittedAnswer", "AlreadyCheckAllAnswer", "Finished", "BelongCourseWorkId", "SubmitterId", "SubmitterInfo", });
     internal_static_SubmittedCourseWorkInfo_SubmittedAnswerEntry_descriptor =
       internal_static_SubmittedCourseWorkInfo_descriptor.getNestedTypes().get(0);
     internal_static_SubmittedCourseWorkInfo_SubmittedAnswerEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubmittedCourseWorkInfo_SubmittedAnswerEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_CourseWorkSubmittedAnswer_descriptor =
+    internal_static_SubmittedCourseWorkSimpleInfo_descriptor =
       getDescriptor().getMessageTypes().get(15);
+    internal_static_SubmittedCourseWorkSimpleInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_SubmittedCourseWorkSimpleInfo_descriptor,
+        new java.lang.String[] { "SubmittedCourseWorkId", "CreateTime", "UpdateTime", "AlreadyCheckAllAnswer", "Finished", "BelongCourseWorkId", "SubmitterId", "SubmitterInfo", });
+    internal_static_CourseWorkSubmittedAnswer_descriptor =
+      getDescriptor().getMessageTypes().get(16);
     internal_static_CourseWorkSubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseWorkSubmittedAnswer_descriptor,
         new java.lang.String[] { "QuestionIndex", "SubmittedAnswer", "CheckStatus", });
     internal_static_ExamInfo_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_ExamInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamInfo_descriptor,
         new java.lang.String[] { "ExamId", "CreateTime", "UpdateTime", "ExamName", "BelongCourseId", "StartTime", "EndTime", "Duration", "ExamQuestionInfo", });
     internal_static_ExamSimpleInfo_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_ExamSimpleInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamSimpleInfo_descriptor,
         new java.lang.String[] { "ExamId", "ExamName", "BelongCourseId", "StartTime", "EndTime", "Duration", });
     internal_static_ExamQuestionInfo_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_ExamQuestionInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamQuestionInfo_descriptor,
         new java.lang.String[] { "ExamQuestionId", "CreateTime", "UpdateTime", "Index", "BelongExamId", "QuestionId", "Score", });
     internal_static_Score_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_Score_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Score_descriptor,
@@ -28506,11 +29423,11 @@ public final class Info {
         internal_static_Score_MultipleScore_ScoreEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_SubmittedExamInfo_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_SubmittedExamInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubmittedExamInfo_descriptor,
-        new java.lang.String[] { "SubmittedExamId", "CreateTime", "UpdateTime", "SubmittedAnswer", "AlreadyCheckAllAnswer", "TotalScore", "BelongExamId", "SubmitterId", });
+        new java.lang.String[] { "SubmittedExamId", "CreateTime", "UpdateTime", "SubmittedAnswer", "AlreadyCheckAllAnswer", "TotalScore", "Finished", "BelongExamId", "SubmitterId", "SubmitterInfo", });
     internal_static_SubmittedExamInfo_SubmittedAnswerEntry_descriptor =
       internal_static_SubmittedExamInfo_descriptor.getNestedTypes().get(0);
     internal_static_SubmittedExamInfo_SubmittedAnswerEntry_fieldAccessorTable = new
@@ -28518,25 +29435,25 @@ public final class Info {
         internal_static_SubmittedExamInfo_SubmittedAnswerEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_ExamSubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_ExamSubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ExamSubmittedAnswer_descriptor,
         new java.lang.String[] { "QuestionIndex", "SubmittedAnswer", "Score", });
     internal_static_SubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_SubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubmittedAnswer_descriptor,
         new java.lang.String[] { "SingleFillingSubmittedAnswer", "MultipleFillingSubmittedAnswer", "SingleChoiceSubmittedAnswer", "MultipleChoiceSubmittedAnswer", "EssaySubmittedAnswer", "SubmittedAnswer", });
     internal_static_SingleFillingSubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_SingleFillingSubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SingleFillingSubmittedAnswer_descriptor,
         new java.lang.String[] { "Answer", });
     internal_static_MultipleFillingSubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_MultipleFillingSubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MultipleFillingSubmittedAnswer_descriptor,
@@ -28554,23 +29471,23 @@ public final class Info {
         internal_static_MultipleFillingSubmittedAnswer_AnswerEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_SingleChoiceSubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_SingleChoiceSubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SingleChoiceSubmittedAnswer_descriptor,
         new java.lang.String[] { "Choice", });
     internal_static_MultipleChoiceSubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_MultipleChoiceSubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MultipleChoiceSubmittedAnswer_descriptor,
         new java.lang.String[] { "Choice", });
     internal_static_EssaySubmittedAnswer_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_EssaySubmittedAnswer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_EssaySubmittedAnswer_descriptor,
-        new java.lang.String[] { "Text", "Image", });
+        new java.lang.String[] { "Text", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
