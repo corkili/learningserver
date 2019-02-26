@@ -206,6 +206,18 @@ message SubmittedExamInfo {
     UserInfo submitterInfo = 10;
 }
 
+message SubmittedExamSimpleInfo {
+    sint64 submittedExamId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool alreadyCheckAllAnswer = 4;
+    double totalScore = 5;
+    bool finished = 6;
+    sint64 belongExamId = 7;
+    sint64 submitterId = 8;
+    UserInfo submitterInfo = 9;
+}
+
 message ExamSubmittedAnswer {
     int32 questionIndex = 1;
     SubmittedAnswer submittedAnswer = 2;

@@ -1,11 +1,11 @@
 package com.corkili.learningserver.repo;
 
-import java.util.List;
-
+import com.corkili.learningserver.po.SubmittedExam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.corkili.learningserver.po.SubmittedExam;
+import java.util.List;
+import java.util.Optional;
 
 public interface SubmittedExamRepository extends JpaRepository<SubmittedExam, Long> {
 
@@ -13,5 +13,11 @@ public interface SubmittedExamRepository extends JpaRepository<SubmittedExam, Lo
     List<Long> findAllSubmittedExamIdByBelongExamId(Long belongExamId);
 
     void deleteAllByBelongExamId(Long belongExamId);
+
+    boolean existsByBelongExamIdAndSubmitterId(Long belongExamId, Long submitterId);
+
+    Optional<SubmittedExam> findByBelongExamIdAndSubmitterId(Long belongExamId, Long submitterId);
+
+    List<SubmittedExam> findAllByBelongExamId(Long belongExamId);
 
 }

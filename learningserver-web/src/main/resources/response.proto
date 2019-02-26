@@ -162,3 +162,28 @@ message SubmittedCourseWorkDeleteResponse {
     BaseResponse response = 1;
     sint64 submittedCourseWorkId = 2;
 }
+
+message SubmittedExamCreateResponse {
+    BaseResponse response = 1;
+    SubmittedExamInfo submittedExamInfo = 2;
+}
+
+message SubmittedExamUpdateResponse {
+    BaseResponse response = 1;
+    SubmittedExamInfo submittedExamInfo = 2;
+}
+
+message SubmittedExamFindAllResponse {
+    BaseResponse response = 1;
+    repeated SubmittedExamSimpleInfo submittedExamSimpleInfo = 2;
+}
+
+message SubmittedExamGetResponse {
+    BaseResponse response = 1;
+    SubmittedExamInfo submittedExamInfo = 2;
+}
+
+message SubmittedExamDeleteResponse {
+    BaseResponse response = 1;
+    sint64 submittedExamId = 2;
+}

@@ -240,3 +240,37 @@ message SubmittedCourseWorkDeleteRequest {
     BaseRequest request = 1;
     sint64 submittedCourseWorkId = 2;
 }
+
+message SubmittedExamCreateRequest {
+    BaseRequest request = 1;
+    map<int32, SubmittedAnswer> submittedAnswer = 2;
+    bool finished = 3;
+    sint64 belongExamId = 4;
+}
+
+message SubmittedExamUpdateRequest {
+    BaseRequest request = 1;
+    sint64 submittedExamId = 2;
+    bool updateSubmittedAnswer = 3;
+    map<int32, ExamSubmittedAnswer> submittedAnswer = 4;
+    bool updateFinished = 5;
+    bool finished = 6;
+}
+
+message SubmittedExamFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongExamId = 2;
+}
+
+message SubmittedExamGetRequest {
+    BaseRequest request = 1;
+    bool byId = 2;
+    sint64 submittedExamId = 3;
+    sint64 belongExamId = 4;
+    sint64 submitterId = 5;
+}
+
+message SubmittedExamDeleteRequest {
+    BaseRequest request = 1;
+    sint64 submittedExamId = 2;
+}

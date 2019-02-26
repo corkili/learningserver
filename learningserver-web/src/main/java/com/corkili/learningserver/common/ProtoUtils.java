@@ -6,6 +6,7 @@ import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
+import com.corkili.learningserver.bo.SubmittedExam;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
@@ -19,6 +20,7 @@ import com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamSimpleInfo;
+import com.corkili.learningserver.generate.protobuf.Info.ExamSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceSubmittedAnswer;
@@ -37,6 +39,8 @@ import com.corkili.learningserver.generate.protobuf.Info.SingleFillingSubmittedA
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo;
+import com.corkili.learningserver.generate.protobuf.Info.SubmittedExamInfo;
+import com.corkili.learningserver.generate.protobuf.Info.SubmittedExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.google.protobuf.ByteString;
@@ -50,6 +54,50 @@ import java.util.Map.Entry;
 
 public class ProtoUtils {
 
+    public static SubmittedExamSimpleInfo generateSubmittedExamSimpleInfo(
+            SubmittedExam submittedExam, User submitter) {
+        if (submittedExam == null) {
+            return SubmittedExamSimpleInfo.getDefaultInstance();
+        }
+        return SubmittedExamSimpleInfo.newBuilder()
+                .setSubmittedExamId(submittedExam.getId())
+                .setCreateTime(getTime(submittedExam.getCreateTime()))
+                .setUpdateTime(getTime(submittedExam.getUpdateTime()))
+                .setAlreadyCheckAllAnswer(submittedExam.isAlreadyCheckAllAnswer())
+                .setTotalScore(submittedExam.getTotalScore())
+                .setFinished(submittedExam.isFinished())
+                .setBelongExamId(submittedExam.getBelongExamId())
+                .setSubmitterId(submittedExam.getSubmitterId())
+                .setSubmitterInfo(generateUserInfo(submitter))
+                .build();
+    }
+
+    public static SubmittedExamInfo generateSubmittedExamInfo(SubmittedExam submittedExam, User submitter) {
+        if (submittedExam == null) {
+            return SubmittedExamInfo.getDefaultInstance();
+        }
+        Map<Integer, ExamSubmittedAnswer> submittedAnswerMap = new HashMap<>();
+        submittedExam.getSubmittedAnswers().forEach((index, ans) -> {
+            submittedAnswerMap.put(index, ExamSubmittedAnswer.newBuilder()
+                    .setQuestionIndex(ans.getQuestionIndex())
+                    .setSubmittedAnswer(generateSubmittedAnswer(ans.getSubmittedAnswer()))
+                    .setScore(ans.getScore())
+                    .build());
+        });
+        return SubmittedExamInfo.newBuilder()
+                .setSubmittedExamId(submittedExam.getId())
+                .setCreateTime(getTime(submittedExam.getCreateTime()))
+                .setUpdateTime(getTime(submittedExam.getUpdateTime()))
+                .putAllSubmittedAnswer(submittedAnswerMap)
+                .setAlreadyCheckAllAnswer(submittedExam.isAlreadyCheckAllAnswer())
+                .setTotalScore(submittedExam.getTotalScore())
+                .setFinished(submittedExam.isFinished())
+                .setBelongExamId(submittedExam.getBelongExamId())
+                .setSubmitterId(submittedExam.getSubmitterId())
+                .setSubmitterInfo(generateUserInfo(submitter))
+                .build();
+    }
+    
     public static SubmittedCourseWorkSimpleInfo generateSubmittedCourseWorkSimpleInfo(
             SubmittedCourseWork submittedCourseWork, User submitter) {
         if (submittedCourseWork == null) {
