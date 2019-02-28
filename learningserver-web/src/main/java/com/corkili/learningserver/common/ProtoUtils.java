@@ -4,6 +4,7 @@ import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
+import com.corkili.learningserver.bo.ForumTopic;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedExam;
@@ -21,6 +22,7 @@ import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamSubmittedAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceSubmittedAnswer;
@@ -53,6 +55,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ProtoUtils {
+
+    public static ForumTopicInfo generateForumTopicInfo(ForumTopic forumTopic, User author, boolean loadImageData) {
+        if (forumTopic == null) {
+            return ForumTopicInfo.getDefaultInstance();
+        }
+        return ForumTopicInfo.newBuilder()
+                .setForumTopicId(forumTopic.getId())
+                .setCreateTime(getTime(forumTopic.getCreateTime()))
+                .setUpdateTime(getTime(forumTopic.getUpdateTime()))
+                .setTitle(forumTopic.getTitle())
+                .setDescription(forumTopic.getDescription())
+                .addAllImage(generateImageList(forumTopic.getImagePaths(), loadImageData))
+                .setAuthorId(forumTopic.getAuthorId())
+                .setAuthorInfo(generateUserInfo(author))
+                .setBelongCourseId(forumTopic.getBelongCourseId())
+                .build();
+    }
 
     public static SubmittedExamSimpleInfo generateSubmittedExamSimpleInfo(
             SubmittedExam submittedExam, User submitter) {

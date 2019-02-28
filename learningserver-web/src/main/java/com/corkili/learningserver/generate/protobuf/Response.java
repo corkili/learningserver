@@ -28822,6 +28822,4059 @@ public final class Response {
 
   }
 
+  public interface ForumTopicCreateResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ForumTopicCreateResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    boolean hasResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder();
+
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    boolean hasForumTopicInfo();
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo();
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code ForumTopicCreateResponse}
+   */
+  public  static final class ForumTopicCreateResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ForumTopicCreateResponse)
+      ForumTopicCreateResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ForumTopicCreateResponse.newBuilder() to construct.
+    private ForumTopicCreateResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ForumTopicCreateResponse() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ForumTopicCreateResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder subBuilder = null;
+              if (response_ != null) {
+                subBuilder = response_.toBuilder();
+              }
+              response_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Response.BaseResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(response_);
+                response_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder subBuilder = null;
+              if (forumTopicInfo_ != null) {
+                subBuilder = forumTopicInfo_.toBuilder();
+              }
+              forumTopicInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(forumTopicInfo_);
+                forumTopicInfo_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicCreateResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicCreateResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.Builder.class);
+    }
+
+    public static final int RESPONSE_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_;
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public boolean hasResponse() {
+      return response_ != null;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+      return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+      return getResponse();
+    }
+
+    public static final int FORUMTOPICINFO_FIELD_NUMBER = 2;
+    private com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo forumTopicInfo_;
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public boolean hasForumTopicInfo() {
+      return forumTopicInfo_ != null;
+    }
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo() {
+      return forumTopicInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+    }
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder() {
+      return getForumTopicInfo();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (response_ != null) {
+        output.writeMessage(1, getResponse());
+      }
+      if (forumTopicInfo_ != null) {
+        output.writeMessage(2, getForumTopicInfo());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (response_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getResponse());
+      }
+      if (forumTopicInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getForumTopicInfo());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse other = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse) obj;
+
+      boolean result = true;
+      result = result && (hasResponse() == other.hasResponse());
+      if (hasResponse()) {
+        result = result && getResponse()
+            .equals(other.getResponse());
+      }
+      result = result && (hasForumTopicInfo() == other.hasForumTopicInfo());
+      if (hasForumTopicInfo()) {
+        result = result && getForumTopicInfo()
+            .equals(other.getForumTopicInfo());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResponse()) {
+        hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
+        hash = (53 * hash) + getResponse().hashCode();
+      }
+      if (hasForumTopicInfo()) {
+        hash = (37 * hash) + FORUMTOPICINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getForumTopicInfo().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ForumTopicCreateResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ForumTopicCreateResponse)
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicCreateResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicCreateResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (responseBuilder_ == null) {
+          response_ = null;
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = null;
+        } else {
+          forumTopicInfo_ = null;
+          forumTopicInfoBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicCreateResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse build() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse result = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse(this);
+        if (responseBuilder_ == null) {
+          result.response_ = response_;
+        } else {
+          result.response_ = responseBuilder_.build();
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          result.forumTopicInfo_ = forumTopicInfo_;
+        } else {
+          result.forumTopicInfo_ = forumTopicInfoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse.getDefaultInstance()) return this;
+        if (other.hasResponse()) {
+          mergeResponse(other.getResponse());
+        }
+        if (other.hasForumTopicInfo()) {
+          mergeForumTopicInfo(other.getForumTopicInfo());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> responseBuilder_;
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public boolean hasResponse() {
+        return responseBuilder_ != null || response_ != null;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+        if (responseBuilder_ == null) {
+          return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        } else {
+          return responseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder builderForValue) {
+        if (responseBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder mergeResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (response_ != null) {
+            response_ =
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.newBuilder(response_).mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          responseBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder clearResponse() {
+        if (responseBuilder_ == null) {
+          response_ = null;
+          onChanged();
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder getResponseBuilder() {
+        
+        onChanged();
+        return getResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+        if (responseBuilder_ != null) {
+          return responseBuilder_.getMessageOrBuilder();
+        } else {
+          return response_ == null ?
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> 
+          getResponseFieldBuilder() {
+        if (responseBuilder_ == null) {
+          responseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder>(
+                  getResponse(),
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        return responseBuilder_;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo forumTopicInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> forumTopicInfoBuilder_;
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public boolean hasForumTopicInfo() {
+        return forumTopicInfoBuilder_ != null || forumTopicInfo_ != null;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          return forumTopicInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+        } else {
+          return forumTopicInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          forumTopicInfo_ = value;
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder builderForValue) {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder mergeForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (forumTopicInfo_ != null) {
+            forumTopicInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.newBuilder(forumTopicInfo_).mergeFrom(value).buildPartial();
+          } else {
+            forumTopicInfo_ = value;
+          }
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder clearForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = null;
+          onChanged();
+        } else {
+          forumTopicInfo_ = null;
+          forumTopicInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder getForumTopicInfoBuilder() {
+        
+        onChanged();
+        return getForumTopicInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder() {
+        if (forumTopicInfoBuilder_ != null) {
+          return forumTopicInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return forumTopicInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+        }
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+          getForumTopicInfoFieldBuilder() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder>(
+                  getForumTopicInfo(),
+                  getParentForChildren(),
+                  isClean());
+          forumTopicInfo_ = null;
+        }
+        return forumTopicInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ForumTopicCreateResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ForumTopicCreateResponse)
+    private static final com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ForumTopicCreateResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ForumTopicCreateResponse>() {
+      @java.lang.Override
+      public ForumTopicCreateResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ForumTopicCreateResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ForumTopicCreateResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ForumTopicCreateResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Response.ForumTopicCreateResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ForumTopicUpdateResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ForumTopicUpdateResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    boolean hasResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder();
+
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    boolean hasForumTopicInfo();
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo();
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code ForumTopicUpdateResponse}
+   */
+  public  static final class ForumTopicUpdateResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ForumTopicUpdateResponse)
+      ForumTopicUpdateResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ForumTopicUpdateResponse.newBuilder() to construct.
+    private ForumTopicUpdateResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ForumTopicUpdateResponse() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ForumTopicUpdateResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder subBuilder = null;
+              if (response_ != null) {
+                subBuilder = response_.toBuilder();
+              }
+              response_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Response.BaseResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(response_);
+                response_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder subBuilder = null;
+              if (forumTopicInfo_ != null) {
+                subBuilder = forumTopicInfo_.toBuilder();
+              }
+              forumTopicInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(forumTopicInfo_);
+                forumTopicInfo_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicUpdateResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicUpdateResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.Builder.class);
+    }
+
+    public static final int RESPONSE_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_;
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public boolean hasResponse() {
+      return response_ != null;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+      return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+      return getResponse();
+    }
+
+    public static final int FORUMTOPICINFO_FIELD_NUMBER = 2;
+    private com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo forumTopicInfo_;
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public boolean hasForumTopicInfo() {
+      return forumTopicInfo_ != null;
+    }
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo() {
+      return forumTopicInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+    }
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder() {
+      return getForumTopicInfo();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (response_ != null) {
+        output.writeMessage(1, getResponse());
+      }
+      if (forumTopicInfo_ != null) {
+        output.writeMessage(2, getForumTopicInfo());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (response_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getResponse());
+      }
+      if (forumTopicInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getForumTopicInfo());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse other = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse) obj;
+
+      boolean result = true;
+      result = result && (hasResponse() == other.hasResponse());
+      if (hasResponse()) {
+        result = result && getResponse()
+            .equals(other.getResponse());
+      }
+      result = result && (hasForumTopicInfo() == other.hasForumTopicInfo());
+      if (hasForumTopicInfo()) {
+        result = result && getForumTopicInfo()
+            .equals(other.getForumTopicInfo());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResponse()) {
+        hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
+        hash = (53 * hash) + getResponse().hashCode();
+      }
+      if (hasForumTopicInfo()) {
+        hash = (37 * hash) + FORUMTOPICINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getForumTopicInfo().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ForumTopicUpdateResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ForumTopicUpdateResponse)
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicUpdateResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicUpdateResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (responseBuilder_ == null) {
+          response_ = null;
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = null;
+        } else {
+          forumTopicInfo_ = null;
+          forumTopicInfoBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicUpdateResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse build() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse result = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse(this);
+        if (responseBuilder_ == null) {
+          result.response_ = response_;
+        } else {
+          result.response_ = responseBuilder_.build();
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          result.forumTopicInfo_ = forumTopicInfo_;
+        } else {
+          result.forumTopicInfo_ = forumTopicInfoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse.getDefaultInstance()) return this;
+        if (other.hasResponse()) {
+          mergeResponse(other.getResponse());
+        }
+        if (other.hasForumTopicInfo()) {
+          mergeForumTopicInfo(other.getForumTopicInfo());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> responseBuilder_;
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public boolean hasResponse() {
+        return responseBuilder_ != null || response_ != null;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+        if (responseBuilder_ == null) {
+          return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        } else {
+          return responseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder builderForValue) {
+        if (responseBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder mergeResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (response_ != null) {
+            response_ =
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.newBuilder(response_).mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          responseBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder clearResponse() {
+        if (responseBuilder_ == null) {
+          response_ = null;
+          onChanged();
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder getResponseBuilder() {
+        
+        onChanged();
+        return getResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+        if (responseBuilder_ != null) {
+          return responseBuilder_.getMessageOrBuilder();
+        } else {
+          return response_ == null ?
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> 
+          getResponseFieldBuilder() {
+        if (responseBuilder_ == null) {
+          responseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder>(
+                  getResponse(),
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        return responseBuilder_;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo forumTopicInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> forumTopicInfoBuilder_;
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public boolean hasForumTopicInfo() {
+        return forumTopicInfoBuilder_ != null || forumTopicInfo_ != null;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          return forumTopicInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+        } else {
+          return forumTopicInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          forumTopicInfo_ = value;
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder builderForValue) {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder mergeForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (forumTopicInfo_ != null) {
+            forumTopicInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.newBuilder(forumTopicInfo_).mergeFrom(value).buildPartial();
+          } else {
+            forumTopicInfo_ = value;
+          }
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder clearForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = null;
+          onChanged();
+        } else {
+          forumTopicInfo_ = null;
+          forumTopicInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder getForumTopicInfoBuilder() {
+        
+        onChanged();
+        return getForumTopicInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder() {
+        if (forumTopicInfoBuilder_ != null) {
+          return forumTopicInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return forumTopicInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+        }
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+          getForumTopicInfoFieldBuilder() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder>(
+                  getForumTopicInfo(),
+                  getParentForChildren(),
+                  isClean());
+          forumTopicInfo_ = null;
+        }
+        return forumTopicInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ForumTopicUpdateResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ForumTopicUpdateResponse)
+    private static final com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ForumTopicUpdateResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ForumTopicUpdateResponse>() {
+      @java.lang.Override
+      public ForumTopicUpdateResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ForumTopicUpdateResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ForumTopicUpdateResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ForumTopicUpdateResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Response.ForumTopicUpdateResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ForumTopicFindAllResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ForumTopicFindAllResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    boolean hasResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder();
+
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    java.util.List<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo> 
+        getForumTopicInfoList();
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo(int index);
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    int getForumTopicInfoCount();
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+        getForumTopicInfoOrBuilderList();
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ForumTopicFindAllResponse}
+   */
+  public  static final class ForumTopicFindAllResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ForumTopicFindAllResponse)
+      ForumTopicFindAllResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ForumTopicFindAllResponse.newBuilder() to construct.
+    private ForumTopicFindAllResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ForumTopicFindAllResponse() {
+      forumTopicInfo_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ForumTopicFindAllResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder subBuilder = null;
+              if (response_ != null) {
+                subBuilder = response_.toBuilder();
+              }
+              response_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Response.BaseResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(response_);
+                response_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                forumTopicInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              forumTopicInfo_.add(
+                  input.readMessage(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          forumTopicInfo_ = java.util.Collections.unmodifiableList(forumTopicInfo_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicFindAllResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicFindAllResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int RESPONSE_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_;
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public boolean hasResponse() {
+      return response_ != null;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+      return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+      return getResponse();
+    }
+
+    public static final int FORUMTOPICINFO_FIELD_NUMBER = 2;
+    private java.util.List<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo> forumTopicInfo_;
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo> getForumTopicInfoList() {
+      return forumTopicInfo_;
+    }
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+        getForumTopicInfoOrBuilderList() {
+      return forumTopicInfo_;
+    }
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public int getForumTopicInfoCount() {
+      return forumTopicInfo_.size();
+    }
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo(int index) {
+      return forumTopicInfo_.get(index);
+    }
+    /**
+     * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder(
+        int index) {
+      return forumTopicInfo_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (response_ != null) {
+        output.writeMessage(1, getResponse());
+      }
+      for (int i = 0; i < forumTopicInfo_.size(); i++) {
+        output.writeMessage(2, forumTopicInfo_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (response_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getResponse());
+      }
+      for (int i = 0; i < forumTopicInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, forumTopicInfo_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse other = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse) obj;
+
+      boolean result = true;
+      result = result && (hasResponse() == other.hasResponse());
+      if (hasResponse()) {
+        result = result && getResponse()
+            .equals(other.getResponse());
+      }
+      result = result && getForumTopicInfoList()
+          .equals(other.getForumTopicInfoList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResponse()) {
+        hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
+        hash = (53 * hash) + getResponse().hashCode();
+      }
+      if (getForumTopicInfoCount() > 0) {
+        hash = (37 * hash) + FORUMTOPICINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getForumTopicInfoList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ForumTopicFindAllResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ForumTopicFindAllResponse)
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicFindAllResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicFindAllResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getForumTopicInfoFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (responseBuilder_ == null) {
+          response_ = null;
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          forumTopicInfoBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicFindAllResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse build() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse result = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (responseBuilder_ == null) {
+          result.response_ = response_;
+        } else {
+          result.response_ = responseBuilder_.build();
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            forumTopicInfo_ = java.util.Collections.unmodifiableList(forumTopicInfo_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.forumTopicInfo_ = forumTopicInfo_;
+        } else {
+          result.forumTopicInfo_ = forumTopicInfoBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse.getDefaultInstance()) return this;
+        if (other.hasResponse()) {
+          mergeResponse(other.getResponse());
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          if (!other.forumTopicInfo_.isEmpty()) {
+            if (forumTopicInfo_.isEmpty()) {
+              forumTopicInfo_ = other.forumTopicInfo_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureForumTopicInfoIsMutable();
+              forumTopicInfo_.addAll(other.forumTopicInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.forumTopicInfo_.isEmpty()) {
+            if (forumTopicInfoBuilder_.isEmpty()) {
+              forumTopicInfoBuilder_.dispose();
+              forumTopicInfoBuilder_ = null;
+              forumTopicInfo_ = other.forumTopicInfo_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              forumTopicInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getForumTopicInfoFieldBuilder() : null;
+            } else {
+              forumTopicInfoBuilder_.addAllMessages(other.forumTopicInfo_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> responseBuilder_;
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public boolean hasResponse() {
+        return responseBuilder_ != null || response_ != null;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+        if (responseBuilder_ == null) {
+          return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        } else {
+          return responseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder builderForValue) {
+        if (responseBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder mergeResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (response_ != null) {
+            response_ =
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.newBuilder(response_).mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          responseBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder clearResponse() {
+        if (responseBuilder_ == null) {
+          response_ = null;
+          onChanged();
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder getResponseBuilder() {
+        
+        onChanged();
+        return getResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+        if (responseBuilder_ != null) {
+          return responseBuilder_.getMessageOrBuilder();
+        } else {
+          return response_ == null ?
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> 
+          getResponseFieldBuilder() {
+        if (responseBuilder_ == null) {
+          responseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder>(
+                  getResponse(),
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        return responseBuilder_;
+      }
+
+      private java.util.List<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo> forumTopicInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureForumTopicInfoIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          forumTopicInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo>(forumTopicInfo_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> forumTopicInfoBuilder_;
+
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo> getForumTopicInfoList() {
+        if (forumTopicInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(forumTopicInfo_);
+        } else {
+          return forumTopicInfoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public int getForumTopicInfoCount() {
+        if (forumTopicInfoBuilder_ == null) {
+          return forumTopicInfo_.size();
+        } else {
+          return forumTopicInfoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo(int index) {
+        if (forumTopicInfoBuilder_ == null) {
+          return forumTopicInfo_.get(index);
+        } else {
+          return forumTopicInfoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.set(index, value);
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder builderForValue) {
+        if (forumTopicInfoBuilder_ == null) {
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder addForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.add(value);
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder addForumTopicInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.add(index, value);
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder addForumTopicInfo(
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder builderForValue) {
+        if (forumTopicInfoBuilder_ == null) {
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder addForumTopicInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder builderForValue) {
+        if (forumTopicInfoBuilder_ == null) {
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder addAllForumTopicInfo(
+          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo> values) {
+        if (forumTopicInfoBuilder_ == null) {
+          ensureForumTopicInfoIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, forumTopicInfo_);
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder clearForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder removeForumTopicInfo(int index) {
+        if (forumTopicInfoBuilder_ == null) {
+          ensureForumTopicInfoIsMutable();
+          forumTopicInfo_.remove(index);
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder getForumTopicInfoBuilder(
+          int index) {
+        return getForumTopicInfoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder(
+          int index) {
+        if (forumTopicInfoBuilder_ == null) {
+          return forumTopicInfo_.get(index);  } else {
+          return forumTopicInfoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+           getForumTopicInfoOrBuilderList() {
+        if (forumTopicInfoBuilder_ != null) {
+          return forumTopicInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(forumTopicInfo_);
+        }
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder addForumTopicInfoBuilder() {
+        return getForumTopicInfoFieldBuilder().addBuilder(
+            com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder addForumTopicInfoBuilder(
+          int index) {
+        return getForumTopicInfoFieldBuilder().addBuilder(
+            index, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder> 
+           getForumTopicInfoBuilderList() {
+        return getForumTopicInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+          getForumTopicInfoFieldBuilder() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder>(
+                  forumTopicInfo_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          forumTopicInfo_ = null;
+        }
+        return forumTopicInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ForumTopicFindAllResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ForumTopicFindAllResponse)
+    private static final com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ForumTopicFindAllResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ForumTopicFindAllResponse>() {
+      @java.lang.Override
+      public ForumTopicFindAllResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ForumTopicFindAllResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ForumTopicFindAllResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ForumTopicFindAllResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Response.ForumTopicFindAllResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ForumTopicGetResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ForumTopicGetResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    boolean hasResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder();
+
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    boolean hasForumTopicInfo();
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo();
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code ForumTopicGetResponse}
+   */
+  public  static final class ForumTopicGetResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ForumTopicGetResponse)
+      ForumTopicGetResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ForumTopicGetResponse.newBuilder() to construct.
+    private ForumTopicGetResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ForumTopicGetResponse() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ForumTopicGetResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder subBuilder = null;
+              if (response_ != null) {
+                subBuilder = response_.toBuilder();
+              }
+              response_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Response.BaseResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(response_);
+                response_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder subBuilder = null;
+              if (forumTopicInfo_ != null) {
+                subBuilder = forumTopicInfo_.toBuilder();
+              }
+              forumTopicInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(forumTopicInfo_);
+                forumTopicInfo_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicGetResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicGetResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.Builder.class);
+    }
+
+    public static final int RESPONSE_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_;
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public boolean hasResponse() {
+      return response_ != null;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+      return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+      return getResponse();
+    }
+
+    public static final int FORUMTOPICINFO_FIELD_NUMBER = 2;
+    private com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo forumTopicInfo_;
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public boolean hasForumTopicInfo() {
+      return forumTopicInfo_ != null;
+    }
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo() {
+      return forumTopicInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+    }
+    /**
+     * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder() {
+      return getForumTopicInfo();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (response_ != null) {
+        output.writeMessage(1, getResponse());
+      }
+      if (forumTopicInfo_ != null) {
+        output.writeMessage(2, getForumTopicInfo());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (response_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getResponse());
+      }
+      if (forumTopicInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getForumTopicInfo());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse other = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse) obj;
+
+      boolean result = true;
+      result = result && (hasResponse() == other.hasResponse());
+      if (hasResponse()) {
+        result = result && getResponse()
+            .equals(other.getResponse());
+      }
+      result = result && (hasForumTopicInfo() == other.hasForumTopicInfo());
+      if (hasForumTopicInfo()) {
+        result = result && getForumTopicInfo()
+            .equals(other.getForumTopicInfo());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResponse()) {
+        hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
+        hash = (53 * hash) + getResponse().hashCode();
+      }
+      if (hasForumTopicInfo()) {
+        hash = (37 * hash) + FORUMTOPICINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getForumTopicInfo().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ForumTopicGetResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ForumTopicGetResponse)
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicGetResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicGetResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (responseBuilder_ == null) {
+          response_ = null;
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = null;
+        } else {
+          forumTopicInfo_ = null;
+          forumTopicInfoBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicGetResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse build() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse result = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse(this);
+        if (responseBuilder_ == null) {
+          result.response_ = response_;
+        } else {
+          result.response_ = responseBuilder_.build();
+        }
+        if (forumTopicInfoBuilder_ == null) {
+          result.forumTopicInfo_ = forumTopicInfo_;
+        } else {
+          result.forumTopicInfo_ = forumTopicInfoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse.getDefaultInstance()) return this;
+        if (other.hasResponse()) {
+          mergeResponse(other.getResponse());
+        }
+        if (other.hasForumTopicInfo()) {
+          mergeForumTopicInfo(other.getForumTopicInfo());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> responseBuilder_;
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public boolean hasResponse() {
+        return responseBuilder_ != null || response_ != null;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+        if (responseBuilder_ == null) {
+          return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        } else {
+          return responseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder builderForValue) {
+        if (responseBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder mergeResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (response_ != null) {
+            response_ =
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.newBuilder(response_).mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          responseBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder clearResponse() {
+        if (responseBuilder_ == null) {
+          response_ = null;
+          onChanged();
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder getResponseBuilder() {
+        
+        onChanged();
+        return getResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+        if (responseBuilder_ != null) {
+          return responseBuilder_.getMessageOrBuilder();
+        } else {
+          return response_ == null ?
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> 
+          getResponseFieldBuilder() {
+        if (responseBuilder_ == null) {
+          responseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder>(
+                  getResponse(),
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        return responseBuilder_;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo forumTopicInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> forumTopicInfoBuilder_;
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public boolean hasForumTopicInfo() {
+        return forumTopicInfoBuilder_ != null || forumTopicInfo_ != null;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo getForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          return forumTopicInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+        } else {
+          return forumTopicInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          forumTopicInfo_ = value;
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder setForumTopicInfo(
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder builderForValue) {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder mergeForumTopicInfo(com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo value) {
+        if (forumTopicInfoBuilder_ == null) {
+          if (forumTopicInfo_ != null) {
+            forumTopicInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.newBuilder(forumTopicInfo_).mergeFrom(value).buildPartial();
+          } else {
+            forumTopicInfo_ = value;
+          }
+          onChanged();
+        } else {
+          forumTopicInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public Builder clearForumTopicInfo() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfo_ = null;
+          onChanged();
+        } else {
+          forumTopicInfo_ = null;
+          forumTopicInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder getForumTopicInfoBuilder() {
+        
+        onChanged();
+        return getForumTopicInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder getForumTopicInfoOrBuilder() {
+        if (forumTopicInfoBuilder_ != null) {
+          return forumTopicInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return forumTopicInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.getDefaultInstance() : forumTopicInfo_;
+        }
+      }
+      /**
+       * <code>.ForumTopicInfo forumTopicInfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder> 
+          getForumTopicInfoFieldBuilder() {
+        if (forumTopicInfoBuilder_ == null) {
+          forumTopicInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfoOrBuilder>(
+                  getForumTopicInfo(),
+                  getParentForChildren(),
+                  isClean());
+          forumTopicInfo_ = null;
+        }
+        return forumTopicInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ForumTopicGetResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ForumTopicGetResponse)
+    private static final com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ForumTopicGetResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ForumTopicGetResponse>() {
+      @java.lang.Override
+      public ForumTopicGetResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ForumTopicGetResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ForumTopicGetResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ForumTopicGetResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Response.ForumTopicGetResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ForumTopicDeleteResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ForumTopicDeleteResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    boolean hasResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse();
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder();
+
+    /**
+     * <code>sint64 forumTopicId = 2;</code>
+     */
+    long getForumTopicId();
+  }
+  /**
+   * Protobuf type {@code ForumTopicDeleteResponse}
+   */
+  public  static final class ForumTopicDeleteResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ForumTopicDeleteResponse)
+      ForumTopicDeleteResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ForumTopicDeleteResponse.newBuilder() to construct.
+    private ForumTopicDeleteResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ForumTopicDeleteResponse() {
+      forumTopicId_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ForumTopicDeleteResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder subBuilder = null;
+              if (response_ != null) {
+                subBuilder = response_.toBuilder();
+              }
+              response_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Response.BaseResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(response_);
+                response_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+
+              forumTopicId_ = input.readSInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicDeleteResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicDeleteResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.Builder.class);
+    }
+
+    public static final int RESPONSE_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_;
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public boolean hasResponse() {
+      return response_ != null;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+      return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+    }
+    /**
+     * <code>.BaseResponse response = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+      return getResponse();
+    }
+
+    public static final int FORUMTOPICID_FIELD_NUMBER = 2;
+    private long forumTopicId_;
+    /**
+     * <code>sint64 forumTopicId = 2;</code>
+     */
+    public long getForumTopicId() {
+      return forumTopicId_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (response_ != null) {
+        output.writeMessage(1, getResponse());
+      }
+      if (forumTopicId_ != 0L) {
+        output.writeSInt64(2, forumTopicId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (response_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getResponse());
+      }
+      if (forumTopicId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(2, forumTopicId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse other = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse) obj;
+
+      boolean result = true;
+      result = result && (hasResponse() == other.hasResponse());
+      if (hasResponse()) {
+        result = result && getResponse()
+            .equals(other.getResponse());
+      }
+      result = result && (getForumTopicId()
+          == other.getForumTopicId());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResponse()) {
+        hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
+        hash = (53 * hash) + getResponse().hashCode();
+      }
+      hash = (37 * hash) + FORUMTOPICID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getForumTopicId());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ForumTopicDeleteResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ForumTopicDeleteResponse)
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicDeleteResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicDeleteResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.class, com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (responseBuilder_ == null) {
+          response_ = null;
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+        forumTopicId_ = 0L;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.internal_static_ForumTopicDeleteResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse build() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse result = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse(this);
+        if (responseBuilder_ == null) {
+          result.response_ = response_;
+        } else {
+          result.response_ = responseBuilder_.build();
+        }
+        result.forumTopicId_ = forumTopicId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse.getDefaultInstance()) return this;
+        if (other.hasResponse()) {
+          mergeResponse(other.getResponse());
+        }
+        if (other.getForumTopicId() != 0L) {
+          setForumTopicId(other.getForumTopicId());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Response.BaseResponse response_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> responseBuilder_;
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public boolean hasResponse() {
+        return responseBuilder_ != null || response_ != null;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse getResponse() {
+        if (responseBuilder_ == null) {
+          return response_ == null ? com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        } else {
+          return responseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder setResponse(
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder builderForValue) {
+        if (responseBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          responseBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder mergeResponse(com.corkili.learningserver.generate.protobuf.Response.BaseResponse value) {
+        if (responseBuilder_ == null) {
+          if (response_ != null) {
+            response_ =
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.newBuilder(response_).mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          responseBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public Builder clearResponse() {
+        if (responseBuilder_ == null) {
+          response_ = null;
+          onChanged();
+        } else {
+          response_ = null;
+          responseBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder getResponseBuilder() {
+        
+        onChanged();
+        return getResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder() {
+        if (responseBuilder_ != null) {
+          return responseBuilder_.getMessageOrBuilder();
+        } else {
+          return response_ == null ?
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse.getDefaultInstance() : response_;
+        }
+      }
+      /**
+       * <code>.BaseResponse response = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder> 
+          getResponseFieldBuilder() {
+        if (responseBuilder_ == null) {
+          responseBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Response.BaseResponse, com.corkili.learningserver.generate.protobuf.Response.BaseResponse.Builder, com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder>(
+                  getResponse(),
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        return responseBuilder_;
+      }
+
+      private long forumTopicId_ ;
+      /**
+       * <code>sint64 forumTopicId = 2;</code>
+       */
+      public long getForumTopicId() {
+        return forumTopicId_;
+      }
+      /**
+       * <code>sint64 forumTopicId = 2;</code>
+       */
+      public Builder setForumTopicId(long value) {
+        
+        forumTopicId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 forumTopicId = 2;</code>
+       */
+      public Builder clearForumTopicId() {
+        
+        forumTopicId_ = 0L;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ForumTopicDeleteResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ForumTopicDeleteResponse)
+    private static final com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ForumTopicDeleteResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ForumTopicDeleteResponse>() {
+      @java.lang.Override
+      public ForumTopicDeleteResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ForumTopicDeleteResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ForumTopicDeleteResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ForumTopicDeleteResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Response.ForumTopicDeleteResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ImageLoadResponse_descriptor;
   private static final 
@@ -28997,6 +33050,31 @@ public final class Response {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_SubmittedExamDeleteResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ForumTopicCreateResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ForumTopicCreateResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ForumTopicUpdateResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ForumTopicUpdateResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ForumTopicFindAllResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ForumTopicFindAllResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ForumTopicGetResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ForumTopicGetResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ForumTopicDeleteResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ForumTopicDeleteResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -29092,10 +33170,22 @@ public final class Response {
       "ittedExamInfo\030\002 \001(\0132\022.SubmittedExamInfo\"" +
       "W\n\033SubmittedExamDeleteResponse\022\037\n\010respon" +
       "se\030\001 \001(\0132\r.BaseResponse\022\027\n\017submittedExam" +
-      "Id\030\002 \001(\022*@\n\014ResponseCode\022\013\n\007SUCCESS\020\000\022\021\n" +
-      "\rGENERAL_ERROR\020\001\022\020\n\014UNAUTHORIZED\020\002B8\n,co" +
-      "m.corkili.learningserver.generate.protob" +
-      "ufB\010Responseb\006proto3"
+      "Id\030\002 \001(\022\"d\n\030ForumTopicCreateResponse\022\037\n\010" +
+      "response\030\001 \001(\0132\r.BaseResponse\022\'\n\016forumTo" +
+      "picInfo\030\002 \001(\0132\017.ForumTopicInfo\"d\n\030ForumT" +
+      "opicUpdateResponse\022\037\n\010response\030\001 \001(\0132\r.B" +
+      "aseResponse\022\'\n\016forumTopicInfo\030\002 \001(\0132\017.Fo" +
+      "rumTopicInfo\"e\n\031ForumTopicFindAllRespons" +
+      "e\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\'\n\016fo" +
+      "rumTopicInfo\030\002 \003(\0132\017.ForumTopicInfo\"a\n\025F" +
+      "orumTopicGetResponse\022\037\n\010response\030\001 \001(\0132\r" +
+      ".BaseResponse\022\'\n\016forumTopicInfo\030\002 \001(\0132\017." +
+      "ForumTopicInfo\"Q\n\030ForumTopicDeleteRespon" +
+      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\024\n\014f" +
+      "orumTopicId\030\002 \001(\022*@\n\014ResponseCode\022\013\n\007SUC" +
+      "CESS\020\000\022\021\n\rGENERAL_ERROR\020\001\022\020\n\014UNAUTHORIZE" +
+      "D\020\002B8\n,com.corkili.learningserver.genera" +
+      "te.protobufB\010Responseb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -29320,6 +33410,36 @@ public final class Response {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubmittedExamDeleteResponse_descriptor,
         new java.lang.String[] { "Response", "SubmittedExamId", });
+    internal_static_ForumTopicCreateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(35);
+    internal_static_ForumTopicCreateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ForumTopicCreateResponse_descriptor,
+        new java.lang.String[] { "Response", "ForumTopicInfo", });
+    internal_static_ForumTopicUpdateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(36);
+    internal_static_ForumTopicUpdateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ForumTopicUpdateResponse_descriptor,
+        new java.lang.String[] { "Response", "ForumTopicInfo", });
+    internal_static_ForumTopicFindAllResponse_descriptor =
+      getDescriptor().getMessageTypes().get(37);
+    internal_static_ForumTopicFindAllResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ForumTopicFindAllResponse_descriptor,
+        new java.lang.String[] { "Response", "ForumTopicInfo", });
+    internal_static_ForumTopicGetResponse_descriptor =
+      getDescriptor().getMessageTypes().get(38);
+    internal_static_ForumTopicGetResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ForumTopicGetResponse_descriptor,
+        new java.lang.String[] { "Response", "ForumTopicInfo", });
+    internal_static_ForumTopicDeleteResponse_descriptor =
+      getDescriptor().getMessageTypes().get(39);
+    internal_static_ForumTopicDeleteResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ForumTopicDeleteResponse_descriptor,
+        new java.lang.String[] { "Response", "ForumTopicId", });
     com.corkili.learningserver.generate.protobuf.Info.getDescriptor();
   }
 

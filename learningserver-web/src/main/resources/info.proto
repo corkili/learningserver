@@ -260,3 +260,15 @@ message EssaySubmittedAnswer {
 //    repeated Image image = 2;
 }
 
+message ForumTopicInfo {
+    sint64 forumTopicId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string title = 4;
+    string description = 5;
+    repeated Image image = 6;
+    sint64 authorId = 7;
+    UserInfo authorInfo = 8;
+    sint64 belongCourseId = 9;
+}
+

@@ -1,20 +1,24 @@
 package com.corkili.learningserver.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.corkili.learningserver.bo.ForumTopic;
+import com.corkili.learningserver.common.ImageUtils;
+import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
+import com.corkili.learningserver.repo.CourseRepository;
+import com.corkili.learningserver.repo.ForumTopicRepository;
+import com.corkili.learningserver.service.ForumTopicService;
+import com.corkili.learningserver.service.TopicCommentService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
-import com.corkili.learningserver.bo.ForumTopic;
-import com.corkili.learningserver.common.ServiceResult;
-import com.corkili.learningserver.repo.ForumTopicRepository;
-import com.corkili.learningserver.service.ForumTopicService;
-import com.corkili.learningserver.service.TopicCommentService;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,6 +29,9 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
 
     @Autowired
     private TopicCommentService topicCommentService;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Override
     public Optional<ForumTopic> po2bo(com.corkili.learningserver.po.ForumTopic forumTopicPO) {
@@ -96,4 +103,106 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
         }
         return ServiceResult.successResultWithMesage("delete forum topic success");
     }
+
+    @Override
+    public ServiceResult createForumTopic(ForumTopic forumTopic, Map<String, byte[]> images) {
+        if (StringUtils.isBlank(forumTopic.getTitle())) {
+            return recordErrorAndCreateFailResultWithMessage("create forumTopic error: title is empty");
+        }
+        if (StringUtils.isBlank(forumTopic.getDescription())) {
+            return recordErrorAndCreateFailResultWithMessage("create forumTopic error: description is empty");
+        }
+        if (forumTopic.getAuthorId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("create forumTopic error: authorId is null");
+        }
+        if (forumTopic.getBelongCourseId() == null || !courseRepository.existsById(forumTopic.getBelongCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("create forumTopic error: belongCourseId is null or not exists");
+        }
+        if (ImageUtils.storeImages(images)) {
+            return recordErrorAndCreateFailResultWithMessage("create forumTopic error: store image failed");
+        }
+        forumTopic.getImagePaths().clear();
+        forumTopic.getImagePaths().addAll(images.keySet());
+        Optional<ForumTopic> forumTopicOptional = create(forumTopic);
+        if (!forumTopicOptional.isPresent()) {
+            ImageUtils.deleteImages(images.keySet());
+            return recordErrorAndCreateFailResultWithMessage("create forumTopic error: create forumTopic failed");
+        }
+        forumTopic = forumTopicOptional.get();
+        return ServiceResult.successResult("create forumTopic success", ForumTopic.class, forumTopic);
+    }
+
+    @Override
+    public ServiceResult updateForumTopic(ForumTopic forumTopic, Map<String, byte[]> images) {
+        if (StringUtils.isBlank(forumTopic.getTitle())) {
+            return recordErrorAndCreateFailResultWithMessage("update forumTopic error: title is empty");
+        }
+        if (StringUtils.isBlank(forumTopic.getDescription())) {
+            return recordErrorAndCreateFailResultWithMessage("update forumTopic error: description is empty");
+        }
+        if (forumTopic.getAuthorId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("update forumTopic error: authorId is null");
+        }
+        if (forumTopic.getBelongCourseId() == null || !courseRepository.existsById(forumTopic.getBelongCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("update forumTopic error: belongCourseId is null or not exists");
+        }
+        List<String> oldImagePaths = new LinkedList<>(forumTopic.getImagePaths());
+        if (images != null) {
+            if (ImageUtils.storeImages(images)) {
+                return recordErrorAndCreateFailResultWithMessage("update forumTopic error: store image failed");
+            }
+            forumTopic.getImagePaths().clear();
+            forumTopic.getImagePaths().addAll(images.keySet());
+        }
+        Optional<ForumTopic> forumTopicOptional = update(forumTopic);
+        if (!forumTopicOptional.isPresent()) {
+            if (images != null) {
+                ImageUtils.deleteImages(images.keySet());
+            }
+            forumTopic.getImagePaths().clear();
+            forumTopic.getImagePaths().addAll(oldImagePaths);
+            return recordErrorAndCreateFailResultWithMessage("update forumTopic error: update forumTopic failed");
+        }
+        if (images != null) {
+            ImageUtils.deleteImages(oldImagePaths);
+        }
+        forumTopic = forumTopicOptional.get();
+        return ServiceResult.successResult("update forumTopic success", ForumTopic.class, forumTopic);
+    }
+
+    @Override
+    public ServiceResult findAllForumTopic(Long belongCourseId) {
+        if (belongCourseId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("find all forumTopic warn: belongCourseId is null")
+                    .merge(ServiceResult.successResultWithExtra(List.class, new LinkedList<ForumTopic>()), true);
+        }
+        List<com.corkili.learningserver.po.ForumTopic> allForumTopicPO =
+                forumTopicRepository.findAllByBelongCourseId(belongCourseId);
+        List<ForumTopic> allForumTopic = new LinkedList<>();
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.ForumTopic forumTopicPO : allForumTopicPO) {
+            Optional<ForumTopic> forumTopicOptional = po2bo(forumTopicPO);
+            i++;
+            if (!forumTopicOptional.isPresent()) {
+                errId.append(forumTopicPO.getId());
+                if (i != allForumTopicPO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                ForumTopic forumTopic = forumTopicOptional.get();
+                allForumTopic.add(forumTopic);
+                // cache
+                putToCache(entityName() + forumTopic.getId(), forumTopic);
+            }
+        }
+        String msg = "find all forumTopic success";
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all forumTopic warn: transfer forumTopic po [{}] to bo failed.", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, allForumTopic);
+    }
+
+
 }

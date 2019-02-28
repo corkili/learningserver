@@ -274,3 +274,35 @@ message SubmittedExamDeleteRequest {
     BaseRequest request = 1;
     sint64 submittedExamId = 2;
 }
+
+message ForumTopicCreateRequest {
+    BaseRequest request = 1;
+    string title = 2;
+    string description = 3;
+    repeated Image image = 4;
+    sint64 belongCourseId = 5;
+}
+
+message ForumTopicUpdateRequest {
+    BaseRequest request = 1;
+    sint64 forumTopicId = 2;
+    bool updateDescription = 3;
+    string description = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message ForumTopicFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseId = 2;
+}
+
+message ForumTopicGetRequest {
+    BaseRequest request = 1;
+    sint64 forumTopicId = 2;
+}
+
+message ForumTopicDeleteRequest {
+    BaseRequest request = 1;
+    sint64 forumTopicId = 2;
+}
