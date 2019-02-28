@@ -306,3 +306,34 @@ message ForumTopicDeleteRequest {
     BaseRequest request = 1;
     sint64 forumTopicId = 2;
 }
+
+message TopicCommentCreateRequest {
+    BaseRequest request = 1;
+    string content = 2;
+    repeated Image image = 3;
+    sint64 belongTopicId = 4;
+}
+
+message TopicCommentUpdateRequest {
+    BaseRequest request = 1;
+    sint64 topicCommentId = 2;
+    bool updateContent = 3;
+    string content = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message TopicCommentFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongTopicId = 2;
+}
+
+message TopicCommentGetRequest {
+    BaseRequest request = 1;
+    sint64 topicCommentId = 2;
+}
+
+message TopicCommentDeleteRequest {
+    BaseRequest request = 1;
+    sint64 topicCommentId = 2;
+}

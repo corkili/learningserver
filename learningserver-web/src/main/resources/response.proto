@@ -212,3 +212,28 @@ message ForumTopicDeleteResponse {
     BaseResponse response = 1;
     sint64 forumTopicId = 2;
 }
+
+message TopicCommentCreateResponse {
+    BaseResponse response = 1;
+    TopicCommentInfo topicCommentInfo = 2;
+}
+
+message TopicCommentUpdateResponse {
+    BaseResponse response = 1;
+    TopicCommentInfo topicCommentInfo = 2;
+}
+
+message TopicCommentFindAllResponse {
+    BaseResponse response = 1;
+    repeated TopicCommentInfo topicCommentInfo = 2;
+}
+
+message TopicCommentGetResponse {
+    BaseResponse response = 1;
+    TopicCommentInfo topicCommentInfo = 2;
+}
+
+message TopicCommentDeleteResponse {
+    BaseResponse response = 1;
+    sint64 topicCommentId = 2;
+}

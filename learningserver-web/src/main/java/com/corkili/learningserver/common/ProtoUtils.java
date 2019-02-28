@@ -8,6 +8,7 @@ import com.corkili.learningserver.bo.ForumTopic;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedExam;
+import com.corkili.learningserver.bo.TopicComment;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
@@ -43,6 +44,7 @@ import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkInfo
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedExamInfo;
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedExamSimpleInfo;
+import com.corkili.learningserver.generate.protobuf.Info.TopicCommentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.google.protobuf.ByteString;
@@ -56,6 +58,22 @@ import java.util.Map.Entry;
 
 public class ProtoUtils {
 
+    public static TopicCommentInfo generateTopicCommentInfo(TopicComment topicComment, User author, boolean loadImageData) {
+        if (topicComment == null) {
+            return TopicCommentInfo.getDefaultInstance();
+        }
+        return TopicCommentInfo.newBuilder()
+                .setTopicCommentId(topicComment.getId())
+                .setCreateTime(getTime(topicComment.getCreateTime()))
+                .setUpdateTime(getTime(topicComment.getUpdateTime()))
+                .setContent(topicComment.getContent())
+                .addAllImage(generateImageList(topicComment.getImagePaths(), loadImageData))
+                .setAuthorId(topicComment.getAuthorId())
+                .setAuthorInfo(generateUserInfo(author))
+                .setBelongTopicId(topicComment.getBelongTopicId())
+                .build();
+    }
+    
     public static ForumTopicInfo generateForumTopicInfo(ForumTopic forumTopic, User author, boolean loadImageData) {
         if (forumTopic == null) {
             return ForumTopicInfo.getDefaultInstance();

@@ -272,3 +272,13 @@ message ForumTopicInfo {
     sint64 belongCourseId = 9;
 }
 
+message TopicCommentInfo {
+    sint64 topicCommentId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string content = 4;
+    repeated Image image = 5;
+    sint64 authorId = 6;
+    UserInfo authorInfo = 7;
+    sint64 belongTopicId = 8;
+}

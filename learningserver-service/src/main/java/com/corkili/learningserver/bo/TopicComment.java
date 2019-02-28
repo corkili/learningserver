@@ -1,18 +1,16 @@
 package com.corkili.learningserver.bo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.corkili.learningserver.common.ServiceUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
-import com.corkili.learningserver.common.ServiceUtils;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -41,6 +39,18 @@ public class TopicComment implements BusinessObject {
     private Long authorId;
 
     private Long belongTopicId;
+
+    public static TopicComment copyFrom(TopicComment topicComment) {
+        TopicComment copyTopicComment = new TopicComment();
+        copyTopicComment.id = topicComment.id;
+        copyTopicComment.createTime = topicComment.createTime;
+        copyTopicComment.updateTime = topicComment.updateTime;
+        copyTopicComment.content = topicComment.content;
+        copyTopicComment.imagePaths.addAll(topicComment.imagePaths);
+        copyTopicComment.authorId = topicComment.authorId;
+        copyTopicComment.belongTopicId = topicComment.belongTopicId;
+        return copyTopicComment;
+    }
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));
