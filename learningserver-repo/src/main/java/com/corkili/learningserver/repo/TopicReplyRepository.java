@@ -1,11 +1,10 @@
 package com.corkili.learningserver.repo;
 
-import java.util.List;
-
+import com.corkili.learningserver.po.TopicReply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.corkili.learningserver.po.TopicReply;
+import java.util.List;
 
 public interface TopicReplyRepository extends JpaRepository<TopicReply, Long> {
 
@@ -14,4 +13,5 @@ public interface TopicReplyRepository extends JpaRepository<TopicReply, Long> {
 
     void deleteAllByBelongCommentId(Long belongCommentId);
 
+    List<TopicReply> findAllByBelongCommentId(Long belongCommentId);
 }

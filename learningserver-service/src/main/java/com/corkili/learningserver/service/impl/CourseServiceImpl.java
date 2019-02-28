@@ -247,15 +247,15 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete course success");
         }
         // delete associated course comment
-        serviceResult = serviceResult.mergeFrom(courseCommentService.deleteCourseCommentByCommentedCourseId(courseId), true);
+        serviceResult = serviceResult.merge(courseCommentService.deleteCourseCommentByCommentedCourseId(courseId), true);
         // delete associated course subscription
-        serviceResult = serviceResult.mergeFrom(courseSubscriptionService.deleteCourseSubscriptionBySubscribedCourseId(courseId), true);
+        serviceResult = serviceResult.merge(courseSubscriptionService.deleteCourseSubscriptionBySubscribedCourseId(courseId), true);
         // delete associated forum topic
-        serviceResult = serviceResult.mergeFrom(forumTopicService.deleteForumTopicByBelongCourseId(courseId), true);
+        serviceResult = serviceResult.merge(forumTopicService.deleteForumTopicByBelongCourseId(courseId), true);
         // delete associated course work
-        serviceResult = serviceResult.mergeFrom(courseWorkService.deleteCourseWorkByBelongCourseId(courseId), true);
+        serviceResult = serviceResult.merge(courseWorkService.deleteCourseWorkByBelongCourseId(courseId), true);
         // delete associated exam
-        serviceResult = serviceResult.mergeFrom(examService.deleteExamByBelongCourseId(courseId), true);
+        serviceResult = serviceResult.merge(examService.deleteExamByBelongCourseId(courseId), true);
         return serviceResult;
     }
 }

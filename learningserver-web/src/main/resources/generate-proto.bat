@@ -1,0 +1,1 @@
+.\protoc.exe --java_out ../java/ info.proto request.proto response.proto

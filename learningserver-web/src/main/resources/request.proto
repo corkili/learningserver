@@ -206,3 +206,221 @@ message ExamDeleteRequest {
     BaseRequest request = 1;
     sint64 examId = 2;
 }
+
+message SubmittedCourseWorkCreateRequest {
+    BaseRequest request = 1;
+    map<int32, SubmittedAnswer> submittedAnswer = 2;
+    bool finished = 3;
+    sint64 belongCourseWorkId = 4;
+}
+
+message SubmittedCourseWorkUpdateRequest {
+    BaseRequest request = 1;
+    sint64 submittedCourseWorkId = 2;
+    bool updateSubmittedAnswer = 3;
+    map<int32, CourseWorkSubmittedAnswer> submittedAnswer = 4;
+    bool updateFinished = 5;
+    bool finished = 6;
+}
+
+message SubmittedCourseWorkFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseWorkId = 2;
+}
+
+message SubmittedCourseWorkGetRequest {
+    BaseRequest request = 1;
+    bool byId = 2;
+    sint64 submittedCourseWorkId = 3;
+    sint64 belongCourseWorkId = 4;
+    sint64 submitterId = 5;
+}
+
+message SubmittedCourseWorkDeleteRequest {
+    BaseRequest request = 1;
+    sint64 submittedCourseWorkId = 2;
+}
+
+message SubmittedExamCreateRequest {
+    BaseRequest request = 1;
+    map<int32, SubmittedAnswer> submittedAnswer = 2;
+    bool finished = 3;
+    sint64 belongExamId = 4;
+}
+
+message SubmittedExamUpdateRequest {
+    BaseRequest request = 1;
+    sint64 submittedExamId = 2;
+    bool updateSubmittedAnswer = 3;
+    map<int32, ExamSubmittedAnswer> submittedAnswer = 4;
+    bool updateFinished = 5;
+    bool finished = 6;
+}
+
+message SubmittedExamFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongExamId = 2;
+}
+
+message SubmittedExamGetRequest {
+    BaseRequest request = 1;
+    bool byId = 2;
+    sint64 submittedExamId = 3;
+    sint64 belongExamId = 4;
+    sint64 submitterId = 5;
+}
+
+message SubmittedExamDeleteRequest {
+    BaseRequest request = 1;
+    sint64 submittedExamId = 2;
+}
+
+message ForumTopicCreateRequest {
+    BaseRequest request = 1;
+    string title = 2;
+    string description = 3;
+    repeated Image image = 4;
+    sint64 belongCourseId = 5;
+}
+
+message ForumTopicUpdateRequest {
+    BaseRequest request = 1;
+    sint64 forumTopicId = 2;
+    bool updateDescription = 3;
+    string description = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message ForumTopicFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCourseId = 2;
+}
+
+message ForumTopicGetRequest {
+    BaseRequest request = 1;
+    sint64 forumTopicId = 2;
+}
+
+message ForumTopicDeleteRequest {
+    BaseRequest request = 1;
+    sint64 forumTopicId = 2;
+}
+
+message TopicCommentCreateRequest {
+    BaseRequest request = 1;
+    string content = 2;
+    repeated Image image = 3;
+    sint64 belongTopicId = 4;
+}
+
+message TopicCommentUpdateRequest {
+    BaseRequest request = 1;
+    sint64 topicCommentId = 2;
+    bool updateContent = 3;
+    string content = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message TopicCommentFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongTopicId = 2;
+}
+
+message TopicCommentGetRequest {
+    BaseRequest request = 1;
+    sint64 topicCommentId = 2;
+}
+
+message TopicCommentDeleteRequest {
+    BaseRequest request = 1;
+    sint64 topicCommentId = 2;
+}
+
+message TopicReplyCreateRequest {
+    BaseRequest request = 1;
+    string content = 2;
+    repeated Image image = 3;
+    sint64 belongCommentId = 4;
+}
+
+message TopicReplyUpdateRequest {
+    BaseRequest request = 1;
+    sint64 topicReplyId = 2;
+    bool updateContent = 3;
+    string content = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message TopicReplyFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCommentId = 2;
+}
+
+message TopicReplyGetRequest {
+    BaseRequest request = 1;
+    sint64 topicReplyId = 2;
+}
+
+message TopicReplyDeleteRequest {
+    BaseRequest request = 1;
+    sint64 topicReplyId = 2;
+}
+
+message CourseCommentCreateRequest {
+    BaseRequest request = 1;
+    CourseCommentType commentType = 2;
+    string content = 3;
+    repeated Image image = 4;
+    sint64 commentedCourseId = 5;
+}
+
+message CourseCommentUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseCommentId = 2;
+    bool updateContent = 3;
+    string content = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message CourseCommentFindAllRequest {
+    BaseRequest request = 1;
+    sint64 commentedCourseId = 2;
+}
+
+message CourseCommentGetRequest {
+    BaseRequest request = 1;
+    sint64 courseCommentId = 2;
+}
+
+message CourseCommentDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseCommentId = 2;
+}
+
+message MessageCreateRequest {
+    BaseRequest request = 1;
+    oneof content {
+        string text = 2;
+        Image image = 3;
+    }
+    sint64 receiverId = 4;
+    sint64 senderId = 5;
+}
+
+message MessageFindAllRequest {
+    BaseRequest request = 1;
+    bool byReceiverId = 2;
+    sint64 receiverId = 3;
+    bool bySenderId = 4;
+    sint64 senderId = 5;
+    bool reverse = 6;
+}
+
+message MessageDeleteRequest {
+    BaseRequest request = 1;
+    sint64 messageId = 2;
+}

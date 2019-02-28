@@ -1,18 +1,16 @@
 package com.corkili.learningserver.bo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.corkili.learningserver.common.ServiceUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
-import com.corkili.learningserver.common.ServiceUtils;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -43,6 +41,19 @@ public class ForumTopic implements BusinessObject {
     private Long authorId;
 
     private Long belongCourseId;
+
+    public static ForumTopic copyFrom(ForumTopic forumTopic) {
+        ForumTopic copyForumTopic = new ForumTopic();
+        copyForumTopic.id = forumTopic.id;
+        copyForumTopic.createTime = forumTopic.createTime;
+        copyForumTopic.updateTime = forumTopic.updateTime;
+        copyForumTopic.title = forumTopic.title;
+        copyForumTopic.description = forumTopic.description;
+        copyForumTopic.imagePaths.addAll(forumTopic.imagePaths);
+        copyForumTopic.authorId = forumTopic.authorId;
+        copyForumTopic.belongCourseId = forumTopic.belongCourseId;
+        return copyForumTopic;
+    }
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

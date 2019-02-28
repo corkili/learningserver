@@ -1,20 +1,24 @@
 package com.corkili.learningserver.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.corkili.learningserver.bo.TopicComment;
+import com.corkili.learningserver.common.ImageUtils;
+import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
+import com.corkili.learningserver.repo.ForumTopicRepository;
+import com.corkili.learningserver.repo.TopicCommentRepository;
+import com.corkili.learningserver.service.TopicCommentService;
+import com.corkili.learningserver.service.TopicReplyService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
-import com.corkili.learningserver.bo.TopicComment;
-import com.corkili.learningserver.common.ServiceResult;
-import com.corkili.learningserver.repo.TopicCommentRepository;
-import com.corkili.learningserver.service.TopicCommentService;
-import com.corkili.learningserver.service.TopicReplyService;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,6 +29,9 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
 
     @Autowired
     private TopicReplyService topicReplyService;
+    
+    @Autowired
+    private ForumTopicRepository forumTopicRepository;
 
     @Override
     public Optional<TopicComment> po2bo(com.corkili.learningserver.po.TopicComment topicCommentPO) {
@@ -82,7 +89,7 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete topic comment success");
         }
         // delete associated topic reply
-        serviceResult = serviceResult.mergeFrom(topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId), true);
+        serviceResult = serviceResult.merge(topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId), true);
         return serviceResult;
     }
 
@@ -96,4 +103,99 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
         }
         return ServiceResult.successResultWithMesage("delete topic comment success");
     }
+
+    @Override
+    public ServiceResult createTopicComment(TopicComment topicComment, Map<String, byte[]> images) {
+        if (StringUtils.isBlank(topicComment.getContent())) {
+            return recordErrorAndCreateFailResultWithMessage("create topicComment error: content is empty");
+        }
+        if (topicComment.getAuthorId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("create topicComment error: authorId is null");
+        }
+        if (topicComment.getBelongTopicId() == null || !forumTopicRepository.existsById(topicComment.getBelongTopicId())) {
+            return recordErrorAndCreateFailResultWithMessage("create topicComment error: belongTopicId is null or not exists");
+        }
+        if (ImageUtils.storeImages(images)) {
+            return recordErrorAndCreateFailResultWithMessage("create topicComment error: store image failed");
+        }
+        topicComment.getImagePaths().clear();
+        topicComment.getImagePaths().addAll(images.keySet());
+        Optional<TopicComment> topicCommentOptional = create(topicComment);
+        if (!topicCommentOptional.isPresent()) {
+            ImageUtils.deleteImages(images.keySet());
+            return recordErrorAndCreateFailResultWithMessage("create topicComment error: create topicComment failed");
+        }
+        topicComment = topicCommentOptional.get();
+        return ServiceResult.successResult("create topicComment success", TopicComment.class, topicComment);
+    }
+
+    @Override
+    public ServiceResult updateTopicComment(TopicComment topicComment, Map<String, byte[]> images) {
+        if (StringUtils.isBlank(topicComment.getContent())) {
+            return recordErrorAndCreateFailResultWithMessage("update topicComment error: content is empty");
+        }
+        if (topicComment.getAuthorId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("update topicComment error: authorId is null");
+        }
+        if (topicComment.getBelongTopicId() == null || !forumTopicRepository.existsById(topicComment.getBelongTopicId())) {
+            return recordErrorAndCreateFailResultWithMessage("update topicComment error: belongTopicId is null or not exists");
+        }
+        List<String> oldImagePaths = new LinkedList<>(topicComment.getImagePaths());
+        if (images != null) {
+            if (ImageUtils.storeImages(images)) {
+                return recordErrorAndCreateFailResultWithMessage("update topicComment error: store image failed");
+            }
+            topicComment.getImagePaths().clear();
+            topicComment.getImagePaths().addAll(images.keySet());
+        }
+        Optional<TopicComment> topicCommentOptional = update(topicComment);
+        if (!topicCommentOptional.isPresent()) {
+            if (images != null) {
+                ImageUtils.deleteImages(images.keySet());
+            }
+            topicComment.getImagePaths().clear();
+            topicComment.getImagePaths().addAll(oldImagePaths);
+            return recordErrorAndCreateFailResultWithMessage("update topicComment error: update topicComment failed");
+        }
+        if (images != null) {
+            ImageUtils.deleteImages(oldImagePaths);
+        }
+        topicComment = topicCommentOptional.get();
+        return ServiceResult.successResult("update topicComment success", TopicComment.class, topicComment);
+    }
+
+    @Override
+    public ServiceResult findAllTopicComment(Long belongTopicId) {
+        if (belongTopicId == null) {
+            return recordWarnAndCreateSuccessResultWithMessage("find all topicComment warn: belongTopicId is null")
+                    .merge(ServiceResult.successResultWithExtra(List.class, new LinkedList<TopicComment>()), true);
+        }
+        List<com.corkili.learningserver.po.TopicComment> allTopicCommentPO =
+                topicCommentRepository.findAllByBelongTopicId(belongTopicId);
+        List<TopicComment> allTopicComment = new LinkedList<>();
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.TopicComment topicCommentPO : allTopicCommentPO) {
+            Optional<TopicComment> topicCommentOptional = po2bo(topicCommentPO);
+            i++;
+            if (!topicCommentOptional.isPresent()) {
+                errId.append(topicCommentPO.getId());
+                if (i != allTopicCommentPO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                TopicComment topicComment = topicCommentOptional.get();
+                allTopicComment.add(topicComment);
+                // cache
+                putToCache(entityName() + topicComment.getId(), topicComment);
+            }
+        }
+        String msg = "find all topicComment success";
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all topicComment warn: transfer topicComment po [{}] to bo failed.", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, allTopicComment);
+    }
+
 }

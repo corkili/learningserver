@@ -1,18 +1,16 @@
 package com.corkili.learningserver.bo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.corkili.learningserver.common.ServiceUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
-import com.corkili.learningserver.common.ServiceUtils;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -43,6 +41,19 @@ public class CourseComment implements BusinessObject {
     private Long commentAuthorId;
 
     private Long commentedCourseId;
+
+    public static CourseComment copyFrom(CourseComment courseComment) {
+        CourseComment copyCourseComment = new CourseComment();
+        copyCourseComment.id = courseComment.id;
+        copyCourseComment.createTime = courseComment.createTime;
+        copyCourseComment.updateTime = courseComment.updateTime;
+        copyCourseComment.commentType = courseComment.commentType;
+        copyCourseComment.content = courseComment.content;
+        copyCourseComment.imagePaths.addAll(courseComment.imagePaths);
+        copyCourseComment.commentAuthorId = courseComment.commentAuthorId;
+        copyCourseComment.commentedCourseId = courseComment.commentedCourseId;
+        return copyCourseComment;
+    }
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

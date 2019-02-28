@@ -90,7 +90,7 @@ message MultipleChoiceAnswer {
 
 message EssayAnswer {
     string text = 1;
-    repeated Image image = 2;
+//    repeated Image image = 2;
 }
 
 message CourseWorkInfo {
@@ -132,6 +132,18 @@ message SubmittedCourseWorkInfo {
     bool finished = 6;
     sint64 belongCourseWorkId = 7;
     sint64 submitterId = 8;
+    UserInfo submitterInfo = 9;
+}
+
+message SubmittedCourseWorkSimpleInfo {
+    sint64 submittedCourseWorkId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool alreadyCheckAllAnswer = 4;
+    bool finished = 5;
+    sint64 belongCourseWorkId = 6;
+    sint64 submitterId = 7;
+    UserInfo submitterInfo = 8;
 }
 
 message CourseWorkSubmittedAnswer {
@@ -191,6 +203,19 @@ message SubmittedExamInfo {
     bool finished = 7;
     sint64 belongExamId = 8;
     sint64 submitterId = 9;
+    UserInfo submitterInfo = 10;
+}
+
+message SubmittedExamSimpleInfo {
+    sint64 submittedExamId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    bool alreadyCheckAllAnswer = 4;
+    double totalScore = 5;
+    bool finished = 6;
+    sint64 belongExamId = 7;
+    sint64 submitterId = 8;
+    UserInfo submitterInfo = 9;
 }
 
 message ExamSubmittedAnswer {
@@ -232,6 +257,73 @@ message MultipleChoiceSubmittedAnswer {
 
 message EssaySubmittedAnswer {
     string text = 1;
-    repeated Image image = 2;
+//    repeated Image image = 2;
 }
 
+message ForumTopicInfo {
+    sint64 forumTopicId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string title = 4;
+    string description = 5;
+    repeated Image image = 6;
+    sint64 authorId = 7;
+    UserInfo authorInfo = 8;
+    sint64 belongCourseId = 9;
+}
+
+message TopicCommentInfo {
+    sint64 topicCommentId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string content = 4;
+    repeated Image image = 5;
+    sint64 authorId = 6;
+    UserInfo authorInfo = 7;
+    sint64 belongTopicId = 8;
+}
+
+message TopicReplyInfo {
+    sint64 topicReplyId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string content = 4;
+    repeated Image image = 5;
+    sint64 authorId = 6;
+    UserInfo authorInfo = 7;
+    sint64 belongCommentId = 8;
+}
+
+message CourseCommentInfo {
+    sint64 courseCommentId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    CourseCommentType commentType = 4;
+    string content = 5;
+    repeated Image image = 6;
+    sint64 commentAuthorId = 7;
+    UserInfo commentAuthorInfo = 8;
+    sint64 commentedCourseId = 9;
+}
+
+enum CourseCommentType {
+    VERY_GOOD = 0;
+    GOOD = 1;
+    MID = 2;
+    JUST_MID = 3;
+    BAD = 4;
+}
+
+message MessageInfo {
+    sint64 messageId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    oneof content {
+        string text = 4;
+        Image image = 5;
+    }
+    sint64 receiverId = 6;
+    UserInfo receiverInfo = 7;
+    sint64 senderId = 8;
+    UserInfo senderInfo = 9;
+}

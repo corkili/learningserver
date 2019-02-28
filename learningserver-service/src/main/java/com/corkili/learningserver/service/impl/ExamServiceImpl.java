@@ -75,9 +75,9 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
             serviceResult = ServiceResult.successResultWithMesage("delete exam success");
         }
         // delete associated exam question
-        serviceResult = serviceResult.mergeFrom(examQuestionService.deleteExamQuestionByBelongExamId(examId), true);
+        serviceResult = serviceResult.merge(examQuestionService.deleteExamQuestionByBelongExamId(examId), true);
         // delete associated submitted exam
-        serviceResult = serviceResult.mergeFrom(submittedExamService.deleteSubmittedExamByBelongExamId(examId), true);
+        serviceResult = serviceResult.merge(submittedExamService.deleteSubmittedExamByBelongExamId(examId), true);
         return serviceResult;
     }
 
@@ -202,7 +202,7 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
         List<Exam> allExam = new LinkedList<>();
         if (belongCourseId == null) {
             return recordWarnAndCreateSuccessResultWithMessage("belongCourseId is null")
-                    .mergeFrom(ServiceResult.successResultWithExtra(List.class, allExam), true);
+                    .merge(ServiceResult.successResultWithExtra(List.class, allExam), true);
         }
         List<com.corkili.learningserver.po.Exam> allExamPO = examRepository
                 .findAllByBelongCourseId(belongCourseId);

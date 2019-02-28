@@ -1,20 +1,18 @@
 package com.corkili.learningserver.bo;
 
+import com.corkili.learningserver.common.ServiceUtils;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import com.corkili.learningserver.common.ServiceUtils;
 
 public interface SubmittedAnswer {
 
@@ -23,6 +21,10 @@ public interface SubmittedAnswer {
     void setAnswer(String answer);
 
     abstract class AbstractSubmittedAnswer implements SubmittedAnswer {
+
+        public AbstractSubmittedAnswer() {
+
+        }
 
         public AbstractSubmittedAnswer(String answer) {
             setAnswer(answer);
@@ -59,6 +61,10 @@ public interface SubmittedAnswer {
     class MultipleFillingSubmittedAnswer extends AbstractSubmittedAnswer {
 
         private Map<Integer, Pair> answerMap;
+
+        public MultipleFillingSubmittedAnswer() {
+            answerMap = new HashMap<>();
+        }
 
         public MultipleFillingSubmittedAnswer(String answer) {
             super(answer);
@@ -98,7 +104,7 @@ public interface SubmittedAnswer {
             String answer;
             double scoreOrCheckStatus;
 
-            private Pair(int index, String answer, double scoreOrCheckStatus) {
+            public Pair(int index, String answer, double scoreOrCheckStatus) {
                 this.index = index;
                 this.answer = answer;
                 this.scoreOrCheckStatus = scoreOrCheckStatus;
@@ -137,6 +143,10 @@ public interface SubmittedAnswer {
 
         private List<Integer> choices;
 
+        public MultipleChoiceSubmittedAnswer() {
+            choices = new LinkedList<>();
+        }
+
         public MultipleChoiceSubmittedAnswer(String answer) {
             super(answer);
         }
@@ -168,7 +178,10 @@ public interface SubmittedAnswer {
     class EssaySubmittedAnswer extends AbstractSubmittedAnswer {
 
         private String text;
-        private List<String> imagePaths;
+//        private List<String> imagePaths;
+
+        public EssaySubmittedAnswer() {
+        }
 
         public EssaySubmittedAnswer(String answer) {
             super(answer);
@@ -176,8 +189,9 @@ public interface SubmittedAnswer {
 
         @Override
         public String getAnswer() {
-            return text + (imagePaths.isEmpty() ? "" :
-                    ("{##image##}" + ServiceUtils.list2String(imagePaths, "{!!!}")));
+//            return text + (imagePaths.isEmpty() ? "" :
+//                    ("{##image##}" + ServiceUtils.list2String(imagePaths, "{!!!}")));
+            return text;
         }
 
         @Override
@@ -185,23 +199,25 @@ public interface SubmittedAnswer {
             if (StringUtils.isBlank(answer)) {
                 return;
             }
-            if (answer.startsWith("{##image##}")) {
-                this.text = "";
-                this.imagePaths = ServiceUtils.string2List(answer, Pattern.compile("\\{!!!}"));
-            } else {
-                if (answer.contains("{##image##}") && !answer.endsWith("{##image##}")) {
-                    String[] tmp = answer.split("\\{##image##}");
-                    this.text = tmp[0];
-                    this.imagePaths = ServiceUtils.string2List(tmp[1], Pattern.compile("\\{!!!}"));
-                } else {
-                    if (answer.endsWith("{##image##}")) {
-                        this.text = answer.substring(0, answer.length() - "{##image##}".length());
-                    } else {
-                        this.text = answer;
-                    }
-                    this.imagePaths = new ArrayList<>();
-                }
-            }
+            this.text = answer;
+
+//            if (answer.startsWith("{##image##}")) {
+//                this.text = "";
+//                this.imagePaths = ServiceUtils.string2List(answer, Pattern.compile("\\{!!!}"));
+//            } else {
+//                if (answer.contains("{##image##}") && !answer.endsWith("{##image##}")) {
+//                    String[] tmp = answer.split("\\{##image##}");
+//                    this.text = tmp[0];
+//                    this.imagePaths = ServiceUtils.string2List(tmp[1], Pattern.compile("\\{!!!}"));
+//                } else {
+//                    if (answer.endsWith("{##image##}")) {
+//                        this.text = answer.substring(0, answer.length() - "{##image##}".length());
+//                    } else {
+//                        this.text = answer;
+//                    }
+//                    this.imagePaths = new ArrayList<>();
+//                }
+//            }
         }
     }
 

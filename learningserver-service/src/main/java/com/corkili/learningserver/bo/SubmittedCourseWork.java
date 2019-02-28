@@ -1,20 +1,19 @@
 package com.corkili.learningserver.bo;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.corkili.learningserver.common.ServiceUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
-import com.corkili.learningserver.common.ServiceUtils;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -52,6 +51,21 @@ public class SubmittedCourseWork implements BusinessObject {
 
     private Long submitterId;
 
+    public static SubmittedCourseWork copyFrom(SubmittedCourseWork submittedCourseWork) {
+        SubmittedCourseWork copySubmittedCourseWork = new SubmittedCourseWork();
+        copySubmittedCourseWork.id = submittedCourseWork.id;
+        copySubmittedCourseWork.createTime = submittedCourseWork.createTime;
+        copySubmittedCourseWork.updateTime = submittedCourseWork.updateTime;
+        Map<Integer, QuestionType> questionTypeMap = new HashMap<>();
+        submittedCourseWork.submittedAnswers.forEach((k, v) -> questionTypeMap.put(k, v.getQuestionType()));
+        copySubmittedCourseWork.setSubmittedAnswers(submittedCourseWork.getSubmittedAnswersStr(), questionTypeMap);
+        copySubmittedCourseWork.alreadyCheckAllAnswer = submittedCourseWork.alreadyCheckAllAnswer;
+        copySubmittedCourseWork.finished = submittedCourseWork.finished;
+        copySubmittedCourseWork.belongCourseWorkId = submittedCourseWork.belongCourseWorkId;
+        copySubmittedCourseWork.submitterId = submittedCourseWork.submitterId;
+        return copySubmittedCourseWork;
+    }
+
     public void setSubmittedAnswers(String submittedAnswersStr, Map<Integer, QuestionType> questionTypeMap) {
         List<String> submittedAnswerList = ServiceUtils.string2List(submittedAnswersStr, Pattern.compile("\\{\\^\\^\\^}"));
         for (String answer : submittedAnswerList) {
@@ -78,11 +92,18 @@ public class SubmittedCourseWork implements BusinessObject {
         private int questionIndex;
         private SubmittedAnswer submittedAnswer;
         private int checkStatus;
+        private QuestionType questionType;
 
         private InnerSubmittedAnswer(int questionIndex, SubmittedAnswer submittedAnswer) {
             this.questionIndex = questionIndex;
             this.submittedAnswer = submittedAnswer;
             this.checkStatus = -1;
+            for (QuestionType type : QuestionType.values()) {
+                if (type.getSubmittedAnswerType().isInstance(submittedAnswer)) {
+                    this.questionType = type;
+                    break;
+                }
+            }
         }
 
         private InnerSubmittedAnswer(String answer, Map<Integer, QuestionType> questionTypeMap, Long belongCourseWorkId) {
@@ -112,6 +133,7 @@ public class SubmittedCourseWork implements BusinessObject {
                 }
                 this.submittedAnswer = questionType.getSubmittedAnswerType()
                         .getConstructor(String.class).newInstance(tmp[1]);
+                this.questionType = questionType;
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
