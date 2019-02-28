@@ -1,5 +1,8 @@
 package com.corkili.learningserver.common;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,20 +12,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
-
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 public class ImageUtils {
 
     private static final String basePath = "../images/";
 
-    public static String getImagePath(String entityName, String imageName, long teacherId) {
+    public static String getImagePath(String entityName, String imageName, long userId) {
         while (imageName.startsWith("/")) {
             imageName = imageName.substring(1);
         }
-        return ServiceUtils.format("{}-{}-{}-{}", entityName, teacherId,
+        return ServiceUtils.format("{}-{}-{}-{}", entityName, userId,
                 UUID.randomUUID().toString().replaceAll("-", ""), imageName);
     }
 

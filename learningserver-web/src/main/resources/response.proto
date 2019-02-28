@@ -287,3 +287,18 @@ message CourseCommentDeleteResponse {
     BaseResponse response = 1;
     sint64 courseCommentId = 2;
 }
+
+message MessageCreateResponse {
+    BaseResponse response = 1;
+    MessageInfo messageInfo = 2;
+}
+
+message MessageFindAllResponse {
+    BaseResponse response = 1;
+    repeated MessageInfo messageInfo = 2;
+}
+
+message MessageDeleteResponse {
+    BaseResponse response = 1;
+    sint64 messageId = 2;
+}

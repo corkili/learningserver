@@ -400,3 +400,27 @@ message CourseCommentDeleteRequest {
     BaseRequest request = 1;
     sint64 courseCommentId = 2;
 }
+
+message MessageCreateRequest {
+    BaseRequest request = 1;
+    oneof content {
+        string text = 2;
+        Image image = 3;
+    }
+    sint64 receiverId = 4;
+    sint64 senderId = 5;
+}
+
+message MessageFindAllRequest {
+    BaseRequest request = 1;
+    bool byReceiverId = 2;
+    sint64 receiverId = 3;
+    bool bySenderId = 4;
+    sint64 senderId = 5;
+    bool reverse = 6;
+}
+
+message MessageDeleteRequest {
+    BaseRequest request = 1;
+    sint64 messageId = 2;
+}

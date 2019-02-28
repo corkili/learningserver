@@ -6,6 +6,7 @@ import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.ForumTopic;
+import com.corkili.learningserver.bo.Message;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedExam;
@@ -29,6 +30,7 @@ import com.corkili.learningserver.generate.protobuf.Info.ExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.ExamSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.ForumTopicInfo;
 import com.corkili.learningserver.generate.protobuf.Info.Image;
+import com.corkili.learningserver.generate.protobuf.Info.MessageInfo;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleChoiceSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.MultipleFillingAnswer;
@@ -54,6 +56,7 @@ import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.google.protobuf.ByteString;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -62,6 +65,26 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ProtoUtils {
+
+    public static MessageInfo generateMessageInfo(Message message, User receiver, User sender, boolean loadImageData) {
+        if (message == null) {
+            return MessageInfo.getDefaultInstance();
+        }
+        MessageInfo.Builder builder = MessageInfo.newBuilder()
+                .setMessageId(message.getId())
+                .setCreateTime(getTime(message.getCreateTime()))
+                .setUpdateTime(getTime(message.getUpdateTime()))
+                .setReceiverId(receiver.getId())
+                .setReceiverInfo(generateUserInfo(receiver))
+                .setSenderId(sender.getId())
+                .setSenderInfo(generateUserInfo(sender));
+        if (message.isImage()) {
+            builder.setImage(generateImageList(Collections.singletonList(message.getContent()), loadImageData).get(0));
+        } else {
+            builder.setText(message.getContent());
+        }
+        return builder.build();
+    }
 
     public static CourseCommentInfo generateCourseCommentInfo(CourseComment courseComment, User author, boolean loadImageData) {
         if (courseComment == null) {

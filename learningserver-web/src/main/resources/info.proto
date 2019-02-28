@@ -313,3 +313,17 @@ enum CourseCommentType {
     JUST_MID = 3;
     BAD = 4;
 }
+
+message MessageInfo {
+    sint64 messageId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    oneof content {
+        string text = 4;
+        Image image = 5;
+    }
+    sint64 receiverId = 6;
+    UserInfo receiverInfo = 7;
+    sint64 senderId = 8;
+    UserInfo senderInfo = 9;
+}
