@@ -1,18 +1,16 @@
 package com.corkili.learningserver.bo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.corkili.learningserver.common.ServiceUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
-import com.corkili.learningserver.common.ServiceUtils;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -41,6 +39,18 @@ public class TopicReply implements BusinessObject {
     private Long authorId;
 
     private Long belongCommentId;
+
+    public static TopicReply copyFrom(TopicReply topicReply) {
+        TopicReply copyTopicReply = new TopicReply();
+        copyTopicReply.id = topicReply.id;
+        copyTopicReply.createTime = topicReply.createTime;
+        copyTopicReply.updateTime = topicReply.updateTime;
+        copyTopicReply.content = topicReply.content;
+        copyTopicReply.imagePaths.addAll(topicReply.imagePaths);
+        copyTopicReply.authorId = topicReply.authorId;
+        copyTopicReply.belongCommentId = topicReply.belongCommentId;
+        return copyTopicReply;
+    }
 
     public void setImagePaths(String imagePathsStr) {
         imagePaths = ServiceUtils.string2List(imagePathsStr, Pattern.compile("\\{!!!}"));

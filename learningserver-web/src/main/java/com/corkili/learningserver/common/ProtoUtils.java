@@ -9,6 +9,7 @@ import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedExam;
 import com.corkili.learningserver.bo.TopicComment;
+import com.corkili.learningserver.bo.TopicReply;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
@@ -45,6 +46,7 @@ import com.corkili.learningserver.generate.protobuf.Info.SubmittedCourseWorkSimp
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedExamInfo;
 import com.corkili.learningserver.generate.protobuf.Info.SubmittedExamSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.TopicCommentInfo;
+import com.corkili.learningserver.generate.protobuf.Info.TopicReplyInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.google.protobuf.ByteString;
@@ -58,6 +60,22 @@ import java.util.Map.Entry;
 
 public class ProtoUtils {
 
+    public static TopicReplyInfo generateTopicReplyInfo(TopicReply topicReply, User author, boolean loadImageData) {
+        if (topicReply == null) {
+            return TopicReplyInfo.getDefaultInstance();
+        }
+        return TopicReplyInfo.newBuilder()
+                .setTopicReplyId(topicReply.getId())
+                .setCreateTime(getTime(topicReply.getCreateTime()))
+                .setUpdateTime(getTime(topicReply.getUpdateTime()))
+                .setContent(topicReply.getContent())
+                .addAllImage(generateImageList(topicReply.getImagePaths(), loadImageData))
+                .setAuthorId(topicReply.getAuthorId())
+                .setAuthorInfo(generateUserInfo(author))
+                .setBelongCommentId(topicReply.getBelongCommentId())
+                .build();
+    }
+    
     public static TopicCommentInfo generateTopicCommentInfo(TopicComment topicComment, User author, boolean loadImageData) {
         if (topicComment == null) {
             return TopicCommentInfo.getDefaultInstance();

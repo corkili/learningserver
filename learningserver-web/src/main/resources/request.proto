@@ -337,3 +337,34 @@ message TopicCommentDeleteRequest {
     BaseRequest request = 1;
     sint64 topicCommentId = 2;
 }
+
+message TopicReplyCreateRequest {
+    BaseRequest request = 1;
+    string content = 2;
+    repeated Image image = 3;
+    sint64 belongCommentId = 4;
+}
+
+message TopicReplyUpdateRequest {
+    BaseRequest request = 1;
+    sint64 topicReplyId = 2;
+    bool updateContent = 3;
+    string content = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message TopicReplyFindAllRequest {
+    BaseRequest request = 1;
+    sint64 belongCommentId = 2;
+}
+
+message TopicReplyGetRequest {
+    BaseRequest request = 1;
+    sint64 topicReplyId = 2;
+}
+
+message TopicReplyDeleteRequest {
+    BaseRequest request = 1;
+    sint64 topicReplyId = 2;
+}
