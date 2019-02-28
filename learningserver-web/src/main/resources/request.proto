@@ -368,3 +368,35 @@ message TopicReplyDeleteRequest {
     BaseRequest request = 1;
     sint64 topicReplyId = 2;
 }
+
+message CourseCommentCreateRequest {
+    BaseRequest request = 1;
+    CourseCommentType commentType = 2;
+    string content = 3;
+    repeated Image image = 4;
+    sint64 commentedCourseId = 5;
+}
+
+message CourseCommentUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseCommentId = 2;
+    bool updateContent = 3;
+    string content = 4;
+    bool updateImage = 5;
+    repeated Image image = 6;
+}
+
+message CourseCommentFindAllRequest {
+    BaseRequest request = 1;
+    sint64 commentedCourseId = 2;
+}
+
+message CourseCommentGetRequest {
+    BaseRequest request = 1;
+    sint64 courseCommentId = 2;
+}
+
+message CourseCommentDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseCommentId = 2;
+}

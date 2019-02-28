@@ -293,3 +293,23 @@ message TopicReplyInfo {
     UserInfo authorInfo = 7;
     sint64 belongCommentId = 8;
 }
+
+message CourseCommentInfo {
+    sint64 courseCommentId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    CourseCommentType commentType = 4;
+    string content = 5;
+    repeated Image image = 6;
+    sint64 commentAuthorId = 7;
+    UserInfo commentAuthorInfo = 8;
+    sint64 commentedCourseId = 9;
+}
+
+enum CourseCommentType {
+    VERY_GOOD = 0;
+    GOOD = 1;
+    MID = 2;
+    JUST_MID = 3;
+    BAD = 4;
+}

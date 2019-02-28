@@ -1,6 +1,7 @@
 package com.corkili.learningserver.common;
 
 import com.corkili.learningserver.bo.Course;
+import com.corkili.learningserver.bo.CourseComment;
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
@@ -13,6 +14,8 @@ import com.corkili.learningserver.bo.TopicReply;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
+import com.corkili.learningserver.generate.protobuf.Info.CourseCommentInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseCommentType;
 import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
@@ -60,6 +63,23 @@ import java.util.Map.Entry;
 
 public class ProtoUtils {
 
+    public static CourseCommentInfo generateCourseCommentInfo(CourseComment courseComment, User author, boolean loadImageData) {
+        if (courseComment == null) {
+            return CourseCommentInfo.getDefaultInstance();
+        }
+        return CourseCommentInfo.newBuilder()
+                .setCourseCommentId(courseComment.getId())
+                .setCreateTime(getTime(courseComment.getCreateTime()))
+                .setUpdateTime(getTime(courseComment.getUpdateTime()))
+                .setCommentType(CourseCommentType.valueOf(courseComment.getCommentType().name()))
+                .setContent(courseComment.getContent())
+                .addAllImage(generateImageList(courseComment.getImagePaths(), loadImageData))
+                .setCommentAuthorId(courseComment.getCommentAuthorId())
+                .setCommentAuthorInfo(generateUserInfo(author))
+                .setCommentedCourseId(courseComment.getCommentedCourseId())
+                .build();
+    }
+    
     public static TopicReplyInfo generateTopicReplyInfo(TopicReply topicReply, User author, boolean loadImageData) {
         if (topicReply == null) {
             return TopicReplyInfo.getDefaultInstance();

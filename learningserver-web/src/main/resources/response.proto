@@ -262,3 +262,28 @@ message TopicReplyDeleteResponse {
     BaseResponse response = 1;
     sint64 topicReplyId = 2;
 }
+
+message CourseCommentCreateResponse {
+    BaseResponse response = 1;
+    CourseCommentInfo courseCommentInfo = 2;
+}
+
+message CourseCommentUpdateResponse {
+    BaseResponse response = 1;
+    CourseCommentInfo courseCommentInfo = 2;
+}
+
+message CourseCommentFindAllResponse {
+    BaseResponse response = 1;
+    repeated CourseCommentInfo courseCommentInfo = 2;
+}
+
+message CourseCommentGetResponse {
+    BaseResponse response = 1;
+    CourseCommentInfo courseCommentInfo = 2;
+}
+
+message CourseCommentDeleteResponse {
+    BaseResponse response = 1;
+    sint64 courseCommentId = 2;
+}

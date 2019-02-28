@@ -1,11 +1,10 @@
 package com.corkili.learningserver.repo;
 
-import java.util.List;
-
+import com.corkili.learningserver.po.CourseComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.corkili.learningserver.po.CourseComment;
+import java.util.List;
 
 public interface CourseCommentRepository extends JpaRepository<CourseComment, Long> {
 
@@ -14,4 +13,5 @@ public interface CourseCommentRepository extends JpaRepository<CourseComment, Lo
 
     void deleteAllByCommentedCourseId(Long commentedCourseId);
 
+    List<CourseComment> findAllByCommentedCourseId(Long commentedCourseId);
 }
