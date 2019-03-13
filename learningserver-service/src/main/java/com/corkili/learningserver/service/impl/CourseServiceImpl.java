@@ -62,7 +62,7 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         String id = coursePO.getId() == null ? "" : coursePO.getId().toString();
         Course course = superOptional.get();
         course.setImagePaths(coursePO.getImagePaths());
-        if (course.setTags(coursePO.getTags())) {
+        if (!course.setTags(coursePO.getTags())) {
             log.error("tags of course po [{}] is empty", id);
             return Optional.empty();
         }
@@ -120,7 +120,7 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
         if (course.getTeacherId() == null) {
             return recordErrorAndCreateFailResultWithMessage("create course error: teacher is null");
         }
-        if (ImageUtils.storeImages(images)) {
+        if (!ImageUtils.storeImages(images)) {
             return recordErrorAndCreateFailResultWithMessage("create course error: store image failed");
         }
         course.getImagePaths().clear();

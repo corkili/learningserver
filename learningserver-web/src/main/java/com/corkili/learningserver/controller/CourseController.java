@@ -71,6 +71,7 @@ public class CourseController {
             course.addTag(tag);
         }
         course.setTeacherId(teacherId);
+        course.setOpen(request.getOpen());
         ServiceResult serviceResult = courseService.createCourse(course, images);
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         CourseInfo courseInfo;
@@ -95,7 +96,14 @@ public class CourseController {
                     .setResponse(baseResponse)
                     .build();
         }
-        Long teacherId = !request.getByTeacherId() ? null : request.getTeacherId();
+        Long teacherId = null;
+        if (request.getByTeacherId()) {
+            if (request.getTeacherId() < 0) {
+                teacherId = tokenManager.getUserIdAssociatedWithToken(token);
+            } else {
+                teacherId = request.getTeacherId();
+            }
+        }
         String teacherName = !request.getByTeacherName() ? null : request.getTeacherName();
         List<String> keywords = !request.getByKeyword() ? null : new LinkedList<>(request.getKeywordList());
         ServiceResult serviceResult = courseService.findAllCourse(request.getAll(), teacherId, teacherName, keywords);
@@ -152,6 +160,9 @@ public class CourseController {
             if (request.getUpdateTags()) {
                 copyCourse.getTags().clear();
                 copyCourse.getTags().addAll(request.getTagList());
+            }
+            if (request.getUpdateOpen()) {
+                copyCourse.setOpen(request.getOpen());
             }
             ServiceResult serviceResult = courseService.updateCourse(copyCourse, images);
             baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);

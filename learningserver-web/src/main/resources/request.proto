@@ -49,6 +49,7 @@ message CourseCreateRequest {
     string description = 3;
     repeated Image image = 4;
     repeated string tag = 5;
+    bool open = 6;
 }
 
 message CourseFindAllRequest {
@@ -73,6 +74,8 @@ message CourseUpdateRequest {
     repeated Image image = 8;
     bool updateTags = 9;
     repeated string tag = 10;
+    bool updateOpen = 11;
+    bool open = 12;
 }
 
 message CourseDeleteRequest {

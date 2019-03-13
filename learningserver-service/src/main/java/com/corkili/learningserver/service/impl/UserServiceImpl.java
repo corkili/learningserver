@@ -163,7 +163,7 @@ public class UserServiceImpl extends ServiceImpl<User, com.corkili.learningserve
         Optional<User> userOptional = retrieveUserByPhoneAndUserType(phone, userType);
         if (!userOptional.isPresent()) {
             return recordErrorAndCreateFailResultWithMessage(
-                    "login error: phone [{}] with userType [{}] already exist", phone, userType);
+                    "login error: phone [{}] with userType [{}] not exist", phone, userType);
         }
         User user = userOptional.get();
         try {

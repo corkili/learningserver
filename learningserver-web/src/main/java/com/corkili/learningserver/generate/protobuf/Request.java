@@ -5405,6 +5405,11 @@ public final class Request {
      */
     com.google.protobuf.ByteString
         getTagBytes(int index);
+
+    /**
+     * <code>bool open = 6;</code>
+     */
+    boolean getOpen();
   }
   /**
    * Protobuf type {@code CourseCreateRequest}
@@ -5423,6 +5428,7 @@ public final class Request {
       description_ = "";
       image_ = java.util.Collections.emptyList();
       tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      open_ = false;
     }
 
     @java.lang.Override
@@ -5490,6 +5496,11 @@ public final class Request {
                 mutable_bitField0_ |= 0x00000010;
               }
               tag_.add(s);
+              break;
+            }
+            case 48: {
+
+              open_ = input.readBool();
               break;
             }
             default: {
@@ -5684,6 +5695,15 @@ public final class Request {
       return tag_.getByteString(index);
     }
 
+    public static final int OPEN_FIELD_NUMBER = 6;
+    private boolean open_;
+    /**
+     * <code>bool open = 6;</code>
+     */
+    public boolean getOpen() {
+      return open_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -5712,6 +5732,9 @@ public final class Request {
       }
       for (int i = 0; i < tag_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, tag_.getRaw(i));
+      }
+      if (open_ != false) {
+        output.writeBool(6, open_);
       }
       unknownFields.writeTo(output);
     }
@@ -5744,6 +5767,10 @@ public final class Request {
         size += dataSize;
         size += 1 * getTagList().size();
       }
+      if (open_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, open_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -5773,6 +5800,8 @@ public final class Request {
           .equals(other.getImageList());
       result = result && getTagList()
           .equals(other.getTagList());
+      result = result && (getOpen()
+          == other.getOpen());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -5800,6 +5829,9 @@ public final class Request {
         hash = (37 * hash) + TAG_FIELD_NUMBER;
         hash = (53 * hash) + getTagList().hashCode();
       }
+      hash = (37 * hash) + OPEN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getOpen());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5952,6 +5984,8 @@ public final class Request {
         }
         tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
+        open_ = false;
+
         return this;
       }
 
@@ -6001,6 +6035,7 @@ public final class Request {
           bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.tag_ = tag_;
+        result.open_ = open_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6096,6 +6131,9 @@ public final class Request {
             tag_.addAll(other.tag_);
           }
           onChanged();
+        }
+        if (other.getOpen() != false) {
+          setOpen(other.getOpen());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -6712,6 +6750,32 @@ public final class Request {
   checkByteStringIsUtf8(value);
         ensureTagIsMutable();
         tag_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private boolean open_ ;
+      /**
+       * <code>bool open = 6;</code>
+       */
+      public boolean getOpen() {
+        return open_;
+      }
+      /**
+       * <code>bool open = 6;</code>
+       */
+      public Builder setOpen(boolean value) {
+        
+        open_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool open = 6;</code>
+       */
+      public Builder clearOpen() {
+        
+        open_ = false;
         onChanged();
         return this;
       }
@@ -8130,6 +8194,16 @@ public final class Request {
      */
     com.google.protobuf.ByteString
         getTagBytes(int index);
+
+    /**
+     * <code>bool updateOpen = 11;</code>
+     */
+    boolean getUpdateOpen();
+
+    /**
+     * <code>bool open = 12;</code>
+     */
+    boolean getOpen();
   }
   /**
    * Protobuf type {@code CourseUpdateRequest}
@@ -8153,6 +8227,8 @@ public final class Request {
       image_ = java.util.Collections.emptyList();
       updateTags_ = false;
       tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      updateOpen_ = false;
+      open_ = false;
     }
 
     @java.lang.Override
@@ -8245,6 +8321,16 @@ public final class Request {
                 mutable_bitField0_ |= 0x00000200;
               }
               tag_.add(s);
+              break;
+            }
+            case 88: {
+
+              updateOpen_ = input.readBool();
+              break;
+            }
+            case 96: {
+
+              open_ = input.readBool();
               break;
             }
             default: {
@@ -8484,6 +8570,24 @@ public final class Request {
       return tag_.getByteString(index);
     }
 
+    public static final int UPDATEOPEN_FIELD_NUMBER = 11;
+    private boolean updateOpen_;
+    /**
+     * <code>bool updateOpen = 11;</code>
+     */
+    public boolean getUpdateOpen() {
+      return updateOpen_;
+    }
+
+    public static final int OPEN_FIELD_NUMBER = 12;
+    private boolean open_;
+    /**
+     * <code>bool open = 12;</code>
+     */
+    public boolean getOpen() {
+      return open_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -8527,6 +8631,12 @@ public final class Request {
       }
       for (int i = 0; i < tag_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 10, tag_.getRaw(i));
+      }
+      if (updateOpen_ != false) {
+        output.writeBool(11, updateOpen_);
+      }
+      if (open_ != false) {
+        output.writeBool(12, open_);
       }
       unknownFields.writeTo(output);
     }
@@ -8579,6 +8689,14 @@ public final class Request {
         size += dataSize;
         size += 1 * getTagList().size();
       }
+      if (updateOpen_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, updateOpen_);
+      }
+      if (open_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(12, open_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -8618,6 +8736,10 @@ public final class Request {
           == other.getUpdateTags());
       result = result && getTagList()
           .equals(other.getTagList());
+      result = result && (getUpdateOpen()
+          == other.getUpdateOpen());
+      result = result && (getOpen()
+          == other.getOpen());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -8660,6 +8782,12 @@ public final class Request {
         hash = (37 * hash) + TAG_FIELD_NUMBER;
         hash = (53 * hash) + getTagList().hashCode();
       }
+      hash = (37 * hash) + UPDATEOPEN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUpdateOpen());
+      hash = (37 * hash) + OPEN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getOpen());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -8822,6 +8950,10 @@ public final class Request {
 
         tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000200);
+        updateOpen_ = false;
+
+        open_ = false;
+
         return this;
       }
 
@@ -8876,6 +9008,8 @@ public final class Request {
           bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.tag_ = tag_;
+        result.updateOpen_ = updateOpen_;
+        result.open_ = open_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8986,6 +9120,12 @@ public final class Request {
             tag_.addAll(other.tag_);
           }
           onChanged();
+        }
+        if (other.getUpdateOpen() != false) {
+          setUpdateOpen(other.getUpdateOpen());
+        }
+        if (other.getOpen() != false) {
+          setOpen(other.getOpen());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -9732,6 +9872,58 @@ public final class Request {
   checkByteStringIsUtf8(value);
         ensureTagIsMutable();
         tag_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private boolean updateOpen_ ;
+      /**
+       * <code>bool updateOpen = 11;</code>
+       */
+      public boolean getUpdateOpen() {
+        return updateOpen_;
+      }
+      /**
+       * <code>bool updateOpen = 11;</code>
+       */
+      public Builder setUpdateOpen(boolean value) {
+        
+        updateOpen_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool updateOpen = 11;</code>
+       */
+      public Builder clearUpdateOpen() {
+        
+        updateOpen_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean open_ ;
+      /**
+       * <code>bool open = 12;</code>
+       */
+      public boolean getOpen() {
+        return open_;
+      }
+      /**
+       * <code>bool open = 12;</code>
+       */
+      public Builder setOpen(boolean value) {
+        
+        open_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool open = 12;</code>
+       */
+      public Builder clearOpen() {
+        
+        open_ = false;
         onChanged();
         return this;
       }
@@ -57813,211 +58005,212 @@ public final class Request {
       "\001(\0162\t.UserType\022\023\n\013updatePhone\030\004 \001(\010\022\020\n\010n" +
       "ewPhone\030\005 \001(\t\022\026\n\016updateUsername\030\006 \001(\010\022\023\n" +
       "\013newUsername\030\007 \001(\t\022\026\n\016updatePassword\030\010 \001" +
-      "(\010\022\023\n\013newPassword\030\t \001(\t\"\201\001\n\023CourseCreate" +
+      "(\010\022\023\n\013newPassword\030\t \001(\t\"\217\001\n\023CourseCreate" +
       "Request\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\022" +
       "\n\ncourseName\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022" +
-      "\025\n\005image\030\004 \003(\0132\006.Image\022\013\n\003tag\030\005 \003(\t\"\272\001\n\024" +
-      "CourseFindAllRequest\022\035\n\007request\030\001 \001(\0132\014." +
-      "BaseRequest\022\013\n\003all\030\002 \001(\010\022\023\n\013byTeacherId\030" +
-      "\003 \001(\010\022\021\n\tteacherId\030\004 \001(\022\022\025\n\rbyTeacherNam" +
-      "e\030\005 \001(\010\022\023\n\013teacherName\030\006 \001(\t\022\021\n\tbyKeywor" +
-      "d\030\007 \001(\010\022\017\n\007keyword\030\010 \003(\t\"\361\001\n\023CourseUpdat" +
-      "eRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
-      "\020\n\010courseId\030\002 \001(\022\022\030\n\020updateCourseName\030\003 " +
-      "\001(\010\022\022\n\ncourseName\030\004 \001(\t\022\031\n\021updateDescrip" +
-      "tion\030\005 \001(\010\022\023\n\013description\030\006 \001(\t\022\023\n\013updat" +
-      "eImage\030\007 \001(\010\022\025\n\005image\030\010 \003(\0132\006.Image\022\022\n\nu" +
-      "pdateTags\030\t \001(\010\022\013\n\003tag\030\n \003(\t\"F\n\023CourseDe" +
-      "leteRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
-      "st\022\020\n\010courseId\030\002 \001(\022\"\226\002\n\025QuestionImportR" +
-      "equest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\020\n" +
-      "\010question\030\002 \001(\t\022\025\n\005image\030\003 \003(\0132\006.Image\022#" +
-      "\n\014questionType\030\004 \001(\0162\r.QuestionType\022\021\n\ta" +
-      "utoCheck\030\005 \001(\010\0224\n\007choices\030\006 \003(\0132#.Questi" +
-      "onImportRequest.ChoicesEntry\022\027\n\006answer\030\007" +
-      " \001(\0132\007.Answer\032.\n\014ChoicesEntry\022\013\n\003key\030\001 \001" +
-      "(\005\022\r\n\005value\030\002 \001(\t:\0028\001\"\245\001\n\026QuestionFindAl" +
-      "lRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
-      "\013\n\003all\030\002 \001(\010\022\021\n\tbyKeyword\030\003 \001(\010\022\017\n\007keywo" +
-      "rd\030\004 \003(\t\022\026\n\016byQuestionType\030\005 \001(\010\022#\n\014ques" +
-      "tionType\030\006 \003(\0162\r.QuestionType\"Z\n\022Questio" +
-      "nGetRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
-      "st\022\022\n\nquestionId\030\002 \003(\022\022\021\n\tloadImage\030\003 \001(" +
-      "\010\"\271\003\n\025QuestionUpdateRequest\022\035\n\007request\030\001" +
-      " \001(\0132\014.BaseRequest\022\022\n\nquestionId\030\002 \001(\022\022\026" +
-      "\n\016updateQuestion\030\003 \001(\010\022\020\n\010question\030\004 \001(\t" +
-      "\022\023\n\013updateImage\030\005 \001(\010\022\025\n\005image\030\006 \003(\0132\006.I" +
-      "mage\022\032\n\022updateQuestionType\030\007 \001(\010\022#\n\014ques" +
-      "tionType\030\010 \001(\0162\r.QuestionType\022\027\n\017updateA" +
-      "utoCheck\030\t \001(\010\022\021\n\tautoCheck\030\n \001(\010\022\025\n\rupd" +
-      "ateChoices\030\013 \001(\010\0224\n\007choices\030\014 \003(\0132#.Ques" +
-      "tionUpdateRequest.ChoicesEntry\022\024\n\014update" +
-      "Answer\030\r \001(\010\022\027\n\006answer\030\016 \001(\0132\007.Answer\032.\n" +
-      "\014ChoicesEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(" +
-      "\t:\0028\001\"J\n\025QuestionDeleteRequest\022\035\n\007reques" +
-      "t\030\001 \001(\0132\014.BaseRequest\022\022\n\nquestionId\030\002 \001(" +
-      "\022\"\200\002\n\027CourseWorkCreateRequest\022\035\n\007request" +
-      "\030\001 \001(\0132\014.BaseRequest\022\026\n\016courseWorkName\030\002" +
-      " \001(\t\022\026\n\016belongCourseId\030\003 \001(\022\022\023\n\013hasDeadl" +
-      "ine\030\004 \001(\010\022\020\n\010deadline\030\005 \001(\006\022<\n\nquestionI" +
-      "d\030\006 \003(\0132(.CourseWorkCreateRequest.Questi" +
-      "onIdEntry\0321\n\017QuestionIdEntry\022\013\n\003key\030\001 \001(" +
-      "\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\356\002\n\027CourseWorkUpdat" +
-      "eRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
-      "\024\n\014courseWorkId\030\002 \001(\022\022\022\n\nupdateOpen\030\003 \001(" +
-      "\010\022\014\n\004open\030\004 \001(\010\022\034\n\024updateCourseWorkName\030" +
-      "\005 \001(\010\022\026\n\016courseWorkName\030\006 \001(\t\022\026\n\016updateD" +
-      "eadline\030\007 \001(\010\022\023\n\013hasDeadline\030\010 \001(\010\022\020\n\010de" +
-      "adline\030\t \001(\006\022\026\n\016updateQuestion\030\n \001(\010\022<\n\n" +
-      "questionId\030\013 \003(\0132(.CourseWorkUpdateReque" +
-      "st.QuestionIdEntry\0321\n\017QuestionIdEntry\022\013\n" +
-      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"Q\n\030CourseW" +
-      "orkFindAllRequest\022\035\n\007request\030\001 \001(\0132\014.Bas" +
-      "eRequest\022\026\n\016belongCourseId\030\002 \001(\022\"K\n\024Cour" +
-      "seWorkGetRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
-      "Request\022\024\n\014courseWorkId\030\002 \001(\022\"N\n\027CourseW" +
+      "\025\n\005image\030\004 \003(\0132\006.Image\022\013\n\003tag\030\005 \003(\t\022\014\n\004o" +
+      "pen\030\006 \001(\010\"\272\001\n\024CourseFindAllRequest\022\035\n\007re" +
+      "quest\030\001 \001(\0132\014.BaseRequest\022\013\n\003all\030\002 \001(\010\022\023" +
+      "\n\013byTeacherId\030\003 \001(\010\022\021\n\tteacherId\030\004 \001(\022\022\025" +
+      "\n\rbyTeacherName\030\005 \001(\010\022\023\n\013teacherName\030\006 \001" +
+      "(\t\022\021\n\tbyKeyword\030\007 \001(\010\022\017\n\007keyword\030\010 \003(\t\"\223" +
+      "\002\n\023CourseUpdateRequest\022\035\n\007request\030\001 \001(\0132" +
+      "\014.BaseRequest\022\020\n\010courseId\030\002 \001(\022\022\030\n\020updat" +
+      "eCourseName\030\003 \001(\010\022\022\n\ncourseName\030\004 \001(\t\022\031\n" +
+      "\021updateDescription\030\005 \001(\010\022\023\n\013description\030" +
+      "\006 \001(\t\022\023\n\013updateImage\030\007 \001(\010\022\025\n\005image\030\010 \003(" +
+      "\0132\006.Image\022\022\n\nupdateTags\030\t \001(\010\022\013\n\003tag\030\n \003" +
+      "(\t\022\022\n\nupdateOpen\030\013 \001(\010\022\014\n\004open\030\014 \001(\010\"F\n\023" +
+      "CourseDeleteRequest\022\035\n\007request\030\001 \001(\0132\014.B" +
+      "aseRequest\022\020\n\010courseId\030\002 \001(\022\"\226\002\n\025Questio" +
+      "nImportRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRe" +
+      "quest\022\020\n\010question\030\002 \001(\t\022\025\n\005image\030\003 \003(\0132\006" +
+      ".Image\022#\n\014questionType\030\004 \001(\0162\r.QuestionT" +
+      "ype\022\021\n\tautoCheck\030\005 \001(\010\0224\n\007choices\030\006 \003(\0132" +
+      "#.QuestionImportRequest.ChoicesEntry\022\027\n\006" +
+      "answer\030\007 \001(\0132\007.Answer\032.\n\014ChoicesEntry\022\013\n" +
+      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\"\245\001\n\026Questi" +
+      "onFindAllRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
+      "Request\022\013\n\003all\030\002 \001(\010\022\021\n\tbyKeyword\030\003 \001(\010\022" +
+      "\017\n\007keyword\030\004 \003(\t\022\026\n\016byQuestionType\030\005 \001(\010" +
+      "\022#\n\014questionType\030\006 \003(\0162\r.QuestionType\"Z\n" +
+      "\022QuestionGetRequest\022\035\n\007request\030\001 \001(\0132\014.B" +
+      "aseRequest\022\022\n\nquestionId\030\002 \003(\022\022\021\n\tloadIm" +
+      "age\030\003 \001(\010\"\271\003\n\025QuestionUpdateRequest\022\035\n\007r" +
+      "equest\030\001 \001(\0132\014.BaseRequest\022\022\n\nquestionId" +
+      "\030\002 \001(\022\022\026\n\016updateQuestion\030\003 \001(\010\022\020\n\010questi" +
+      "on\030\004 \001(\t\022\023\n\013updateImage\030\005 \001(\010\022\025\n\005image\030\006" +
+      " \003(\0132\006.Image\022\032\n\022updateQuestionType\030\007 \001(\010" +
+      "\022#\n\014questionType\030\010 \001(\0162\r.QuestionType\022\027\n" +
+      "\017updateAutoCheck\030\t \001(\010\022\021\n\tautoCheck\030\n \001(" +
+      "\010\022\025\n\rupdateChoices\030\013 \001(\010\0224\n\007choices\030\014 \003(" +
+      "\0132#.QuestionUpdateRequest.ChoicesEntry\022\024" +
+      "\n\014updateAnswer\030\r \001(\010\022\027\n\006answer\030\016 \001(\0132\007.A" +
+      "nswer\032.\n\014ChoicesEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005va" +
+      "lue\030\002 \001(\t:\0028\001\"J\n\025QuestionDeleteRequest\022\035" +
+      "\n\007request\030\001 \001(\0132\014.BaseRequest\022\022\n\nquestio" +
+      "nId\030\002 \001(\022\"\200\002\n\027CourseWorkCreateRequest\022\035\n" +
+      "\007request\030\001 \001(\0132\014.BaseRequest\022\026\n\016courseWo" +
+      "rkName\030\002 \001(\t\022\026\n\016belongCourseId\030\003 \001(\022\022\023\n\013" +
+      "hasDeadline\030\004 \001(\010\022\020\n\010deadline\030\005 \001(\006\022<\n\nq" +
+      "uestionId\030\006 \003(\0132(.CourseWorkCreateReques" +
+      "t.QuestionIdEntry\0321\n\017QuestionIdEntry\022\013\n\003" +
+      "key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"\356\002\n\027CourseW" +
+      "orkUpdateRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
+      "Request\022\024\n\014courseWorkId\030\002 \001(\022\022\022\n\nupdateO" +
+      "pen\030\003 \001(\010\022\014\n\004open\030\004 \001(\010\022\034\n\024updateCourseW" +
+      "orkName\030\005 \001(\010\022\026\n\016courseWorkName\030\006 \001(\t\022\026\n" +
+      "\016updateDeadline\030\007 \001(\010\022\023\n\013hasDeadline\030\010 \001" +
+      "(\010\022\020\n\010deadline\030\t \001(\006\022\026\n\016updateQuestion\030\n" +
+      " \001(\010\022<\n\nquestionId\030\013 \003(\0132(.CourseWorkUpd" +
+      "ateRequest.QuestionIdEntry\0321\n\017QuestionId" +
+      "Entry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\"Q\n" +
+      "\030CourseWorkFindAllRequest\022\035\n\007request\030\001 \001" +
+      "(\0132\014.BaseRequest\022\026\n\016belongCourseId\030\002 \001(\022" +
+      "\"K\n\024CourseWorkGetRequest\022\035\n\007request\030\001 \001(" +
+      "\0132\014.BaseRequest\022\024\n\014courseWorkId\030\002 \001(\022\"N\n" +
+      "\027CourseWorkDeleteRequest\022\035\n\007request\030\001 \001(" +
+      "\0132\014.BaseRequest\022\024\n\014courseWorkId\030\002 \001(\022\"\371\002" +
+      "\n\021ExamCreateRequest\022\035\n\007request\030\001 \001(\0132\014.B" +
+      "aseRequest\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCo" +
+      "urseId\030\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTi" +
+      "me\030\005 \001(\006\022\020\n\010duration\030\006 \001(\005\0226\n\nquestionId" +
+      "\030\007 \003(\0132\".ExamCreateRequest.QuestionIdEnt" +
+      "ry\022<\n\rquestionScore\030\010 \003(\0132%.ExamCreateRe" +
+      "quest.QuestionScoreEntry\0321\n\017QuestionIdEn" +
+      "try\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\032<\n\022Q" +
+      "uestionScoreEntry\022\013\n\003key\030\001 \001(\005\022\025\n\005value\030" +
+      "\002 \001(\0132\006.Score:\0028\001\"\351\003\n\021ExamUpdateRequest\022" +
+      "\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\016\n\006examId" +
+      "\030\002 \001(\022\022\026\n\016updateExamName\030\003 \001(\010\022\020\n\010examNa" +
+      "me\030\004 \001(\t\022\027\n\017updateStartTime\030\005 \001(\010\022\021\n\tsta" +
+      "rtTime\030\006 \001(\006\022\025\n\rupdateEndTime\030\007 \001(\010\022\017\n\007e" +
+      "ndTime\030\010 \001(\006\022\026\n\016updateDuration\030\t \001(\010\022\020\n\010" +
+      "duration\030\n \001(\005\022\026\n\016updateQuestion\030\013 \001(\010\0226" +
+      "\n\nquestionId\030\014 \003(\0132\".ExamUpdateRequest.Q" +
+      "uestionIdEntry\022<\n\rquestionScore\030\r \003(\0132%." +
+      "ExamUpdateRequest.QuestionScoreEntry\0321\n\017" +
+      "QuestionIdEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 " +
+      "\001(\022:\0028\001\032<\n\022QuestionScoreEntry\022\013\n\003key\030\001 \001" +
+      "(\005\022\025\n\005value\030\002 \001(\0132\006.Score:\0028\001\"K\n\022ExamFin" +
+      "dAllRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
+      "st\022\026\n\016belongCourseId\030\002 \001(\022\"?\n\016ExamGetReq" +
+      "uest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\016\n\006e" +
+      "xamId\030\002 \001(\022\"B\n\021ExamDeleteRequest\022\035\n\007requ" +
+      "est\030\001 \001(\0132\014.BaseRequest\022\016\n\006examId\030\002 \001(\022\"" +
+      "\212\002\n SubmittedCourseWorkCreateRequest\022\035\n\007" +
+      "request\030\001 \001(\0132\014.BaseRequest\022O\n\017submitted" +
+      "Answer\030\002 \003(\01326.SubmittedCourseWorkCreate" +
+      "Request.SubmittedAnswerEntry\022\020\n\010finished" +
+      "\030\003 \001(\010\022\032\n\022belongCourseWorkId\030\004 \001(\022\032H\n\024Su" +
+      "bmittedAnswerEntry\022\013\n\003key\030\001 \001(\005\022\037\n\005value" +
+      "\030\002 \001(\0132\020.SubmittedAnswer:\0028\001\"\316\002\n Submitt" +
+      "edCourseWorkUpdateRequest\022\035\n\007request\030\001 \001" +
+      "(\0132\014.BaseRequest\022\035\n\025submittedCourseWorkI" +
+      "d\030\002 \001(\022\022\035\n\025updateSubmittedAnswer\030\003 \001(\010\022O" +
+      "\n\017submittedAnswer\030\004 \003(\01326.SubmittedCours" +
+      "eWorkUpdateRequest.SubmittedAnswerEntry\022" +
+      "\026\n\016updateFinished\030\005 \001(\010\022\020\n\010finished\030\006 \001(" +
+      "\010\032R\n\024SubmittedAnswerEntry\022\013\n\003key\030\001 \001(\005\022)" +
+      "\n\005value\030\002 \001(\0132\032.CourseWorkSubmittedAnswe" +
+      "r:\0028\001\"^\n!SubmittedCourseWorkFindAllReque" +
+      "st\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\032\n\022bel" +
+      "ongCourseWorkId\030\002 \001(\022\"\234\001\n\035SubmittedCours" +
+      "eWorkGetRequest\022\035\n\007request\030\001 \001(\0132\014.BaseR" +
+      "equest\022\014\n\004byId\030\002 \001(\010\022\035\n\025submittedCourseW" +
+      "orkId\030\003 \001(\022\022\032\n\022belongCourseWorkId\030\004 \001(\022\022" +
+      "\023\n\013submitterId\030\005 \001(\022\"`\n SubmittedCourseW" +
       "orkDeleteRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
-      "Request\022\024\n\014courseWorkId\030\002 \001(\022\"\371\002\n\021ExamCr" +
-      "eateRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
-      "st\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCourseId\030\003" +
-      " \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTime\030\005 \001(\006" +
-      "\022\020\n\010duration\030\006 \001(\005\0226\n\nquestionId\030\007 \003(\0132\"" +
-      ".ExamCreateRequest.QuestionIdEntry\022<\n\rqu" +
-      "estionScore\030\010 \003(\0132%.ExamCreateRequest.Qu" +
-      "estionScoreEntry\0321\n\017QuestionIdEntry\022\013\n\003k" +
-      "ey\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\032<\n\022QuestionS" +
-      "coreEntry\022\013\n\003key\030\001 \001(\005\022\025\n\005value\030\002 \001(\0132\006." +
-      "Score:\0028\001\"\351\003\n\021ExamUpdateRequest\022\035\n\007reque" +
-      "st\030\001 \001(\0132\014.BaseRequest\022\016\n\006examId\030\002 \001(\022\022\026" +
-      "\n\016updateExamName\030\003 \001(\010\022\020\n\010examName\030\004 \001(\t" +
-      "\022\027\n\017updateStartTime\030\005 \001(\010\022\021\n\tstartTime\030\006" +
-      " \001(\006\022\025\n\rupdateEndTime\030\007 \001(\010\022\017\n\007endTime\030\010" +
-      " \001(\006\022\026\n\016updateDuration\030\t \001(\010\022\020\n\010duration" +
-      "\030\n \001(\005\022\026\n\016updateQuestion\030\013 \001(\010\0226\n\nquesti" +
-      "onId\030\014 \003(\0132\".ExamUpdateRequest.QuestionI" +
-      "dEntry\022<\n\rquestionScore\030\r \003(\0132%.ExamUpda" +
-      "teRequest.QuestionScoreEntry\0321\n\017Question" +
-      "IdEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\022:\0028\001\032" +
-      "<\n\022QuestionScoreEntry\022\013\n\003key\030\001 \001(\005\022\025\n\005va" +
-      "lue\030\002 \001(\0132\006.Score:\0028\001\"K\n\022ExamFindAllRequ" +
-      "est\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\026\n\016be" +
-      "longCourseId\030\002 \001(\022\"?\n\016ExamGetRequest\022\035\n\007" +
-      "request\030\001 \001(\0132\014.BaseRequest\022\016\n\006examId\030\002 " +
-      "\001(\022\"B\n\021ExamDeleteRequest\022\035\n\007request\030\001 \001(" +
-      "\0132\014.BaseRequest\022\016\n\006examId\030\002 \001(\022\"\212\002\n Subm" +
-      "ittedCourseWorkCreateRequest\022\035\n\007request\030" +
-      "\001 \001(\0132\014.BaseRequest\022O\n\017submittedAnswer\030\002" +
-      " \003(\01326.SubmittedCourseWorkCreateRequest." +
-      "SubmittedAnswerEntry\022\020\n\010finished\030\003 \001(\010\022\032" +
-      "\n\022belongCourseWorkId\030\004 \001(\022\032H\n\024SubmittedA" +
-      "nswerEntry\022\013\n\003key\030\001 \001(\005\022\037\n\005value\030\002 \001(\0132\020" +
-      ".SubmittedAnswer:\0028\001\"\316\002\n SubmittedCourse" +
-      "WorkUpdateRequest\022\035\n\007request\030\001 \001(\0132\014.Bas" +
-      "eRequest\022\035\n\025submittedCourseWorkId\030\002 \001(\022\022" +
-      "\035\n\025updateSubmittedAnswer\030\003 \001(\010\022O\n\017submit" +
-      "tedAnswer\030\004 \003(\01326.SubmittedCourseWorkUpd" +
-      "ateRequest.SubmittedAnswerEntry\022\026\n\016updat" +
-      "eFinished\030\005 \001(\010\022\020\n\010finished\030\006 \001(\010\032R\n\024Sub" +
-      "mittedAnswerEntry\022\013\n\003key\030\001 \001(\005\022)\n\005value\030" +
-      "\002 \001(\0132\032.CourseWorkSubmittedAnswer:\0028\001\"^\n" +
-      "!SubmittedCourseWorkFindAllRequest\022\035\n\007re" +
-      "quest\030\001 \001(\0132\014.BaseRequest\022\032\n\022belongCours" +
-      "eWorkId\030\002 \001(\022\"\234\001\n\035SubmittedCourseWorkGet" +
-      "Request\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\014" +
-      "\n\004byId\030\002 \001(\010\022\035\n\025submittedCourseWorkId\030\003 " +
-      "\001(\022\022\032\n\022belongCourseWorkId\030\004 \001(\022\022\023\n\013submi" +
-      "tterId\030\005 \001(\022\"`\n SubmittedCourseWorkDelet" +
-      "eRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
-      "\035\n\025submittedCourseWorkId\030\002 \001(\022\"\370\001\n\032Submi" +
-      "ttedExamCreateRequest\022\035\n\007request\030\001 \001(\0132\014" +
-      ".BaseRequest\022I\n\017submittedAnswer\030\002 \003(\01320." +
-      "SubmittedExamCreateRequest.SubmittedAnsw" +
-      "erEntry\022\020\n\010finished\030\003 \001(\010\022\024\n\014belongExamI" +
-      "d\030\004 \001(\022\032H\n\024SubmittedAnswerEntry\022\013\n\003key\030\001" +
-      " \001(\005\022\037\n\005value\030\002 \001(\0132\020.SubmittedAnswer:\0028" +
-      "\001\"\266\002\n\032SubmittedExamUpdateRequest\022\035\n\007requ" +
-      "est\030\001 \001(\0132\014.BaseRequest\022\027\n\017submittedExam" +
-      "Id\030\002 \001(\022\022\035\n\025updateSubmittedAnswer\030\003 \001(\010\022" +
-      "I\n\017submittedAnswer\030\004 \003(\01320.SubmittedExam" +
-      "UpdateRequest.SubmittedAnswerEntry\022\026\n\016up" +
-      "dateFinished\030\005 \001(\010\022\020\n\010finished\030\006 \001(\010\032L\n\024" +
-      "SubmittedAnswerEntry\022\013\n\003key\030\001 \001(\005\022#\n\005val" +
-      "ue\030\002 \001(\0132\024.ExamSubmittedAnswer:\0028\001\"R\n\033Su" +
-      "bmittedExamFindAllRequest\022\035\n\007request\030\001 \001" +
-      "(\0132\014.BaseRequest\022\024\n\014belongExamId\030\002 \001(\022\"\212" +
-      "\001\n\027SubmittedExamGetRequest\022\035\n\007request\030\001 " +
-      "\001(\0132\014.BaseRequest\022\014\n\004byId\030\002 \001(\010\022\027\n\017submi" +
-      "ttedExamId\030\003 \001(\022\022\024\n\014belongExamId\030\004 \001(\022\022\023" +
-      "\n\013submitterId\030\005 \001(\022\"T\n\032SubmittedExamDele" +
+      "Request\022\035\n\025submittedCourseWorkId\030\002 \001(\022\"\370" +
+      "\001\n\032SubmittedExamCreateRequest\022\035\n\007request" +
+      "\030\001 \001(\0132\014.BaseRequest\022I\n\017submittedAnswer\030" +
+      "\002 \003(\01320.SubmittedExamCreateRequest.Submi" +
+      "ttedAnswerEntry\022\020\n\010finished\030\003 \001(\010\022\024\n\014bel" +
+      "ongExamId\030\004 \001(\022\032H\n\024SubmittedAnswerEntry\022" +
+      "\013\n\003key\030\001 \001(\005\022\037\n\005value\030\002 \001(\0132\020.SubmittedA" +
+      "nswer:\0028\001\"\266\002\n\032SubmittedExamUpdateRequest" +
+      "\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\027\n\017submi" +
+      "ttedExamId\030\002 \001(\022\022\035\n\025updateSubmittedAnswe" +
+      "r\030\003 \001(\010\022I\n\017submittedAnswer\030\004 \003(\01320.Submi" +
+      "ttedExamUpdateRequest.SubmittedAnswerEnt" +
+      "ry\022\026\n\016updateFinished\030\005 \001(\010\022\020\n\010finished\030\006" +
+      " \001(\010\032L\n\024SubmittedAnswerEntry\022\013\n\003key\030\001 \001(" +
+      "\005\022#\n\005value\030\002 \001(\0132\024.ExamSubmittedAnswer:\002" +
+      "8\001\"R\n\033SubmittedExamFindAllRequest\022\035\n\007req" +
+      "uest\030\001 \001(\0132\014.BaseRequest\022\024\n\014belongExamId" +
+      "\030\002 \001(\022\"\212\001\n\027SubmittedExamGetRequest\022\035\n\007re" +
+      "quest\030\001 \001(\0132\014.BaseRequest\022\014\n\004byId\030\002 \001(\010\022" +
+      "\027\n\017submittedExamId\030\003 \001(\022\022\024\n\014belongExamId" +
+      "\030\004 \001(\022\022\023\n\013submitterId\030\005 \001(\022\"T\n\032Submitted" +
+      "ExamDeleteRequest\022\035\n\007request\030\001 \001(\0132\014.Bas" +
+      "eRequest\022\027\n\017submittedExamId\030\002 \001(\022\"\213\001\n\027Fo" +
+      "rumTopicCreateRequest\022\035\n\007request\030\001 \001(\0132\014" +
+      ".BaseRequest\022\r\n\005title\030\002 \001(\t\022\023\n\013descripti" +
+      "on\030\003 \001(\t\022\025\n\005image\030\004 \003(\0132\006.Image\022\026\n\016belon" +
+      "gCourseId\030\005 \001(\022\"\252\001\n\027ForumTopicUpdateRequ" +
+      "est\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\024\n\014fo" +
+      "rumTopicId\030\002 \001(\022\022\031\n\021updateDescription\030\003 " +
+      "\001(\010\022\023\n\013description\030\004 \001(\t\022\023\n\013updateImage\030" +
+      "\005 \001(\010\022\025\n\005image\030\006 \003(\0132\006.Image\"Q\n\030ForumTop" +
+      "icFindAllRequest\022\035\n\007request\030\001 \001(\0132\014.Base" +
+      "Request\022\026\n\016belongCourseId\030\002 \001(\022\"K\n\024Forum" +
+      "TopicGetRequest\022\035\n\007request\030\001 \001(\0132\014.BaseR" +
+      "equest\022\024\n\014forumTopicId\030\002 \001(\022\"N\n\027ForumTop" +
+      "icDeleteRequest\022\035\n\007request\030\001 \001(\0132\014.BaseR" +
+      "equest\022\024\n\014forumTopicId\030\002 \001(\022\"y\n\031TopicCom" +
+      "mentCreateRequest\022\035\n\007request\030\001 \001(\0132\014.Bas" +
+      "eRequest\022\017\n\007content\030\002 \001(\t\022\025\n\005image\030\003 \003(\013" +
+      "2\006.Image\022\025\n\rbelongTopicId\030\004 \001(\022\"\246\001\n\031Topi" +
+      "cCommentUpdateRequest\022\035\n\007request\030\001 \001(\0132\014" +
+      ".BaseRequest\022\026\n\016topicCommentId\030\002 \001(\022\022\025\n\r" +
+      "updateContent\030\003 \001(\010\022\017\n\007content\030\004 \001(\t\022\023\n\013" +
+      "updateImage\030\005 \001(\010\022\025\n\005image\030\006 \003(\0132\006.Image" +
+      "\"R\n\032TopicCommentFindAllRequest\022\035\n\007reques" +
+      "t\030\001 \001(\0132\014.BaseRequest\022\025\n\rbelongTopicId\030\002" +
+      " \001(\022\"O\n\026TopicCommentGetRequest\022\035\n\007reques" +
+      "t\030\001 \001(\0132\014.BaseRequest\022\026\n\016topicCommentId\030" +
+      "\002 \001(\022\"R\n\031TopicCommentDeleteRequest\022\035\n\007re" +
+      "quest\030\001 \001(\0132\014.BaseRequest\022\026\n\016topicCommen" +
+      "tId\030\002 \001(\022\"y\n\027TopicReplyCreateRequest\022\035\n\007" +
+      "request\030\001 \001(\0132\014.BaseRequest\022\017\n\007content\030\002" +
+      " \001(\t\022\025\n\005image\030\003 \003(\0132\006.Image\022\027\n\017belongCom" +
+      "mentId\030\004 \001(\022\"\242\001\n\027TopicReplyUpdateRequest" +
+      "\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\024\n\014topic" +
+      "ReplyId\030\002 \001(\022\022\025\n\rupdateContent\030\003 \001(\010\022\017\n\007" +
+      "content\030\004 \001(\t\022\023\n\013updateImage\030\005 \001(\010\022\025\n\005im" +
+      "age\030\006 \003(\0132\006.Image\"R\n\030TopicReplyFindAllRe" +
+      "quest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\027\n\017" +
+      "belongCommentId\030\002 \001(\022\"K\n\024TopicReplyGetRe" +
+      "quest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\024\n\014" +
+      "topicReplyId\030\002 \001(\022\"N\n\027TopicReplyDeleteRe" +
+      "quest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\024\n\014" +
+      "topicReplyId\030\002 \001(\022\"\247\001\n\032CourseCommentCrea" +
       "teRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest" +
-      "\022\027\n\017submittedExamId\030\002 \001(\022\"\213\001\n\027ForumTopic" +
-      "CreateRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReq" +
-      "uest\022\r\n\005title\030\002 \001(\t\022\023\n\013description\030\003 \001(\t" +
-      "\022\025\n\005image\030\004 \003(\0132\006.Image\022\026\n\016belongCourseI" +
-      "d\030\005 \001(\022\"\252\001\n\027ForumTopicUpdateRequest\022\035\n\007r" +
-      "equest\030\001 \001(\0132\014.BaseRequest\022\024\n\014forumTopic" +
-      "Id\030\002 \001(\022\022\031\n\021updateDescription\030\003 \001(\010\022\023\n\013d" +
-      "escription\030\004 \001(\t\022\023\n\013updateImage\030\005 \001(\010\022\025\n" +
-      "\005image\030\006 \003(\0132\006.Image\"Q\n\030ForumTopicFindAl" +
-      "lRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022" +
-      "\026\n\016belongCourseId\030\002 \001(\022\"K\n\024ForumTopicGet" +
-      "Request\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\024" +
-      "\n\014forumTopicId\030\002 \001(\022\"N\n\027ForumTopicDelete" +
-      "Request\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\024" +
-      "\n\014forumTopicId\030\002 \001(\022\"y\n\031TopicCommentCrea" +
-      "teRequest\022\035\n\007request\030\001 \001(\0132\014.BaseRequest" +
-      "\022\017\n\007content\030\002 \001(\t\022\025\n\005image\030\003 \003(\0132\006.Image" +
-      "\022\025\n\rbelongTopicId\030\004 \001(\022\"\246\001\n\031TopicComment" +
-      "UpdateRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReq" +
-      "uest\022\026\n\016topicCommentId\030\002 \001(\022\022\025\n\rupdateCo" +
-      "ntent\030\003 \001(\010\022\017\n\007content\030\004 \001(\t\022\023\n\013updateIm" +
-      "age\030\005 \001(\010\022\025\n\005image\030\006 \003(\0132\006.Image\"R\n\032Topi" +
-      "cCommentFindAllRequest\022\035\n\007request\030\001 \001(\0132" +
-      "\014.BaseRequest\022\025\n\rbelongTopicId\030\002 \001(\022\"O\n\026" +
-      "TopicCommentGetRequest\022\035\n\007request\030\001 \001(\0132" +
-      "\014.BaseRequest\022\026\n\016topicCommentId\030\002 \001(\022\"R\n" +
-      "\031TopicCommentDeleteRequest\022\035\n\007request\030\001 " +
-      "\001(\0132\014.BaseRequest\022\026\n\016topicCommentId\030\002 \001(" +
-      "\022\"y\n\027TopicReplyCreateRequest\022\035\n\007request\030" +
-      "\001 \001(\0132\014.BaseRequest\022\017\n\007content\030\002 \001(\t\022\025\n\005" +
-      "image\030\003 \003(\0132\006.Image\022\027\n\017belongCommentId\030\004" +
-      " \001(\022\"\242\001\n\027TopicReplyUpdateRequest\022\035\n\007requ" +
-      "est\030\001 \001(\0132\014.BaseRequest\022\024\n\014topicReplyId\030" +
-      "\002 \001(\022\022\025\n\rupdateContent\030\003 \001(\010\022\017\n\007content\030" +
-      "\004 \001(\t\022\023\n\013updateImage\030\005 \001(\010\022\025\n\005image\030\006 \003(" +
-      "\0132\006.Image\"R\n\030TopicReplyFindAllRequest\022\035\n" +
-      "\007request\030\001 \001(\0132\014.BaseRequest\022\027\n\017belongCo" +
-      "mmentId\030\002 \001(\022\"K\n\024TopicReplyGetRequest\022\035\n" +
-      "\007request\030\001 \001(\0132\014.BaseRequest\022\024\n\014topicRep" +
-      "lyId\030\002 \001(\022\"N\n\027TopicReplyDeleteRequest\022\035\n" +
-      "\007request\030\001 \001(\0132\014.BaseRequest\022\024\n\014topicRep" +
-      "lyId\030\002 \001(\022\"\247\001\n\032CourseCommentCreateReques" +
-      "t\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\'\n\013comm" +
-      "entType\030\002 \001(\0162\022.CourseCommentType\022\017\n\007con" +
-      "tent\030\003 \001(\t\022\025\n\005image\030\004 \003(\0132\006.Image\022\031\n\021com" +
-      "mentedCourseId\030\005 \001(\022\"\250\001\n\032CourseCommentUp" +
-      "dateRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReque" +
-      "st\022\027\n\017courseCommentId\030\002 \001(\022\022\025\n\rupdateCon" +
-      "tent\030\003 \001(\010\022\017\n\007content\030\004 \001(\t\022\023\n\013updateIma" +
-      "ge\030\005 \001(\010\022\025\n\005image\030\006 \003(\0132\006.Image\"W\n\033Cours" +
-      "eCommentFindAllRequest\022\035\n\007request\030\001 \001(\0132" +
-      "\014.BaseRequest\022\031\n\021commentedCourseId\030\002 \001(\022" +
-      "\"Q\n\027CourseCommentGetRequest\022\035\n\007request\030\001" +
-      " \001(\0132\014.BaseRequest\022\027\n\017courseCommentId\030\002 " +
-      "\001(\022\"T\n\032CourseCommentDeleteRequest\022\035\n\007req" +
-      "uest\030\001 \001(\0132\014.BaseRequest\022\027\n\017courseCommen" +
-      "tId\030\002 \001(\022\"\217\001\n\024MessageCreateRequest\022\035\n\007re" +
-      "quest\030\001 \001(\0132\014.BaseRequest\022\016\n\004text\030\002 \001(\tH" +
-      "\000\022\027\n\005image\030\003 \001(\0132\006.ImageH\000\022\022\n\nreceiverId" +
-      "\030\004 \001(\022\022\020\n\010senderId\030\005 \001(\022B\t\n\007content\"\227\001\n\025" +
-      "MessageFindAllRequest\022\035\n\007request\030\001 \001(\0132\014" +
-      ".BaseRequest\022\024\n\014byReceiverId\030\002 \001(\010\022\022\n\nre" +
-      "ceiverId\030\003 \001(\022\022\022\n\nbySenderId\030\004 \001(\010\022\020\n\010se" +
-      "nderId\030\005 \001(\022\022\017\n\007reverse\030\006 \001(\010\"H\n\024Message" +
-      "DeleteRequest\022\035\n\007request\030\001 \001(\0132\014.BaseReq" +
-      "uest\022\021\n\tmessageId\030\002 \001(\022B7\n,com.corkili.l" +
-      "earningserver.generate.protobufB\007Request" +
-      "b\006proto3"
+      "\022\'\n\013commentType\030\002 \001(\0162\022.CourseCommentTyp" +
+      "e\022\017\n\007content\030\003 \001(\t\022\025\n\005image\030\004 \003(\0132\006.Imag" +
+      "e\022\031\n\021commentedCourseId\030\005 \001(\022\"\250\001\n\032CourseC" +
+      "ommentUpdateRequest\022\035\n\007request\030\001 \001(\0132\014.B" +
+      "aseRequest\022\027\n\017courseCommentId\030\002 \001(\022\022\025\n\ru" +
+      "pdateContent\030\003 \001(\010\022\017\n\007content\030\004 \001(\t\022\023\n\013u" +
+      "pdateImage\030\005 \001(\010\022\025\n\005image\030\006 \003(\0132\006.Image\"" +
+      "W\n\033CourseCommentFindAllRequest\022\035\n\007reques" +
+      "t\030\001 \001(\0132\014.BaseRequest\022\031\n\021commentedCourse" +
+      "Id\030\002 \001(\022\"Q\n\027CourseCommentGetRequest\022\035\n\007r" +
+      "equest\030\001 \001(\0132\014.BaseRequest\022\027\n\017courseComm" +
+      "entId\030\002 \001(\022\"T\n\032CourseCommentDeleteReques" +
+      "t\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\027\n\017cour" +
+      "seCommentId\030\002 \001(\022\"\217\001\n\024MessageCreateReque" +
+      "st\022\035\n\007request\030\001 \001(\0132\014.BaseRequest\022\016\n\004tex" +
+      "t\030\002 \001(\tH\000\022\027\n\005image\030\003 \001(\0132\006.ImageH\000\022\022\n\nre" +
+      "ceiverId\030\004 \001(\022\022\020\n\010senderId\030\005 \001(\022B\t\n\007cont" +
+      "ent\"\227\001\n\025MessageFindAllRequest\022\035\n\007request" +
+      "\030\001 \001(\0132\014.BaseRequest\022\024\n\014byReceiverId\030\002 \001" +
+      "(\010\022\022\n\nreceiverId\030\003 \001(\022\022\022\n\nbySenderId\030\004 \001" +
+      "(\010\022\020\n\010senderId\030\005 \001(\022\022\017\n\007reverse\030\006 \001(\010\"H\n" +
+      "\024MessageDeleteRequest\022\035\n\007request\030\001 \001(\0132\014" +
+      ".BaseRequest\022\021\n\tmessageId\030\002 \001(\022B7\n,com.c" +
+      "orkili.learningserver.generate.protobufB" +
+      "\007Requestb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -58073,7 +58266,7 @@ public final class Request {
     internal_static_CourseCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseCreateRequest_descriptor,
-        new java.lang.String[] { "Request", "CourseName", "Description", "Image", "Tag", });
+        new java.lang.String[] { "Request", "CourseName", "Description", "Image", "Tag", "Open", });
     internal_static_CourseFindAllRequest_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_CourseFindAllRequest_fieldAccessorTable = new
@@ -58085,7 +58278,7 @@ public final class Request {
     internal_static_CourseUpdateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseUpdateRequest_descriptor,
-        new java.lang.String[] { "Request", "CourseId", "UpdateCourseName", "CourseName", "UpdateDescription", "Description", "UpdateImage", "Image", "UpdateTags", "Tag", });
+        new java.lang.String[] { "Request", "CourseId", "UpdateCourseName", "CourseName", "UpdateDescription", "Description", "UpdateImage", "Image", "UpdateTags", "Tag", "UpdateOpen", "Open", });
     internal_static_CourseDeleteRequest_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_CourseDeleteRequest_fieldAccessorTable = new
