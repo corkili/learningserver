@@ -1,6 +1,9 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.CourseSubscription;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
+import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.repo.CourseSubscriptionRepository;
+import com.corkili.learningserver.repo.UserRepository;
 import com.corkili.learningserver.service.CourseSubscriptionService;
 
 @Slf4j
@@ -20,6 +26,12 @@ public class CourseSubscriptionServiceImpl extends ServiceImpl<CourseSubscriptio
 
     @Autowired
     private CourseSubscriptionRepository courseSubscriptionRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Override
     protected JpaRepository<com.corkili.learningserver.po.CourseSubscription, Long> repository() {
@@ -44,6 +56,71 @@ public class CourseSubscriptionServiceImpl extends ServiceImpl<CourseSubscriptio
     @Override
     protected Logger logger() {
         return log;
+    }
+
+    @Override
+    public ServiceResult createCourseSubscription(CourseSubscription courseSubscription) {
+        if (courseSubscription.getSubscriberId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("create courseSubscription error: subscriberId is null");
+        }
+        if (courseSubscription.getSubscribedCourseId() == null) {
+            return recordErrorAndCreateFailResultWithMessage("create courseSubscription error: subscribedCourseId is null");
+        }
+        if (!userRepository.existsById(courseSubscription.getSubscriberId())) {
+            return recordErrorAndCreateFailResultWithMessage("create courseSubscription error: subscriber (user[{}]) not exist",
+                    courseSubscription.getSubscriberId());
+        }
+        if (!courseRepository.existsById(courseSubscription.getSubscribedCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("create courseSubscription error: subscribedCourse (course[{}]) not exist",
+                    courseSubscription.getSubscribedCourseId());
+        }
+        if (courseSubscriptionRepository.existsBySubscriberIdAndSubscribedCourseId(
+                courseSubscription.getSubscriberId(), courseSubscription.getSubscribedCourseId())) {
+            return recordErrorAndCreateFailResultWithMessage("create courseSubscription error: user [{}] already subscribe course [{}]",
+                    courseSubscription.getSubscriberId(), courseSubscription.getSubscribedCourseId());
+        }
+        Optional<CourseSubscription> courseSubscriptionOptional = create(courseSubscription);
+        if (!courseSubscriptionOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("create courseSubscription error: create courseSubscription failed");
+        }
+        courseSubscription = courseSubscriptionOptional.get();
+        return ServiceResult.successResult("create courseSubscription success", CourseSubscription.class, courseSubscription);
+    }
+
+    @Override
+    public ServiceResult findAllCourseSubscription(Long subscriberId, Long subscribedCourseId) {
+        String msg = "find all courseSubscription success";
+        List<com.corkili.learningserver.po.CourseSubscription> allCourseSubscriptionPO = new LinkedList<>();
+        if (subscriberId != null && subscribedCourseId != null) {
+            allCourseSubscriptionPO.addAll(courseSubscriptionRepository.findAllBySubscriberIdAndSubscribedCourseId(subscriberId, subscribedCourseId));
+        } else if (subscriberId != null) {
+            allCourseSubscriptionPO.addAll(courseSubscriptionRepository.findAllBySubscriberId(subscriberId));
+        } else if (subscribedCourseId != null){
+            allCourseSubscriptionPO.addAll(courseSubscriptionRepository.findAllBySubscribedCourseId(subscribedCourseId));
+        }
+        List<CourseSubscription> allCourseSubscription = new ArrayList<>(allCourseSubscriptionPO.size());
+        StringBuilder errId = new StringBuilder();
+        int i = 0;
+        for (com.corkili.learningserver.po.CourseSubscription courseSubscriptionPO : allCourseSubscriptionPO) {
+            Optional<CourseSubscription> courseSubscriptionOptional = po2bo(courseSubscriptionPO);
+            i++;
+            if (!courseSubscriptionOptional.isPresent()) {
+                errId.append(courseSubscriptionPO.getId());
+                if (i != allCourseSubscriptionPO.size()) {
+                    errId.append(",");
+                }
+            } else {
+                CourseSubscription courseSubscription = courseSubscriptionOptional.get();
+                allCourseSubscription.add(courseSubscription);
+                // cache
+                putToCache(entityName() + courseSubscription.getId(), courseSubscription);
+            }
+        }
+        if (errId.length() != 0) {
+            msg = ServiceUtils.format("find all courseSubscription warn: transfer course po [{}] to bo failed.", errId.toString());
+            log.warn(msg);
+        }
+        return ServiceResult.successResult(msg, List.class, allCourseSubscription);
     }
 
     @Override

@@ -327,3 +327,13 @@ message MessageInfo {
     sint64 senderId = 8;
     UserInfo senderInfo = 9;
 }
+
+message CourseSubscriptionInfo {
+    sint64 courseSubscriptionId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    sint64 subscriberId = 4;
+    UserInfo subscriberInfo = 5;
+    sint64 subscribedCourseId = 6;
+    CourseInfo subscribedCourseInfo = 7;
+}

@@ -427,3 +427,21 @@ message MessageDeleteRequest {
     BaseRequest request = 1;
     sint64 messageId = 2;
 }
+
+message CourseSubscriptionCreateRequest {
+    BaseRequest request = 1;
+    sint64 subscribedCourseId = 2;
+}
+
+message CourseSubscriptionFindAllRequest {
+    BaseRequest request = 1;
+    bool bySubscriberId = 2;
+    sint64 subscriberId = 3;
+    bool bySubscribedCourseId = 4;
+    sint64 subscribedCourseId = 5;
+}
+
+message CourseSubscriptionDeleteRequest {
+    BaseRequest request = 1;
+    sint64 courseSubscriptionId = 2;
+}

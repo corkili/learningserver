@@ -302,3 +302,18 @@ message MessageDeleteResponse {
     BaseResponse response = 1;
     sint64 messageId = 2;
 }
+
+message CourseSubscriptionCreateResponse {
+    BaseResponse response = 1;
+    CourseSubscriptionInfo courseSubscriptionInfo = 2;
+}
+
+message CourseSubscriptionFindAllResponse {
+    BaseResponse response = 1;
+    repeated CourseSubscriptionInfo courseSubscriptionInfo = 2;
+}
+
+message CourseSubscriptionDeleteResponse {
+    BaseResponse response = 1;
+    sint64 courseSubscriptionId = 2;
+}

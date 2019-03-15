@@ -37730,6 +37730,1127 @@ public final class Info {
 
   }
 
+  public interface CourseSubscriptionInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CourseSubscriptionInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>sint64 courseSubscriptionId = 1;</code>
+     */
+    long getCourseSubscriptionId();
+
+    /**
+     * <code>fixed64 createTime = 2;</code>
+     */
+    long getCreateTime();
+
+    /**
+     * <code>fixed64 updateTime = 3;</code>
+     */
+    long getUpdateTime();
+
+    /**
+     * <code>sint64 subscriberId = 4;</code>
+     */
+    long getSubscriberId();
+
+    /**
+     * <code>.UserInfo subscriberInfo = 5;</code>
+     */
+    boolean hasSubscriberInfo();
+    /**
+     * <code>.UserInfo subscriberInfo = 5;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubscriberInfo();
+    /**
+     * <code>.UserInfo subscriberInfo = 5;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubscriberInfoOrBuilder();
+
+    /**
+     * <code>sint64 subscribedCourseId = 6;</code>
+     */
+    long getSubscribedCourseId();
+
+    /**
+     * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+     */
+    boolean hasSubscribedCourseInfo();
+    /**
+     * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseInfo getSubscribedCourseInfo();
+    /**
+     * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseInfoOrBuilder getSubscribedCourseInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code CourseSubscriptionInfo}
+   */
+  public  static final class CourseSubscriptionInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CourseSubscriptionInfo)
+      CourseSubscriptionInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CourseSubscriptionInfo.newBuilder() to construct.
+    private CourseSubscriptionInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CourseSubscriptionInfo() {
+      courseSubscriptionId_ = 0L;
+      createTime_ = 0L;
+      updateTime_ = 0L;
+      subscriberId_ = 0L;
+      subscribedCourseId_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CourseSubscriptionInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              courseSubscriptionId_ = input.readSInt64();
+              break;
+            }
+            case 17: {
+
+              createTime_ = input.readFixed64();
+              break;
+            }
+            case 25: {
+
+              updateTime_ = input.readFixed64();
+              break;
+            }
+            case 32: {
+
+              subscriberId_ = input.readSInt64();
+              break;
+            }
+            case 42: {
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder subBuilder = null;
+              if (subscriberInfo_ != null) {
+                subBuilder = subscriberInfo_.toBuilder();
+              }
+              subscriberInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.UserInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(subscriberInfo_);
+                subscriberInfo_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 48: {
+
+              subscribedCourseId_ = input.readSInt64();
+              break;
+            }
+            case 58: {
+              com.corkili.learningserver.generate.protobuf.Info.CourseInfo.Builder subBuilder = null;
+              if (subscribedCourseInfo_ != null) {
+                subBuilder = subscribedCourseInfo_.toBuilder();
+              }
+              subscribedCourseInfo_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.CourseInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(subscribedCourseInfo_);
+                subscribedCourseInfo_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseSubscriptionInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseSubscriptionInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.class, com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.Builder.class);
+    }
+
+    public static final int COURSESUBSCRIPTIONID_FIELD_NUMBER = 1;
+    private long courseSubscriptionId_;
+    /**
+     * <code>sint64 courseSubscriptionId = 1;</code>
+     */
+    public long getCourseSubscriptionId() {
+      return courseSubscriptionId_;
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 2;
+    private long createTime_;
+    /**
+     * <code>fixed64 createTime = 2;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    public static final int UPDATETIME_FIELD_NUMBER = 3;
+    private long updateTime_;
+    /**
+     * <code>fixed64 updateTime = 3;</code>
+     */
+    public long getUpdateTime() {
+      return updateTime_;
+    }
+
+    public static final int SUBSCRIBERID_FIELD_NUMBER = 4;
+    private long subscriberId_;
+    /**
+     * <code>sint64 subscriberId = 4;</code>
+     */
+    public long getSubscriberId() {
+      return subscriberId_;
+    }
+
+    public static final int SUBSCRIBERINFO_FIELD_NUMBER = 5;
+    private com.corkili.learningserver.generate.protobuf.Info.UserInfo subscriberInfo_;
+    /**
+     * <code>.UserInfo subscriberInfo = 5;</code>
+     */
+    public boolean hasSubscriberInfo() {
+      return subscriberInfo_ != null;
+    }
+    /**
+     * <code>.UserInfo subscriberInfo = 5;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubscriberInfo() {
+      return subscriberInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : subscriberInfo_;
+    }
+    /**
+     * <code>.UserInfo subscriberInfo = 5;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubscriberInfoOrBuilder() {
+      return getSubscriberInfo();
+    }
+
+    public static final int SUBSCRIBEDCOURSEID_FIELD_NUMBER = 6;
+    private long subscribedCourseId_;
+    /**
+     * <code>sint64 subscribedCourseId = 6;</code>
+     */
+    public long getSubscribedCourseId() {
+      return subscribedCourseId_;
+    }
+
+    public static final int SUBSCRIBEDCOURSEINFO_FIELD_NUMBER = 7;
+    private com.corkili.learningserver.generate.protobuf.Info.CourseInfo subscribedCourseInfo_;
+    /**
+     * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+     */
+    public boolean hasSubscribedCourseInfo() {
+      return subscribedCourseInfo_ != null;
+    }
+    /**
+     * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseInfo getSubscribedCourseInfo() {
+      return subscribedCourseInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.CourseInfo.getDefaultInstance() : subscribedCourseInfo_;
+    }
+    /**
+     * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseInfoOrBuilder getSubscribedCourseInfoOrBuilder() {
+      return getSubscribedCourseInfo();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (courseSubscriptionId_ != 0L) {
+        output.writeSInt64(1, courseSubscriptionId_);
+      }
+      if (createTime_ != 0L) {
+        output.writeFixed64(2, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        output.writeFixed64(3, updateTime_);
+      }
+      if (subscriberId_ != 0L) {
+        output.writeSInt64(4, subscriberId_);
+      }
+      if (subscriberInfo_ != null) {
+        output.writeMessage(5, getSubscriberInfo());
+      }
+      if (subscribedCourseId_ != 0L) {
+        output.writeSInt64(6, subscribedCourseId_);
+      }
+      if (subscribedCourseInfo_ != null) {
+        output.writeMessage(7, getSubscribedCourseInfo());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (courseSubscriptionId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(1, courseSubscriptionId_);
+      }
+      if (createTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(2, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(3, updateTime_);
+      }
+      if (subscriberId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(4, subscriberId_);
+      }
+      if (subscriberInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getSubscriberInfo());
+      }
+      if (subscribedCourseId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(6, subscribedCourseId_);
+      }
+      if (subscribedCourseInfo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getSubscribedCourseInfo());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo other = (com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo) obj;
+
+      boolean result = true;
+      result = result && (getCourseSubscriptionId()
+          == other.getCourseSubscriptionId());
+      result = result && (getCreateTime()
+          == other.getCreateTime());
+      result = result && (getUpdateTime()
+          == other.getUpdateTime());
+      result = result && (getSubscriberId()
+          == other.getSubscriberId());
+      result = result && (hasSubscriberInfo() == other.hasSubscriberInfo());
+      if (hasSubscriberInfo()) {
+        result = result && getSubscriberInfo()
+            .equals(other.getSubscriberInfo());
+      }
+      result = result && (getSubscribedCourseId()
+          == other.getSubscribedCourseId());
+      result = result && (hasSubscribedCourseInfo() == other.hasSubscribedCourseInfo());
+      if (hasSubscribedCourseInfo()) {
+        result = result && getSubscribedCourseInfo()
+            .equals(other.getSubscribedCourseInfo());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + COURSESUBSCRIPTIONID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCourseSubscriptionId());
+      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCreateTime());
+      hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getUpdateTime());
+      hash = (37 * hash) + SUBSCRIBERID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getSubscriberId());
+      if (hasSubscriberInfo()) {
+        hash = (37 * hash) + SUBSCRIBERINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getSubscriberInfo().hashCode();
+      }
+      hash = (37 * hash) + SUBSCRIBEDCOURSEID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getSubscribedCourseId());
+      if (hasSubscribedCourseInfo()) {
+        hash = (37 * hash) + SUBSCRIBEDCOURSEINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getSubscribedCourseInfo().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CourseSubscriptionInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CourseSubscriptionInfo)
+        com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseSubscriptionInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseSubscriptionInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.class, com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        courseSubscriptionId_ = 0L;
+
+        createTime_ = 0L;
+
+        updateTime_ = 0L;
+
+        subscriberId_ = 0L;
+
+        if (subscriberInfoBuilder_ == null) {
+          subscriberInfo_ = null;
+        } else {
+          subscriberInfo_ = null;
+          subscriberInfoBuilder_ = null;
+        }
+        subscribedCourseId_ = 0L;
+
+        if (subscribedCourseInfoBuilder_ == null) {
+          subscribedCourseInfo_ = null;
+        } else {
+          subscribedCourseInfo_ = null;
+          subscribedCourseInfoBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseSubscriptionInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo build() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo result = new com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo(this);
+        result.courseSubscriptionId_ = courseSubscriptionId_;
+        result.createTime_ = createTime_;
+        result.updateTime_ = updateTime_;
+        result.subscriberId_ = subscriberId_;
+        if (subscriberInfoBuilder_ == null) {
+          result.subscriberInfo_ = subscriberInfo_;
+        } else {
+          result.subscriberInfo_ = subscriberInfoBuilder_.build();
+        }
+        result.subscribedCourseId_ = subscribedCourseId_;
+        if (subscribedCourseInfoBuilder_ == null) {
+          result.subscribedCourseInfo_ = subscribedCourseInfo_;
+        } else {
+          result.subscribedCourseInfo_ = subscribedCourseInfoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo.getDefaultInstance()) return this;
+        if (other.getCourseSubscriptionId() != 0L) {
+          setCourseSubscriptionId(other.getCourseSubscriptionId());
+        }
+        if (other.getCreateTime() != 0L) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.getUpdateTime() != 0L) {
+          setUpdateTime(other.getUpdateTime());
+        }
+        if (other.getSubscriberId() != 0L) {
+          setSubscriberId(other.getSubscriberId());
+        }
+        if (other.hasSubscriberInfo()) {
+          mergeSubscriberInfo(other.getSubscriberInfo());
+        }
+        if (other.getSubscribedCourseId() != 0L) {
+          setSubscribedCourseId(other.getSubscribedCourseId());
+        }
+        if (other.hasSubscribedCourseInfo()) {
+          mergeSubscribedCourseInfo(other.getSubscribedCourseInfo());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long courseSubscriptionId_ ;
+      /**
+       * <code>sint64 courseSubscriptionId = 1;</code>
+       */
+      public long getCourseSubscriptionId() {
+        return courseSubscriptionId_;
+      }
+      /**
+       * <code>sint64 courseSubscriptionId = 1;</code>
+       */
+      public Builder setCourseSubscriptionId(long value) {
+        
+        courseSubscriptionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 courseSubscriptionId = 1;</code>
+       */
+      public Builder clearCourseSubscriptionId() {
+        
+        courseSubscriptionId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long createTime_ ;
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public Builder setCreateTime(long value) {
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long updateTime_ ;
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public long getUpdateTime() {
+        return updateTime_;
+      }
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public Builder setUpdateTime(long value) {
+        
+        updateTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public Builder clearUpdateTime() {
+        
+        updateTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long subscriberId_ ;
+      /**
+       * <code>sint64 subscriberId = 4;</code>
+       */
+      public long getSubscriberId() {
+        return subscriberId_;
+      }
+      /**
+       * <code>sint64 subscriberId = 4;</code>
+       */
+      public Builder setSubscriberId(long value) {
+        
+        subscriberId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 subscriberId = 4;</code>
+       */
+      public Builder clearSubscriberId() {
+        
+        subscriberId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.UserInfo subscriberInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> subscriberInfoBuilder_;
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public boolean hasSubscriberInfo() {
+        return subscriberInfoBuilder_ != null || subscriberInfo_ != null;
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo getSubscriberInfo() {
+        if (subscriberInfoBuilder_ == null) {
+          return subscriberInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : subscriberInfo_;
+        } else {
+          return subscriberInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public Builder setSubscriberInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (subscriberInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          subscriberInfo_ = value;
+          onChanged();
+        } else {
+          subscriberInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public Builder setSubscriberInfo(
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder builderForValue) {
+        if (subscriberInfoBuilder_ == null) {
+          subscriberInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          subscriberInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public Builder mergeSubscriberInfo(com.corkili.learningserver.generate.protobuf.Info.UserInfo value) {
+        if (subscriberInfoBuilder_ == null) {
+          if (subscriberInfo_ != null) {
+            subscriberInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.newBuilder(subscriberInfo_).mergeFrom(value).buildPartial();
+          } else {
+            subscriberInfo_ = value;
+          }
+          onChanged();
+        } else {
+          subscriberInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public Builder clearSubscriberInfo() {
+        if (subscriberInfoBuilder_ == null) {
+          subscriberInfo_ = null;
+          onChanged();
+        } else {
+          subscriberInfo_ = null;
+          subscriberInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder getSubscriberInfoBuilder() {
+        
+        onChanged();
+        return getSubscriberInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getSubscriberInfoOrBuilder() {
+        if (subscriberInfoBuilder_ != null) {
+          return subscriberInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return subscriberInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo.getDefaultInstance() : subscriberInfo_;
+        }
+      }
+      /**
+       * <code>.UserInfo subscriberInfo = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder> 
+          getSubscriberInfoFieldBuilder() {
+        if (subscriberInfoBuilder_ == null) {
+          subscriberInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.UserInfo, com.corkili.learningserver.generate.protobuf.Info.UserInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder>(
+                  getSubscriberInfo(),
+                  getParentForChildren(),
+                  isClean());
+          subscriberInfo_ = null;
+        }
+        return subscriberInfoBuilder_;
+      }
+
+      private long subscribedCourseId_ ;
+      /**
+       * <code>sint64 subscribedCourseId = 6;</code>
+       */
+      public long getSubscribedCourseId() {
+        return subscribedCourseId_;
+      }
+      /**
+       * <code>sint64 subscribedCourseId = 6;</code>
+       */
+      public Builder setSubscribedCourseId(long value) {
+        
+        subscribedCourseId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 subscribedCourseId = 6;</code>
+       */
+      public Builder clearSubscribedCourseId() {
+        
+        subscribedCourseId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.CourseInfo subscribedCourseInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseInfo, com.corkili.learningserver.generate.protobuf.Info.CourseInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseInfoOrBuilder> subscribedCourseInfoBuilder_;
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public boolean hasSubscribedCourseInfo() {
+        return subscribedCourseInfoBuilder_ != null || subscribedCourseInfo_ != null;
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseInfo getSubscribedCourseInfo() {
+        if (subscribedCourseInfoBuilder_ == null) {
+          return subscribedCourseInfo_ == null ? com.corkili.learningserver.generate.protobuf.Info.CourseInfo.getDefaultInstance() : subscribedCourseInfo_;
+        } else {
+          return subscribedCourseInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public Builder setSubscribedCourseInfo(com.corkili.learningserver.generate.protobuf.Info.CourseInfo value) {
+        if (subscribedCourseInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          subscribedCourseInfo_ = value;
+          onChanged();
+        } else {
+          subscribedCourseInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public Builder setSubscribedCourseInfo(
+          com.corkili.learningserver.generate.protobuf.Info.CourseInfo.Builder builderForValue) {
+        if (subscribedCourseInfoBuilder_ == null) {
+          subscribedCourseInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          subscribedCourseInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public Builder mergeSubscribedCourseInfo(com.corkili.learningserver.generate.protobuf.Info.CourseInfo value) {
+        if (subscribedCourseInfoBuilder_ == null) {
+          if (subscribedCourseInfo_ != null) {
+            subscribedCourseInfo_ =
+              com.corkili.learningserver.generate.protobuf.Info.CourseInfo.newBuilder(subscribedCourseInfo_).mergeFrom(value).buildPartial();
+          } else {
+            subscribedCourseInfo_ = value;
+          }
+          onChanged();
+        } else {
+          subscribedCourseInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public Builder clearSubscribedCourseInfo() {
+        if (subscribedCourseInfoBuilder_ == null) {
+          subscribedCourseInfo_ = null;
+          onChanged();
+        } else {
+          subscribedCourseInfo_ = null;
+          subscribedCourseInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseInfo.Builder getSubscribedCourseInfoBuilder() {
+        
+        onChanged();
+        return getSubscribedCourseInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseInfoOrBuilder getSubscribedCourseInfoOrBuilder() {
+        if (subscribedCourseInfoBuilder_ != null) {
+          return subscribedCourseInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return subscribedCourseInfo_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.CourseInfo.getDefaultInstance() : subscribedCourseInfo_;
+        }
+      }
+      /**
+       * <code>.CourseInfo subscribedCourseInfo = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseInfo, com.corkili.learningserver.generate.protobuf.Info.CourseInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseInfoOrBuilder> 
+          getSubscribedCourseInfoFieldBuilder() {
+        if (subscribedCourseInfoBuilder_ == null) {
+          subscribedCourseInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.CourseInfo, com.corkili.learningserver.generate.protobuf.Info.CourseInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseInfoOrBuilder>(
+                  getSubscribedCourseInfo(),
+                  getParentForChildren(),
+                  isClean());
+          subscribedCourseInfo_ = null;
+        }
+        return subscribedCourseInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CourseSubscriptionInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:CourseSubscriptionInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CourseSubscriptionInfo>
+        PARSER = new com.google.protobuf.AbstractParser<CourseSubscriptionInfo>() {
+      @java.lang.Override
+      public CourseSubscriptionInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CourseSubscriptionInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CourseSubscriptionInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CourseSubscriptionInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Image_descriptor;
   private static final 
@@ -37945,6 +39066,11 @@ public final class Info {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_MessageInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseSubscriptionInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseSubscriptionInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -38103,14 +39229,20 @@ public final class Info {
       "\022\016\n\004text\030\004 \001(\tH\000\022\027\n\005image\030\005 \001(\0132\006.ImageH" +
       "\000\022\022\n\nreceiverId\030\006 \001(\022\022\037\n\014receiverInfo\030\007 " +
       "\001(\0132\t.UserInfo\022\020\n\010senderId\030\010 \001(\022\022\035\n\nsend" +
-      "erInfo\030\t \001(\0132\t.UserInfoB\t\n\007content*$\n\010Us" +
-      "erType\022\013\n\007Teacher\020\000\022\013\n\007Student\020\001*g\n\014Ques" +
-      "tionType\022\021\n\rSingleFilling\020\000\022\023\n\017MultipleF" +
-      "illing\020\001\022\020\n\014SingleChoice\020\002\022\022\n\016MultipleCh" +
-      "oice\020\003\022\t\n\005Essay\020\004*L\n\021CourseCommentType\022\r" +
-      "\n\tVERY_GOOD\020\000\022\010\n\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST" +
-      "_MID\020\003\022\007\n\003BAD\020\004B4\n,com.corkili.learnings" +
-      "erver.generate.protobufB\004Infob\006proto3"
+      "erInfo\030\t \001(\0132\t.UserInfoB\t\n\007content\"\336\001\n\026C" +
+      "ourseSubscriptionInfo\022\034\n\024courseSubscript" +
+      "ionId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdat" +
+      "eTime\030\003 \001(\006\022\024\n\014subscriberId\030\004 \001(\022\022!\n\016sub" +
+      "scriberInfo\030\005 \001(\0132\t.UserInfo\022\032\n\022subscrib" +
+      "edCourseId\030\006 \001(\022\022)\n\024subscribedCourseInfo" +
+      "\030\007 \001(\0132\013.CourseInfo*$\n\010UserType\022\013\n\007Teach" +
+      "er\020\000\022\013\n\007Student\020\001*g\n\014QuestionType\022\021\n\rSin" +
+      "gleFilling\020\000\022\023\n\017MultipleFilling\020\001\022\020\n\014Sin" +
+      "gleChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t\n\005Essay" +
+      "\020\004*L\n\021CourseCommentType\022\r\n\tVERY_GOOD\020\000\022\010" +
+      "\n\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020\004" +
+      "B4\n,com.corkili.learningserver.generate." +
+      "protobufB\004Infob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -38382,6 +39514,12 @@ public final class Info {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MessageInfo_descriptor,
         new java.lang.String[] { "MessageId", "CreateTime", "UpdateTime", "Text", "Image", "ReceiverId", "ReceiverInfo", "SenderId", "SenderInfo", "Content", });
+    internal_static_CourseSubscriptionInfo_descriptor =
+      getDescriptor().getMessageTypes().get(35);
+    internal_static_CourseSubscriptionInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseSubscriptionInfo_descriptor,
+        new java.lang.String[] { "CourseSubscriptionId", "CreateTime", "UpdateTime", "SubscriberId", "SubscriberInfo", "SubscribedCourseId", "SubscribedCourseInfo", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

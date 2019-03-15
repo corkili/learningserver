@@ -1,7 +1,18 @@
 package com.corkili.learningserver.common;
 
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import com.google.protobuf.ByteString;
+
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.CourseComment;
+import com.corkili.learningserver.bo.CourseSubscription;
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.Exam;
 import com.corkili.learningserver.bo.ExamQuestion;
@@ -18,6 +29,7 @@ import com.corkili.learningserver.generate.protobuf.Info.Answer;
 import com.corkili.learningserver.generate.protobuf.Info.CourseCommentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseCommentType;
 import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseSubscriptionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSimpleInfo;
@@ -54,17 +66,25 @@ import com.corkili.learningserver.generate.protobuf.Info.TopicCommentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.TopicReplyInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
-import com.google.protobuf.ByteString;
-
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class ProtoUtils {
+
+    public static CourseSubscriptionInfo generateCourseSubscriptionInfo(CourseSubscription courseSubscription,
+                                                                        User subscriber, Course course, User courseTeacher,
+                                                                        boolean loadImageData) {
+        if (courseSubscription == null) {
+            return CourseSubscriptionInfo.getDefaultInstance();
+        }
+        return CourseSubscriptionInfo.newBuilder()
+                .setCourseSubscriptionId(courseSubscription.getId())
+                .setCreateTime(getTime(courseSubscription.getCreateTime()))
+                .setUpdateTime(getTime(courseSubscription.getUpdateTime()))
+                .setSubscriberId(courseSubscription.getId())
+                .setSubscriberInfo(generateUserInfo(subscriber))
+                .setSubscribedCourseId(courseSubscription.getSubscribedCourseId())
+                .setSubscribedCourseInfo(generateCourseInfo(course, courseTeacher, loadImageData))
+                .build();
+    }
 
     public static MessageInfo generateMessageInfo(Message message, User receiver, User sender, boolean loadImageData) {
         if (message == null) {

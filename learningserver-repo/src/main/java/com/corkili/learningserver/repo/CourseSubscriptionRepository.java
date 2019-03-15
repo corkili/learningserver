@@ -14,4 +14,12 @@ public interface CourseSubscriptionRepository extends JpaRepository<CourseSubscr
 
     void deleteAllBySubscribedCourseId(Long subscribedCourseId);
 
+    List<CourseSubscription> findAllBySubscriberId(Long subscriberId);
+
+    List<CourseSubscription> findAllBySubscribedCourseId(Long subscribedCourseId);
+
+    List<CourseSubscription> findAllBySubscriberIdAndSubscribedCourseId(Long subscriberId, Long subscribedCourseId);
+
+    boolean existsBySubscriberIdAndSubscribedCourseId(Long subscriberId, Long subscribedCourseId);
+
 }

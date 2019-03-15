@@ -1,5 +1,18 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.CourseComment;
 import com.corkili.learningserver.bo.CourseComment.Type;
 import com.corkili.learningserver.common.ImageUtils;
@@ -8,17 +21,6 @@ import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.CourseCommentRepository;
 import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.service.CourseCommentService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -111,7 +113,7 @@ public class CourseCommentServiceImpl extends ServiceImpl<CourseComment, com.cor
         if (courseComment.getCommentedCourseId() == null || !courseRepository.existsById(courseComment.getCommentedCourseId())) {
             return recordErrorAndCreateFailResultWithMessage("create courseComment error: commentedCourseId is null or not exists");
         }
-        if (ImageUtils.storeImages(images)) {
+        if (!ImageUtils.storeImages(images)) {
             return recordErrorAndCreateFailResultWithMessage("create courseComment error: store image failed");
         }
         courseComment.getImagePaths().clear();
@@ -141,7 +143,7 @@ public class CourseCommentServiceImpl extends ServiceImpl<CourseComment, com.cor
         }
         List<String> oldImagePaths = new LinkedList<>(courseComment.getImagePaths());
         if (images != null) {
-            if (ImageUtils.storeImages(images)) {
+            if (!ImageUtils.storeImages(images)) {
                 return recordErrorAndCreateFailResultWithMessage("update courseComment error: store image failed");
             }
             courseComment.getImagePaths().clear();
