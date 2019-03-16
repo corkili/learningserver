@@ -495,6 +495,7 @@ public class ProtoUtils {
             return UserInfo.getDefaultInstance();
         }
         return UserInfo.newBuilder()
+                .setUserId(user.getId())
                 .setPhone(user.getPhone())
                 .setUsername(user.getUsername())
                 .setUserType(UserType.valueOf(user.getUserType().name()))

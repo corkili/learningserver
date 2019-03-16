@@ -23,9 +23,10 @@ message Image {
 }
 
 message UserInfo {
-    string phone = 1;
-    string username = 2;
-    UserType userType = 3;
+    sint64 userId = 1;
+    string phone = 2;
+    string username = 3;
+    UserType userType = 4;
 }
 
 message CourseInfo {

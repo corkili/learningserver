@@ -1,5 +1,18 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.ForumTopic;
 import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ServiceResult;
@@ -8,17 +21,6 @@ import com.corkili.learningserver.repo.CourseRepository;
 import com.corkili.learningserver.repo.ForumTopicRepository;
 import com.corkili.learningserver.service.ForumTopicService;
 import com.corkili.learningserver.service.TopicCommentService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -118,7 +120,7 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
         if (forumTopic.getBelongCourseId() == null || !courseRepository.existsById(forumTopic.getBelongCourseId())) {
             return recordErrorAndCreateFailResultWithMessage("create forumTopic error: belongCourseId is null or not exists");
         }
-        if (ImageUtils.storeImages(images)) {
+        if (!ImageUtils.storeImages(images)) {
             return recordErrorAndCreateFailResultWithMessage("create forumTopic error: store image failed");
         }
         forumTopic.getImagePaths().clear();
@@ -148,7 +150,7 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
         }
         List<String> oldImagePaths = new LinkedList<>(forumTopic.getImagePaths());
         if (images != null) {
-            if (ImageUtils.storeImages(images)) {
+            if (!ImageUtils.storeImages(images)) {
                 return recordErrorAndCreateFailResultWithMessage("update forumTopic error: store image failed");
             }
             forumTopic.getImagePaths().clear();

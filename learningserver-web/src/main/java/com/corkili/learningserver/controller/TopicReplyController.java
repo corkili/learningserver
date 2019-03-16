@@ -1,5 +1,17 @@
 package com.corkili.learningserver.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.corkili.learningserver.bo.TopicReply;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ControllerUtils;
@@ -20,17 +32,6 @@ import com.corkili.learningserver.generate.protobuf.Response.TopicReplyUpdateRes
 import com.corkili.learningserver.service.TopicReplyService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/topicReply")
@@ -108,7 +109,7 @@ public class TopicReplyController {
         User author = authorOptional.get();
         TopicReply topicReply = TopicReply.copyFrom(topicReplyOptional.get());
         if (request.getUpdateContent()) {
-            topicReply.setContent(topicReply.getContent());
+            topicReply.setContent(request.getContent());
         }
         Map<String, byte[]> images = null;
         if (request.getUpdateImage()) {

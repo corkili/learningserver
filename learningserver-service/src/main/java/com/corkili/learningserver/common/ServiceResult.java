@@ -55,8 +55,12 @@ public class ServiceResult {
         boolean mergeResult = result & serviceResult.result;
         String mergeMsg = useBaseResultMessage ? msg : serviceResult.msg;
         Map<Object, Object> mergeExtraMap = new HashMap<>();
-        mergeExtraMap.putAll(extraMap);
-        mergeExtraMap.putAll(serviceResult.extraMap);
+        if (extraMap != null) {
+            mergeExtraMap.putAll(extraMap);
+        }
+        if (serviceResult.extraMap != null) {
+            mergeExtraMap.putAll(serviceResult.extraMap);
+        }
         return new ServiceResult(mergeResult, mergeMsg, mergeExtraMap);
     }
 
