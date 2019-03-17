@@ -1,5 +1,21 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.CourseWork;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.common.ServiceResult;
@@ -9,22 +25,10 @@ import com.corkili.learningserver.repo.CourseWorkRepository;
 import com.corkili.learningserver.service.CourseWorkService;
 import com.corkili.learningserver.service.SubmittedCourseWorkService;
 import com.corkili.learningserver.service.WorkQuestionService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional
 public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.learningserver.po.CourseWork> implements CourseWorkService {
 
     @Autowired
@@ -66,24 +70,23 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
 
     @Override
     public ServiceResult deleteCourseWork(Long courseWorkId) {
-        ServiceResult serviceResult;
+        // delete associated work question
+        workQuestionService.deleteWorkQuestionByBelongCourseWorkId(courseWorkId);
+        // delete associated submitted course work
+        submittedCourseWorkService.deleteSubmittedCourseWorkByBelongCourseWorkId(courseWorkId);
         // delete course work
+        ServiceResult serviceResult;
         if (delete(courseWorkId)) {
             serviceResult = ServiceResult.successResultWithMesage("delete course work success");
         } else {
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete course work success");
         }
-        // delete associated work question
-        serviceResult = serviceResult.merge(workQuestionService.deleteWorkQuestionByBelongCourseWorkId(courseWorkId), true);
-        // delete associated submitted course work
-        serviceResult = serviceResult.merge(submittedCourseWorkService.deleteSubmittedCourseWorkByBelongCourseWorkId(courseWorkId), true);
         return serviceResult;
     }
 
     @Override
     public ServiceResult deleteCourseWorkByBelongCourseId(Long belongCourseId) {
         List<Long> courseWorkIdList = courseWorkRepository.findAllCourseWorkIdByBelongCourseId(belongCourseId);
-        courseWorkRepository.deleteAllByBelongCourseId(belongCourseId);
         for (Long id : courseWorkIdList) {
             // delete associated work question
             workQuestionService.deleteWorkQuestionByBelongCourseWorkId(id);
@@ -91,6 +94,7 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
             submittedCourseWorkService.deleteSubmittedCourseWorkByBelongCourseWorkId(id);
             evictFromCache(entityName() + id);
         }
+        courseWorkRepository.deleteAllByBelongCourseId(belongCourseId);
         return ServiceResult.successResultWithMesage("delete course work success");
     }
 

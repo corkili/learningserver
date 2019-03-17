@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,7 @@ import com.corkili.learningserver.service.TopicReplyService;
 
 @Slf4j
 @Service
+@Transactional
 public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corkili.learningserver.po.TopicComment> implements TopicCommentService {
 
     @Autowired
@@ -84,25 +86,25 @@ public class TopicCommentServiceImpl extends ServiceImpl<TopicComment, com.corki
 
     @Override
     public ServiceResult deleteTopicComment(Long topicCommentId) {
+        // delete associated topic reply
+        topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId);
         ServiceResult serviceResult;
         if (delete(topicCommentId)) {
             serviceResult = ServiceResult.successResult("delete topic comment success");
         } else {
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete topic comment success");
         }
-        // delete associated topic reply
-        serviceResult = serviceResult.merge(topicReplyService.deleteTopicReplyByBelongCommentId(topicCommentId), true);
         return serviceResult;
     }
 
     @Override
     public ServiceResult deleteTopicCommentByBelongTopicId(Long belongTopicId) {
         List<Long> topicCommentIdList = topicCommentRepository.findAllTopicCommentIdByBelongTopicId(belongTopicId);
-        topicCommentRepository.deleteAllByBelongTopicId(belongTopicId);
         for (Long id : topicCommentIdList) {
             topicReplyService.deleteTopicReplyByBelongCommentId(id);
             evictFromCache(entityName() + id);
         }
+        topicCommentRepository.deleteAllByBelongTopicId(belongTopicId);
         return ServiceResult.successResultWithMesage("delete topic comment success");
     }
 

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,7 @@ import com.corkili.learningserver.service.SubmittedExamService;
 
 @Slf4j
 @Service
+@Transactional
 public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserver.po.Exam> implements ExamService {
 
     @Autowired
@@ -68,23 +70,22 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
 
     @Override
     public ServiceResult deleteExam(Long examId) {
+        // delete associated exam question
+        examQuestionService.deleteExamQuestionByBelongExamId(examId);
+        // delete associated submitted exam
+        submittedExamService.deleteSubmittedExamByBelongExamId(examId);
         ServiceResult serviceResult;
         if (!delete(examId)) {
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete exam success");
         } else {
             serviceResult = ServiceResult.successResultWithMesage("delete exam success");
         }
-        // delete associated exam question
-        serviceResult = serviceResult.merge(examQuestionService.deleteExamQuestionByBelongExamId(examId), true);
-        // delete associated submitted exam
-        serviceResult = serviceResult.merge(submittedExamService.deleteSubmittedExamByBelongExamId(examId), true);
         return serviceResult;
     }
 
     @Override
     public ServiceResult deleteExamByBelongCourseId(Long belongCourseId) {
         List<Long> examIdList = examRepository.findAllExamIdByBelongCourseId(belongCourseId);
-        examRepository.deleteAllByBelongCourseId(belongCourseId);
         for (Long id : examIdList) {
             // delete associated exam question
             examQuestionService.deleteExamQuestionByBelongExamId(id);
@@ -92,6 +93,7 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
             submittedExamService.deleteSubmittedExamByBelongExamId(id);
             evictFromCache(entityName() + id);
         }
+        examRepository.deleteAllByBelongCourseId(belongCourseId);
         return ServiceResult.successResultWithMesage("delete exam success");
     }
 

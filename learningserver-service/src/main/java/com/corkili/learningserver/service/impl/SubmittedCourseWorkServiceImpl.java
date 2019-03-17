@@ -1,5 +1,19 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
@@ -16,20 +30,10 @@ import com.corkili.learningserver.service.QuestionService;
 import com.corkili.learningserver.service.SubmittedCourseWorkService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.service.WorkQuestionService;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional
 public class SubmittedCourseWorkServiceImpl extends ServiceImpl<SubmittedCourseWork, com.corkili.learningserver.po.SubmittedCourseWork> implements SubmittedCourseWorkService {
 
     @Autowired

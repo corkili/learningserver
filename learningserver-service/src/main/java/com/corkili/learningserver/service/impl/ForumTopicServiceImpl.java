@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,7 @@ import com.corkili.learningserver.service.TopicCommentService;
 
 @Slf4j
 @Service
+@Transactional
 public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.learningserver.po.ForumTopic> implements ForumTopicService {
 
     @Autowired
@@ -85,24 +87,24 @@ public class ForumTopicServiceImpl extends ServiceImpl<ForumTopic, com.corkili.l
     @Override
     public ServiceResult deleteForumTopic(Long forumTopicId) {
         ServiceResult serviceResult;
+        // delete associated topic comment
+        topicCommentService.deleteTopicCommentByBelongTopicId(forumTopicId);
         if (delete(forumTopicId)) {
             serviceResult = ServiceResult.successResultWithMesage("delete forum topic success");
         } else {
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete forum topic success");
         }
-        // delete associated topic comment
-        serviceResult = serviceResult.merge(topicCommentService.deleteTopicCommentByBelongTopicId(forumTopicId), true);
         return serviceResult;
     }
 
     @Override
     public ServiceResult deleteForumTopicByBelongCourseId(Long belongCourseId) {
         List<Long> forumTopicIdList = forumTopicRepository.findAllForumTopicIdByBelongCourseId(belongCourseId);
-        forumTopicRepository.deleteAllByBelongCourseId(belongCourseId);
         for (Long id : forumTopicIdList) {
             topicCommentService.deleteTopicCommentByBelongTopicId(id);
             evictFromCache(entityName() + id);
         }
+        forumTopicRepository.deleteAllByBelongCourseId(belongCourseId);
         return ServiceResult.successResultWithMesage("delete forum topic success");
     }
 

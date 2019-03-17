@@ -19,6 +19,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.corkili.learningserver.bo.BusinessObject;
 import com.corkili.learningserver.common.ServiceResult;
@@ -27,6 +28,7 @@ import com.corkili.learningserver.po.PersistObject;
 import com.corkili.learningserver.service.Service;
 
 @Component
+@Transactional
 public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistObject> implements Service<BO, PO> {
 
     private static final String CACHE_NAME = "memoryCache";

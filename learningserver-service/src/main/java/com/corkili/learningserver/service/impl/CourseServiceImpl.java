@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,7 @@ import com.corkili.learningserver.service.ScormService;
 
 @Slf4j
 @Service
+@Transactional
 public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learningserver.po.Course> implements CourseService {
 
     @Autowired
@@ -239,23 +241,23 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
                 scormService.deleteScorm(coursePO.getCourseware().getId());
             }
         }
-        ServiceResult serviceResult;
+        // delete associated course comment
+        courseCommentService.deleteCourseCommentByCommentedCourseId(courseId);
+        // delete associated course subscription
+        courseSubscriptionService.deleteCourseSubscriptionBySubscribedCourseId(courseId);
+        // delete associated forum topic
+        forumTopicService.deleteForumTopicByBelongCourseId(courseId);
+        // delete associated course work
+        courseWorkService.deleteCourseWorkByBelongCourseId(courseId);
+        // delete associated exam
+        examService.deleteExamByBelongCourseId(courseId);
         // delete course
+        ServiceResult serviceResult;
         if (delete(courseId)) {
             serviceResult = ServiceResult.successResultWithMesage("delete course success");
         } else {
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete course success");
         }
-        // delete associated course comment
-        serviceResult = serviceResult.merge(courseCommentService.deleteCourseCommentByCommentedCourseId(courseId), true);
-        // delete associated course subscription
-        serviceResult = serviceResult.merge(courseSubscriptionService.deleteCourseSubscriptionBySubscribedCourseId(courseId), true);
-        // delete associated forum topic
-        serviceResult = serviceResult.merge(forumTopicService.deleteForumTopicByBelongCourseId(courseId), true);
-        // delete associated course work
-        serviceResult = serviceResult.merge(courseWorkService.deleteCourseWorkByBelongCourseId(courseId), true);
-        // delete associated exam
-        serviceResult = serviceResult.merge(examService.deleteExamByBelongCourseId(courseId), true);
         return serviceResult;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,7 @@ import com.corkili.learningserver.service.WorkQuestionService;
 
 @Slf4j
 @Service
+@Transactional
 public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corkili.learningserver.po.WorkQuestion> implements WorkQuestionService {
 
     private static final String CACHE_NAME = "memoryCache";

@@ -1,5 +1,18 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.Message;
 import com.corkili.learningserver.common.ImageUtils;
 import com.corkili.learningserver.common.ServiceResult;
@@ -7,19 +20,10 @@ import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.MessageRepository;
 import com.corkili.learningserver.repo.UserRepository;
 import com.corkili.learningserver.service.MessageService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional
 public class MessageServiceImpl extends ServiceImpl<Message, com.corkili.learningserver.po.Message> implements MessageService {
 
     @Autowired
