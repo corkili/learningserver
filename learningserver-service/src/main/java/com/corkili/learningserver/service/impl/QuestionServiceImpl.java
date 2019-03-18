@@ -326,7 +326,7 @@ public class QuestionServiceImpl extends ServiceImpl<Question, com.corkili.learn
 //                essayAnswer.getImagePaths().addAll(essayImages.keySet());
 //            }
 //        }
-        Optional<Question> questionOptional = create(question);
+        Optional<Question> questionOptional = update(question);
         if (!questionOptional.isPresent()) {
             // rollback
             if (questionImages != null) {

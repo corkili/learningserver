@@ -576,6 +576,7 @@ public class ProtoUtils {
                     Question.MultipleChoiceAnswer questionAnswer = new Question.MultipleChoiceAnswer(
                             answer.getMultipleChoiceAnswer().getSelectAllIsCorrect());
                     answer.getMultipleChoiceAnswer().getChoiceList().forEach(questionAnswer.getChoices()::add);
+                    return questionAnswer;
                 }
                 break;
             }

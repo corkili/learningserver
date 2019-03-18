@@ -91,7 +91,6 @@ public class Question implements PersistObject {
      *
      */
     @Column(name = "choices", length = 2000)
-    @NotBlank
     private String choices;
 
     /**

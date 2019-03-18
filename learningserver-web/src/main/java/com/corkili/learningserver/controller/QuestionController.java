@@ -1,5 +1,17 @@
 package com.corkili.learningserver.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.QuestionType;
 import com.corkili.learningserver.common.ControllerUtils;
@@ -22,17 +34,6 @@ import com.corkili.learningserver.generate.protobuf.Response.QuestionImportRespo
 import com.corkili.learningserver.generate.protobuf.Response.QuestionUpdateResponse;
 import com.corkili.learningserver.service.QuestionService;
 import com.corkili.learningserver.token.TokenManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/question")
@@ -195,13 +196,9 @@ public class QuestionController {
             request.getChoicesMap().forEach(copyQuestion::putChoice);
         }
 //        Map<String, byte[]> essayImages = null;
-//        if (request.getUpdateAnswer()) {
-//            copyQuestion.setAnswer(ProtoUtils.generateQuestionAnswer(request.getQuestionType(), request.getAnswer()));
-//            if (request.getQuestionType() == Info.QuestionType.Essay && request.getAnswer().hasEssayAnswer()) {
-//                essayImages = ControllerUtils.generateImageMap("question", authorId,
-//                        request.getAnswer().getEssayAnswer().getImageList());
-//            }
-//        }
+        if (request.getUpdateAnswer()) {
+            copyQuestion.setAnswer(ProtoUtils.generateQuestionAnswer(request.getQuestionType(), request.getAnswer()));
+        }
         ServiceResult serviceResult = questionService.updateQuestion(copyQuestion, images);
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         QuestionInfo questionInfo;
