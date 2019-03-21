@@ -111,7 +111,7 @@ public class WorkQuestionServiceImpl extends ServiceImpl<WorkQuestion, com.corki
             return recordWarnAndCreateSuccessResultWithMessage("create or update work question warn: no work question")
                     .merge(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
         }
-        if (courseWorkId == null || courseWorkRepository.existsById(courseWorkId)) {
+        if (courseWorkId == null || !courseWorkRepository.existsById(courseWorkId)) {
             return recordErrorAndCreateFailResultWithMessage("create or update work question error: course work id is null");
         }
         List<WorkQuestion> workQuestionList = new ArrayList<>(workQuestions);

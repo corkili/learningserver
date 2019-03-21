@@ -105,7 +105,7 @@ public class CourseWorkController {
                     .build();
         }
         CourseWork courseWork = courseWorkOptional.get();
-        boolean notOpen = courseWork.isOpen();
+        boolean notOpen = !courseWork.isOpen();
         CourseWork copyCourseWork = CourseWork.copyFrom(courseWork);
         if (request.getUpdateOpen() && notOpen) {
             copyCourseWork.setOpen(request.getOpen());

@@ -20,7 +20,6 @@ import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Info;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionInfo;
-import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionDeleteRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionFindAllRequest;
 import com.corkili.learningserver.generate.protobuf.Request.QuestionGetRequest;
@@ -104,16 +103,16 @@ public class QuestionController {
         }
         ServiceResult serviceResult = questionService.findAllQuestion(authorId, request.getAll(), keywordList, questionTypeList);
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
-        List<QuestionSimpleInfo> questionSimpleInfoList = new LinkedList<>();
+        List<QuestionInfo> questionInfoList = new LinkedList<>();
         if (serviceResult.isSuccess()) {
             List<Question> questionList = (List<Question>) serviceResult.extra(List.class);
             for (Question question : questionList) {
-                questionSimpleInfoList.add(ProtoUtils.generateQuestionSimpleInfo(question));
+                questionInfoList.add(ProtoUtils.generateQuestionInfo(question, false));
             }
         }
         return QuestionFindAllResponse.newBuilder()
                 .setResponse(baseResponse)
-                .addAllQuestionSimpleInfo(questionSimpleInfoList)
+                .addAllQuestionInfo(questionInfoList)
                 .build();
     }
 

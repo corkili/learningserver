@@ -69,7 +69,7 @@ message QuestionImportResponse {
 
 message QuestionFindAllResponse {
     BaseResponse response = 1;
-    repeated QuestionSimpleInfo questionSimpleInfo = 2;
+    repeated QuestionInfo questionInfo = 2;
 }
 
 message QuestionGetResponse {

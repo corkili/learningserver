@@ -9026,27 +9026,27 @@ public final class Response {
     com.corkili.learningserver.generate.protobuf.Response.BaseResponseOrBuilder getResponseOrBuilder();
 
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo> 
-        getQuestionSimpleInfoList();
+    java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo> 
+        getQuestionInfoList();
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo getQuestionSimpleInfo(int index);
+    com.corkili.learningserver.generate.protobuf.Info.QuestionInfo getQuestionInfo(int index);
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    int getQuestionSimpleInfoCount();
+    int getQuestionInfoCount();
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder> 
-        getQuestionSimpleInfoOrBuilderList();
+    java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder> 
+        getQuestionInfoOrBuilderList();
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder getQuestionSimpleInfoOrBuilder(
+    com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder getQuestionInfoOrBuilder(
         int index);
   }
   /**
@@ -9062,7 +9062,7 @@ public final class Response {
       super(builder);
     }
     private QuestionFindAllResponse() {
-      questionSimpleInfo_ = java.util.Collections.emptyList();
+      questionInfo_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -9104,11 +9104,11 @@ public final class Response {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                questionSimpleInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo>();
+                questionInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              questionSimpleInfo_.add(
-                  input.readMessage(com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.parser(), extensionRegistry));
+              questionInfo_.add(
+                  input.readMessage(com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -9127,7 +9127,7 @@ public final class Response {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          questionSimpleInfo_ = java.util.Collections.unmodifiableList(questionSimpleInfo_);
+          questionInfo_ = java.util.Collections.unmodifiableList(questionInfo_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -9168,39 +9168,39 @@ public final class Response {
       return getResponse();
     }
 
-    public static final int QUESTIONSIMPLEINFO_FIELD_NUMBER = 2;
-    private java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo> questionSimpleInfo_;
+    public static final int QUESTIONINFO_FIELD_NUMBER = 2;
+    private java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo> questionInfo_;
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo> getQuestionSimpleInfoList() {
-      return questionSimpleInfo_;
+    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo> getQuestionInfoList() {
+      return questionInfo_;
     }
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder> 
-        getQuestionSimpleInfoOrBuilderList() {
-      return questionSimpleInfo_;
+    public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder> 
+        getQuestionInfoOrBuilderList() {
+      return questionInfo_;
     }
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    public int getQuestionSimpleInfoCount() {
-      return questionSimpleInfo_.size();
+    public int getQuestionInfoCount() {
+      return questionInfo_.size();
     }
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo getQuestionSimpleInfo(int index) {
-      return questionSimpleInfo_.get(index);
+    public com.corkili.learningserver.generate.protobuf.Info.QuestionInfo getQuestionInfo(int index) {
+      return questionInfo_.get(index);
     }
     /**
-     * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+     * <code>repeated .QuestionInfo questionInfo = 2;</code>
      */
-    public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder getQuestionSimpleInfoOrBuilder(
+    public com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder getQuestionInfoOrBuilder(
         int index) {
-      return questionSimpleInfo_.get(index);
+      return questionInfo_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -9220,8 +9220,8 @@ public final class Response {
       if (response_ != null) {
         output.writeMessage(1, getResponse());
       }
-      for (int i = 0; i < questionSimpleInfo_.size(); i++) {
-        output.writeMessage(2, questionSimpleInfo_.get(i));
+      for (int i = 0; i < questionInfo_.size(); i++) {
+        output.writeMessage(2, questionInfo_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -9236,9 +9236,9 @@ public final class Response {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getResponse());
       }
-      for (int i = 0; i < questionSimpleInfo_.size(); i++) {
+      for (int i = 0; i < questionInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, questionSimpleInfo_.get(i));
+          .computeMessageSize(2, questionInfo_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -9261,8 +9261,8 @@ public final class Response {
         result = result && getResponse()
             .equals(other.getResponse());
       }
-      result = result && getQuestionSimpleInfoList()
-          .equals(other.getQuestionSimpleInfoList());
+      result = result && getQuestionInfoList()
+          .equals(other.getQuestionInfoList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -9278,9 +9278,9 @@ public final class Response {
         hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
         hash = (53 * hash) + getResponse().hashCode();
       }
-      if (getQuestionSimpleInfoCount() > 0) {
-        hash = (37 * hash) + QUESTIONSIMPLEINFO_FIELD_NUMBER;
-        hash = (53 * hash) + getQuestionSimpleInfoList().hashCode();
+      if (getQuestionInfoCount() > 0) {
+        hash = (37 * hash) + QUESTIONINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getQuestionInfoList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -9410,7 +9410,7 @@ public final class Response {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getQuestionSimpleInfoFieldBuilder();
+          getQuestionInfoFieldBuilder();
         }
       }
       @java.lang.Override
@@ -9422,11 +9422,11 @@ public final class Response {
           response_ = null;
           responseBuilder_ = null;
         }
-        if (questionSimpleInfoBuilder_ == null) {
-          questionSimpleInfo_ = java.util.Collections.emptyList();
+        if (questionInfoBuilder_ == null) {
+          questionInfo_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          questionSimpleInfoBuilder_.clear();
+          questionInfoBuilder_.clear();
         }
         return this;
       }
@@ -9461,14 +9461,14 @@ public final class Response {
         } else {
           result.response_ = responseBuilder_.build();
         }
-        if (questionSimpleInfoBuilder_ == null) {
+        if (questionInfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            questionSimpleInfo_ = java.util.Collections.unmodifiableList(questionSimpleInfo_);
+            questionInfo_ = java.util.Collections.unmodifiableList(questionInfo_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.questionSimpleInfo_ = questionSimpleInfo_;
+          result.questionInfo_ = questionInfo_;
         } else {
-          result.questionSimpleInfo_ = questionSimpleInfoBuilder_.build();
+          result.questionInfo_ = questionInfoBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -9522,29 +9522,29 @@ public final class Response {
         if (other.hasResponse()) {
           mergeResponse(other.getResponse());
         }
-        if (questionSimpleInfoBuilder_ == null) {
-          if (!other.questionSimpleInfo_.isEmpty()) {
-            if (questionSimpleInfo_.isEmpty()) {
-              questionSimpleInfo_ = other.questionSimpleInfo_;
+        if (questionInfoBuilder_ == null) {
+          if (!other.questionInfo_.isEmpty()) {
+            if (questionInfo_.isEmpty()) {
+              questionInfo_ = other.questionInfo_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
-              ensureQuestionSimpleInfoIsMutable();
-              questionSimpleInfo_.addAll(other.questionSimpleInfo_);
+              ensureQuestionInfoIsMutable();
+              questionInfo_.addAll(other.questionInfo_);
             }
             onChanged();
           }
         } else {
-          if (!other.questionSimpleInfo_.isEmpty()) {
-            if (questionSimpleInfoBuilder_.isEmpty()) {
-              questionSimpleInfoBuilder_.dispose();
-              questionSimpleInfoBuilder_ = null;
-              questionSimpleInfo_ = other.questionSimpleInfo_;
+          if (!other.questionInfo_.isEmpty()) {
+            if (questionInfoBuilder_.isEmpty()) {
+              questionInfoBuilder_.dispose();
+              questionInfoBuilder_ = null;
+              questionInfo_ = other.questionInfo_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              questionSimpleInfoBuilder_ = 
+              questionInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getQuestionSimpleInfoFieldBuilder() : null;
+                   getQuestionInfoFieldBuilder() : null;
             } else {
-              questionSimpleInfoBuilder_.addAllMessages(other.questionSimpleInfo_);
+              questionInfoBuilder_.addAllMessages(other.questionInfo_);
             }
           }
         }
@@ -9695,244 +9695,244 @@ public final class Response {
         return responseBuilder_;
       }
 
-      private java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo> questionSimpleInfo_ =
+      private java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo> questionInfo_ =
         java.util.Collections.emptyList();
-      private void ensureQuestionSimpleInfoIsMutable() {
+      private void ensureQuestionInfoIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          questionSimpleInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo>(questionSimpleInfo_);
+          questionInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo>(questionInfo_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder> questionSimpleInfoBuilder_;
+          com.corkili.learningserver.generate.protobuf.Info.QuestionInfo, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder> questionInfoBuilder_;
 
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo> getQuestionSimpleInfoList() {
-        if (questionSimpleInfoBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(questionSimpleInfo_);
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo> getQuestionInfoList() {
+        if (questionInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(questionInfo_);
         } else {
-          return questionSimpleInfoBuilder_.getMessageList();
+          return questionInfoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public int getQuestionSimpleInfoCount() {
-        if (questionSimpleInfoBuilder_ == null) {
-          return questionSimpleInfo_.size();
+      public int getQuestionInfoCount() {
+        if (questionInfoBuilder_ == null) {
+          return questionInfo_.size();
         } else {
-          return questionSimpleInfoBuilder_.getCount();
+          return questionInfoBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo getQuestionSimpleInfo(int index) {
-        if (questionSimpleInfoBuilder_ == null) {
-          return questionSimpleInfo_.get(index);
+      public com.corkili.learningserver.generate.protobuf.Info.QuestionInfo getQuestionInfo(int index) {
+        if (questionInfoBuilder_ == null) {
+          return questionInfo_.get(index);
         } else {
-          return questionSimpleInfoBuilder_.getMessage(index);
+          return questionInfoBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder setQuestionSimpleInfo(
-          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo value) {
-        if (questionSimpleInfoBuilder_ == null) {
+      public Builder setQuestionInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo value) {
+        if (questionInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.set(index, value);
+          ensureQuestionInfoIsMutable();
+          questionInfo_.set(index, value);
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.setMessage(index, value);
+          questionInfoBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder setQuestionSimpleInfo(
-          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder builderForValue) {
-        if (questionSimpleInfoBuilder_ == null) {
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.set(index, builderForValue.build());
+      public Builder setQuestionInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder builderForValue) {
+        if (questionInfoBuilder_ == null) {
+          ensureQuestionInfoIsMutable();
+          questionInfo_.set(index, builderForValue.build());
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.setMessage(index, builderForValue.build());
+          questionInfoBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder addQuestionSimpleInfo(com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo value) {
-        if (questionSimpleInfoBuilder_ == null) {
+      public Builder addQuestionInfo(com.corkili.learningserver.generate.protobuf.Info.QuestionInfo value) {
+        if (questionInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.add(value);
+          ensureQuestionInfoIsMutable();
+          questionInfo_.add(value);
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.addMessage(value);
+          questionInfoBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder addQuestionSimpleInfo(
-          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo value) {
-        if (questionSimpleInfoBuilder_ == null) {
+      public Builder addQuestionInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo value) {
+        if (questionInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.add(index, value);
+          ensureQuestionInfoIsMutable();
+          questionInfo_.add(index, value);
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.addMessage(index, value);
+          questionInfoBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder addQuestionSimpleInfo(
-          com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder builderForValue) {
-        if (questionSimpleInfoBuilder_ == null) {
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.add(builderForValue.build());
+      public Builder addQuestionInfo(
+          com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder builderForValue) {
+        if (questionInfoBuilder_ == null) {
+          ensureQuestionInfoIsMutable();
+          questionInfo_.add(builderForValue.build());
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.addMessage(builderForValue.build());
+          questionInfoBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder addQuestionSimpleInfo(
-          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder builderForValue) {
-        if (questionSimpleInfoBuilder_ == null) {
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.add(index, builderForValue.build());
+      public Builder addQuestionInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder builderForValue) {
+        if (questionInfoBuilder_ == null) {
+          ensureQuestionInfoIsMutable();
+          questionInfo_.add(index, builderForValue.build());
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.addMessage(index, builderForValue.build());
+          questionInfoBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder addAllQuestionSimpleInfo(
-          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo> values) {
-        if (questionSimpleInfoBuilder_ == null) {
-          ensureQuestionSimpleInfoIsMutable();
+      public Builder addAllQuestionInfo(
+          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionInfo> values) {
+        if (questionInfoBuilder_ == null) {
+          ensureQuestionInfoIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, questionSimpleInfo_);
+              values, questionInfo_);
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.addAllMessages(values);
+          questionInfoBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder clearQuestionSimpleInfo() {
-        if (questionSimpleInfoBuilder_ == null) {
-          questionSimpleInfo_ = java.util.Collections.emptyList();
+      public Builder clearQuestionInfo() {
+        if (questionInfoBuilder_ == null) {
+          questionInfo_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.clear();
+          questionInfoBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public Builder removeQuestionSimpleInfo(int index) {
-        if (questionSimpleInfoBuilder_ == null) {
-          ensureQuestionSimpleInfoIsMutable();
-          questionSimpleInfo_.remove(index);
+      public Builder removeQuestionInfo(int index) {
+        if (questionInfoBuilder_ == null) {
+          ensureQuestionInfoIsMutable();
+          questionInfo_.remove(index);
           onChanged();
         } else {
-          questionSimpleInfoBuilder_.remove(index);
+          questionInfoBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder getQuestionSimpleInfoBuilder(
+      public com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder getQuestionInfoBuilder(
           int index) {
-        return getQuestionSimpleInfoFieldBuilder().getBuilder(index);
+        return getQuestionInfoFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder getQuestionSimpleInfoOrBuilder(
+      public com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder getQuestionInfoOrBuilder(
           int index) {
-        if (questionSimpleInfoBuilder_ == null) {
-          return questionSimpleInfo_.get(index);  } else {
-          return questionSimpleInfoBuilder_.getMessageOrBuilder(index);
+        if (questionInfoBuilder_ == null) {
+          return questionInfo_.get(index);  } else {
+          return questionInfoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder> 
-           getQuestionSimpleInfoOrBuilderList() {
-        if (questionSimpleInfoBuilder_ != null) {
-          return questionSimpleInfoBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder> 
+           getQuestionInfoOrBuilderList() {
+        if (questionInfoBuilder_ != null) {
+          return questionInfoBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(questionSimpleInfo_);
+          return java.util.Collections.unmodifiableList(questionInfo_);
         }
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder addQuestionSimpleInfoBuilder() {
-        return getQuestionSimpleInfoFieldBuilder().addBuilder(
-            com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.getDefaultInstance());
+      public com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder addQuestionInfoBuilder() {
+        return getQuestionInfoFieldBuilder().addBuilder(
+            com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder addQuestionSimpleInfoBuilder(
+      public com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder addQuestionInfoBuilder(
           int index) {
-        return getQuestionSimpleInfoFieldBuilder().addBuilder(
-            index, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.getDefaultInstance());
+        return getQuestionInfoFieldBuilder().addBuilder(
+            index, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .QuestionSimpleInfo questionSimpleInfo = 2;</code>
+       * <code>repeated .QuestionInfo questionInfo = 2;</code>
        */
-      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder> 
-           getQuestionSimpleInfoBuilderList() {
-        return getQuestionSimpleInfoFieldBuilder().getBuilderList();
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder> 
+           getQuestionInfoBuilderList() {
+        return getQuestionInfoFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder> 
-          getQuestionSimpleInfoFieldBuilder() {
-        if (questionSimpleInfoBuilder_ == null) {
-          questionSimpleInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfoOrBuilder>(
-                  questionSimpleInfo_,
+          com.corkili.learningserver.generate.protobuf.Info.QuestionInfo, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder> 
+          getQuestionInfoFieldBuilder() {
+        if (questionInfoBuilder_ == null) {
+          questionInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.QuestionInfo, com.corkili.learningserver.generate.protobuf.Info.QuestionInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.QuestionInfoOrBuilder>(
+                  questionInfo_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          questionSimpleInfo_ = null;
+          questionInfo_ = null;
         }
-        return questionSimpleInfoBuilder_;
+        return questionInfoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -50273,139 +50273,139 @@ public final class Response {
       "eResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRespon" +
       "se\022\020\n\010courseId\030\002 \001(\022\"^\n\026QuestionImportRe" +
       "sponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022" +
-      "#\n\014questionInfo\030\002 \001(\0132\r.QuestionInfo\"k\n\027" +
+      "#\n\014questionInfo\030\002 \001(\0132\r.QuestionInfo\"_\n\027" +
       "QuestionFindAllResponse\022\037\n\010response\030\001 \001(" +
-      "\0132\r.BaseResponse\022/\n\022questionSimpleInfo\030\002" +
-      " \003(\0132\023.QuestionSimpleInfo\"u\n\023QuestionGet" +
-      "Response\022\037\n\010response\030\001 \001(\0132\r.BaseRespons" +
-      "e\022#\n\014questionInfo\030\002 \003(\0132\r.QuestionInfo\022\030" +
-      "\n\020failedQuestionId\030\003 \003(\022\"^\n\026QuestionUpda" +
-      "teResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRespo" +
-      "nse\022#\n\014questionInfo\030\002 \001(\0132\r.QuestionInfo" +
-      "\"M\n\026QuestionDeleteResponse\022\037\n\010response\030\001" +
-      " \001(\0132\r.BaseResponse\022\022\n\nquestionId\030\002 \001(\022\"" +
-      "d\n\030CourseWorkCreateResponse\022\037\n\010response\030" +
-      "\001 \001(\0132\r.BaseResponse\022\'\n\016courseWorkInfo\030\002" +
-      " \001(\0132\017.CourseWorkInfo\"d\n\030CourseWorkUpdat" +
-      "eResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRespon" +
-      "se\022\'\n\016courseWorkInfo\030\002 \001(\0132\017.CourseWorkI" +
-      "nfo\"q\n\031CourseWorkFindAllResponse\022\037\n\010resp" +
-      "onse\030\001 \001(\0132\r.BaseResponse\0223\n\024courseWorkS" +
-      "impleInfo\030\002 \003(\0132\025.CourseWorkSimpleInfo\"a" +
-      "\n\025CourseWorkGetResponse\022\037\n\010response\030\001 \001(" +
-      "\0132\r.BaseResponse\022\'\n\016courseWorkInfo\030\002 \001(\013" +
-      "2\017.CourseWorkInfo\"Q\n\030CourseWorkDeleteRes" +
-      "ponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\024" +
-      "\n\014courseWorkId\030\002 \001(\022\"R\n\022ExamCreateRespon" +
-      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\033\n\010e" +
-      "xamInfo\030\002 \001(\0132\t.ExamInfo\"R\n\022ExamUpdateRe" +
+      "\0132\r.BaseResponse\022#\n\014questionInfo\030\002 \003(\0132\r" +
+      ".QuestionInfo\"u\n\023QuestionGetResponse\022\037\n\010" +
+      "response\030\001 \001(\0132\r.BaseResponse\022#\n\014questio" +
+      "nInfo\030\002 \003(\0132\r.QuestionInfo\022\030\n\020failedQues" +
+      "tionId\030\003 \003(\022\"^\n\026QuestionUpdateResponse\022\037" +
+      "\n\010response\030\001 \001(\0132\r.BaseResponse\022#\n\014quest" +
+      "ionInfo\030\002 \001(\0132\r.QuestionInfo\"M\n\026Question" +
+      "DeleteResponse\022\037\n\010response\030\001 \001(\0132\r.BaseR" +
+      "esponse\022\022\n\nquestionId\030\002 \001(\022\"d\n\030CourseWor" +
+      "kCreateResponse\022\037\n\010response\030\001 \001(\0132\r.Base" +
+      "Response\022\'\n\016courseWorkInfo\030\002 \001(\0132\017.Cours" +
+      "eWorkInfo\"d\n\030CourseWorkUpdateResponse\022\037\n" +
+      "\010response\030\001 \001(\0132\r.BaseResponse\022\'\n\016course" +
+      "WorkInfo\030\002 \001(\0132\017.CourseWorkInfo\"q\n\031Cours" +
+      "eWorkFindAllResponse\022\037\n\010response\030\001 \001(\0132\r" +
+      ".BaseResponse\0223\n\024courseWorkSimpleInfo\030\002 " +
+      "\003(\0132\025.CourseWorkSimpleInfo\"a\n\025CourseWork" +
+      "GetResponse\022\037\n\010response\030\001 \001(\0132\r.BaseResp" +
+      "onse\022\'\n\016courseWorkInfo\030\002 \001(\0132\017.CourseWor" +
+      "kInfo\"Q\n\030CourseWorkDeleteResponse\022\037\n\010res" +
+      "ponse\030\001 \001(\0132\r.BaseResponse\022\024\n\014courseWork" +
+      "Id\030\002 \001(\022\"R\n\022ExamCreateResponse\022\037\n\010respon" +
+      "se\030\001 \001(\0132\r.BaseResponse\022\033\n\010examInfo\030\002 \001(" +
+      "\0132\t.ExamInfo\"R\n\022ExamUpdateResponse\022\037\n\010re" +
+      "sponse\030\001 \001(\0132\r.BaseResponse\022\033\n\010examInfo\030" +
+      "\002 \001(\0132\t.ExamInfo\"_\n\023ExamFindAllResponse\022" +
+      "\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\'\n\016exam" +
+      "SimpleInfo\030\002 \003(\0132\017.ExamSimpleInfo\"O\n\017Exa" +
+      "mGetResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRes" +
+      "ponse\022\033\n\010examInfo\030\002 \001(\0132\t.ExamInfo\"E\n\022Ex" +
+      "amDeleteResponse\022\037\n\010response\030\001 \001(\0132\r.Bas" +
+      "eResponse\022\016\n\006examId\030\002 \001(\022\"\177\n!SubmittedCo" +
+      "urseWorkCreateResponse\022\037\n\010response\030\001 \001(\013" +
+      "2\r.BaseResponse\0229\n\027submittedCourseWorkIn" +
+      "fo\030\002 \001(\0132\030.SubmittedCourseWorkInfo\"\177\n!Su" +
+      "bmittedCourseWorkUpdateResponse\022\037\n\010respo" +
+      "nse\030\001 \001(\0132\r.BaseResponse\0229\n\027submittedCou" +
+      "rseWorkInfo\030\002 \001(\0132\030.SubmittedCourseWorkI" +
+      "nfo\"\214\001\n\"SubmittedCourseWorkFindAllRespon" +
+      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022E\n\035s" +
+      "ubmittedCourseWorkSimpleInfo\030\002 \003(\0132\036.Sub" +
+      "mittedCourseWorkSimpleInfo\"|\n\036SubmittedC" +
+      "ourseWorkGetResponse\022\037\n\010response\030\001 \001(\0132\r" +
+      ".BaseResponse\0229\n\027submittedCourseWorkInfo" +
+      "\030\002 \001(\0132\030.SubmittedCourseWorkInfo\"c\n!Subm" +
+      "ittedCourseWorkDeleteResponse\022\037\n\010respons" +
+      "e\030\001 \001(\0132\r.BaseResponse\022\035\n\025submittedCours" +
+      "eWorkId\030\002 \001(\022\"m\n\033SubmittedExamCreateResp" +
+      "onse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022-\n" +
+      "\021submittedExamInfo\030\002 \001(\0132\022.SubmittedExam" +
+      "Info\"m\n\033SubmittedExamUpdateResponse\022\037\n\010r" +
+      "esponse\030\001 \001(\0132\r.BaseResponse\022-\n\021submitte" +
+      "dExamInfo\030\002 \001(\0132\022.SubmittedExamInfo\"z\n\034S" +
+      "ubmittedExamFindAllResponse\022\037\n\010response\030" +
+      "\001 \001(\0132\r.BaseResponse\0229\n\027submittedExamSim" +
+      "pleInfo\030\002 \003(\0132\030.SubmittedExamSimpleInfo\"" +
+      "j\n\030SubmittedExamGetResponse\022\037\n\010response\030" +
+      "\001 \001(\0132\r.BaseResponse\022-\n\021submittedExamInf" +
+      "o\030\002 \001(\0132\022.SubmittedExamInfo\"W\n\033Submitted" +
+      "ExamDeleteResponse\022\037\n\010response\030\001 \001(\0132\r.B" +
+      "aseResponse\022\027\n\017submittedExamId\030\002 \001(\022\"d\n\030" +
+      "ForumTopicCreateResponse\022\037\n\010response\030\001 \001" +
+      "(\0132\r.BaseResponse\022\'\n\016forumTopicInfo\030\002 \001(" +
+      "\0132\017.ForumTopicInfo\"d\n\030ForumTopicUpdateRe" +
       "sponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022" +
-      "\033\n\010examInfo\030\002 \001(\0132\t.ExamInfo\"_\n\023ExamFind" +
-      "AllResponse\022\037\n\010response\030\001 \001(\0132\r.BaseResp" +
-      "onse\022\'\n\016examSimpleInfo\030\002 \003(\0132\017.ExamSimpl" +
-      "eInfo\"O\n\017ExamGetResponse\022\037\n\010response\030\001 \001" +
-      "(\0132\r.BaseResponse\022\033\n\010examInfo\030\002 \001(\0132\t.Ex" +
-      "amInfo\"E\n\022ExamDeleteResponse\022\037\n\010response" +
-      "\030\001 \001(\0132\r.BaseResponse\022\016\n\006examId\030\002 \001(\022\"\177\n" +
-      "!SubmittedCourseWorkCreateResponse\022\037\n\010re" +
-      "sponse\030\001 \001(\0132\r.BaseResponse\0229\n\027submitted" +
-      "CourseWorkInfo\030\002 \001(\0132\030.SubmittedCourseWo" +
-      "rkInfo\"\177\n!SubmittedCourseWorkUpdateRespo" +
-      "nse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\0229\n\027" +
-      "submittedCourseWorkInfo\030\002 \001(\0132\030.Submitte" +
-      "dCourseWorkInfo\"\214\001\n\"SubmittedCourseWorkF" +
-      "indAllResponse\022\037\n\010response\030\001 \001(\0132\r.BaseR" +
-      "esponse\022E\n\035submittedCourseWorkSimpleInfo" +
-      "\030\002 \003(\0132\036.SubmittedCourseWorkSimpleInfo\"|" +
-      "\n\036SubmittedCourseWorkGetResponse\022\037\n\010resp" +
-      "onse\030\001 \001(\0132\r.BaseResponse\0229\n\027submittedCo" +
-      "urseWorkInfo\030\002 \001(\0132\030.SubmittedCourseWork" +
-      "Info\"c\n!SubmittedCourseWorkDeleteRespons" +
-      "e\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\035\n\025su" +
-      "bmittedCourseWorkId\030\002 \001(\022\"m\n\033SubmittedEx" +
-      "amCreateResponse\022\037\n\010response\030\001 \001(\0132\r.Bas" +
-      "eResponse\022-\n\021submittedExamInfo\030\002 \001(\0132\022.S" +
-      "ubmittedExamInfo\"m\n\033SubmittedExamUpdateR" +
-      "esponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse" +
-      "\022-\n\021submittedExamInfo\030\002 \001(\0132\022.SubmittedE" +
-      "xamInfo\"z\n\034SubmittedExamFindAllResponse\022" +
-      "\037\n\010response\030\001 \001(\0132\r.BaseResponse\0229\n\027subm" +
-      "ittedExamSimpleInfo\030\002 \003(\0132\030.SubmittedExa" +
-      "mSimpleInfo\"j\n\030SubmittedExamGetResponse\022" +
-      "\037\n\010response\030\001 \001(\0132\r.BaseResponse\022-\n\021subm" +
-      "ittedExamInfo\030\002 \001(\0132\022.SubmittedExamInfo\"" +
-      "W\n\033SubmittedExamDeleteResponse\022\037\n\010respon" +
-      "se\030\001 \001(\0132\r.BaseResponse\022\027\n\017submittedExam" +
-      "Id\030\002 \001(\022\"d\n\030ForumTopicCreateResponse\022\037\n\010" +
-      "response\030\001 \001(\0132\r.BaseResponse\022\'\n\016forumTo" +
-      "picInfo\030\002 \001(\0132\017.ForumTopicInfo\"d\n\030ForumT" +
-      "opicUpdateResponse\022\037\n\010response\030\001 \001(\0132\r.B" +
-      "aseResponse\022\'\n\016forumTopicInfo\030\002 \001(\0132\017.Fo" +
-      "rumTopicInfo\"e\n\031ForumTopicFindAllRespons" +
-      "e\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\'\n\016fo" +
-      "rumTopicInfo\030\002 \003(\0132\017.ForumTopicInfo\"a\n\025F" +
-      "orumTopicGetResponse\022\037\n\010response\030\001 \001(\0132\r" +
-      ".BaseResponse\022\'\n\016forumTopicInfo\030\002 \001(\0132\017." +
-      "ForumTopicInfo\"Q\n\030ForumTopicDeleteRespon" +
-      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\024\n\014f" +
-      "orumTopicId\030\002 \001(\022\"j\n\032TopicCommentCreateR" +
-      "esponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse" +
-      "\022+\n\020topicCommentInfo\030\002 \001(\0132\021.TopicCommen" +
-      "tInfo\"j\n\032TopicCommentUpdateResponse\022\037\n\010r" +
+      "\'\n\016forumTopicInfo\030\002 \001(\0132\017.ForumTopicInfo" +
+      "\"e\n\031ForumTopicFindAllResponse\022\037\n\010respons" +
+      "e\030\001 \001(\0132\r.BaseResponse\022\'\n\016forumTopicInfo" +
+      "\030\002 \003(\0132\017.ForumTopicInfo\"a\n\025ForumTopicGet" +
+      "Response\022\037\n\010response\030\001 \001(\0132\r.BaseRespons" +
+      "e\022\'\n\016forumTopicInfo\030\002 \001(\0132\017.ForumTopicIn" +
+      "fo\"Q\n\030ForumTopicDeleteResponse\022\037\n\010respon" +
+      "se\030\001 \001(\0132\r.BaseResponse\022\024\n\014forumTopicId\030" +
+      "\002 \001(\022\"j\n\032TopicCommentCreateResponse\022\037\n\010r" +
       "esponse\030\001 \001(\0132\r.BaseResponse\022+\n\020topicCom" +
-      "mentInfo\030\002 \001(\0132\021.TopicCommentInfo\"k\n\033Top" +
-      "icCommentFindAllResponse\022\037\n\010response\030\001 \001" +
-      "(\0132\r.BaseResponse\022+\n\020topicCommentInfo\030\002 " +
-      "\003(\0132\021.TopicCommentInfo\"g\n\027TopicCommentGe" +
-      "tResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRespon" +
-      "se\022+\n\020topicCommentInfo\030\002 \001(\0132\021.TopicComm" +
-      "entInfo\"U\n\032TopicCommentDeleteResponse\022\037\n" +
-      "\010response\030\001 \001(\0132\r.BaseResponse\022\026\n\016topicC" +
-      "ommentId\030\002 \001(\022\"d\n\030TopicReplyCreateRespon" +
-      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\'\n\016t" +
-      "opicReplyInfo\030\002 \001(\0132\017.TopicReplyInfo\"d\n\030" +
-      "TopicReplyUpdateResponse\022\037\n\010response\030\001 \001" +
-      "(\0132\r.BaseResponse\022\'\n\016topicReplyInfo\030\002 \001(" +
-      "\0132\017.TopicReplyInfo\"e\n\031TopicReplyFindAllR" +
-      "esponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse" +
-      "\022\'\n\016topicReplyInfo\030\002 \003(\0132\017.TopicReplyInf" +
-      "o\"a\n\025TopicReplyGetResponse\022\037\n\010response\030\001" +
-      " \001(\0132\r.BaseResponse\022\'\n\016topicReplyInfo\030\002 " +
-      "\001(\0132\017.TopicReplyInfo\"Q\n\030TopicReplyDelete" +
-      "Response\022\037\n\010response\030\001 \001(\0132\r.BaseRespons" +
-      "e\022\024\n\014topicReplyId\030\002 \001(\022\"m\n\033CourseComment" +
-      "CreateResponse\022\037\n\010response\030\001 \001(\0132\r.BaseR" +
-      "esponse\022-\n\021courseCommentInfo\030\002 \001(\0132\022.Cou" +
-      "rseCommentInfo\"m\n\033CourseCommentUpdateRes" +
-      "ponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022-" +
-      "\n\021courseCommentInfo\030\002 \001(\0132\022.CourseCommen" +
-      "tInfo\"n\n\034CourseCommentFindAllResponse\022\037\n" +
-      "\010response\030\001 \001(\0132\r.BaseResponse\022-\n\021course" +
-      "CommentInfo\030\002 \003(\0132\022.CourseCommentInfo\"j\n" +
-      "\030CourseCommentGetResponse\022\037\n\010response\030\001 " +
+      "mentInfo\030\002 \001(\0132\021.TopicCommentInfo\"j\n\032Top" +
+      "icCommentUpdateResponse\022\037\n\010response\030\001 \001(" +
+      "\0132\r.BaseResponse\022+\n\020topicCommentInfo\030\002 \001" +
+      "(\0132\021.TopicCommentInfo\"k\n\033TopicCommentFin" +
+      "dAllResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRes" +
+      "ponse\022+\n\020topicCommentInfo\030\002 \003(\0132\021.TopicC" +
+      "ommentInfo\"g\n\027TopicCommentGetResponse\022\037\n" +
+      "\010response\030\001 \001(\0132\r.BaseResponse\022+\n\020topicC" +
+      "ommentInfo\030\002 \001(\0132\021.TopicCommentInfo\"U\n\032T" +
+      "opicCommentDeleteResponse\022\037\n\010response\030\001 " +
+      "\001(\0132\r.BaseResponse\022\026\n\016topicCommentId\030\002 \001" +
+      "(\022\"d\n\030TopicReplyCreateResponse\022\037\n\010respon" +
+      "se\030\001 \001(\0132\r.BaseResponse\022\'\n\016topicReplyInf" +
+      "o\030\002 \001(\0132\017.TopicReplyInfo\"d\n\030TopicReplyUp" +
+      "dateResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRes" +
+      "ponse\022\'\n\016topicReplyInfo\030\002 \001(\0132\017.TopicRep" +
+      "lyInfo\"e\n\031TopicReplyFindAllResponse\022\037\n\010r" +
+      "esponse\030\001 \001(\0132\r.BaseResponse\022\'\n\016topicRep" +
+      "lyInfo\030\002 \003(\0132\017.TopicReplyInfo\"a\n\025TopicRe" +
+      "plyGetResponse\022\037\n\010response\030\001 \001(\0132\r.BaseR" +
+      "esponse\022\'\n\016topicReplyInfo\030\002 \001(\0132\017.TopicR" +
+      "eplyInfo\"Q\n\030TopicReplyDeleteResponse\022\037\n\010" +
+      "response\030\001 \001(\0132\r.BaseResponse\022\024\n\014topicRe" +
+      "plyId\030\002 \001(\022\"m\n\033CourseCommentCreateRespon" +
+      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022-\n\021c" +
+      "ourseCommentInfo\030\002 \001(\0132\022.CourseCommentIn" +
+      "fo\"m\n\033CourseCommentUpdateResponse\022\037\n\010res" +
+      "ponse\030\001 \001(\0132\r.BaseResponse\022-\n\021courseComm" +
+      "entInfo\030\002 \001(\0132\022.CourseCommentInfo\"n\n\034Cou" +
+      "rseCommentFindAllResponse\022\037\n\010response\030\001 " +
       "\001(\0132\r.BaseResponse\022-\n\021courseCommentInfo\030" +
-      "\002 \001(\0132\022.CourseCommentInfo\"W\n\033CourseComme" +
-      "ntDeleteResponse\022\037\n\010response\030\001 \001(\0132\r.Bas" +
-      "eResponse\022\027\n\017courseCommentId\030\002 \001(\022\"[\n\025Me" +
-      "ssageCreateResponse\022\037\n\010response\030\001 \001(\0132\r." +
-      "BaseResponse\022!\n\013messageInfo\030\002 \001(\0132\014.Mess" +
-      "ageInfo\"\\\n\026MessageFindAllResponse\022\037\n\010res" +
-      "ponse\030\001 \001(\0132\r.BaseResponse\022!\n\013messageInf" +
-      "o\030\002 \003(\0132\014.MessageInfo\"K\n\025MessageDeleteRe" +
-      "sponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022" +
-      "\021\n\tmessageId\030\002 \001(\022\"|\n CourseSubscription" +
-      "CreateResponse\022\037\n\010response\030\001 \001(\0132\r.BaseR" +
-      "esponse\0227\n\026courseSubscriptionInfo\030\002 \001(\0132" +
-      "\027.CourseSubscriptionInfo\"}\n!CourseSubscr" +
-      "iptionFindAllResponse\022\037\n\010response\030\001 \001(\0132" +
-      "\r.BaseResponse\0227\n\026courseSubscriptionInfo" +
-      "\030\002 \003(\0132\027.CourseSubscriptionInfo\"a\n Cours" +
-      "eSubscriptionDeleteResponse\022\037\n\010response\030" +
-      "\001 \001(\0132\r.BaseResponse\022\034\n\024courseSubscripti" +
-      "onId\030\002 \001(\022*@\n\014ResponseCode\022\013\n\007SUCCESS\020\000\022" +
-      "\021\n\rGENERAL_ERROR\020\001\022\020\n\014UNAUTHORIZED\020\002B8\n," +
-      "com.corkili.learningserver.generate.prot" +
-      "obufB\010Responseb\006proto3"
+      "\002 \003(\0132\022.CourseCommentInfo\"j\n\030CourseComme" +
+      "ntGetResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRe" +
+      "sponse\022-\n\021courseCommentInfo\030\002 \001(\0132\022.Cour" +
+      "seCommentInfo\"W\n\033CourseCommentDeleteResp" +
+      "onse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\022\027\n" +
+      "\017courseCommentId\030\002 \001(\022\"[\n\025MessageCreateR" +
+      "esponse\022\037\n\010response\030\001 \001(\0132\r.BaseResponse" +
+      "\022!\n\013messageInfo\030\002 \001(\0132\014.MessageInfo\"\\\n\026M" +
+      "essageFindAllResponse\022\037\n\010response\030\001 \001(\0132" +
+      "\r.BaseResponse\022!\n\013messageInfo\030\002 \003(\0132\014.Me" +
+      "ssageInfo\"K\n\025MessageDeleteResponse\022\037\n\010re" +
+      "sponse\030\001 \001(\0132\r.BaseResponse\022\021\n\tmessageId" +
+      "\030\002 \001(\022\"|\n CourseSubscriptionCreateRespon" +
+      "se\022\037\n\010response\030\001 \001(\0132\r.BaseResponse\0227\n\026c" +
+      "ourseSubscriptionInfo\030\002 \001(\0132\027.CourseSubs" +
+      "criptionInfo\"}\n!CourseSubscriptionFindAl" +
+      "lResponse\022\037\n\010response\030\001 \001(\0132\r.BaseRespon" +
+      "se\0227\n\026courseSubscriptionInfo\030\002 \003(\0132\027.Cou" +
+      "rseSubscriptionInfo\"a\n CourseSubscriptio" +
+      "nDeleteResponse\022\037\n\010response\030\001 \001(\0132\r.Base" +
+      "Response\022\034\n\024courseSubscriptionId\030\002 \001(\022*@" +
+      "\n\014ResponseCode\022\013\n\007SUCCESS\020\000\022\021\n\rGENERAL_E" +
+      "RROR\020\001\022\020\n\014UNAUTHORIZED\020\002B8\n,com.corkili." +
+      "learningserver.generate.protobufB\010Respon" +
+      "seb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -50491,7 +50491,7 @@ public final class Response {
     internal_static_QuestionFindAllResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_QuestionFindAllResponse_descriptor,
-        new java.lang.String[] { "Response", "QuestionSimpleInfo", });
+        new java.lang.String[] { "Response", "QuestionInfo", });
     internal_static_QuestionGetResponse_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_QuestionGetResponse_fieldAccessorTable = new
