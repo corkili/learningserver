@@ -126,7 +126,7 @@ public class CourseWorkController {
                 workQuestions.add(workQuestion);
             }
         }
-        ServiceResult serviceResult = courseWorkService.updateCourseWork(copyCourseWork, workQuestions);
+        ServiceResult serviceResult = courseWorkService.updateCourseWork(copyCourseWork, request.getUpdateDeadline(), workQuestions);
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         CourseWorkInfo courseWorkInfo;
         if (serviceResult.isSuccess()) {

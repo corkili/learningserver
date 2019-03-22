@@ -66,7 +66,7 @@ public class ExamController {
         exam.setBelongCourseId(request.getBelongCourseId());
         exam.setStartTime(new Date(request.getStartTime()));
         exam.setEndTime(new Date(request.getEndTime()));
-        exam.setDuration(request.getDuration());
+        exam.setDuration(10);
         List<ExamQuestion> examQuestions = new ArrayList<>(request.getQuestionIdCount());
         for (Entry<Integer, Long> entry : request.getQuestionIdMap().entrySet()) {
             ExamQuestion examQuestion = new ExamQuestion();
@@ -130,7 +130,7 @@ public class ExamController {
             copyExam.setEndTime(new Date(request.getEndTime()));
         }
         if (request.getUpdateDuration() && notStart) {
-            copyExam.setDuration(request.getDuration());
+            copyExam.setDuration(10);
         }
         List<ExamQuestion> examQuestions = null;
         if (request.getUpdateQuestion() && notStart) {
@@ -153,7 +153,7 @@ public class ExamController {
                 examQuestions.add(examQuestion);
             }
         }
-        ServiceResult serviceResult = examService.updateExam(copyExam, examQuestions);
+        ServiceResult serviceResult = examService.updateExam(copyExam, request.getUpdateStartTime(), request.getUpdateEndTime(), examQuestions);
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         ExamInfo examInfo;
         if (serviceResult.isSuccess()) {

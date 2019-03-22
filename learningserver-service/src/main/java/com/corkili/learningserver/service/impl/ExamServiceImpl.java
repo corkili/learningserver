@@ -105,12 +105,12 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
         if (exam.getExamName().length() > 100) {
             return recordErrorAndCreateFailResultWithMessage("create exam error: length of workName > 100");
         }
-        if (exam.getCreateTime() == null) {
+        if (exam.getStartTime() == null) {
             return recordErrorAndCreateFailResultWithMessage("create exam error: start time is null");
         }
-        if (exam.getCreateTime().before(new Date())) {
-            return recordErrorAndCreateFailResultWithMessage("create exam error: start time is before now");
-        }
+//        if (exam.getStartTime().before(new Date())) {
+//            return recordErrorAndCreateFailResultWithMessage("create exam error: start time is before now");
+//        }
         if (exam.getEndTime() == null) {
             return recordErrorAndCreateFailResultWithMessage("create exam error: end time is null");
         }
@@ -147,26 +147,26 @@ public class ExamServiceImpl extends ServiceImpl<Exam, com.corkili.learningserve
     }
 
     @Override
-    public ServiceResult updateExam(Exam exam, Collection<ExamQuestion> examQuestions) {
+    public ServiceResult updateExam(Exam exam, boolean updateStartTime, boolean updateEndTime, Collection<ExamQuestion> examQuestions) {
         if (StringUtils.isBlank(exam.getExamName())) {
             return recordErrorAndCreateFailResultWithMessage("update exam error: workName is empty");
         }
         if (exam.getExamName().length() > 100) {
             return recordErrorAndCreateFailResultWithMessage("update exam error: length of workName > 100");
         }
-        if (exam.getCreateTime() == null) {
+        if (updateStartTime && exam.getStartTime() == null) {
             return recordErrorAndCreateFailResultWithMessage("update exam error: start time is null");
         }
-        if (exam.getCreateTime().before(new Date())) {
-            return recordErrorAndCreateFailResultWithMessage("update exam error: start time is before now");
-        }
-        if (exam.getEndTime() == null) {
+//        if (exam.getStartTime().before(new Date())) {
+//            return recordErrorAndCreateFailResultWithMessage("update exam error: start time is before now");
+//        }
+        if (updateEndTime && exam.getEndTime() == null) {
             return recordErrorAndCreateFailResultWithMessage("update exam error: end time is null");
         }
-        if (exam.getEndTime().before(new Date())) {
+        if (updateEndTime && exam.getEndTime().before(new Date())) {
             return recordErrorAndCreateFailResultWithMessage("update exam error: end time is before now");
         }
-        if (exam.getStartTime().after(exam.getEndTime())) {
+        if ((updateStartTime || updateEndTime) && exam.getStartTime().after(exam.getEndTime())) {
             return recordErrorAndCreateFailResultWithMessage("update exam error: start time is after end time");
         }
         if (exam.getDuration() < 1) {

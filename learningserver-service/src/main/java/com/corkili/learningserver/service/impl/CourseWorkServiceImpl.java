@@ -133,14 +133,14 @@ public class CourseWorkServiceImpl extends ServiceImpl<CourseWork, com.corkili.l
     }
 
     @Override
-    public ServiceResult updateCourseWork(CourseWork courseWork, Collection<WorkQuestion> workQuestions) {
+    public ServiceResult updateCourseWork(CourseWork courseWork, boolean updateDeadline, Collection<WorkQuestion> workQuestions) {
         if (StringUtils.isBlank(courseWork.getWorkName())) {
             return recordErrorAndCreateFailResultWithMessage("update course work error: workName is empty");
         }
         if (courseWork.getWorkName().length() > 100) {
             return recordErrorAndCreateFailResultWithMessage("update course work error: length of workName > 100");
         }
-        if (courseWork.getDeadline() != null && courseWork.getDeadline().before(new Date())) {
+        if (updateDeadline && courseWork.getDeadline() != null && courseWork.getDeadline().before(new Date())) {
             return recordErrorAndCreateFailResultWithMessage("update course work error: deadline is before now");
         }
         if (courseWork.getBelongCourseId() == null || !courseRepository.existsById(courseWork.getBelongCourseId())) {

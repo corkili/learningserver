@@ -133,7 +133,7 @@ public class ExamQuestionServiceImpl extends ServiceImpl<ExamQuestion, com.corki
             return recordWarnAndCreateSuccessResultWithMessage("create or update exam question warn: no exam question")
                     .merge(ServiceResult.successResultWithExtra(List.class, new LinkedList<>()), true);
         }
-        if (examId == null || examRepository.existsById(examId)) {
+        if (examId == null || !examRepository.existsById(examId)) {
             return recordErrorAndCreateFailResultWithMessage("create or update exam question error: course work id is null");
         }
         List<ExamQuestion> examQuestionList = new ArrayList<>(examQuestions);
