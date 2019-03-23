@@ -72,6 +72,8 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
             po.setUpdateTime(new Date());
         } else {
             po.setId(null);
+            po.setCreateTime(new Date());
+            po.setUpdateTime(new Date(po.getCreateTime().getTime()));
         }
         try {
             po = repository().saveAndFlush(po);
