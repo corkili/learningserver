@@ -143,7 +143,7 @@ public class MessageServiceImpl extends ServiceImpl<Message, com.corkili.learnin
                 putToCache(entityName() + message.getId(), message);
             }
         }
-        String msg = "find all forumTopic success";
+        String msg = "find all message success";
         if (errId.length() != 0) {
             msg = ServiceUtils.format("find all message warn: transfer message po [{}] to bo failed.", errId.toString());
             log.warn(msg);
