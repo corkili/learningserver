@@ -1,5 +1,17 @@
 package com.corkili.learningserver.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ControllerUtils;
@@ -24,17 +36,6 @@ import com.corkili.learningserver.generate.protobuf.Response.SubmittedCourseWork
 import com.corkili.learningserver.service.SubmittedCourseWorkService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/submittedCourseWork")
@@ -171,6 +172,8 @@ public class SubmittedCourseWorkController {
         }
         if (!submittedCourseWorkOptional.isPresent()) {
             baseResponse = ControllerUtils.generateErrorBaseResponse(token, "no submitted course work exists");
+        } else {
+            baseResponse = ControllerUtils.generateSuccessBaseResponse(token, "get submitted course work success");
         }
         Long submitterId = submittedCourseWorkOptional.map(SubmittedCourseWork::getSubmitterId).orElse(null);
         return SubmittedCourseWorkGetResponse.newBuilder()

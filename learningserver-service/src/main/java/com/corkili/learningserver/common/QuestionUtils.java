@@ -1,5 +1,12 @@
 package com.corkili.learningserver.common;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.Question;
 import com.corkili.learningserver.bo.Question.MultipleChoiceAnswer;
@@ -17,11 +24,6 @@ import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedCourseWork.InnerSubmittedAnswer;
 import com.corkili.learningserver.bo.SubmittedExam;
 import com.corkili.learningserver.bo.WorkQuestion;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Map;
-import java.util.Map.Entry;
 
 @Slf4j
 public class QuestionUtils {
@@ -260,8 +262,8 @@ public class QuestionUtils {
      *
      * scoreMap == null:
      *  0: false
-     *  1: half_true
-     *  2: true
+     *  1: true
+     *  2: half_true
      *
      * scoreMap != null:
      *  score
@@ -284,13 +286,13 @@ public class QuestionUtils {
             }
             if (answer.isSelectAllIsCorrect()) {
                 if (scoreMap == null) {
-                    return count == answer.getChoices().size() ? 2 : 0;
+                    return count == answer.getChoices().size() ? 1 : 0;
                 } else {
                     return count == answer.getChoices().size() ? scoreMap.getOrDefault(-1, 0d) : 0;
                 }
             } else {
                 if (scoreMap == null) {
-                    return count == 0 ? 0 : (count == answer.getChoices().size() ? 2 : 1);
+                    return count == 0 ? 0 : (count == answer.getChoices().size() ? 1 : 2);
                 } else {
                     double score = scoreMap.getOrDefault(-1, 0d);
                     return count == 0 ? 0 : (count == answer.getChoices().size() ? score : score / 2);

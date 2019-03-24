@@ -1,12 +1,5 @@
 package com.corkili.learningserver.bo;
 
-import com.corkili.learningserver.common.ServiceUtils;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +7,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import com.corkili.learningserver.common.ServiceUtils;
 
 @Getter
 @Setter
@@ -50,6 +52,10 @@ public class SubmittedCourseWork implements BusinessObject {
     private Long belongCourseWorkId;
 
     private Long submitterId;
+
+    public SubmittedCourseWork() {
+        this.submittedAnswers = new HashMap<>();
+    }
 
     public static SubmittedCourseWork copyFrom(SubmittedCourseWork submittedCourseWork) {
         SubmittedCourseWork copySubmittedCourseWork = new SubmittedCourseWork();
