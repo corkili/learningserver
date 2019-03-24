@@ -160,7 +160,10 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                         }
                     } else {
                         Field fieldOfBO = bo.getClass().getDeclaredField(fieldOfPO.getName());
-                        if (fieldOfBO.getType().equals(fieldOfPO.getType())) { // otherwise, processed by subclass
+                        if (fieldOfBO.getType().equals(fieldOfPO.getType()) || fieldOfBO.getType().equals(double.class)
+                                || fieldOfBO.getType().equals(int.class) || fieldOfBO.getType().equals(long.class)
+                                || fieldOfBO.getType().equals(Double.class) || fieldOfBO.getType().equals(Integer.class)
+                                || fieldOfBO.getType().equals(Long.class)) { // otherwise, processed by subclass
                             try {
                                 fieldOfPO.setAccessible(true);
                                 fieldOfBO.setAccessible(true);
@@ -219,7 +222,10 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                         }
                     } else {
                         Field fieldOfPO = po.getClass().getDeclaredField(fieldOfBO.getName());
-                        if (fieldOfBO.getType().equals(fieldOfPO.getType())) { // otherwise, processed by subclass
+                        if (fieldOfBO.getType().equals(fieldOfPO.getType()) || fieldOfBO.getType().equals(double.class)
+                                || fieldOfBO.getType().equals(int.class) || fieldOfBO.getType().equals(long.class)
+                                || fieldOfBO.getType().equals(Double.class) || fieldOfBO.getType().equals(Integer.class)
+                                || fieldOfBO.getType().equals(Long.class)) { // otherwise, processed by subclass
                             try {
                                 fieldOfPO.setAccessible(true);
                                 fieldOfBO.setAccessible(true);

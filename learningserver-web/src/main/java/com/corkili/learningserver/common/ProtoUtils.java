@@ -289,6 +289,7 @@ public class ProtoUtils {
             com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer res
                     = new com.corkili.learningserver.bo.SubmittedAnswer.EssaySubmittedAnswer();
             res.setText(raw.getText());
+            result = res;
         }
         return result;
     }
