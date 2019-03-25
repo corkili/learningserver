@@ -54,8 +54,10 @@ public class QuestionUtils {
                         workQuestion.getQuestionId(), innerSubmittedAnswer.getQuestionIndex());
                 continue;
             }
-            double result = checkQuestionAnswer(question, innerSubmittedAnswer.getSubmittedAnswer(), null);
-            innerSubmittedAnswer.setCheckStatus((int) result);
+            if (question.isAutoCheck()) {
+                double result = checkQuestionAnswer(question, innerSubmittedAnswer.getSubmittedAnswer(), null);
+                innerSubmittedAnswer.setCheckStatus((int) result);
+            }
         }
         rollupAnswerCheckResult(submittedCourseWork);
     }
@@ -86,8 +88,10 @@ public class QuestionUtils {
                         examQuestion.getQuestionId(), innerSubmittedAnswer.getQuestionIndex());
                 continue;
             }
-            double result = checkQuestionAnswer(question, innerSubmittedAnswer.getSubmittedAnswer(), examQuestion.getScoreMap());
-            innerSubmittedAnswer.setScore(result);
+            if (question.isAutoCheck()) {
+                double result = checkQuestionAnswer(question, innerSubmittedAnswer.getSubmittedAnswer(), examQuestion.getScoreMap());
+                innerSubmittedAnswer.setScore(result);
+            }
         }
         rollupAnswerCheckResult(submittedExam);
     }
