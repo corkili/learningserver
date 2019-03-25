@@ -676,4 +676,5 @@ public class ProtoUtils {
             return 0;
         }
     }
+
 }
