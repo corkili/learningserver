@@ -1986,6 +1986,16 @@ public final class Info {
      * <code>.UserInfo teacherInfo = 9;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.UserInfoOrBuilder getTeacherInfoOrBuilder();
+
+    /**
+     * <code>bool hasCourseware = 10;</code>
+     */
+    boolean getHasCourseware();
+
+    /**
+     * <code>sint64 coursewareId = 11;</code>
+     */
+    long getCoursewareId();
   }
   /**
    * Protobuf type {@code CourseInfo}
@@ -2008,6 +2018,8 @@ public final class Info {
       description_ = "";
       image_ = java.util.Collections.emptyList();
       tag_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      hasCourseware_ = false;
+      coursewareId_ = 0L;
     }
 
     @java.lang.Override
@@ -2095,6 +2107,16 @@ public final class Info {
                 teacherInfo_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+            case 80: {
+
+              hasCourseware_ = input.readBool();
+              break;
+            }
+            case 88: {
+
+              coursewareId_ = input.readSInt64();
               break;
             }
             default: {
@@ -2325,6 +2347,24 @@ public final class Info {
       return getTeacherInfo();
     }
 
+    public static final int HASCOURSEWARE_FIELD_NUMBER = 10;
+    private boolean hasCourseware_;
+    /**
+     * <code>bool hasCourseware = 10;</code>
+     */
+    public boolean getHasCourseware() {
+      return hasCourseware_;
+    }
+
+    public static final int COURSEWAREID_FIELD_NUMBER = 11;
+    private long coursewareId_;
+    /**
+     * <code>sint64 coursewareId = 11;</code>
+     */
+    public long getCoursewareId() {
+      return coursewareId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2365,6 +2405,12 @@ public final class Info {
       }
       if (teacherInfo_ != null) {
         output.writeMessage(9, getTeacherInfo());
+      }
+      if (hasCourseware_ != false) {
+        output.writeBool(10, hasCourseware_);
+      }
+      if (coursewareId_ != 0L) {
+        output.writeSInt64(11, coursewareId_);
       }
       unknownFields.writeTo(output);
     }
@@ -2413,6 +2459,14 @@ public final class Info {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, getTeacherInfo());
       }
+      if (hasCourseware_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, hasCourseware_);
+      }
+      if (coursewareId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(11, coursewareId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2450,6 +2504,10 @@ public final class Info {
         result = result && getTeacherInfo()
             .equals(other.getTeacherInfo());
       }
+      result = result && (getHasCourseware()
+          == other.getHasCourseware());
+      result = result && (getCoursewareId()
+          == other.getCoursewareId());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2489,6 +2547,12 @@ public final class Info {
         hash = (37 * hash) + TEACHERINFO_FIELD_NUMBER;
         hash = (53 * hash) + getTeacherInfo().hashCode();
       }
+      hash = (37 * hash) + HASCOURSEWARE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getHasCourseware());
+      hash = (37 * hash) + COURSEWAREID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCoursewareId());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2649,6 +2713,10 @@ public final class Info {
           teacherInfo_ = null;
           teacherInfoBuilder_ = null;
         }
+        hasCourseware_ = false;
+
+        coursewareId_ = 0L;
+
         return this;
       }
 
@@ -2702,6 +2770,8 @@ public final class Info {
         } else {
           result.teacherInfo_ = teacherInfoBuilder_.build();
         }
+        result.hasCourseware_ = hasCourseware_;
+        result.coursewareId_ = coursewareId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2809,6 +2879,12 @@ public final class Info {
         }
         if (other.hasTeacherInfo()) {
           mergeTeacherInfo(other.getTeacherInfo());
+        }
+        if (other.getHasCourseware() != false) {
+          setHasCourseware(other.getHasCourseware());
+        }
+        if (other.getCoursewareId() != 0L) {
+          setCoursewareId(other.getCoursewareId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3531,6 +3607,58 @@ public final class Info {
           teacherInfo_ = null;
         }
         return teacherInfoBuilder_;
+      }
+
+      private boolean hasCourseware_ ;
+      /**
+       * <code>bool hasCourseware = 10;</code>
+       */
+      public boolean getHasCourseware() {
+        return hasCourseware_;
+      }
+      /**
+       * <code>bool hasCourseware = 10;</code>
+       */
+      public Builder setHasCourseware(boolean value) {
+        
+        hasCourseware_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool hasCourseware = 10;</code>
+       */
+      public Builder clearHasCourseware() {
+        
+        hasCourseware_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long coursewareId_ ;
+      /**
+       * <code>sint64 coursewareId = 11;</code>
+       */
+      public long getCoursewareId() {
+        return coursewareId_;
+      }
+      /**
+       * <code>sint64 coursewareId = 11;</code>
+       */
+      public Builder setCoursewareId(long value) {
+        
+        coursewareId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 coursewareId = 11;</code>
+       */
+      public Builder clearCoursewareId() {
+        
+        coursewareId_ = 0L;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -38915,6 +39043,814 @@ public final class Info {
 
   }
 
+  public interface ScormInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ScormInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>sint64 scormId = 1;</code>
+     */
+    long getScormId();
+
+    /**
+     * <code>fixed64 createTime = 2;</code>
+     */
+    long getCreateTime();
+
+    /**
+     * <code>fixed64 updateTime = 3;</code>
+     */
+    long getUpdateTime();
+
+    /**
+     * <code>string path = 4;</code>
+     */
+    java.lang.String getPath();
+    /**
+     * <code>string path = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getPathBytes();
+
+    /**
+     * <code>bytes data = 5;</code>
+     */
+    com.google.protobuf.ByteString getData();
+  }
+  /**
+   * Protobuf type {@code ScormInfo}
+   */
+  public  static final class ScormInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ScormInfo)
+      ScormInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ScormInfo.newBuilder() to construct.
+    private ScormInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ScormInfo() {
+      scormId_ = 0L;
+      createTime_ = 0L;
+      updateTime_ = 0L;
+      path_ = "";
+      data_ = com.google.protobuf.ByteString.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ScormInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              scormId_ = input.readSInt64();
+              break;
+            }
+            case 17: {
+
+              createTime_ = input.readFixed64();
+              break;
+            }
+            case 25: {
+
+              updateTime_ = input.readFixed64();
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              path_ = s;
+              break;
+            }
+            case 42: {
+
+              data_ = input.readBytes();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_ScormInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_ScormInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.ScormInfo.class, com.corkili.learningserver.generate.protobuf.Info.ScormInfo.Builder.class);
+    }
+
+    public static final int SCORMID_FIELD_NUMBER = 1;
+    private long scormId_;
+    /**
+     * <code>sint64 scormId = 1;</code>
+     */
+    public long getScormId() {
+      return scormId_;
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 2;
+    private long createTime_;
+    /**
+     * <code>fixed64 createTime = 2;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    public static final int UPDATETIME_FIELD_NUMBER = 3;
+    private long updateTime_;
+    /**
+     * <code>fixed64 updateTime = 3;</code>
+     */
+    public long getUpdateTime() {
+      return updateTime_;
+    }
+
+    public static final int PATH_FIELD_NUMBER = 4;
+    private volatile java.lang.Object path_;
+    /**
+     * <code>string path = 4;</code>
+     */
+    public java.lang.String getPath() {
+      java.lang.Object ref = path_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        path_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string path = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPathBytes() {
+      java.lang.Object ref = path_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        path_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DATA_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString data_;
+    /**
+     * <code>bytes data = 5;</code>
+     */
+    public com.google.protobuf.ByteString getData() {
+      return data_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (scormId_ != 0L) {
+        output.writeSInt64(1, scormId_);
+      }
+      if (createTime_ != 0L) {
+        output.writeFixed64(2, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        output.writeFixed64(3, updateTime_);
+      }
+      if (!getPathBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, path_);
+      }
+      if (!data_.isEmpty()) {
+        output.writeBytes(5, data_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (scormId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(1, scormId_);
+      }
+      if (createTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(2, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed64Size(3, updateTime_);
+      }
+      if (!getPathBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, path_);
+      }
+      if (!data_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, data_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.ScormInfo)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.ScormInfo other = (com.corkili.learningserver.generate.protobuf.Info.ScormInfo) obj;
+
+      boolean result = true;
+      result = result && (getScormId()
+          == other.getScormId());
+      result = result && (getCreateTime()
+          == other.getCreateTime());
+      result = result && (getUpdateTime()
+          == other.getUpdateTime());
+      result = result && getPath()
+          .equals(other.getPath());
+      result = result && getData()
+          .equals(other.getData());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SCORMID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getScormId());
+      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCreateTime());
+      hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getUpdateTime());
+      hash = (37 * hash) + PATH_FIELD_NUMBER;
+      hash = (53 * hash) + getPath().hashCode();
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.ScormInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ScormInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ScormInfo)
+        com.corkili.learningserver.generate.protobuf.Info.ScormInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_ScormInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_ScormInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.ScormInfo.class, com.corkili.learningserver.generate.protobuf.Info.ScormInfo.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.ScormInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        scormId_ = 0L;
+
+        createTime_ = 0L;
+
+        updateTime_ = 0L;
+
+        path_ = "";
+
+        data_ = com.google.protobuf.ByteString.EMPTY;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_ScormInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.ScormInfo getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.ScormInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.ScormInfo build() {
+        com.corkili.learningserver.generate.protobuf.Info.ScormInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.ScormInfo buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.ScormInfo result = new com.corkili.learningserver.generate.protobuf.Info.ScormInfo(this);
+        result.scormId_ = scormId_;
+        result.createTime_ = createTime_;
+        result.updateTime_ = updateTime_;
+        result.path_ = path_;
+        result.data_ = data_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.ScormInfo) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.ScormInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.ScormInfo other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.ScormInfo.getDefaultInstance()) return this;
+        if (other.getScormId() != 0L) {
+          setScormId(other.getScormId());
+        }
+        if (other.getCreateTime() != 0L) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.getUpdateTime() != 0L) {
+          setUpdateTime(other.getUpdateTime());
+        }
+        if (!other.getPath().isEmpty()) {
+          path_ = other.path_;
+          onChanged();
+        }
+        if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
+          setData(other.getData());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.ScormInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.ScormInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long scormId_ ;
+      /**
+       * <code>sint64 scormId = 1;</code>
+       */
+      public long getScormId() {
+        return scormId_;
+      }
+      /**
+       * <code>sint64 scormId = 1;</code>
+       */
+      public Builder setScormId(long value) {
+        
+        scormId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 scormId = 1;</code>
+       */
+      public Builder clearScormId() {
+        
+        scormId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long createTime_ ;
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public Builder setCreateTime(long value) {
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 createTime = 2;</code>
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long updateTime_ ;
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public long getUpdateTime() {
+        return updateTime_;
+      }
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public Builder setUpdateTime(long value) {
+        
+        updateTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>fixed64 updateTime = 3;</code>
+       */
+      public Builder clearUpdateTime() {
+        
+        updateTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object path_ = "";
+      /**
+       * <code>string path = 4;</code>
+       */
+      public java.lang.String getPath() {
+        java.lang.Object ref = path_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          path_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string path = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPathBytes() {
+        java.lang.Object ref = path_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          path_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string path = 4;</code>
+       */
+      public Builder setPath(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        path_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string path = 4;</code>
+       */
+      public Builder clearPath() {
+        
+        path_ = getDefaultInstance().getPath();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string path = 4;</code>
+       */
+      public Builder setPathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        path_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes data = 5;</code>
+       */
+      public com.google.protobuf.ByteString getData() {
+        return data_;
+      }
+      /**
+       * <code>bytes data = 5;</code>
+       */
+      public Builder setData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        data_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes data = 5;</code>
+       */
+      public Builder clearData() {
+        
+        data_ = getDefaultInstance().getData();
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ScormInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:ScormInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.ScormInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.ScormInfo();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.ScormInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ScormInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ScormInfo>() {
+      @java.lang.Override
+      public ScormInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ScormInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ScormInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ScormInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.ScormInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Image_descriptor;
   private static final 
@@ -39135,6 +40071,11 @@ public final class Info {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CourseSubscriptionInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ScormInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ScormInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -39147,166 +40088,170 @@ public final class Info {
       "\n\ninfo.proto\"5\n\005Image\022\014\n\004path\030\001 \001(\t\022\017\n\007h" +
       "asData\030\002 \001(\010\022\r\n\005image\030\003 \001(\014\"X\n\010UserInfo\022" +
       "\016\n\006userId\030\001 \001(\022\022\r\n\005phone\030\002 \001(\t\022\020\n\010userna" +
-      "me\030\003 \001(\t\022\033\n\010userType\030\004 \001(\0162\t.UserType\"\301\001" +
+      "me\030\003 \001(\t\022\033\n\010userType\030\004 \001(\0162\t.UserType\"\356\001" +
       "\n\nCourseInfo\022\020\n\010courseId\030\001 \001(\022\022\022\n\ncreate" +
       "Time\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\014\n\004open\030\004" +
       " \001(\010\022\022\n\ncourseName\030\005 \001(\t\022\023\n\013description\030" +
       "\006 \001(\t\022\025\n\005image\030\007 \003(\0132\006.Image\022\013\n\003tag\030\010 \003(" +
-      "\t\022\036\n\013teacherInfo\030\t \001(\0132\t.UserInfo\"\263\002\n\014Qu" +
-      "estionInfo\022\022\n\nquestionId\030\001 \001(\022\022\022\n\ncreate" +
-      "Time\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\020\n\010questi" +
-      "on\030\004 \001(\t\022\025\n\005image\030\005 \003(\0132\006.Image\022#\n\014quest" +
-      "ionType\030\006 \001(\0162\r.QuestionType\022\021\n\tautoChec" +
-      "k\030\007 \001(\010\022+\n\007choices\030\010 \003(\0132\032.QuestionInfo." +
-      "ChoicesEntry\022\027\n\006answer\030\t \001(\0132\007.Answer\022\020\n" +
-      "\010authorId\030\n \001(\022\032.\n\014ChoicesEntry\022\013\n\003key\030\001" +
-      " \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\"\204\001\n\022QuestionSimp" +
-      "leInfo\022\022\n\nquestionId\030\001 \001(\022\022\020\n\010question\030\002" +
-      " \001(\t\022#\n\014questionType\030\003 \001(\0162\r.QuestionTyp" +
-      "e\022\021\n\tautoCheck\030\004 \001(\010\022\020\n\010authorId\030\005 \001(\022\"\217" +
-      "\002\n\006Answer\0223\n\023singleFillingAnswer\030\001 \001(\0132\024" +
-      ".SingleFillingAnswerH\000\0227\n\025multipleFillin" +
-      "gAnswer\030\002 \001(\0132\026.MultipleFillingAnswerH\000\022" +
-      "1\n\022singleChoiceAnswer\030\003 \001(\0132\023.SingleChoi" +
-      "ceAnswerH\000\0225\n\024multipleChoiceAnswer\030\004 \001(\013" +
-      "2\025.MultipleChoiceAnswerH\000\022#\n\013essayAnswer" +
-      "\030\005 \001(\0132\014.EssayAnswerH\000B\010\n\006answer\"%\n\023Sing" +
-      "leFillingAnswer\022\016\n\006answer\030\001 \003(\t\"\220\001\n\025Mult" +
-      "ipleFillingAnswer\0222\n\006answer\030\001 \003(\0132\".Mult" +
-      "ipleFillingAnswer.AnswerEntry\032C\n\013AnswerE" +
-      "ntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024.Singl" +
-      "eFillingAnswer:\0028\001\"$\n\022SingleChoiceAnswer" +
-      "\022\016\n\006choice\030\001 \001(\005\"B\n\024MultipleChoiceAnswer" +
-      "\022\016\n\006choice\030\001 \003(\005\022\032\n\022selectAllIsCorrect\030\002" +
-      " \001(\010\"\033\n\013EssayAnswer\022\014\n\004text\030\001 \001(\t\"\354\001\n\016Co" +
-      "urseWorkInfo\022\024\n\014courseWorkId\030\001 \001(\022\022\022\n\ncr" +
-      "eateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\014\n\004op" +
-      "en\030\004 \001(\010\022\026\n\016courseWorkName\030\005 \001(\t\022\026\n\016belo" +
-      "ngCourseId\030\006 \001(\022\022\023\n\013hasDeadline\030\007 \001(\010\022\020\n" +
-      "\010deadline\030\010 \001(\006\0227\n\026courseWorkQuestionInf" +
-      "o\030\t \003(\0132\027.CourseWorkQuestionInfo\"\221\001\n\024Cou" +
-      "rseWorkSimpleInfo\022\024\n\014courseWorkId\030\001 \001(\022\022" +
-      "\014\n\004open\030\002 \001(\010\022\026\n\016courseWorkName\030\003 \001(\t\022\026\n" +
-      "\016belongCourseId\030\004 \001(\022\022\023\n\013hasDeadline\030\005 \001" +
-      "(\010\022\020\n\010deadline\030\006 \001(\006\"\235\001\n\026CourseWorkQuest" +
-      "ionInfo\022\034\n\024courseWorkQuestionId\030\001 \001(\022\022\022\n" +
-      "\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\r\n" +
-      "\005index\030\004 \001(\005\022\032\n\022belongCourseWorkId\030\005 \001(\022" +
-      "\022\022\n\nquestionId\030\006 \001(\022\"\200\003\n\027SubmittedCourse" +
-      "WorkInfo\022\035\n\025submittedCourseWorkId\030\001 \001(\022\022" +
+      "\t\022\036\n\013teacherInfo\030\t \001(\0132\t.UserInfo\022\025\n\rhas" +
+      "Courseware\030\n \001(\010\022\024\n\014coursewareId\030\013 \001(\022\"\263" +
+      "\002\n\014QuestionInfo\022\022\n\nquestionId\030\001 \001(\022\022\022\n\nc" +
+      "reateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\020\n\010q" +
+      "uestion\030\004 \001(\t\022\025\n\005image\030\005 \003(\0132\006.Image\022#\n\014" +
+      "questionType\030\006 \001(\0162\r.QuestionType\022\021\n\taut" +
+      "oCheck\030\007 \001(\010\022+\n\007choices\030\010 \003(\0132\032.Question" +
+      "Info.ChoicesEntry\022\027\n\006answer\030\t \001(\0132\007.Answ" +
+      "er\022\020\n\010authorId\030\n \001(\022\032.\n\014ChoicesEntry\022\013\n\003" +
+      "key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\"\204\001\n\022Questio" +
+      "nSimpleInfo\022\022\n\nquestionId\030\001 \001(\022\022\020\n\010quest" +
+      "ion\030\002 \001(\t\022#\n\014questionType\030\003 \001(\0162\r.Questi" +
+      "onType\022\021\n\tautoCheck\030\004 \001(\010\022\020\n\010authorId\030\005 " +
+      "\001(\022\"\217\002\n\006Answer\0223\n\023singleFillingAnswer\030\001 " +
+      "\001(\0132\024.SingleFillingAnswerH\000\0227\n\025multipleF" +
+      "illingAnswer\030\002 \001(\0132\026.MultipleFillingAnsw" +
+      "erH\000\0221\n\022singleChoiceAnswer\030\003 \001(\0132\023.Singl" +
+      "eChoiceAnswerH\000\0225\n\024multipleChoiceAnswer\030" +
+      "\004 \001(\0132\025.MultipleChoiceAnswerH\000\022#\n\013essayA" +
+      "nswer\030\005 \001(\0132\014.EssayAnswerH\000B\010\n\006answer\"%\n" +
+      "\023SingleFillingAnswer\022\016\n\006answer\030\001 \003(\t\"\220\001\n" +
+      "\025MultipleFillingAnswer\0222\n\006answer\030\001 \003(\0132\"" +
+      ".MultipleFillingAnswer.AnswerEntry\032C\n\013An" +
+      "swerEntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024." +
+      "SingleFillingAnswer:\0028\001\"$\n\022SingleChoiceA" +
+      "nswer\022\016\n\006choice\030\001 \001(\005\"B\n\024MultipleChoiceA" +
+      "nswer\022\016\n\006choice\030\001 \003(\005\022\032\n\022selectAllIsCorr" +
+      "ect\030\002 \001(\010\"\033\n\013EssayAnswer\022\014\n\004text\030\001 \001(\t\"\354" +
+      "\001\n\016CourseWorkInfo\022\024\n\014courseWorkId\030\001 \001(\022\022" +
       "\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022" +
-      "F\n\017submittedAnswer\030\004 \003(\0132-.SubmittedCour" +
-      "seWorkInfo.SubmittedAnswerEntry\022\035\n\025alrea" +
-      "dyCheckAllAnswer\030\005 \001(\010\022\020\n\010finished\030\006 \001(\010" +
-      "\022\032\n\022belongCourseWorkId\030\007 \001(\022\022\023\n\013submitte" +
-      "rId\030\010 \001(\022\022 \n\rsubmitterInfo\030\t \001(\0132\t.UserI" +
-      "nfo\032R\n\024SubmittedAnswerEntry\022\013\n\003key\030\001 \001(\005" +
-      "\022)\n\005value\030\002 \001(\0132\032.CourseWorkSubmittedAns" +
-      "wer:\0028\001\"\352\001\n\035SubmittedCourseWorkSimpleInf" +
-      "o\022\035\n\025submittedCourseWorkId\030\001 \001(\022\022\022\n\ncrea" +
-      "teTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\035\n\025alre" +
-      "adyCheckAllAnswer\030\004 \001(\010\022\020\n\010finished\030\005 \001(" +
-      "\010\022\032\n\022belongCourseWorkId\030\006 \001(\022\022\023\n\013submitt" +
-      "erId\030\007 \001(\022\022 \n\rsubmitterInfo\030\010 \001(\0132\t.User" +
-      "Info\"r\n\031CourseWorkSubmittedAnswer\022\025\n\rque" +
-      "stionIndex\030\001 \001(\005\022)\n\017submittedAnswer\030\002 \001(" +
-      "\0132\020.SubmittedAnswer\022\023\n\013checkStatus\030\003 \001(\005" +
-      "\"\317\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022\022\n\ncreateT" +
-      "ime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\020\n\010examNam" +
-      "e\030\004 \001(\t\022\026\n\016belongCourseId\030\005 \001(\022\022\021\n\tstart" +
-      "Time\030\006 \001(\006\022\017\n\007endTime\030\007 \001(\006\022\020\n\010duration\030" +
-      "\010 \001(\005\022+\n\020examQuestionInfo\030\t \003(\0132\021.ExamQu" +
-      "estionInfo\"\200\001\n\016ExamSimpleInfo\022\016\n\006examId\030" +
-      "\001 \001(\022\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCourseI" +
-      "d\030\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTime\030\005 " +
-      "\001(\006\022\020\n\010duration\030\006 \001(\005\"\242\001\n\020ExamQuestionIn" +
-      "fo\022\026\n\016examQuestionId\030\001 \001(\022\022\022\n\ncreateTime" +
-      "\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\r\n\005index\030\004 \001(" +
-      "\005\022\024\n\014belongExamId\030\005 \001(\022\022\022\n\nquestionId\030\006 " +
-      "\001(\022\022\025\n\005score\030\007 \001(\0132\006.Score\"\305\001\n\005Score\022\025\n\013" +
-      "singleScore\030\001 \001(\001H\000\022-\n\rmultipleScore\030\002 \001" +
-      "(\0132\024.Score.MultipleScoreH\000\032m\n\rMultipleSc" +
-      "ore\022.\n\005score\030\001 \003(\0132\037.Score.MultipleScore" +
-      ".ScoreEntry\032,\n\nScoreEntry\022\013\n\003key\030\001 \001(\005\022\r" +
-      "\n\005value\030\002 \001(\001:\0028\001B\007\n\005score\"\366\002\n\021Submitted" +
-      "ExamInfo\022\027\n\017submittedExamId\030\001 \001(\022\022\022\n\ncre" +
-      "ateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022@\n\017sub" +
-      "mittedAnswer\030\004 \003(\0132\'.SubmittedExamInfo.S" +
-      "ubmittedAnswerEntry\022\035\n\025alreadyCheckAllAn" +
-      "swer\030\005 \001(\010\022\022\n\ntotalScore\030\006 \001(\001\022\020\n\010finish" +
-      "ed\030\007 \001(\010\022\024\n\014belongExamId\030\010 \001(\022\022\023\n\013submit" +
-      "terId\030\t \001(\022\022 \n\rsubmitterInfo\030\n \001(\0132\t.Use" +
-      "rInfo\032L\n\024SubmittedAnswerEntry\022\013\n\003key\030\001 \001" +
-      "(\005\022#\n\005value\030\002 \001(\0132\024.ExamSubmittedAnswer:" +
-      "\0028\001\"\354\001\n\027SubmittedExamSimpleInfo\022\027\n\017submi" +
-      "ttedExamId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\n" +
-      "updateTime\030\003 \001(\006\022\035\n\025alreadyCheckAllAnswe" +
-      "r\030\004 \001(\010\022\022\n\ntotalScore\030\005 \001(\001\022\020\n\010finished\030" +
-      "\006 \001(\010\022\024\n\014belongExamId\030\007 \001(\022\022\023\n\013submitter" +
-      "Id\030\010 \001(\022\022 \n\rsubmitterInfo\030\t \001(\0132\t.UserIn" +
-      "fo\"f\n\023ExamSubmittedAnswer\022\025\n\rquestionInd" +
-      "ex\030\001 \001(\005\022)\n\017submittedAnswer\030\002 \001(\0132\020.Subm" +
-      "ittedAnswer\022\r\n\005score\030\003 \001(\001\"\373\002\n\017Submitted" +
-      "Answer\022E\n\034singleFillingSubmittedAnswer\030\001" +
-      " \001(\0132\035.SingleFillingSubmittedAnswerH\000\022I\n" +
-      "\036multipleFillingSubmittedAnswer\030\002 \001(\0132\037." +
-      "MultipleFillingSubmittedAnswerH\000\022C\n\033sing" +
-      "leChoiceSubmittedAnswer\030\003 \001(\0132\034.SingleCh" +
-      "oiceSubmittedAnswerH\000\022G\n\035multipleChoiceS" +
-      "ubmittedAnswer\030\004 \001(\0132\036.MultipleChoiceSub" +
-      "mittedAnswerH\000\0225\n\024essaySubmittedAnswer\030\005" +
-      " \001(\0132\025.EssaySubmittedAnswerH\000B\021\n\017submitt" +
-      "edAnswer\".\n\034SingleFillingSubmittedAnswer" +
-      "\022\016\n\006answer\030\001 \001(\t\"\365\001\n\036MultipleFillingSubm" +
-      "ittedAnswer\022;\n\006answer\030\001 \003(\0132+.MultipleFi" +
-      "llingSubmittedAnswer.AnswerEntry\032A\n\004Pair" +
-      "\022\r\n\005index\030\001 \001(\005\022\016\n\006answer\030\002 \001(\t\022\032\n\022score" +
-      "OrCheckStatus\030\003 \001(\001\032S\n\013AnswerEntry\022\013\n\003ke" +
-      "y\030\001 \001(\005\0223\n\005value\030\002 \001(\0132$.MultipleFilling" +
-      "SubmittedAnswer.Pair:\0028\001\"-\n\033SingleChoice" +
-      "SubmittedAnswer\022\016\n\006choice\030\001 \001(\005\"/\n\035Multi" +
-      "pleChoiceSubmittedAnswer\022\016\n\006choice\030\001 \003(\005" +
-      "\"$\n\024EssaySubmittedAnswer\022\014\n\004text\030\001 \001(\t\"\322" +
-      "\001\n\016ForumTopicInfo\022\024\n\014forumTopicId\030\001 \001(\022\022" +
-      "\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022" +
-      "\r\n\005title\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\022\025\n\005i" +
-      "mage\030\006 \003(\0132\006.Image\022\020\n\010authorId\030\007 \001(\022\022\035\n\n" +
-      "authorInfo\030\010 \001(\0132\t.UserInfo\022\026\n\016belongCou" +
-      "rseId\030\t \001(\022\"\302\001\n\020TopicCommentInfo\022\026\n\016topi" +
-      "cCommentId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\n" +
-      "updateTime\030\003 \001(\006\022\017\n\007content\030\004 \001(\t\022\025\n\005ima" +
-      "ge\030\005 \003(\0132\006.Image\022\020\n\010authorId\030\006 \001(\022\022\035\n\nau" +
-      "thorInfo\030\007 \001(\0132\t.UserInfo\022\025\n\rbelongTopic" +
-      "Id\030\010 \001(\022\"\300\001\n\016TopicReplyInfo\022\024\n\014topicRepl" +
-      "yId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateT" +
-      "ime\030\003 \001(\006\022\017\n\007content\030\004 \001(\t\022\025\n\005image\030\005 \003(" +
-      "\0132\006.Image\022\020\n\010authorId\030\006 \001(\022\022\035\n\nauthorInf" +
-      "o\030\007 \001(\0132\t.UserInfo\022\027\n\017belongCommentId\030\010 " +
-      "\001(\022\"\377\001\n\021CourseCommentInfo\022\027\n\017courseComme" +
-      "ntId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdate" +
-      "Time\030\003 \001(\006\022\'\n\013commentType\030\004 \001(\0162\022.Course" +
-      "CommentType\022\017\n\007content\030\005 \001(\t\022\025\n\005image\030\006 " +
-      "\003(\0132\006.Image\022\027\n\017commentAuthorId\030\007 \001(\022\022$\n\021" +
-      "commentAuthorInfo\030\010 \001(\0132\t.UserInfo\022\031\n\021co" +
-      "mmentedCourseId\030\t \001(\022\"\342\001\n\013MessageInfo\022\021\n" +
-      "\tmessageId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\n" +
-      "updateTime\030\003 \001(\006\022\016\n\004text\030\004 \001(\tH\000\022\027\n\005imag" +
-      "e\030\005 \001(\0132\006.ImageH\000\022\022\n\nreceiverId\030\006 \001(\022\022\037\n" +
-      "\014receiverInfo\030\007 \001(\0132\t.UserInfo\022\020\n\010sender" +
-      "Id\030\010 \001(\022\022\035\n\nsenderInfo\030\t \001(\0132\t.UserInfoB" +
-      "\t\n\007content\"\336\001\n\026CourseSubscriptionInfo\022\034\n" +
-      "\024courseSubscriptionId\030\001 \001(\022\022\022\n\ncreateTim" +
-      "e\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\024\n\014subscribe" +
-      "rId\030\004 \001(\022\022!\n\016subscriberInfo\030\005 \001(\0132\t.User" +
-      "Info\022\032\n\022subscribedCourseId\030\006 \001(\022\022)\n\024subs" +
-      "cribedCourseInfo\030\007 \001(\0132\013.CourseInfo*$\n\010U" +
-      "serType\022\013\n\007Teacher\020\000\022\013\n\007Student\020\001*g\n\014Que" +
-      "stionType\022\021\n\rSingleFilling\020\000\022\023\n\017Multiple" +
-      "Filling\020\001\022\020\n\014SingleChoice\020\002\022\022\n\016MultipleC" +
-      "hoice\020\003\022\t\n\005Essay\020\004*L\n\021CourseCommentType\022" +
-      "\r\n\tVERY_GOOD\020\000\022\010\n\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUS" +
-      "T_MID\020\003\022\007\n\003BAD\020\004B4\n,com.corkili.learning" +
-      "server.generate.protobufB\004Infob\006proto3"
+      "\014\n\004open\030\004 \001(\010\022\026\n\016courseWorkName\030\005 \001(\t\022\026\n" +
+      "\016belongCourseId\030\006 \001(\022\022\023\n\013hasDeadline\030\007 \001" +
+      "(\010\022\020\n\010deadline\030\010 \001(\006\0227\n\026courseWorkQuesti" +
+      "onInfo\030\t \003(\0132\027.CourseWorkQuestionInfo\"\221\001" +
+      "\n\024CourseWorkSimpleInfo\022\024\n\014courseWorkId\030\001" +
+      " \001(\022\022\014\n\004open\030\002 \001(\010\022\026\n\016courseWorkName\030\003 \001" +
+      "(\t\022\026\n\016belongCourseId\030\004 \001(\022\022\023\n\013hasDeadlin" +
+      "e\030\005 \001(\010\022\020\n\010deadline\030\006 \001(\006\"\235\001\n\026CourseWork" +
+      "QuestionInfo\022\034\n\024courseWorkQuestionId\030\001 \001" +
+      "(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001" +
+      "(\006\022\r\n\005index\030\004 \001(\005\022\032\n\022belongCourseWorkId\030" +
+      "\005 \001(\022\022\022\n\nquestionId\030\006 \001(\022\"\200\003\n\027SubmittedC" +
+      "ourseWorkInfo\022\035\n\025submittedCourseWorkId\030\001" +
+      " \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003" +
+      " \001(\006\022F\n\017submittedAnswer\030\004 \003(\0132-.Submitte" +
+      "dCourseWorkInfo.SubmittedAnswerEntry\022\035\n\025" +
+      "alreadyCheckAllAnswer\030\005 \001(\010\022\020\n\010finished\030" +
+      "\006 \001(\010\022\032\n\022belongCourseWorkId\030\007 \001(\022\022\023\n\013sub" +
+      "mitterId\030\010 \001(\022\022 \n\rsubmitterInfo\030\t \001(\0132\t." +
+      "UserInfo\032R\n\024SubmittedAnswerEntry\022\013\n\003key\030" +
+      "\001 \001(\005\022)\n\005value\030\002 \001(\0132\032.CourseWorkSubmitt" +
+      "edAnswer:\0028\001\"\352\001\n\035SubmittedCourseWorkSimp" +
+      "leInfo\022\035\n\025submittedCourseWorkId\030\001 \001(\022\022\022\n" +
+      "\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\035\n" +
+      "\025alreadyCheckAllAnswer\030\004 \001(\010\022\020\n\010finished" +
+      "\030\005 \001(\010\022\032\n\022belongCourseWorkId\030\006 \001(\022\022\023\n\013su" +
+      "bmitterId\030\007 \001(\022\022 \n\rsubmitterInfo\030\010 \001(\0132\t" +
+      ".UserInfo\"r\n\031CourseWorkSubmittedAnswer\022\025" +
+      "\n\rquestionIndex\030\001 \001(\005\022)\n\017submittedAnswer" +
+      "\030\002 \001(\0132\020.SubmittedAnswer\022\023\n\013checkStatus\030" +
+      "\003 \001(\005\"\317\001\n\010ExamInfo\022\016\n\006examId\030\001 \001(\022\022\022\n\ncr" +
+      "eateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\020\n\010ex" +
+      "amName\030\004 \001(\t\022\026\n\016belongCourseId\030\005 \001(\022\022\021\n\t" +
+      "startTime\030\006 \001(\006\022\017\n\007endTime\030\007 \001(\006\022\020\n\010dura" +
+      "tion\030\010 \001(\005\022+\n\020examQuestionInfo\030\t \003(\0132\021.E" +
+      "xamQuestionInfo\"\200\001\n\016ExamSimpleInfo\022\016\n\006ex" +
+      "amId\030\001 \001(\022\022\020\n\010examName\030\002 \001(\t\022\026\n\016belongCo" +
+      "urseId\030\003 \001(\022\022\021\n\tstartTime\030\004 \001(\006\022\017\n\007endTi" +
+      "me\030\005 \001(\006\022\020\n\010duration\030\006 \001(\005\"\242\001\n\020ExamQuest" +
+      "ionInfo\022\026\n\016examQuestionId\030\001 \001(\022\022\022\n\ncreat" +
+      "eTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\r\n\005index" +
+      "\030\004 \001(\005\022\024\n\014belongExamId\030\005 \001(\022\022\022\n\nquestion" +
+      "Id\030\006 \001(\022\022\025\n\005score\030\007 \001(\0132\006.Score\"\305\001\n\005Scor" +
+      "e\022\025\n\013singleScore\030\001 \001(\001H\000\022-\n\rmultipleScor" +
+      "e\030\002 \001(\0132\024.Score.MultipleScoreH\000\032m\n\rMulti" +
+      "pleScore\022.\n\005score\030\001 \003(\0132\037.Score.Multiple" +
+      "Score.ScoreEntry\032,\n\nScoreEntry\022\013\n\003key\030\001 " +
+      "\001(\005\022\r\n\005value\030\002 \001(\001:\0028\001B\007\n\005score\"\366\002\n\021Subm" +
+      "ittedExamInfo\022\027\n\017submittedExamId\030\001 \001(\022\022\022" +
+      "\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022@" +
+      "\n\017submittedAnswer\030\004 \003(\0132\'.SubmittedExamI" +
+      "nfo.SubmittedAnswerEntry\022\035\n\025alreadyCheck" +
+      "AllAnswer\030\005 \001(\010\022\022\n\ntotalScore\030\006 \001(\001\022\020\n\010f" +
+      "inished\030\007 \001(\010\022\024\n\014belongExamId\030\010 \001(\022\022\023\n\013s" +
+      "ubmitterId\030\t \001(\022\022 \n\rsubmitterInfo\030\n \001(\0132" +
+      "\t.UserInfo\032L\n\024SubmittedAnswerEntry\022\013\n\003ke" +
+      "y\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024.ExamSubmittedAn" +
+      "swer:\0028\001\"\354\001\n\027SubmittedExamSimpleInfo\022\027\n\017" +
+      "submittedExamId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(" +
+      "\006\022\022\n\nupdateTime\030\003 \001(\006\022\035\n\025alreadyCheckAll" +
+      "Answer\030\004 \001(\010\022\022\n\ntotalScore\030\005 \001(\001\022\020\n\010fini" +
+      "shed\030\006 \001(\010\022\024\n\014belongExamId\030\007 \001(\022\022\023\n\013subm" +
+      "itterId\030\010 \001(\022\022 \n\rsubmitterInfo\030\t \001(\0132\t.U" +
+      "serInfo\"f\n\023ExamSubmittedAnswer\022\025\n\rquesti" +
+      "onIndex\030\001 \001(\005\022)\n\017submittedAnswer\030\002 \001(\0132\020" +
+      ".SubmittedAnswer\022\r\n\005score\030\003 \001(\001\"\373\002\n\017Subm" +
+      "ittedAnswer\022E\n\034singleFillingSubmittedAns" +
+      "wer\030\001 \001(\0132\035.SingleFillingSubmittedAnswer" +
+      "H\000\022I\n\036multipleFillingSubmittedAnswer\030\002 \001" +
+      "(\0132\037.MultipleFillingSubmittedAnswerH\000\022C\n" +
+      "\033singleChoiceSubmittedAnswer\030\003 \001(\0132\034.Sin" +
+      "gleChoiceSubmittedAnswerH\000\022G\n\035multipleCh" +
+      "oiceSubmittedAnswer\030\004 \001(\0132\036.MultipleChoi" +
+      "ceSubmittedAnswerH\000\0225\n\024essaySubmittedAns" +
+      "wer\030\005 \001(\0132\025.EssaySubmittedAnswerH\000B\021\n\017su" +
+      "bmittedAnswer\".\n\034SingleFillingSubmittedA" +
+      "nswer\022\016\n\006answer\030\001 \001(\t\"\365\001\n\036MultipleFillin" +
+      "gSubmittedAnswer\022;\n\006answer\030\001 \003(\0132+.Multi" +
+      "pleFillingSubmittedAnswer.AnswerEntry\032A\n" +
+      "\004Pair\022\r\n\005index\030\001 \001(\005\022\016\n\006answer\030\002 \001(\t\022\032\n\022" +
+      "scoreOrCheckStatus\030\003 \001(\001\032S\n\013AnswerEntry\022" +
+      "\013\n\003key\030\001 \001(\005\0223\n\005value\030\002 \001(\0132$.MultipleFi" +
+      "llingSubmittedAnswer.Pair:\0028\001\"-\n\033SingleC" +
+      "hoiceSubmittedAnswer\022\016\n\006choice\030\001 \001(\005\"/\n\035" +
+      "MultipleChoiceSubmittedAnswer\022\016\n\006choice\030" +
+      "\001 \003(\005\"$\n\024EssaySubmittedAnswer\022\014\n\004text\030\001 " +
+      "\001(\t\"\322\001\n\016ForumTopicInfo\022\024\n\014forumTopicId\030\001" +
+      " \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nupdateTime\030\003" +
+      " \001(\006\022\r\n\005title\030\004 \001(\t\022\023\n\013description\030\005 \001(\t" +
+      "\022\025\n\005image\030\006 \003(\0132\006.Image\022\020\n\010authorId\030\007 \001(" +
+      "\022\022\035\n\nauthorInfo\030\010 \001(\0132\t.UserInfo\022\026\n\016belo" +
+      "ngCourseId\030\t \001(\022\"\302\001\n\020TopicCommentInfo\022\026\n" +
+      "\016topicCommentId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(" +
+      "\006\022\022\n\nupdateTime\030\003 \001(\006\022\017\n\007content\030\004 \001(\t\022\025" +
+      "\n\005image\030\005 \003(\0132\006.Image\022\020\n\010authorId\030\006 \001(\022\022" +
+      "\035\n\nauthorInfo\030\007 \001(\0132\t.UserInfo\022\025\n\rbelong" +
+      "TopicId\030\010 \001(\022\"\300\001\n\016TopicReplyInfo\022\024\n\014topi" +
+      "cReplyId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nup" +
+      "dateTime\030\003 \001(\006\022\017\n\007content\030\004 \001(\t\022\025\n\005image" +
+      "\030\005 \003(\0132\006.Image\022\020\n\010authorId\030\006 \001(\022\022\035\n\nauth" +
+      "orInfo\030\007 \001(\0132\t.UserInfo\022\027\n\017belongComment" +
+      "Id\030\010 \001(\022\"\377\001\n\021CourseCommentInfo\022\027\n\017course" +
+      "CommentId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(\006\022\022\n\nu" +
+      "pdateTime\030\003 \001(\006\022\'\n\013commentType\030\004 \001(\0162\022.C" +
+      "ourseCommentType\022\017\n\007content\030\005 \001(\t\022\025\n\005ima" +
+      "ge\030\006 \003(\0132\006.Image\022\027\n\017commentAuthorId\030\007 \001(" +
+      "\022\022$\n\021commentAuthorInfo\030\010 \001(\0132\t.UserInfo\022" +
+      "\031\n\021commentedCourseId\030\t \001(\022\"\342\001\n\013MessageIn" +
+      "fo\022\021\n\tmessageId\030\001 \001(\022\022\022\n\ncreateTime\030\002 \001(" +
+      "\006\022\022\n\nupdateTime\030\003 \001(\006\022\016\n\004text\030\004 \001(\tH\000\022\027\n" +
+      "\005image\030\005 \001(\0132\006.ImageH\000\022\022\n\nreceiverId\030\006 \001" +
+      "(\022\022\037\n\014receiverInfo\030\007 \001(\0132\t.UserInfo\022\020\n\010s" +
+      "enderId\030\010 \001(\022\022\035\n\nsenderInfo\030\t \001(\0132\t.User" +
+      "InfoB\t\n\007content\"\336\001\n\026CourseSubscriptionIn" +
+      "fo\022\034\n\024courseSubscriptionId\030\001 \001(\022\022\022\n\ncrea" +
+      "teTime\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\024\n\014subs" +
+      "criberId\030\004 \001(\022\022!\n\016subscriberInfo\030\005 \001(\0132\t" +
+      ".UserInfo\022\032\n\022subscribedCourseId\030\006 \001(\022\022)\n" +
+      "\024subscribedCourseInfo\030\007 \001(\0132\013.CourseInfo" +
+      "\"`\n\tScormInfo\022\017\n\007scormId\030\001 \001(\022\022\022\n\ncreate" +
+      "Time\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\014\n\004path\030\004" +
+      " \001(\t\022\014\n\004data\030\005 \001(\014*$\n\010UserType\022\013\n\007Teache" +
+      "r\020\000\022\013\n\007Student\020\001*g\n\014QuestionType\022\021\n\rSing" +
+      "leFilling\020\000\022\023\n\017MultipleFilling\020\001\022\020\n\014Sing" +
+      "leChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t\n\005Essay\020" +
+      "\004*L\n\021CourseCommentType\022\r\n\tVERY_GOOD\020\000\022\010\n" +
+      "\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020\004B" +
+      "4\n,com.corkili.learningserver.generate.p" +
+      "rotobufB\004Infob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -39337,7 +40282,7 @@ public final class Info {
     internal_static_CourseInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseInfo_descriptor,
-        new java.lang.String[] { "CourseId", "CreateTime", "UpdateTime", "Open", "CourseName", "Description", "Image", "Tag", "TeacherInfo", });
+        new java.lang.String[] { "CourseId", "CreateTime", "UpdateTime", "Open", "CourseName", "Description", "Image", "Tag", "TeacherInfo", "HasCourseware", "CoursewareId", });
     internal_static_QuestionInfo_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_QuestionInfo_fieldAccessorTable = new
@@ -39584,6 +40529,12 @@ public final class Info {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseSubscriptionInfo_descriptor,
         new java.lang.String[] { "CourseSubscriptionId", "CreateTime", "UpdateTime", "SubscriberId", "SubscriberInfo", "SubscribedCourseId", "SubscribedCourseInfo", });
+    internal_static_ScormInfo_descriptor =
+      getDescriptor().getMessageTypes().get(36);
+    internal_static_ScormInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ScormInfo_descriptor,
+        new java.lang.String[] { "ScormId", "CreateTime", "UpdateTime", "Path", "Data", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

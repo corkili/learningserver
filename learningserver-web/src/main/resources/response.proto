@@ -317,3 +317,8 @@ message CourseSubscriptionDeleteResponse {
     BaseResponse response = 1;
     sint64 courseSubscriptionId = 2;
 }
+
+message CoursewareUpdateResponse {
+    BaseResponse response = 1;
+    CourseInfo courseInfo = 2;
+}

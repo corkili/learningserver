@@ -445,3 +445,11 @@ message CourseSubscriptionDeleteRequest {
     BaseRequest request = 1;
     sint64 courseSubscriptionId = 2;
 }
+
+message CoursewareUpdateRequest {
+    BaseRequest request = 1;
+    sint64 courseId = 2;
+    bool isDelete = 3;
+    string filename = 4;
+    bytes data = 5;
+}

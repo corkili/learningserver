@@ -1,15 +1,5 @@
 package com.corkili.learningserver.common;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.protobuf.ByteString;
-
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.CourseComment;
 import com.corkili.learningserver.bo.CourseSubscription;
@@ -19,6 +9,7 @@ import com.corkili.learningserver.bo.ExamQuestion;
 import com.corkili.learningserver.bo.ForumTopic;
 import com.corkili.learningserver.bo.Message;
 import com.corkili.learningserver.bo.Question;
+import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.bo.SubmittedCourseWork;
 import com.corkili.learningserver.bo.SubmittedExam;
 import com.corkili.learningserver.bo.TopicComment;
@@ -53,6 +44,7 @@ import com.corkili.learningserver.generate.protobuf.Info.QuestionSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.QuestionType;
 import com.corkili.learningserver.generate.protobuf.Info.Score;
 import com.corkili.learningserver.generate.protobuf.Info.Score.MultipleScore;
+import com.corkili.learningserver.generate.protobuf.Info.ScormInfo;
 import com.corkili.learningserver.generate.protobuf.Info.SingleChoiceAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.SingleChoiceSubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.SingleFillingAnswer;
@@ -66,8 +58,33 @@ import com.corkili.learningserver.generate.protobuf.Info.TopicCommentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.TopicReplyInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
+import com.google.protobuf.ByteString;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ProtoUtils {
+
+    public static ScormInfo generateScormInfo(Scorm scorm, boolean loadZipData) {
+        if (scorm == null) {
+            return ScormInfo.getDefaultInstance();
+        }
+        byte[] data = new byte[0];
+        if (loadZipData) {
+            data = ScormZipUtils.readScormZip(scorm.getPath());
+        }
+        return ScormInfo.newBuilder()
+                .setScormId(scorm.getId())
+                .setCreateTime(getTime(scorm.getCreateTime()))
+                .setUpdateTime(getTime(scorm.getUpdateTime()))
+                .setData(ByteString.copyFrom(data))
+                .build();
+    }
 
     public static CourseSubscriptionInfo generateCourseSubscriptionInfo(CourseSubscription courseSubscription,
                                                                         User subscriber, Course course, User courseTeacher,
@@ -488,6 +505,8 @@ public class ProtoUtils {
                 .addAllImage(imageList)
                 .addAllTag(course.getTags())
                 .setTeacherInfo(generateUserInfo(teacher))
+                .setHasCourseware(course.getCoursewareId() != null)
+                .setCoursewareId(course.getCoursewareId() != null ? course.getCoursewareId() : 0)
                 .build();
     }
 

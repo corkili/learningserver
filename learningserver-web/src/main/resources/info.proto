@@ -39,6 +39,8 @@ message CourseInfo {
     repeated Image image = 7;
     repeated string tag = 8;
     UserInfo teacherInfo = 9;
+    bool hasCourseware = 10;
+    sint64 coursewareId = 11;
 }
 
 message QuestionInfo {
@@ -337,4 +339,12 @@ message CourseSubscriptionInfo {
     UserInfo subscriberInfo = 5;
     sint64 subscribedCourseId = 6;
     CourseInfo subscribedCourseInfo = 7;
+}
+
+message ScormInfo {
+    sint64 scormId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string path = 4;
+    bytes data = 5;
 }
