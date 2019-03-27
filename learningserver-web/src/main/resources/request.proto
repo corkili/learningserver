@@ -453,3 +453,8 @@ message CoursewareUpdateRequest {
     string filename = 4;
     bytes data = 5;
 }
+
+message CourseCatalogQueryRequest {
+    BaseRequest request = 1;
+    sint64 scormId = 2;
+}

@@ -1,6 +1,8 @@
 package com.corkili.learningserver.common;
 
 import com.corkili.learningserver.bo.Course;
+import com.corkili.learningserver.bo.CourseCatalog;
+import com.corkili.learningserver.bo.CourseCatalog.CourseCatalogItem;
 import com.corkili.learningserver.bo.CourseComment;
 import com.corkili.learningserver.bo.CourseSubscription;
 import com.corkili.learningserver.bo.CourseWork;
@@ -17,6 +19,9 @@ import com.corkili.learningserver.bo.TopicReply;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.bo.WorkQuestion;
 import com.corkili.learningserver.generate.protobuf.Info.Answer;
+import com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo;
+import com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList;
 import com.corkili.learningserver.generate.protobuf.Info.CourseCommentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseCommentType;
 import com.corkili.learningserver.generate.protobuf.Info.CourseInfo;
@@ -59,7 +64,9 @@ import com.corkili.learningserver.generate.protobuf.Info.TopicReplyInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
 import com.google.protobuf.ByteString;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,7 +75,107 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+@Slf4j
 public class ProtoUtils {
+
+    public static CourseCatalogInfo generateCourseCatalogInfo(CourseCatalog courseCatalog) {
+        if (courseCatalog == null) {
+            return CourseCatalogInfo.getDefaultInstance();
+        }
+
+        CourseCatalogInfo.Builder courseCatalogInfo = CourseCatalogInfo.newBuilder();
+        courseCatalogInfo.setDefaultItemId(courseCatalog.getDefaultItemId());
+        courseCatalogInfo.setMaxLevel(courseCatalog.getMaxLevel());
+        courseCatalogInfo.setItemNumber(courseCatalog.getItemNumber());
+
+        if (courseCatalog.getMaxLevel() > 0) {
+            Map<Integer, List<CourseCatalogItemInfo.Builder>> itemMap = new HashMap<>();
+            for (Entry<Integer, List<CourseCatalogItem>> entry : courseCatalog.getItems().entrySet()) {
+                List<CourseCatalogItemInfo.Builder> itemList = new ArrayList<>();
+                for (CourseCatalogItem courseCatalogItem : entry.getValue()) {
+                    itemList.add(generateCourseCatalogItemInfo(courseCatalogItem));
+                }
+                itemMap.put(entry.getKey(), itemList);
+            }
+            for (Entry<Integer, List<CourseCatalogItem>> entry : courseCatalog.getItems().entrySet()) {
+                List<CourseCatalogItem> items = entry.getValue();
+                List<CourseCatalogItemInfo.Builder> infos = itemMap.getOrDefault(entry.getKey(), new ArrayList<>());
+                List<CourseCatalogItemInfo.Builder> lastLevelList = itemMap.getOrDefault(entry.getKey() - 1, new ArrayList<>());
+                List<CourseCatalogItemInfo.Builder> nextLevelList = itemMap.getOrDefault(entry.getKey() + 1, new ArrayList<>());
+                for (CourseCatalogItem item : items) {
+                    CourseCatalogItemInfo.Builder info = null;
+                    for (CourseCatalogItemInfo.Builder builder : infos) {
+                        if (builder.getLevel() == item.getLevel() && builder.getIndex() == item.getIndex()) {
+                            info = builder;
+                            break;
+                        }
+                    }
+                    if (info == null) {
+                        log.warn("generate course catalog info error-1");
+                        continue;
+                    }
+                    // parent
+                    info.setHasParent(item.getParentItem() != null);
+                    if (item.getParentItem() != null) {
+                        CourseCatalogItemInfo.Builder parent = null;
+                        for (CourseCatalogItemInfo.Builder builder : lastLevelList) {
+                            if (builder.getLevel() == item.getParentItem().getLevel()
+                                    && builder.getIndex() == item.getParentItem().getIndex()) {
+                                parent = builder;
+                                break;
+                            }
+                        }
+                        if (parent == null) {
+                            log.warn("generate course catalog info error-2");
+                        } else {
+                            info.setParentItem(parent);
+                        }
+                    }
+                    // child
+                    CourseCatalogItemInfoList.Builder nextLevelItems = CourseCatalogItemInfoList.newBuilder();
+                    for (CourseCatalogItem nextLevelItem : item.getNextLevelItems()) {
+                        CourseCatalogItemInfo.Builder child = null;
+                        for (CourseCatalogItemInfo.Builder builder : nextLevelList) {
+                            if (builder.getLevel() == nextLevelItem.getLevel()
+                                    && builder.getIndex() == nextLevelItem.getIndex()) {
+                                child = builder;
+                                break;
+                            }
+                        }
+                        if (child == null) {
+                            log.warn("generate course catalog info error-3");
+                        } else {
+                            nextLevelItems.addCourseCatalogItemInfo(child);
+                        }
+                    }
+                    info.setNextLevelItems(nextLevelItems);
+                }
+            }
+            for (Entry<Integer, List<CourseCatalogItemInfo.Builder>> entry : itemMap.entrySet()) {
+                CourseCatalogItemInfoList.Builder itemList = CourseCatalogItemInfoList.newBuilder();
+                for (CourseCatalogItemInfo.Builder builder : entry.getValue()) {
+                    itemList.addCourseCatalogItemInfo(builder);
+                }
+                courseCatalogInfo.putItems(entry.getKey(), itemList.build());
+            }
+        }
+
+        return courseCatalogInfo.build();
+    }
+
+    private static CourseCatalogItemInfo.Builder generateCourseCatalogItemInfo(CourseCatalogItem courseCatalogItem) {
+        if (courseCatalogItem == null) {
+            return null;
+        }
+        return CourseCatalogItemInfo.newBuilder()
+                .setLevel(courseCatalogItem.getLevel())
+                .setIndex(courseCatalogItem.getIndex())
+                .setItemId(courseCatalogItem.getItemId())
+                .setItemTitle(courseCatalogItem.getItemTitle())
+                .setSelectable(courseCatalogItem.isSelectable())
+                .setVisible(courseCatalogItem.isVisible())
+                .addAllHideLmsUI(courseCatalogItem.getHideLmsUI());
+    }
 
     public static ScormInfo generateScormInfo(Scorm scorm, boolean loadZipData) {
         if (scorm == null) {

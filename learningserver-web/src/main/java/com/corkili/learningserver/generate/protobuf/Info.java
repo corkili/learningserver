@@ -39851,6 +39851,3363 @@ public final class Info {
 
   }
 
+  public interface CourseCatalogInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CourseCatalogInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string defaultItemId = 1;</code>
+     */
+    java.lang.String getDefaultItemId();
+    /**
+     * <code>string defaultItemId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDefaultItemIdBytes();
+
+    /**
+     * <code>int32 maxLevel = 2;</code>
+     */
+    int getMaxLevel();
+
+    /**
+     * <code>int32 itemNumber = 3;</code>
+     */
+    int getItemNumber();
+
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+    int getItemsCount();
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+    boolean containsItems(
+        int key);
+    /**
+     * Use {@link #getItemsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+    getItems();
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+    java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+    getItemsMap();
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getItemsOrDefault(
+        int key,
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList defaultValue);
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getItemsOrThrow(
+        int key);
+  }
+  /**
+   * Protobuf type {@code CourseCatalogInfo}
+   */
+  public  static final class CourseCatalogInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CourseCatalogInfo)
+      CourseCatalogInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CourseCatalogInfo.newBuilder() to construct.
+    private CourseCatalogInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CourseCatalogInfo() {
+      defaultItemId_ = "";
+      maxLevel_ = 0;
+      itemNumber_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CourseCatalogInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              defaultItemId_ = s;
+              break;
+            }
+            case 16: {
+
+              maxLevel_ = input.readInt32();
+              break;
+            }
+            case 24: {
+
+              itemNumber_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                items_ = com.google.protobuf.MapField.newMapField(
+                    ItemsDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000008;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+              items__ = input.readMessage(
+                  ItemsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              items_.getMutableMap().put(
+                  items__.getKey(), items__.getValue());
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogInfo_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 4:
+          return internalGetItems();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.class, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int DEFAULTITEMID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object defaultItemId_;
+    /**
+     * <code>string defaultItemId = 1;</code>
+     */
+    public java.lang.String getDefaultItemId() {
+      java.lang.Object ref = defaultItemId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        defaultItemId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string defaultItemId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDefaultItemIdBytes() {
+      java.lang.Object ref = defaultItemId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        defaultItemId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MAXLEVEL_FIELD_NUMBER = 2;
+    private int maxLevel_;
+    /**
+     * <code>int32 maxLevel = 2;</code>
+     */
+    public int getMaxLevel() {
+      return maxLevel_;
+    }
+
+    public static final int ITEMNUMBER_FIELD_NUMBER = 3;
+    private int itemNumber_;
+    /**
+     * <code>int32 itemNumber = 3;</code>
+     */
+    public int getItemNumber() {
+      return itemNumber_;
+    }
+
+    public static final int ITEMS_FIELD_NUMBER = 4;
+    private static final class ItemsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>newDefaultInstance(
+                  com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogInfo_ItemsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> items_;
+    private com.google.protobuf.MapField<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+    internalGetItems() {
+      if (items_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            ItemsDefaultEntryHolder.defaultEntry);
+      }
+      return items_;
+    }
+
+    public int getItemsCount() {
+      return internalGetItems().getMap().size();
+    }
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+
+    public boolean containsItems(
+        int key) {
+      
+      return internalGetItems().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getItemsMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> getItems() {
+      return getItemsMap();
+    }
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> getItemsMap() {
+      return internalGetItems().getMap();
+    }
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getItemsOrDefault(
+        int key,
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList defaultValue) {
+      
+      java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> map =
+          internalGetItems().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+     */
+
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getItemsOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> map =
+          internalGetItems().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getDefaultItemIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, defaultItemId_);
+      }
+      if (maxLevel_ != 0) {
+        output.writeInt32(2, maxLevel_);
+      }
+      if (itemNumber_ != 0) {
+        output.writeInt32(3, itemNumber_);
+      }
+      com.google.protobuf.GeneratedMessageV3
+        .serializeIntegerMapTo(
+          output,
+          internalGetItems(),
+          ItemsDefaultEntryHolder.defaultEntry,
+          4);
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getDefaultItemIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, defaultItemId_);
+      }
+      if (maxLevel_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, maxLevel_);
+      }
+      if (itemNumber_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, itemNumber_);
+      }
+      for (java.util.Map.Entry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> entry
+           : internalGetItems().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+        items__ = ItemsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(4, items__);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo other = (com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo) obj;
+
+      boolean result = true;
+      result = result && getDefaultItemId()
+          .equals(other.getDefaultItemId());
+      result = result && (getMaxLevel()
+          == other.getMaxLevel());
+      result = result && (getItemNumber()
+          == other.getItemNumber());
+      result = result && internalGetItems().equals(
+          other.internalGetItems());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DEFAULTITEMID_FIELD_NUMBER;
+      hash = (53 * hash) + getDefaultItemId().hashCode();
+      hash = (37 * hash) + MAXLEVEL_FIELD_NUMBER;
+      hash = (53 * hash) + getMaxLevel();
+      hash = (37 * hash) + ITEMNUMBER_FIELD_NUMBER;
+      hash = (53 * hash) + getItemNumber();
+      if (!internalGetItems().getMap().isEmpty()) {
+        hash = (37 * hash) + ITEMS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetItems().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CourseCatalogInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CourseCatalogInfo)
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogInfo_descriptor;
+      }
+
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMapField(
+          int number) {
+        switch (number) {
+          case 4:
+            return internalGetItems();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapField internalGetMutableMapField(
+          int number) {
+        switch (number) {
+          case 4:
+            return internalGetMutableItems();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.class, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        defaultItemId_ = "";
+
+        maxLevel_ = 0;
+
+        itemNumber_ = 0;
+
+        internalGetMutableItems().clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo build() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo result = new com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.defaultItemId_ = defaultItemId_;
+        result.maxLevel_ = maxLevel_;
+        result.itemNumber_ = itemNumber_;
+        result.items_ = internalGetItems();
+        result.items_.makeImmutable();
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo.getDefaultInstance()) return this;
+        if (!other.getDefaultItemId().isEmpty()) {
+          defaultItemId_ = other.defaultItemId_;
+          onChanged();
+        }
+        if (other.getMaxLevel() != 0) {
+          setMaxLevel(other.getMaxLevel());
+        }
+        if (other.getItemNumber() != 0) {
+          setItemNumber(other.getItemNumber());
+        }
+        internalGetMutableItems().mergeFrom(
+            other.internalGetItems());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object defaultItemId_ = "";
+      /**
+       * <code>string defaultItemId = 1;</code>
+       */
+      public java.lang.String getDefaultItemId() {
+        java.lang.Object ref = defaultItemId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          defaultItemId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string defaultItemId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDefaultItemIdBytes() {
+        java.lang.Object ref = defaultItemId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          defaultItemId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string defaultItemId = 1;</code>
+       */
+      public Builder setDefaultItemId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        defaultItemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string defaultItemId = 1;</code>
+       */
+      public Builder clearDefaultItemId() {
+        
+        defaultItemId_ = getDefaultInstance().getDefaultItemId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string defaultItemId = 1;</code>
+       */
+      public Builder setDefaultItemIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        defaultItemId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int maxLevel_ ;
+      /**
+       * <code>int32 maxLevel = 2;</code>
+       */
+      public int getMaxLevel() {
+        return maxLevel_;
+      }
+      /**
+       * <code>int32 maxLevel = 2;</code>
+       */
+      public Builder setMaxLevel(int value) {
+        
+        maxLevel_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 maxLevel = 2;</code>
+       */
+      public Builder clearMaxLevel() {
+        
+        maxLevel_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int itemNumber_ ;
+      /**
+       * <code>int32 itemNumber = 3;</code>
+       */
+      public int getItemNumber() {
+        return itemNumber_;
+      }
+      /**
+       * <code>int32 itemNumber = 3;</code>
+       */
+      public Builder setItemNumber(int value) {
+        
+        itemNumber_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 itemNumber = 3;</code>
+       */
+      public Builder clearItemNumber() {
+        
+        itemNumber_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> items_;
+      private com.google.protobuf.MapField<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+      internalGetItems() {
+        if (items_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              ItemsDefaultEntryHolder.defaultEntry);
+        }
+        return items_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+      internalGetMutableItems() {
+        onChanged();;
+        if (items_ == null) {
+          items_ = com.google.protobuf.MapField.newMapField(
+              ItemsDefaultEntryHolder.defaultEntry);
+        }
+        if (!items_.isMutable()) {
+          items_ = items_.copy();
+        }
+        return items_;
+      }
+
+      public int getItemsCount() {
+        return internalGetItems().getMap().size();
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+
+      public boolean containsItems(
+          int key) {
+        
+        return internalGetItems().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getItemsMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> getItems() {
+        return getItemsMap();
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> getItemsMap() {
+        return internalGetItems().getMap();
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getItemsOrDefault(
+          int key,
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList defaultValue) {
+        
+        java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> map =
+            internalGetItems().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getItemsOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> map =
+            internalGetItems().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearItems() {
+        internalGetMutableItems().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+
+      public Builder removeItems(
+          int key) {
+        
+        internalGetMutableItems().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList>
+      getMutableItems() {
+        return internalGetMutableItems().getMutableMap();
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+      public Builder putItems(
+          int key,
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList value) {
+        
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        internalGetMutableItems().getMutableMap()
+            .put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;int32, .CourseCatalogItemInfoList&gt; items = 4;</code>
+       */
+
+      public Builder putAllItems(
+          java.util.Map<java.lang.Integer, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList> values) {
+        internalGetMutableItems().getMutableMap()
+            .putAll(values);
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CourseCatalogInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:CourseCatalogInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CourseCatalogInfo>
+        PARSER = new com.google.protobuf.AbstractParser<CourseCatalogInfo>() {
+      @java.lang.Override
+      public CourseCatalogInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CourseCatalogInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CourseCatalogInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CourseCatalogInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CourseCatalogItemInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CourseCatalogItemInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 level = 1;</code>
+     */
+    int getLevel();
+
+    /**
+     * <code>int32 index = 2;</code>
+     */
+    int getIndex();
+
+    /**
+     * <code>string itemId = 3;</code>
+     */
+    java.lang.String getItemId();
+    /**
+     * <code>string itemId = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getItemIdBytes();
+
+    /**
+     * <code>string itemTitle = 4;</code>
+     */
+    java.lang.String getItemTitle();
+    /**
+     * <code>string itemTitle = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getItemTitleBytes();
+
+    /**
+     * <code>bool selectable = 5;</code>
+     */
+    boolean getSelectable();
+
+    /**
+     * <code>bool visible = 6;</code>
+     */
+    boolean getVisible();
+
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    java.util.List<java.lang.String>
+        getHideLmsUIList();
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    int getHideLmsUICount();
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    java.lang.String getHideLmsUI(int index);
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getHideLmsUIBytes(int index);
+
+    /**
+     * <code>bool hasParent = 8;</code>
+     */
+    boolean getHasParent();
+
+    /**
+     * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+     */
+    boolean hasParentItem();
+    /**
+     * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getParentItem();
+    /**
+     * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder getParentItemOrBuilder();
+
+    /**
+     * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+     */
+    boolean hasNextLevelItems();
+    /**
+     * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getNextLevelItems();
+    /**
+     * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder getNextLevelItemsOrBuilder();
+  }
+  /**
+   * Protobuf type {@code CourseCatalogItemInfo}
+   */
+  public  static final class CourseCatalogItemInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CourseCatalogItemInfo)
+      CourseCatalogItemInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CourseCatalogItemInfo.newBuilder() to construct.
+    private CourseCatalogItemInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CourseCatalogItemInfo() {
+      level_ = 0;
+      index_ = 0;
+      itemId_ = "";
+      itemTitle_ = "";
+      selectable_ = false;
+      visible_ = false;
+      hideLmsUI_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      hasParent_ = false;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CourseCatalogItemInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              level_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              index_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              itemId_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              itemTitle_ = s;
+              break;
+            }
+            case 40: {
+
+              selectable_ = input.readBool();
+              break;
+            }
+            case 48: {
+
+              visible_ = input.readBool();
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                hideLmsUI_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              hideLmsUI_.add(s);
+              break;
+            }
+            case 64: {
+
+              hasParent_ = input.readBool();
+              break;
+            }
+            case 74: {
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder subBuilder = null;
+              if (parentItem_ != null) {
+                subBuilder = parentItem_.toBuilder();
+              }
+              parentItem_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(parentItem_);
+                parentItem_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 82: {
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder subBuilder = null;
+              if (nextLevelItems_ != null) {
+                subBuilder = nextLevelItems_.toBuilder();
+              }
+              nextLevelItems_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(nextLevelItems_);
+                nextLevelItems_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          hideLmsUI_ = hideLmsUI_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.class, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int LEVEL_FIELD_NUMBER = 1;
+    private int level_;
+    /**
+     * <code>int32 level = 1;</code>
+     */
+    public int getLevel() {
+      return level_;
+    }
+
+    public static final int INDEX_FIELD_NUMBER = 2;
+    private int index_;
+    /**
+     * <code>int32 index = 2;</code>
+     */
+    public int getIndex() {
+      return index_;
+    }
+
+    public static final int ITEMID_FIELD_NUMBER = 3;
+    private volatile java.lang.Object itemId_;
+    /**
+     * <code>string itemId = 3;</code>
+     */
+    public java.lang.String getItemId() {
+      java.lang.Object ref = itemId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        itemId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string itemId = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getItemIdBytes() {
+      java.lang.Object ref = itemId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        itemId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ITEMTITLE_FIELD_NUMBER = 4;
+    private volatile java.lang.Object itemTitle_;
+    /**
+     * <code>string itemTitle = 4;</code>
+     */
+    public java.lang.String getItemTitle() {
+      java.lang.Object ref = itemTitle_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        itemTitle_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string itemTitle = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getItemTitleBytes() {
+      java.lang.Object ref = itemTitle_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        itemTitle_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SELECTABLE_FIELD_NUMBER = 5;
+    private boolean selectable_;
+    /**
+     * <code>bool selectable = 5;</code>
+     */
+    public boolean getSelectable() {
+      return selectable_;
+    }
+
+    public static final int VISIBLE_FIELD_NUMBER = 6;
+    private boolean visible_;
+    /**
+     * <code>bool visible = 6;</code>
+     */
+    public boolean getVisible() {
+      return visible_;
+    }
+
+    public static final int HIDELMSUI_FIELD_NUMBER = 7;
+    private com.google.protobuf.LazyStringList hideLmsUI_;
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getHideLmsUIList() {
+      return hideLmsUI_;
+    }
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    public int getHideLmsUICount() {
+      return hideLmsUI_.size();
+    }
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    public java.lang.String getHideLmsUI(int index) {
+      return hideLmsUI_.get(index);
+    }
+    /**
+     * <code>repeated string hideLmsUI = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHideLmsUIBytes(int index) {
+      return hideLmsUI_.getByteString(index);
+    }
+
+    public static final int HASPARENT_FIELD_NUMBER = 8;
+    private boolean hasParent_;
+    /**
+     * <code>bool hasParent = 8;</code>
+     */
+    public boolean getHasParent() {
+      return hasParent_;
+    }
+
+    public static final int PARENTITEM_FIELD_NUMBER = 9;
+    private com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parentItem_;
+    /**
+     * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+     */
+    public boolean hasParentItem() {
+      return parentItem_ != null;
+    }
+    /**
+     * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getParentItem() {
+      return parentItem_ == null ? com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance() : parentItem_;
+    }
+    /**
+     * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder getParentItemOrBuilder() {
+      return getParentItem();
+    }
+
+    public static final int NEXTLEVELITEMS_FIELD_NUMBER = 10;
+    private com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList nextLevelItems_;
+    /**
+     * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+     */
+    public boolean hasNextLevelItems() {
+      return nextLevelItems_ != null;
+    }
+    /**
+     * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getNextLevelItems() {
+      return nextLevelItems_ == null ? com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.getDefaultInstance() : nextLevelItems_;
+    }
+    /**
+     * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder getNextLevelItemsOrBuilder() {
+      return getNextLevelItems();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (level_ != 0) {
+        output.writeInt32(1, level_);
+      }
+      if (index_ != 0) {
+        output.writeInt32(2, index_);
+      }
+      if (!getItemIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, itemId_);
+      }
+      if (!getItemTitleBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, itemTitle_);
+      }
+      if (selectable_ != false) {
+        output.writeBool(5, selectable_);
+      }
+      if (visible_ != false) {
+        output.writeBool(6, visible_);
+      }
+      for (int i = 0; i < hideLmsUI_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, hideLmsUI_.getRaw(i));
+      }
+      if (hasParent_ != false) {
+        output.writeBool(8, hasParent_);
+      }
+      if (parentItem_ != null) {
+        output.writeMessage(9, getParentItem());
+      }
+      if (nextLevelItems_ != null) {
+        output.writeMessage(10, getNextLevelItems());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (level_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, level_);
+      }
+      if (index_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, index_);
+      }
+      if (!getItemIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, itemId_);
+      }
+      if (!getItemTitleBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, itemTitle_);
+      }
+      if (selectable_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, selectable_);
+      }
+      if (visible_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, visible_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < hideLmsUI_.size(); i++) {
+          dataSize += computeStringSizeNoTag(hideLmsUI_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getHideLmsUIList().size();
+      }
+      if (hasParent_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(8, hasParent_);
+      }
+      if (parentItem_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getParentItem());
+      }
+      if (nextLevelItems_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, getNextLevelItems());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo other = (com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo) obj;
+
+      boolean result = true;
+      result = result && (getLevel()
+          == other.getLevel());
+      result = result && (getIndex()
+          == other.getIndex());
+      result = result && getItemId()
+          .equals(other.getItemId());
+      result = result && getItemTitle()
+          .equals(other.getItemTitle());
+      result = result && (getSelectable()
+          == other.getSelectable());
+      result = result && (getVisible()
+          == other.getVisible());
+      result = result && getHideLmsUIList()
+          .equals(other.getHideLmsUIList());
+      result = result && (getHasParent()
+          == other.getHasParent());
+      result = result && (hasParentItem() == other.hasParentItem());
+      if (hasParentItem()) {
+        result = result && getParentItem()
+            .equals(other.getParentItem());
+      }
+      result = result && (hasNextLevelItems() == other.hasNextLevelItems());
+      if (hasNextLevelItems()) {
+        result = result && getNextLevelItems()
+            .equals(other.getNextLevelItems());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + LEVEL_FIELD_NUMBER;
+      hash = (53 * hash) + getLevel();
+      hash = (37 * hash) + INDEX_FIELD_NUMBER;
+      hash = (53 * hash) + getIndex();
+      hash = (37 * hash) + ITEMID_FIELD_NUMBER;
+      hash = (53 * hash) + getItemId().hashCode();
+      hash = (37 * hash) + ITEMTITLE_FIELD_NUMBER;
+      hash = (53 * hash) + getItemTitle().hashCode();
+      hash = (37 * hash) + SELECTABLE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSelectable());
+      hash = (37 * hash) + VISIBLE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getVisible());
+      if (getHideLmsUICount() > 0) {
+        hash = (37 * hash) + HIDELMSUI_FIELD_NUMBER;
+        hash = (53 * hash) + getHideLmsUIList().hashCode();
+      }
+      hash = (37 * hash) + HASPARENT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getHasParent());
+      if (hasParentItem()) {
+        hash = (37 * hash) + PARENTITEM_FIELD_NUMBER;
+        hash = (53 * hash) + getParentItem().hashCode();
+      }
+      if (hasNextLevelItems()) {
+        hash = (37 * hash) + NEXTLEVELITEMS_FIELD_NUMBER;
+        hash = (53 * hash) + getNextLevelItems().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CourseCatalogItemInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CourseCatalogItemInfo)
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.class, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        level_ = 0;
+
+        index_ = 0;
+
+        itemId_ = "";
+
+        itemTitle_ = "";
+
+        selectable_ = false;
+
+        visible_ = false;
+
+        hideLmsUI_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        hasParent_ = false;
+
+        if (parentItemBuilder_ == null) {
+          parentItem_ = null;
+        } else {
+          parentItem_ = null;
+          parentItemBuilder_ = null;
+        }
+        if (nextLevelItemsBuilder_ == null) {
+          nextLevelItems_ = null;
+        } else {
+          nextLevelItems_ = null;
+          nextLevelItemsBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo build() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo result = new com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.level_ = level_;
+        result.index_ = index_;
+        result.itemId_ = itemId_;
+        result.itemTitle_ = itemTitle_;
+        result.selectable_ = selectable_;
+        result.visible_ = visible_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          hideLmsUI_ = hideLmsUI_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.hideLmsUI_ = hideLmsUI_;
+        result.hasParent_ = hasParent_;
+        if (parentItemBuilder_ == null) {
+          result.parentItem_ = parentItem_;
+        } else {
+          result.parentItem_ = parentItemBuilder_.build();
+        }
+        if (nextLevelItemsBuilder_ == null) {
+          result.nextLevelItems_ = nextLevelItems_;
+        } else {
+          result.nextLevelItems_ = nextLevelItemsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance()) return this;
+        if (other.getLevel() != 0) {
+          setLevel(other.getLevel());
+        }
+        if (other.getIndex() != 0) {
+          setIndex(other.getIndex());
+        }
+        if (!other.getItemId().isEmpty()) {
+          itemId_ = other.itemId_;
+          onChanged();
+        }
+        if (!other.getItemTitle().isEmpty()) {
+          itemTitle_ = other.itemTitle_;
+          onChanged();
+        }
+        if (other.getSelectable() != false) {
+          setSelectable(other.getSelectable());
+        }
+        if (other.getVisible() != false) {
+          setVisible(other.getVisible());
+        }
+        if (!other.hideLmsUI_.isEmpty()) {
+          if (hideLmsUI_.isEmpty()) {
+            hideLmsUI_ = other.hideLmsUI_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureHideLmsUIIsMutable();
+            hideLmsUI_.addAll(other.hideLmsUI_);
+          }
+          onChanged();
+        }
+        if (other.getHasParent() != false) {
+          setHasParent(other.getHasParent());
+        }
+        if (other.hasParentItem()) {
+          mergeParentItem(other.getParentItem());
+        }
+        if (other.hasNextLevelItems()) {
+          mergeNextLevelItems(other.getNextLevelItems());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int level_ ;
+      /**
+       * <code>int32 level = 1;</code>
+       */
+      public int getLevel() {
+        return level_;
+      }
+      /**
+       * <code>int32 level = 1;</code>
+       */
+      public Builder setLevel(int value) {
+        
+        level_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 level = 1;</code>
+       */
+      public Builder clearLevel() {
+        
+        level_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int index_ ;
+      /**
+       * <code>int32 index = 2;</code>
+       */
+      public int getIndex() {
+        return index_;
+      }
+      /**
+       * <code>int32 index = 2;</code>
+       */
+      public Builder setIndex(int value) {
+        
+        index_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 index = 2;</code>
+       */
+      public Builder clearIndex() {
+        
+        index_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object itemId_ = "";
+      /**
+       * <code>string itemId = 3;</code>
+       */
+      public java.lang.String getItemId() {
+        java.lang.Object ref = itemId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          itemId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string itemId = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getItemIdBytes() {
+        java.lang.Object ref = itemId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          itemId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string itemId = 3;</code>
+       */
+      public Builder setItemId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string itemId = 3;</code>
+       */
+      public Builder clearItemId() {
+        
+        itemId_ = getDefaultInstance().getItemId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string itemId = 3;</code>
+       */
+      public Builder setItemIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object itemTitle_ = "";
+      /**
+       * <code>string itemTitle = 4;</code>
+       */
+      public java.lang.String getItemTitle() {
+        java.lang.Object ref = itemTitle_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          itemTitle_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string itemTitle = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getItemTitleBytes() {
+        java.lang.Object ref = itemTitle_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          itemTitle_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string itemTitle = 4;</code>
+       */
+      public Builder setItemTitle(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        itemTitle_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string itemTitle = 4;</code>
+       */
+      public Builder clearItemTitle() {
+        
+        itemTitle_ = getDefaultInstance().getItemTitle();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string itemTitle = 4;</code>
+       */
+      public Builder setItemTitleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        itemTitle_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean selectable_ ;
+      /**
+       * <code>bool selectable = 5;</code>
+       */
+      public boolean getSelectable() {
+        return selectable_;
+      }
+      /**
+       * <code>bool selectable = 5;</code>
+       */
+      public Builder setSelectable(boolean value) {
+        
+        selectable_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool selectable = 5;</code>
+       */
+      public Builder clearSelectable() {
+        
+        selectable_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean visible_ ;
+      /**
+       * <code>bool visible = 6;</code>
+       */
+      public boolean getVisible() {
+        return visible_;
+      }
+      /**
+       * <code>bool visible = 6;</code>
+       */
+      public Builder setVisible(boolean value) {
+        
+        visible_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool visible = 6;</code>
+       */
+      public Builder clearVisible() {
+        
+        visible_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList hideLmsUI_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureHideLmsUIIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          hideLmsUI_ = new com.google.protobuf.LazyStringArrayList(hideLmsUI_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getHideLmsUIList() {
+        return hideLmsUI_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public int getHideLmsUICount() {
+        return hideLmsUI_.size();
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public java.lang.String getHideLmsUI(int index) {
+        return hideLmsUI_.get(index);
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHideLmsUIBytes(int index) {
+        return hideLmsUI_.getByteString(index);
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public Builder setHideLmsUI(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureHideLmsUIIsMutable();
+        hideLmsUI_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public Builder addHideLmsUI(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureHideLmsUIIsMutable();
+        hideLmsUI_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public Builder addAllHideLmsUI(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureHideLmsUIIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, hideLmsUI_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public Builder clearHideLmsUI() {
+        hideLmsUI_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string hideLmsUI = 7;</code>
+       */
+      public Builder addHideLmsUIBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureHideLmsUIIsMutable();
+        hideLmsUI_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private boolean hasParent_ ;
+      /**
+       * <code>bool hasParent = 8;</code>
+       */
+      public boolean getHasParent() {
+        return hasParent_;
+      }
+      /**
+       * <code>bool hasParent = 8;</code>
+       */
+      public Builder setHasParent(boolean value) {
+        
+        hasParent_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool hasParent = 8;</code>
+       */
+      public Builder clearHasParent() {
+        
+        hasParent_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo parentItem_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> parentItemBuilder_;
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public boolean hasParentItem() {
+        return parentItemBuilder_ != null || parentItem_ != null;
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getParentItem() {
+        if (parentItemBuilder_ == null) {
+          return parentItem_ == null ? com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance() : parentItem_;
+        } else {
+          return parentItemBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public Builder setParentItem(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo value) {
+        if (parentItemBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          parentItem_ = value;
+          onChanged();
+        } else {
+          parentItemBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public Builder setParentItem(
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder builderForValue) {
+        if (parentItemBuilder_ == null) {
+          parentItem_ = builderForValue.build();
+          onChanged();
+        } else {
+          parentItemBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public Builder mergeParentItem(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo value) {
+        if (parentItemBuilder_ == null) {
+          if (parentItem_ != null) {
+            parentItem_ =
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.newBuilder(parentItem_).mergeFrom(value).buildPartial();
+          } else {
+            parentItem_ = value;
+          }
+          onChanged();
+        } else {
+          parentItemBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public Builder clearParentItem() {
+        if (parentItemBuilder_ == null) {
+          parentItem_ = null;
+          onChanged();
+        } else {
+          parentItem_ = null;
+          parentItemBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder getParentItemBuilder() {
+        
+        onChanged();
+        return getParentItemFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder getParentItemOrBuilder() {
+        if (parentItemBuilder_ != null) {
+          return parentItemBuilder_.getMessageOrBuilder();
+        } else {
+          return parentItem_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance() : parentItem_;
+        }
+      }
+      /**
+       * <code>.CourseCatalogItemInfo parentItem = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> 
+          getParentItemFieldBuilder() {
+        if (parentItemBuilder_ == null) {
+          parentItemBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder>(
+                  getParentItem(),
+                  getParentForChildren(),
+                  isClean());
+          parentItem_ = null;
+        }
+        return parentItemBuilder_;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList nextLevelItems_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder> nextLevelItemsBuilder_;
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public boolean hasNextLevelItems() {
+        return nextLevelItemsBuilder_ != null || nextLevelItems_ != null;
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getNextLevelItems() {
+        if (nextLevelItemsBuilder_ == null) {
+          return nextLevelItems_ == null ? com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.getDefaultInstance() : nextLevelItems_;
+        } else {
+          return nextLevelItemsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public Builder setNextLevelItems(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList value) {
+        if (nextLevelItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          nextLevelItems_ = value;
+          onChanged();
+        } else {
+          nextLevelItemsBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public Builder setNextLevelItems(
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder builderForValue) {
+        if (nextLevelItemsBuilder_ == null) {
+          nextLevelItems_ = builderForValue.build();
+          onChanged();
+        } else {
+          nextLevelItemsBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public Builder mergeNextLevelItems(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList value) {
+        if (nextLevelItemsBuilder_ == null) {
+          if (nextLevelItems_ != null) {
+            nextLevelItems_ =
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.newBuilder(nextLevelItems_).mergeFrom(value).buildPartial();
+          } else {
+            nextLevelItems_ = value;
+          }
+          onChanged();
+        } else {
+          nextLevelItemsBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public Builder clearNextLevelItems() {
+        if (nextLevelItemsBuilder_ == null) {
+          nextLevelItems_ = null;
+          onChanged();
+        } else {
+          nextLevelItems_ = null;
+          nextLevelItemsBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder getNextLevelItemsBuilder() {
+        
+        onChanged();
+        return getNextLevelItemsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder getNextLevelItemsOrBuilder() {
+        if (nextLevelItemsBuilder_ != null) {
+          return nextLevelItemsBuilder_.getMessageOrBuilder();
+        } else {
+          return nextLevelItems_ == null ?
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.getDefaultInstance() : nextLevelItems_;
+        }
+      }
+      /**
+       * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder> 
+          getNextLevelItemsFieldBuilder() {
+        if (nextLevelItemsBuilder_ == null) {
+          nextLevelItemsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder>(
+                  getNextLevelItems(),
+                  getParentForChildren(),
+                  isClean());
+          nextLevelItems_ = null;
+        }
+        return nextLevelItemsBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CourseCatalogItemInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:CourseCatalogItemInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CourseCatalogItemInfo>
+        PARSER = new com.google.protobuf.AbstractParser<CourseCatalogItemInfo>() {
+      @java.lang.Override
+      public CourseCatalogItemInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CourseCatalogItemInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CourseCatalogItemInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CourseCatalogItemInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CourseCatalogItemInfoListOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CourseCatalogItemInfoList)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    java.util.List<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo> 
+        getCourseCatalogItemInfoList();
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getCourseCatalogItemInfo(int index);
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    int getCourseCatalogItemInfoCount();
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> 
+        getCourseCatalogItemInfoOrBuilderList();
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder getCourseCatalogItemInfoOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code CourseCatalogItemInfoList}
+   */
+  public  static final class CourseCatalogItemInfoList extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CourseCatalogItemInfoList)
+      CourseCatalogItemInfoListOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CourseCatalogItemInfoList.newBuilder() to construct.
+    private CourseCatalogItemInfoList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CourseCatalogItemInfoList() {
+      courseCatalogItemInfo_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CourseCatalogItemInfoList(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                courseCatalogItemInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              courseCatalogItemInfo_.add(
+                  input.readMessage(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          courseCatalogItemInfo_ = java.util.Collections.unmodifiableList(courseCatalogItemInfo_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfoList_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfoList_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.class, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder.class);
+    }
+
+    public static final int COURSECATALOGITEMINFO_FIELD_NUMBER = 1;
+    private java.util.List<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo> courseCatalogItemInfo_;
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    public java.util.List<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo> getCourseCatalogItemInfoList() {
+      return courseCatalogItemInfo_;
+    }
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> 
+        getCourseCatalogItemInfoOrBuilderList() {
+      return courseCatalogItemInfo_;
+    }
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    public int getCourseCatalogItemInfoCount() {
+      return courseCatalogItemInfo_.size();
+    }
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getCourseCatalogItemInfo(int index) {
+      return courseCatalogItemInfo_.get(index);
+    }
+    /**
+     * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder getCourseCatalogItemInfoOrBuilder(
+        int index) {
+      return courseCatalogItemInfo_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < courseCatalogItemInfo_.size(); i++) {
+        output.writeMessage(1, courseCatalogItemInfo_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < courseCatalogItemInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, courseCatalogItemInfo_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList other = (com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList) obj;
+
+      boolean result = true;
+      result = result && getCourseCatalogItemInfoList()
+          .equals(other.getCourseCatalogItemInfoList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getCourseCatalogItemInfoCount() > 0) {
+        hash = (37 * hash) + COURSECATALOGITEMINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getCourseCatalogItemInfoList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CourseCatalogItemInfoList}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CourseCatalogItemInfoList)
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfoList_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfoList_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.class, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getCourseCatalogItemInfoFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (courseCatalogItemInfoBuilder_ == null) {
+          courseCatalogItemInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          courseCatalogItemInfoBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_CourseCatalogItemInfoList_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList build() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList result = new com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList(this);
+        int from_bitField0_ = bitField0_;
+        if (courseCatalogItemInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            courseCatalogItemInfo_ = java.util.Collections.unmodifiableList(courseCatalogItemInfo_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.courseCatalogItemInfo_ = courseCatalogItemInfo_;
+        } else {
+          result.courseCatalogItemInfo_ = courseCatalogItemInfoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList.getDefaultInstance()) return this;
+        if (courseCatalogItemInfoBuilder_ == null) {
+          if (!other.courseCatalogItemInfo_.isEmpty()) {
+            if (courseCatalogItemInfo_.isEmpty()) {
+              courseCatalogItemInfo_ = other.courseCatalogItemInfo_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureCourseCatalogItemInfoIsMutable();
+              courseCatalogItemInfo_.addAll(other.courseCatalogItemInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.courseCatalogItemInfo_.isEmpty()) {
+            if (courseCatalogItemInfoBuilder_.isEmpty()) {
+              courseCatalogItemInfoBuilder_.dispose();
+              courseCatalogItemInfoBuilder_ = null;
+              courseCatalogItemInfo_ = other.courseCatalogItemInfo_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              courseCatalogItemInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getCourseCatalogItemInfoFieldBuilder() : null;
+            } else {
+              courseCatalogItemInfoBuilder_.addAllMessages(other.courseCatalogItemInfo_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo> courseCatalogItemInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureCourseCatalogItemInfoIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          courseCatalogItemInfo_ = new java.util.ArrayList<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo>(courseCatalogItemInfo_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> courseCatalogItemInfoBuilder_;
+
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo> getCourseCatalogItemInfoList() {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(courseCatalogItemInfo_);
+        } else {
+          return courseCatalogItemInfoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public int getCourseCatalogItemInfoCount() {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          return courseCatalogItemInfo_.size();
+        } else {
+          return courseCatalogItemInfoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo getCourseCatalogItemInfo(int index) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          return courseCatalogItemInfo_.get(index);
+        } else {
+          return courseCatalogItemInfoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder setCourseCatalogItemInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo value) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.set(index, value);
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder setCourseCatalogItemInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder builderForValue) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder addCourseCatalogItemInfo(com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo value) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.add(value);
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder addCourseCatalogItemInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo value) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.add(index, value);
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder addCourseCatalogItemInfo(
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder builderForValue) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder addCourseCatalogItemInfo(
+          int index, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder builderForValue) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder addAllCourseCatalogItemInfo(
+          java.lang.Iterable<? extends com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo> values) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          ensureCourseCatalogItemInfoIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, courseCatalogItemInfo_);
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder clearCourseCatalogItemInfo() {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          courseCatalogItemInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public Builder removeCourseCatalogItemInfo(int index) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          ensureCourseCatalogItemInfoIsMutable();
+          courseCatalogItemInfo_.remove(index);
+          onChanged();
+        } else {
+          courseCatalogItemInfoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder getCourseCatalogItemInfoBuilder(
+          int index) {
+        return getCourseCatalogItemInfoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder getCourseCatalogItemInfoOrBuilder(
+          int index) {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          return courseCatalogItemInfo_.get(index);  } else {
+          return courseCatalogItemInfoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public java.util.List<? extends com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> 
+           getCourseCatalogItemInfoOrBuilderList() {
+        if (courseCatalogItemInfoBuilder_ != null) {
+          return courseCatalogItemInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(courseCatalogItemInfo_);
+        }
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder addCourseCatalogItemInfoBuilder() {
+        return getCourseCatalogItemInfoFieldBuilder().addBuilder(
+            com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder addCourseCatalogItemInfoBuilder(
+          int index) {
+        return getCourseCatalogItemInfoFieldBuilder().addBuilder(
+            index, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .CourseCatalogItemInfo courseCatalogItemInfo = 1;</code>
+       */
+      public java.util.List<com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder> 
+           getCourseCatalogItemInfoBuilderList() {
+        return getCourseCatalogItemInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder> 
+          getCourseCatalogItemInfoFieldBuilder() {
+        if (courseCatalogItemInfoBuilder_ == null) {
+          courseCatalogItemInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfo.Builder, com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoOrBuilder>(
+                  courseCatalogItemInfo_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          courseCatalogItemInfo_ = null;
+        }
+        return courseCatalogItemInfoBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CourseCatalogItemInfoList)
+    }
+
+    // @@protoc_insertion_point(class_scope:CourseCatalogItemInfoList)
+    private static final com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CourseCatalogItemInfoList>
+        PARSER = new com.google.protobuf.AbstractParser<CourseCatalogItemInfoList>() {
+      @java.lang.Override
+      public CourseCatalogItemInfoList parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CourseCatalogItemInfoList(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CourseCatalogItemInfoList> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CourseCatalogItemInfoList> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoList getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Image_descriptor;
   private static final 
@@ -40076,6 +43433,26 @@ public final class Info {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ScormInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseCatalogInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseCatalogInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseCatalogInfo_ItemsEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseCatalogInfo_ItemsEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseCatalogItemInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseCatalogItemInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CourseCatalogItemInfoList_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CourseCatalogItemInfoList_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -40244,14 +43621,28 @@ public final class Info {
       "\024subscribedCourseInfo\030\007 \001(\0132\013.CourseInfo" +
       "\"`\n\tScormInfo\022\017\n\007scormId\030\001 \001(\022\022\022\n\ncreate" +
       "Time\030\002 \001(\006\022\022\n\nupdateTime\030\003 \001(\006\022\014\n\004path\030\004" +
-      " \001(\t\022\014\n\004data\030\005 \001(\014*$\n\010UserType\022\013\n\007Teache" +
-      "r\020\000\022\013\n\007Student\020\001*g\n\014QuestionType\022\021\n\rSing" +
-      "leFilling\020\000\022\023\n\017MultipleFilling\020\001\022\020\n\014Sing" +
-      "leChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t\n\005Essay\020" +
-      "\004*L\n\021CourseCommentType\022\r\n\tVERY_GOOD\020\000\022\010\n" +
-      "\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020\004B" +
-      "4\n,com.corkili.learningserver.generate.p" +
-      "rotobufB\004Infob\006proto3"
+      " \001(\t\022\014\n\004data\030\005 \001(\014\"\310\001\n\021CourseCatalogInfo" +
+      "\022\025\n\rdefaultItemId\030\001 \001(\t\022\020\n\010maxLevel\030\002 \001(" +
+      "\005\022\022\n\nitemNumber\030\003 \001(\005\022,\n\005items\030\004 \003(\0132\035.C" +
+      "ourseCatalogInfo.ItemsEntry\032H\n\nItemsEntr" +
+      "y\022\013\n\003key\030\001 \001(\005\022)\n\005value\030\002 \001(\0132\032.CourseCa" +
+      "talogItemInfoList:\0028\001\"\203\002\n\025CourseCatalogI" +
+      "temInfo\022\r\n\005level\030\001 \001(\005\022\r\n\005index\030\002 \001(\005\022\016\n" +
+      "\006itemId\030\003 \001(\t\022\021\n\titemTitle\030\004 \001(\t\022\022\n\nsele" +
+      "ctable\030\005 \001(\010\022\017\n\007visible\030\006 \001(\010\022\021\n\thideLms" +
+      "UI\030\007 \003(\t\022\021\n\thasParent\030\010 \001(\010\022*\n\nparentIte" +
+      "m\030\t \001(\0132\026.CourseCatalogItemInfo\0222\n\016nextL" +
+      "evelItems\030\n \001(\0132\032.CourseCatalogItemInfoL" +
+      "ist\"R\n\031CourseCatalogItemInfoList\0225\n\025cour" +
+      "seCatalogItemInfo\030\001 \003(\0132\026.CourseCatalogI" +
+      "temInfo*$\n\010UserType\022\013\n\007Teacher\020\000\022\013\n\007Stud" +
+      "ent\020\001*g\n\014QuestionType\022\021\n\rSingleFilling\020\000" +
+      "\022\023\n\017MultipleFilling\020\001\022\020\n\014SingleChoice\020\002\022" +
+      "\022\n\016MultipleChoice\020\003\022\t\n\005Essay\020\004*L\n\021Course" +
+      "CommentType\022\r\n\tVERY_GOOD\020\000\022\010\n\004GOOD\020\001\022\007\n\003" +
+      "MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020\004B4\n,com.cork" +
+      "ili.learningserver.generate.protobufB\004In" +
+      "fob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -40535,6 +43926,30 @@ public final class Info {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ScormInfo_descriptor,
         new java.lang.String[] { "ScormId", "CreateTime", "UpdateTime", "Path", "Data", });
+    internal_static_CourseCatalogInfo_descriptor =
+      getDescriptor().getMessageTypes().get(37);
+    internal_static_CourseCatalogInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseCatalogInfo_descriptor,
+        new java.lang.String[] { "DefaultItemId", "MaxLevel", "ItemNumber", "Items", });
+    internal_static_CourseCatalogInfo_ItemsEntry_descriptor =
+      internal_static_CourseCatalogInfo_descriptor.getNestedTypes().get(0);
+    internal_static_CourseCatalogInfo_ItemsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseCatalogInfo_ItemsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_CourseCatalogItemInfo_descriptor =
+      getDescriptor().getMessageTypes().get(38);
+    internal_static_CourseCatalogItemInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseCatalogItemInfo_descriptor,
+        new java.lang.String[] { "Level", "Index", "ItemId", "ItemTitle", "Selectable", "Visible", "HideLmsUI", "HasParent", "ParentItem", "NextLevelItems", });
+    internal_static_CourseCatalogItemInfoList_descriptor =
+      getDescriptor().getMessageTypes().get(39);
+    internal_static_CourseCatalogItemInfoList_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CourseCatalogItemInfoList_descriptor,
+        new java.lang.String[] { "CourseCatalogItemInfo", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

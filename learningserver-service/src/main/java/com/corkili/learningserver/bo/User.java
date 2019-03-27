@@ -1,17 +1,18 @@
 package com.corkili.learningserver.bo;
 
-import java.util.Date;
-
+import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-public class User implements BusinessObject {
+public class User implements BusinessObject, LMSLearnerInfo {
 
     private Long id;
 
@@ -48,6 +49,26 @@ public class User implements BusinessObject {
 
     public boolean isStudent() {
         return userType == Type.Student;
+    }
+
+    @Override
+    public String getLearnerID() {
+        return id == null ? "" : String.valueOf(id);
+    }
+
+    @Override
+    public void setLearnerID(String learnerID) {
+
+    }
+
+    @Override
+    public String getLearnerName() {
+        return username;
+    }
+
+    @Override
+    public void setLearnerName(String learnerName) {
+
     }
 
     public enum Type {

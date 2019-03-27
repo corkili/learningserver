@@ -9,4 +9,6 @@ public interface ScormService extends Service<Scorm, com.corkili.learningserver.
 
     ServiceResult deleteScorm(Long scormId);
 
+    ServiceResult queryCatalog(Long scormId);
+
 }

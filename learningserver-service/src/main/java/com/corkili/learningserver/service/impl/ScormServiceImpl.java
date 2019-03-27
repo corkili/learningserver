@@ -1,6 +1,8 @@
 package com.corkili.learningserver.service.impl;
 
+import com.corkili.learningserver.bo.CourseCatalog;
 import com.corkili.learningserver.common.ScormZipUtils;
+import com.corkili.learningserver.scorm.SCORM;
 import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
@@ -29,6 +31,8 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     @Autowired
     private ScormRepository scormRepository;
 
+    private SCORM scormManager;
+
     private SCORMPackageManager scormPackageManager;
 
     private SCORMRuntimeManager scormRuntimeManager;
@@ -36,9 +40,10 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     private SCORMSeqNavManager scormSeqNavManager;
 
     public ScormServiceImpl() {
-        scormPackageManager = SCORMPackageManager.getInstance();
-        scormRuntimeManager = SCORMRuntimeManager.getInstance();
-        scormSeqNavManager = SCORMSeqNavManager.getInstance();
+        scormManager = SCORM.getInstance();
+        scormPackageManager = scormManager.getPackageManager();
+        scormRuntimeManager = scormManager.getRuntimeManager();
+        scormSeqNavManager = scormManager.getSnManager();
     }
 
     @Override
@@ -97,5 +102,21 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
             return recordWarnAndCreateSuccessResultWithMessage("delete scorm success");
         }
         return ServiceResult.successResultWithMesage("delete scorm success");
+    }
+
+    @Override
+    public ServiceResult queryCatalog(Long scormId) {
+        if (scormId == null || !scormRepository.existsById(scormId)) {
+            return recordErrorAndCreateFailResultWithMessage("query catalog error: scorm [{}] not exist", scormId);
+        }
+        ContentPackage contentPackage = scormPackageManager.launch(String.valueOf(scormId));
+        if (contentPackage == null) {
+            return recordErrorAndCreateFailResultWithMessage("query catalog error: launch scorm package failed");
+        }
+        CourseCatalog courseCatalog = CourseCatalog.generateFromContentPackage(contentPackage);
+        if (courseCatalog == null) {
+            return recordErrorAndCreateFailResultWithMessage("query catalog error: generate course catalog failed");
+        }
+        return ServiceResult.successResult("query catalog success", CourseCatalog.class, courseCatalog);
     }
 }

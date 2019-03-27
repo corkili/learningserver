@@ -348,3 +348,27 @@ message ScormInfo {
     string path = 4;
     bytes data = 5;
 }
+
+message CourseCatalogInfo {
+    string defaultItemId = 1;
+    int32 maxLevel = 2;
+    int32 itemNumber = 3;
+    map<int32, CourseCatalogItemInfoList> items = 4;
+}
+
+message CourseCatalogItemInfo {
+    int32 level = 1;
+    int32 index = 2;
+    string itemId = 3;
+    string itemTitle = 4;
+    bool selectable = 5;
+    bool visible = 6;
+    repeated string hideLmsUI = 7;
+    bool hasParent = 8;
+    CourseCatalogItemInfo parentItem = 9;
+    CourseCatalogItemInfoList nextLevelItems = 10;
+}
+
+message CourseCatalogItemInfoList {
+    repeated CourseCatalogItemInfo courseCatalogItemInfo = 1;
+}
