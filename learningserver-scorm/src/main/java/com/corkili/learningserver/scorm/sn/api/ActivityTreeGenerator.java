@@ -1,16 +1,5 @@
 package com.corkili.learningserver.scorm.sn.api;
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.scorm.cam.model.AdlseqMapInfo;
 import com.corkili.learningserver.scorm.cam.model.AdlseqObjective;
 import com.corkili.learningserver.scorm.cam.model.CompletionThreshold;
@@ -34,6 +23,7 @@ import com.corkili.learningserver.scorm.cam.model.Sequencing;
 import com.corkili.learningserver.scorm.cam.model.SequencingCollection;
 import com.corkili.learningserver.scorm.cam.model.SequencingRules;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
 import com.corkili.learningserver.scorm.sn.model.datatype.Vocabulary;
@@ -51,28 +41,36 @@ import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescri
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
-import com.corkili.learningserver.scorm.common.ID;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
+import java.time.Duration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public class ActivityTreeGenerator {
 
     private static LMSPersistDriverManager lmsPersistDriverManager = LMSPersistDriverManager.getInstance();
 
-    public static Map<ID, ActivityTree> deriveActivityTreesFrom(
-            ContentPackage contentPackage, String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo) {
-        Map<ID, ActivityTree> map = new HashMap<>();
+    public static ActivityTree deriveActivityTreesFrom(ContentPackage contentPackage, String lmsContentPackageID,
+                                                       LMSLearnerInfo lmsLearnerInfo, String organizationId) {
         SequencingCollection sequencingCollection = contentPackage.getManifest().getSequencingCollection();
         for (Organization organization : contentPackage.getManifest().getOrganizations().getOrganizationList()) {
-            ID id = new ID(organization.getIdentifier().getValue(), lmsContentPackageID, lmsLearnerInfo.getLearnerID());
-            ActivityTree activityTree = deriveActivityTreeFrom(organization, sequencingCollection, id);
-            if (activityTree == null) {
-                log.error("derive activity tree error - activity tree \"{}\"", id);
-            } else {
-                initAvailableChildren(activityTree);
-                map.put(id, activityTree);
+            if (StringUtils.equals(organization.getIdentifier().getValue(), organizationId)) {
+                ID id = new ID(organization.getIdentifier().getValue(), lmsContentPackageID, lmsLearnerInfo.getLearnerID());
+                ActivityTree activityTree = deriveActivityTreeFrom(organization, sequencingCollection, id);
+                if (activityTree == null) {
+                    log.error("derive activity tree error - activity tree \"{}\"", id);
+                    break;
+                } else {
+                    initAvailableChildren(activityTree);
+                    return activityTree;
+                }
             }
         }
-        return map;
+        return null;
     }
 
     private static ActivityTree deriveActivityTreeFrom(

@@ -372,3 +372,26 @@ message CourseCatalogItemInfo {
 message CourseCatalogItemInfoList {
     repeated CourseCatalogItemInfo courseCatalogItemInfo = 1;
 }
+
+message DeliveryContentInfo {
+    string itemId = 1;
+    string basePath = 2;
+    string entry = 3;
+    bool hasParameters = 4;
+    string parameters = 5;
+    repeated string content = 6;
+}
+
+enum NavigationEventType {
+    Start = 0;
+    ResumeAll = 1;
+    Continue = 2;
+    Previous = 3;
+    Choose = 4;
+    Jump = 5;
+    Abandon = 6;
+    AbandonAll = 7;
+    SuspendAll = 8;
+    UnqualifiedExit = 9;
+    ExitAll = 10;
+}

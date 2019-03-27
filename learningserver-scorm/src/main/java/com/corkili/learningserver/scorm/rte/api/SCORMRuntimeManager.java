@@ -1,18 +1,17 @@
 package com.corkili.learningserver.scorm.rte.api;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class SCORMRuntimeManager {
@@ -40,10 +39,10 @@ public class SCORMRuntimeManager {
     }
 
     public boolean launch(String lmsContentPackageID, String activityItemID, LMSLearnerInfo lmsLearnerInfo) {
-        return launch(lmsContentPackageID, lmsLearnerInfo, activityItemID, false);
+        return launch(lmsContentPackageID, activityItemID, lmsLearnerInfo, false);
     }
 
-    public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo, String activityItemID, boolean reloadIfPresent) {
+    public boolean launch(String lmsContentPackageID, String activityItemID, LMSLearnerInfo lmsLearnerInfo, boolean reloadIfPresent) {
         ContentPackage contentPackage = scormPackageManager.launch(lmsContentPackageID, reloadIfPresent);
         if (contentPackage == null) {
             return false;

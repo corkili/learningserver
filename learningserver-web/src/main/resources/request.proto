@@ -458,3 +458,11 @@ message CourseCatalogQueryRequest {
     BaseRequest request = 1;
     sint64 scormId = 2;
 }
+
+message NavigationProcessRequest {
+    BaseRequest request = 1;
+    NavigationEventType navigationEventType = 2;
+    string targetItemId = 3;
+    sint64 scormId = 4;
+    string level1CatalogItemId = 5;
+}

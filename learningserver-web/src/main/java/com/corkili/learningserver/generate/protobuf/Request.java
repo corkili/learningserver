@@ -61445,6 +61445,1045 @@ public final class Request {
 
   }
 
+  public interface NavigationProcessRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:NavigationProcessRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    boolean hasRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest();
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder();
+
+    /**
+     * <code>.NavigationEventType navigationEventType = 2;</code>
+     */
+    int getNavigationEventTypeValue();
+    /**
+     * <code>.NavigationEventType navigationEventType = 2;</code>
+     */
+    com.corkili.learningserver.generate.protobuf.Info.NavigationEventType getNavigationEventType();
+
+    /**
+     * <code>string targetItemId = 3;</code>
+     */
+    java.lang.String getTargetItemId();
+    /**
+     * <code>string targetItemId = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getTargetItemIdBytes();
+
+    /**
+     * <code>sint64 scormId = 4;</code>
+     */
+    long getScormId();
+
+    /**
+     * <code>string level1CatalogItemId = 5;</code>
+     */
+    java.lang.String getLevel1CatalogItemId();
+    /**
+     * <code>string level1CatalogItemId = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getLevel1CatalogItemIdBytes();
+  }
+  /**
+   * Protobuf type {@code NavigationProcessRequest}
+   */
+  public  static final class NavigationProcessRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:NavigationProcessRequest)
+      NavigationProcessRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use NavigationProcessRequest.newBuilder() to construct.
+    private NavigationProcessRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private NavigationProcessRequest() {
+      navigationEventType_ = 0;
+      targetItemId_ = "";
+      scormId_ = 0L;
+      level1CatalogItemId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NavigationProcessRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder subBuilder = null;
+              if (request_ != null) {
+                subBuilder = request_.toBuilder();
+              }
+              request_ = input.readMessage(com.corkili.learningserver.generate.protobuf.Request.BaseRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(request_);
+                request_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+
+              navigationEventType_ = rawValue;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              targetItemId_ = s;
+              break;
+            }
+            case 32: {
+
+              scormId_ = input.readSInt64();
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              level1CatalogItemId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_NavigationProcessRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Request.internal_static_NavigationProcessRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.class, com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.Builder.class);
+    }
+
+    public static final int REQUEST_FIELD_NUMBER = 1;
+    private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_;
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public boolean hasRequest() {
+      return request_ != null;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+      return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+    }
+    /**
+     * <code>.BaseRequest request = 1;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+      return getRequest();
+    }
+
+    public static final int NAVIGATIONEVENTTYPE_FIELD_NUMBER = 2;
+    private int navigationEventType_;
+    /**
+     * <code>.NavigationEventType navigationEventType = 2;</code>
+     */
+    public int getNavigationEventTypeValue() {
+      return navigationEventType_;
+    }
+    /**
+     * <code>.NavigationEventType navigationEventType = 2;</code>
+     */
+    public com.corkili.learningserver.generate.protobuf.Info.NavigationEventType getNavigationEventType() {
+      @SuppressWarnings("deprecation")
+      com.corkili.learningserver.generate.protobuf.Info.NavigationEventType result = com.corkili.learningserver.generate.protobuf.Info.NavigationEventType.valueOf(navigationEventType_);
+      return result == null ? com.corkili.learningserver.generate.protobuf.Info.NavigationEventType.UNRECOGNIZED : result;
+    }
+
+    public static final int TARGETITEMID_FIELD_NUMBER = 3;
+    private volatile java.lang.Object targetItemId_;
+    /**
+     * <code>string targetItemId = 3;</code>
+     */
+    public java.lang.String getTargetItemId() {
+      java.lang.Object ref = targetItemId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        targetItemId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string targetItemId = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTargetItemIdBytes() {
+      java.lang.Object ref = targetItemId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        targetItemId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SCORMID_FIELD_NUMBER = 4;
+    private long scormId_;
+    /**
+     * <code>sint64 scormId = 4;</code>
+     */
+    public long getScormId() {
+      return scormId_;
+    }
+
+    public static final int LEVEL1CATALOGITEMID_FIELD_NUMBER = 5;
+    private volatile java.lang.Object level1CatalogItemId_;
+    /**
+     * <code>string level1CatalogItemId = 5;</code>
+     */
+    public java.lang.String getLevel1CatalogItemId() {
+      java.lang.Object ref = level1CatalogItemId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        level1CatalogItemId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string level1CatalogItemId = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLevel1CatalogItemIdBytes() {
+      java.lang.Object ref = level1CatalogItemId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        level1CatalogItemId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (request_ != null) {
+        output.writeMessage(1, getRequest());
+      }
+      if (navigationEventType_ != com.corkili.learningserver.generate.protobuf.Info.NavigationEventType.Start.getNumber()) {
+        output.writeEnum(2, navigationEventType_);
+      }
+      if (!getTargetItemIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, targetItemId_);
+      }
+      if (scormId_ != 0L) {
+        output.writeSInt64(4, scormId_);
+      }
+      if (!getLevel1CatalogItemIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, level1CatalogItemId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (request_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getRequest());
+      }
+      if (navigationEventType_ != com.corkili.learningserver.generate.protobuf.Info.NavigationEventType.Start.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, navigationEventType_);
+      }
+      if (!getTargetItemIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, targetItemId_);
+      }
+      if (scormId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(4, scormId_);
+      }
+      if (!getLevel1CatalogItemIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, level1CatalogItemId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest other = (com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest) obj;
+
+      boolean result = true;
+      result = result && (hasRequest() == other.hasRequest());
+      if (hasRequest()) {
+        result = result && getRequest()
+            .equals(other.getRequest());
+      }
+      result = result && navigationEventType_ == other.navigationEventType_;
+      result = result && getTargetItemId()
+          .equals(other.getTargetItemId());
+      result = result && (getScormId()
+          == other.getScormId());
+      result = result && getLevel1CatalogItemId()
+          .equals(other.getLevel1CatalogItemId());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasRequest()) {
+        hash = (37 * hash) + REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRequest().hashCode();
+      }
+      hash = (37 * hash) + NAVIGATIONEVENTTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + navigationEventType_;
+      hash = (37 * hash) + TARGETITEMID_FIELD_NUMBER;
+      hash = (53 * hash) + getTargetItemId().hashCode();
+      hash = (37 * hash) + SCORMID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getScormId());
+      hash = (37 * hash) + LEVEL1CATALOGITEMID_FIELD_NUMBER;
+      hash = (53 * hash) + getLevel1CatalogItemId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code NavigationProcessRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:NavigationProcessRequest)
+        com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_NavigationProcessRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_NavigationProcessRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.class, com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (requestBuilder_ == null) {
+          request_ = null;
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+        navigationEventType_ = 0;
+
+        targetItemId_ = "";
+
+        scormId_ = 0L;
+
+        level1CatalogItemId_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.internal_static_NavigationProcessRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest build() {
+        com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest result = new com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest(this);
+        if (requestBuilder_ == null) {
+          result.request_ = request_;
+        } else {
+          result.request_ = requestBuilder_.build();
+        }
+        result.navigationEventType_ = navigationEventType_;
+        result.targetItemId_ = targetItemId_;
+        result.scormId_ = scormId_;
+        result.level1CatalogItemId_ = level1CatalogItemId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest.getDefaultInstance()) return this;
+        if (other.hasRequest()) {
+          mergeRequest(other.getRequest());
+        }
+        if (other.navigationEventType_ != 0) {
+          setNavigationEventTypeValue(other.getNavigationEventTypeValue());
+        }
+        if (!other.getTargetItemId().isEmpty()) {
+          targetItemId_ = other.targetItemId_;
+          onChanged();
+        }
+        if (other.getScormId() != 0L) {
+          setScormId(other.getScormId());
+        }
+        if (!other.getLevel1CatalogItemId().isEmpty()) {
+          level1CatalogItemId_ = other.level1CatalogItemId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.corkili.learningserver.generate.protobuf.Request.BaseRequest request_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> requestBuilder_;
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public boolean hasRequest() {
+        return requestBuilder_ != null || request_ != null;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest getRequest() {
+        if (requestBuilder_ == null) {
+          return request_ == null ? com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        } else {
+          return requestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder setRequest(
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder builderForValue) {
+        if (requestBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          requestBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder mergeRequest(com.corkili.learningserver.generate.protobuf.Request.BaseRequest value) {
+        if (requestBuilder_ == null) {
+          if (request_ != null) {
+            request_ =
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.newBuilder(request_).mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          requestBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public Builder clearRequest() {
+        if (requestBuilder_ == null) {
+          request_ = null;
+          onChanged();
+        } else {
+          request_ = null;
+          requestBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder getRequestBuilder() {
+        
+        onChanged();
+        return getRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder getRequestOrBuilder() {
+        if (requestBuilder_ != null) {
+          return requestBuilder_.getMessageOrBuilder();
+        } else {
+          return request_ == null ?
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest.getDefaultInstance() : request_;
+        }
+      }
+      /**
+       * <code>.BaseRequest request = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder> 
+          getRequestFieldBuilder() {
+        if (requestBuilder_ == null) {
+          requestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.corkili.learningserver.generate.protobuf.Request.BaseRequest, com.corkili.learningserver.generate.protobuf.Request.BaseRequest.Builder, com.corkili.learningserver.generate.protobuf.Request.BaseRequestOrBuilder>(
+                  getRequest(),
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        return requestBuilder_;
+      }
+
+      private int navigationEventType_ = 0;
+      /**
+       * <code>.NavigationEventType navigationEventType = 2;</code>
+       */
+      public int getNavigationEventTypeValue() {
+        return navigationEventType_;
+      }
+      /**
+       * <code>.NavigationEventType navigationEventType = 2;</code>
+       */
+      public Builder setNavigationEventTypeValue(int value) {
+        navigationEventType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.NavigationEventType navigationEventType = 2;</code>
+       */
+      public com.corkili.learningserver.generate.protobuf.Info.NavigationEventType getNavigationEventType() {
+        @SuppressWarnings("deprecation")
+        com.corkili.learningserver.generate.protobuf.Info.NavigationEventType result = com.corkili.learningserver.generate.protobuf.Info.NavigationEventType.valueOf(navigationEventType_);
+        return result == null ? com.corkili.learningserver.generate.protobuf.Info.NavigationEventType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.NavigationEventType navigationEventType = 2;</code>
+       */
+      public Builder setNavigationEventType(com.corkili.learningserver.generate.protobuf.Info.NavigationEventType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        navigationEventType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.NavigationEventType navigationEventType = 2;</code>
+       */
+      public Builder clearNavigationEventType() {
+        
+        navigationEventType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object targetItemId_ = "";
+      /**
+       * <code>string targetItemId = 3;</code>
+       */
+      public java.lang.String getTargetItemId() {
+        java.lang.Object ref = targetItemId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          targetItemId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string targetItemId = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTargetItemIdBytes() {
+        java.lang.Object ref = targetItemId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          targetItemId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string targetItemId = 3;</code>
+       */
+      public Builder setTargetItemId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        targetItemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string targetItemId = 3;</code>
+       */
+      public Builder clearTargetItemId() {
+        
+        targetItemId_ = getDefaultInstance().getTargetItemId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string targetItemId = 3;</code>
+       */
+      public Builder setTargetItemIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        targetItemId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long scormId_ ;
+      /**
+       * <code>sint64 scormId = 4;</code>
+       */
+      public long getScormId() {
+        return scormId_;
+      }
+      /**
+       * <code>sint64 scormId = 4;</code>
+       */
+      public Builder setScormId(long value) {
+        
+        scormId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>sint64 scormId = 4;</code>
+       */
+      public Builder clearScormId() {
+        
+        scormId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object level1CatalogItemId_ = "";
+      /**
+       * <code>string level1CatalogItemId = 5;</code>
+       */
+      public java.lang.String getLevel1CatalogItemId() {
+        java.lang.Object ref = level1CatalogItemId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          level1CatalogItemId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string level1CatalogItemId = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLevel1CatalogItemIdBytes() {
+        java.lang.Object ref = level1CatalogItemId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          level1CatalogItemId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string level1CatalogItemId = 5;</code>
+       */
+      public Builder setLevel1CatalogItemId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        level1CatalogItemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string level1CatalogItemId = 5;</code>
+       */
+      public Builder clearLevel1CatalogItemId() {
+        
+        level1CatalogItemId_ = getDefaultInstance().getLevel1CatalogItemId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string level1CatalogItemId = 5;</code>
+       */
+      public Builder setLevel1CatalogItemIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        level1CatalogItemId_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:NavigationProcessRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:NavigationProcessRequest)
+    private static final com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<NavigationProcessRequest>
+        PARSER = new com.google.protobuf.AbstractParser<NavigationProcessRequest>() {
+      @java.lang.Override
+      public NavigationProcessRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new NavigationProcessRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<NavigationProcessRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NavigationProcessRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_BaseRequest_descriptor;
   private static final 
@@ -61820,6 +62859,11 @@ public final class Request {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CourseCatalogQueryRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NavigationProcessRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NavigationProcessRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -62061,9 +63105,13 @@ public final class Request {
       "BaseRequest\022\020\n\010courseId\030\002 \001(\022\022\020\n\010isDelet" +
       "e\030\003 \001(\010\022\020\n\010filename\030\004 \001(\t\022\014\n\004data\030\005 \001(\014\"" +
       "K\n\031CourseCatalogQueryRequest\022\035\n\007request\030" +
-      "\001 \001(\0132\014.BaseRequest\022\017\n\007scormId\030\002 \001(\022B7\n," +
-      "com.corkili.learningserver.generate.prot" +
-      "obufB\007Requestb\006proto3"
+      "\001 \001(\0132\014.BaseRequest\022\017\n\007scormId\030\002 \001(\022\"\260\001\n" +
+      "\030NavigationProcessRequest\022\035\n\007request\030\001 \001" +
+      "(\0132\014.BaseRequest\0221\n\023navigationEventType\030" +
+      "\002 \001(\0162\024.NavigationEventType\022\024\n\014targetIte" +
+      "mId\030\003 \001(\t\022\017\n\007scormId\030\004 \001(\022\022\033\n\023level1Cata" +
+      "logItemId\030\005 \001(\tB7\n,com.corkili.learnings" +
+      "erver.generate.protobufB\007Requestb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -62528,6 +63576,12 @@ public final class Request {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseCatalogQueryRequest_descriptor,
         new java.lang.String[] { "Request", "ScormId", });
+    internal_static_NavigationProcessRequest_descriptor =
+      getDescriptor().getMessageTypes().get(63);
+    internal_static_NavigationProcessRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NavigationProcessRequest_descriptor,
+        new java.lang.String[] { "Request", "NavigationEventType", "TargetItemId", "ScormId", "Level1CatalogItemId", });
     com.corkili.learningserver.generate.protobuf.Info.getDescriptor();
   }
 

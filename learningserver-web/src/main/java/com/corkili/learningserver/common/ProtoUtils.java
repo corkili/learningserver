@@ -30,6 +30,7 @@ import com.corkili.learningserver.generate.protobuf.Info.CourseWorkInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkQuestionInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSimpleInfo;
 import com.corkili.learningserver.generate.protobuf.Info.CourseWorkSubmittedAnswer;
+import com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.EssayAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.EssaySubmittedAnswer;
 import com.corkili.learningserver.generate.protobuf.Info.ExamInfo;
@@ -63,8 +64,10 @@ import com.corkili.learningserver.generate.protobuf.Info.TopicCommentInfo;
 import com.corkili.learningserver.generate.protobuf.Info.TopicReplyInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserInfo;
 import com.corkili.learningserver.generate.protobuf.Info.UserType;
+import com.corkili.learningserver.scorm.cam.model.DeliveryContent;
 import com.google.protobuf.ByteString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,6 +80,20 @@ import java.util.Map.Entry;
 
 @Slf4j
 public class ProtoUtils {
+
+    public static DeliveryContentInfo generateDeliveryContentInfo(DeliveryContent deliveryContent) {
+        if (deliveryContent == null) {
+            return DeliveryContentInfo.getDefaultInstance();
+        }
+        return DeliveryContentInfo.newBuilder()
+                .setItemId(deliveryContent.getItemId())
+                .setBasePath(deliveryContent.getBasePath())
+                .setEntry(deliveryContent.getEntry())
+                .setHasParameters(StringUtils.isNotBlank(deliveryContent.getParameters()))
+                .setParameters(deliveryContent.getParameters() == null ? "" : deliveryContent.getParameters())
+                .addAllContent(deliveryContent.getContent().getPhysicalFilePathList())
+                .build();
+    }
 
     public static CourseCatalogInfo generateCourseCatalogInfo(CourseCatalog courseCatalog) {
         if (courseCatalog == null) {

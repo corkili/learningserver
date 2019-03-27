@@ -1,25 +1,29 @@
 package com.corkili.learningserver.service.impl;
 
 import com.corkili.learningserver.bo.CourseCatalog;
+import com.corkili.learningserver.bo.Scorm;
+import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ScormZipUtils;
+import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.repo.ScormRepository;
 import com.corkili.learningserver.scorm.SCORM;
+import com.corkili.learningserver.scorm.SCORMResult;
 import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
+import com.corkili.learningserver.scorm.cam.model.DeliveryContent;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
 import com.corkili.learningserver.scorm.sn.api.SCORMSeqNavManager;
+import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
+import com.corkili.learningserver.service.ScormService;
+import com.corkili.learningserver.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import lombok.extern.slf4j.Slf4j;
-
-import com.corkili.learningserver.bo.Scorm;
-import com.corkili.learningserver.common.ServiceResult;
-import com.corkili.learningserver.repo.ScormRepository;
-import com.corkili.learningserver.service.ScormService;
 
 import java.util.Optional;
 
@@ -30,6 +34,9 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
 
     @Autowired
     private ScormRepository scormRepository;
+
+    @Autowired
+    private UserService userService;
 
     private SCORM scormManager;
 
@@ -118,5 +125,34 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
             return recordErrorAndCreateFailResultWithMessage("query catalog error: generate course catalog failed");
         }
         return ServiceResult.successResult("query catalog success", CourseCatalog.class, courseCatalog);
+    }
+
+    @Override
+    public ServiceResult processNavigationEvent(NavigationEvent navigationEvent, Long userId, Long scormId, String level1CatalogItemId) {
+        Optional<User> userOptional = userService.retrieve(userId);
+        if (userId == null || !userOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("process navigation event error: user [{}] not exist", userId);
+        }
+        if (scormId == null || !scormRepository.existsById(scormId)) {
+            return recordErrorAndCreateFailResultWithMessage("process navigation event error: scorm [{}] not exist", scormId);
+        }
+        User user = userOptional.get();
+        if (!scormSeqNavManager.launch(String.valueOf(scormId), user, level1CatalogItemId)) {
+            return recordErrorAndCreateFailResultWithMessage("process navigation event error: launch sn data error");
+        }
+        SCORMResult scormResult = scormManager.process(navigationEvent, new ID(level1CatalogItemId, String.valueOf(scormId), String.valueOf(user.getId())));
+        if (!scormResult.isSuccess()) {
+            return recordErrorAndCreateFailResultWithMessage("process navigation event error: {}", scormResult.getErrorMsg());
+        }
+        DeliveryContent deliveryContent = scormResult.getDeliveryContent();
+        if (deliveryContent != null && scormResult.getDeliveryActivity() != null) {
+            if (!scormRuntimeManager.launch(String.valueOf(scormId), deliveryContent.getItemId(), user, true)) {
+                return recordErrorAndCreateFailResultWithMessage("process navigation event error: launch runtime data error");
+            }
+            if (!scormManager.mapTrackingInfoToRuntimeData(scormResult.getDeliveryActivity())) {
+                return recordErrorAndCreateFailResultWithMessage("process navigation event error: init runtime data error");
+            }
+        }
+        return ServiceResult.successResult("process navigation event success", DeliveryContent.class, deliveryContent);
     }
 }

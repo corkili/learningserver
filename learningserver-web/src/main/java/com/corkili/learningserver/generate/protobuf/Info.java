@@ -362,6 +362,185 @@ public final class Info {
     // @@protoc_insertion_point(enum_scope:CourseCommentType)
   }
 
+  /**
+   * Protobuf enum {@code NavigationEventType}
+   */
+  public enum NavigationEventType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>Start = 0;</code>
+     */
+    Start(0),
+    /**
+     * <code>ResumeAll = 1;</code>
+     */
+    ResumeAll(1),
+    /**
+     * <code>Continue = 2;</code>
+     */
+    Continue(2),
+    /**
+     * <code>Previous = 3;</code>
+     */
+    Previous(3),
+    /**
+     * <code>Choose = 4;</code>
+     */
+    Choose(4),
+    /**
+     * <code>Jump = 5;</code>
+     */
+    Jump(5),
+    /**
+     * <code>Abandon = 6;</code>
+     */
+    Abandon(6),
+    /**
+     * <code>AbandonAll = 7;</code>
+     */
+    AbandonAll(7),
+    /**
+     * <code>SuspendAll = 8;</code>
+     */
+    SuspendAll(8),
+    /**
+     * <code>UnqualifiedExit = 9;</code>
+     */
+    UnqualifiedExit(9),
+    /**
+     * <code>ExitAll = 10;</code>
+     */
+    ExitAll(10),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>Start = 0;</code>
+     */
+    public static final int Start_VALUE = 0;
+    /**
+     * <code>ResumeAll = 1;</code>
+     */
+    public static final int ResumeAll_VALUE = 1;
+    /**
+     * <code>Continue = 2;</code>
+     */
+    public static final int Continue_VALUE = 2;
+    /**
+     * <code>Previous = 3;</code>
+     */
+    public static final int Previous_VALUE = 3;
+    /**
+     * <code>Choose = 4;</code>
+     */
+    public static final int Choose_VALUE = 4;
+    /**
+     * <code>Jump = 5;</code>
+     */
+    public static final int Jump_VALUE = 5;
+    /**
+     * <code>Abandon = 6;</code>
+     */
+    public static final int Abandon_VALUE = 6;
+    /**
+     * <code>AbandonAll = 7;</code>
+     */
+    public static final int AbandonAll_VALUE = 7;
+    /**
+     * <code>SuspendAll = 8;</code>
+     */
+    public static final int SuspendAll_VALUE = 8;
+    /**
+     * <code>UnqualifiedExit = 9;</code>
+     */
+    public static final int UnqualifiedExit_VALUE = 9;
+    /**
+     * <code>ExitAll = 10;</code>
+     */
+    public static final int ExitAll_VALUE = 10;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static NavigationEventType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static NavigationEventType forNumber(int value) {
+      switch (value) {
+        case 0: return Start;
+        case 1: return ResumeAll;
+        case 2: return Continue;
+        case 3: return Previous;
+        case 4: return Choose;
+        case 5: return Jump;
+        case 6: return Abandon;
+        case 7: return AbandonAll;
+        case 8: return SuspendAll;
+        case 9: return UnqualifiedExit;
+        case 10: return ExitAll;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<NavigationEventType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        NavigationEventType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<NavigationEventType>() {
+            public NavigationEventType findValueByNumber(int number) {
+              return NavigationEventType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.getDescriptor().getEnumTypes().get(3);
+    }
+
+    private static final NavigationEventType[] VALUES = values();
+
+    public static NavigationEventType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private NavigationEventType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:NavigationEventType)
+  }
+
   public interface ImageOrBuilder extends
       // @@protoc_insertion_point(interface_extends:Image)
       com.google.protobuf.MessageOrBuilder {
@@ -43208,6 +43387,1225 @@ public final class Info {
 
   }
 
+  public interface DeliveryContentInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DeliveryContentInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string itemId = 1;</code>
+     */
+    java.lang.String getItemId();
+    /**
+     * <code>string itemId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getItemIdBytes();
+
+    /**
+     * <code>string basePath = 2;</code>
+     */
+    java.lang.String getBasePath();
+    /**
+     * <code>string basePath = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getBasePathBytes();
+
+    /**
+     * <code>string entry = 3;</code>
+     */
+    java.lang.String getEntry();
+    /**
+     * <code>string entry = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getEntryBytes();
+
+    /**
+     * <code>bool hasParameters = 4;</code>
+     */
+    boolean getHasParameters();
+
+    /**
+     * <code>string parameters = 5;</code>
+     */
+    java.lang.String getParameters();
+    /**
+     * <code>string parameters = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getParametersBytes();
+
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    java.util.List<java.lang.String>
+        getContentList();
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    int getContentCount();
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    java.lang.String getContent(int index);
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentBytes(int index);
+  }
+  /**
+   * Protobuf type {@code DeliveryContentInfo}
+   */
+  public  static final class DeliveryContentInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DeliveryContentInfo)
+      DeliveryContentInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use DeliveryContentInfo.newBuilder() to construct.
+    private DeliveryContentInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DeliveryContentInfo() {
+      itemId_ = "";
+      basePath_ = "";
+      entry_ = "";
+      hasParameters_ = false;
+      parameters_ = "";
+      content_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DeliveryContentInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              itemId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              basePath_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              entry_ = s;
+              break;
+            }
+            case 32: {
+
+              hasParameters_ = input.readBool();
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              parameters_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                content_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              content_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          content_ = content_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_DeliveryContentInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.corkili.learningserver.generate.protobuf.Info.internal_static_DeliveryContentInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.class, com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int ITEMID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object itemId_;
+    /**
+     * <code>string itemId = 1;</code>
+     */
+    public java.lang.String getItemId() {
+      java.lang.Object ref = itemId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        itemId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string itemId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getItemIdBytes() {
+      java.lang.Object ref = itemId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        itemId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BASEPATH_FIELD_NUMBER = 2;
+    private volatile java.lang.Object basePath_;
+    /**
+     * <code>string basePath = 2;</code>
+     */
+    public java.lang.String getBasePath() {
+      java.lang.Object ref = basePath_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        basePath_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string basePath = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBasePathBytes() {
+      java.lang.Object ref = basePath_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        basePath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ENTRY_FIELD_NUMBER = 3;
+    private volatile java.lang.Object entry_;
+    /**
+     * <code>string entry = 3;</code>
+     */
+    public java.lang.String getEntry() {
+      java.lang.Object ref = entry_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        entry_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string entry = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEntryBytes() {
+      java.lang.Object ref = entry_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        entry_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HASPARAMETERS_FIELD_NUMBER = 4;
+    private boolean hasParameters_;
+    /**
+     * <code>bool hasParameters = 4;</code>
+     */
+    public boolean getHasParameters() {
+      return hasParameters_;
+    }
+
+    public static final int PARAMETERS_FIELD_NUMBER = 5;
+    private volatile java.lang.Object parameters_;
+    /**
+     * <code>string parameters = 5;</code>
+     */
+    public java.lang.String getParameters() {
+      java.lang.Object ref = parameters_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        parameters_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string parameters = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getParametersBytes() {
+      java.lang.Object ref = parameters_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        parameters_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CONTENT_FIELD_NUMBER = 6;
+    private com.google.protobuf.LazyStringList content_;
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getContentList() {
+      return content_;
+    }
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    public int getContentCount() {
+      return content_.size();
+    }
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    public java.lang.String getContent(int index) {
+      return content_.get(index);
+    }
+    /**
+     * <code>repeated string content = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentBytes(int index) {
+      return content_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getItemIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, itemId_);
+      }
+      if (!getBasePathBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, basePath_);
+      }
+      if (!getEntryBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, entry_);
+      }
+      if (hasParameters_ != false) {
+        output.writeBool(4, hasParameters_);
+      }
+      if (!getParametersBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, parameters_);
+      }
+      for (int i = 0; i < content_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, content_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getItemIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, itemId_);
+      }
+      if (!getBasePathBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, basePath_);
+      }
+      if (!getEntryBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, entry_);
+      }
+      if (hasParameters_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, hasParameters_);
+      }
+      if (!getParametersBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, parameters_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < content_.size(); i++) {
+          dataSize += computeStringSizeNoTag(content_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getContentList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo)) {
+        return super.equals(obj);
+      }
+      com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo other = (com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo) obj;
+
+      boolean result = true;
+      result = result && getItemId()
+          .equals(other.getItemId());
+      result = result && getBasePath()
+          .equals(other.getBasePath());
+      result = result && getEntry()
+          .equals(other.getEntry());
+      result = result && (getHasParameters()
+          == other.getHasParameters());
+      result = result && getParameters()
+          .equals(other.getParameters());
+      result = result && getContentList()
+          .equals(other.getContentList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ITEMID_FIELD_NUMBER;
+      hash = (53 * hash) + getItemId().hashCode();
+      hash = (37 * hash) + BASEPATH_FIELD_NUMBER;
+      hash = (53 * hash) + getBasePath().hashCode();
+      hash = (37 * hash) + ENTRY_FIELD_NUMBER;
+      hash = (53 * hash) + getEntry().hashCode();
+      hash = (37 * hash) + HASPARAMETERS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getHasParameters());
+      hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
+      hash = (53 * hash) + getParameters().hashCode();
+      if (getContentCount() > 0) {
+        hash = (37 * hash) + CONTENT_FIELD_NUMBER;
+        hash = (53 * hash) + getContentList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DeliveryContentInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DeliveryContentInfo)
+        com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_DeliveryContentInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_DeliveryContentInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.class, com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.Builder.class);
+      }
+
+      // Construct using com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        itemId_ = "";
+
+        basePath_ = "";
+
+        entry_ = "";
+
+        hasParameters_ = false;
+
+        parameters_ = "";
+
+        content_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.internal_static_DeliveryContentInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo getDefaultInstanceForType() {
+        return com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo build() {
+        com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo buildPartial() {
+        com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo result = new com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.itemId_ = itemId_;
+        result.basePath_ = basePath_;
+        result.entry_ = entry_;
+        result.hasParameters_ = hasParameters_;
+        result.parameters_ = parameters_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          content_ = content_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.content_ = content_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo) {
+          return mergeFrom((com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo other) {
+        if (other == com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo.getDefaultInstance()) return this;
+        if (!other.getItemId().isEmpty()) {
+          itemId_ = other.itemId_;
+          onChanged();
+        }
+        if (!other.getBasePath().isEmpty()) {
+          basePath_ = other.basePath_;
+          onChanged();
+        }
+        if (!other.getEntry().isEmpty()) {
+          entry_ = other.entry_;
+          onChanged();
+        }
+        if (other.getHasParameters() != false) {
+          setHasParameters(other.getHasParameters());
+        }
+        if (!other.getParameters().isEmpty()) {
+          parameters_ = other.parameters_;
+          onChanged();
+        }
+        if (!other.content_.isEmpty()) {
+          if (content_.isEmpty()) {
+            content_ = other.content_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureContentIsMutable();
+            content_.addAll(other.content_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object itemId_ = "";
+      /**
+       * <code>string itemId = 1;</code>
+       */
+      public java.lang.String getItemId() {
+        java.lang.Object ref = itemId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          itemId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string itemId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getItemIdBytes() {
+        java.lang.Object ref = itemId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          itemId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string itemId = 1;</code>
+       */
+      public Builder setItemId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string itemId = 1;</code>
+       */
+      public Builder clearItemId() {
+        
+        itemId_ = getDefaultInstance().getItemId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string itemId = 1;</code>
+       */
+      public Builder setItemIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object basePath_ = "";
+      /**
+       * <code>string basePath = 2;</code>
+       */
+      public java.lang.String getBasePath() {
+        java.lang.Object ref = basePath_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          basePath_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string basePath = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBasePathBytes() {
+        java.lang.Object ref = basePath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          basePath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string basePath = 2;</code>
+       */
+      public Builder setBasePath(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        basePath_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string basePath = 2;</code>
+       */
+      public Builder clearBasePath() {
+        
+        basePath_ = getDefaultInstance().getBasePath();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string basePath = 2;</code>
+       */
+      public Builder setBasePathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        basePath_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object entry_ = "";
+      /**
+       * <code>string entry = 3;</code>
+       */
+      public java.lang.String getEntry() {
+        java.lang.Object ref = entry_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          entry_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string entry = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEntryBytes() {
+        java.lang.Object ref = entry_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          entry_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string entry = 3;</code>
+       */
+      public Builder setEntry(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        entry_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string entry = 3;</code>
+       */
+      public Builder clearEntry() {
+        
+        entry_ = getDefaultInstance().getEntry();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string entry = 3;</code>
+       */
+      public Builder setEntryBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        entry_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean hasParameters_ ;
+      /**
+       * <code>bool hasParameters = 4;</code>
+       */
+      public boolean getHasParameters() {
+        return hasParameters_;
+      }
+      /**
+       * <code>bool hasParameters = 4;</code>
+       */
+      public Builder setHasParameters(boolean value) {
+        
+        hasParameters_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool hasParameters = 4;</code>
+       */
+      public Builder clearHasParameters() {
+        
+        hasParameters_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object parameters_ = "";
+      /**
+       * <code>string parameters = 5;</code>
+       */
+      public java.lang.String getParameters() {
+        java.lang.Object ref = parameters_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          parameters_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string parameters = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getParametersBytes() {
+        java.lang.Object ref = parameters_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          parameters_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string parameters = 5;</code>
+       */
+      public Builder setParameters(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        parameters_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string parameters = 5;</code>
+       */
+      public Builder clearParameters() {
+        
+        parameters_ = getDefaultInstance().getParameters();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string parameters = 5;</code>
+       */
+      public Builder setParametersBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        parameters_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList content_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureContentIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          content_ = new com.google.protobuf.LazyStringArrayList(content_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getContentList() {
+        return content_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public int getContentCount() {
+        return content_.size();
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public java.lang.String getContent(int index) {
+        return content_.get(index);
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentBytes(int index) {
+        return content_.getByteString(index);
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public Builder setContent(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureContentIsMutable();
+        content_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public Builder addContent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureContentIsMutable();
+        content_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public Builder addAllContent(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureContentIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, content_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public Builder clearContent() {
+        content_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string content = 6;</code>
+       */
+      public Builder addContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureContentIsMutable();
+        content_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DeliveryContentInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:DeliveryContentInfo)
+    private static final com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo();
+    }
+
+    public static com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DeliveryContentInfo>
+        PARSER = new com.google.protobuf.AbstractParser<DeliveryContentInfo>() {
+      @java.lang.Override
+      public DeliveryContentInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new DeliveryContentInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DeliveryContentInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DeliveryContentInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.corkili.learningserver.generate.protobuf.Info.DeliveryContentInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Image_descriptor;
   private static final 
@@ -43453,6 +44851,11 @@ public final class Info {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CourseCatalogItemInfoList_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DeliveryContentInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DeliveryContentInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -43635,14 +45038,22 @@ public final class Info {
       "evelItems\030\n \001(\0132\032.CourseCatalogItemInfoL" +
       "ist\"R\n\031CourseCatalogItemInfoList\0225\n\025cour" +
       "seCatalogItemInfo\030\001 \003(\0132\026.CourseCatalogI" +
-      "temInfo*$\n\010UserType\022\013\n\007Teacher\020\000\022\013\n\007Stud" +
-      "ent\020\001*g\n\014QuestionType\022\021\n\rSingleFilling\020\000" +
-      "\022\023\n\017MultipleFilling\020\001\022\020\n\014SingleChoice\020\002\022" +
-      "\022\n\016MultipleChoice\020\003\022\t\n\005Essay\020\004*L\n\021Course" +
-      "CommentType\022\r\n\tVERY_GOOD\020\000\022\010\n\004GOOD\020\001\022\007\n\003" +
-      "MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020\004B4\n,com.cork" +
-      "ili.learningserver.generate.protobufB\004In" +
-      "fob\006proto3"
+      "temInfo\"\202\001\n\023DeliveryContentInfo\022\016\n\006itemI" +
+      "d\030\001 \001(\t\022\020\n\010basePath\030\002 \001(\t\022\r\n\005entry\030\003 \001(\t" +
+      "\022\025\n\rhasParameters\030\004 \001(\010\022\022\n\nparameters\030\005 " +
+      "\001(\t\022\017\n\007content\030\006 \003(\t*$\n\010UserType\022\013\n\007Teac" +
+      "her\020\000\022\013\n\007Student\020\001*g\n\014QuestionType\022\021\n\rSi" +
+      "ngleFilling\020\000\022\023\n\017MultipleFilling\020\001\022\020\n\014Si" +
+      "ngleChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t\n\005Essa" +
+      "y\020\004*L\n\021CourseCommentType\022\r\n\tVERY_GOOD\020\000\022" +
+      "\010\n\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020" +
+      "\004*\260\001\n\023NavigationEventType\022\t\n\005Start\020\000\022\r\n\t" +
+      "ResumeAll\020\001\022\014\n\010Continue\020\002\022\014\n\010Previous\020\003\022" +
+      "\n\n\006Choose\020\004\022\010\n\004Jump\020\005\022\013\n\007Abandon\020\006\022\016\n\nAb" +
+      "andonAll\020\007\022\016\n\nSuspendAll\020\010\022\023\n\017Unqualifie" +
+      "dExit\020\t\022\013\n\007ExitAll\020\nB4\n,com.corkili.lear" +
+      "ningserver.generate.protobufB\004Infob\006prot" +
+      "o3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -43950,6 +45361,12 @@ public final class Info {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseCatalogItemInfoList_descriptor,
         new java.lang.String[] { "CourseCatalogItemInfo", });
+    internal_static_DeliveryContentInfo_descriptor =
+      getDescriptor().getMessageTypes().get(40);
+    internal_static_DeliveryContentInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DeliveryContentInfo_descriptor,
+        new java.lang.String[] { "ItemId", "BasePath", "Entry", "HasParameters", "Parameters", "Content", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
