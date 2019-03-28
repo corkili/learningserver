@@ -14,4 +14,6 @@ public interface ScormService extends Service<Scorm, com.corkili.learningserver.
 
     ServiceResult processNavigationEvent(NavigationEvent navigationEvent, Long userId, Long scormId, String level1CatalogItemId);
 
+    ServiceResult invokeLMSRuntimeAPI(Long userId, Long scormId, String itemId, String methodName, String parameter1, String parameter2);
+
 }

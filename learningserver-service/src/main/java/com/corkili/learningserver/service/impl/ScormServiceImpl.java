@@ -155,4 +155,34 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         }
         return ServiceResult.successResult("process navigation event success", DeliveryContent.class, deliveryContent);
     }
+
+    @Override
+    public ServiceResult invokeLMSRuntimeAPI(Long userId, Long scormId, String itemId, String methodName, String parameter1, String parameter2) {
+        Optional<User> userOptional = userService.retrieve(userId);
+        if (userId == null || !userOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] error: user [{}] not exist", methodName, parameter1, parameter2, userId);
+        }
+        if (scormId == null || !scormRepository.existsById(scormId)) {
+            return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] error: scorm [{}] not exist", methodName, parameter1, parameter2, scormId);
+        }
+        ID attemptID = new ID(itemId, String.valueOf(scormId), String.valueOf(userId));
+        String result;
+        if ("initialize".equalsIgnoreCase(methodName)) {
+            result = scormRuntimeManager.initialize(attemptID, parameter1);
+        } else if ("terminate".equalsIgnoreCase(methodName)) {
+            result = scormRuntimeManager.terminate(attemptID, parameter1);
+        } else if ("getValue".equalsIgnoreCase(methodName)) {
+            result = scormRuntimeManager.getValue(attemptID, parameter1);
+        } else if ("setValue".equalsIgnoreCase(methodName)) {
+            result = scormRuntimeManager.setValue(attemptID, parameter1, parameter2);
+        } else if ("commit".equalsIgnoreCase(methodName)) {
+            result = scormRuntimeManager.commit(attemptID, parameter1);
+        } else if ("getLastError".equalsIgnoreCase(methodName)) {
+            result = scormRuntimeManager.getLastErrorCode(attemptID);
+        } else {
+            return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] error: method not undefined", methodName, parameter1, parameter2);
+        }
+        return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] success", methodName,
+                parameter1, parameter2, String.class, result);
+    }
 }

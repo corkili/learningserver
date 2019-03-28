@@ -185,4 +185,22 @@ public class SCORMRuntimeManager {
             return "please try again";
         }
     }
+
+    public String getErrorString(int errorCode) {
+        for (ScormError value : ScormError.values()) {
+            if (value.getCode() == errorCode) {
+                return value.getMsg();
+            }
+        }
+        return "Undefined error code - " + errorCode;
+    }
+
+    public String getDiagnostic(int errorCode) {
+        for (ScormError value : ScormError.values()) {
+            if (value.getCode() == errorCode) {
+                return value.getMsg();
+            }
+        }
+        return "Undefined error code - " + errorCode;
+    }
 }
