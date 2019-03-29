@@ -18,3 +18,10 @@ spring:
 
   cache:
     type: ehcache
+
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false

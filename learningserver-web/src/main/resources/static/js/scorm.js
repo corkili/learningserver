@@ -8,9 +8,6 @@ function API_1484_11() {
  */
 API_1484_11.prototype.Initialize = function(parameter) {
     var params = {
-        token: '',
-        scormId: '',
-        itemId: '',
         methodName: 'initialize',
         parameter1: '' + parameter
     };
@@ -19,16 +16,22 @@ API_1484_11.prototype.Initialize = function(parameter) {
     $.ajax({
         async: false,
         type: "post",
-        url: "scorm/lmsRuntimeAPI",
-        data: params,
+        url: "lmsRuntimeAPI",
+        data: JSON.stringify(params),
         dataType: "json",
+        contentType: 'application/json',
         success: function (data) {
-            res = data.returnValue;
-            errCode = data.lastError;
+            if (data.result == 'true') {
+                res = data.returnValue;
+                errCode = data.lastError;
+            } else {
+                res = 'false';
+                errCode = 102;
+            }
         },
         error: function (data) {
             res = 'false';
-            errCode = 101;
+            errCode = 102;
         }
     });
     this.LastError = errCode;
@@ -40,9 +43,6 @@ API_1484_11.prototype.Initialize = function(parameter) {
  */
 API_1484_11.prototype.Terminate = function(parameter) {
     var params = {
-        token: '',
-        scormId: '',
-        itemId: '',
         methodName: 'terminate',
         parameter1: '' + parameter
     };
@@ -51,16 +51,22 @@ API_1484_11.prototype.Terminate = function(parameter) {
     $.ajax({
         async: false,
         type: "post",
-        url: "scorm/lmsRuntimeAPI",
-        data: params,
+        url: "lmsRuntimeAPI",
+        data: JSON.stringify(params),
         dataType: "json",
+        contentType: 'application/json',
         success: function (data) {
-            res = data.returnValue;
-            errCode = data.lastError;
+            if (data.result == 'true') {
+                res = data.returnValue;
+                errCode = data.lastError;
+            } else {
+                res = 'false';
+                errCode = 111;
+            }
         },
         error: function (data) {
             res = 'false';
-            errCode = 101;
+            errCode = 111;
         }
     });
     this.LastError = errCode;
@@ -72,9 +78,6 @@ API_1484_11.prototype.Terminate = function(parameter) {
  */
 API_1484_11.prototype.GetValue = function(element) {
     var params = {
-        token: '',
-        scormId: '',
-        itemId: '',
         methodName: 'getValue',
         parameter1: '' + element
     };
@@ -83,16 +86,22 @@ API_1484_11.prototype.GetValue = function(element) {
     $.ajax({
         async: false,
         type: "post",
-        url: "scorm/lmsRuntimeAPI",
-        data: params,
+        url: "lmsRuntimeAPI",
+        data: JSON.stringify(params),
         dataType: "json",
+        contentType: 'application/json',
         success: function (data) {
-            res = data.returnValue;
-            errCode = data.lastError;
+            if (data.result == 'true') {
+                res = data.returnValue;
+                errCode = data.lastError;
+            } else {
+                res = '';
+                errCode = 301;
+            }
         },
         error: function (data) {
             res = '';
-            errCode = 101;
+            errCode = 301;
         }
     });
     this.LastError = errCode;
@@ -104,9 +113,6 @@ API_1484_11.prototype.GetValue = function(element) {
  */
 API_1484_11.prototype.SetValue = function(element, value) {
     var params = {
-        token: '',
-        scormId: '',
-        itemId: '',
         methodName: 'setValue',
         parameter1: '' + element,
         parameter2: '' + value
@@ -116,16 +122,22 @@ API_1484_11.prototype.SetValue = function(element, value) {
     $.ajax({
         async: false,
         type: "post",
-        url: "scorm/lmsRuntimeAPI",
-        data: params,
+        url: "lmsRuntimeAPI",
+        data: JSON.stringify(params),
         dataType: "json",
+        contentType: 'application/json',
         success: function (data) {
-            res = data.returnValue;
-            errCode = data.lastError;
+            if (data.result == 'true') {
+                res = data.returnValue;
+                errCode = data.lastError;
+            } else {
+                res = 'false';
+                errCode = 351;
+            }
         },
         error: function (data) {
             res = 'false';
-            errCode = 101;
+            errCode = 351;
         }
     });
     this.LastError = errCode;
@@ -137,9 +149,6 @@ API_1484_11.prototype.SetValue = function(element, value) {
  */
 API_1484_11.prototype.Commit = function(parameter) {
     var params = {
-        token: '',
-        scormId: '',
-        itemId: '',
         methodName: 'commit',
         parameter1: '' + parameter
     };
@@ -148,16 +157,22 @@ API_1484_11.prototype.Commit = function(parameter) {
     $.ajax({
         async: false,
         type: "post",
-        url: "scorm/lmsRuntimeAPI",
-        data: params,
+        url: "lmsRuntimeAPI",
+        data: JSON.stringify(params),
         dataType: "json",
+        contentType: 'application/json',
         success: function (data) {
-            res = data.returnValue;
-            errCode = data.lastError;
+            if (data.result == 'true') {
+                res = data.returnValue;
+                errCode = data.lastError;
+            } else {
+                res = 'false';
+                errCode = 391;
+            }
         },
         error: function (data) {
-            res = 'true';
-            errCode = 0;
+            res = 'false';
+            errCode = 391;
         }
     });
     this.LastError = errCode;
@@ -170,23 +185,25 @@ API_1484_11.prototype.Commit = function(parameter) {
 API_1484_11.prototype.GetLastError = function() {
     if (this.LastError === undefined) {
         var params = {
-            token: '',
-            scormId: '',
-            itemId: '',
             methodName: 'getLastError'
         };
         var res = 0;
         $.ajax({
             async: false,
             type: "post",
-            url: "scorm/lmsRuntimeAPI",
-            data: params,
+            url: "lmsRuntimeAPI",
+            data: JSON.stringify(params),
             dataType: "json",
+            contentType: 'application/json',
             success: function (data) {
-                res = data.returnValue;
+                if (data.result == 'true') {
+                    res = data.returnValue;
+                } else {
+                    res = 101;
+                }
             },
             error: function (data) {
-                res = 0;
+                res = 101;
             }
         });
         this.LastError = res;

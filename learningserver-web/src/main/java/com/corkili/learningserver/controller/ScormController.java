@@ -5,6 +5,7 @@ import com.corkili.learningserver.bo.CourseCatalog;
 import com.corkili.learningserver.common.ControllerUtils;
 import com.corkili.learningserver.common.ProtoUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.generate.protobuf.Request.CourseCatalogQueryRequest;
 import com.corkili.learningserver.generate.protobuf.Request.NavigationProcessRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
@@ -16,6 +17,7 @@ import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +26,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/scorm")
+@Slf4j
 public class ScormController {
 
     @Autowired
@@ -89,9 +90,11 @@ public class ScormController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{token}/{scormId}/{itemId}/lmsRuntimeAPI", method = RequestMethod.POST)
-    public String lmsRuntimeAPI(HttpServletRequest request, @PathVariable("token") String token,
-                                @PathVariable("scormId") Long scormId, @PathVariable("itemId") String itemId) {
+    @RequestMapping(value = "/{token}/{scormId}/{itemId}/lmsRuntimeAPI", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public JSONObject lmsRuntimeAPI(@PathVariable("token") String token, @PathVariable("scormId") Long scormId,
+                                    @PathVariable("itemId") String itemId, @RequestBody JSONObject requestData) {
+        log.info("lmsRuntimeAPI: " + ServiceUtils.format("{{}} invoke {}({}, {})", token, requestData.getString("methodName"),
+                requestData.getString("parameter1"), requestData.getString("parameter2")));
         token = tokenManager.getOrNewToken(token);
         if (!tokenManager.isLogin(token)) {
             JSONObject response = new JSONObject();
@@ -99,26 +102,11 @@ public class ScormController {
             response.put("msg", "not login");
             response.put("returnValue", "");
             response.put("lastError", 0);
-            return response.toString();
+            return response;
         }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        try {
-            BufferedReader reader = request.getReader();
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (Exception e) {
-            JSONObject response = new JSONObject();
-            response.put("result", "false");
-            response.put("msg", "read request data failed");
-            response.put("returnValue", "");
-            response.put("lastError", 0);
-            return response.toString();
-        }
-        JSONObject requestData = JSONObject.parseObject(sb.toString());
         ServiceResult serviceResult = scormService.invokeLMSRuntimeAPI(tokenManager.getUserIdAssociatedWithToken(token),
-                scormId, itemId, requestData.getString("methodName"), requestData.getString("parameter1"), requestData.getString("parameter2"));
+                scormId, itemId, requestData.getString("methodName"), requestData.getString("parameter1"),
+                requestData.getString("parameter2"));
         String result;
         String msg;
         String returnValue;
@@ -145,7 +133,55 @@ public class ScormController {
         response.put("msg", msg);
         response.put("returnValue", returnValue);
         response.put("lastError", lastError);
-        return response.toString();
+        return response;
     }
 
+    @RequestMapping(value = "/{token}/{scormId}/{itemId}/launchContentObject", method = RequestMethod.GET)
+    public ModelAndView launchContentObject(@PathVariable("token") String token, @PathVariable("scormId") Long scormId,
+                                            @PathVariable("itemId") String itemId) {
+        token = tokenManager.getOrNewToken(token);
+        if (!tokenManager.isLogin(token)) {
+            return new ModelAndView("redirect:/error");
+        }
+        ModelAndView modelAndView = new ModelAndView("lms");
+//        DeliveryContent deliveryContent = new DeliveryContent("playing_item", "scormPackages/scorm-test-pkg",
+//                "shared/launchpage.html?content=playing", null, null);
+        DeliveryContent deliveryContent = scormService.getDeliveryContent(tokenManager.getUserIdAssociatedWithToken(token), scormId, itemId);
+        String path = deliveryContent.getBasePath();
+        String entry = deliveryContent.getEntry();
+        if (!path.endsWith("/")) {
+            path += "/";
+        }
+        if (entry.startsWith("/")) {
+            entry = entry.substring(1);
+        }
+        path += entry;
+        String parameters = deliveryContent.getParameters();
+        if (StringUtils.isNotBlank(parameters)) {
+            while (parameters.startsWith("?") || parameters.startsWith("&")) {
+                parameters = path.substring(1);
+            }
+            boolean done = false;
+            if (parameters.startsWith("#")) {
+                if (!path.contains("#")) {
+                    path += parameters;
+                }
+                done = true;
+            }
+            if (!done) {
+                if (path.contains("?")) {
+                    path += "&";
+                } else {
+                    path += "?";
+                }
+                path += parameters;
+            }
+        }
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        log.info("path: " + path);
+        modelAndView.addObject("path", "../../../../" + path);
+        return modelAndView;
+    }
 }

@@ -5,6 +5,7 @@ import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ScormZipUtils;
 import com.corkili.learningserver.common.ServiceResult;
+import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.ScormRepository;
 import com.corkili.learningserver.scorm.SCORM;
 import com.corkili.learningserver.scorm.SCORMResult;
@@ -25,6 +26,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -46,11 +49,14 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
 
     private SCORMSeqNavManager scormSeqNavManager;
 
+    private Map<String, DeliveryContent> deliveryContentMap;
+
     public ScormServiceImpl() {
         scormManager = SCORM.getInstance();
         scormPackageManager = scormManager.getPackageManager();
         scormRuntimeManager = scormManager.getRuntimeManager();
         scormSeqNavManager = scormManager.getSnManager();
+        deliveryContentMap = new HashMap<>();
     }
 
     @Override
@@ -146,6 +152,7 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         }
         DeliveryContent deliveryContent = scormResult.getDeliveryContent();
         if (deliveryContent != null && scormResult.getDeliveryActivity() != null) {
+            deliveryContentMap.put(ServiceUtils.format("{}-{}-{}", userId, scormId, deliveryContent.getItemId()), deliveryContent);
             if (!scormRuntimeManager.launch(String.valueOf(scormId), deliveryContent.getItemId(), user, true)) {
                 return recordErrorAndCreateFailResultWithMessage("process navigation event error: launch runtime data error");
             }
@@ -184,5 +191,10 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         }
         return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] success", methodName,
                 parameter1, parameter2, String.class, result);
+    }
+
+    @Override
+    public DeliveryContent getDeliveryContent(Long userId, Long scormId, String itemId) {
+        return deliveryContentMap.get(ServiceUtils.format("{}-{}-{}", userId, scormId, itemId));
     }
 }
