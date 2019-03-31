@@ -1,5 +1,18 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.CourseCatalog;
 import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.bo.User;
@@ -13,27 +26,18 @@ import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.DeliveryContent;
 import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.common.LMSPersistDriver;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
 import com.corkili.learningserver.scorm.sn.api.SCORMSeqNavManager;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
 @Transactional
-public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningserver.po.Scorm> implements ScormService {
+public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningserver.po.Scorm> implements ScormService, LMSPersistDriver {
 
     @Autowired
     private ScormRepository scormRepository;
@@ -52,6 +56,7 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     private Map<String, DeliveryContent> deliveryContentMap;
 
     public ScormServiceImpl() {
+        LMSPersistDriverManager.getInstance().registerDriver(this);
         scormManager = SCORM.getInstance();
         scormPackageManager = scormManager.getPackageManager();
         scormRuntimeManager = scormManager.getRuntimeManager();
@@ -196,5 +201,26 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     @Override
     public DeliveryContent getDeliveryContent(Long userId, Long scormId, String itemId) {
         return deliveryContentMap.get(ServiceUtils.format("{}-{}-{}", userId, scormId, itemId));
+    }
+
+    @Override
+    public String querySCORMPackageZipFilePathBy(String lmsContentPackageID) {
+        Long scormID = Long.valueOf(lmsContentPackageID);
+        Scorm scorm = retrieve(scormID).orElse(null);
+        if (scorm == null) {
+            return null;
+        } else {
+            return ScormZipUtils.getScormZipPath(scorm.getPath());
+        }
+    }
+
+    @Override
+    public int queryActivityAttemptCountBy(String lmsContentPackageID, String activityID, String learnerID) {
+        return 0;
+    }
+
+    @Override
+    public void saveActivityAttemptCount(String lmsContentPackageID, String activityID, String learnerID, int attemptCount) {
+
     }
 }

@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLDeleteAll;
@@ -57,6 +56,5 @@ public class Scorm implements PersistObject {
     private byte deleted;
 
     @Column(name = "path", nullable = false, length = 2048)
-    @NotBlank
     private String path;
 }

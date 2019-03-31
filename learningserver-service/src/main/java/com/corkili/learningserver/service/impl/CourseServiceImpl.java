@@ -1,5 +1,21 @@
 package com.corkili.learningserver.service.impl;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.common.ImageUtils;
@@ -14,20 +30,6 @@ import com.corkili.learningserver.service.CourseWorkService;
 import com.corkili.learningserver.service.ExamService;
 import com.corkili.learningserver.service.ForumTopicService;
 import com.corkili.learningserver.service.ScormService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -276,6 +278,7 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
             if (!serviceResult.isSuccess()) {
                 return recordErrorAndCreateFailResultWithMessage("update courseware error: import scorm failed");
             }
+            scorm = serviceResult.extra(Scorm.class);
             course.setCoursewareId(scorm.getId());
             Optional<Course> courseOptional = update(course);
             if (!courseOptional.isPresent()) {

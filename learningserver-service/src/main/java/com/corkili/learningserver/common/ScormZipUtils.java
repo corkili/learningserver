@@ -1,23 +1,35 @@
 package com.corkili.learningserver.common;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 public class ScormZipUtils {
 
-    private static final String basePath = "../scormPackages/";
+    private static final String basePath = "./scormPackages/";
 
     private static final String zipSuffix = ".zip";
+
+    public static String getScormZipPath(String pathFromDB) {
+        while (pathFromDB.startsWith("/")) {
+            pathFromDB = pathFromDB.substring(1);
+        }
+        while (pathFromDB.endsWith("/")) {
+            pathFromDB = pathFromDB.substring(0, pathFromDB.length() - 1);
+        }
+        if (!pathFromDB.toLowerCase().endsWith(zipSuffix)) {
+            pathFromDB += zipSuffix;
+        }
+        return basePath + pathFromDB;
+    }
 
     public static String getScormZipPath(String scormZipName, long userId) {
         while (scormZipName.startsWith("/")) {
@@ -60,8 +72,6 @@ public class ScormZipUtils {
             File file = new File(path);
             file.deleteOnExit();
             FileUtils.writeByteArrayToFile(file, scormZipData);
-            BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-            out.write(scormZipData);
         } catch (IOException e) {
             log.error("store scormZip exception - {}", ServiceUtils.stringifyError(e));
             return false;
@@ -88,9 +98,15 @@ public class ScormZipUtils {
         }
         String path = basePath + scormZipPath;
         try {
-            FileUtils.forceDelete(new File(path));
+            File zipFile = new File(path);
+            if (zipFile.exists()) {
+                FileUtils.forceDelete(zipFile);
+            }
             if (scormZipPath.toLowerCase().endsWith(zipSuffix)) {
-                FileUtils.forceDelete(new File(path.substring(0, scormZipPath.length() - zipSuffix.length())));
+                File uncompressDir = new File(path.substring(0, scormZipPath.length() - zipSuffix.length()));
+                if (uncompressDir.exists()) {
+                    FileUtils.forceDelete(uncompressDir);
+                }
             }
         } catch (IOException e) {
             log.error("delete scormZip exception - {}", ServiceUtils.stringifyError(e));
