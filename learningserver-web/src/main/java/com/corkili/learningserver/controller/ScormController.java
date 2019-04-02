@@ -1,6 +1,18 @@
 package com.corkili.learningserver.controller;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.CourseCatalog;
 import com.corkili.learningserver.common.ControllerUtils;
 import com.corkili.learningserver.common.ProtoUtils;
@@ -17,16 +29,6 @@ import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/scorm")
@@ -79,13 +81,15 @@ public class ScormController {
                         StringUtils.isBlank(request.getTargetItemId()) ? null : request.getTargetItemId()),
                 tokenManager.getUserIdAssociatedWithToken(token), request.getScormId(), request.getLevel1CatalogItemId());
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        DeliveryContent deliveryContent = serviceResult.extra(DeliveryContent.class);
         return NavigationProcessResponse.newBuilder()
                 .setResponse(baseResponse)
                 .setNavigationEventType(request.getNavigationEventType())
                 .setTargetItemId(request.getTargetItemId())
                 .setScormId(request.getScormId())
                 .setLevel1CatalogItemId(request.getLevel1CatalogItemId())
-                .setDeliveryContentInfo(ProtoUtils.generateDeliveryContentInfo(serviceResult.extra(DeliveryContent.class)))
+                .setHasDeliveryContentInfo(deliveryContent != null)
+                .setDeliveryContentInfo(ProtoUtils.generateDeliveryContentInfo(deliveryContent))
                 .build();
     }
 

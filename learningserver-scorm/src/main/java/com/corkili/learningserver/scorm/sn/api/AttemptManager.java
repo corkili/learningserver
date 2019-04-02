@@ -60,8 +60,9 @@ public class AttemptManager {
         }
         NavigationRequest request = EventTranslator.translateEventToRequestType(event, targetActivityTree, targetActivity);
         Activity oldCurrentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
+        boolean oldIsActive = oldCurrentActivity != null && oldCurrentActivity.getActivityStateInformation().isActivityIsActive();
         OverallSequencingResult result = OverallSequencingBehavior.overallSequencing(request);
-        if (updateAttempt()) {
+        if (!updateAttempt()) {
             log.error("update ActivityAttempt error");
         }
         if (!result.isSuccess()) {
@@ -76,7 +77,8 @@ public class AttemptManager {
             }
         }
         Activity currentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
-        if (currentActivity != null && currentActivity.isLeaf() && !currentActivity.equals(oldCurrentActivity)) {
+        if (currentActivity != null && currentActivity.isLeaf() && currentActivity.getActivityStateInformation().isActivityIsActive()
+                && (!currentActivity.equals(oldCurrentActivity) || !oldIsActive)) {
             // has a new delivery activity
             return new ProcessResult(currentActivity);
         } else {

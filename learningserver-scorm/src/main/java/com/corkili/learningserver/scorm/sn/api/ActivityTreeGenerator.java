@@ -1,5 +1,14 @@
 package com.corkili.learningserver.scorm.sn.api;
 
+import java.time.Duration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.scorm.cam.model.AdlseqMapInfo;
 import com.corkili.learningserver.scorm.cam.model.AdlseqObjective;
 import com.corkili.learningserver.scorm.cam.model.CompletionThreshold;
@@ -41,13 +50,6 @@ import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescri
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-
-import java.time.Duration;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Slf4j
 public class ActivityTreeGenerator {
@@ -86,7 +88,7 @@ public class ActivityTreeGenerator {
         activityTree.setRoot(root);
         for (Item item : organization.getItemList()) {
             Activity activity = deriveActivityFrom(item, sequencingCollection,
-                    new ID(item.getIdentifierref(), id.getLmsContentPackageID(), id.getLmsLearnerID()), root);
+                    new ID(item.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), root);
             root.getChildren().add(activity);
         }
         initActivityProgressInformation(root);
