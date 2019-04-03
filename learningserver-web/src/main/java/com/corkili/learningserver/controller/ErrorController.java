@@ -11,4 +11,9 @@ public class ErrorController {
         return "error";
     }
 
+    @RequestMapping("/nologin")
+    public String nologin() {
+        return "nologin";
+    }
+
 }

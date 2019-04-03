@@ -184,6 +184,7 @@ public class TerminationBehavior {
         }
         // 3
         if (terminationRequest.getRequestType() == Type.Exit) {
+            boolean breakToNextCase = false;
             // 3.1
             // Ensure the state of the current activity is up to date.
             UtilityProcess.processEndAttempt(new UtilityProcessRequest(activityTree, currentActivity));
@@ -211,6 +212,7 @@ public class TerminationBehavior {
                     terminationRequest.setRequestType(Type.ExitAll);
                     // 3.3.3.2
                     // Process an Exit All Termination Request.
+                    breakToNextCase = true;
                     break;
                 }
                 // 3.3.4
@@ -246,10 +248,12 @@ public class TerminationBehavior {
                                         activityTree.getGlobalStateInformation().getCurrentActivity()));
                     }
                 }
-            } while (!processedExit); // 3.4
+            } while (processedExit); // 3.4
             // 3.5
-            return new TerminationBehaviorResult().setValidTerminationRequest(true)
-                    .setSequencingRequest(count == 1 ? returnedSR : null);
+            if (!breakToNextCase) {
+                return new TerminationBehaviorResult().setValidTerminationRequest(true)
+                        .setSequencingRequest(count == 1 ? returnedSR : null);
+            }
         }
         // 4
         if (terminationRequest.getRequestType() == Type.ExitAll) {

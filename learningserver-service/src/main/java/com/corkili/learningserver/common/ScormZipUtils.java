@@ -14,9 +14,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScormZipUtils {
 
-    private static final String basePath = "./scormPackages/";
+    private static String basePath = "./scormPackages/";
 
     private static final String zipSuffix = ".zip";
+
+    public static String getBasePath() {
+        return basePath;
+    }
+
+    public static void setBasePath(String[] args) {
+        if (args.length > 0) {
+            String path = args[0];
+            if (!path.endsWith("/")) {
+                path = path + "/";
+            }
+            basePath = path + "scormPackages/";
+            log.info("modify scorm base path to [{}]", basePath);
+        }
+    }
 
     public static String getScormZipPath(String pathFromDB) {
         while (pathFromDB.startsWith("/")) {

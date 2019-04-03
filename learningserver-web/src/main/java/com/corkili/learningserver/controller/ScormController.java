@@ -145,10 +145,9 @@ public class ScormController {
                                             @PathVariable("itemId") String itemId) {
         token = tokenManager.getOrNewToken(token);
         if (!tokenManager.isLogin(token)) {
-            return new ModelAndView("redirect:/error");
+            return new ModelAndView("redirect:/nologin");
         }
-        ModelAndView modelAndView = new ModelAndView("lms");
-//        DeliveryContent deliveryContent = new DeliveryContent("playing_item", "scormPackages/scorm-test-pkg",
+//        DeliveryContent deliveryContent = new DeliveryContent("playing_item", "scormPackages/scorm-1-39698b306c7e41589446766849e613ec-scorm-golf",
 //                "shared/launchpage.html?content=playing", null, null);
         DeliveryContent deliveryContent = scormService.getDeliveryContent(tokenManager.getUserIdAssociatedWithToken(token), scormId, itemId);
         String path = deliveryContent.getBasePath();
@@ -181,10 +180,12 @@ public class ScormController {
                 path += parameters;
             }
         }
+        path = path.substring(path.indexOf("scormPackages"));
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
         log.info("path: " + path);
+        ModelAndView modelAndView = new ModelAndView("lms");
         modelAndView.addObject("path", "../../../../" + path);
         return modelAndView;
     }

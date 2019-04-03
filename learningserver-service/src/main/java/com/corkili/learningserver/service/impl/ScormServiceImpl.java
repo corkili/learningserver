@@ -194,8 +194,8 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         } else {
             return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] error: method not undefined", methodName, parameter1, parameter2);
         }
-        return recordErrorAndCreateFailResultWithMessage("invoke runtime api [{}({})({})] success", methodName,
-                parameter1, parameter2, String.class, result);
+        return ServiceResult.successResult(ServiceUtils.format("invoke runtime api [{}({})({})] success",
+                methodName, parameter1, parameter2), String.class, result);
     }
 
     @Override
