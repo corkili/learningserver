@@ -147,7 +147,7 @@ public class ActivityTree {
             if (!includeTo) {
                 indexOfTo--;
             }
-            if (indexOfFrom >= indexOfTo) {
+            if (indexOfFrom > indexOfTo) {
                 return Collections.emptyList();
             }
             for (int i = indexOfFrom; i <= indexOfTo; i++) {
@@ -160,7 +160,7 @@ public class ActivityTree {
             if (!includeTo) {
                 indexOfTo++;
             }
-            if (indexOfTo >=indexOfFrom) {
+            if (indexOfTo > indexOfFrom) {
                 return Collections.emptyList();
             }
             for (int i = indexOfFrom; i >= indexOfTo; i--) {

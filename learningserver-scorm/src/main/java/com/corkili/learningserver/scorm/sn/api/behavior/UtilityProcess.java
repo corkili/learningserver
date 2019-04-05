@@ -309,6 +309,9 @@ public class UtilityProcess {
                 new RollupRequest(utilityProcessRequest.getTargetActivityTree(), targetActivity));
     }
 
+    /**
+     * SN-3-17
+     */
     private static Boolean evaluateRuleCondition(RuleCondition ruleCondition, Activity targetActivity) {
         ObjectiveDescription objectiveDescription = targetActivity
                 .findAssociatedObjectiveByID(ruleCondition.getReferencedObjective());

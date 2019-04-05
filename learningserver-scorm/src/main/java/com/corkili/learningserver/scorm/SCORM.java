@@ -1,5 +1,9 @@
 package com.corkili.learningserver.scorm;
 
+import java.math.BigDecimal;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.DeliveryContent;
@@ -18,9 +22,6 @@ import com.corkili.learningserver.scorm.sn.model.definition.ObjectiveDescription
 import com.corkili.learningserver.scorm.sn.model.tracking.AttemptProgressInformation;
 import com.corkili.learningserver.scorm.sn.model.tracking.ObjectiveProgressInformation;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
-import lombok.extern.slf4j.Slf4j;
-
-import java.math.BigDecimal;
 
 @Slf4j
 public class SCORM {
@@ -110,6 +111,7 @@ public class SCORM {
     }
 
     public void mapRuntimeDataToTrackingInfo(Activity activity) {
+        log.info("mapRuntimeDataToTrackingInfo: {}", activity.getId());
         LearnerAttempt learnerAttempt = runtimeManager.getLearnerAttempt(activity.getId());
         if (learnerAttempt == null) {
             log.error("mapRuntimeDataToTrackingInfo: Learner Attempt \"{}\" not exist", activity.getId());

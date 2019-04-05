@@ -184,7 +184,7 @@ public class ScormController {
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
-        log.info("path: " + path);
+//        log.info("path: " + path);
         ModelAndView modelAndView = new ModelAndView("lms");
         modelAndView.addObject("path", "../../../../" + path);
         return modelAndView;
