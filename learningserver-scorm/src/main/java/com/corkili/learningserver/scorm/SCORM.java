@@ -111,6 +111,9 @@ public class SCORM {
     }
 
     public void mapRuntimeDataToTrackingInfo(Activity activity) {
+        if (activity == null) {
+            return;
+        }
         log.info("mapRuntimeDataToTrackingInfo: {}", activity.getId());
         LearnerAttempt learnerAttempt = runtimeManager.getLearnerAttempt(activity.getId());
         if (learnerAttempt == null) {

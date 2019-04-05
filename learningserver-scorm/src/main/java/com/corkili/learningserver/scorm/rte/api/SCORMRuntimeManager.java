@@ -1,17 +1,18 @@
 package com.corkili.learningserver.scorm.rte.api;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
-import lombok.extern.slf4j.Slf4j;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class SCORMRuntimeManager {
@@ -101,9 +102,13 @@ public class SCORMRuntimeManager {
         unlaunch(shouldDelete);
     }
 
+    public void unlaunch(ID attemptID) {
+        learnerAttemptMap.remove(attemptID);
+    }
+
     private void unlaunch(List<ID> shouldDelete) {
         for (ID attemptID : shouldDelete) {
-            learnerAttemptMap.remove(attemptID);
+            unlaunch(attemptID);
         }
     }
 

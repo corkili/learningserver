@@ -96,7 +96,7 @@ public class LearnerAttempt {
         return scormResult.getReturnValue();
     }
 
-    String terminate(String parameter) {
+    public String terminate(String parameter) {
         if (currentLearnerSession == null || currentLearnerSession.isNotOpen()
                 || currentLearnerSession.isClosed() || !currentLearnerSession.isOpen()) {
             setError(ScormError.E_111);
@@ -206,7 +206,7 @@ public class LearnerAttempt {
         return true;
     }
 
-    boolean closeLearnerSession(boolean isSuspendAllNavigationRequest) {
+    public boolean closeLearnerSession(boolean isSuspendAllNavigationRequest) {
         if (isJustCreate()) {
             log.error("close learner session before initialize run-time data");
             return false;
