@@ -2,7 +2,7 @@ package com.corkili.learningserver.scorm.sn.model.definition;
 
 public class ObjectiveMap {
 
-    private final String ActivityObjectiveID;
+    private final String activityObjectiveID;
     private final String targetObjectiveID;
     private boolean readObjectiveSatisfiedStatus;
     private boolean writeObjectiveSatisfiedStatus;
@@ -20,7 +20,7 @@ public class ObjectiveMap {
     private boolean writeProgressMeasure;
 
     public ObjectiveMap(String activityObjectiveID, String targetObjectiveID) {
-        ActivityObjectiveID = activityObjectiveID;
+        this.activityObjectiveID = activityObjectiveID;
         this.targetObjectiveID = targetObjectiveID;
         readObjectiveSatisfiedStatus = true;
         writeObjectiveSatisfiedStatus = false;
@@ -39,7 +39,7 @@ public class ObjectiveMap {
     }
 
     public String getActivityObjectiveID() {
-        return ActivityObjectiveID;
+        return activityObjectiveID;
     }
 
     public String getTargetObjectiveID() {

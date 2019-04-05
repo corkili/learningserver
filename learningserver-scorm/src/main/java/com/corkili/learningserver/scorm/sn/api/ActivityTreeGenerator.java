@@ -81,13 +81,13 @@ public class ActivityTreeGenerator {
         activityTree.setObjectivesGlobalToSystem(organization.isObjectivesGlobalToSystem());
         // root
         Activity root = new Activity(
-                new ID(organization.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()));
+                new ID(organization.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), activityTree);
         root.setTitle(organization.getTitle());
         initSequencingDefinition(root, organization.getSequencing(), sequencingCollection);
         initCompletionThreshold(root, organization.getCompletionThreshold());
         activityTree.setRoot(root);
         for (Item item : organization.getItemList()) {
-            Activity activity = deriveActivityFrom(item, sequencingCollection,
+            Activity activity = deriveActivityFrom(activityTree, item, sequencingCollection,
                     new ID(item.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), root);
             root.getChildren().add(activity);
         }
@@ -95,9 +95,9 @@ public class ActivityTreeGenerator {
         return activityTree;
     }
 
-    private static Activity deriveActivityFrom(
+    private static Activity deriveActivityFrom(ActivityTree activityTree,
             Item item, SequencingCollection sequencingCollection, ID id, Activity parentActivity) {
-        Activity activity = new Activity(id);
+        Activity activity = new Activity(id, activityTree);
         activity.setParentActivity(parentActivity);
         activity.setVisible(item.isIsvisible());
         activity.setTitle(item.getTitle());
@@ -111,7 +111,7 @@ public class ActivityTreeGenerator {
         initCompletionThreshold(activity, item.getCompletionThreshold());
         initPresentation(activity, item.getPresentation());
         for (Item childItem : item.getItemList()) {
-            Activity childActivity = deriveActivityFrom(item, sequencingCollection,
+            Activity childActivity = deriveActivityFrom(activityTree, item, sequencingCollection,
                     new ID(childItem.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), activity);
             activity.getChildren().add(childActivity);
         }
@@ -335,12 +335,12 @@ public class ActivityTreeGenerator {
         // objectiveDescriptions
         if (sequencing.getObjectives() != null) {
             Objectives objectives = sequencing.getObjectives();
-            sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(
+            sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(activity,
                     objectives.getPrimaryObjective(), 
                     CPUtils.findAdlseqObjectiveByID(sequencing.getAdlseqObjectives(), 
                             objectives.getPrimaryObjective().getObjectiveID()), true));
             for (Objective objective : objectives.getObjectiveList()) {
-                sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(objective,
+                sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(activity, objective,
                         CPUtils.findAdlseqObjectiveByID(sequencing.getAdlseqObjectives(), objective.getObjectiveID()), 
                         false));
             }
@@ -383,11 +383,11 @@ public class ActivityTreeGenerator {
         }
     }
     
-    private static ObjectiveDescription deriveObjectiveDescriptionFrom(
+    private static ObjectiveDescription deriveObjectiveDescriptionFrom(Activity activity,
             Objective objective, AdlseqObjective adlseqObjective, boolean isPrimary) {
         String objectiveID = objective.getObjectiveID() != null 
                 && StringUtils.isNotBlank(objective.getObjectiveID().getValue()) ? objective.getObjectiveID().getValue() : null;
-        ObjectiveDescription description = new ObjectiveDescription(isPrimary);
+        ObjectiveDescription description = new ObjectiveDescription(isPrimary, activity);
         if (objectiveID != null) {
             description.setObjectiveID(objectiveID);
         }

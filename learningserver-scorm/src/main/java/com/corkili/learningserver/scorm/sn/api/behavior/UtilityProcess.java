@@ -342,10 +342,13 @@ public class UtilityProcess {
                         objectiveProgressInformation.getObjectiveNormalizedMeasure()
                                 .compareTo(ruleCondition.getMeasureThreshold()) < 0 : null;
             case "Completed":
-                return attemptProgressInformation.isAttemptProgressStatus() ?
-                        attemptProgressInformation.isAttemptCompletionStatus() : null;
+                return objectiveProgressInformation.isObjectiveCompletionProgressStatus() ?
+                        objectiveProgressInformation.isObjectiveCompletionStatus() : null;
+//                return attemptProgressInformation.isAttemptProgressStatus() ?
+//                        attemptProgressInformation.isAttemptCompletionStatus() : null;
             case "Activity Progress Known":
-                return attemptProgressInformation.isAttemptProgressStatus();
+                return objectiveProgressInformation.isObjectiveCompletionProgressStatus();
+//                return attemptProgressInformation.isAttemptProgressStatus();
             case "Attempted":
                 return activityProgressInformation.getActivityAttemptCount().getValue() > 0;
             case "Attempt Limit Exceeded":

@@ -9,6 +9,7 @@ import com.corkili.learningserver.scorm.sn.model.datatype.DecimalWithRange;
  */
 public class AttemptProgressInformation {
 
+    private final Object context;
     private boolean attemptProgressStatus;
     private boolean attemptCompletionStatus;
     private boolean attemptCompletionAmountStatus;
@@ -16,7 +17,8 @@ public class AttemptProgressInformation {
     private Duration attemptAbsoluteDuration;
     private Duration attemptExperiencedDuration;
 
-    public AttemptProgressInformation() {
+    public AttemptProgressInformation(Object context) {
+        this.context = context;
         attemptProgressStatus = false;
         attemptCompletionStatus = false;
         attemptCompletionAmountStatus = false;
@@ -32,6 +34,10 @@ public class AttemptProgressInformation {
         attemptCompletionAmount.setValue(0);
         attemptAbsoluteDuration = Duration.ZERO;
         attemptExperiencedDuration = Duration.ZERO;
+    }
+
+    public Object getContext() {
+        return context;
     }
 
     public boolean isAttemptProgressStatus() {

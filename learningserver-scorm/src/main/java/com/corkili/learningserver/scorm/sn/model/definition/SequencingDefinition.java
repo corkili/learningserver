@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
+
 public class SequencingDefinition {
 
+    private final Activity context;
     private final SequencingControlMode sequencingControlMode;
     private final ConstrainChoiceControls constrainChoiceControls;
     private final List<SequencingRuleDescription> sequencingRuleDescriptions;
@@ -19,7 +22,8 @@ public class SequencingDefinition {
     private final DeliveryControls deliveryControls;
     private final CompletionThreshold completionThreshold;
 
-    public SequencingDefinition() {
+    public SequencingDefinition(Activity context) {
+        this.context = context;
         sequencingControlMode = new SequencingControlMode();
         constrainChoiceControls = new ConstrainChoiceControls();
         sequencingRuleDescriptions = new ArrayList<>();
@@ -32,6 +36,10 @@ public class SequencingDefinition {
         randomizationControls = new RandomizationControls();
         deliveryControls = new DeliveryControls();
         completionThreshold = new CompletionThreshold();
+    }
+
+    public Activity getContext() {
+        return context;
     }
 
     public SequencingControlMode getSequencingControlMode() {
@@ -85,6 +93,15 @@ public class SequencingDefinition {
     public ObjectiveDescription findObjectiveDescriptionByID(String objectiveID) {
         for (ObjectiveDescription objectiveDescription : objectiveDescriptions) {
             if (Objects.equals(objectiveID, objectiveDescription.getObjectiveID())) {
+                return objectiveDescription;
+            }
+        }
+        return null;
+    }
+
+    public ObjectiveDescription getPrimaryObjectiveDescription() {
+        for (ObjectiveDescription objectiveDescription : objectiveDescriptions) {
+            if (objectiveDescription.isObjectiveContributesToRollup()) {
                 return objectiveDescription;
             }
         }

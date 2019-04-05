@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.corkili.learningserver.scorm.sn.model.datatype.DecimalWithRange;
 import com.corkili.learningserver.scorm.sn.model.tracking.ObjectiveProgressInformation;
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 
 /**
  * @see com.corkili.learningserver.scorm.cam.model.Objective
@@ -17,13 +18,15 @@ public class ObjectiveDescription implements DefinitionElementSet {
     private final boolean objectiveContributesToRollup;
     private final List<ObjectiveMap> objectiveMaps;
     private final ObjectiveProgressInformation objectiveProgressInformation;
+    private final Activity context;
 
-    public ObjectiveDescription(boolean isPrimaryObjective) {
+    public ObjectiveDescription(boolean isPrimaryObjective, Activity context) {
         objectiveSatisfiedByMeasure = false;
         objectiveMinimumSatisfiedNormalizedMeasure = new DecimalWithRange(1, -1, 1, 4);
         objectiveContributesToRollup = isPrimaryObjective;
         objectiveMaps = new ArrayList<>();
-        objectiveProgressInformation = new ObjectiveProgressInformation();
+        objectiveProgressInformation = new ObjectiveProgressInformation(this);
+        this.context = context;
     }
 
     public String getObjectiveID() {
@@ -56,5 +59,9 @@ public class ObjectiveDescription implements DefinitionElementSet {
 
     public ObjectiveProgressInformation getObjectiveProgressInformation() {
         return objectiveProgressInformation;
+    }
+
+    public Activity getContext() {
+        return context;
     }
 }

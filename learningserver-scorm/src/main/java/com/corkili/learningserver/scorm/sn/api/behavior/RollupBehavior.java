@@ -147,9 +147,8 @@ public class RollupBehavior {
                     targetObjective.getObjectiveProgressInformation().setObjectiveMeasureStatus(true);
                     // 6.3.1.2
                     // total / counted
-                    targetObjective.getObjectiveProgressInformation().getObjectiveNormalizedMeasure()
-                            .setValue(totalWeightedMeasure.divide(countedMeasures, BigDecimal.ROUND_HALF_UP)
-                                    .doubleValue());
+                    targetObjective.getObjectiveProgressInformation().setObjectiveNormalizedMeasure(
+                            totalWeightedMeasure.divide(countedMeasures, BigDecimal.ROUND_HALF_UP).doubleValue());
                 } else { // 6.3.2
                     // 6.3.2.1
                     // No children contributed weight.
@@ -683,10 +682,13 @@ public class RollupBehavior {
             case "Objective Measure Known":
                 return objectiveProgressInformation.isObjectiveMeasureStatus();
             case "Completed":
-                return attemptProgressInformation.isAttemptProgressStatus()
-                        && attemptProgressInformation.isAttemptCompletionStatus();
+                return objectiveProgressInformation.isObjectiveCompletionProgressStatus()  ?
+                        objectiveProgressInformation.isObjectiveCompletionStatus() : null;
+//                return attemptProgressInformation.isAttemptProgressStatus()
+//                        && attemptProgressInformation.isAttemptCompletionStatus();
             case "Activity Progress Known":
-                return attemptProgressInformation.isAttemptProgressStatus();
+                return objectiveProgressInformation.isObjectiveCompletionProgressStatus();
+//                return attemptProgressInformation.isAttemptProgressStatus();
             case "Attempted":
                 return activityProgressInformation.getActivityAttemptCount().getValue() > 0;
             case "Attempt Limit Exceeded":
