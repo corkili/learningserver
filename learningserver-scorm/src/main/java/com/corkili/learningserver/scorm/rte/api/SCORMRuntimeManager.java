@@ -40,10 +40,10 @@ public class SCORMRuntimeManager {
     }
 
     public boolean launch(String lmsContentPackageID, String activityItemID, LMSLearnerInfo lmsLearnerInfo) {
-        return launch(lmsContentPackageID, lmsLearnerInfo, activityItemID, false);
+        return launch(lmsContentPackageID, activityItemID, lmsLearnerInfo, false);
     }
 
-    public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo, String activityItemID, boolean reloadIfPresent) {
+    public boolean launch(String lmsContentPackageID, String activityItemID, LMSLearnerInfo lmsLearnerInfo, boolean reloadIfPresent) {
         ContentPackage contentPackage = scormPackageManager.launch(lmsContentPackageID, reloadIfPresent);
         if (contentPackage == null) {
             return false;
@@ -102,9 +102,13 @@ public class SCORMRuntimeManager {
         unlaunch(shouldDelete);
     }
 
+    public void unlaunch(ID attemptID) {
+        learnerAttemptMap.remove(attemptID);
+    }
+
     private void unlaunch(List<ID> shouldDelete) {
         for (ID attemptID : shouldDelete) {
-            learnerAttemptMap.remove(attemptID);
+            unlaunch(attemptID);
         }
     }
 
@@ -185,5 +189,23 @@ public class SCORMRuntimeManager {
         } else {
             return "please try again";
         }
+    }
+
+    public String getErrorString(int errorCode) {
+        for (ScormError value : ScormError.values()) {
+            if (value.getCode() == errorCode) {
+                return value.getMsg();
+            }
+        }
+        return "Undefined error code - " + errorCode;
+    }
+
+    public String getDiagnostic(int errorCode) {
+        for (ScormError value : ScormError.values()) {
+            if (value.getCode() == errorCode) {
+                return value.getMsg();
+            }
+        }
+        return "Undefined error code - " + errorCode;
     }
 }

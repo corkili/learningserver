@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" th:src="@{../../../../js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{../../../../js/scorm.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            window.open(document.getElementById("sco").action);
+        })
+    </script>
+</head>
+<body>
+<form id="sco" th:action="${path}"></form>
+</body>
+</html>

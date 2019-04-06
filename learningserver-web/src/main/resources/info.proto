@@ -39,6 +39,8 @@ message CourseInfo {
     repeated Image image = 7;
     repeated string tag = 8;
     UserInfo teacherInfo = 9;
+    bool hasCourseware = 10;
+    sint64 coursewareId = 11;
 }
 
 message QuestionInfo {
@@ -337,4 +339,59 @@ message CourseSubscriptionInfo {
     UserInfo subscriberInfo = 5;
     sint64 subscribedCourseId = 6;
     CourseInfo subscribedCourseInfo = 7;
+}
+
+message ScormInfo {
+    sint64 scormId = 1;
+    fixed64 createTime = 2;
+    fixed64 updateTime = 3;
+    string path = 4;
+    bytes data = 5;
+}
+
+message CourseCatalogInfo {
+    string defaultItemId = 1;
+    int32 maxLevel = 2;
+    int32 itemNumber = 3;
+    map<int32, CourseCatalogItemInfoList> items = 4;
+}
+
+message CourseCatalogItemInfo {
+    int32 level = 1;
+    int32 index = 2;
+    string itemId = 3;
+    string itemTitle = 4;
+    bool selectable = 5;
+    bool visible = 6;
+    repeated string hideLmsUI = 7;
+    bool hasParent = 8;
+    CourseCatalogItemInfo parentItem = 9;
+    CourseCatalogItemInfoList nextLevelItems = 10;
+}
+
+message CourseCatalogItemInfoList {
+    repeated CourseCatalogItemInfo courseCatalogItemInfo = 1;
+}
+
+message DeliveryContentInfo {
+    string itemId = 1;
+    string basePath = 2;
+    string entry = 3;
+    bool hasParameters = 4;
+    string parameters = 5;
+    repeated string content = 6;
+}
+
+enum NavigationEventType {
+    Start = 0;
+    ResumeAll = 1;
+    Continue = 2;
+    Previous = 3;
+    Choose = 4;
+    Jump = 5;
+    Abandon = 6;
+    AbandonAll = 7;
+    SuspendAll = 8;
+    UnqualifiedExit = 9;
+    ExitAll = 10;
 }

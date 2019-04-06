@@ -12,13 +12,16 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.corkili.learningserver.scorm.SCORM;
+import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.rte.api.LearnerAttempt;
+import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
 import com.corkili.learningserver.scorm.sn.api.behavior.OverallSequencingBehavior;
 import com.corkili.learningserver.scorm.sn.api.behavior.result.OverallSequencingResult;
 import com.corkili.learningserver.scorm.sn.api.event.EventTranslator;
 import com.corkili.learningserver.scorm.sn.api.event.EventType;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.scorm.sn.api.request.NavigationRequest;
-import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 
@@ -49,6 +52,7 @@ public class AttemptManager {
     }
 
     public ProcessResult process(NavigationEvent event) {
+        SCORM.getInstance().mapRuntimeDataToTrackingInfo(targetActivityTree.getGlobalStateInformation().getCurrentActivity());
         processedEventTypeSeries.add(event.getType());
         Activity targetActivity = null;
         if (StringUtils.isNotBlank(event.getTargetActivityID())) {
@@ -60,13 +64,20 @@ public class AttemptManager {
         }
         NavigationRequest request = EventTranslator.translateEventToRequestType(event, targetActivityTree, targetActivity);
         Activity oldCurrentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
+        boolean oldIsActive = oldCurrentActivity != null && oldCurrentActivity.getActivityStateInformation().isActivityIsActive();
         OverallSequencingResult result = OverallSequencingBehavior.overallSequencing(request);
-        if (updateAttempt()) {
+        if (!updateAttempt()) {
             log.error("update ActivityAttempt error");
         }
         if (!result.isSuccess()) {
             log.error("Exception: {} - {}", result.getException().getCode(), result.getException().getDescription());
             return new ProcessResult(result.getException());
+        }
+        if (result.isExit()) {
+            Activity currentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
+            if (currentActivity != null && !currentActivity.getActivityStateInformation().isActivityIsActive()) {
+                targetActivityTree.getGlobalStateInformation().setCurrentActivity(null);
+            }
         }
         if (result.isExit() && result.getEndSequencingSession()) {
             if (event.getType() == EventType.SuspendAll) {
@@ -76,7 +87,8 @@ public class AttemptManager {
             }
         }
         Activity currentActivity = targetActivityTree.getGlobalStateInformation().getCurrentActivity();
-        if (currentActivity != null && currentActivity.isLeaf() && !currentActivity.equals(oldCurrentActivity)) {
+        if (currentActivity != null && currentActivity.isLeaf() && currentActivity.getActivityStateInformation().isActivityIsActive()
+                && (!currentActivity.equals(oldCurrentActivity) || !oldIsActive)) {
             // has a new delivery activity
             return new ProcessResult(currentActivity);
         } else {
@@ -121,7 +133,13 @@ public class AttemptManager {
             }
         }
         for (int i = shouldDelete.size() - 1; i >= 0; i--) {
-            containedAttempts.remove(shouldDelete.get(i));
+            Activity activity = shouldDelete.get(i);
+            containedAttempts.remove(activity);
+            LearnerAttempt learnerAttempt = SCORMRuntimeManager.getInstance().getLearnerAttempt(activity.getId());
+            if (learnerAttempt != null) {
+                learnerAttempt.terminate("");
+//                learnerAttempt.closeLearnerSession(true);
+            }
         }
     }
 

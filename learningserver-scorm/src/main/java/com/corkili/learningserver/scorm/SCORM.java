@@ -73,13 +73,13 @@ public class SCORM {
             return new SCORMResult(CommonUtils.format("obtain delivery content \"{}\" failed",
                     deliveryActivity.getId().getIdentifier()));
         }
-        if (!mapTrackingInfoToRuntimeData(deliveryActivity)) {
-            return new SCORMResult("sync Tracking Information and Run-time Data failed");
-        }
-        return new SCORMResult(deliveryContent);
+//        if (!mapTrackingInfoToRuntimeData(deliveryActivity)) {
+//            return new SCORMResult("sync Tracking Information and Run-time Data failed");
+//        }
+        return new SCORMResult(deliveryContent, deliveryActivity);
     }
 
-    private boolean mapTrackingInfoToRuntimeData(Activity activity) {
+    public boolean mapTrackingInfoToRuntimeData(Activity activity) {
         LearnerAttempt learnerAttempt = runtimeManager.getLearnerAttempt(activity.getId());
         if (learnerAttempt == null) {
             log.error("Learner Attempt \"{}\" not exist", activity.getId());
@@ -111,6 +111,10 @@ public class SCORM {
     }
 
     public void mapRuntimeDataToTrackingInfo(Activity activity) {
+        if (activity == null) {
+            return;
+        }
+        log.info("mapRuntimeDataToTrackingInfo: {}", activity.getId());
         LearnerAttempt learnerAttempt = runtimeManager.getLearnerAttempt(activity.getId());
         if (learnerAttempt == null) {
             log.error("mapRuntimeDataToTrackingInfo: Learner Attempt \"{}\" not exist", activity.getId());
@@ -131,7 +135,13 @@ public class SCORM {
         for (Instance instance : runtimeData.getCmi().getObjectives().getInstances()) {
             ObjectiveDescription objectiveDescription = activity.getSequencingDefinition()
                     .findObjectiveDescriptionByID(instance.getId().getValue());
+
+            if (objectiveDescription == null) {
+                continue;
+            }
+
             ObjectiveProgressInformation information = objectiveDescription.getObjectiveProgressInformation();
+
             if (instance.getSuccessStatus().getValue().equals("unknown")) {
                 information.setObjectiveProgressStatus(false);
                 information.setObjectiveSatisfiedStatus(false);
@@ -139,31 +149,32 @@ public class SCORM {
                 information.setObjectiveProgressStatus(true);
                 information.setObjectiveSatisfiedStatus("passed".equals(instance.getSuccessStatus().getValue()));
             }
+
             if (instance.getScore().getScaled().getValue() == null) {
                 information.setObjectiveMeasureStatus(false);
-                information.getObjectiveNormalizedMeasure().setValue(0.0);
+                information.setObjectiveNormalizedMeasure(0.0);
             } else {
                 information.setObjectiveMeasureStatus(true);
-                information.getObjectiveNormalizedMeasure()
-                        .setValue(instance.getScore().getScaled().getValue().doubleValue());
+                information.setObjectiveNormalizedMeasure(instance.getScore().getScaled().getValue().doubleValue());
             }
+
+            if (instance.getCompletionStatus().getValue().equals("unknown")) {
+                information.setObjectiveCompletionProgressStatus(false);
+                information.setObjectiveCompletionStatus(false);
+            } else {
+                information.setObjectiveCompletionProgressStatus(true);
+                information.setObjectiveCompletionStatus("completed".equals(instance.getCompletionStatus().getValue()));
+            }
+
+            if (instance.getProgressMeasure().getValue() == null) {
+                information.setObjectiveCompletionAmountStatus(false);
+                information.setObjectiveCompletionAmount(0.0);
+            } else {
+                information.setObjectiveCompletionAmountStatus(false);
+                information.setObjectiveCompletionAmount(instance.getProgressMeasure().getValue().doubleValue());
+            }
+
             if (objectiveDescription.isObjectiveContributesToRollup()) { // primary
-                if (runtimeData.getCmi().getSuccessStatus().getSuccessStatus().getValue().equals("unknown")) {
-                    information.setObjectiveProgressStatus(false);
-                    information.setObjectiveSatisfiedStatus(false);
-                } else {
-                    information.setObjectiveProgressStatus(true);
-                    information.setObjectiveSatisfiedStatus(
-                            "passed".equals(runtimeData.getCmi().getSuccessStatus().getSuccessStatus().getValue()));
-                }
-                if (runtimeData.getCmi().getScore().getScaled().getValue() == null) {
-                    information.setObjectiveMeasureStatus(false);
-                    information.getObjectiveNormalizedMeasure().setValue(0.0);
-                } else {
-                    information.setObjectiveMeasureStatus(true);
-                    information.getObjectiveNormalizedMeasure()
-                            .setValue(runtimeData.getCmi().getScore().getScaled().getValue().doubleValue());
-                }
                 if (instance.getCompletionStatus().getValue().equals("unknown")) {
                     attemptProgressInformation.setAttemptProgressStatus(false);
                     attemptProgressInformation.setAttemptCompletionStatus(false);
@@ -172,6 +183,7 @@ public class SCORM {
                     attemptProgressInformation.setAttemptCompletionStatus(
                             "completed".equals(instance.getCompletionStatus().getValue()));
                 }
+
                 if (instance.getProgressMeasure().getValue() == null) {
                     attemptProgressInformation.setAttemptCompletionAmountStatus(false);
                     attemptProgressInformation.getAttemptCompletionAmount().setValue(0.0);
@@ -182,6 +194,7 @@ public class SCORM {
                 }
             }
         }
+
         if (runtimeData.getCmi().getCompletionStatus().getCompletionStatus().getValue().equals("unknown")) {
             attemptProgressInformation.setAttemptProgressStatus(false);
             attemptProgressInformation.setAttemptCompletionStatus(false);
@@ -197,6 +210,47 @@ public class SCORM {
             attemptProgressInformation.setAttemptCompletionAmountStatus(true);
             attemptProgressInformation.getAttemptCompletionAmount().setValue(
                     runtimeData.getCmi().getProgressMeasure().getProgressMeasure().getValue().doubleValue());
+        }
+
+        ObjectiveDescription objectiveDescription = activity.getSequencingDefinition().getPrimaryObjectiveDescription();
+
+        if (objectiveDescription == null) {
+            return;
+        }
+
+        ObjectiveProgressInformation information = objectiveDescription.getObjectiveProgressInformation();
+
+        if (runtimeData.getCmi().getSuccessStatus().getSuccessStatus().getValue().equals("unknown")) {
+            information.setObjectiveProgressStatus(false);
+            information.setObjectiveSatisfiedStatus(false);
+        } else {
+            information.setObjectiveProgressStatus(true);
+            information.setObjectiveSatisfiedStatus(
+                    "passed".equals(runtimeData.getCmi().getSuccessStatus().getSuccessStatus().getValue()));
+        }
+
+        if (runtimeData.getCmi().getScore().getScaled().getValue() == null) {
+            information.setObjectiveMeasureStatus(false);
+            information.setObjectiveNormalizedMeasure(0.0);
+        } else {
+            information.setObjectiveMeasureStatus(true);
+            information.setObjectiveNormalizedMeasure(runtimeData.getCmi().getScore().getScaled().getValue().doubleValue());
+        }
+
+        if (runtimeData.getCmi().getCompletionStatus().getCompletionStatus().getValue().equals("unknown")) {
+            information.setObjectiveCompletionProgressStatus(false);
+            information.setObjectiveCompletionStatus(false);
+        } else {
+            information.setObjectiveCompletionProgressStatus(true);
+            information.setObjectiveCompletionStatus("completed".equals(runtimeData.getCmi().getCompletionStatus().getCompletionStatus().getValue()));
+        }
+
+        if (runtimeData.getCmi().getProgressMeasure().getProgressMeasure().getValue() == null) {
+            information.setObjectiveCompletionAmountStatus(false);
+            information.setObjectiveCompletionAmount(0.0);
+        } else {
+            information.setObjectiveCompletionAmountStatus(false);
+            information.setObjectiveCompletionAmount(runtimeData.getCmi().getProgressMeasure().getProgressMeasure().getValue().doubleValue());
         }
     }
 

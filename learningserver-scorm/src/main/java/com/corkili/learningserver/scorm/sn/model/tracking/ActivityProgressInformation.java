@@ -3,22 +3,29 @@ package com.corkili.learningserver.scorm.sn.model.tracking;
 import java.time.Duration;
 
 import com.corkili.learningserver.scorm.sn.model.datatype.NonNegativeInteger;
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 
 /**
  * Each tracked activity has one set of tracking status information that span all attempts on that activity.
  */
 public class ActivityProgressInformation {
 
+    private final Activity context;
     private boolean activityProgressStatus;
     private Duration activityAbsoluteDuration;
     private Duration activityExperiencedDuration;
     private final NonNegativeInteger activityAttemptCount;
 
-    public ActivityProgressInformation() {
+    public ActivityProgressInformation(Activity context) {
+        this.context = context;
         activityProgressStatus = false;
         activityAbsoluteDuration = Duration.ZERO;
         activityExperiencedDuration = Duration.ZERO;
         activityAttemptCount = new NonNegativeInteger(0);
+    }
+
+    public Activity getContext() {
+        return context;
     }
 
     public boolean isActivityProgressStatus() {

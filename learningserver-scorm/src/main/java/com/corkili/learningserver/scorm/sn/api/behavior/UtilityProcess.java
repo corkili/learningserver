@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.corkili.learningserver.scorm.SCORM;
 import com.corkili.learningserver.scorm.sn.api.behavior.result.UtilityProcessResult;
 import com.corkili.learningserver.scorm.sn.api.request.RollupRequest;
 import com.corkili.learningserver.scorm.sn.api.request.UtilityProcessRequest;
@@ -245,7 +244,7 @@ public class UtilityProcess {
         if (targetActivity.isLeaf()) {
             // TODO 1.1
             if (deliveryControls.isTracked()) {
-                SCORM.getInstance().mapRuntimeDataToTrackingInfo(targetActivity);
+//                SCORM.getInstance().mapRuntimeDataToTrackingInfo(targetActivity);
                 // 1.1.1
                 // The sequencer will not affect the state of suspended activities.
                 if (!targetActivity.getActivityStateInformation().isActivityIsSuspended()) {
@@ -309,6 +308,9 @@ public class UtilityProcess {
                 new RollupRequest(utilityProcessRequest.getTargetActivityTree(), targetActivity));
     }
 
+    /**
+     * SN-3-17
+     */
     private static Boolean evaluateRuleCondition(RuleCondition ruleCondition, Activity targetActivity) {
         ObjectiveDescription objectiveDescription = targetActivity
                 .findAssociatedObjectiveByID(ruleCondition.getReferencedObjective());
@@ -339,10 +341,13 @@ public class UtilityProcess {
                         objectiveProgressInformation.getObjectiveNormalizedMeasure()
                                 .compareTo(ruleCondition.getMeasureThreshold()) < 0 : null;
             case "Completed":
-                return attemptProgressInformation.isAttemptProgressStatus() ?
-                        attemptProgressInformation.isAttemptCompletionStatus() : null;
+                return objectiveProgressInformation.isObjectiveCompletionProgressStatus() ?
+                        objectiveProgressInformation.isObjectiveCompletionStatus() : null;
+//                return attemptProgressInformation.isAttemptProgressStatus() ?
+//                        attemptProgressInformation.isAttemptCompletionStatus() : null;
             case "Activity Progress Known":
-                return attemptProgressInformation.isAttemptProgressStatus();
+                return objectiveProgressInformation.isObjectiveCompletionProgressStatus();
+//                return attemptProgressInformation.isAttemptProgressStatus();
             case "Attempted":
                 return activityProgressInformation.getActivityAttemptCount().getValue() > 0;
             case "Attempt Limit Exceeded":

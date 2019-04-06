@@ -2,7 +2,6 @@ package com.corkili.learningserver.po;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -91,7 +90,7 @@ public class Course implements PersistObject {
     @JoinColumn(name = "teacher_fk", nullable = false)
     private User teacher;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "scorm_fk")
     private Scorm courseware;
 

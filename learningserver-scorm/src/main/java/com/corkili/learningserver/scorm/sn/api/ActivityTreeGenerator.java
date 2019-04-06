@@ -1,10 +1,8 @@
 package com.corkili.learningserver.scorm.sn.api;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +32,7 @@ import com.corkili.learningserver.scorm.cam.model.Sequencing;
 import com.corkili.learningserver.scorm.cam.model.SequencingCollection;
 import com.corkili.learningserver.scorm.cam.model.SequencingRules;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
 import com.corkili.learningserver.scorm.sn.model.datatype.Vocabulary;
@@ -51,28 +50,29 @@ import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescri
 import com.corkili.learningserver.scorm.sn.model.definition.SequencingRuleDescription.ConditionType;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
-import com.corkili.learningserver.scorm.common.ID;
 
 @Slf4j
 public class ActivityTreeGenerator {
 
     private static LMSPersistDriverManager lmsPersistDriverManager = LMSPersistDriverManager.getInstance();
 
-    public static Map<ID, ActivityTree> deriveActivityTreesFrom(
-            ContentPackage contentPackage, String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo) {
-        Map<ID, ActivityTree> map = new HashMap<>();
+    public static ActivityTree deriveActivityTreesFrom(ContentPackage contentPackage, String lmsContentPackageID,
+                                                       LMSLearnerInfo lmsLearnerInfo, String organizationId) {
         SequencingCollection sequencingCollection = contentPackage.getManifest().getSequencingCollection();
         for (Organization organization : contentPackage.getManifest().getOrganizations().getOrganizationList()) {
-            ID id = new ID(organization.getIdentifier().getValue(), lmsContentPackageID, lmsLearnerInfo.getLearnerID());
-            ActivityTree activityTree = deriveActivityTreeFrom(organization, sequencingCollection, id);
-            if (activityTree == null) {
-                log.error("derive activity tree error - activity tree \"{}\"", id);
-            } else {
-                initAvailableChildren(activityTree);
-                map.put(id, activityTree);
+            if (StringUtils.equals(organization.getIdentifier().getValue(), organizationId)) {
+                ID id = new ID(organization.getIdentifier().getValue(), lmsContentPackageID, lmsLearnerInfo.getLearnerID());
+                ActivityTree activityTree = deriveActivityTreeFrom(organization, sequencingCollection, id);
+                if (activityTree == null) {
+                    log.error("derive activity tree error - activity tree \"{}\"", id);
+                    break;
+                } else {
+                    initAvailableChildren(activityTree);
+                    return activityTree;
+                }
             }
         }
-        return map;
+        return null;
     }
 
     private static ActivityTree deriveActivityTreeFrom(
@@ -81,23 +81,23 @@ public class ActivityTreeGenerator {
         activityTree.setObjectivesGlobalToSystem(organization.isObjectivesGlobalToSystem());
         // root
         Activity root = new Activity(
-                new ID(organization.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()));
+                new ID(organization.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), activityTree);
         root.setTitle(organization.getTitle());
         initSequencingDefinition(root, organization.getSequencing(), sequencingCollection);
         initCompletionThreshold(root, organization.getCompletionThreshold());
         activityTree.setRoot(root);
         for (Item item : organization.getItemList()) {
-            Activity activity = deriveActivityFrom(item, sequencingCollection,
-                    new ID(item.getIdentifierref(), id.getLmsContentPackageID(), id.getLmsLearnerID()), root);
+            Activity activity = deriveActivityFrom(activityTree, item, sequencingCollection,
+                    new ID(item.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), root);
             root.getChildren().add(activity);
         }
         initActivityProgressInformation(root);
         return activityTree;
     }
 
-    private static Activity deriveActivityFrom(
+    private static Activity deriveActivityFrom(ActivityTree activityTree,
             Item item, SequencingCollection sequencingCollection, ID id, Activity parentActivity) {
-        Activity activity = new Activity(id);
+        Activity activity = new Activity(id, activityTree);
         activity.setParentActivity(parentActivity);
         activity.setVisible(item.isIsvisible());
         activity.setTitle(item.getTitle());
@@ -111,7 +111,7 @@ public class ActivityTreeGenerator {
         initCompletionThreshold(activity, item.getCompletionThreshold());
         initPresentation(activity, item.getPresentation());
         for (Item childItem : item.getItemList()) {
-            Activity childActivity = deriveActivityFrom(item, sequencingCollection,
+            Activity childActivity = deriveActivityFrom(activityTree, item, sequencingCollection,
                     new ID(childItem.getIdentifier().getValue(), id.getLmsContentPackageID(), id.getLmsLearnerID()), activity);
             activity.getChildren().add(childActivity);
         }
@@ -335,12 +335,12 @@ public class ActivityTreeGenerator {
         // objectiveDescriptions
         if (sequencing.getObjectives() != null) {
             Objectives objectives = sequencing.getObjectives();
-            sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(
+            sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(activity,
                     objectives.getPrimaryObjective(), 
                     CPUtils.findAdlseqObjectiveByID(sequencing.getAdlseqObjectives(), 
                             objectives.getPrimaryObjective().getObjectiveID()), true));
             for (Objective objective : objectives.getObjectiveList()) {
-                sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(objective,
+                sequencingDefinition.getObjectiveDescriptions().add(deriveObjectiveDescriptionFrom(activity, objective,
                         CPUtils.findAdlseqObjectiveByID(sequencing.getAdlseqObjectives(), objective.getObjectiveID()), 
                         false));
             }
@@ -383,11 +383,11 @@ public class ActivityTreeGenerator {
         }
     }
     
-    private static ObjectiveDescription deriveObjectiveDescriptionFrom(
+    private static ObjectiveDescription deriveObjectiveDescriptionFrom(Activity activity,
             Objective objective, AdlseqObjective adlseqObjective, boolean isPrimary) {
         String objectiveID = objective.getObjectiveID() != null 
                 && StringUtils.isNotBlank(objective.getObjectiveID().getValue()) ? objective.getObjectiveID().getValue() : null;
-        ObjectiveDescription description = new ObjectiveDescription(isPrimary);
+        ObjectiveDescription description = new ObjectiveDescription(isPrimary, activity);
         if (objectiveID != null) {
             description.setObjectiveID(objectiveID);
         }

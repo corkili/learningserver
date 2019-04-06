@@ -97,7 +97,7 @@ public class DeliveryBehavior {
         Activity identifiedActivity = deliveryRequest.getTargetActivity();
         // 1
         // If the attempt on the current activity has not been terminated, we cannot deliver new content.
-        if (currentActivity.getActivityStateInformation().isActivityIsActive()) {
+        if (currentActivity != null && currentActivity.getActivityStateInformation().isActivityIsActive()) {
             // 1.1
             // Delivery request is invalid - The Current Activity has not been terminated.
             return new DeliveryBehaviorResult().setException(SequencingException.DB21);

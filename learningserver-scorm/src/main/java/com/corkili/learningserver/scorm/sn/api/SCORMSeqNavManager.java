@@ -1,19 +1,18 @@
 package com.corkili.learningserver.scorm.sn.api;
 
+import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
+import com.corkili.learningserver.scorm.cam.model.ContentPackage;
+import com.corkili.learningserver.scorm.common.CommonUtils;
+import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
+import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
+import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import lombok.extern.slf4j.Slf4j;
-
-import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
-import com.corkili.learningserver.scorm.cam.model.ContentPackage;
-import com.corkili.learningserver.scorm.common.CommonUtils;
-import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
-import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
-import com.corkili.learningserver.scorm.common.ID;
-import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 
 @Slf4j
 public class SCORMSeqNavManager {
@@ -40,24 +39,22 @@ public class SCORMSeqNavManager {
         return instance;
     }
 
-    public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo) {
-        return launch(lmsContentPackageID, lmsLearnerInfo, false);
+    public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo, String organizationId) {
+        return launch(lmsContentPackageID, lmsLearnerInfo, organizationId, false);
     }
 
-    public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo, boolean reloadIfPresent) {
+    public boolean launch(String lmsContentPackageID, LMSLearnerInfo lmsLearnerInfo, String organizationId, boolean reloadIfPresent) {
         ContentPackage contentPackage = scormPackageManager.launch(lmsContentPackageID, reloadIfPresent);
-        Map<ID, ActivityTree> activityTreeMap = ActivityTreeGenerator
-                .deriveActivityTreesFrom(contentPackage, lmsContentPackageID, lmsLearnerInfo);
-        if (activityTreeMap.isEmpty()) {
+        ActivityTree activityTree = ActivityTreeGenerator
+                .deriveActivityTreesFrom(contentPackage, lmsContentPackageID, lmsLearnerInfo, organizationId);
+        if (activityTree == null) {
             return false;
         }
-        for (ActivityTree activityTree : activityTreeMap.values()) {
-            if (attemptManagerMap.containsKey(activityTree.getId()) && !reloadIfPresent) {
-                continue;
-            }
-            AttemptManager attemptManager = new AttemptManager(activityTree);
-            attemptManagerMap.put(attemptManager.getManagerID(), attemptManager);
+        if (attemptManagerMap.containsKey(activityTree.getId()) && !reloadIfPresent) {
+            return true;
         }
+        AttemptManager attemptManager = new AttemptManager(activityTree);
+        attemptManagerMap.put(attemptManager.getManagerID(), attemptManager);
         return true;
     }
 

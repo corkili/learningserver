@@ -41,18 +41,21 @@ public class Activity {
 
     private final List<Activity> children;
 
-    public Activity(ID id) {
+    private final ActivityTree context;
+
+    public Activity(ID id, ActivityTree context) {
         this.id = id;
         children = new ArrayList<>();
-        sequencingDefinition = new SequencingDefinition();
-        activityProgressInformation = new ActivityProgressInformation();
-        attemptProgressInformation = new AttemptProgressInformation();
+        sequencingDefinition = new SequencingDefinition(this);
+        activityProgressInformation = new ActivityProgressInformation(this);
+        attemptProgressInformation = new AttemptProgressInformation(this);
         activityStateInformation = new ActivityStateInformation();
         hideLmsUIControls = new HideLmsUIControls();
         visible = true;
         title = "";
         referenceResource = "";
         parameters = "";
+        this.context = context;
     }
 
     public SequencingDefinition getSequencingDefinition() {
@@ -188,6 +191,10 @@ public class Activity {
             return activity.id;
         }
         return getBelongActivityTreeID(activity.getParentActivity());
+    }
+
+    public ActivityTree getContext() {
+        return context;
     }
 
     @Override

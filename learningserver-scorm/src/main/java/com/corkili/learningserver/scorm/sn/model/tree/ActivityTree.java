@@ -2,14 +2,17 @@ package com.corkili.learningserver.scorm.sn.model.tree;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Stack;
 
 import com.sun.istack.internal.NotNull;
 
 import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.sn.model.global.GlobalObjectiveDescription;
 import com.corkili.learningserver.scorm.sn.model.tracking.GlobalStateInformation;
 
 public class ActivityTree {
@@ -18,11 +21,13 @@ public class ActivityTree {
     private boolean objectivesGlobalToSystem; // SN-3-39 3.10.2
     private Activity root;
     private final GlobalStateInformation globalStateInformation;
+    private final Map<String, GlobalObjectiveDescription> globalObjectiveDescriptionMap;
 
     public ActivityTree(ID id) {
         this.id = id;
         objectivesGlobalToSystem = true;
         globalStateInformation = new GlobalStateInformation();
+        globalObjectiveDescriptionMap = new HashMap<>();
     }
 
     public boolean isObjectivesGlobalToSystem() {
@@ -47,6 +52,15 @@ public class ActivityTree {
 
     public ID getId() {
         return id;
+    }
+
+    public GlobalObjectiveDescription findGlobalObjectiveDescription(String objectiveId) {
+        GlobalObjectiveDescription globalObjectiveDescription = globalObjectiveDescriptionMap.get(objectiveId);
+        if (globalObjectiveDescription == null) {
+            globalObjectiveDescription = new GlobalObjectiveDescription(objectiveId);
+            globalObjectiveDescriptionMap.put(objectiveId, globalObjectiveDescription);
+        }
+        return globalObjectiveDescription;
     }
 
     public boolean isRoot(Activity activity) {
@@ -147,7 +161,7 @@ public class ActivityTree {
             if (!includeTo) {
                 indexOfTo--;
             }
-            if (indexOfFrom >= indexOfTo) {
+            if (indexOfFrom > indexOfTo) {
                 return Collections.emptyList();
             }
             for (int i = indexOfFrom; i <= indexOfTo; i++) {
@@ -160,7 +174,7 @@ public class ActivityTree {
             if (!includeTo) {
                 indexOfTo++;
             }
-            if (indexOfTo >=indexOfFrom) {
+            if (indexOfTo > indexOfFrom) {
                 return Collections.emptyList();
             }
             for (int i = indexOfFrom; i >= indexOfTo; i--) {

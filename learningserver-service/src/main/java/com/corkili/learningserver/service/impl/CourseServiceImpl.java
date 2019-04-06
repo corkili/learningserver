@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 import com.corkili.learningserver.bo.Course;
+import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.common.ImageUtils;
+import com.corkili.learningserver.common.ScormZipUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.repo.CourseRepository;
@@ -259,5 +261,48 @@ public class CourseServiceImpl extends ServiceImpl<Course, com.corkili.learnings
             serviceResult = recordWarnAndCreateSuccessResultWithMessage("delete course success");
         }
         return serviceResult;
+    }
+
+    @Override
+    public ServiceResult saveOrUpdateOrDeleteCourseware(Long courseId, String zipName, byte[] zipData) {
+        Course course = retrieve(courseId).orElse(null);
+        if (course == null) {
+            return recordErrorAndCreateFailResultWithMessage("update courseware error: course [{}] not exists", courseId);
+        }
+        course = Course.copyFrom(course);
+        Long oldCoursewareId = course.getCoursewareId();
+        if (zipData != null && zipData.length != 0) {
+            Scorm scorm = new Scorm();
+            scorm.setPath(ScormZipUtils.getScormZipPath(zipName, course.getTeacherId()));
+            ServiceResult serviceResult = scormService.importScorm(scorm, zipData);
+            if (!serviceResult.isSuccess()) {
+                return recordErrorAndCreateFailResultWithMessage("update courseware error: import scorm failed");
+            }
+            scorm = serviceResult.extra(Scorm.class);
+            course.setCoursewareId(scorm.getId());
+            Optional<Course> courseOptional = update(course);
+            if (!courseOptional.isPresent()) {
+                // rollback
+                scormService.deleteScorm(scorm.getId());
+                return recordErrorAndCreateFailResultWithMessage("update coruseware error: update course [{}] failed", course.getId());
+            }
+            course = courseOptional.get();
+            if (oldCoursewareId != null) {
+                scormService.deleteScorm(oldCoursewareId);
+            }
+            return ServiceResult.successResult("update courseware success", Course.class, course);
+        } else {
+            if (oldCoursewareId != null) {
+                course.setCoursewareId(null);
+                Optional<Course> courseOptional = update(course);
+                if (!courseOptional.isPresent()) {
+                    // rollback
+                    return recordErrorAndCreateFailResultWithMessage("delete coruseware error: update course [{}] failed", course.getId());
+                }
+                scormService.deleteScorm(oldCoursewareId);
+                course = courseOptional.get();
+            }
+            return ServiceResult.successResult("delete courseware success", Course.class, course);
+        }
     }
 }

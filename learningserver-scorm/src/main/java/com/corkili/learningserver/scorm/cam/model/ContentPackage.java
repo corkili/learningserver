@@ -1,17 +1,16 @@
 package com.corkili.learningserver.scorm.cam.model;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
+import com.corkili.learningserver.scorm.cam.load.ModelUtils;
+import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.corkili.learningserver.scorm.cam.load.ModelUtils;
-import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A package represents a unit of learning.
@@ -89,7 +88,7 @@ public class ContentPackage {
         String entry = manifestXmlBase + resourcesXmlBase +
                 (!ModelUtils.isAnyUriEmpty(resourceRefByItem.getXmlBase()) ? resourceRefByItem.getXmlBase().getValue() : "")
                 + resourceRefByItem.getHref();
-        return new DeliveryContent(basePath, entry, content);
+        return new DeliveryContent(itemID, basePath, entry, item.getParameters(), content);
     }
 
     public ContentPackageType getContentPackageType() {

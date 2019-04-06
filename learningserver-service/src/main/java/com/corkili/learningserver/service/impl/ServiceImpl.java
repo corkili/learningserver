@@ -175,8 +175,8 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                         }
                     }
                 } catch (NoSuchFieldException e) {
-                    logger().warn("exception occurs when transfer {} po [{}] to {} bo, NoSuchFieldException: {}",
-                            entityName(), id, entityName(), e.getMessage());
+//                    logger().warn("exception occurs when transfer {} po [{}] to {} bo, NoSuchFieldException: {}",
+//                            entityName(), id, entityName(), e.getMessage());
                 }
             }
         } catch (Exception e) {
@@ -237,8 +237,8 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
                         }
                     }
                 } catch (NoSuchFieldException e) {
-                    logger().warn("exception occurs when transfer {} bo [{}] to {} po, NoSuchFieldException: {}",
-                            entityName(), id, entityName(), e.getMessage());
+//                    logger().warn("exception occurs when transfer {} bo [{}] to {} po, NoSuchFieldException: {}",
+//                            entityName(), id, entityName(), e.getMessage());
                 }
             }
         } catch (Exception e) {
@@ -377,7 +377,7 @@ public abstract class ServiceImpl<BO extends BusinessObject, PO extends PersistO
     }
 
     protected ServiceResult recordWarnAndCreateSuccessResultWithMessage(String msg, Object... args) {
-        logger().warn(msg, args);
+//        logger().warn(msg, args);
         return ServiceResult.successResultWithMesage(ServiceUtils.format(msg, args));
     }
 

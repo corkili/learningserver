@@ -117,8 +117,10 @@ public final class CPUtils {
             return null;
         }
         for (Sequencing sequencing : sequencingCollection.getSequencingList()) {
-            if (StringUtils.equals(id, sequencing.getIdRef().getValue())) {
-                return sequencing;
+            if (sequencing.getIdRef() != null) {
+                if (StringUtils.equals(id, sequencing.getIdRef().getValue())) {
+                    return sequencing;
+                }
             }
         }
         return null;

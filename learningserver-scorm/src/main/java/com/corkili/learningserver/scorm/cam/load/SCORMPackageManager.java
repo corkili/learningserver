@@ -1,12 +1,14 @@
 package com.corkili.learningserver.scorm.cam.load;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class SCORMPackageManager {
@@ -61,10 +63,17 @@ public class SCORMPackageManager {
     }
 
     public void unlaunch(String lmsContentPackageID) {
-        contentPackageMap.remove(lmsContentPackageID);
+        ContentPackage contentPackage = contentPackageMap.remove(lmsContentPackageID);
+        if (contentPackage != null) {
+            try {
+                FileUtils.deleteDirectory(new File(contentPackage.getBasePath()));
+            } catch (IOException ignored) {
+
+            }
+        }
     }
 
-    private ContentPackage loadSCORMContentPackageFromZipFile(String lmsContentPackageID,String zipFilePath) {
+    private ContentPackage loadSCORMContentPackageFromZipFile(String lmsContentPackageID, String zipFilePath) {
         if (!ZipUtils.isEndWithZip(zipFilePath)) {
             return null;
         }

@@ -317,3 +317,23 @@ message CourseSubscriptionDeleteResponse {
     BaseResponse response = 1;
     sint64 courseSubscriptionId = 2;
 }
+
+message CoursewareUpdateResponse {
+    BaseResponse response = 1;
+    CourseInfo courseInfo = 2;
+}
+
+message CourseCatalogQueryResponse {
+    BaseResponse response = 1;
+    CourseCatalogInfo courseCatalogInfo = 2;
+}
+
+message NavigationProcessResponse {
+    BaseResponse response = 1;
+    NavigationEventType navigationEventType = 2;
+    string targetItemId = 3;
+    sint64 scormId = 4;
+    string level1CatalogItemId = 5;
+    bool hasDeliveryContentInfo = 6;
+    DeliveryContentInfo deliveryContentInfo = 7;
+}

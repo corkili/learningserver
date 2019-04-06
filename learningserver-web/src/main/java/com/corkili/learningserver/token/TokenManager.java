@@ -1,6 +1,9 @@
 package com.corkili.learningserver.token;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,7 +44,7 @@ public class TokenManager {
         tokenMap.remove(token);
     }
 
-    public boolean isTokenAssociatedWithUser(String token) {
+    private boolean isTokenAssociatedWithUser(String token) {
         if (!tokenMap.containsKey(token)) {
             return false;
         }
@@ -64,7 +67,7 @@ public class TokenManager {
         return testToken.getUserId() != null && testToken.isLogin();
     }
 
-    public TokenManager setTokenAssociatedUser(String token, Long userId) {
+    private TokenManager setTokenAssociatedUser(String token, Long userId) {
         if (!tokenMap.containsKey(token)) {
             log.error("token [{}] not exists", token);
             throw new IllegalStateException(ServiceUtils.format("token [{}] not exists", token));
@@ -73,7 +76,7 @@ public class TokenManager {
         return this;
     }
 
-    public TokenManager tokenLogin(String token) {
+    private TokenManager tokenLogin(String token) {
         if (!tokenMap.containsKey(token)) {
             log.error("token [{}] not exists", token);
             throw new IllegalStateException(ServiceUtils.format("token [{}] not exists", token));
@@ -84,6 +87,16 @@ public class TokenManager {
             throw new IllegalStateException(ServiceUtils.format("token [{}] doesn't associated with user", token));
         }
         testToken.setLogin(true);
+        // clear other token
+        Set<String> shouldDelete = new HashSet<>();
+        for (Entry<String, Token> entry : tokenMap.entrySet()) {
+            if (!entry.getKey().equals(token) && entry.getValue().getUserId().equals(testToken.getUserId())) {
+                shouldDelete.add(entry.getKey());
+            }
+        }
+        for (String s : shouldDelete) {
+            tokenMap.remove(s);
+        }
         return this;
     }
 

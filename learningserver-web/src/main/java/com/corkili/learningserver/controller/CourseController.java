@@ -1,17 +1,5 @@
 package com.corkili.learningserver.controller;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.corkili.learningserver.bo.Course;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ControllerUtils;
@@ -23,14 +11,27 @@ import com.corkili.learningserver.generate.protobuf.Request.CourseCreateRequest;
 import com.corkili.learningserver.generate.protobuf.Request.CourseDeleteRequest;
 import com.corkili.learningserver.generate.protobuf.Request.CourseFindAllRequest;
 import com.corkili.learningserver.generate.protobuf.Request.CourseUpdateRequest;
+import com.corkili.learningserver.generate.protobuf.Request.CoursewareUpdateRequest;
 import com.corkili.learningserver.generate.protobuf.Response.BaseResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseCreateResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseDeleteResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseFindAllResponse;
 import com.corkili.learningserver.generate.protobuf.Response.CourseUpdateResponse;
+import com.corkili.learningserver.generate.protobuf.Response.CoursewareUpdateResponse;
 import com.corkili.learningserver.service.CourseService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/course")
@@ -195,4 +196,30 @@ public class CourseController {
                 .setCourseId(request.getCourseId())
                 .build();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateCourseware", produces = "application/x-protobuf", method = RequestMethod.POST)
+    public CoursewareUpdateResponse updateCourseware(@RequestBody CoursewareUpdateRequest request) {
+        String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        BaseResponse baseResponse = ControllerUtils.validateTokenLogin(tokenManager, token);
+        if (baseResponse != null) {
+            return CoursewareUpdateResponse.newBuilder()
+                    .setResponse(baseResponse)
+                    .build();
+        }
+        ServiceResult serviceResult = courseService.saveOrUpdateOrDeleteCourseware(request.getCourseId(),
+                request.getFilename(), request.getIsDelete() ? null : request.getData().toByteArray());
+        baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
+        CourseInfo courseInfo = CourseInfo.getDefaultInstance();
+        Course course = serviceResult.extra(Course.class);
+        if (course != null) {
+            User teacher = userService.retrieve(course.getTeacherId()).orElse(null);
+            courseInfo = ProtoUtils.generateCourseInfo(course, teacher, false);
+        }
+        return CoursewareUpdateResponse.newBuilder()
+                .setResponse(baseResponse)
+                .setCourseInfo(courseInfo)
+                .build();
+    }
+
 }

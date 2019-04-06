@@ -1,6 +1,12 @@
 */target/
 .mvn
 
+*scorm-test-pkg.zip
+*/scorm-test-pkg/
+*/scormPackages/
+scormPackages/
+/scormPackages/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -27,5 +33,3 @@
 .mvnw*
 .DS_Store
 
-*scorm-test-pkg.zip
-*/scorm-test-pkg/

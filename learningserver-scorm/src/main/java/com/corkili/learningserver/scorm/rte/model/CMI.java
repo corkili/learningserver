@@ -94,6 +94,7 @@ public class CMI implements GeneralDataType {
         this.interactions = new Interactions();
         this.launchData = new LaunchData();
         this.learnerId = new LearnerId();
+        this.learnerName = new LearnerName();
         this.learnerPreference = new LearnerPreference();
         this.location = new Location();
         this.maximumTimeAllowed = new MaximumTimeAllowed();
