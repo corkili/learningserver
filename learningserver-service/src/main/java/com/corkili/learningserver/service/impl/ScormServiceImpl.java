@@ -156,7 +156,7 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         if (navigationEvent.getType() == EventType.ExitAll || navigationEvent.getType() == EventType.AbandonAll) {
             scormRuntimeManager.unlaunch(user, String.valueOf(scormId));
             scormSeqNavManager.unlaunch(String.valueOf(userId), String.valueOf(scormId));
-        }ad
+        }
         if (!scormResult.isSuccess()) {
             return recordErrorAndCreateFailResultWithMessage("process navigation event error: {}", scormResult.getErrorMsg());
         }
