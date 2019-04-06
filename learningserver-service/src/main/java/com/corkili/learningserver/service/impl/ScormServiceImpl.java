@@ -30,6 +30,7 @@ import com.corkili.learningserver.scorm.common.LMSPersistDriver;
 import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
 import com.corkili.learningserver.scorm.sn.api.SCORMSeqNavManager;
+import com.corkili.learningserver.scorm.sn.api.event.EventType;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
@@ -165,6 +166,10 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
                 return recordErrorAndCreateFailResultWithMessage("process navigation event error: init runtime data error");
             }
         }
+        if (navigationEvent.getType() == EventType.ExitAll || navigationEvent.getType() == EventType.AbandonAll) {
+            scormRuntimeManager.unlaunch(user, String.valueOf(scormId));
+            scormSeqNavManager.unlaunch(String.valueOf(userId), String.valueOf(scormId));
+        }
         return ServiceResult.successResult("process navigation event success", DeliveryContent.class, deliveryContent);
     }
 
@@ -201,6 +206,15 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     @Override
     public DeliveryContent getDeliveryContent(Long userId, Long scormId, String itemId) {
         return deliveryContentMap.get(ServiceUtils.format("{}-{}-{}", userId, scormId, itemId));
+    }
+
+    @Override
+    public void onLogout(Long userId) {
+        User user = userService.retrieve(userId).orElse(null);
+        if (user != null) {
+            scormRuntimeManager.unlaunch(user);
+            scormSeqNavManager.unlaunch(user);
+        }
     }
 
     @Override

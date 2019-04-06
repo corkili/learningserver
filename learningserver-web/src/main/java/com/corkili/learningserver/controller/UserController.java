@@ -24,6 +24,7 @@ import com.corkili.learningserver.generate.protobuf.Response.UserLoginResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserLogoutResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserRegisterResponse;
 import com.corkili.learningserver.generate.protobuf.Response.UserUpdateInfoResponse;
+import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
 import com.corkili.learningserver.token.TokenManager;
 
@@ -36,6 +37,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ScormService scormService;
 
     @ResponseBody
     @RequestMapping(value = "/register", produces = "application/x-protobuf", method = RequestMethod.POST)
@@ -67,6 +71,8 @@ public class UserController {
         UserInfo userInfo;
         if (loginResult.isSuccess() && user != null) {
             userInfo = ProtoUtils.generateUserInfo(user);
+            // clear and update new
+            scormService.onLogout(user.getId());
             tokenManager.setTokenAssociatedUserAndLogin(token, user.getId());
         } else {
             userInfo = UserInfo.newBuilder()
@@ -84,12 +90,14 @@ public class UserController {
     @RequestMapping(value = "/logout", produces = "application/x-protobuf", method = RequestMethod.POST)
     public UserLogoutResponse logout(@RequestBody UserLogoutRequest request) {
         String token = tokenManager.getOrNewToken(request.getRequest().getToken());
+        Long userId = tokenManager.getUserIdAssociatedWithToken(token);
         BaseResponse baseResponse;
         if (tokenManager.isLogin(token)) {
             baseResponse = ControllerUtils.generateSuccessBaseResponse("", "logout success");
         } else {
             baseResponse = ControllerUtils.generateErrorBaseResponse("", "already logout");
         }
+        scormService.onLogout(userId);
         tokenManager.removeToken(token);
         return UserLogoutResponse.newBuilder()
                 .setResponse(baseResponse)

@@ -18,4 +18,6 @@ public interface ScormService extends Service<Scorm, com.corkili.learningserver.
     ServiceResult invokeLMSRuntimeAPI(Long userId, Long scormId, String itemId, String methodName, String parameter1, String parameter2);
 
     DeliveryContent getDeliveryContent(Long userId, Long scormId, String itemId);
+
+    void onLogout(Long userId);
 }
