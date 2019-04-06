@@ -153,6 +153,10 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
             return recordErrorAndCreateFailResultWithMessage("process navigation event error: launch sn data error");
         }
         SCORMResult scormResult = scormManager.process(navigationEvent, new ID(level1CatalogItemId, String.valueOf(scormId), String.valueOf(user.getId())));
+        if (navigationEvent.getType() == EventType.ExitAll || navigationEvent.getType() == EventType.AbandonAll) {
+            scormRuntimeManager.unlaunch(user, String.valueOf(scormId));
+            scormSeqNavManager.unlaunch(String.valueOf(userId), String.valueOf(scormId));
+        }ad
         if (!scormResult.isSuccess()) {
             return recordErrorAndCreateFailResultWithMessage("process navigation event error: {}", scormResult.getErrorMsg());
         }
@@ -165,10 +169,6 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
             if (!scormManager.mapTrackingInfoToRuntimeData(scormResult.getDeliveryActivity())) {
                 return recordErrorAndCreateFailResultWithMessage("process navigation event error: init runtime data error");
             }
-        }
-        if (navigationEvent.getType() == EventType.ExitAll || navigationEvent.getType() == EventType.AbandonAll) {
-            scormRuntimeManager.unlaunch(user, String.valueOf(scormId));
-            scormSeqNavManager.unlaunch(String.valueOf(userId), String.valueOf(scormId));
         }
         return ServiceResult.successResult("process navigation event success", DeliveryContent.class, deliveryContent);
     }
