@@ -3,6 +3,7 @@ package com.corkili.learningserver.token;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -90,7 +91,7 @@ public class TokenManager {
         // clear other token
         Set<String> shouldDelete = new HashSet<>();
         for (Entry<String, Token> entry : tokenMap.entrySet()) {
-            if (!entry.getKey().equals(token) && entry.getValue().getUserId().equals(testToken.getUserId())) {
+            if (!entry.getKey().equals(token) && Objects.equals(entry.getValue().getUserId(), testToken.getUserId())) {
                 shouldDelete.add(entry.getKey());
             }
         }

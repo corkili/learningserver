@@ -46,7 +46,7 @@ public class ControllerUtils {
             return BaseResponse.newBuilder()
                     .setToken(token)
                     .setResult(false)
-                    .setMsg("Don't login")
+                    .setMsg("nologin")
                     .setResponseCode(ResponseCode.UNAUTHORIZED)
                     .build();
         }
