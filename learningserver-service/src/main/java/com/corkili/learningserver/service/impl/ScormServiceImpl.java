@@ -6,6 +6,8 @@ import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ScormZipUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
+import com.corkili.learningserver.po.ScormData;
+import com.corkili.learningserver.repo.ScormDataRepository;
 import com.corkili.learningserver.repo.ScormRepository;
 import com.corkili.learningserver.scorm.SCORM;
 import com.corkili.learningserver.scorm.SCORMResult;
@@ -29,7 +31,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,6 +44,9 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
 
     @Autowired
     private ScormRepository scormRepository;
+
+    @Autowired
+    private ScormDataRepository scormDataRepository;
 
     @Autowired
     private UserService userService;
@@ -228,21 +235,55 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
 
     @Override
     public int queryActivityAttemptCountBy(String lmsContentPackageID, String activityID, String learnerID) {
-        return 0;
+        List<ScormData> scormDataList = scormDataRepository.findAllByScormIdAndItemAndLearnerId(
+                Long.valueOf(lmsContentPackageID), activityID, Long.valueOf(learnerID));
+        if (scormDataList == null || scormDataList.size() != 1) {
+            return 0;
+        }
+        ScormData scormData = scormDataList.get(0);
+        return scormData.getAttemptCnt();
     }
 
     @Override
     public void saveActivityAttemptCount(String lmsContentPackageID, String activityID, String learnerID, int attemptCount) {
-
+        List<ScormData> scormDataList = scormDataRepository.findAllByScormIdAndItemAndLearnerId(
+                Long.valueOf(lmsContentPackageID), activityID, Long.valueOf(learnerID));
+        ScormData scormData;
+        if (scormDataList == null || scormDataList.size() != 1) {
+            scormData = new ScormData();
+            scormData.setCreateTime(new Date());
+        } else {
+            scormData = scormDataList.get(0);
+        }
+        scormData.setUpdateTime(new Date());
+        scormData.setAttemptCnt(attemptCount);
+        scormDataRepository.save(scormData);
     }
 
     @Override
     public String queryRuntimeDataBy(String lmsContentPackageID, String activityID, String learnerID) {
-        return null;
+        List<ScormData> scormDataList = scormDataRepository.findAllByScormIdAndItemAndLearnerId(
+                Long.valueOf(lmsContentPackageID), activityID, Long.valueOf(learnerID));
+        if (scormDataList == null || scormDataList.size() != 1) {
+            return "";
+        }
+        ScormData scormData = scormDataList.get(0);
+        return scormData.getRuntimeData();
     }
 
     @Override
     public void saveRuntimeData(String lmsContentPackageID, String activityID, String learnerID, String runtimeData) {
-
+        List<ScormData> scormDataList = scormDataRepository.findAllByScormIdAndItemAndLearnerId(
+                Long.valueOf(lmsContentPackageID), activityID, Long.valueOf(learnerID));
+        ScormData scormData;
+        if (scormDataList == null || scormDataList.size() != 1) {
+            scormData = new ScormData();
+            scormData.setCreateTime(new Date());
+        } else {
+            scormData = scormDataList.get(0);
+        }
+        scormData.setUpdateTime(new Date());
+        scormData.setRuntimeData(runtimeData);
+        scormDataRepository.save(scormData);
     }
 }
