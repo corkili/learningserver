@@ -367,6 +367,11 @@ message CourseCatalogItemInfo {
     bool hasParent = 8;
     CourseCatalogItemInfo parentItem = 9;
     CourseCatalogItemInfoList nextLevelItems = 10;
+    bool hasCompletionThreshold = 11;
+    double completionThreshold = 12;
+    double progressMeasure = 13;
+    string completionStatus = 14;
+    bool leaf = 15;
 }
 
 message CourseCatalogItemInfoList {

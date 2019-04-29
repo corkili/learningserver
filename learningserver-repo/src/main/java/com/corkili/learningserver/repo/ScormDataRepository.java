@@ -9,4 +9,6 @@ public interface ScormDataRepository extends JpaRepository<ScormData, Long> {
 
     List<ScormData> findAllByScormIdAndItemAndLearnerId(Long scormId, String item, Long learnerId);
 
+    List<ScormData> findAllByScormIdAndLearnerId(Long scormId, Long learnerId);
+
 }

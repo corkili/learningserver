@@ -54,7 +54,7 @@ public class ScormController {
                     .setResponse(baseResponse)
                     .build();
         }
-        ServiceResult serviceResult = scormService.queryCatalog(request.getScormId());
+        ServiceResult serviceResult = scormService.queryCatalog(request.getScormId(), tokenManager.getUserIdAssociatedWithToken(token));
         baseResponse = ControllerUtils.generateBaseResponseFrom(token, serviceResult);
         return CourseCatalogQueryResponse.newBuilder()
                 .setResponse(baseResponse)

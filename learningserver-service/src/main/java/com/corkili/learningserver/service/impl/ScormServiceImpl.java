@@ -1,6 +1,7 @@
 package com.corkili.learningserver.service.impl;
 
 import com.corkili.learningserver.bo.CourseCatalog;
+import com.corkili.learningserver.bo.CourseCatalog.CourseCatalogItem;
 import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.bo.User;
 import com.corkili.learningserver.common.ScormZipUtils;
@@ -17,7 +18,11 @@ import com.corkili.learningserver.scorm.cam.model.DeliveryContent;
 import com.corkili.learningserver.scorm.common.ID;
 import com.corkili.learningserver.scorm.common.LMSPersistDriver;
 import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
+import com.corkili.learningserver.scorm.rte.api.LearnerAttempt;
 import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
+import com.corkili.learningserver.scorm.rte.model.RuntimeData;
+import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
 import com.corkili.learningserver.scorm.sn.api.SCORMSeqNavManager;
 import com.corkili.learningserver.scorm.sn.api.event.EventType;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
@@ -31,6 +36,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -129,10 +135,15 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
     }
 
     @Override
-    public ServiceResult queryCatalog(Long scormId) {
+    public ServiceResult queryCatalog(Long scormId, Long userId) {
         if (scormId == null || !scormRepository.existsById(scormId)) {
             return recordErrorAndCreateFailResultWithMessage("query catalog error: scorm [{}] not exist", scormId);
         }
+        Optional<User> userOptional = userService.retrieve(userId);
+        if (userId == null || !userOptional.isPresent()) {
+            return recordErrorAndCreateFailResultWithMessage("query catalog error: user [{}] not exist", userId);
+        }
+        User user = userOptional.get();
         ContentPackage contentPackage = scormPackageManager.launch(String.valueOf(scormId));
         if (contentPackage == null) {
             return recordErrorAndCreateFailResultWithMessage("query catalog error: launch scorm package failed");
@@ -140,6 +151,40 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         CourseCatalog courseCatalog = CourseCatalog.generateFromContentPackage(contentPackage);
         if (courseCatalog == null) {
             return recordErrorAndCreateFailResultWithMessage("query catalog error: generate course catalog failed");
+        }
+        List<CourseCatalogItem> level1ItemList = courseCatalog.getItems().get(1);
+        if (level1ItemList != null) {
+            for (CourseCatalogItem courseCatalogItem : level1ItemList) {
+                scormSeqNavManager.launch(String.valueOf(scormId), user, courseCatalogItem.getItemId());
+            }
+        }
+        List<CourseCatalogItem> leafItemList = courseCatalog.getItems().get(courseCatalog.getMaxLevel());
+        if (leafItemList != null) {
+            for (CourseCatalogItem courseCatalogItem : leafItemList) {
+                scormRuntimeManager.launch(String.valueOf(scormId), courseCatalogItem.getItemId(), user);
+                LearnerAttempt learnerAttempt = scormRuntimeManager.getLearnerAttempt(
+                        new ID(courseCatalogItem.getItemId(), String.valueOf(scormId), String.valueOf(user.getId())));
+                RuntimeData runtimeData = learnerAttempt.getRuntimeData();
+                BigDecimal ctValue = runtimeData.getCmi().getCompletionThreshold().getCompletionThreshold().getValue();
+                if (ctValue != null) {
+                    courseCatalogItem.setCompletionThreshold(ctValue.doubleValue());
+                } else {
+                    courseCatalogItem.setCompletionThreshold(null);
+                }
+                BigDecimal pmValue = runtimeData.getCmi().getProgressMeasure().getProgressMeasure().getValue();
+                if (pmValue != null) {
+                    courseCatalogItem.setProgressMeasure(pmValue.doubleValue());
+                } else {
+                    courseCatalogItem.setProgressMeasure(0.0);
+                }
+                ScormResult scormResult = runtimeData.getCmi().getCompletionStatus().get();
+                if (scormResult.getError() != ScormError.E_0 || "".equals(scormResult.getReturnValue())) {
+                    courseCatalogItem.setCompletionStatus("unknown");
+                } else {
+                    // "completed", "incomplete", "not_attempted", "unknown"
+                    courseCatalogItem.setCompletionStatus(scormResult.getReturnValue());
+                }
+            }
         }
         return ServiceResult.successResult("query catalog success", CourseCatalog.class, courseCatalog);
     }

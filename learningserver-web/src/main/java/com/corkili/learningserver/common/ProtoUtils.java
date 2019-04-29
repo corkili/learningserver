@@ -191,7 +191,12 @@ public class ProtoUtils {
                 .setItemTitle(courseCatalogItem.getItemTitle())
                 .setSelectable(courseCatalogItem.isSelectable())
                 .setVisible(courseCatalogItem.isVisible())
-                .addAllHideLmsUI(courseCatalogItem.getHideLmsUI());
+                .addAllHideLmsUI(courseCatalogItem.getHideLmsUI())
+                .setHasCompletionThreshold(courseCatalogItem.getCompletionThreshold() != null)
+                .setCompletionThreshold(courseCatalogItem.getCompletionThreshold() != null ? courseCatalogItem.getCompletionThreshold() : 0.0)
+                .setProgressMeasure(courseCatalogItem.getProgressMeasure())
+                .setCompletionStatus(courseCatalogItem.getCompletionStatus())
+                .setLeaf(courseCatalogItem.isLeaf());
     }
 
     public static ScormInfo generateScormInfo(Scorm scorm, boolean loadZipData) {

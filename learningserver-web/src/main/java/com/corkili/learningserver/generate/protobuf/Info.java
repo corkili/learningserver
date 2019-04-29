@@ -41111,6 +41111,36 @@ public final class Info {
      * <code>.CourseCatalogItemInfoList nextLevelItems = 10;</code>
      */
     com.corkili.learningserver.generate.protobuf.Info.CourseCatalogItemInfoListOrBuilder getNextLevelItemsOrBuilder();
+
+    /**
+     * <code>bool hasCompletionThreshold = 11;</code>
+     */
+    boolean getHasCompletionThreshold();
+
+    /**
+     * <code>double completionThreshold = 12;</code>
+     */
+    double getCompletionThreshold();
+
+    /**
+     * <code>double progressMeasure = 13;</code>
+     */
+    double getProgressMeasure();
+
+    /**
+     * <code>string completionStatus = 14;</code>
+     */
+    java.lang.String getCompletionStatus();
+    /**
+     * <code>string completionStatus = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getCompletionStatusBytes();
+
+    /**
+     * <code>bool leaf = 15;</code>
+     */
+    boolean getLeaf();
   }
   /**
    * Protobuf type {@code CourseCatalogItemInfo}
@@ -41133,6 +41163,11 @@ public final class Info {
       visible_ = false;
       hideLmsUI_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       hasParent_ = false;
+      hasCompletionThreshold_ = false;
+      completionThreshold_ = 0D;
+      progressMeasure_ = 0D;
+      completionStatus_ = "";
+      leaf_ = false;
     }
 
     @java.lang.Override
@@ -41229,6 +41264,32 @@ public final class Info {
                 nextLevelItems_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+            case 88: {
+
+              hasCompletionThreshold_ = input.readBool();
+              break;
+            }
+            case 97: {
+
+              completionThreshold_ = input.readDouble();
+              break;
+            }
+            case 105: {
+
+              progressMeasure_ = input.readDouble();
+              break;
+            }
+            case 114: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              completionStatus_ = s;
+              break;
+            }
+            case 120: {
+
+              leaf_ = input.readBool();
               break;
             }
             default: {
@@ -41451,6 +41512,76 @@ public final class Info {
       return getNextLevelItems();
     }
 
+    public static final int HASCOMPLETIONTHRESHOLD_FIELD_NUMBER = 11;
+    private boolean hasCompletionThreshold_;
+    /**
+     * <code>bool hasCompletionThreshold = 11;</code>
+     */
+    public boolean getHasCompletionThreshold() {
+      return hasCompletionThreshold_;
+    }
+
+    public static final int COMPLETIONTHRESHOLD_FIELD_NUMBER = 12;
+    private double completionThreshold_;
+    /**
+     * <code>double completionThreshold = 12;</code>
+     */
+    public double getCompletionThreshold() {
+      return completionThreshold_;
+    }
+
+    public static final int PROGRESSMEASURE_FIELD_NUMBER = 13;
+    private double progressMeasure_;
+    /**
+     * <code>double progressMeasure = 13;</code>
+     */
+    public double getProgressMeasure() {
+      return progressMeasure_;
+    }
+
+    public static final int COMPLETIONSTATUS_FIELD_NUMBER = 14;
+    private volatile java.lang.Object completionStatus_;
+    /**
+     * <code>string completionStatus = 14;</code>
+     */
+    public java.lang.String getCompletionStatus() {
+      java.lang.Object ref = completionStatus_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        completionStatus_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string completionStatus = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCompletionStatusBytes() {
+      java.lang.Object ref = completionStatus_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        completionStatus_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LEAF_FIELD_NUMBER = 15;
+    private boolean leaf_;
+    /**
+     * <code>bool leaf = 15;</code>
+     */
+    public boolean getLeaf() {
+      return leaf_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -41494,6 +41625,21 @@ public final class Info {
       }
       if (nextLevelItems_ != null) {
         output.writeMessage(10, getNextLevelItems());
+      }
+      if (hasCompletionThreshold_ != false) {
+        output.writeBool(11, hasCompletionThreshold_);
+      }
+      if (completionThreshold_ != 0D) {
+        output.writeDouble(12, completionThreshold_);
+      }
+      if (progressMeasure_ != 0D) {
+        output.writeDouble(13, progressMeasure_);
+      }
+      if (!getCompletionStatusBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, completionStatus_);
+      }
+      if (leaf_ != false) {
+        output.writeBool(15, leaf_);
       }
       unknownFields.writeTo(output);
     }
@@ -41546,6 +41692,25 @@ public final class Info {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, getNextLevelItems());
       }
+      if (hasCompletionThreshold_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, hasCompletionThreshold_);
+      }
+      if (completionThreshold_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(12, completionThreshold_);
+      }
+      if (progressMeasure_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(13, progressMeasure_);
+      }
+      if (!getCompletionStatusBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, completionStatus_);
+      }
+      if (leaf_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(15, leaf_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -41588,6 +41753,20 @@ public final class Info {
         result = result && getNextLevelItems()
             .equals(other.getNextLevelItems());
       }
+      result = result && (getHasCompletionThreshold()
+          == other.getHasCompletionThreshold());
+      result = result && (
+          java.lang.Double.doubleToLongBits(getCompletionThreshold())
+          == java.lang.Double.doubleToLongBits(
+              other.getCompletionThreshold()));
+      result = result && (
+          java.lang.Double.doubleToLongBits(getProgressMeasure())
+          == java.lang.Double.doubleToLongBits(
+              other.getProgressMeasure()));
+      result = result && getCompletionStatus()
+          .equals(other.getCompletionStatus());
+      result = result && (getLeaf()
+          == other.getLeaf());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -41628,6 +41807,20 @@ public final class Info {
         hash = (37 * hash) + NEXTLEVELITEMS_FIELD_NUMBER;
         hash = (53 * hash) + getNextLevelItems().hashCode();
       }
+      hash = (37 * hash) + HASCOMPLETIONTHRESHOLD_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getHasCompletionThreshold());
+      hash = (37 * hash) + COMPLETIONTHRESHOLD_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getCompletionThreshold()));
+      hash = (37 * hash) + PROGRESSMEASURE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getProgressMeasure()));
+      hash = (37 * hash) + COMPLETIONSTATUS_FIELD_NUMBER;
+      hash = (53 * hash) + getCompletionStatus().hashCode();
+      hash = (37 * hash) + LEAF_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getLeaf());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -41789,6 +41982,16 @@ public final class Info {
           nextLevelItems_ = null;
           nextLevelItemsBuilder_ = null;
         }
+        hasCompletionThreshold_ = false;
+
+        completionThreshold_ = 0D;
+
+        progressMeasure_ = 0D;
+
+        completionStatus_ = "";
+
+        leaf_ = false;
+
         return this;
       }
 
@@ -41839,6 +42042,11 @@ public final class Info {
         } else {
           result.nextLevelItems_ = nextLevelItemsBuilder_.build();
         }
+        result.hasCompletionThreshold_ = hasCompletionThreshold_;
+        result.completionThreshold_ = completionThreshold_;
+        result.progressMeasure_ = progressMeasure_;
+        result.completionStatus_ = completionStatus_;
+        result.leaf_ = leaf_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -41926,6 +42134,22 @@ public final class Info {
         }
         if (other.hasNextLevelItems()) {
           mergeNextLevelItems(other.getNextLevelItems());
+        }
+        if (other.getHasCompletionThreshold() != false) {
+          setHasCompletionThreshold(other.getHasCompletionThreshold());
+        }
+        if (other.getCompletionThreshold() != 0D) {
+          setCompletionThreshold(other.getCompletionThreshold());
+        }
+        if (other.getProgressMeasure() != 0D) {
+          setProgressMeasure(other.getProgressMeasure());
+        }
+        if (!other.getCompletionStatus().isEmpty()) {
+          completionStatus_ = other.completionStatus_;
+          onChanged();
+        }
+        if (other.getLeaf() != false) {
+          setLeaf(other.getLeaf());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -42551,6 +42775,179 @@ public final class Info {
           nextLevelItems_ = null;
         }
         return nextLevelItemsBuilder_;
+      }
+
+      private boolean hasCompletionThreshold_ ;
+      /**
+       * <code>bool hasCompletionThreshold = 11;</code>
+       */
+      public boolean getHasCompletionThreshold() {
+        return hasCompletionThreshold_;
+      }
+      /**
+       * <code>bool hasCompletionThreshold = 11;</code>
+       */
+      public Builder setHasCompletionThreshold(boolean value) {
+        
+        hasCompletionThreshold_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool hasCompletionThreshold = 11;</code>
+       */
+      public Builder clearHasCompletionThreshold() {
+        
+        hasCompletionThreshold_ = false;
+        onChanged();
+        return this;
+      }
+
+      private double completionThreshold_ ;
+      /**
+       * <code>double completionThreshold = 12;</code>
+       */
+      public double getCompletionThreshold() {
+        return completionThreshold_;
+      }
+      /**
+       * <code>double completionThreshold = 12;</code>
+       */
+      public Builder setCompletionThreshold(double value) {
+        
+        completionThreshold_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double completionThreshold = 12;</code>
+       */
+      public Builder clearCompletionThreshold() {
+        
+        completionThreshold_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double progressMeasure_ ;
+      /**
+       * <code>double progressMeasure = 13;</code>
+       */
+      public double getProgressMeasure() {
+        return progressMeasure_;
+      }
+      /**
+       * <code>double progressMeasure = 13;</code>
+       */
+      public Builder setProgressMeasure(double value) {
+        
+        progressMeasure_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double progressMeasure = 13;</code>
+       */
+      public Builder clearProgressMeasure() {
+        
+        progressMeasure_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object completionStatus_ = "";
+      /**
+       * <code>string completionStatus = 14;</code>
+       */
+      public java.lang.String getCompletionStatus() {
+        java.lang.Object ref = completionStatus_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          completionStatus_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string completionStatus = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCompletionStatusBytes() {
+        java.lang.Object ref = completionStatus_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          completionStatus_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string completionStatus = 14;</code>
+       */
+      public Builder setCompletionStatus(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        completionStatus_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string completionStatus = 14;</code>
+       */
+      public Builder clearCompletionStatus() {
+        
+        completionStatus_ = getDefaultInstance().getCompletionStatus();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string completionStatus = 14;</code>
+       */
+      public Builder setCompletionStatusBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        completionStatus_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean leaf_ ;
+      /**
+       * <code>bool leaf = 15;</code>
+       */
+      public boolean getLeaf() {
+        return leaf_;
+      }
+      /**
+       * <code>bool leaf = 15;</code>
+       */
+      public Builder setLeaf(boolean value) {
+        
+        leaf_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool leaf = 15;</code>
+       */
+      public Builder clearLeaf() {
+        
+        leaf_ = false;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -45029,31 +45426,34 @@ public final class Info {
       "\005\022\022\n\nitemNumber\030\003 \001(\005\022,\n\005items\030\004 \003(\0132\035.C" +
       "ourseCatalogInfo.ItemsEntry\032H\n\nItemsEntr" +
       "y\022\013\n\003key\030\001 \001(\005\022)\n\005value\030\002 \001(\0132\032.CourseCa" +
-      "talogItemInfoList:\0028\001\"\203\002\n\025CourseCatalogI" +
+      "talogItemInfoList:\0028\001\"\201\003\n\025CourseCatalogI" +
       "temInfo\022\r\n\005level\030\001 \001(\005\022\r\n\005index\030\002 \001(\005\022\016\n" +
       "\006itemId\030\003 \001(\t\022\021\n\titemTitle\030\004 \001(\t\022\022\n\nsele" +
       "ctable\030\005 \001(\010\022\017\n\007visible\030\006 \001(\010\022\021\n\thideLms" +
       "UI\030\007 \003(\t\022\021\n\thasParent\030\010 \001(\010\022*\n\nparentIte" +
       "m\030\t \001(\0132\026.CourseCatalogItemInfo\0222\n\016nextL" +
       "evelItems\030\n \001(\0132\032.CourseCatalogItemInfoL" +
-      "ist\"R\n\031CourseCatalogItemInfoList\0225\n\025cour" +
-      "seCatalogItemInfo\030\001 \003(\0132\026.CourseCatalogI" +
-      "temInfo\"\202\001\n\023DeliveryContentInfo\022\016\n\006itemI" +
-      "d\030\001 \001(\t\022\020\n\010basePath\030\002 \001(\t\022\r\n\005entry\030\003 \001(\t" +
-      "\022\025\n\rhasParameters\030\004 \001(\010\022\022\n\nparameters\030\005 " +
-      "\001(\t\022\017\n\007content\030\006 \003(\t*$\n\010UserType\022\013\n\007Teac" +
-      "her\020\000\022\013\n\007Student\020\001*g\n\014QuestionType\022\021\n\rSi" +
-      "ngleFilling\020\000\022\023\n\017MultipleFilling\020\001\022\020\n\014Si" +
-      "ngleChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t\n\005Essa" +
-      "y\020\004*L\n\021CourseCommentType\022\r\n\tVERY_GOOD\020\000\022" +
-      "\010\n\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST_MID\020\003\022\007\n\003BAD\020" +
-      "\004*\260\001\n\023NavigationEventType\022\t\n\005Start\020\000\022\r\n\t" +
-      "ResumeAll\020\001\022\014\n\010Continue\020\002\022\014\n\010Previous\020\003\022" +
-      "\n\n\006Choose\020\004\022\010\n\004Jump\020\005\022\013\n\007Abandon\020\006\022\016\n\nAb" +
-      "andonAll\020\007\022\016\n\nSuspendAll\020\010\022\023\n\017Unqualifie" +
-      "dExit\020\t\022\013\n\007ExitAll\020\nB4\n,com.corkili.lear" +
-      "ningserver.generate.protobufB\004Infob\006prot" +
-      "o3"
+      "ist\022\036\n\026hasCompletionThreshold\030\013 \001(\010\022\033\n\023c" +
+      "ompletionThreshold\030\014 \001(\001\022\027\n\017progressMeas" +
+      "ure\030\r \001(\001\022\030\n\020completionStatus\030\016 \001(\t\022\014\n\004l" +
+      "eaf\030\017 \001(\010\"R\n\031CourseCatalogItemInfoList\0225" +
+      "\n\025courseCatalogItemInfo\030\001 \003(\0132\026.CourseCa" +
+      "talogItemInfo\"\202\001\n\023DeliveryContentInfo\022\016\n" +
+      "\006itemId\030\001 \001(\t\022\020\n\010basePath\030\002 \001(\t\022\r\n\005entry" +
+      "\030\003 \001(\t\022\025\n\rhasParameters\030\004 \001(\010\022\022\n\nparamet" +
+      "ers\030\005 \001(\t\022\017\n\007content\030\006 \003(\t*$\n\010UserType\022\013" +
+      "\n\007Teacher\020\000\022\013\n\007Student\020\001*g\n\014QuestionType" +
+      "\022\021\n\rSingleFilling\020\000\022\023\n\017MultipleFilling\020\001" +
+      "\022\020\n\014SingleChoice\020\002\022\022\n\016MultipleChoice\020\003\022\t" +
+      "\n\005Essay\020\004*L\n\021CourseCommentType\022\r\n\tVERY_G" +
+      "OOD\020\000\022\010\n\004GOOD\020\001\022\007\n\003MID\020\002\022\014\n\010JUST_MID\020\003\022\007" +
+      "\n\003BAD\020\004*\260\001\n\023NavigationEventType\022\t\n\005Start" +
+      "\020\000\022\r\n\tResumeAll\020\001\022\014\n\010Continue\020\002\022\014\n\010Previ" +
+      "ous\020\003\022\n\n\006Choose\020\004\022\010\n\004Jump\020\005\022\013\n\007Abandon\020\006" +
+      "\022\016\n\nAbandonAll\020\007\022\016\n\nSuspendAll\020\010\022\023\n\017Unqu" +
+      "alifiedExit\020\t\022\013\n\007ExitAll\020\nB4\n,com.corkil" +
+      "i.learningserver.generate.protobufB\004Info" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -45354,7 +45754,7 @@ public final class Info {
     internal_static_CourseCatalogItemInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CourseCatalogItemInfo_descriptor,
-        new java.lang.String[] { "Level", "Index", "ItemId", "ItemTitle", "Selectable", "Visible", "HideLmsUI", "HasParent", "ParentItem", "NextLevelItems", });
+        new java.lang.String[] { "Level", "Index", "ItemId", "ItemTitle", "Selectable", "Visible", "HideLmsUI", "HasParent", "ParentItem", "NextLevelItems", "HasCompletionThreshold", "CompletionThreshold", "ProgressMeasure", "CompletionStatus", "Leaf", });
     internal_static_CourseCatalogItemInfoList_descriptor =
       getDescriptor().getMessageTypes().get(39);
     internal_static_CourseCatalogItemInfoList_fieldAccessorTable = new
