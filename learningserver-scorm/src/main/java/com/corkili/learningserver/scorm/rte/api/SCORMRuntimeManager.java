@@ -1,18 +1,20 @@
 package com.corkili.learningserver.scorm.rte.api;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.common.LMSPersistDriver;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
+import com.corkili.learningserver.scorm.rte.model.util.RuntimeDataUtil;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class SCORMRuntimeManager {
@@ -102,8 +104,14 @@ public class SCORMRuntimeManager {
         unlaunch(shouldDelete);
     }
 
-    public void unlaunch(ID attemptID) {
-        learnerAttemptMap.remove(attemptID);
+    private void unlaunch(ID attemptID) {
+        LearnerAttempt learnerAttempt = learnerAttemptMap.remove(attemptID);
+        LMSPersistDriver lmsPersistDriver = LMSPersistDriverManager.getInstance().getDriver();
+        if (lmsPersistDriver != null) {
+            String runtimeDataStr = RuntimeDataUtil.transferToString(learnerAttempt.getRuntimeData());
+            lmsPersistDriver.saveRuntimeData(attemptID.getLmsContentPackageID(), attemptID.getIdentifier(),
+                    attemptID.getLmsLearnerID(), runtimeDataStr);
+        }
     }
 
     private void unlaunch(List<ID> shouldDelete) {

@@ -1,14 +1,5 @@
 package com.corkili.learningserver.scorm.rte.api;
 
-import java.math.BigDecimal;
-import java.time.Duration;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.lang3.StringUtils;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.cam.model.Item;
 import com.corkili.learningserver.scorm.cam.model.Objective;
@@ -16,11 +7,21 @@ import com.corkili.learningserver.scorm.cam.model.Objectives;
 import com.corkili.learningserver.scorm.cam.model.Sequencing;
 import com.corkili.learningserver.scorm.cam.model.util.CPUtils;
 import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.common.LMSPersistDriver;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.model.Data;
 import com.corkili.learningserver.scorm.rte.model.Objectives.Instance;
 import com.corkili.learningserver.scorm.rte.model.RuntimeData;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
+import com.corkili.learningserver.scorm.rte.model.util.RuntimeDataUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class LearnerAttempt {
@@ -312,6 +313,8 @@ public class LearnerAttempt {
 
         initADLData(item);
 
+        initFromPersistData();
+
         state = State.INITIALIZED;
 
         return true;
@@ -449,6 +452,19 @@ public class LearnerAttempt {
                 runtimeData.getAdl().getData().getInstances().add(instance);
             }
             runtimeData.getAdl().getData().getCount().setValue(runtimeData.getAdl().getData().getInstances().size());
+        }
+    }
+
+    private void initFromPersistData() {
+        LMSPersistDriver lmsPersistDriver = LMSPersistDriverManager.getInstance().getDriver();
+        if (lmsPersistDriver == null) {
+            return;
+        }
+        String runtimeDataStr = lmsPersistDriver.queryRuntimeDataBy(attemptID.getLmsContentPackageID(),
+                attemptID.getIdentifier(), attemptID.getLmsLearnerID());
+        if (runtimeDataStr != null) {
+            Map<String, String> elementMap = RuntimeDataUtil.stirng2map(runtimeDataStr);
+            elementMap.forEach((n, v) -> ElementParser.parseSet(runtimeData, n, v));
         }
     }
 

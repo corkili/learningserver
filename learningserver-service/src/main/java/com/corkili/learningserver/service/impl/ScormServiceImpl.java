@@ -1,18 +1,5 @@
 package com.corkili.learningserver.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import lombok.extern.slf4j.Slf4j;
-
 import com.corkili.learningserver.bo.CourseCatalog;
 import com.corkili.learningserver.bo.Scorm;
 import com.corkili.learningserver.bo.User;
@@ -34,6 +21,17 @@ import com.corkili.learningserver.scorm.sn.api.event.EventType;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -235,6 +233,16 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
 
     @Override
     public void saveActivityAttemptCount(String lmsContentPackageID, String activityID, String learnerID, int attemptCount) {
+
+    }
+
+    @Override
+    public String queryRuntimeDataBy(String lmsContentPackageID, String activityID, String learnerID) {
+        return null;
+    }
+
+    @Override
+    public void saveRuntimeData(String lmsContentPackageID, String activityID, String learnerID, String runtimeData) {
 
     }
 }

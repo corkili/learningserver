@@ -2,6 +2,7 @@ package com.corkili.learningserver.scorm.rte.model;
 
 import com.corkili.learningserver.scorm.rte.model.annotation.Meta;
 import com.corkili.learningserver.scorm.rte.model.datatype.GeneralDataType;
+import com.corkili.learningserver.scorm.rte.model.util.RuntimeDataUtil;
 
 public class RuntimeData implements GeneralDataType {
 
@@ -31,4 +32,9 @@ public class RuntimeData implements GeneralDataType {
     public void setAdl(ADL adl) {
         this.adl = adl;
     }
+
+    public static void main(String[] args) {
+        System.out.println(RuntimeDataUtil.transferToString(new RuntimeData()));
+    }
+
 }

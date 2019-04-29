@@ -8,4 +8,8 @@ public interface LMSPersistDriver {
 
     void saveActivityAttemptCount(String lmsContentPackageID, String activityID, String learnerID, int attemptCount);
 
+    String queryRuntimeDataBy(String lmsContentPackageID, String activityID, String learnerID);
+
+    void saveRuntimeData(String lmsContentPackageID, String activityID, String learnerID, String runtimeData);
+
 }

@@ -10,4 +10,6 @@ public interface CollectionDataType<Instance> {
 
     void syncNewInstance(boolean operatorIsSuccess);
 
+    int count();
+
 }

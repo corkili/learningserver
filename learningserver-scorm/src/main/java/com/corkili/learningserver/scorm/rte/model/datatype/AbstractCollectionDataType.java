@@ -1,11 +1,11 @@
 package com.corkili.learningserver.scorm.rte.model.datatype;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.corkili.learningserver.scorm.rte.model.error.Diagnostic;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 import com.corkili.learningserver.scorm.rte.model.result.CollectionScormResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractCollectionDataType<Instance> implements CollectionDataType<Instance> {
 
@@ -50,6 +50,11 @@ public abstract class AbstractCollectionDataType<Instance> implements Collection
             addCount();
         }
         lastNewInstance = null;
+    }
+
+    @Override
+    public int count() {
+        return instances.size();
     }
 
     protected abstract Instance newInstance();
