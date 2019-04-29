@@ -4,8 +4,11 @@ import com.corkili.learningserver.scorm.cam.load.SCORMPackageManager;
 import com.corkili.learningserver.scorm.cam.model.ContentPackage;
 import com.corkili.learningserver.scorm.common.CommonUtils;
 import com.corkili.learningserver.scorm.common.ID;
+import com.corkili.learningserver.scorm.common.LMSPersistDriver;
+import com.corkili.learningserver.scorm.common.LMSPersistDriverManager;
 import com.corkili.learningserver.scorm.rte.api.LMSLearnerInfo;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.scorm.sn.model.tree.ActivityTree;
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,7 +94,20 @@ public class SCORMSeqNavManager {
 
     private void unlaunch(List<ID> shouldDelete) {
         for (ID id : shouldDelete) {
-            attemptManagerMap.remove(id);
+            AttemptManager attemptManager = attemptManagerMap.remove(id);
+            if (LMSPersistDriverManager.getInstance().getDriver() != null) {
+                LMSPersistDriver lmsPersistDriver = LMSPersistDriverManager.getInstance().getDriver();
+                for (Activity activity : attemptManager.getTargetActivityTree().preorder()) {
+                    if (activity.getActivityProgressInformation().isActivityProgressStatus()) {
+                        int attemptCnt = activity.getActivityProgressInformation().getActivityAttemptCount().getValue();
+                        if (attemptCnt > 0) {
+                            ID aid = activity.getId();
+                            lmsPersistDriver.saveActivityAttemptCount(aid.getLmsContentPackageID(), aid.getIdentifier(),
+                                    aid.getLmsLearnerID(), attemptCnt);
+                        }
+                    }
+                }
+            }
         }
     }
 
