@@ -8,7 +8,9 @@ import com.corkili.learningserver.common.ScormZipUtils;
 import com.corkili.learningserver.common.ServiceResult;
 import com.corkili.learningserver.common.ServiceUtils;
 import com.corkili.learningserver.po.ScormData;
+import com.corkili.learningserver.po.ScormRecord;
 import com.corkili.learningserver.repo.ScormDataRepository;
+import com.corkili.learningserver.repo.ScormRecordRepository;
 import com.corkili.learningserver.repo.ScormRepository;
 import com.corkili.learningserver.scorm.SCORM;
 import com.corkili.learningserver.scorm.SCORMResult;
@@ -23,9 +25,11 @@ import com.corkili.learningserver.scorm.rte.api.SCORMRuntimeManager;
 import com.corkili.learningserver.scorm.rte.model.RuntimeData;
 import com.corkili.learningserver.scorm.rte.model.error.ScormError;
 import com.corkili.learningserver.scorm.rte.model.result.ScormResult;
+import com.corkili.learningserver.scorm.sn.api.AttemptManager;
 import com.corkili.learningserver.scorm.sn.api.SCORMSeqNavManager;
 import com.corkili.learningserver.scorm.sn.api.event.EventType;
 import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
+import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -53,6 +58,9 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
 
     @Autowired
     private ScormDataRepository scormDataRepository;
+
+    @Autowired
+    private ScormRecordRepository scormRecordRepository;
 
     @Autowired
     private UserService userService;
@@ -202,10 +210,69 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         if (!scormSeqNavManager.launch(String.valueOf(scormId), user, level1CatalogItemId)) {
             return recordErrorAndCreateFailResultWithMessage("process navigation event error: launch sn data error");
         }
-        SCORMResult scormResult = scormManager.process(navigationEvent, new ID(level1CatalogItemId, String.valueOf(scormId), String.valueOf(user.getId())));
+        ID snID = new ID(level1CatalogItemId, String.valueOf(scormId), String.valueOf(user.getId()));
+        AttemptManager attemptManager = scormSeqNavManager.findAttemptManagerBy(snID);
+        Activity oldActivity = null;
+        if (attemptManager != null) {
+            oldActivity = attemptManager.getTargetActivityTree().getGlobalStateInformation().getCurrentActivity();
+        }
+        NavigationEvent processedNavigationEvent = navigationEvent;
+        if (navigationEvent.getType() == EventType.Start) {
+            Optional<ScormRecord> scormRecordOptional = scormRecordRepository.findByScormIdAndLearnerId(scormId, userId);
+            if (scormRecordOptional.isPresent()) {
+                ScormRecord scormRecord = scormRecordOptional.get();
+                if (StringUtils.isNotBlank(scormRecord.getLastItem())) {
+                    processedNavigationEvent = new NavigationEvent(EventType.Choose, scormRecord.getLastItem());
+                }
+            }
+        }
+        SCORMResult scormResult = scormManager.process(processedNavigationEvent, snID);
+        if (!scormResult.isSuccess()) {
+            if (processedNavigationEvent.getType() == EventType.Choose && navigationEvent.getType() == EventType.Start) {
+                // reset runtime and retry start
+                if (!scormSeqNavManager.launch(String.valueOf(scormId), user, level1CatalogItemId, true)) {
+                    return recordErrorAndCreateFailResultWithMessage("process navigation event error: {}", scormResult.getErrorMsg());
+                }
+                processedNavigationEvent = navigationEvent;
+                scormResult = scormManager.process(processedNavigationEvent, snID);
+            }
+        }
         if (navigationEvent.getType() == EventType.ExitAll || navigationEvent.getType() == EventType.AbandonAll) {
             scormRuntimeManager.unlaunch(user, String.valueOf(scormId));
             scormSeqNavManager.unlaunch(String.valueOf(userId), String.valueOf(scormId));
+            String prefix = ServiceUtils.format("{}-{}", userId, scormId);
+            List<String> shouldRemoveContentKeyList = new LinkedList<>();
+            deliveryContentMap.keySet().forEach(k -> {
+                if (k.startsWith(prefix)) {
+                    shouldRemoveContentKeyList.add(k);
+                }
+            });
+            for (String key : shouldRemoveContentKeyList) {
+                deliveryContentMap.remove(key);
+            }
+        }
+        if (navigationEvent.getType() == EventType.ExitAll || navigationEvent.getType() == EventType.AbandonAll
+                || navigationEvent.getType() == EventType.UnqualifiedExit) {
+            if (oldActivity != null) {
+                Optional<ScormRecord> scormRecordOptional = scormRecordRepository.findByScormIdAndLearnerId(scormId, userId);
+                ScormRecord scormRecord;
+                if (scormRecordOptional.isPresent()) {
+                    scormRecord = scormRecordOptional.get();
+                } else {
+                    scormRecord = new ScormRecord();
+                    com.corkili.learningserver.po.Scorm scormPO = new com.corkili.learningserver.po.Scorm();
+                    scormPO.setId(scormId);
+                    scormRecord.setScorm(scormPO);
+                    com.corkili.learningserver.po.User userPO = new com.corkili.learningserver.po.User();
+                    user.setId(userId);
+                    scormRecord.setLearner(userPO);
+                    scormRecord.setCreateTime(new Date());
+                }
+                scormRecord.setUpdateTime(new Date());
+                scormRecord.setLastItem(oldActivity.getId().getIdentifier());
+                scormRecordRepository.save(scormRecord);
+                deliveryContentMap.remove(ServiceUtils.format("{}-{}-{}", user, scormId, oldActivity.getId().getIdentifier()));
+            }
         }
         if (!scormResult.isSuccess()) {
             return recordErrorAndCreateFailResultWithMessage("process navigation event error: {}", scormResult.getErrorMsg());
@@ -264,6 +331,16 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         if (user != null) {
             scormRuntimeManager.unlaunch(user);
             scormSeqNavManager.unlaunch(user);
+            String uid = String.valueOf(userId);
+            List<String> shouldRemoveContentKeyList = new LinkedList<>();
+            deliveryContentMap.keySet().forEach(k -> {
+                if (k.startsWith(uid)) {
+                    shouldRemoveContentKeyList.add(k);
+                }
+            });
+            for (String key : shouldRemoveContentKeyList) {
+                deliveryContentMap.remove(key);
+            }
         }
     }
 
@@ -297,6 +374,13 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         if (scormDataList == null || scormDataList.size() != 1) {
             scormData = new ScormData();
             scormData.setCreateTime(new Date());
+            com.corkili.learningserver.po.Scorm scorm = new com.corkili.learningserver.po.Scorm();
+            scorm.setId(Long.valueOf(lmsContentPackageID));
+            scormData.setScorm(scorm);
+            scormData.setItem(activityID);
+            com.corkili.learningserver.po.User user = new com.corkili.learningserver.po.User();
+            user.setId(Long.valueOf(learnerID));
+            scormData.setLearner(user);
         } else {
             scormData = scormDataList.get(0);
         }
@@ -324,6 +408,13 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
         if (scormDataList == null || scormDataList.size() != 1) {
             scormData = new ScormData();
             scormData.setCreateTime(new Date());
+            com.corkili.learningserver.po.Scorm scorm = new com.corkili.learningserver.po.Scorm();
+            scorm.setId(Long.valueOf(lmsContentPackageID));
+            scormData.setScorm(scorm);
+            scormData.setItem(activityID);
+            com.corkili.learningserver.po.User user = new com.corkili.learningserver.po.User();
+            user.setId(Long.valueOf(learnerID));
+            scormData.setLearner(user);
         } else {
             scormData = scormDataList.get(0);
         }
