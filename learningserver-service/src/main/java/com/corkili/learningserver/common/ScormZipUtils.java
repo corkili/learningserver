@@ -112,6 +112,7 @@ public class ScormZipUtils {
             scormZipPath = scormZipPath.substring(1);
         }
         String path = basePath + scormZipPath;
+        log.warn("deleteScormZip: " + path);
         try {
             File zipFile = new File(path);
             if (zipFile.exists()) {

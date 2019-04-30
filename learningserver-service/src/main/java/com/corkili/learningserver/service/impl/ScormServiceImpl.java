@@ -272,7 +272,7 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
                     scormPO.setId(scormId);
                     scormRecord.setScorm(scormPO);
                     com.corkili.learningserver.po.User userPO = new com.corkili.learningserver.po.User();
-                    user.setId(userId);
+                    userPO.setId(userId);
                     scormRecord.setLearner(userPO);
                     scormRecord.setCreateTime(new Date());
                 }
