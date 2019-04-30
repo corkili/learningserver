@@ -8,7 +8,7 @@ import com.corkili.learningserver.common.ScormZipUtils;
 
 @SpringBootApplication
 @EnableCaching
-public class it LearningServerApplication {
+public class LearningServerApplication {
 
     public static void main(String[] args) {
         ScormZipUtils.setBasePath(args);
