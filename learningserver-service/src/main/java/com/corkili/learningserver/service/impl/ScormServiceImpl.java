@@ -1,5 +1,22 @@
 package com.corkili.learningserver.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.corkili.learningserver.bo.CourseCatalog;
 import com.corkili.learningserver.bo.CourseCatalog.CourseCatalogItem;
 import com.corkili.learningserver.bo.Scorm;
@@ -32,21 +49,6 @@ import com.corkili.learningserver.scorm.sn.api.event.NavigationEvent;
 import com.corkili.learningserver.scorm.sn.model.tree.Activity;
 import com.corkili.learningserver.service.ScormService;
 import com.corkili.learningserver.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -192,6 +194,12 @@ public class ScormServiceImpl extends ServiceImpl<Scorm, com.corkili.learningser
                     // "completed", "incomplete", "not_attempted", "unknown"
                     courseCatalogItem.setCompletionStatus(scormResult.getReturnValue());
                 }
+            }
+        }
+        if (level1ItemList != null) {
+            for (CourseCatalogItem courseCatalogItem : level1ItemList) {
+                scormSeqNavManager.forceMapRuntimeData2TrackingInfo(new ID(courseCatalogItem.getItemId(),
+                        String.valueOf(scormId), String.valueOf(userId)));
             }
         }
         return ServiceResult.successResult("query catalog success", CourseCatalog.class, courseCatalog);
