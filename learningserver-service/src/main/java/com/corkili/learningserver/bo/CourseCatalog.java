@@ -49,6 +49,7 @@ public class CourseCatalog {
             courseCatalogItem.index = i;
             courseCatalogItem.itemId = organization.getIdentifier().getValue();
             courseCatalogItem.itemTitle = organization.getTitle();
+            courseCatalogItem.leaf = false;
             courseCatalogItem.selectable = false;
             courseCatalogItem.visible = true;
             courseCatalogItem.parentItem = null;
@@ -77,6 +78,7 @@ public class CourseCatalog {
         courseCatalogItem.index = currentIndex;
         courseCatalogItem.itemId = item.getIdentifier().getValue();
         courseCatalogItem.itemTitle = item.getTitle();
+        courseCatalogItem.leaf = item.getItemList() == null || item.getItemList().isEmpty();
         courseCatalogItem.selectable = item.getIdentifierref() != null && (item.getItemList() == null || item.getItemList().isEmpty());
         courseCatalogItem.visible = item.isIsvisible();
         if (item.getPresentation() != null && item.getPresentation().getNavigationInterface() != null
@@ -111,8 +113,12 @@ public class CourseCatalog {
         private int index;
         private String itemId;
         private String itemTitle;
+        private boolean leaf;
         private boolean selectable;
         private boolean visible;
+        private Double completionThreshold;
+        private double progressMeasure;
+        private String completionStatus;
         private final Set<String> hideLmsUI;
         private CourseCatalogItem parentItem;
         private final List<CourseCatalogItem> nextLevelItems;
@@ -122,8 +128,12 @@ public class CourseCatalog {
             index = -1;
             itemId = "";
             itemTitle = "";
+            leaf = false;
             selectable = false;
             visible = true;
+            completionThreshold = null;
+            progressMeasure = 0.0;
+            completionStatus = "";
             hideLmsUI = new HashSet<>();
             parentItem = null;
             nextLevelItems = new ArrayList<>();

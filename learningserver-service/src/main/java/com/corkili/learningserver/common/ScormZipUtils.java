@@ -112,13 +112,15 @@ public class ScormZipUtils {
             scormZipPath = scormZipPath.substring(1);
         }
         String path = basePath + scormZipPath;
+//        log.warn("deleteScormZip: " + path);
         try {
             File zipFile = new File(path);
             if (zipFile.exists()) {
                 FileUtils.forceDelete(zipFile);
             }
-            if (scormZipPath.toLowerCase().endsWith(zipSuffix)) {
-                File uncompressDir = new File(path.substring(0, scormZipPath.length() - zipSuffix.length()));
+            if (path.toLowerCase().endsWith(zipSuffix)) {
+                File uncompressDir = new File(path.substring(0, path.length() - zipSuffix.length()));
+//                log.warn("deleteScormZipDir: " + uncompressDir.getAbsolutePath());
                 if (uncompressDir.exists()) {
                     FileUtils.forceDelete(uncompressDir);
                 }
